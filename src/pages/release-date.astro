@@ -1,0 +1,81 @@
+---
+import Base from '../layouts/Base.astro';
+import { SITE, GAME } from '../consts';
+
+const faq = [
+  { q: 'When does Moonlight Peaks release?', a: `Moonlight Peaks launches on ${GAME.releaseLabel} on Steam, Nintendo Switch, Nintendo Switch 2, and Android via Google Play.` },
+  { q: 'How much does Moonlight Peaks cost?', a: `It is priced at ${GAME.price}, with ${GAME.launchDiscount}.` },
+  { q: 'Is there a Moonlight Peaks demo?', a: 'Yes. A free demo is available now on Steam and the Nintendo eShop. It includes character creation, fishing, flower arranging, embroidery, and meeting some of the town residents.' },
+  { q: 'Is Moonlight Peaks on console?', a: 'Yes — it launches on Nintendo Switch and Switch 2 alongside PC and Android. The Switch demo is playable on Switch 2.' },
+  { q: 'Is Moonlight Peaks multiplayer?', a: 'Moonlight Peaks is a single-player cozy life sim focused on farming, relationships, and town mysteries. There is no announced co-op mode.' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: SITE.url },
+    { '@type': 'ListItem', position: 2, name: 'Release date', item: new URL('/release-date', SITE.url).href },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks Release Date, Platforms & Price (July 7, 2026) | Moonlit Almanac"
+  description="Moonlight Peaks releases July 7, 2026 on Steam, Switch, Switch 2, and Android. Price, the free demo, platforms, and what to expect at launch — all in one place."
+  path="/release-date"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Release date' }]}
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Entry · Release</p>
+      <h1>Moonlight Peaks <em>release date</em> & platforms</h1>
+      <p class="intro">
+        Everything confirmed about the {GAME.title} launch — the date, where to play, the price,
+        and the free demo you can try right now. Last updated {SITE.updated}.
+      </p>
+
+      <h2>The facts</h2>
+      <table class="facts">
+        <tr><th>Release date</th><td>{GAME.releaseLabel}</td></tr>
+        <tr><th>Platforms</th><td>{GAME.platforms.join(' · ')}</td></tr>
+        <tr><th>Price</th><td>{GAME.price} ({GAME.launchDiscount})</td></tr>
+        <tr><th>Demo</th><td>{GAME.demo}</td></tr>
+        <tr><th>Developer</th><td>{GAME.developer}</td></tr>
+        <tr><th>Publisher</th><td>{GAME.publisher}</td></tr>
+        <tr><th>Players</th><td>Single-player cozy life sim</td></tr>
+      </table>
+
+      <h2>What is Moonlight Peaks?</h2>
+      <p>
+        Moonlight Peaks is a cozy-gothic life sim where you play a vampire settling into your
+        family's abandoned homestead in a town full of werewolves, witches, mermaids, and other
+        creatures of the night. You grow mystical crops, raise magical livestock, learn
+        spell-casting and potion-making, and befriend — or romance — the locals, all while proving
+        to your skeptical father that a kinder, undead life is possible.
+      </p>
+
+      <h2>Try the demo before launch</h2>
+      <p>
+        The free demo is the best way to decide if {GAME.title} is for you. It lets you test
+        character creation and a handful of cozy activities — fishing, flower arranging, and
+        embroidery among them — plus early interactions with townsfolk. Demo progress does not
+        carry into the full game, but it is a faithful taste of the daily loop.
+      </p>
+
+      <div class="callout">
+        Bookmark this page. The moment {GAME.title} goes live on {GAME.releaseLabel}, we publish the
+        day-one cheat list, crop and fishing data, and the full Nokturna card guide.
+      </div>
+
+      <h2>FAQ</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </article>
+</Base>

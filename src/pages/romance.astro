@@ -1,0 +1,50 @@
+---
+import Base from '../layouts/Base.astro';
+import { SITE, GAME } from '../consts';
+
+const jsonLd = {
+  '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: SITE.url },
+    { '@type': 'ListItem', position: 2, name: 'Romance', item: new URL('/romance', SITE.url).href },
+  ],
+};
+---
+<Base
+  title="Moonlight Peaks Romance & the Seven Families — Who You Can Date | Moonlit Almanac"
+  description="Romance in Moonlight Peaks: the seven families, the creatures of the night you can befriend and romance, and their gift preferences. Full candidate list at launch."
+  path="/romance"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Romance & families' }]}
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Entry · Hearts</p>
+      <h1>Romance & the <em>seven families</em></h1>
+      <p class="intro">
+        Who you can befriend, who you can romance, and what to gift them. Moonlight Peaks centers
+        relationships with the town's creatures of the night. Updated {SITE.updated}.
+      </p>
+
+      <h2>What we know</h2>
+      <p>
+        The town is inhabited by seven families spanning humans and supernatural folk — werewolves,
+        witches, mermaids, and others, with Death as a notable character. You can befriend and
+        romance residents as a core pillar of the game. The demo introduces several townsfolk ahead
+        of the full cast at launch.
+      </p>
+
+      <h2>Coming at launch ({GAME.releaseLabel})</h2>
+      <ul>
+        <li><strong>Every romance candidate</strong> — names, families, and how to meet them.</li>
+        <li><strong>Gift guide</strong> — loved and liked gifts for each character.</li>
+        <li><strong>Relationship steps</strong> — friendship to dating to marriage, with milestones.</li>
+        <li><strong>The seven families</strong> — who belongs to which, and their stories.</li>
+      </ul>
+
+      <div class="callout wip">
+        Placeholder entry until {GAME.title} ships on {GAME.releaseLabel} and the full cast and gift
+        tables are known. We'll fill it in fast — gift guides are among the most-searched cozy pages.
+      </div>
+    </div>
+  </article>
+</Base>

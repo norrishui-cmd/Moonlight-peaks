@@ -1,0 +1,104 @@
+---
+import Base from '../layouts/Base.astro';
+import { SITE, GAME } from '../consts';
+
+const entries = [
+  { ent: 'Entry · Release', title: 'Release date & platforms', desc: 'When, where, price, and the free demo — everything to play day one.', href: '/release-date', live: true },
+  { ent: 'Entry · Guide', title: 'Beginner guide', desc: 'Everything known so far, shaping into your day-one head start.', href: '/beginner-guide', live: true },
+  { ent: 'Entry · Cards', title: 'Nokturna card game', desc: "The town's favorite game — how it works, cards, and how to win.", href: '/nokturna', live: true },
+  { ent: 'Entry · Hearts', title: 'Romance & families', desc: 'The seven families, who you can romance, and gift favorites.', href: '/romance', live: true },
+  { ent: 'Entry · Cheats', title: 'Cheats & console', desc: 'Console commands and money cheats — published at launch.', href: '/cheats', live: true },
+  { ent: 'Entry · Farm', title: 'Crops & seasons', desc: 'Mystical crops, magical livestock, and the night-farming loop.', href: '#', live: false },
+];
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: SITE.brand,
+    url: SITE.url,
+    description: 'Fan-made guide and wiki for Moonlight Peaks: release info, beginner guide, Nokturna, romance, and cheats.',
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'VideoGame',
+    name: GAME.title,
+    gamePlatform: GAME.platforms,
+    publisher: { '@type': 'Organization', name: GAME.publisher },
+    author: { '@type': 'Organization', name: GAME.developer },
+    datePublished: '2026-07-07',
+  },
+];
+---
+<Base
+  title="Moonlight Peaks Guide & Wiki — Release, Tips, Nokturna & Cheats | Moonlit Almanac"
+  description="Your fan guide to Moonlight Peaks, the cozy vampire life sim. Release date, beginner tips, the Nokturna card game, romance and families, and launch-day cheats."
+  path="/"
+  jsonLd={jsonLd}
+>
+  <section class="hero">
+    <div class="wrap">
+      <p class="eyebrow">A vampire farmer's field almanac</p>
+      <h1 class="title"><em>Moonlight Peaks</em> opens its gates soon.</h1>
+      <p class="lede">
+        The cozy-gothic guide to the vampire life sim by {GAME.developer}. We're live before launch
+        so you can start day one knowing the town — release info now, then tips, Nokturna, romance,
+        and cheats the moment {GAME.title} arrives.
+      </p>
+      <div class="actions">
+        <a class="btn btn-primary" href="/release-date">Release & demo <span class="arr">→</span></a>
+        <a class="btn btn-ghost" href="/beginner-guide">What we know</a>
+      </div>
+
+      <div class="countdown" id="cd" data-release={GAME.releaseISO} aria-label="Time until launch">
+        <div class="cd-cell"><div class="n" data-d>—</div><div class="u">days</div></div>
+        <div class="cd-cell"><div class="n" data-h>—</div><div class="u">hours</div></div>
+        <div class="cd-cell"><div class="n" data-m>—</div><div class="u">min</div></div>
+        <span class="cd-note">until {GAME.releaseLabel} · {GAME.demo}</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>Almanac entries</h2>
+        <span class="note">what players look up first</span>
+      </div>
+      <div class="entries">
+        {entries.map((e) => (
+          <a class={`entry${e.live ? '' : ' soon'}`} href={e.href}>
+            <span class={`tag ${e.live ? 'live' : 'soon'}`}>{e.live ? 'Open' : 'Soon'}</span>
+            <span class="ent">{e.ent}</span>
+            <h3>{e.title}</h3>
+            <p>{e.desc}</p>
+            <span class="go">{e.live ? 'read entry →' : 'at launch'}</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const root = document.getElementById('cd');
+    if (root) {
+      const target = new Date(root.getAttribute('data-release') || '').getTime();
+      const d = root.querySelector('[data-d]');
+      const h = root.querySelector('[data-h]');
+      const m = root.querySelector('[data-m]');
+      const tick = () => {
+        const diff = target - Date.now();
+        if (isNaN(target)) return;
+        if (diff <= 0) { if (d) d.textContent = '0'; if (h) h.textContent = '0'; if (m) m.textContent = '0'; return; }
+        const days = Math.floor(diff / 86400000);
+        const hours = Math.floor((diff % 86400000) / 3600000);
+        const mins = Math.floor((diff % 3600000) / 60000);
+        if (d) d.textContent = String(days);
+        if (h) h.textContent = String(hours);
+        if (m) m.textContent = String(mins);
+      };
+      tick();
+      setInterval(tick, 30000);
+    }
+  </script>
+</Base>
