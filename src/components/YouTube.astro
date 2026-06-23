@@ -1,0 +1,46 @@
+---
+// Usage in any .astro page:  <YouTube id="VIDEO_ID" title="What this video is" />
+// Get VIDEO_ID from the YouTube URL: youtu.be/VIDEO_ID  or  watch?v=VIDEO_ID
+interface Props { id: string; title?: string; }
+const { id, title = 'YouTube video' } = Astro.props;
+---
+<div class="yt-lite" data-id={id} role="button" tabindex="0" aria-label={`Play: ${title}`}>
+  <img
+    class="yt-thumb"
+    src={`https://i.ytimg.com/vi/${id}/hqdefault.jpg`}
+    alt={title}
+    loading="lazy"
+    width="480" height="360"
+  />
+  <span class="yt-play" aria-hidden="true"></span>
+  <span class="yt-cap">{title}</span>
+</div>
+
+<style>
+  .yt-lite { position: relative; display: block; width: 100%; aspect-ratio: 16 / 9; border: 1px solid var(--line); border-radius: 12px; overflow: hidden; background: #000; cursor: pointer; margin: 18px 0; }
+  .yt-thumb { width: 100%; height: 100%; object-fit: cover; opacity: 0.82; transition: opacity .15s ease; }
+  .yt-lite:hover .yt-thumb { opacity: 1; }
+  .yt-play { position: absolute; inset: 0; margin: auto; width: 68px; height: 48px; border-radius: 12px; background: rgba(192,67,106,0.92); }
+  .yt-play::before { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-40%, -50%); border-style: solid; border-width: 11px 0 11px 19px; border-color: transparent transparent transparent #fff; }
+  .yt-cap { position: absolute; left: 0; bottom: 0; right: 0; padding: 10px 12px; font-size: 0.82rem; color: #fff; background: linear-gradient(transparent, rgba(0,0,0,0.7)); font-family: var(--body); }
+  .yt-lite iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+  :focus-visible.yt-lite { outline: 2px solid var(--candle); outline-offset: 2px; }
+</style>
+
+<script>
+  document.querySelectorAll('.yt-lite').forEach((box) => {
+    const load = () => {
+      const id = box.getAttribute('data-id');
+      if (!id || box.querySelector('iframe')) return;
+      const iframe = document.createElement('iframe');
+      iframe.src = `https://www.youtube-nocookie.com/embed/${id}?autoplay=1`;
+      iframe.allow = 'accelerated-sensors; autoplay; encrypted-media; gyroscope; picture-in-picture';
+      iframe.allowFullscreen = true;
+      iframe.title = box.getAttribute('aria-label') || 'YouTube video';
+      box.innerHTML = '';
+      box.appendChild(iframe);
+    };
+    box.addEventListener('click', load);
+    box.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); load(); } });
+  });
+</script>
