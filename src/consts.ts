@@ -1,12 +1,8 @@
-// Site-wide constants — edit in one place.
 export const SITE = {
-  brand: 'Moonlit Almanac',
-  name: 'Moonlit Almanac — Moonlight Peaks Guide & Wiki',
-  tagline: 'A field almanac for the cozy vampire life sim.',
-  // Change to your real domain (no trailing slash).
+  name: 'Moonlight Peaks Wiki & Guide',
   url: 'https://moonlightpeax.wiki',
-  updated: 'June 22, 2026',
-  contact: 'hello@moonlitalmanac.example.com',
+  updated: 'June 2026',
+  contact: 'hello@moonlightpeax.wiki',
 };
 
 export const GAME = {
