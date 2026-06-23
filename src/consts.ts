@@ -13,11 +13,10 @@ export const GAME = {
   title: 'Moonlight Peaks',
   developer: 'Little Chicken Game Company',
   publisher: 'XSEED Games',
-  // Confirmed launch — used by the countdown. ISO, midnight local as a safe default.
   releaseISO: '2026-07-07T00:00:00',
   releaseLabel: 'July 7, 2026',
   price: '$34.99',
-  launchDiscount: '15% off for the first week after launch',
-  platforms: ['Steam (PC)', 'Nintendo Switch', 'Nintendo Switch 2', 'Android (Google Play)'],
-  demo: 'Free demo live now on Steam and the Nintendo eShop',
+  launchDiscount: '15% off across all platforms for the first 7 days after launch',
+  platforms: ['Steam (PC & Mac)', 'Steam Deck', 'Nintendo Switch', 'Nintendo Switch 2', 'Android (Google Play)'],
+  demo: 'Free demo on Steam (PC & Mac) and Nintendo Switch / Switch 2',
 };
