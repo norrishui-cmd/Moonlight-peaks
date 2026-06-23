@@ -1,0 +1,56 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE } from '../../consts';
+import { previews } from '../../data/previews';
+
+export function getStaticPaths() {
+  return previews.map((article) => ({ params: { slug: article.slug }, props: { article } }));
+}
+const { article } = Astro.props;
+const url = new URL(`/previews/${article.slug}`, SITE.url).href;
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: SITE.url },
+    { '@type': 'ListItem', position: 2, name: 'Demo previews', item: new URL('/previews', SITE.url).href },
+    { '@type': 'ListItem', position: 3, name: article.title, item: url },
+  ] },
+  { '@context': 'https://schema.org', '@type': 'Article', headline: article.title, description: article.dek, mainEntityOfPage: url, publisher: { '@type': 'Organization', name: SITE.brand } },
+];
+---
+<Base
+  title={`${article.title} | Moonlight Peaks Wiki & Guide`}
+  description={article.dek}
+  path={`/previews/${article.slug}`}
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Demo previews', href: '/previews' }, { label: article.title }]}
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Preview · {article.tag}</p>
+      <h1>{article.title}</h1>
+      <p class="intro">{article.dek}</p>
+      <p class="pl-meta-line">{article.readTime} · Updated {article.date}</p>
+
+      {article.body.map((b) => (
+        b.type === 'h2' ? <h2>{b.text}</h2>
+        : b.type === 'ul' ? <ul>{(b.items || []).map((i) => (<li>{i}</li>))}</ul>
+        : b.type === 'callout' ? <div class="callout">{b.text}</div>
+        : <p>{b.text}</p>
+      ))}
+
+      <h2>Sources</h2>
+      <ul>
+        {article.sources.map((s) => (<li><a href={s.url} target="_blank" rel="noopener nofollow">{s.label}</a></li>))}
+      </ul>
+
+      <div class="callout">
+        More: <a href="/previews">all demo previews</a> · <a href="/release-date">release & demo</a> · <a href="/beginner-guide">beginner guide</a>.
+      </div>
+    </div>
+  </article>
+
+  <style>
+    .pl-meta-line { font-family: var(--mono); font-size: 0.72rem; color: var(--faint); margin: 8px 0 0; }
+  </style>
+</Base>
