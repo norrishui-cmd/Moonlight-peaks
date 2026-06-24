@@ -8,9 +8,11 @@ interface Props {
   path?: string;
   jsonLd?: object | object[];
   crumbs?: Crumb[];
+  ogImage?: string;
 }
-const { title, description, path = '/', jsonLd, crumbs = [] } = Astro.props;
+const { title, description, path = '/', jsonLd, crumbs = [], ogImage } = Astro.props;
 const canonical = new URL(path, SITE.url).href;
+const ogImageUrl = ogImage ? new URL(ogImage, SITE.url).href : undefined;
 const nav = [
   { href: '/release-date', label: 'Release' },
   { href: '/beginner-guide', label: 'Guide' },
@@ -35,9 +37,11 @@ const ld = Array.isArray(jsonLd) ? jsonLd : jsonLd ? [jsonLd] : [];
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <meta property="og:site_name" content={SITE.brand} />
-    <meta name="twitter:card" content="summary" />
+    {ogImageUrl && <meta property="og:image" content={ogImageUrl} />}
+    <meta name="twitter:card" content={ogImageUrl ? 'summary_large_image' : 'summary'} />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
+    {ogImageUrl && <meta name="twitter:image" content={ogImageUrl} />}
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
