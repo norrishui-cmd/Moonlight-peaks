@@ -3,43 +3,63 @@ import Base from '../../layouts/Base.astro';
 import { SITE, GAME } from '../../consts';
 import { previews } from '../../data/previews';
 
+const groups = [
+  { key: 'preview', title: 'Demo impressions', note: 'player & press roundups' },
+  { key: 'guide', title: 'Guides', note: 'evergreen how-to & reference' },
+  { key: 'daily', title: 'Daily updates', note: 'short daily notes' },
+];
+
 const jsonLd = [
   { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
     { '@type': 'ListItem', position: 1, name: 'Home', item: SITE.url },
-    { '@type': 'ListItem', position: 2, name: 'Demo previews', item: new URL('/previews', SITE.url).href },
+    { '@type': 'ListItem', position: 2, name: 'Articles', item: new URL('/previews', SITE.url).href },
   ] },
   { '@context': 'https://schema.org', '@type': 'ItemList', itemListElement: previews.map((p, i) => ({ '@type': 'ListItem', position: i + 1, name: p.title, url: new URL(`/previews/${p.slug}`, SITE.url).href })) },
 ];
 ---
 <Base
-  title="Moonlight Peaks Demo Impressions & Previews | Moonlight Peaks Wiki & Guide"
-  description="Roundups of Moonlight Peaks demo feedback from players and press: overall impressions, common complaints, the two demo versions, and whether the demo is worth playing."
+  title="Moonlight Peaks Guides & Demo Impressions | Moonlight Peaks Wiki & Guide"
+  description="Moonlight Peaks guides and demo impression roundups: beginner tips, night farming, families and romance, comparisons, demo feedback, and a quick FAQ."
   path="/previews"
   jsonLd={jsonLd}
-  crumbs={[{ label: 'Demo previews' }]}
+  crumbs={[{ label: 'Articles' }]}
 >
   <article class="page">
     <div class="wrap">
-      <p class="eyebrow">Entry · Previews</p>
-      <h1>Moonlight Peaks <em>demo</em> impressions</h1>
+      <p class="eyebrow">Entry · Articles</p>
+      <h1>Moonlight Peaks <em>guides</em> & impressions</h1>
       <p class="intro">
-        Roundups of what players and press are saying about the free {GAME.title} demo ahead of the
-        {GAME.releaseLabel} launch. Written in our own words from public feedback — these are not
-        first-hand reviews. Updated {SITE.updated}.
+        Guides, comparisons, and roundups of what players and press are saying about {GAME.title}
+        ahead of the {GAME.releaseLabel} launch. Written in our own words from public info and
+        feedback — these are not first-hand reviews. Updated {SITE.updated}.
       </p>
 
-      <ul class="prev-list">
-        {previews.map((p) => (
-          <li>
-            <a href={`/previews/${p.slug}`}>
-              <span class="pl-tag">{p.tag}</span>
-              <span class="pl-title">{p.title}</span>
-              <span class="pl-dek">{p.dek}</span>
-              <span class="pl-meta">{p.readTime} · {p.date}</span>
-            </a>
-          </li>
-        ))}
-      </ul>
+      {groups.map((g) => {
+        const items = previews.filter((p) => p.category === g.key);
+        return items.length === 0 ? null : (
+          <section class="pgroup">
+            <div class="pgroup-head">
+              <h2>{g.title}</h2>
+              <span class="note">{g.note}</span>
+            </div>
+            <ul class="prev-list">
+              {items.map((p) => (
+                <li>
+                  <a href={`/previews/${p.slug}`}>
+                    <img class="pl-thumb" src={p.image} alt={`${p.title} — Moonlight Peaks`} width="160" height="84" loading="lazy" />
+                    <span class="pl-body">
+                      <span class="pl-tag">{p.tag}</span>
+                      <span class="pl-title">{p.title}</span>
+                      <span class="pl-dek">{p.dek}</span>
+                      <span class="pl-meta">{p.readTime} · {p.date}</span>
+                    </span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </section>
+        );
+      })}
 
       <div class="callout">
         Related: <a href="/release-date">release & demo</a>, <a href="/beginner-guide">beginner guide</a>,
@@ -49,12 +69,22 @@ const jsonLd = [
   </article>
 
   <style>
+    .pgroup { margin: 0 0 26px; }
+    .pgroup-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin: 0 0 12px; }
+    .pgroup-head h2 { margin: 0; }
+    .pgroup-head .note { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--faint); }
     .prev-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
-    .prev-list a { display: block; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); padding: 14px 16px; transition: border-color .15s ease, transform .15s ease; }
+    .prev-list a { display: flex; gap: 14px; align-items: stretch; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); padding: 12px; transition: border-color .15s ease, transform .15s ease; }
     .prev-list a:hover { border-color: color-mix(in srgb, var(--candle) 50%, var(--line)); transform: translateY(-2px); }
+    .pl-thumb { flex: 0 0 auto; width: 160px; height: 84px; object-fit: cover; border-radius: 10px; border: 1px solid var(--line); }
+    .pl-body { min-width: 0; display: block; }
     .pl-tag { display: block; font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--faint); }
-    .pl-title { display: block; font-family: var(--display); font-weight: 600; font-size: 1.1rem; color: var(--mist); margin: 3px 0 2px; }
-    .pl-dek { display: block; color: var(--muted); font-size: 0.88rem; }
+    .pl-title { display: block; font-family: var(--display); font-weight: 600; font-size: 1.08rem; color: var(--mist); margin: 3px 0 2px; }
+    .pl-dek { display: block; color: var(--muted); font-size: 0.86rem; }
     .pl-meta { display: block; font-family: var(--mono); font-size: 0.68rem; color: var(--faint); margin-top: 6px; }
+    @media (max-width: 520px) {
+      .prev-list a { flex-direction: column; }
+      .pl-thumb { width: 100%; height: auto; aspect-ratio: 1200 / 630; }
+    }
   </style>
 </Base>
