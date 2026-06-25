@@ -2,12 +2,13 @@ import type { APIRoute } from 'astro';
 import { SITE } from '../consts';
 import { previews } from '../data/previews';
 import { characters } from '../data/characters';
+import { faqs } from '../data/faq';
 
 type Entry = { path: string; images?: string[] };
 
 const homeImages = ['/card-release.webp', '/card-guide.webp', '/card-nokturna.webp', '/card-romance.webp', '/card-cheats.webp', '/card-crops.webp'];
 
-const staticPaths = ['/release-date', '/demo', '/platforms', '/beginner-guide', '/farming', '/magic', '/activities', '/characters', '/moonlight-peaks-vs-stardew-valley', '/nokturna', '/map', '/romance', '/cheats', '/about', '/privacy', '/previews'];
+const staticPaths = ['/release-date', '/demo', '/platforms', '/beginner-guide', '/farming', '/magic', '/activities', '/characters', '/moonlight-peaks-vs-stardew-valley', '/nokturna', '/map', '/romance', '/cheats', '/about', '/privacy', '/previews', '/faq'];
 
 export const GET: APIRoute = () => {
   const charEntries: Entry[] = characters
@@ -19,6 +20,7 @@ export const GET: APIRoute = () => {
     ...staticPaths.map((p) => ({ path: p })),
     ...charEntries,
     ...previews.map((p) => ({ path: `/previews/${p.slug}`, images: [p.image] })),
+    ...faqs.map((f) => ({ path: `/faq/${f.slug}` })),
   ];
 
   const abs = (u: string) => new URL(u, SITE.url).href;
