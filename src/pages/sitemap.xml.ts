@@ -6,12 +6,18 @@ import { faqs } from '../data/faq';
 import { locations } from '../data/locations';
 import { families } from '../data/families';
 import { activities } from '../data/activities';
+import { comparisons } from '../data/compare';
+import { platforms } from '../data/platforms';
+
+// Bump LASTMOD only when you push a meaningful content update (not every deploy / not daily),
+// otherwise search engines learn to ignore it.
+const LASTMOD = '2026-06-26';
 
 type Entry = { path: string; images?: string[] };
 
 const homeImages = ['/card-release.webp', '/card-guide.webp', '/card-nokturna.webp', '/card-romance.webp', '/card-cheats.webp', '/card-crops.webp'];
 
-const staticPaths = ['/release-date', '/demo', '/platforms', '/beginner-guide', '/farming', '/magic', '/activities', '/characters', '/moonlight-peaks-vs-stardew-valley', '/nokturna', '/map', '/romance', '/cheats', '/about', '/privacy', '/previews', '/faq', '/locations', '/families'];
+const staticPaths = ['/release-date', '/demo', '/platforms', '/beginner-guide', '/farming', '/magic', '/activities', '/characters', '/moonlight-peaks-vs-stardew-valley', '/nokturna', '/map', '/romance', '/cheats', '/about', '/privacy', '/previews', '/faq', '/locations', '/families', '/compare'];
 
 const topic = (base: string, items: { slug: string; image?: string }[]): Entry[] =>
   items.map((it) => ({ path: `${base}/${it.slug}`, images: it.image ? [it.image] : [] }));
@@ -28,6 +34,8 @@ export const GET: APIRoute = () => {
     ...topic('/locations', locations),
     ...topic('/families', families),
     ...topic('/activities', activities),
+    ...topic('/platforms', platforms),
+    ...topic('/compare', comparisons),
     ...previews.map((p) => ({ path: `/previews/${p.slug}`, images: [p.image] })),
     ...faqs.map((f) => ({ path: `/faq/${f.slug}` })),
   ];
@@ -36,7 +44,8 @@ export const GET: APIRoute = () => {
   const body = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
 ${entries.map((e) => `  <url>
-    <loc>${abs(e.path)}</loc>${(e.images || []).map((img) => `
+    <loc>${abs(e.path)}</loc>
+    <lastmod>${LASTMOD}</lastmod>${(e.images || []).map((img) => `
     <image:image><image:loc>${abs(img)}</image:loc></image:image>`).join('')}
   </url>`).join('\n')}
 </urlset>`;
