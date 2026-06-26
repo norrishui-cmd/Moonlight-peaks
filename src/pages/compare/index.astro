@@ -1,0 +1,65 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE } from '../../consts';
+import { compareSection, comparisons } from '../../data/compare';
+
+// Stardew uses the existing standalone page to avoid duplicate content.
+const stardew = { other: 'Stardew Valley', href: '/moonlight-peaks-vs-stardew-valley', dek: 'The genre benchmark — how a vampire night-farm differs from Pelican Town.' };
+const cards = [
+  stardew,
+  ...comparisons.map((c) => ({ other: c.other, href: `${compareSection.base}/${c.slug}`, dek: c.dek })),
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: SITE.url },
+    { '@type': 'ListItem', position: 2, name: compareSection.label, item: new URL(compareSection.base, SITE.url).href },
+  ] },
+  { '@context': 'https://schema.org', '@type': 'ItemList', itemListElement: cards.map((c, i) => ({
+    '@type': 'ListItem', position: i + 1, name: `Moonlight Peaks vs ${c.other}`, url: new URL(c.href, SITE.url).href,
+  })) },
+];
+---
+<Base
+  title={compareSection.title}
+  description={compareSection.description}
+  path={compareSection.base}
+  jsonLd={jsonLd}
+  crumbs={[{ label: compareSection.label }]}
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Hub · {compareSection.eyebrow}</p>
+      <h1 set:html={compareSection.heading}></h1>
+      <p class="intro">{compareSection.intro}</p>
+
+      <div class="cmp-grid">
+        {cards.map((c) => (
+          <a class="cmp-card" href={c.href}>
+            <span class="cmp-vs">Moonlight Peaks <em>vs</em></span>
+            <span class="cmp-other">{c.other}</span>
+            <span class="cmp-dek">{c.dek}</span>
+            <span class="cmp-go">Compare →</span>
+          </a>
+        ))}
+      </div>
+
+      <div class="callout">
+        Related: <a href="/release-date">release date</a> · <a href="/platforms">platforms</a> ·
+        <a href="/beginner-guide">beginner guide</a> · <a href="/characters">characters</a>.
+      </div>
+    </div>
+  </article>
+
+  <style>
+    .cmp-grid { display: grid; grid-template-columns: 1fr; gap: 12px; }
+    @media (min-width: 600px) { .cmp-grid { grid-template-columns: 1fr 1fr; } }
+    .cmp-card { display: flex; flex-direction: column; border: 1px solid var(--line); border-radius: 14px; background: var(--surface); padding: 16px; transition: border-color .15s ease, transform .15s ease; }
+    .cmp-card:hover { border-color: color-mix(in srgb, var(--candle) 50%, var(--line)); transform: translateY(-2px); }
+    .cmp-vs { font-family: var(--mono); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--faint); }
+    .cmp-vs em { color: var(--candle); font-style: normal; }
+    .cmp-other { font-family: var(--display); font-weight: 600; font-size: 1.3rem; color: var(--mist); margin: 2px 0 6px; }
+    .cmp-dek { color: #ded3e6; font-size: 0.9rem; margin: 0 0 10px; }
+    .cmp-go { font-family: var(--mono); font-size: 0.72rem; color: var(--candle); margin-top: auto; }
+  </style>
+</Base>
