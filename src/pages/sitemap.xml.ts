@@ -3,12 +3,18 @@ import { SITE } from '../consts';
 import { previews } from '../data/previews';
 import { characters } from '../data/characters';
 import { faqs } from '../data/faq';
+import { locations } from '../data/locations';
+import { families } from '../data/families';
+import { activities } from '../data/activities';
 
 type Entry = { path: string; images?: string[] };
 
 const homeImages = ['/card-release.webp', '/card-guide.webp', '/card-nokturna.webp', '/card-romance.webp', '/card-cheats.webp', '/card-crops.webp'];
 
-const staticPaths = ['/release-date', '/demo', '/platforms', '/beginner-guide', '/farming', '/magic', '/activities', '/characters', '/moonlight-peaks-vs-stardew-valley', '/nokturna', '/map', '/romance', '/cheats', '/about', '/privacy', '/previews', '/faq'];
+const staticPaths = ['/release-date', '/demo', '/platforms', '/beginner-guide', '/farming', '/magic', '/activities', '/characters', '/moonlight-peaks-vs-stardew-valley', '/nokturna', '/map', '/romance', '/cheats', '/about', '/privacy', '/previews', '/faq', '/locations', '/families'];
+
+const topic = (base: string, items: { slug: string; image?: string }[]): Entry[] =>
+  items.map((it) => ({ path: `${base}/${it.slug}`, images: it.image ? [it.image] : [] }));
 
 export const GET: APIRoute = () => {
   const charEntries: Entry[] = characters
@@ -19,6 +25,9 @@ export const GET: APIRoute = () => {
     { path: '/', images: homeImages },
     ...staticPaths.map((p) => ({ path: p })),
     ...charEntries,
+    ...topic('/locations', locations),
+    ...topic('/families', families),
+    ...topic('/activities', activities),
     ...previews.map((p) => ({ path: `/previews/${p.slug}`, images: [p.image] })),
     ...faqs.map((f) => ({ path: `/faq/${f.slug}` })),
   ];
