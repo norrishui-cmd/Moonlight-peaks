@@ -23,6 +23,10 @@ const url = new URL(`/characters/${c.id}`, SITE.url).href;
 const imgAbs = c.img ? new URL(c.img, SITE.url).href : undefined;
 const statusLabel = c.status === 'confirmed' ? 'Developer-confirmed' : 'Reported (verify at launch)';
 
+const familyMap: Record<string, string> = { vampire: '/families/vampires', werewolf: '/families/werewolves', witch: '/families/witches', other: '/families' };
+const familyHref = familyMap[c.type] || '/families';
+const familyLabel = c.type === 'other' ? 'the seven families' : `${typeLabels[c.type].toLowerCase()} family`;
+
 const jsonLd = [
   { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
     { '@type': 'ListItem', position: 1, name: 'Home', item: SITE.url },
@@ -60,7 +64,7 @@ const jsonLd = [
           <h1>{c.name}</h1>
           <div class="ctags">
             <span class={`cbadge ${c.status === 'confirmed' ? 'is-conf' : 'is-rep'}`}>{c.status}</span>
-            <span class="ctag fam">{typeLabels[c.type]}</span>
+            <a class="ctag fam" href={familyHref}>{typeLabels[c.type]}</a>
             {c.family !== '—' && c.family !== typeLabels[c.type] && <span class="ctag fam">{c.family}</span>}
             {c.romanceable === true && <span class="ctag heart">♥ Romanceable</span>}
             {c.romanceable === false && <span class="ctag">Not romanceable</span>}
@@ -119,8 +123,8 @@ const jsonLd = [
       </nav>
 
       <div class="callout">
-        More: <a href="/romance">romance & the seven families</a> · <a href="/characters">all characters</a> ·
-        <a href="/beginner-guide">beginner guide</a> · <a href="/previews/families-and-residents">families explained</a>.
+        More: <a href={familyHref}>{familyLabel}</a> · <a href="/families">all families</a> ·
+        <a href="/romance">romance</a> · <a href="/characters">all characters</a> · <a href="/beginner-guide">beginner guide</a>.
       </div>
     </div>
   </article>
@@ -136,6 +140,8 @@ const jsonLd = [
     .cbadge.is-conf { color: #9be6b4; border: 1px solid #2f6a45; }
     .cbadge.is-rep { color: var(--faint); border: 1px solid var(--line); }
     .ctag { font-family: var(--mono); font-size: 0.66rem; color: var(--candle); border: 1px solid var(--candle-dim); border-radius: 6px; padding: 2px 7px; }
+    a.ctag.fam { color: #cbb4f0; border-color: #5a4a7a; text-decoration: none; }
+    a.ctag.fam:hover { border-color: #cbb4f0; }
     .ctag.fam { color: #cbb4f0; border-color: #5a4a7a; }
     .ctag.heart { color: var(--wine); border-color: #7a2f45; }
     .cdesc { color: #ded3e6; margin: 0; }
