@@ -1,6 +1,8 @@
 ---
 import Base from '../layouts/Base.astro';
 import { SITE, GAME } from '../consts';
+import PriorityLinks from '../components/PriorityLinks.astro';
+import { comparisonPriorityLinks } from '../data/priorityLinks';
 
 const faq = [
   { q: 'Is Moonlight Peaks like Stardew Valley?', a: 'Yes, in spirit — both are cozy farming life sims where you plant, tend, befriend, and romance townsfolk. Moonlight Peaks adds a supernatural twist: you play a vampire, farm by night, and use magic.' },
@@ -31,6 +33,22 @@ const jsonLd = [
         Moonlight Peaks is often compared to Stardew Valley — here's how the two cozy farming sims
         actually stack up, so you can decide which fits you. Updated {SITE.updated}.
       </p>
+
+      <h2>Quick comparison</h2>
+      <table class="facts">
+        <tr><th>Premise</th><td>Moonlight Peaks is a vampire life sim in a supernatural town; Stardew Valley is a rural farm restoration sim.</td></tr>
+        <tr><th>Visual style</th><td>Moonlight Peaks uses modern 3D; Stardew Valley uses 2D pixel art.</td></tr>
+        <tr><th>Combat</th><td>Moonlight Peaks is combat-free; Stardew Valley includes combat in mines and related areas.</td></tr>
+        <tr><th>Multiplayer</th><td>Moonlight Peaks is single-player only; Stardew Valley supports co-op.</td></tr>
+        <tr><th>Romance angle</th><td>Moonlight Peaks leans into supernatural families and gender-neutral dating; Stardew Valley has a long-established town cast.</td></tr>
+        <tr><th>Best fit</th><td>Choose Moonlight Peaks for a fresh gothic cozy theme; choose Stardew Valley for a proven classic with years of content.</td></tr>
+      </table>
+
+      <PriorityLinks
+        title="More cozy-sim comparisons"
+        note="comparison cluster"
+        links={comparisonPriorityLinks}
+      />
 
       <h2>What they share</h2>
       <p>
