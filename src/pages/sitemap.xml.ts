@@ -9,6 +9,7 @@ import { activities } from '../data/activities';
 import { comparisons } from '../data/compare';
 import { platforms } from '../data/platforms';
 import { demo } from '../data/demo';
+import { seoPages } from '../data/seoGraph';
 
 // Bump LASTMOD only when you push a meaningful content update (not every deploy / not daily),
 // otherwise search engines learn to ignore it.
@@ -40,6 +41,7 @@ export const GET: APIRoute = () => {
     ...topic('/demo', demo),
     ...previews.map((p) => ({ path: `/previews/${p.slug}`, images: [p.image] })),
     ...faqs.map((f) => ({ path: `/faq/${f.slug}` })),
+    ...seoPages.map((p) => ({ path: p.path })),
   ];
 
   const abs = (u: string) => new URL(u, SITE.url).href;
