@@ -1,6 +1,8 @@
 ---
 import Base from '../layouts/Base.astro';
 import { SITE, GAME } from '../consts';
+import PriorityLinks from '../components/PriorityLinks.astro';
+import { romancePriorityLinks } from '../data/priorityLinks';
 
 const named = [
   { name: 'Count Dracula', slug: 'count-dracula', family: 'Vampire', note: 'Your father. Story character — not romanceable.', status: 'confirmed' },
@@ -76,6 +78,12 @@ const jsonLd = [
         once the live build confirms them on {GAME.releaseLabel}. We won't list a gift as "loved"
         until it's verified in-game.
       </p>
+
+      <PriorityLinks
+        title="Romance searches to open next"
+        note="gifts and heart events"
+        links={romancePriorityLinks}
+      />
 
       <h2>FAQ</h2>
       <div class="faq">
