@@ -1,6 +1,8 @@
 ---
 import Base from '../layouts/Base.astro';
 import { SITE, GAME } from '../consts';
+import PriorityLinks from '../components/PriorityLinks.astro';
+import { beginnerPriorityLinks } from '../data/priorityLinks';
 
 const jsonLd = {
   '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
@@ -24,6 +26,20 @@ const jsonLd = {
         What we know so far, gathered from the demo and official trailers. On {GAME.releaseLabel}
         this becomes a full day-one walkthrough with exact numbers. Updated {SITE.updated}.
       </p>
+
+      <h2>Start here checklist</h2>
+      <ol class="steps">
+        <li><strong>Confirm your platform.</strong> Check Steam, Switch, Switch 2, Steam Deck, Mac, and Android support before planning your first save.</li>
+        <li><strong>Try the free demo.</strong> Use it to test controls, character creation, fishing, flower arranging, embroidery, and the early tone.</li>
+        <li><strong>Learn the night loop.</strong> Moonlight Peaks is a cozy life sim, but the vampire schedule changes how you think about farming.</li>
+        <li><strong>Pick a first focus.</strong> Farming, relationships, decorating, fishing, magic, and Nokturna all connect to separate guide clusters.</li>
+      </ol>
+
+      <PriorityLinks
+        title="Beginner pages to open next"
+        note="first-session path"
+        links={beginnerPriorityLinks}
+      />
 
       <h2>The core loop</h2>
       <p>
@@ -61,6 +77,22 @@ const jsonLd = {
         <a href="/romance">romance & families entry</a> will track every candidate and their gift
         preferences at launch.
       </p>
+
+      <h2>What not to worry about before launch</h2>
+      <p>
+        Do not chase exact min-max routes yet. Until the full build is available, crop profit,
+        gift values, fish spawns, recipe prices, quest rewards, and resident schedules should be
+        treated as launch data. The useful pre-launch work is learning the systems and saving the
+        right reference pages.
+      </p>
+
+      <h2>Best next pages by goal</h2>
+      <table class="facts">
+        <tr><th>If you want to play day one</th><td><a href="/release-date">Release date</a>, <a href="/demo">demo guide</a>, and <a href="/platforms">platform guide</a></td></tr>
+        <tr><th>If you want romance</th><td><a href="/romance">Romance guide</a>, <a href="/characters">characters</a>, and <a href="/romance/saga/gifts">Saga gifts</a></td></tr>
+        <tr><th>If you want farming</th><td><a href="/farming">Farming guide</a>, <a href="/guides/money-guide">money guide</a>, and <a href="/collectibles/crops">crops</a></td></tr>
+        <tr><th>If you want collecting</th><td><a href="/collectibles/fish">fish</a>, <a href="/collectibles/bugs">bugs</a>, <a href="/crafting/recipes">recipes</a>, and <a href="/map/locations">locations</a></td></tr>
+      </table>
 
       <div class="callout wip">
         Pre-launch entry. Exact crop prices, fish lists, gift tables, and cheat commands aren't
