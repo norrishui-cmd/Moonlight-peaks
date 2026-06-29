@@ -1,13 +1,13 @@
-import type { SeoPage } from './seoGraph';
-import { activities } from './activities';
-import { characters } from './characters';
-import { comparisons } from './compare';
-import { demo } from './demo';
-import { families } from './families';
-import { faqs } from './faq';
-import { locations } from './locations';
-import { platforms } from './platforms';
-import { previews } from './previews';
+import type { SeoPage } from './seoGraph.ts';
+import { activities } from './activities.ts';
+import { characters } from './characters.ts';
+import { comparisons } from './compare.ts';
+import { demo } from './demo.ts';
+import { families } from './families.ts';
+import { faqs } from './faq.ts';
+import { locations } from './locations.ts';
+import { platforms } from './platforms.ts';
+import { previews } from './previews.ts';
 
 const faq = (focus: string) => [
   {
