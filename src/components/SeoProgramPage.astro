@@ -1,13 +1,17 @@
 ---
 import Base from '../layouts/Base.astro';
 import { GAME, SITE } from '../consts';
+import { t, withLocale, type LocaleCode } from '../data/i18n';
 import type { SeoPage } from '../data/seoGraph';
 
 interface Props {
   page: SeoPage;
+  sourcePath?: string;
+  locale?: LocaleCode;
 }
 
-const { page } = Astro.props;
+const { page, sourcePath = page.path, locale = 'en' } = Astro.props;
+const tx = t(locale);
 const canonical = new URL(page.path, SITE.url).href;
 const crumbs = [
   { label: page.hub.replace(' Hub', ''), href: page.hubPath },
@@ -18,7 +22,7 @@ const breadcrumbLd = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
   itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'Home', item: SITE.url },
+    { '@type': 'ListItem', position: 1, name: tx.home, item: new URL(withLocale('/', locale), SITE.url).href },
     { '@type': 'ListItem', position: 2, name: page.hub.replace(' Hub', ''), item: new URL(page.hubPath, SITE.url).href },
     { '@type': 'ListItem', position: 3, name: page.h1, item: canonical },
   ],
@@ -75,7 +79,7 @@ const itemListLd = page.kind === 'hub' || page.kind === 'list'
 
 const jsonLd = [breadcrumbLd, faqLd, articleLd, howToLd, itemListLd].filter(Boolean);
 ---
-<Base title={page.title} description={page.description} path={page.path} jsonLd={jsonLd} crumbs={crumbs}>
+<Base title={page.title} description={page.description} path={page.path} sourcePath={sourcePath} locale={locale} jsonLd={jsonLd} crumbs={crumbs}>
   <article class="page seo-page">
     <div class="wrap">
       <p class="eyebrow">{page.hub} / {page.kind}</p>
@@ -90,7 +94,7 @@ const jsonLd = [breadcrumbLd, faqLd, articleLd, howToLd, itemListLd].filter(Bool
       ))}
 
       <section class="seo-section">
-        <h2>Related guides</h2>
+        <h2>{tx.relatedGuides}</h2>
         <div class="seo-links">
           {page.related.map((item) => (
             <a href={item.href}>{item.label}</a>
@@ -99,7 +103,7 @@ const jsonLd = [breadcrumbLd, faqLd, articleLd, howToLd, itemListLd].filter(Bool
       </section>
 
       <section class="seo-section">
-        <h2>FAQ</h2>
+        <h2>{tx.faq}</h2>
         {page.faqs.map((faq) => (
           <div class="seo-faq">
             <h3>{faq.q}</h3>
@@ -109,11 +113,9 @@ const jsonLd = [breadcrumbLd, faqLd, articleLd, howToLd, itemListLd].filter(Bool
       </section>
 
       <section class="seo-section">
-        <h2>Latest news</h2>
+        <h2>{tx.latestNews}</h2>
         <p>
-          Check the <a href="/development/game-updates">game updates</a>, <a href="/community/news">news</a>,
-          and <a href="/development/official-confirmations">official confirmations</a> pages for new
-          Moonlight Peaks details as launch coverage expands.
+          {tx.latestNewsText}
         </p>
       </section>
     </div>
