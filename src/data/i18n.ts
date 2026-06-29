@@ -1,4 +1,4 @@
-import type { SeoPage, SeoFaq, SeoLink } from './seoGraph';
+import type { SeoPage, SeoFaq, SeoLink } from './seoGraph.ts';
 
 export type LocaleCode = 'en' | 'es' | 'ja' | 'zh' | 'fr';
 
