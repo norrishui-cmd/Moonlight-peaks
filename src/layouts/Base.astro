@@ -15,12 +15,13 @@ const canonical = new URL(path, SITE.url).href;
 const ogImageUrl = ogImage ? new URL(ogImage, SITE.url).href : undefined;
 const nav = [
   { href: '/release-date', label: 'Release' },
+  { href: '/demo', label: 'Demo' },
+  { href: '/platforms', label: 'Platforms' },
   { href: '/beginner-guide', label: 'Guide' },
   { href: '/characters', label: 'Characters' },
-  { href: '/nokturna', label: 'Nokturna' },
   { href: '/romance', label: 'Romance' },
+  { href: '/guides', label: 'Guides' },
   { href: '/faq', label: 'FAQ' },
-  { href: '/about', label: 'About' },
 ];
 const here = Astro.url.pathname.replace(/\/$/, '') || '/';
 const ld = Array.isArray(jsonLd) ? jsonLd : jsonLd ? [jsonLd] : [];
