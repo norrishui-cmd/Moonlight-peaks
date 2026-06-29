@@ -1,8 +1,8 @@
 ---
 import SeoProgramPage from '../../components/SeoProgramPage.astro';
-import { localizedStaticPages } from '../../data/localizedStaticPages';
-import { localizeSeoPage, localizedLocales, type LocaleCode } from '../../data/i18n';
-import { seoPages, type SeoPage } from '../../data/seoGraph';
+import { localizedStaticPages } from '../../data/localizedStaticPages.ts';
+import { localizeSeoPage, localizedLocales, type LocaleCode } from '../../data/i18n.ts';
+import { seoPages, type SeoPage } from '../../data/seoGraph.ts';
 
 const uniquePages = (pages: SeoPage[]): SeoPage[] => {
   const seen = new Set<string>();
