@@ -1,0 +1,14 @@
+---
+import SeoProgramPage from '../components/SeoProgramPage.astro';
+import { seoPages } from '../data/seoGraph';
+
+export function getStaticPaths() {
+  return seoPages.map((page) => ({
+    params: { slug: page.path.replace(/^\//, '') },
+    props: { page },
+  }));
+}
+
+const { page } = Astro.props;
+---
+<SeoProgramPage page={page} />
