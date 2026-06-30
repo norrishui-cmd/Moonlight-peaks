@@ -1,0 +1,82 @@
+---
+import Base from '../layouts/Base.astro';
+import { SITE, GAME } from '../consts';
+
+const faq = [
+  { q: 'Can you turn into a bat in Moonlight Peaks?', a: 'Yes. As a vampire you can shapeshift into a bat, which is a quick way to get around the town at night — flying around is described as conveniently fast.' },
+  { q: 'What other forms can you shapeshift into?', a: 'The developers have hinted that you can learn to shapeshift into other forms beyond the bat, and demo players have described dashing around as a cat. The full list of forms is expected at launch.' },
+  { q: 'How do you unlock shapeshifting?', a: 'Shapeshifting is part of your vampire lineage and supernatural abilities. Exactly how and when each form unlocks will be confirmed when the full game launches on ' + GAME.releaseLabel + '.' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: SITE.url },
+    { '@type': 'ListItem', position: 2, name: 'Shapeshifting', item: new URL('/shapeshifting', SITE.url).href },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks Shapeshifting — Bat Form & Other Forms"
+  description="How shapeshifting works in Moonlight Peaks: turning into a bat to travel the town at night, the other forms the developers have hinted at, and how it fits your vampire powers."
+  path="/shapeshifting"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Shapeshifting' }]}
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Entry · Shapeshifting</p>
+      <h1>Moonlight Peaks <em>shapeshifting</em></h1>
+      <p class="intro">
+        One of the perks of being a vampire in {GAME.title} is changing your shape. Here's what's
+        actually confirmed about shapeshifting — and what the developers have only hinted at so far.
+        Updated {SITE.updated}.
+      </p>
+
+      <h2>Turn into a bat to get around</h2>
+      <p>
+        The confirmed headline form is the classic vampire bat. Shifting into a bat lets you fly
+        around the town quickly at night, which is handy when you're juggling the farm, errands and
+        socialising before sunrise.
+      </p>
+
+      <h2>Other forms are hinted at</h2>
+      <p>
+        The studio has teased that you can learn to shapeshift into other forms too, beyond the bat.
+        Players who tried the demo described dashing around as a cat, but the complete set of forms —
+        and what each one is good for — hasn't been fully detailed yet.
+      </p>
+
+      <h2>Part of your vampire powers</h2>
+      <p>
+        Shapeshifting sits alongside the rest of your supernatural abilities and helps you explore
+        everything the town has to offer. It pairs naturally with <a href="/magic">witchcraft and
+        potions</a> — and like everything else in your (un-)life, it works around the rule that you
+        return to your coffin before the sun comes up.
+      </p>
+
+      <h2>Coming at launch ({GAME.releaseLabel})</h2>
+      <ul>
+        <li>The full <strong>list of forms</strong> you can take, beyond the bat.</li>
+        <li>How each form <strong>unlocks</strong> and what it's useful for.</li>
+        <li>Any limits — energy, timing, or where you can and can't transform.</li>
+      </ul>
+
+      <h2>FAQ</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        Pre-launch entry — the full form list lands at launch. Related:
+        <a href="/magic">magic & potions</a>, <a href="/character-creator">character creator</a>,
+        <a href="/beginner-guide">beginner guide</a>.
+      </div>
+    </div>
+  </article>
+</Base>
