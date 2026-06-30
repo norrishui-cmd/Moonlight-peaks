@@ -6,8 +6,8 @@ export const platformsSection: TopicSection = {
   eyebrow: 'Platform',
   heading: 'Moonlight Peaks <em>platforms</em> & price',
   schemaType: 'Thing',
-  title: 'Moonlight Peaks Platforms & Price — Steam, Switch 2, Steam Deck & Android | Moonlight Peaks Wiki & Guide',
-  description: 'Where to play Moonlight Peaks: Steam (PC & Mac), Steam Deck, Nintendo Switch, Switch 2, and Android via Google Play — with price, the free demo, and PS5/Xbox/iOS status.',
+  title: 'Moonlight Peaks on Nintendo Switch — Platforms, Switch 2, Steam & Price | Moonlight Peaks Wiki & Guide',
+  description: 'Where to play Moonlight Peaks: Nintendo Switch and Switch 2, Steam (PC & Mac), Steam Deck, and Android via Google Play — with price, the free demo, and PS5/Xbox/iOS status.',
   intro: 'Everything about where and how to play Moonlight Peaks at launch on July 7, 2026 — every platform, the price, the free demo, and per-platform deep dives.',
 };
 
@@ -21,6 +21,16 @@ export const platforms: TopicItem[] = [
     ],
     related: [{ label: 'All platforms', href: '/platforms' }, { label: 'Release date', href: '/release-date' }, { label: 'What platforms?', href: '/faq/what-platforms-is-moonlight-peaks-on' }],
     faq: [{ q: 'Is Moonlight Peaks Steam Deck Verified?', a: 'It launches on Steam, so it is playable on Steam Deck; the official Verified rating will be confirmed around the July 7, 2026 launch.' }],
+  },
+  {
+    slug: 'switch', title: 'Moonlight Peaks on Nintendo Switch', tag: 'Switch', status: 'confirmed',
+    dek: 'Moonlight Peaks launches on the original Nintendo Switch — price, the free demo, and the Switch 2 upgrade.',
+    body: [
+      'Moonlight Peaks releases on the original Nintendo Switch on July 7, 2026, and the free demo is available on the eShop.',
+      'There is also a separate, enhanced Nintendo Switch 2 edition; players who buy on the original Switch have been told a Switch-to-Switch 2 upgrade pass will be available.',
+    ],
+    related: [{ label: 'All platforms', href: '/platforms' }, { label: 'On Switch 2', href: '/platforms/switch-2' }, { label: 'Release date', href: '/release-date' }],
+    faq: [{ q: 'Is Moonlight Peaks on the original Nintendo Switch?', a: 'Yes — it launches on the original Switch on July 7, 2026, and the free demo is on the eShop. A separate, enhanced Switch 2 edition is also available.' }],
   },
   {
     slug: 'switch-2', title: 'Moonlight Peaks on Nintendo Switch 2', tag: 'Switch 2', status: 'confirmed',
