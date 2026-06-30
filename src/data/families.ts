@@ -6,7 +6,7 @@ export const familiesSection: TopicSection = {
   eyebrow: 'World',
   heading: 'The <em>seven families</em>',
   schemaType: 'Thing',
-  title: 'Moonlight Peaks Families — Vampires, Werewolves, Witches, Mermaids & Normies | Moonlight Peaks Wiki & Guide',
+  title: 'Moonlight Peaks Families — Vampires, Witches & More',
   description: 'The seven families of Moonlight Peaks: vampires, werewolves, witches, mermaids and the ordinary-human normies. What each family is, who belongs to it, and what is still unrevealed.',
   intro: 'Moonlight Peaks is built around seven families, each with a supernatural inclination — except the normies. Here is what the developers have confirmed about each, with links to the residents who belong to them. Two families\u2019 inclinations are still under wraps; we add them as they\u2019re revealed.',
 };
