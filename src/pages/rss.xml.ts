@@ -1,6 +1,7 @@
 import type { APIRoute } from 'astro';
 import { SITE } from '../consts';
 import { previews } from '../data/previews';
+import { news } from '../data/news';
 
 const esc = (s: string) =>
   s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
@@ -11,7 +12,22 @@ const BUILD = new Date('2026-06-30T00:00:00Z').toUTCString();
 
 export const GET: APIRoute = () => {
   const abs = (u: string) => new URL(u, SITE.url).href;
-  const items = previews
+  const newsItems = news
+    .map((item) => {
+      const link = abs(`/news/${item.slug}`);
+      const pubDate = new Date(`${item.date}T00:00:00Z`).toUTCString();
+      return `    <item>
+      <title>${esc(item.title)}</title>
+      <link>${link}</link>
+      <guid isPermaLink="true">${link}</guid>
+      <description>${esc(item.body)}</description>
+      <pubDate>${pubDate}</pubDate>
+      <category>news</category>
+    </item>`;
+    })
+    .join('\n');
+
+  const previewItems = previews
     .map((p) => {
       const link = abs(`/previews/${p.slug}`);
       return `    <item>
@@ -22,6 +38,8 @@ export const GET: APIRoute = () => {
     </item>`;
     })
     .join('\n');
+
+  const items = [newsItems, previewItems].filter(Boolean).join('\n');
 
   const body = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
