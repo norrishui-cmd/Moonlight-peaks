@@ -6,7 +6,7 @@ export const compareSection: TopicSection = {
   eyebrow: 'Compare',
   heading: 'Moonlight Peaks <em>vs</em> other cozy sims',
   schemaType: 'Thing',
-  title: 'Moonlight Peaks vs Other Cozy Sims — Witchbrook, Coral Island, Wylde Flowers & Stardew | Moonlight Peaks Wiki & Guide',
+  title: 'Moonlight Peaks vs Other Cozy Sims — Full Comparisons',
   description: 'How Moonlight Peaks compares to other cozy farming and witch life sims — Stardew Valley, Witchbrook, Coral Island and Wylde Flowers — across setting, magic, romance, combat, multiplayer and platforms.',
   intro: 'Trying to pick your next cozy life sim? Here is how Moonlight Peaks stacks up against the games people most often compare it to. Each breakdown uses publicly confirmed facts about both games; Moonlight Peaks itself launches July 7, 2026.',
 };
