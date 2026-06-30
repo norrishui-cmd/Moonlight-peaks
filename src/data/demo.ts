@@ -6,7 +6,7 @@ export const demoSection: TopicSection = {
   eyebrow: 'Demo',
   heading: 'The Moonlight Peaks <em>demo</em>',
   schemaType: 'Thing',
-  title: 'Moonlight Peaks Demo — Free on Steam & Switch, What\u2019s Inside & How to Download | Moonlight Peaks Wiki & Guide',
+  title: 'Moonlight Peaks Demo — Free on Steam & Switch eShop',
   description: 'Everything about the free Moonlight Peaks demo: what you can do in it, how to download it on Steam and Nintendo Switch, and how it differs from the full game.',
   intro: 'The free Moonlight Peaks demo is the best way to try the cozy vampire life sim before it launches on July 7, 2026. It is available on Steam and the Nintendo eShop (also on Switch 2). Here is what is in it, how to get it, and how it compares to the full game.',
 };
