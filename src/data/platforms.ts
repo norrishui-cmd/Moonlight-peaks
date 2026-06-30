@@ -6,7 +6,7 @@ export const platformsSection: TopicSection = {
   eyebrow: 'Platform',
   heading: 'Moonlight Peaks <em>platforms</em> & price',
   schemaType: 'Thing',
-  title: 'Moonlight Peaks on Nintendo Switch — Platforms, Switch 2, Steam & Price | Moonlight Peaks Wiki & Guide',
+  title: 'Moonlight Peaks Platforms — Switch, Switch 2, Steam & Price',
   description: 'Where to play Moonlight Peaks: Nintendo Switch and Switch 2, Steam (PC & Mac), Steam Deck, and Android via Google Play — with price, the free demo, and PS5/Xbox/iOS status.',
   intro: 'Everything about where and how to play Moonlight Peaks at launch on July 7, 2026 — every platform, the price, the free demo, and per-platform deep dives.',
 };
