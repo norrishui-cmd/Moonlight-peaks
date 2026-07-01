@@ -10,6 +10,7 @@ const url = new URL(`${section.base}/${item.slug}`, SITE.url).href;
 const statusLabel =
   item.status === 'confirmed' ? 'Developer-confirmed'
   : item.status === 'expected' ? 'Expected — not yet confirmed'
+  : item.status === 'datamined' ? 'Datamined — from pre-launch game files, cross-referenced with community wikis; verify at launch'
   : 'Reported — verify at launch';
 
 const ld: object[] = [
