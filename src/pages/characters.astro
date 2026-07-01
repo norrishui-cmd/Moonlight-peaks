@@ -66,7 +66,7 @@ const jsonLd = [
                 </h2>
                 <div class="ctags">
                   <span class="ctag fam">{typeLabels[c.type]}</span>
-                  {c.family !== '—' && c.family !== typeLabels[c.type] && <span class="ctag fam">{c.family}</span>}
+                  {c.family !== 'Unknown' && c.family !== typeLabels[c.type] && <span class="ctag fam">{c.family}</span>}
                   {c.romanceable === true && <span class="ctag heart">♥ Romanceable</span>}
                   {c.romanceable === false && <span class="ctag">Not romanceable</span>}
                   {c.romanceable === null && <span class="ctag">Romance: TBC</span>}
