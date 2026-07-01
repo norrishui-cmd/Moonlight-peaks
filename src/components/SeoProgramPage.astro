@@ -43,6 +43,7 @@ const articleLd = {
   dateModified: '2026-06-30',
   publisher: { '@type': 'Organization', name: SITE.brand },
   about: { '@type': 'VideoGame', name: GAME.title, datePublished: GAME.releaseISO, gamePlatform: GAME.platforms },
+  ...(page.sources && page.sources.length > 0 ? { citation: page.sources.map((source) => new URL(source.href, SITE.url).href) } : {}),
 };
 
 const howToLd = page.kind === 'guide'
@@ -108,6 +109,24 @@ const jsonLd = [breadcrumbLd, faqLd, articleLd, howToLd, itemListLd].filter(Bool
         ))}
       </section>
 
+      {page.sources && page.sources.length > 0 && (
+        <section class="seo-section">
+          <h2>Sources &amp; update policy</h2>
+          <p>
+            This generated page is based on official or neutral public sources plus verified site data.
+            Unconfirmed launch details are marked for later verification instead of being guessed.
+          </p>
+          <ul class="seo-sources">
+            {page.sources.map((source) => (
+              <li>
+                <a href={source.href} target={source.href.startsWith('http') ? '_blank' : undefined} rel={source.href.startsWith('http') ? 'noopener noreferrer nofollow' : undefined}>{source.label}</a>
+                <span>{source.note}</span>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+
       <section class="seo-section">
         <h2>Latest news</h2>
         <p>
@@ -152,5 +171,30 @@ const jsonLd = [breadcrumbLd, faqLd, articleLd, howToLd, itemListLd].filter(Bool
       margin: 0 0 4px;
     }
     .seo-faq p { margin: 0; }
+    .seo-sources {
+      list-style: none;
+      padding: 0;
+      margin: 10px 0 0;
+      display: grid;
+      gap: 10px;
+    }
+    .seo-sources li {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--surface);
+      padding: 10px 12px;
+    }
+    .seo-sources a {
+      display: block;
+      color: var(--candle);
+      font-weight: 700;
+      text-decoration: none;
+    }
+    .seo-sources span {
+      display: block;
+      color: var(--muted);
+      font-size: 0.84rem;
+      margin-top: 3px;
+    }
   </style>
 </Base>

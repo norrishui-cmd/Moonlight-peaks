@@ -21,6 +21,12 @@ export type SeoFaq = {
   a: string;
 };
 
+export type SeoSource = {
+  label: string;
+  href: string;
+  note: string;
+};
+
 export type SeoPage = {
   path: string;
   hub: string;
@@ -33,6 +39,7 @@ export type SeoPage = {
   sections: { title: string; body: string }[];
   faqs: SeoFaq[];
   related: SeoLink[];
+  sources?: SeoSource[];
   image?: string;
 };
 
@@ -79,6 +86,12 @@ const titleCase = (slug: string): string =>
 
 const topicsFrom = (labels: string[], kind?: SeoKind): Topic[] =>
   labels.map((label) => ({ slug: slugify(label), label: kind ? titleCase(slugify(label)) : label, ...(kind ? { kind } : {}) }));
+
+const sanitizePublicText = (value: string): string =>
+  value
+    .replace(/\s*\(cross-referenced via moonlightpeaks\.wiki\.gg\)/gi, '')
+    .replace(/cross-referenced via moonlightpeaks\.wiki\.gg/gi, 'cross-referenced against pre-launch references')
+    .replace(/moonlightpeaks\.wiki\.gg/gi, 'pre-launch references');
 
 const knownPaths = new Set<string>([
   '/',
@@ -487,6 +500,38 @@ const makeHubPage = (hub: Hub): SeoPage => ({
   ],
 });
 
+const publicSource = (label: string, href: string, note: string): SeoSource => ({ label, href, note });
+
+const officialSteamSource = publicSource(
+  'Steam Store - Moonlight Peaks',
+  'https://store.steampowered.com/app/2209900/Moonlight_Peaks/',
+  'Official Steam listing for core game description, platform/store context, single-player status, and launch-facing information.'
+);
+
+const officialDemoSource = publicSource(
+  'Marvelous Games - official demo announcement',
+  'https://marvelousgames.com/news/moonlight-peaks-invites-you-to-go-goth-in-frightfully-fun-new-demo',
+  'Official publisher announcement used for demo availability and demo feature context.'
+);
+
+const pcGamerSource = publicSource(
+  'PC Gamer - hands-on preview',
+  'https://www.pcgamer.com/games/life-sim/moonlight-peaks-preview-impressions/',
+  'Neutral press preview used for hands-on gameplay context; details are still verified against official launch data when possible.'
+);
+
+const guardianSource = publicSource(
+  'The Guardian - developer interview',
+  'https://www.theguardian.com/games/2025/jul/01/moonlight-peaks-vegan-vampire-dracula-daughter-stardew-valley',
+  'Neutral media interview used for broad game, romance, and cozy-sim context.'
+);
+
+const neutralSteamCommunitySource = publicSource(
+  'Steam Community - Moonlight Peaks discussions',
+  'https://steamcommunity.com/app/2209900/discussions/',
+  'Neutral platform discussion area used only for public player-question context, never as final proof for unconfirmed facts.'
+);
+
 const characterSeoPages: SeoPage[] = characters
   .filter((character) => character.status !== 'unconfirmed')
   .flatMap((character) => {
@@ -501,6 +546,11 @@ const characterSeoPages: SeoPage[] = characters
       { label: 'All characters', href: '/characters' },
       { label: 'Romance guide', href: '/romance' },
       { label: 'Romance Gift Finder', href: '/tools/romance-gift-finder' },
+    ];
+    const characterSources: SeoSource[] = [
+      officialSteamSource,
+      pcGamerSource,
+      guardianSource,
     ];
 
     return [
@@ -524,6 +574,7 @@ const characterSeoPages: SeoPage[] = characters
           { q: 'Are gift tables guessed here?', a: 'No. Gift tables are added only after reliable data exists, because guessed gift pages are bad for players and risky for search quality.' },
         ],
         related: baseRelated,
+        sources: characterSources,
         image: character.img,
       },
       {
@@ -537,7 +588,7 @@ const characterSeoPages: SeoPage[] = characters
         intro: `A focused relationship-status page for ${character.name}, built from the current character data and updated when the live game confirms more.`,
         sections: [
           { title: 'Current romance status', body: character.romanceable === true ? `${character.name} is currently marked as romanceable. Full heart events, dating steps, proposal rules, and favorite gifts still need launch verification.` : character.romanceable === false ? `${character.name} is currently marked as not romanceable. This page tracks that status so players do not confuse story characters with dateable residents.` : `${character.name}'s romance status is still unknown. This page will update once the live game confirms whether they can be dated.` },
-          { title: 'Known profile notes', body: character.knownInfo && character.knownInfo.length > 0 ? character.knownInfo.join(' ') : character.desc },
+          { title: 'Known profile notes', body: sanitizePublicText(character.knownInfo && character.knownInfo.length > 0 ? character.knownInfo.join(' ') : character.desc) },
           { title: 'Launch checklist', body: 'The details to verify are heart events, daily routine, date locations, gift preferences, birthday, marriage eligibility, and any family or story requirements.' },
         ],
         faqs: [
@@ -546,6 +597,7 @@ const characterSeoPages: SeoPage[] = characters
           { q: 'Will this page change after launch?', a: 'Yes. Relationship pages should expand only when the live game confirms schedules, events, gifts, and marriage details.' },
         ],
         related: baseRelated,
+        sources: characterSources,
         image: character.img,
       },
     ];
@@ -568,6 +620,11 @@ const platformSeoPages: SeoPage[] = platforms.flatMap((platform) => [
     ],
     faqs: platform.faq.length > 0 ? platform.faq : [{ q: `Is ${platform.title} confirmed?`, a: platform.dek }],
     related: [{ label: platform.title, href: `/platforms/${platform.slug}` }, { label: 'All platforms', href: '/platforms' }, { label: 'Release date', href: '/release-date' }, { label: 'Demo guide', href: '/demo' }],
+    sources: [
+      officialSteamSource,
+      officialDemoSource,
+      neutralSteamCommunitySource,
+    ],
   },
   {
     path: `/platforms/${platform.slug}/demo`,
@@ -585,6 +642,11 @@ const platformSeoPages: SeoPage[] = platforms.flatMap((platform) => [
     ],
     faqs: [{ q: `Is there a ${platform.title} demo?`, a: 'Demo availability depends on platform. Check the main demo page and this platform page for the current confirmed status.' }],
     related: [{ label: platform.title, href: `/platforms/${platform.slug}` }, { label: 'Demo guide', href: '/demo' }, { label: 'What is in the demo', href: '/demo/whats-in-the-demo' }, { label: 'Platform picker', href: '/tools/platform-picker' }],
+    sources: [
+      officialSteamSource,
+      officialDemoSource,
+      neutralSteamCommunitySource,
+    ],
   },
 ]);
 
@@ -608,6 +670,11 @@ const itemSeoPages: SeoPage[] = itemCategories.map((item) => ({
     { q: 'Why not publish every item now?', a: 'Publishing guessed item tables would be low value. This page keeps the useful structure ready while waiting for real data.' },
   ],
   related: [{ label: item.name, href: `/items/${item.slug}` }, { label: 'Items hub', href: '/items' }, ...item.related],
+  sources: [
+    officialSteamSource,
+    officialDemoSource,
+    pcGamerSource,
+  ],
 }));
 
 const demoSeoPages: SeoPage[] = demo.flatMap((entry) => [
@@ -627,6 +694,11 @@ const demoSeoPages: SeoPage[] = demo.flatMap((entry) => [
     ],
     faqs: entry.faq,
     related: [{ label: entry.title, href: `/demo/${entry.slug}` }, { label: 'Demo guide', href: '/demo' }, { label: 'Steam Deck', href: '/platforms/steam-deck' }],
+    sources: [
+      officialSteamSource,
+      officialDemoSource,
+      neutralSteamCommunitySource,
+    ],
   },
   {
     path: `/demo/${entry.slug}/switch`,
@@ -644,6 +716,11 @@ const demoSeoPages: SeoPage[] = demo.flatMap((entry) => [
     ],
     faqs: entry.faq,
     related: [{ label: entry.title, href: `/demo/${entry.slug}` }, { label: 'Switch', href: '/platforms/switch' }, { label: 'Switch 2', href: '/platforms/switch-2' }],
+    sources: [
+      officialSteamSource,
+      officialDemoSource,
+      neutralSteamCommunitySource,
+    ],
   },
 ]);
 
@@ -657,12 +734,17 @@ const locationSeoPages: SeoPage[] = locations.map((location) => ({
   h1: `${location.title} confirmed details`,
   intro: `A focused location-status page for ${location.title}.`,
   sections: [
-    { title: 'Location summary', body: location.dek },
-    { title: 'What we know', body: location.body.join(' ') },
+    { title: 'Location summary', body: sanitizePublicText(location.dek) },
+    { title: 'What we know', body: sanitizePublicText(location.body.join(' ')) },
     { title: 'What to verify', body: 'After launch, this page should add exact map position, shops or NPCs nearby, resource spawns, events, and quest connections if confirmed.' },
   ],
   faqs: location.faq || [{ q: `What is ${location.title}?`, a: location.dek }],
   related: [{ label: location.title, href: `/locations/${location.slug}` }, { label: 'Locations', href: '/locations' }, ...(location.related || [])],
+  sources: [
+    officialSteamSource,
+    pcGamerSource,
+    guardianSource,
+  ],
   image: location.image,
 }));
 
@@ -736,8 +818,43 @@ const seoMinimumTarget =
   SEO_DAILY_MINIMUM_URLS *
   Math.max(1, Math.floor((Date.now() - Date.parse(SEO_START_DATE)) / 86_400_000) + 1);
 
+const textSize = (page: SeoPage): number =>
+  [
+    page.title,
+    page.description,
+    page.intro,
+    ...page.sections.flatMap((section) => [section.title, section.body]),
+    ...page.faqs.flatMap((faq) => [faq.q, faq.a]),
+  ].join(' ').replace(/\s+/g, ' ').trim().length;
+
+const hasUnsafeDraftMarker = (page: SeoPage): boolean => {
+  const text = [
+    page.title,
+    page.description,
+    page.intro,
+    ...page.sections.map((section) => section.body),
+    ...page.faqs.map((faq) => faq.a),
+  ].join(' ').toLowerCase();
+  return /\b(lorem|todo|tbd|dummy text|sample text)\b/.test(text);
+};
+
+const hasSafePublicSources = (page: SeoPage): boolean =>
+  (page.sources || []).length >= 2 &&
+  (page.sources || []).every((source) => !/wiki\.gg|moonlightpeaks\.wiki/i.test(source.href));
+
+const passesSeoQualityGate = (page: SeoPage): boolean =>
+  page.path.split('/').filter(Boolean).length >= 3 &&
+  page.sections.length >= 3 &&
+  page.sections.every((section) => section.title.length >= 4 && section.body.length >= 90) &&
+  page.faqs.length >= 2 &&
+  page.related.length >= 3 &&
+  textSize(page) >= 900 &&
+  hasSafePublicSources(page) &&
+  !hasUnsafeDraftMarker(page);
+
 const computedSeoPages: SeoPage[] = unique(trustedGenerated, (page) => page.path)
   .filter((page) => !knownPaths.has(page.path))
+  .filter(passesSeoQualityGate)
   .sort((a, b) => scorePage(a) - scorePage(b) || a.path.localeCompare(b.path));
 
 export const seoPages: SeoPage[] = SEO_PROGRAM_ENABLED ? computedSeoPages : [];
@@ -748,6 +865,8 @@ export const seoStats = {
   hubs: hubs.length,
   urls: seoPages.length,
   candidates: trustedGenerated.length,
+  passedQualityGate: computedSeoPages.length,
+  rejectedByQualityGate: Math.max(0, trustedGenerated.length - computedSeoPages.length),
   dailyMinimumUrls: SEO_DAILY_MINIMUM_URLS,
   minimumTarget: seoMinimumTarget,
   meetsMinimumTarget: seoPages.length >= seoMinimumTarget,

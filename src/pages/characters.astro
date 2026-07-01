@@ -4,7 +4,7 @@ import { SITE, GAME } from '../consts';
 import PriorityLinks from '../components/PriorityLinks.astro';
 import { characters, typeLabels } from '../data/characters';
 import { characterPriorityLinks } from '../data/priorityLinks';
-import { dataminedNpcs, dataminedPetNames, dataminedSource } from '../data/npc-datamine';
+import { dataminedNpcs, dataminedPetNames } from '../data/npc-datamine';
 
 const types = [...new Set(characters.map((c) => c.type))];
 const hasProfile = () => true;
@@ -92,8 +92,8 @@ const jsonLd = [
       <p class="cdm-intro">
         Beyond the profiled residents above, pre-launch game-file datamines list more names we don't
         have art or other details for yet — so rather than invent a backstory, here's the honest list.
-        Source: <a href={dataminedSource.url} target="_blank" rel="noopener">{dataminedSource.label}</a>,
-        cross-referenced. Treat every name below as unverified until the developers confirm it.
+        Treat every name below as unverified until the developers confirm it or the live game can be
+        checked directly.
       </p>
       <div class="cdm-grid">
         {dataminedNpcs.map((n) => (
