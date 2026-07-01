@@ -88,6 +88,8 @@ export const guideHubPriorityLinks: PriorityLink[] = [
   { label: 'Farming', href: '/farming', note: 'Night farming, crops, livestock, and magic.' },
   { label: 'Magic', href: '/magic', note: 'Wands, runes, mana, potions, and shapeshifting.' },
   { label: 'Activities', href: '/activities', note: 'Fishing, foraging, crafts, and the character creator.' },
+  { label: 'Items', href: '/items', note: 'Tools, clothing, potions, and the other item categories.' },
+  { label: 'Environment', href: '/environment', note: 'Weather, seasons, and festivals.' },
   { label: 'Romance', href: '/romance', note: 'Gifts, friendship, marriage, and characters.' },
   { label: 'Characters', href: '/characters', note: 'Every known resident and their status.' },
   { label: 'Compare with other sims', href: '/compare', note: 'How Moonlight Peaks differs from other cozy games.' },
