@@ -1,0 +1,44 @@
+// Additional Moonlight Peaks residents whose names surfaced in pre-launch datamined game
+// files (moonlightpeaks.wiki.gg), but for whom we have no fan art and no other confirmed
+// details (family, role, romance status). To avoid inventing biographies for names we can't
+// back up, these do NOT get full character profile pages — just an honest reference table.
+// Cross-reference before publishing anything more specific than "name exists in the files."
+
+export type DataminedNpc = { name: string; note?: string };
+
+export const dataminedNpcs: DataminedNpc[] = [
+  { name: 'Albertus' },
+  { name: 'Alina', note: 'A house named "Alina\u2019s House" also appears in the same files.' },
+  { name: 'Aras' },
+  { name: 'Balthasar' },
+  { name: 'Chester' },
+  { name: 'Death', note: 'Some pre-launch coverage has floated Death as a possible romance option — not developer-confirmed.' },
+  { name: 'Mr. Deyes' },
+  { name: 'Hoodini' },
+  { name: 'Jacques' },
+  { name: 'Kim' },
+  { name: 'Laveau' },
+  { name: 'Llemi' },
+  { name: 'Ludo' },
+  { name: 'Moon Goddess', note: 'Name suggests a deity or event figure rather than an ordinary townsperson — unconfirmed.' },
+  { name: 'Persephone' },
+  { name: 'Rei' },
+  { name: 'Samael', note: 'A house named "Samael\u2019s House" also appears in the same files.' },
+  { name: 'Snek' },
+  { name: 'Sun God', note: 'Name suggests a deity or event figure rather than an ordinary townsperson — unconfirmed.' },
+  { name: 'Tae' },
+  { name: 'Viktor' },
+  { name: 'Winston' },
+  { name: 'Yabbis' },
+  { name: 'Yasmin' },
+];
+
+// Fun, low-stakes fact: a couple of names in the same files are attached to creature/pet
+// icons rather than person portraits — likely example names for tameable companions, not
+// separate NPCs. Worth a one-line mention, not a profile.
+export const dataminedPetNames: string[] = ['Larry', 'Rachel', 'Grim'];
+
+export const dataminedSource = {
+  label: 'Moonlight Peaks Wiki (wiki.gg)',
+  url: 'https://moonlightpeaks.wiki.gg/',
+};
