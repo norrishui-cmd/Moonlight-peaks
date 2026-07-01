@@ -158,4 +158,36 @@ export const characters: Character[] = [
   { id: 'evan',    name: 'Evan',    family: '—', type: 'other', status: 'datamined', romanceable: null, img: '/evan.webp',    c1: '#3a3a4a', c2: '#8a8ab0',
     desc: 'Name verified via pre-launch datamined game files; role and family not yet confirmed by the developers.',
     traits: [], knownInfo: ['Listed as a Moonlight Peaks resident in pre-launch datamined game files (cross-referenced via moonlightpeaks.wiki.gg).', 'Family, species, and relationship status are not yet developer-confirmed — treat as unverified until launch.'] },
+
+  // --- Datamined names WITH a second corroborating detail (a matching named location, or notable
+  // cross-coverage) — enough for a short, honest standalone page rather than a bare table row.
+  // No fan art exists for these; img is left empty and falls back to the letter-avatar. ---
+  { id: 'albertus', name: 'Albertus', family: '—', type: 'other', status: 'datamined', romanceable: null, img: '', c1: '#3a4a3a', c2: '#7ab08a',
+    desc: 'Name verified via pre-launch datamined game files, which also list "Albertus\u2019 Jobs" as a separate entry — possibly a job board or task-giving role.',
+    traits: [], knownInfo: [
+      'Listed as a Moonlight Peaks resident in pre-launch datamined game files (cross-referenced via moonlightpeaks.wiki.gg).',
+      'The same files list a distinct "Albertus\u2019 Jobs" entry alongside his name, hinting he may be connected to jobs or tasks in some way — not developer-confirmed.',
+      'No fan art exists yet for Albertus on this site; family, species, and role are unverified until launch.',
+    ] },
+  { id: 'alina', name: 'Alina', family: '—', type: 'other', status: 'datamined', romanceable: null, img: '', c1: '#4a3a4a', c2: '#b08ac0',
+    desc: 'Name verified via pre-launch datamined game files, which also list "Alina\u2019s House" as a named location.',
+    traits: [], knownInfo: [
+      'Listed as a Moonlight Peaks resident in pre-launch datamined game files (cross-referenced via moonlightpeaks.wiki.gg).',
+      'The same files reference an "Alina\u2019s House," suggesting she is a homeowner/resident rather than a passing or event-only figure.',
+      'No fan art exists yet for Alina on this site; family, species, and relationship status are unverified until launch.',
+    ] },
+  { id: 'death', name: 'Death', family: '—', type: 'other', status: 'datamined', romanceable: null, img: '', c1: '#2a2a2a', c2: '#8a8a9a',
+    desc: 'Name verified via pre-launch datamined game files, which also list "Death\u2019s Shack" — some pre-launch chatter has floated Death as a possible romance option, unconfirmed.',
+    traits: [], knownInfo: [
+      'Listed as a Moonlight Peaks resident in pre-launch datamined game files (cross-referenced via moonlightpeaks.wiki.gg), which also reference a "Death\u2019s Shack" as his home.',
+      'Some pre-launch community discussion has speculated Death could be a romance option, playing on the game\u2019s cozy-gothic tone — this is speculation, not a developer confirmation, and we are not treating it as fact.',
+      'No fan art exists yet for Death on this site; role and relationship status are unverified until launch.',
+    ] },
+  { id: 'samael', name: 'Samael', family: '—', type: 'other', status: 'datamined', romanceable: null, img: '', c1: '#4a2a2a', c2: '#b06a6a',
+    desc: 'Name verified via pre-launch datamined game files, which also list "Samael\u2019s House" as a named location.',
+    traits: [], knownInfo: [
+      'Listed as a Moonlight Peaks resident in pre-launch datamined game files (cross-referenced via moonlightpeaks.wiki.gg).',
+      'The same files reference a "Samael\u2019s House," suggesting he is a homeowner/resident rather than a passing or event-only figure.',
+      'No fan art exists yet for Samael on this site; family, species, and relationship status are unverified until launch.',
+    ] },
 ];

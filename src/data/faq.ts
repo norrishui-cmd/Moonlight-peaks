@@ -257,6 +257,24 @@ export const faqs: Faq[] = [
     a: 'As of our last check, Moonlight Peaks had not yet been rated by the ESRB. Given the game has no combat and a cozy, gentle gothic tone, it is likely to land in a low age bracket, but we will update this once an official rating is published.',
     related: [{ label: 'Is there combat?', href: '/faq/is-there-combat-in-moonlight-peaks' }, { label: 'Is it cozy?', href: '/faq/is-moonlight-peaks-cozy' }],
   },
+  {
+    slug: 'how-do-you-make-money-in-moonlight-peaks', cat: 'farming',
+    q: 'How do you make money in Moonlight Peaks?',
+    a: 'The main confirmed loop is growing and selling your harvest — the Steam page frames unlocking abilities and upgrades around having "a more bountiful harvest." One secondary game-database summary adds that stranger, more "unnatural" crops sell for more, though that detail is not developer-confirmed. Exact prices, buyers, and shop mechanics are confirmed at launch.',
+    related: [{ label: 'How to make money guide', href: '/previews/how-does-money-work-in-moonlight-peaks' }, { label: 'Farming', href: '/farming' }],
+  },
+  {
+    slug: 'can-you-sell-crops-in-moonlight-peaks', cat: 'farming',
+    q: 'Can you sell your crops in Moonlight Peaks?',
+    a: 'Selling your harvest for coins is the implied core loop of a farm sim like this, and Moonlight Peaks\u2019 own store page ties your farm\u2019s output to unlocking upgrades and abilities. We have not seen developer-confirmed specifics on exactly who buys your crops or how selling works mechanically — that lands at launch.',
+    related: [{ label: 'How to make money guide', href: '/previews/how-does-money-work-in-moonlight-peaks' }, { label: 'Farming', href: '/farming' }],
+  },
+  {
+    slug: 'is-there-a-shop-in-moonlight-peaks', cat: 'world',
+    q: 'Is there a shop in Moonlight Peaks?',
+    a: 'Pre-launch datamined files name several shops in town (see our shops page), and one player\u2019s own demo account described a traveling merchant selling seeds and decor items. Whether that merchant also buys your goods, or whether selling happens elsewhere, is not yet confirmed.',
+    related: [{ label: 'Town shops', href: '/locations/shops' }, { label: 'How to make money guide', href: '/previews/how-does-money-work-in-moonlight-peaks' }],
+  },
 ];
 
 // ───────────────────────── PENDING (no confirmed answer yet — fill at launch, then move up) ─────────────────────────

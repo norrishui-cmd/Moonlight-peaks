@@ -7,12 +7,9 @@
 export type DataminedNpc = { name: string; note?: string };
 
 export const dataminedNpcs: DataminedNpc[] = [
-  { name: 'Albertus' },
-  { name: 'Alina', note: 'A house named "Alina\u2019s House" also appears in the same files.' },
   { name: 'Aras' },
   { name: 'Balthasar' },
   { name: 'Chester' },
-  { name: 'Death', note: 'Some pre-launch coverage has floated Death as a possible romance option — not developer-confirmed.' },
   { name: 'Mr. Deyes' },
   { name: 'Hoodini' },
   { name: 'Jacques' },
@@ -23,7 +20,6 @@ export const dataminedNpcs: DataminedNpc[] = [
   { name: 'Moon Goddess', note: 'Name suggests a deity or event figure rather than an ordinary townsperson — unconfirmed.' },
   { name: 'Persephone' },
   { name: 'Rei' },
-  { name: 'Samael', note: 'A house named "Samael\u2019s House" also appears in the same files.' },
   { name: 'Snek' },
   { name: 'Sun God', note: 'Name suggests a deity or event figure rather than an ordinary townsperson — unconfirmed.' },
   { name: 'Tae' },
