@@ -5,6 +5,7 @@ import { demo } from './demo';
 import { faqs } from './faq';
 import { families } from './families';
 import { locations } from './locations';
+import { itemCategories } from './items';
 import { platforms } from './platforms';
 import { previews } from './previews';
 
@@ -107,6 +108,7 @@ const knownPaths = new Set<string>([
   ...families.map((item) => `/families/${item.slug}`),
   ...activities.map((item) => `/activities/${item.slug}`),
   ...platforms.map((item) => `/platforms/${item.slug}`),
+  ...itemCategories.map((item) => `/items/${item.slug}`),
   ...demo.map((item) => `/demo/${item.slug}`),
   ...comparisons.map((item) => `/compare/${item.slug}`),
   ...faqs.map((item) => `/faq/${item.slug}`),

@@ -1,0 +1,165 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+import { itemCategories, itemLaunchNote } from '../../data/items';
+import type { ItemCategory } from '../../data/items';
+
+export function getStaticPaths() {
+  return itemCategories.map((item, index) => ({
+    params: { slug: item.slug },
+    props: {
+      item,
+      prev: itemCategories[(index - 1 + itemCategories.length) % itemCategories.length],
+      next: itemCategories[(index + 1) % itemCategories.length],
+    },
+  }));
+}
+
+const { item, prev, next } = Astro.props as { item: ItemCategory; prev: ItemCategory; next: ItemCategory };
+const url = new URL(`/items/${item.slug}`, SITE.url).href;
+const relatedCategories = itemCategories
+  .filter((entry) => entry.slug !== item.slug && (entry.group === item.group || item.related.some((link) => link.href === `/items/${entry.slug}`)))
+  .slice(0, 3);
+
+const faq = [
+  {
+    q: `What are ${item.name} in Moonlight Peaks?`,
+    a: `${item.name} are tracked as a Moonlight Peaks item category. ${item.summary}`,
+  },
+  {
+    q: `Is the ${item.name} list confirmed?`,
+    a: item.status === 'confirmed'
+      ? `The ${item.name} system is confirmed, but individual item names and effects still need live-game verification.`
+      : `The ${item.name} category is pre-launch structure and should be treated as launch-pending until the full game can be checked.`,
+  },
+  {
+    q: `When will this ${item.name} page be expanded?`,
+    a: `After ${GAME.releaseLabel}, this page can expand with real names, icons, sources, effects, prices, and related guides.`,
+  },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: SITE.url },
+    { '@type': 'ListItem', position: 2, name: 'Items', item: new URL('/items', SITE.url).href },
+    { '@type': 'ListItem', position: 3, name: item.name, item: url },
+  ] },
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'CollectionPage', name: `Moonlight Peaks ${item.name}`, description: item.dek, url },
+];
+---
+<Base
+  title={`Moonlight Peaks ${item.name} - Item Category Guide`}
+  description={`${item.name} in Moonlight Peaks: ${item.dek} Sources, effects, locations, crafting, prices, and uses will be verified after launch.`}
+  path={`/items/${item.slug}`}
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Items', href: '/items' }, { label: item.name }]}
+>
+  <article class="page item-category-page">
+    <div class="wrap">
+      <p class="eyebrow">Items / {item.group}</p>
+      <h1>Moonlight Peaks <em>{item.name}</em></h1>
+      <p class="intro">{item.dek}</p>
+
+      <div class="item-status">
+        <span class={`itbadge is-${item.status}`}>{item.status}</span>
+        <span>{itemLaunchNote}</span>
+      </div>
+
+      <h2>Overview</h2>
+      <p>{item.summary}</p>
+
+      <div class="item-grid">
+        <section>
+          <h2>What this category may include</h2>
+          <ul>
+            {item.examples.map((entry) => <li>{entry}</li>)}
+          </ul>
+        </section>
+
+        <section>
+          <h2>What to verify at launch</h2>
+          <ul>
+            {item.verify.map((entry) => <li>{entry}</li>)}
+          </ul>
+        </section>
+      </div>
+
+      <h2>How players will use this page</h2>
+      <p>
+        This page is built as a landing page first, not a placeholder table. Once {GAME.title} is live, it can
+        hold a searchable item list with icons, sources, effects, prices, crafting requirements, gift notes,
+        and links to the guides that explain the surrounding system.
+      </p>
+
+      <h2>Related guides</h2>
+      <div class="link-row">
+        {item.related.map((link) => <a href={link.href}>{link.label}</a>)}
+        {relatedCategories.map((entry) => <a href={`/items/${entry.slug}`}>{entry.name}</a>)}
+      </div>
+
+      <h2>FAQ</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <nav class="prevnext" aria-label="Item category navigation">
+        <a href={`/items/${prev.slug}`}>{prev.name}</a>
+        <a href="/items">All item categories</a>
+        <a href={`/items/${next.slug}`}>{next.name}</a>
+      </nav>
+    </div>
+  </article>
+
+  <style>
+    .item-status {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: var(--surface);
+      padding: 12px 14px;
+      color: #ded3e6;
+      margin: 12px 0 22px;
+      font-size: 0.88rem;
+    }
+    .itbadge { font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.04em; text-transform: uppercase; border-radius: 5px; padding: 2px 6px; }
+    .itbadge.is-confirmed { color: #9be6b4; border: 1px solid #2f6a45; }
+    .itbadge.is-expected { color: var(--candle); border: 1px solid var(--candle-dim); }
+    .itbadge.is-datamined { color: #9ac6e0; border: 1px solid #2f5a70; }
+    .item-grid { display: grid; grid-template-columns: 1fr; gap: 12px; margin: 14px 0 22px; }
+    @media (min-width: 760px) { .item-grid { grid-template-columns: 1fr 1fr; } }
+    .item-grid section {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: var(--surface);
+      padding: 14px;
+    }
+    .item-grid h2 { margin-top: 0; font-size: 1.1rem; }
+    .link-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; }
+    .link-row a {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 7px 11px;
+      background: var(--surface);
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      color: var(--candle);
+      text-decoration: none;
+    }
+    .link-row a:hover { border-color: color-mix(in srgb, var(--candle) 50%, var(--line)); }
+    .prevnext { display: flex; justify-content: space-between; gap: 10px; margin: 18px 0 0; font-family: var(--mono); font-size: 0.8rem; }
+    .prevnext a { color: var(--candle); }
+    @media (max-width: 560px) {
+      .prevnext { flex-direction: column; }
+      .link-row a { min-height: 44px; display: inline-flex; align-items: center; }
+    }
+  </style>
+</Base>

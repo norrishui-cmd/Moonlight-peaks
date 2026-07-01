@@ -11,6 +11,7 @@ import { platforms } from '../data/platforms';
 import { demo } from '../data/demo';
 import { news } from '../data/news';
 import { seoPages } from '../data/seoGraph';
+import { itemCategories } from '../data/items';
 
 // Bump LASTMOD only when you push a meaningful content update (not every deploy / not daily),
 // otherwise search engines learn to ignore it.
@@ -27,7 +28,6 @@ const topic = (base: string, items: { slug: string; image?: string }[]): Entry[]
 
 export const GET: APIRoute = () => {
   const charEntries: Entry[] = characters
-    .filter((c) => c.status !== 'unconfirmed')
     .map((c) => ({ path: `/characters/${c.id}`, images: c.img ? [c.img] : [] }));
 
   const entries: Entry[] = [
@@ -38,6 +38,7 @@ export const GET: APIRoute = () => {
     ...topic('/families', families),
     ...topic('/activities', activities),
     ...topic('/platforms', platforms),
+    ...topic('/items', itemCategories),
     ...topic('/compare', comparisons),
     ...topic('/demo', demo),
     ...news.map((n) => ({ path: `/news/${n.slug}` })),

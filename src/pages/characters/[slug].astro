@@ -3,10 +3,10 @@ import Base from '../../layouts/Base.astro';
 import { SITE, GAME } from '../../consts';
 import { characters, typeLabels } from '../../data/characters';
 
-const profiled = characters.filter((c) => c.status !== 'unconfirmed');
+const profiled = characters;
 
 export function getStaticPaths() {
-  const list = characters.filter((c) => c.status !== 'unconfirmed');
+  const list = characters;
   return list.map((c, i) => ({
     params: { slug: c.id },
     props: { c, prev: list[(i - 1 + list.length) % list.length], next: list[(i + 1) % list.length] },
@@ -21,7 +21,14 @@ const related = [...sameType, ...fill].slice(0, 3);
 
 const url = new URL(`/characters/${c.id}`, SITE.url).href;
 const imgAbs = c.img ? new URL(c.img, SITE.url).href : undefined;
-const statusLabel = c.status === 'confirmed' ? 'Developer-confirmed' : c.status === 'datamined' ? 'Datamined — name verified via pre-launch game files, role unconfirmed' : 'Reported (verify at launch)';
+const statusLabel =
+  c.status === 'confirmed'
+    ? 'Developer-confirmed'
+    : c.status === 'reported'
+      ? 'Reported from previews or coverage; verify at launch'
+      : c.status === 'datamined'
+        ? 'Datamined - name verified via pre-launch game files, role unconfirmed'
+        : 'Unconfirmed - portrait shown, name and role still need launch verification';
 
 const familyMap: Record<string, string> = { vampire: '/families/vampires', werewolf: '/families/werewolves', witch: '/families/witches', other: '/families' };
 const familyHref = familyMap[c.type] || '/families';
@@ -63,7 +70,7 @@ const jsonLd = [
         <div class="cmeta">
           <h1>{c.name}</h1>
           <div class="ctags">
-            <span class={`cbadge ${c.status === 'confirmed' ? 'is-conf' : 'is-rep'}`}>{c.status}</span>
+            <span class={`cbadge ${c.status === 'confirmed' ? 'is-conf' : c.status === 'reported' ? 'is-rep' : c.status === 'datamined' ? 'is-dm' : 'is-unc'}`}>{c.status}</span>
             <a class="ctag fam" href={familyHref}>{typeLabels[c.type]}</a>
             {c.family !== '—' && c.family !== typeLabels[c.type] && <span class="ctag fam">{c.family}</span>}
             {c.romanceable === true && <span class="ctag heart">♥ Romanceable</span>}
@@ -139,6 +146,8 @@ const jsonLd = [
     .cbadge { font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.04em; text-transform: uppercase; border-radius: 5px; padding: 2px 6px; }
     .cbadge.is-conf { color: #9be6b4; border: 1px solid #2f6a45; }
     .cbadge.is-rep { color: var(--faint); border: 1px solid var(--line); }
+    .cbadge.is-dm { color: #9ac6e0; border: 1px solid #2f5a70; }
+    .cbadge.is-unc { color: #7c6e90; border: 1px dashed var(--line); }
     .ctag { font-family: var(--mono); font-size: 0.66rem; color: var(--candle); border: 1px solid var(--candle-dim); border-radius: 6px; padding: 2px 7px; }
     a.ctag.fam { color: #cbb4f0; border-color: #5a4a7a; text-decoration: none; }
     a.ctag.fam:hover { border-color: #cbb4f0; }

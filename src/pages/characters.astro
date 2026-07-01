@@ -7,7 +7,7 @@ import { characterPriorityLinks } from '../data/priorityLinks';
 import { dataminedNpcs, dataminedPetNames, dataminedSource } from '../data/npc-datamine';
 
 const types = [...new Set(characters.map((c) => c.type))];
-const hasProfile = (c) => c.status !== 'unconfirmed';
+const hasProfile = () => true;
 
 const jsonLd = [
   { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [

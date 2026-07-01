@@ -1,23 +1,12 @@
 ---
 import Base from '../layouts/Base.astro';
 import { SITE, GAME } from '../consts';
-
-const categories: { name: string; note: string }[] = [
-  { name: 'Tools', note: 'The equipment you use around the farm — hoe, watering can, and the rest of your night-farming kit.' },
-  { name: 'Fertilizer', note: 'Items that boost or speed up your enchanted crops and glowing flowers.' },
-  { name: 'Clothing', note: 'Outfit pieces for your vampire, on top of what the character creator offers at the start.' },
-  { name: 'Cooking', note: 'Ingredients and dishes you prepare from what you grow, forage, and fish up.' },
-  { name: 'Crafting', note: 'Materials and recipes for building or making items around the homestead.' },
-  { name: 'Artifacts', note: 'Collectible curios — likely tied to exploring the mines and other landmarks.' },
-  { name: 'Potions', note: 'Brews you make through potion-making, including the confirmed Alter Ego Elixir.' },
-  { name: 'Mineables', note: 'Ores, gems, or minerals you dig up while exploring underground.' },
-  { name: 'Decorations', note: 'Furniture and décor for customizing your cottage.' },
-];
+import { itemCategories, itemLaunchNote } from '../data/items';
 
 const faq = [
-  { q: 'What items are in Moonlight Peaks?', a: 'Pre-launch datamined game files list item categories including tools, fertilizer, clothing, cooking, crafting materials, artifacts, potions, mineables, and decorations. Specific item names, effects, and prices are not yet developer-confirmed.' },
-  { q: 'Are there potions in Moonlight Peaks?', a: 'Yes — potion-making is a confirmed activity, and the Alter Ego Elixir (which changes your appearance) is a confirmed example. A full potion list lands at launch.' },
-  { q: 'Where will the full item list go?', a: 'Once the game is out on ' + GAME.releaseLabel + ', each category here will link to detailed pages with real names, effects, and where to find or craft each item.' },
+  { q: 'What items are in Moonlight Peaks?', a: 'Pre-launch structure lists item categories including tools, fertilizer, clothing, fish, critters, Vampster, Soul Blobs, cooking, crafting, artifacts, farm helpers, potions, mineables, and decorations. Specific names, effects, prices, and sources still need launch verification.' },
+  { q: 'Are there potions in Moonlight Peaks?', a: 'Yes. Potion-making is a confirmed activity, and the Alter Ego Elixir, which changes your appearance, is a confirmed example. The full potion list will be verified after launch.' },
+  { q: 'Will each Moonlight Peaks item category get its own page?', a: 'Yes. Each category now has a landing page so item data can expand cleanly after launch without changing URLs.' },
 ];
 
 const jsonLd = [
@@ -26,53 +15,54 @@ const jsonLd = [
     { '@type': 'ListItem', position: 1, name: 'Home', item: SITE.url },
     { '@type': 'ListItem', position: 2, name: 'Items', item: new URL('/items', SITE.url).href },
   ] },
+  { '@context': 'https://schema.org', '@type': 'ItemList', name: 'Moonlight Peaks item categories', itemListElement: itemCategories.map((item, index) => ({
+    '@type': 'ListItem',
+    position: index + 1,
+    name: item.name,
+    url: new URL(`/items/${item.slug}`, SITE.url).href,
+  })) },
 ];
 ---
 <Base
-  title="Moonlight Peaks Items — Tools, Potions & Categories"
-  description="The item categories in Moonlight Peaks: tools, fertilizer, clothing, cooking, crafting, artifacts, potions, mineables and decorations — what's confirmed, what's datamined, and what's still unknown."
+  title="Moonlight Peaks Items - Tools, Potions, Fish & Categories"
+  description="Moonlight Peaks item categories: tools, fertilizer, clothing, fish, critters, Vampster, Soul Blobs, cooking, crafting, artifacts, farm helpers, potions, mineables, and decorations."
   path="/items"
   jsonLd={jsonLd}
   crumbs={[{ label: 'Items' }]}
 >
-  <article class="page">
+  <article class="page items-page">
     <div class="wrap">
-      <p class="eyebrow">Hub · Items</p>
+      <p class="eyebrow">Hub / Items</p>
       <h1>Moonlight Peaks <em>items</em></h1>
       <p class="intro">
-        A structural overview of the kinds of items you'll collect, craft, and use in
-        {GAME.title}. Category names below come from pre-launch datamined game files
-        (cross-referenced via <a href="https://moonlightpeaks.wiki.gg/" target="_blank" rel="noopener">moonlightpeaks.wiki.gg</a>),
-        not developer announcements — treat them as a likely structure, not a confirmed one.
-        Updated {SITE.updated}.
+        A launch-ready index for the items you will collect, craft, cook, mine, decorate with, and use around
+        your vampire farm in {GAME.title}. The category structure below is treated carefully: some systems are
+        confirmed, while exact item names and effects still need live-game verification.
       </p>
+
+      <div class="item-note">
+        <strong>Accuracy note:</strong> {itemLaunchNote} These pages are built so the item guide can expand
+        without changing URLs after launch.
+      </div>
 
       <h2>Item categories</h2>
       <div class="itg">
-        {categories.map((cat) => (
-          <div class="itcard">
+        {itemCategories.map((cat) => (
+          <a class="itcard" href={`/items/${cat.slug}`}>
+            <span class="itgroup">{cat.group}</span>
             <h3>{cat.name}</h3>
-            <p>{cat.note}</p>
-            <span class="itbadge">Datamined</span>
-          </div>
+            <p>{cat.dek}</p>
+            <span class={`itbadge is-${cat.status}`}>{cat.status}</span>
+          </a>
         ))}
       </div>
 
-      <h2>What we know for sure</h2>
+      <h2>How these pages will grow</h2>
       <p>
-        A few item-adjacent facts are developer-confirmed rather than datamined: you farm
-        <strong>enchanted crops and glowing flowers</strong>, raise magical livestock like the
-        <strong>Draculamb</strong>, and brew potions including the <strong>Alter Ego Elixir</strong>.
-        See <a href="/farming">farming & livestock</a> and <a href="/magic">magic & potions</a> for the
-        sourced details behind those.
+        Each category page is structured for the details players usually need from a wiki: where to find an
+        item, how to craft or buy it, what it does, whether it is used in cooking, gifts, quests, upgrades, or
+        decorating, and which related guides explain the surrounding system.
       </p>
-
-      <h2>Coming at launch ({GAME.releaseLabel})</h2>
-      <ul>
-        <li>The full <strong>item list</strong> per category, with real names and icons.</li>
-        <li><strong>Where to find, buy, or craft</strong> each item.</li>
-        <li><strong>Effects and use cases</strong> — what fertilizer does what, which potions do what, and so on.</li>
-      </ul>
 
       <h2>FAQ</h2>
       <div class="faq">
@@ -85,19 +75,44 @@ const jsonLd = [
       </div>
 
       <div class="callout wip">
-        Pre-launch entry — per-item data lands at launch. Related:
-        <a href="/farming">farming</a>, <a href="/magic">magic & potions</a>, <a href="/environment">environment</a>.
+        Related:
+        <a href="/farming">farming</a>, <a href="/magic">magic and potions</a>,
+        <a href="/activities">activities</a>, <a href="/locations">locations</a>,
+        <a href="/tools">site tools</a>.
       </div>
     </div>
   </article>
 
   <style>
+    .item-note {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: var(--surface);
+      padding: 12px 14px;
+      color: #ded3e6;
+      font-size: 0.9rem;
+      margin: 12px 0 22px;
+    }
     .itg { display: grid; grid-template-columns: 1fr; gap: 12px; margin: 6px 0 18px; }
     @media (min-width: 640px) { .itg { grid-template-columns: 1fr 1fr; } }
-    @media (min-width: 900px) { .itg { grid-template-columns: 1fr 1fr 1fr; } }
-    .itcard { border: 1px solid var(--line); border-radius: 14px; background: var(--surface); padding: 14px; }
-    .itcard h3 { font-family: var(--display); font-weight: 600; font-size: 1rem; margin: 0 0 6px; }
-    .itcard p { color: #ded3e6; font-size: 0.84rem; margin: 0 0 8px; }
-    .itbadge { font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.04em; text-transform: uppercase; color: #9ac6e0; border: 1px solid #2f5a70; border-radius: 5px; padding: 2px 6px; }
+    @media (min-width: 980px) { .itg { grid-template-columns: 1fr 1fr 1fr; } }
+    .itcard {
+      display: block;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: var(--surface);
+      padding: 14px;
+      color: inherit;
+      text-decoration: none;
+      transition: border-color .15s ease, transform .15s ease;
+    }
+    .itcard:hover { border-color: color-mix(in srgb, var(--candle) 50%, var(--line)); transform: translateY(-2px); }
+    .itgroup { font-family: var(--mono); color: var(--faint); text-transform: uppercase; letter-spacing: 0.04em; font-size: 0.62rem; }
+    .itcard h3 { font-family: var(--display); font-weight: 600; font-size: 1rem; margin: 4px 0 6px; }
+    .itcard p { color: #ded3e6; font-size: 0.84rem; margin: 0 0 10px; }
+    .itbadge { font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.04em; text-transform: uppercase; border-radius: 5px; padding: 2px 6px; }
+    .itbadge.is-confirmed { color: #9be6b4; border: 1px solid #2f6a45; }
+    .itbadge.is-expected { color: var(--candle); border: 1px solid var(--candle-dim); }
+    .itbadge.is-datamined { color: #9ac6e0; border: 1px solid #2f5a70; }
   </style>
 </Base>
