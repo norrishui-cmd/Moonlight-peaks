@@ -21,7 +21,7 @@ const related = [...sameType, ...fill].slice(0, 3);
 
 const url = new URL(`/characters/${c.id}`, SITE.url).href;
 const imgAbs = c.img ? new URL(c.img, SITE.url).href : undefined;
-const statusLabel = c.status === 'confirmed' ? 'Developer-confirmed' : 'Reported (verify at launch)';
+const statusLabel = c.status === 'confirmed' ? 'Developer-confirmed' : c.status === 'datamined' ? 'Datamined — name verified via pre-launch game files, role unconfirmed' : 'Reported (verify at launch)';
 
 const familyMap: Record<string, string> = { vampire: '/families/vampires', werewolf: '/families/werewolves', witch: '/families/witches', other: '/families' };
 const familyHref = familyMap[c.type] || '/families';
