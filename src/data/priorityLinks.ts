@@ -54,6 +54,8 @@ export const romancePriorityLinks: PriorityLink[] = [
   { label: 'Can you romance a werewolf?', href: '/faq/can-you-romance-a-werewolf', note: 'Saga and werewolf romance.' },
   { label: 'Can you romance Death?', href: '/faq/can-you-romance-death-in-moonlight-peaks', note: 'What\u2019s confirmed vs speculation.' },
   { label: 'Romance Match Quiz', href: '/tools/romance-match-quiz', note: 'A fun, sourced-hints matchmaking quiz.' },
+  { label: 'Romance Planner', href: '/tools/romance-planner', note: 'Shortlist, notes, and a launch-day prep checklist.' },
+  { label: 'Day-one romance route', href: '/previews/day-one-romance-route', note: 'Who has a known home in the datamined files.' },
   { label: 'Romance Gift Finder', href: '/tools/romance-gift-finder', note: 'Verification status for every named character.' },
   { label: 'Best picks by vibe', href: '/previews/best-romance-picks-by-vibe', note: 'An honest, non-official read on who fits which mood.' },
   { label: 'All characters', href: '/characters', note: 'Every known resident and their status.' },

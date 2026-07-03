@@ -59,9 +59,32 @@ const jsonLd = [
         <YouTube id="YFb9capELQw" title="Moonlight Peaks romance video" />
       </div>
 
-      <div class="callout wip">
-        Curious who fits your vibe? Try the <a href="/tools/romance-match-quiz">Romance Match Quiz</a> —
-        six quick questions matched against real, sourced personality hints. Just for fun, not official data.
+      <h2>Start here: planning your romance route</h2>
+      <p>
+        No confirmed gift lists or affection mechanics exist yet, but there's a real, honest way to get
+        ready before {GAME.releaseLabel}. Four steps, in order:
+      </p>
+      <div class="rp-steps">
+        <a class="rp-step" href="/tools/romance-match-quiz">
+          <span class="rp-step-num">1</span>
+          <strong>Take the quiz</strong>
+          <span>A fun, sourced-hints match to narrow down who catches your eye.</span>
+        </a>
+        <a class="rp-step" href="/previews/day-one-romance-route">
+          <span class="rp-step-num">2</span>
+          <strong>Check the day-one route</strong>
+          <span>See which residents already have a known home in datamined files.</span>
+        </a>
+        <a class="rp-step" href="/tools/romance-planner">
+          <span class="rp-step-num">3</span>
+          <strong>Build your shortlist</strong>
+          <span>Save your picks and notes privately in your browser with the Romance Planner.</span>
+        </a>
+        <a class="rp-step" href="/previews/what-to-expect-from-romance-mechanics">
+          <span class="rp-step-num">4</span>
+          <strong>Set your expectations</strong>
+          <span>Know what's genre-typical versus actually confirmed before you dive in.</span>
+        </a>
       </div>
 
       <h2>The basics</h2>
@@ -115,6 +138,21 @@ const jsonLd = [
     </div>
   </article>
   <style>
+    .rp-steps { display: grid; grid-template-columns: 1fr; gap: 10px; margin: 14px 0 24px; }
+    @media (min-width: 640px) { .rp-steps { grid-template-columns: 1fr 1fr; } }
+    .rp-step {
+      display: flex; flex-direction: column; gap: 4px; border: 1px solid var(--line); border-radius: 14px;
+      background: var(--surface); padding: 14px 16px; text-decoration: none; position: relative;
+      transition: border-color .15s ease;
+    }
+    .rp-step:hover { border-color: color-mix(in srgb, var(--candle) 45%, var(--line)); }
+    .rp-step-num {
+      position: absolute; top: 12px; right: 14px; font-family: var(--mono); font-size: 0.7rem; color: var(--candle);
+      border: 1px solid color-mix(in srgb, var(--candle) 40%, var(--line)); border-radius: 999px; width: 20px; height: 20px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .rp-step strong { font-family: var(--display); font-weight: 600; font-size: 0.94rem; color: var(--mist); padding-right: 26px; }
+    .rp-step span:last-child { font-size: 0.8rem; color: var(--faint); line-height: 1.4; }
     .romance-video {
       margin: clamp(1.6rem, 4vw, 2.6rem) 0 clamp(2rem, 5vw, 3rem);
     }

@@ -1,0 +1,252 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+import { characters, typeLabels } from '../../data/characters';
+
+// Every character with a real profile page except the two explicitly non-romanceable ones
+// (Count Dracula, Pumpkin Head). Unconfirmed-name characters (no profile page) are excluded.
+const candidates = characters
+  .filter((c) => c.status !== 'unconfirmed' && c.romanceable !== false)
+  .map((c) => ({
+    id: c.id,
+    name: c.name,
+    family: c.family && c.family !== 'Unknown' ? c.family : null,
+    type: typeLabels[c.type],
+    status: c.status,
+    href: `/characters/${c.id}`,
+  }));
+
+// Generic, non-fabricated prep tasks — none of these assume specific in-game mechanics that
+// aren't confirmed. They're the honest, useful things a player can actually do before July 7.
+const prepTasks = [
+  { id: 'read-profile', t: 'Read your shortlisted characters\u2019 profiles and known info' },
+  { id: 'check-home', t: 'Note any known home location for your picks (see their profile\u2019s Known Info)' },
+  { id: 'check-family', t: 'Check which family they belong to and any reported family tension' },
+  { id: 'check-status', t: 'Confirm their current accuracy tier (confirmed / reported / datamined)' },
+  { id: 'try-quiz', t: 'Take the Romance Match Quiz for a second opinion' },
+  { id: 'plan-day-one', t: 'Decide who you\u2019ll try to talk to first on day one' },
+  { id: 'bookmark-page', t: 'Bookmark this page — your shortlist and notes are saved on this device' },
+];
+
+const faq = [
+  { q: 'Does this tool use real gift or affection data?', a: 'No. No gift, affection, or event data is confirmed yet, so none is shown here. This tool only tracks your own shortlist, notes, and prep-task checklist — all stored privately in your browser, not on our server.' },
+  { q: 'Will my shortlist be there after launch?', a: 'Yes, as long as you use the same browser and device and don\u2019t clear your site data. Once real romance data is confirmed, we\u2019ll expand this tool to use it.' },
+  { q: 'Is my data sent anywhere?', a: 'No. Everything is saved in your browser\u2019s local storage only. We don\u2019t see it, store it on a server, or use it for anything.' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: SITE.url },
+    { '@type': 'ListItem', position: 2, name: 'Tools', item: new URL('/tools', SITE.url).href },
+    { '@type': 'ListItem', position: 3, name: 'Romance Planner', item: new URL('/tools/romance-planner', SITE.url).href },
+  ] },
+  { '@context': 'https://schema.org', '@type': 'WebApplication', name: 'Moonlight Peaks Romance Planner',
+    applicationCategory: 'GameApplication', operatingSystem: 'Web',
+    url: new URL('/tools/romance-planner', SITE.url).href,
+    description: 'A pre-launch romance shortlist and prep-task tracker for Moonlight Peaks, saved locally in your browser.' },
+];
+---
+<Base
+  title="Moonlight Peaks Romance Planner — Shortlist & Prep Tracker"
+  description="Shortlist your Moonlight Peaks romance picks, add personal notes, and track launch-day prep — saved privately in your browser, no invented gift data."
+  path="/tools/romance-planner"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Tools', href: '/tools' }, { label: 'Romance Planner' }]}
+  showExport
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Tool · Romance</p>
+      <h1>Romance <em>planner</em></h1>
+      <p class="intro">
+        Shortlist who you're considering, jot down your own notes, and check off the prep you've done
+        before {GAME.title} launches on {GAME.releaseLabel}. Everything here is saved privately in your
+        browser — no account, no server, and no invented gift or affection data.
+      </p>
+
+      <h2>Your shortlist</h2>
+      <p class="rp-sub">Tap a character to add or remove them from your shortlist.</p>
+      <div id="rp-candidates" class="rp-candidates">
+        {candidates.map((c) => (
+          <button type="button" class="rp-candidate" data-rp-id={c.id} data-rp-href={c.href} data-rp-name={c.name}>
+            <span class="rp-star" aria-hidden="true">\u2606</span>
+            <span class="rp-name">{c.name}</span>
+            <span class="rp-meta">{c.family ? `${c.family} \u00b7 ` : ''}{c.status}</span>
+          </button>
+        ))}
+      </div>
+
+      <h2>Your notes</h2>
+      <div id="rp-shortlist-empty" class="callout wip">Your shortlist is empty — tap a character above to add one.</div>
+      <div id="rp-notes-list" class="rp-notes-list"></div>
+
+      <h2>Launch-day prep checklist</h2>
+      <ul id="rp-prep-list" class="rp-prep-list">
+        {prepTasks.map((task) => (
+          <li>
+            <label>
+              <input type="checkbox" data-rp-task={task.id} />
+              <span>{task.t}</span>
+            </label>
+          </li>
+        ))}
+      </ul>
+
+      <div class="rp-actions">
+        <button type="button" id="rp-clear" class="rq-btn">Clear my shortlist &amp; notes</button>
+      </div>
+
+      <h2>FAQ</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        Related: <a href="/romance">Romance & marriage</a>, <a href="/tools/romance-match-quiz">Romance Match Quiz</a>,
+        <a href="/tools/romance-gift-finder">Romance Gift Finder</a>, <a href="/characters">All characters</a>.
+      </div>
+    </div>
+  </article>
+
+  <style>
+    .rp-sub { color: var(--faint); font-size: 0.8rem; margin: -6px 0 12px; }
+    .rp-candidates { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 0 0 24px; }
+    @media (min-width: 640px) { .rp-candidates { grid-template-columns: repeat(3, 1fr); } }
+    .rp-candidate {
+      display: flex; flex-direction: column; align-items: flex-start; gap: 2px; text-align: left;
+      border: 1px solid var(--line); border-radius: 12px; background: var(--surface); padding: 10px 12px;
+      cursor: pointer; transition: border-color .15s ease;
+    }
+    .rp-candidate:hover { border-color: color-mix(in srgb, var(--candle) 45%, var(--line)); }
+    .rp-candidate.is-picked { border-color: var(--candle); background: color-mix(in srgb, var(--candle) 10%, var(--surface)); }
+    .rp-candidate .rp-star { font-size: 0.9rem; color: var(--faint); }
+    .rp-candidate.is-picked .rp-star { color: var(--candle); }
+    .rp-candidate .rp-name { font-family: var(--display); font-weight: 600; font-size: 0.88rem; color: var(--mist); }
+    .rp-candidate .rp-meta { font-family: var(--mono); font-size: 0.66rem; color: var(--faint); }
+    .rp-notes-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; }
+    .rp-note-card { border: 1px solid var(--line); border-radius: 12px; background: var(--surface); padding: 12px 14px; }
+    .rp-note-card .rp-note-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
+    .rp-note-card strong { font-family: var(--display); font-size: 0.94rem; }
+    .rp-note-card a { font-family: var(--mono); font-size: 0.7rem; color: var(--candle); }
+    .rp-note-card textarea {
+      width: 100%; min-height: 64px; background: var(--ink-2); border: 1px solid var(--line); border-radius: 8px;
+      color: var(--mist); font-family: inherit; font-size: 0.84rem; padding: 8px 10px; resize: vertical;
+    }
+    .rp-prep-list { list-style: none; margin: 0 0 20px; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+    .rp-prep-list label { display: flex; align-items: center; gap: 10px; font-size: 0.86rem; color: var(--muted); cursor: pointer; }
+    .rp-prep-list input { accent-color: var(--candle); }
+    .rp-actions { margin: 0 0 24px; }
+  </style>
+
+  <script>
+    (function () {
+      var KEY_SHORTLIST = 'mp-romance-shortlist';
+      var KEY_NOTES = 'mp-romance-notes';
+      var KEY_PREP = 'mp-romance-prep';
+
+      function readJSON(key, fallback) {
+        try {
+          var raw = localStorage.getItem(key);
+          return raw ? JSON.parse(raw) : fallback;
+        } catch (e) { return fallback; }
+      }
+      function writeJSON(key, val) {
+        try { localStorage.setItem(key, JSON.stringify(val)); } catch (e) {}
+      }
+
+      var shortlist = readJSON(KEY_SHORTLIST, []); // array of ids
+      var notes = readJSON(KEY_NOTES, {}); // id -> text
+      var prep = readJSON(KEY_PREP, {}); // taskId -> bool
+
+      var candidateEls = document.querySelectorAll('.rp-candidate');
+      var notesList = document.getElementById('rp-notes-list');
+      var emptyMsg = document.getElementById('rp-shortlist-empty');
+
+      function renderCandidates() {
+        candidateEls.forEach(function (el) {
+          var id = el.getAttribute('data-rp-id');
+          el.classList.toggle('is-picked', shortlist.indexOf(id) > -1);
+          var star = el.querySelector('.rp-star');
+          if (star) star.textContent = shortlist.indexOf(id) > -1 ? '\u2605' : '\u2606';
+        });
+      }
+
+      function renderNotes() {
+        notesList.innerHTML = '';
+        if (shortlist.length === 0) { emptyMsg.hidden = false; return; }
+        emptyMsg.hidden = true;
+        shortlist.forEach(function (id) {
+          var el = document.querySelector('.rp-candidate[data-rp-id="' + id + '"]');
+          if (!el) return;
+          var name = el.getAttribute('data-rp-name');
+          var href = el.getAttribute('data-rp-href');
+          var card = document.createElement('div');
+          card.className = 'rp-note-card';
+          var head = document.createElement('div');
+          head.className = 'rp-note-head';
+          var strong = document.createElement('strong');
+          strong.textContent = name;
+          var link = document.createElement('a');
+          link.href = href;
+          link.textContent = 'View profile';
+          head.appendChild(strong);
+          head.appendChild(link);
+          var textarea = document.createElement('textarea');
+          textarea.placeholder = 'Notes on ' + name + '\u2026';
+          textarea.value = notes[id] || '';
+          textarea.addEventListener('input', function () {
+            notes[id] = textarea.value;
+            writeJSON(KEY_NOTES, notes);
+          });
+          card.appendChild(head);
+          card.appendChild(textarea);
+          notesList.appendChild(card);
+        });
+      }
+
+      candidateEls.forEach(function (el) {
+        el.addEventListener('click', function () {
+          var id = el.getAttribute('data-rp-id');
+          var idx = shortlist.indexOf(id);
+          if (idx > -1) { shortlist.splice(idx, 1); }
+          else { shortlist.push(id); }
+          writeJSON(KEY_SHORTLIST, shortlist);
+          renderCandidates();
+          renderNotes();
+        });
+      });
+
+      document.querySelectorAll('[data-rp-task]').forEach(function (box) {
+        var id = box.getAttribute('data-rp-task');
+        box.checked = !!prep[id];
+        box.addEventListener('change', function () {
+          prep[id] = box.checked;
+          writeJSON(KEY_PREP, prep);
+        });
+      });
+
+      var clearBtn = document.getElementById('rp-clear');
+      if (clearBtn) {
+        clearBtn.addEventListener('click', function () {
+          if (!window.confirm('Clear your shortlist, notes, and checklist? This can\u2019t be undone.')) return;
+          shortlist = []; notes = {}; prep = {};
+          writeJSON(KEY_SHORTLIST, shortlist);
+          writeJSON(KEY_NOTES, notes);
+          writeJSON(KEY_PREP, prep);
+          renderCandidates();
+          renderNotes();
+          document.querySelectorAll('[data-rp-task]').forEach(function (box) { box.checked = false; });
+        });
+      }
+
+      renderCandidates();
+      renderNotes();
+    })();
+  </script>
+</Base>

@@ -685,4 +685,56 @@ export const previews: Preview[] = [
     ],
     sources: [{ label: 'PC Gamer — hands-on preview', url: 'https://www.pcgamer.com/games/life-sim/moonlight-peaks-preview-impressions/' }],
   },
+
+  // ───────────────────────── NEW BATCH: getting-started romance content (July 2026) ─────────────────────────
+  {
+    slug: 'day-one-romance-route', category: 'guide',
+    title: 'A Day-One Route for Your Romance Picks',
+    dek: 'A handful of residents have known homes in pre-launch datamined files — here\u2019s how to use that to plan your first day.',
+    date: 'July 2026', readTime: '3 min', tag: 'Romance', image: '/hero-first-five-minutes.webp',
+    body: [
+      { type: 'p', text: 'You won\u2019t get a confirmed relationship walkthrough until the game is actually out, but there\u2019s one real, honest planning tool available right now: several residents already have a named home in pre-launch datamined files.' },
+      { type: 'h2', text: 'Who has a known home so far' },
+      { type: 'ul', items: [
+        'Logan \u2014 "Logan\u2019s House," independently corroborated by a developer diary.',
+        'Death \u2014 "Death\u2019s Shack."',
+        'Alina \u2014 "Alina\u2019s House."',
+        'Samael \u2014 "Samael\u2019s House."',
+        'Fiona, Dragan, Noel, and Elvira \u2014 each with a house of the same name pattern.',
+      ] },
+      { type: 'h2', text: 'How to use this honestly' },
+      { type: 'p', text: 'This is not a confirmed walking route — we don\u2019t know if these homes are visitable on day one, whether the resident is even home, or what the town\u2019s actual layout looks like. What it does give you is a real, sourced shortlist: if your target has a named home in the files, that\u2019s a genuine signal they\u2019re a developed character worth prioritizing, not just a name.' },
+      { type: 'h2', text: 'What to actually do with it' },
+      { type: 'ol', items: [
+        'Add your top picks to the Romance Planner shortlist.',
+        'Check each one\u2019s profile for their known home reference, if any.',
+        'On launch day, prioritize residents with a named home — they\u2019re the ones most likely to have real content behind them.',
+        'For everyone else, keep expectations open; a name-only resident could still turn out to be fully developed.',
+      ] },
+      { type: 'callout', text: 'We will replace this with a real, confirmed map-based route the moment the full game is out on July 7, 2026.' },
+    ],
+    sources: [{ label: 'Moonlight Peaks Wiki (wiki.gg) — datamine', url: 'https://moonlightpeaks.wiki.gg/' }],
+  },
+  {
+    slug: 'what-to-expect-from-romance-mechanics', category: 'guide',
+    title: 'What to Expect From Romance Mechanics',
+    dek: 'Moonlight Peaks hasn\u2019t detailed its romance mechanics yet. Here\u2019s what similar cozy sims typically do — clearly labeled as genre convention, not this game\u2019s confirmed system.',
+    date: 'July 2026', readTime: '4 min', tag: 'Romance', image: '/hero-vs-other-cozy-sims.webp',
+    body: [
+      { type: 'p', text: 'A lot of the "how do I romance someone" questions we get can\u2019t be answered yet, because Moonlight Peaks hasn\u2019t confirmed its actual romance mechanics. What we can honestly do is explain what\u2019s typical for this genre — while being explicit that none of it is confirmed for this specific game.' },
+      { type: 'h2', text: 'What cozy life-sims typically do' },
+      { type: 'p', text: 'Games in this genre — think Stardew Valley, Fields of Mistria, and similar titles — commonly use some combination of: giving gifts to raise affection, talking to a character regularly, triggering scripted "heart events" at certain affection thresholds, and eventually unlocking a proposal or marriage option once affection is high enough.' },
+      { type: 'h2', text: 'What we actually know about Moonlight Peaks specifically' },
+      { type: 'ul', items: [
+        'Marriage is confirmed as a feature.',
+        'There are no children, confirmed.',
+        'Dating is gender-neutral, confirmed.',
+        'Gift preferences, affection mechanics, heart events, and proposal requirements are NOT confirmed.',
+      ] },
+      { type: 'h2', text: 'Why we\u2019re publishing genre expectations at all' },
+      { type: 'p', text: 'Going in with zero context isn\u2019t that useful either — knowing the shape of what\u2019s common in the genre can help you recognize the actual system quickly once you\u2019re playing, without us pretending to know specifics we don\u2019t.' },
+      { type: 'callout', text: 'The moment Moonlight Peaks\u2019 actual romance mechanics are confirmed, this page gets replaced with the real thing — not left as a guess.' },
+    ],
+    sources: [{ label: 'Official Steam page', url: 'https://store.steampowered.com/app/2209900/Moonlight_Peaks/' }],
+  },
 ];
