@@ -48,7 +48,49 @@ const here = Astro.url.pathname.replace(/\/$/, '') || '/';
 const isActive = (href: string) => here === href || (href !== '/' && here.startsWith(`${href}/`));
 const isGuideGroupActive = guideGroup.children.some((c) => isActive(c.href));
 const isWorldGroupActive = worldGroup.children.some((c) => isActive(c.href));
-const ld = Array.isArray(jsonLd) ? jsonLd : jsonLd ? [jsonLd] : [];
+const rawLd = Array.isArray(jsonLd) ? jsonLd : jsonLd ? [jsonLd] : [];
+const schemaAuthor = { '@type': 'Organization', name: SITE.brand, url: SITE.url };
+const schemaDate = '2026-07-04';
+let questionSchemaIndex = 0;
+
+const enrichAnswer = (answer: Record<string, unknown>, index: number) => ({
+  ...answer,
+  author: answer.author ?? schemaAuthor,
+  datePublished: answer.datePublished ?? schemaDate,
+  upvoteCount: answer.upvoteCount ?? 0,
+  url: answer.url ?? `${canonical}#answer-${index}`,
+});
+
+const enrichStructuredData = (value: unknown): unknown => {
+  if (Array.isArray(value)) return value.map(enrichStructuredData);
+  if (!value || typeof value !== 'object') return value;
+
+  const source = value as Record<string, unknown>;
+  const next = Object.fromEntries(
+    Object.entries(source).map(([key, child]) => [key, enrichStructuredData(child)]),
+  ) as Record<string, unknown>;
+
+  if (next['@type'] === 'Question' && next.acceptedAnswer) {
+    questionSchemaIndex += 1;
+    const index = questionSchemaIndex;
+    const acceptedAnswer = Array.isArray(next.acceptedAnswer)
+      ? next.acceptedAnswer.map((answer) => enrichAnswer(answer as Record<string, unknown>, index))
+      : enrichAnswer(next.acceptedAnswer as Record<string, unknown>, index);
+
+    return {
+      ...next,
+      author: next.author ?? schemaAuthor,
+      datePublished: next.datePublished ?? schemaDate,
+      answerCount: next.answerCount ?? (Array.isArray(acceptedAnswer) ? acceptedAnswer.length : 1),
+      url: next.url ?? `${canonical}#question-${index}`,
+      acceptedAnswer,
+    };
+  }
+
+  return next;
+};
+
+const ld = rawLd.map(enrichStructuredData);
 ---
 <!doctype html>
 <html lang="en">
