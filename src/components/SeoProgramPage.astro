@@ -9,6 +9,12 @@ interface Props {
 
 const { page } = Astro.props;
 const canonical = new URL(page.path, SITE.url).href;
+const structuredDataDate = '2026-07-04';
+const structuredDataAuthor = {
+  '@type': 'Organization',
+  name: SITE.brand,
+  url: SITE.url,
+};
 const crumbs = [
   { label: page.hub.replace(' Hub', ''), href: page.hubPath },
   { label: page.h1.replace(/^Moonlight Peaks /, '') },
@@ -27,10 +33,21 @@ const breadcrumbLd = {
 const faqLd = {
   '@context': 'https://schema.org',
   '@type': 'FAQPage',
-  mainEntity: page.faqs.map((faq) => ({
+  mainEntity: page.faqs.map((faq, index) => ({
     '@type': 'Question',
     name: faq.q,
-    acceptedAnswer: { '@type': 'Answer', text: faq.a },
+    author: structuredDataAuthor,
+    datePublished: structuredDataDate,
+    answerCount: 1,
+    url: `${canonical}#faq-${index + 1}`,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: faq.a,
+      author: structuredDataAuthor,
+      datePublished: structuredDataDate,
+      upvoteCount: 0,
+      url: `${canonical}#answer-${index + 1}`,
+    },
   })),
 };
 
@@ -101,10 +118,10 @@ const jsonLd = [breadcrumbLd, faqLd, articleLd, howToLd, itemListLd].filter(Bool
 
       <section class="seo-section">
         <h2>FAQ</h2>
-        {page.faqs.map((faq) => (
-          <div class="seo-faq">
+        {page.faqs.map((faq, index) => (
+          <div class="seo-faq" id={`faq-${index + 1}`}>
             <h3>{faq.q}</h3>
-            <p>{faq.a}</p>
+            <p id={`answer-${index + 1}`}>{faq.a}</p>
           </div>
         ))}
       </section>
