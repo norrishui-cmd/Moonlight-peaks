@@ -275,6 +275,42 @@ export const faqs: Faq[] = [
     a: 'Pre-launch datamined files name several shops in town (see our shops page), and one player\u2019s own demo account described a traveling merchant selling seeds and decor items. Whether that merchant also buys your goods, or whether selling happens elsewhere, is not yet confirmed.',
     related: [{ label: 'Town shops', href: '/locations/shops' }, { label: 'How to make money guide', href: '/previews/how-does-money-work-in-moonlight-peaks' }],
   },
+  {
+    slug: 'can-you-romance-death-in-moonlight-peaks', cat: 'romance',
+    q: 'Can you romance Death in Moonlight Peaks?',
+    a: 'Unconfirmed. Death is a real name in pre-launch datamined game files, with his own home ("Death\u2019s Shack"), and some pre-launch chatter has floated him as a possible romance option — but this is speculation, not a developer confirmation. We\u2019ll update this the moment the full game settles it.',
+    related: [{ label: 'Romance Match Quiz', href: '/tools/romance-match-quiz' }, { label: 'All characters', href: '/characters' }],
+  },
+  {
+    slug: 'is-count-dracula-romanceable', cat: 'romance',
+    q: 'Is Count Dracula romanceable in Moonlight Peaks?',
+    a: 'No. Count Dracula is your character\u2019s father and a story-central figure, not a romance option — the game is explicit that your relationship with him is family, not dating.',
+    related: [{ label: 'Count Dracula profile', href: '/characters/count-dracula' }, { label: 'Romance', href: '/romance' }],
+  },
+  {
+    slug: 'is-logan-romanceable-in-moonlight-peaks', cat: 'romance',
+    q: 'Is Logan romanceable in Moonlight Peaks?',
+    a: 'Reported, not yet developer-confirmed with full certainty — Logan appears as a werewolf resident in press coverage, and independent hints (a dev diary and pre-launch datamined files) both point to his name and home being real. Treat him as a likely, not guaranteed, romance option until launch.',
+    related: [{ label: 'Logan profile', href: '/characters/logan' }, { label: 'Is Logan the mayor?', href: '/previews/is-logan-the-mayor' }],
+  },
+  {
+    slug: 'can-you-divorce-in-moonlight-peaks', cat: 'romance',
+    q: 'Can you divorce or break up in Moonlight Peaks?',
+    a: 'Not confirmed. The developers have confirmed you can marry a romance partner, but whether you can later divorce, break up, or re-marry someone else has not been addressed anywhere we\u2019ve found.',
+    related: [{ label: 'Marriage FAQ', href: '/faq/can-you-get-married-in-moonlight-peaks' }, { label: 'Romance', href: '/romance' }],
+  },
+  {
+    slug: 'is-there-a-wedding-ceremony-in-moonlight-peaks', cat: 'romance',
+    q: 'Is there a wedding ceremony in Moonlight Peaks?',
+    a: 'Not confirmed. Marriage itself is confirmed, but whether it comes with an actual ceremony, guests, or a dedicated event — versus a simple menu confirmation — has not been shown or described anywhere yet.',
+    related: [{ label: 'Marriage FAQ', href: '/faq/can-you-get-married-in-moonlight-peaks' }, { label: 'Romance', href: '/romance' }],
+  },
+  {
+    slug: 'do-families-disapprove-of-cross-family-romance', cat: 'romance',
+    q: 'Do families disapprove of you dating outside your own family in Moonlight Peaks?',
+    a: 'Not confirmed as a game mechanic, but it fits the tone: vampires and werewolves are reported to bicker constantly, and press coverage describes an old feud between the town\u2019s supernatural families. Whether that translates into an actual in-game disapproval mechanic for cross-family romance is unknown.',
+    related: [{ label: 'The family feud, explained', href: '/previews/family-feud-explained' }, { label: 'Can you romance a werewolf?', href: '/faq/can-you-romance-a-werewolf' }],
+  },
 ];
 
 // ───────────────────────── PENDING (no confirmed answer yet — fill at launch, then move up) ─────────────────────────

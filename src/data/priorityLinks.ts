@@ -52,6 +52,10 @@ export const romancePriorityLinks: PriorityLink[] = [
   { label: 'Can you have children?', href: '/faq/can-you-have-children-in-moonlight-peaks', note: 'The confirmed no-children answer.' },
   { label: 'How many romance options?', href: '/faq/how-many-romance-options-are-there', note: 'The size of the dating roster.' },
   { label: 'Can you romance a werewolf?', href: '/faq/can-you-romance-a-werewolf', note: 'Saga and werewolf romance.' },
+  { label: 'Can you romance Death?', href: '/faq/can-you-romance-death-in-moonlight-peaks', note: 'What\u2019s confirmed vs speculation.' },
+  { label: 'Romance Match Quiz', href: '/tools/romance-match-quiz', note: 'A fun, sourced-hints matchmaking quiz.' },
+  { label: 'Romance Gift Finder', href: '/tools/romance-gift-finder', note: 'Verification status for every named character.' },
+  { label: 'Best picks by vibe', href: '/previews/best-romance-picks-by-vibe', note: 'An honest, non-official read on who fits which mood.' },
   { label: 'All characters', href: '/characters', note: 'Every known resident and their status.' },
   { label: 'The seven families', href: '/families', note: 'How the families and romance connect.' },
 ];

@@ -1,0 +1,257 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+import { characters } from '../../data/characters';
+
+// Only characters with real, sourced descriptive flavor are used — no fabricated personalities.
+// Each entry's blurb is drawn directly from the character's own (already-cited) knownInfo/desc.
+const cast = ['saga', 'luna', 'orlock', 'logan', 'the-warlock', 'death', 'mina']
+  .map((id) => characters.find((c) => c.id === id))
+  .filter(Boolean);
+
+const results: Record<string, { tagline: string; blurb: string }> = {
+  saga: {
+    tagline: 'You want someone whose energy shifts with the moon.',
+    blurb: 'Saga is a confirmed werewolf romance option — the developers describe her energy changing with the full moon. If you want a partner with real range, night to night, she is the pick.',
+  },
+  luna: {
+    tagline: 'You want someone steady, green-thumbed, and a little magical.',
+    blurb: 'Luna is reported as a farming witch — likely your earliest source for spells and gardening know-how. Grounded, useful, and probably knows exactly what your crops need.',
+  },
+  orlock: {
+    tagline: 'You want old-world charm and a little bit of power.',
+    blurb: 'Orlock is reported as the head of a vampire family — old-world influence, and the kind of presence that walks into a room and changes it.',
+  },
+  logan: {
+    tagline: 'You want someone private, home-proud, and a little mysterious.',
+    blurb: 'Logan is a reported werewolf resident best known for a distinctive house — datamined files and a developer diary both independently point to him being real. Quietly confident, keeps a nice home.',
+  },
+  'the-warlock': {
+    tagline: 'You want confidence, charm, and zero subtlety about it.',
+    blurb: 'Seen in a hands-on preview as a self-obsessed warlock who won\u2019t stop flirting. His real name is still unconfirmed — but the energy is not.',
+  },
+  death: {
+    tagline: 'You want someone the whole town is a little afraid of.',
+    blurb: 'Death is a name that turns up in pre-launch datamined files, complete with his own home ("Death\u2019s Shack"). Some pre-launch chatter has floated him as a possible romance option — nothing confirmed, but if it happens, you called it first.',
+  },
+  mina: {
+    tagline: 'You want a mystery — and you\u2019re fine not solving it right away.',
+    blurb: 'Mina has been named by the developers but almost nothing else about her is public yet. Sometimes the appeal is exactly that: a clean slate to find out about at launch.',
+  },
+};
+
+const questions = [
+  {
+    q: 'What draws you in on your first night in town?',
+    options: [
+      { t: 'The old vampire manor and its secrets', s: 'orlock' },
+      { t: 'The garden plots, ready to be planted', s: 'luna' },
+      { t: 'A howl in the distance', s: 'saga' },
+      { t: 'Somewhere quiet no one else has found', s: 'death' },
+    ],
+  },
+  {
+    q: 'Someone flirts with you within five minutes of arriving. You:',
+    options: [
+      { t: 'Are charmed despite yourself', s: 'the-warlock' },
+      { t: 'Politely deflect — you\u2019re here to work', s: 'luna' },
+      { t: 'Match the energy right back', s: 'saga' },
+      { t: 'Wonder what they\u2019re really after', s: 'orlock' },
+    ],
+  },
+  {
+    q: 'Pick a house you\u2019d want to visit:',
+    options: [
+      { t: 'A grand family estate, generations old', s: 'orlock' },
+      { t: 'A quietly kept home with a personal touch', s: 'logan' },
+      { t: 'Wherever the crops are best', s: 'luna' },
+      { t: 'Somewhere half the town avoids', s: 'death' },
+    ],
+  },
+  {
+    q: 'What\u2019s your read on the town\u2019s seven-family drama?',
+    options: [
+      { t: 'Old-world politics — I\u2019d want to be on the winning side', s: 'orlock' },
+      { t: 'None of my business, I have a farm to run', s: 'luna' },
+      { t: 'Honestly? A little thrilling', s: 'the-warlock' },
+      { t: 'I\u2019d rather stay out of it entirely', s: 'mina' },
+    ],
+  },
+  {
+    q: 'A full moon rises over town. What are you doing?',
+    options: [
+      { t: 'Watching from a window, feeling something change', s: 'saga' },
+      { t: 'Tending night-blooming flowers', s: 'luna' },
+      { t: 'Somewhere no one can see me', s: 'death' },
+      { t: 'Making sure my house looks good in the moonlight', s: 'logan' },
+    ],
+  },
+  {
+    q: 'Someone in town is a total mystery to everyone. Your reaction:',
+    options: [
+      { t: 'Intrigued — I want to know more', s: 'mina' },
+      { t: 'Charming, but I stay guarded', s: 'the-warlock' },
+      { t: 'That\u2019s exactly my type', s: 'death' },
+      { t: 'I trust confidence and status more', s: 'orlock' },
+    ],
+  },
+];
+
+const faq = [
+  { q: 'Is this quiz official or based on real game data?', a: 'It\u2019s just for fun. The result options are built from real, sourced hints about each character\u2019s personality — developer reveals, hands-on press previews, and pre-launch datamined files — but the matching itself is our own lighthearted read, not an official compatibility system.' },
+  { q: 'Does this tell me who has the best gifts or romance route?', a: 'No — gift preferences, romance events, and relationship mechanics are not confirmed anywhere yet. See our Romance Gift Finder for what\u2019s actually verified versus still pending.' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: SITE.url },
+    { '@type': 'ListItem', position: 2, name: 'Tools', item: new URL('/tools', SITE.url).href },
+    { '@type': 'ListItem', position: 3, name: 'Romance Match Quiz', item: new URL('/tools/romance-match-quiz', SITE.url).href },
+  ] },
+  { '@context': 'https://schema.org', '@type': 'WebApplication', name: 'Moonlight Peaks Romance Match Quiz',
+    applicationCategory: 'GameApplication', operatingSystem: 'Web',
+    url: new URL('/tools/romance-match-quiz', SITE.url).href,
+    description: 'A lighthearted quiz that matches you to a Moonlight Peaks romance option based on real, sourced personality hints — not invented compatibility data.' },
+];
+---
+<Base
+  title="Moonlight Peaks Romance Match Quiz — Find Your Match"
+  description="A fun, honest quiz matching you to a Moonlight Peaks romance option using real sourced character hints — no invented gift or compatibility data."
+  path="/tools/romance-match-quiz"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Tools', href: '/tools' }, { label: 'Romance Match Quiz' }]}
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Tool · Romance</p>
+      <h1>Romance <em>match</em> quiz</h1>
+      <p class="intro">
+        Six quick questions, matched against real personality hints from developer reveals, press
+        hands-on previews, and pre-launch datamined files. It's just for fun — see the FAQ below for
+        what this is (and isn't).
+      </p>
+
+      <div id="quiz-root" class="quiz-root">
+        <div id="quiz-questions"></div>
+        <div id="quiz-result" class="quiz-result" hidden></div>
+        <div class="quiz-controls">
+          <button type="button" id="quiz-restart" class="rq-btn" hidden>Take it again</button>
+        </div>
+      </div>
+
+      <h2>FAQ</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        Related: <a href="/tools/romance-gift-finder">Romance Gift Finder</a>,
+        <a href="/romance">Romance & marriage</a>, <a href="/characters">All characters</a>.
+      </div>
+    </div>
+  </article>
+
+  <style>
+    .quiz-root { margin: 18px 0 28px; }
+    .rq-question { border: 1px solid var(--line); border-radius: 14px; background: var(--surface); padding: 16px; margin-bottom: 14px; }
+    .rq-question h3 { font-family: var(--display); font-weight: 600; font-size: 1rem; margin: 0 0 12px; color: var(--mist); }
+    .rq-options { display: grid; grid-template-columns: 1fr; gap: 8px; }
+    @media (min-width: 640px) { .rq-options { grid-template-columns: 1fr 1fr; } }
+    .rq-option {
+      text-align: left; font-size: 0.86rem; color: var(--muted); border: 1px solid var(--line);
+      border-radius: 10px; background: var(--ink-2); padding: 10px 12px; cursor: pointer;
+      transition: border-color .15s ease, color .15s ease, background .15s ease;
+    }
+    .rq-option:hover { border-color: color-mix(in srgb, var(--candle) 45%, var(--line)); color: var(--mist); }
+    .rq-option.is-picked { border-color: var(--candle); color: var(--candle); background: color-mix(in srgb, var(--candle) 10%, var(--ink-2)); }
+    .quiz-result { border: 1px solid color-mix(in srgb, var(--candle) 40%, var(--line)); border-radius: 16px; background: var(--surface); padding: 20px; text-align: center; }
+    .quiz-result h2 { font-family: var(--display); font-size: 1.3rem; margin: 4px 0 6px; }
+    .quiz-result .qr-tagline { color: var(--candle); font-size: 0.94rem; margin: 0 0 12px; }
+    .quiz-result .qr-blurb { color: var(--muted); font-size: 0.88rem; line-height: 1.6; max-width: 480px; margin: 0 auto 16px; }
+    .quiz-result a.qr-profile { display: inline-block; font-family: var(--mono); font-size: 0.8rem; color: var(--candle); border: 1px solid color-mix(in srgb, var(--candle) 45%, var(--line)); border-radius: 999px; padding: 8px 18px; }
+    .quiz-controls { text-align: center; margin-top: 14px; }
+    .rq-btn { font-family: var(--mono); font-size: 0.78rem; color: var(--muted); border: 1px solid var(--line); border-radius: 999px; background: var(--surface); padding: 8px 18px; cursor: pointer; }
+    .rq-btn:hover { color: var(--candle); border-color: color-mix(in srgb, var(--candle) 45%, var(--line)); }
+    .rq-progress { font-family: var(--mono); font-size: 0.68rem; color: var(--faint); margin-bottom: 6px; }
+  </style>
+
+  <script define:vars={{ questions, results, cast: cast.map((c) => ({ id: c!.id, name: c!.name })) }}>
+    (function () {
+      var qWrap = document.getElementById('quiz-questions');
+      var resultBox = document.getElementById('quiz-result');
+      var restartBtn = document.getElementById('quiz-restart');
+      var current = 0;
+      var scores = {};
+
+      var profileHref = {};
+      cast.forEach(function (c) { profileHref[c.id] = '/characters/' + c.id; });
+
+      function renderQuestion(i) {
+        qWrap.innerHTML = '';
+        var q = questions[i];
+        var box = document.createElement('div');
+        box.className = 'rq-question';
+        var progress = document.createElement('div');
+        progress.className = 'rq-progress';
+        progress.textContent = 'Question ' + (i + 1) + ' of ' + questions.length;
+        var h3 = document.createElement('h3');
+        h3.textContent = q.q;
+        var opts = document.createElement('div');
+        opts.className = 'rq-options';
+        q.options.forEach(function (opt) {
+          var btn = document.createElement('button');
+          btn.type = 'button';
+          btn.className = 'rq-option';
+          btn.textContent = opt.t;
+          btn.addEventListener('click', function () {
+            scores[opt.s] = (scores[opt.s] || 0) + 1;
+            current++;
+            if (current < questions.length) { renderQuestion(current); }
+            else { showResult(); }
+          });
+          opts.appendChild(btn);
+        });
+        box.appendChild(progress);
+        box.appendChild(h3);
+        box.appendChild(opts);
+        qWrap.appendChild(box);
+      }
+
+      function showResult() {
+        var best = null, bestScore = -1;
+        Object.keys(scores).forEach(function (k) {
+          if (scores[k] > bestScore) { bestScore = scores[k]; best = k; }
+        });
+        if (!best) best = 'mina';
+        var info = results[best];
+        var name = (cast.filter(function (c) { return c.id === best; })[0] || {}).name || best;
+
+        qWrap.style.display = 'none';
+        resultBox.hidden = false;
+        resultBox.innerHTML =
+          '<p class="rq-progress">Your match</p>' +
+          '<h2>' + name + '</h2>' +
+          '<p class="qr-tagline">' + info.tagline + '</p>' +
+          '<p class="qr-blurb">' + info.blurb + '</p>' +
+          '<a class="qr-profile" href="' + profileHref[best] + '">See ' + name + '\u2019s profile</a>';
+        restartBtn.hidden = false;
+      }
+
+      restartBtn.addEventListener('click', function () {
+        current = 0; scores = {};
+        qWrap.style.display = '';
+        resultBox.hidden = true;
+        restartBtn.hidden = true;
+        renderQuestion(0);
+      });
+
+      renderQuestion(0);
+    })();
+  </script>
+</Base>

@@ -13,6 +13,7 @@ const named = [
   { name: 'Luna', slug: 'luna', family: 'Witch', note: 'A farming witch.', status: 'reported' },
   { name: 'Pumpkin Head', slug: 'pumpkin-head', family: '—', note: 'Theatrical event host around town.', status: 'reported' },
   { name: 'Logan', slug: 'logan', family: 'Werewolf', note: 'Has a distinctive werewolf house.', status: 'reported' },
+  { name: 'Death', slug: 'death', family: '—', note: 'Datamined resident with his own home ("Death\u2019s Shack"); romance status is speculation, not confirmed.', status: 'datamined' },
 ];
 
 const famHref = (family: string) =>
@@ -58,6 +59,11 @@ const jsonLd = [
         <YouTube id="YFb9capELQw" title="Moonlight Peaks romance video" />
       </div>
 
+      <div class="callout wip">
+        Curious who fits your vibe? Try the <a href="/tools/romance-match-quiz">Romance Match Quiz</a> —
+        six quick questions matched against real, sourced personality hints. Just for fun, not official data.
+      </div>
+
       <h2>The basics</h2>
       <p>
         Around two dozen residents are dateable, spread across the town's seven families — vampires,
@@ -72,7 +78,7 @@ const jsonLd = [
         <tr><th>Character</th><th>Family / status</th></tr>
         {named.map((c) => (
           <tr>
-            <td><strong><a href={`/characters/${c.slug}`}>{c.name}</a></strong> {c.status === 'reported' && <span style="color:var(--faint);font-family:var(--mono);font-size:0.7rem">reported</span>}<br /><span style="color:var(--muted);font-size:0.85rem">{c.note}</span></td>
+            <td><strong><a href={`/characters/${c.slug}`}>{c.name}</a></strong> {(c.status === 'reported' || c.status === 'datamined') && <span style="color:var(--faint);font-family:var(--mono);font-size:0.7rem">{c.status}</span>}<br /><span style="color:var(--muted);font-size:0.85rem">{c.note}</span></td>
             <td>{c.family === '—' ? '—' : <a href={famHref(c.family)}>{c.family}</a>}</td>
           </tr>
         ))}
