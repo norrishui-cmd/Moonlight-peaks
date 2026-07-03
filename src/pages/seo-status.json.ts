@@ -27,6 +27,7 @@ export const GET: APIRoute = () => {
     headers: {
       'Content-Type': 'application/json; charset=utf-8',
       'Cache-Control': 'public, max-age=0, s-maxage=300',
+      'X-Robots-Tag': 'noindex, nofollow',
     },
   });
 };

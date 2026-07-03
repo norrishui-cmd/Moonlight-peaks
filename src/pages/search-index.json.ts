@@ -13,30 +13,30 @@ import { itemCategories } from '../data/items';
 
 // A single flat, normalized search index built at build time. Every entry is
 // { t: title, d: short description, u: url, k: kind label }. Because it's generated
-// from the same data arrays the pages render from, it never drifts out of sync —
+// from the same data arrays the pages render from, it never drifts out of sync:
 // add content anywhere and it shows up in search on the next build automatically.
 type Doc = { t: string; d: string; u: string; k: string };
 
 const clip = (s: string | undefined, n = 120): string => {
   if (!s) return '';
   const flat = s.replace(/\s+/g, ' ').trim();
-  return flat.length > n ? flat.slice(0, n - 1) + '…' : flat;
+  return flat.length > n ? flat.slice(0, n - 1) + '...' : flat;
 };
 
-// Evergreen static hub/guide pages (no per-item data file) — hand-listed so search
+// Evergreen static hub/guide pages (no per-item data file) are hand-listed so search
 // covers them too. Keep roughly in sync if you add major new static pages.
 const staticPages: Doc[] = [
   { t: 'Beginner guide', d: 'Everything known so far, shaped into a day-one head start.', u: '/beginner-guide', k: 'Guide' },
   { t: 'Farming', d: 'Enchanted crops, glowing flowers, magical livestock, night farming.', u: '/farming', k: 'Guide' },
   { t: 'Magic & potions', d: 'Spells, wands, mana, runes, and the Alter Ego Elixir.', u: '/magic', k: 'Guide' },
-  { t: 'Character creator', d: 'Customization options in the demo’s vampire creator.', u: '/character-creator', k: 'Guide' },
+  { t: 'Character creator', d: "Customization options in the demo's vampire creator.", u: '/character-creator', k: 'Guide' },
   { t: 'Shapeshifting', d: 'Turning into a bat and other hinted forms.', u: '/shapeshifting', k: 'Guide' },
   { t: 'Romance & marriage', d: 'Gifts, friendship, marriage, and who you can date.', u: '/romance', k: 'Guide' },
   { t: 'Items', d: 'Tools, potions, decorations, and other item categories.', u: '/items', k: 'Guide' },
   { t: 'Environment', d: 'Weather, seasons, and festivals.', u: '/environment', k: 'Guide' },
   { t: 'Nokturna card game', d: 'How the in-game card game works, cards, and tips.', u: '/nokturna', k: 'Guide' },
   { t: 'Cheats & console', d: 'Console commands and money-cheat expectations.', u: '/cheats', k: 'Guide' },
-  { t: 'Behind the scenes', d: 'What the dev team’s own diaries reveal about making the game.', u: '/behind-the-scenes', k: 'Guide' },
+  { t: 'Behind the scenes', d: "What the dev team's own diaries reveal about making the game.", u: '/behind-the-scenes', k: 'Guide' },
   { t: 'Moonlight Peaks vs Stardew Valley', d: 'How the two cozy sims compare.', u: '/moonlight-peaks-vs-stardew-valley', k: 'Compare' },
   { t: 'Release date & platforms', d: 'When, where, price, and the free demo.', u: '/release-date', k: 'Guide' },
   { t: 'Interactive map', d: 'The town, farm, forest, lake, mines and named spots.', u: '/map', k: 'Guide' },
@@ -86,6 +86,9 @@ export const GET: APIRoute = () => {
   docs.push(...staticPages);
 
   return new Response(JSON.stringify(docs), {
-    headers: { 'Content-Type': 'application/json; charset=utf-8' },
+    headers: {
+      'Content-Type': 'application/json; charset=utf-8',
+      'X-Robots-Tag': 'noindex, nofollow',
+    },
   });
 };
