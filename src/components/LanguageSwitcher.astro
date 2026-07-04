@@ -4,7 +4,8 @@ import type { Locale } from '../i18n/nav';
 interface Props { lang: Locale; path: string; }
 const { lang, path } = Astro.props;
 
-const labels: Record<Locale, string> = { en: 'EN', es: 'ES', ja: '日本語', zh: '中文' };
+const labels: Record<Locale, string> = { en: 'English', es: 'Español', ja: '日本語', zh: '中文' };
+const shortLabels: Record<Locale, string> = { en: 'EN', es: 'ES', ja: 'JA', zh: 'ZH' };
 // Only pages in this set exist in translated form so far. Falls back to the English
 // version of the current page for any locale/page combo not yet translated.
 const translatedPaths = new Set<string>(['/', '/beginner-guide', '/release-date', '/faq']);
@@ -16,23 +17,22 @@ const hrefFor = (target: Locale): string => {
   if (target === 'en') return bare;
   return bare === '/' ? `/${target}` : `/${target}${bare}`;
 };
+const locales: Locale[] = ['en', 'es', 'ja', 'zh'];
 ---
-<div class="lang-switcher">
-  {(['en', 'es', 'ja', 'zh'] as Locale[]).map((code) => (
-    <a href={hrefFor(code)} class={code === lang ? 'is-current' : ''} aria-current={code === lang ? 'true' : undefined}>
-      {labels[code]}
-    </a>
-  ))}
-</div>
+<details class="nav-dd lang-dd">
+  <summary aria-label="Change language">
+    <span class="lang-globe" aria-hidden="true">🌐</span>
+    <span class="lang-current">{shortLabels[lang]}</span>
+  </summary>
+  <div class="nav-dd-menu lang-dd-menu">
+    {locales.map((code) => (
+      <a href={hrefFor(code)} aria-current={code === lang ? 'page' : undefined}>{labels[code]}</a>
+    ))}
+  </div>
+</details>
 
 <style>
-  .lang-switcher { display: flex; gap: 4px; flex: 0 0 auto; }
-  .lang-switcher a {
-    font-family: var(--mono); font-size: 0.68rem; color: var(--faint);
-    border: 1px solid var(--line); border-radius: 999px; padding: 5px 9px;
-    transition: color .15s ease, border-color .15s ease;
-  }
-  .lang-switcher a:hover { color: var(--mist); border-color: color-mix(in srgb, var(--candle) 45%, var(--line)); }
-  .lang-switcher a.is-current { color: var(--candle); border-color: color-mix(in srgb, var(--candle) 55%, var(--line)); }
-  @media (max-width: 900px) { .lang-switcher { display: none; } }
+  .lang-dd > summary { display: inline-flex; align-items: center; gap: 5px; }
+  .lang-globe { font-size: 0.95rem; line-height: 1; }
+  .lang-current { font-family: var(--mono); font-size: 0.72rem; }
 </style>
