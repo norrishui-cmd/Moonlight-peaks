@@ -58,7 +58,7 @@ export const activities: TopicItem[] = [
     related: [{ label: 'Magic', href: '/magic' }, { label: 'Witches', href: '/families/witches' }],
   },
   {
-    slug: 'decorating', title: 'Decorating', tag: 'Activity', status: 'confirmed', image: '/hero-loc-your-cottage.webp',
+    slug: 'decorating', title: 'Decorating', tag: 'Activity', status: 'confirmed', image: '/hero-act-decorating.webp',
     dek: 'Place and arrange furniture and decor to customize your gothic cottage.',
     body: [
       'Decorating your home is a core cozy activity — you place and arrange furniture and decor to make the cottage your own.',
