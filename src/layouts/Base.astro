@@ -2,6 +2,8 @@
 import { SITE, GA_MEASUREMENT_ID } from '../consts';
 import '../styles/global.css';
 import SiteSearch from '../components/SiteSearch.astro';
+import { t, type Locale } from '../i18n/nav';
+import LanguageSwitcher from '../components/LanguageSwitcher.astro';
 interface Crumb { label: string; href?: string; }
 interface Props {
   title: string;
@@ -12,43 +14,64 @@ interface Props {
   ogImage?: string;
   showExport?: boolean;
   noindex?: boolean;
+  lang?: 'en' | 'es' | 'ja' | 'zh';
 }
-const { title, description, path = '/', jsonLd, crumbs = [], ogImage, showExport = false, noindex = false } = Astro.props;
+const { title, description, path = '/', jsonLd, crumbs = [], ogImage, showExport = false, noindex = false, lang = 'en' } = Astro.props;
 const canonical = new URL(path, SITE.url).href;
 const ogImageUrl = ogImage ? new URL(ogImage, SITE.url).href : undefined;
+
+// hreflang alternates: strip any existing /es/ /ja/ /zh/ prefix to get the "bare" path,
+// then rebuild it for each locale. English has no prefix (the default locale).
+const barePath = path.replace(/^\/(es|ja|zh)(\/|$)/, '/');
+const hreflangs: { code: string; href: string }[] = [
+  { code: 'en', href: new URL(barePath, SITE.url).href },
+  { code: 'es', href: new URL(`/es${barePath}`.replace(/\/$/, '') || '/es', SITE.url).href },
+  { code: 'ja', href: new URL(`/ja${barePath}`.replace(/\/$/, '') || '/ja', SITE.url).href },
+  { code: 'zh', href: new URL(`/zh${barePath}`.replace(/\/$/, '') || '/zh', SITE.url).href },
+];
 const navPeople = [
-  { href: '/characters', label: 'Characters' },
-  { href: '/families', label: 'Families' },
-  { href: '/romance', label: 'Romance' },
+  { href: '/characters', label: t(lang, 'characters') },
+  { href: '/families', label: t(lang, 'families') },
+  { href: '/romance', label: t(lang, 'romance') },
 ];
 const navUtility = [
-  { href: '/tools', label: 'Tools' },
-  { href: '/faq', label: 'FAQ' },
-  { href: '/about', label: 'About' },
+  { href: '/tools', label: t(lang, 'tools') },
+  { href: '/faq', label: t(lang, 'faq') },
+  { href: '/about', label: t(lang, 'about') },
 ];
 const guideGroup = {
-  label: 'Guides',
+  label: t(lang, 'guides'),
   href: '/guides',
   children: [
-    { href: '/guides', label: 'All guides' },
-    { href: '/release-date', label: 'Release' },
-    { href: '/demo', label: 'Demo' },
-    { href: '/platforms', label: 'Platforms' },
+    { href: '/guides', label: t(lang, 'allGuides') },
+    { href: '/release-date', label: t(lang, 'release') },
+    { href: '/demo', label: t(lang, 'demo') },
+    { href: '/platforms', label: t(lang, 'platforms') },
   ],
 };
 const worldGroup = {
-  label: 'World',
+  label: t(lang, 'world'),
   href: '/locations',
   children: [
-    { href: '/locations', label: 'Locations' },
-    { href: '/activities', label: 'Activities' },
-    { href: '/items', label: 'Items' },
+    { href: '/locations', label: t(lang, 'locations') },
+    { href: '/activities', label: t(lang, 'activities') },
+    { href: '/items', label: t(lang, 'items') },
   ],
 };
 const here = Astro.url.pathname.replace(/\/$/, '') || '/';
 const isActive = (href: string) => here === href || (href !== '/' && here.startsWith(`${href}/`));
 const isGuideGroupActive = guideGroup.children.some((c) => isActive(c.href));
 const isWorldGroupActive = worldGroup.children.some((c) => isActive(c.href));
+
+// Only /  and /beginner-guide are translated so far. Every other nav target still only
+// exists in English — linking to a non-existent /es/characters etc. would 404. As more
+// pages get translated, add their bare English path here and links will follow automatically.
+const translatedPaths = new Set<string>(['/', '/beginner-guide']);
+const localizedHref = (href: string): string => {
+  if (lang === 'en') return href;
+  if (translatedPaths.has(href)) return href === '/' ? `/${lang}` : `/${lang}${href}`;
+  return href; // not translated yet — send to the English version rather than a 404
+};
 const rawLd = Array.isArray(jsonLd) ? jsonLd : jsonLd ? [jsonLd] : [];
 const schemaAuthor = { '@type': 'Organization', name: SITE.brand, url: SITE.url };
 const schemaDate = '2026-07-04';
@@ -94,7 +117,7 @@ const enrichStructuredData = (value: unknown): unknown => {
 const ld = rawLd.map(enrichStructuredData);
 ---
 <!doctype html>
-<html lang="en">
+<html lang={lang}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -102,6 +125,8 @@ const ld = rawLd.map(enrichStructuredData);
     <meta name="description" content={description} />
     {noindex && <meta name="robots" content="noindex, follow" />}
     <link rel="canonical" href={canonical} />
+    {hreflangs.map((h) => <link rel="alternate" hreflang={h.code} href={h.href} />)}
+    <link rel="alternate" hreflang="x-default" href={hreflangs[0].href} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="alternate" type="application/rss+xml" title="Moonlight Peaks — Articles & Guides" href="/rss.xml" />
     <meta property="og:type" content="website" />
@@ -150,7 +175,7 @@ const ld = rawLd.map(enrichStructuredData);
   <body>
     <header class="site-header">
       <div class="wrap bar">
-        <a class="brand" href="/" aria-label={`${SITE.brand} home`}>
+        <a class="brand" href={localizedHref('/')} aria-label={`${SITE.brand} home`}>
           <span class="moon" aria-hidden="true"></span>
           <span class="mark">Moonlight Peaks <em>Wiki &amp; Guide</em></span>
         </a>
@@ -159,32 +184,33 @@ const ld = rawLd.map(enrichStructuredData);
             <summary aria-current={isGuideGroupActive ? 'page' : undefined}>{guideGroup.label}</summary>
             <div class="nav-dd-menu">
               {guideGroup.children.map((c) => (
-                <a href={c.href} aria-current={isActive(c.href) ? 'page' : undefined}>{c.label}</a>
+                <a href={localizedHref(c.href)} aria-current={isActive(c.href) ? 'page' : undefined}>{c.label}</a>
               ))}
             </div>
           </details>
           {navPeople.map((n) => (
-            <a href={n.href} aria-current={isActive(n.href) ? 'page' : undefined}>{n.label}</a>
+            <a href={localizedHref(n.href)} aria-current={isActive(n.href) ? 'page' : undefined}>{n.label}</a>
           ))}
           <details class="nav-dd" open={isWorldGroupActive ? true : undefined}>
             <summary aria-current={isWorldGroupActive ? 'page' : undefined}>{worldGroup.label}</summary>
             <div class="nav-dd-menu">
               {worldGroup.children.map((c) => (
-                <a href={c.href} aria-current={isActive(c.href) ? 'page' : undefined}>{c.label}</a>
+                <a href={localizedHref(c.href)} aria-current={isActive(c.href) ? 'page' : undefined}>{c.label}</a>
               ))}
             </div>
           </details>
           {navUtility.map((n) => (
-            <a href={n.href} aria-current={isActive(n.href) ? 'page' : undefined}>{n.label}</a>
+            <a href={localizedHref(n.href)} aria-current={isActive(n.href) ? 'page' : undefined}>{n.label}</a>
           ))}
         </nav>
+        <LanguageSwitcher lang={lang} path={path} />
         <SiteSearch />
       </div>
     </header>
     {crumbs.length > 0 && (
       <div class="wrap">
         <nav class="crumb" aria-label="Breadcrumb">
-          <a href="/">Home</a>
+          <a href={localizedHref('/')}>{t(lang, 'home')}</a>
           {crumbs.map((c) => (
             <span>{' / '}{c.href ? <a href={c.href}>{c.label}</a> : c.label}</span>
           ))}
@@ -211,17 +237,17 @@ const ld = rawLd.map(enrichStructuredData);
         <div class="row">
           <span>{SITE.brand}</span>
           <span class="links">
-            <a href="/characters">Characters</a>
-            <a href="/locations">Locations</a>
-            <a href="/families">Families</a>
-            <a href="/activities">Activities</a>
-            <a href="/faq">FAQ</a>
-            <a href="/guides">Guides</a>
-            <a href="/tools">Tools</a>
-            <a href="/platforms">Platforms</a>
-            <a href="/compare">Compare</a>
-            <a href="/about">About</a>
-            <a href="/privacy">Privacy</a>
+            <a href={localizedHref('/characters')}>{t(lang, 'characters')}</a>
+            <a href={localizedHref('/locations')}>{t(lang, 'locations')}</a>
+            <a href={localizedHref('/families')}>{t(lang, 'families')}</a>
+            <a href={localizedHref('/activities')}>{t(lang, 'activities')}</a>
+            <a href={localizedHref('/faq')}>{t(lang, 'faq')}</a>
+            <a href={localizedHref('/guides')}>{t(lang, 'guides')}</a>
+            <a href={localizedHref('/tools')}>{t(lang, 'tools')}</a>
+            <a href={localizedHref('/platforms')}>{t(lang, 'platforms')}</a>
+            <a href={localizedHref('/compare')}>Compare</a>
+            <a href={localizedHref('/about')}>{t(lang, 'about')}</a>
+            <a href={localizedHref('/privacy')}>Privacy</a>
             <span>Updated {SITE.updated}</span>
           </span>
         </div>

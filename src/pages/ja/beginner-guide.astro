@@ -1,0 +1,97 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+
+const jsonLd = {
+  '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'ホーム', item: `${SITE.url}/ja` },
+    { '@type': 'ListItem', position: 2, name: '初心者ガイド', item: `${SITE.url}/ja/beginner-guide` },
+  ],
+};
+---
+<Base
+  title="Moonlight Peaks 発売前・初心者ガイド"
+  description="Moonlight Peaksの発売前初心者ガイド:夜の農業サイクル、吸血鬼の能力、7つの家族、恋愛、釣り、ポーション、ノクトゥルナについて。"
+  path="/ja/beginner-guide"
+  jsonLd={jsonLd}
+  crumbs={[{ label: '初心者ガイド' }]}
+  lang="ja"
+  showExport
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">エントリー・ガイド</p>
+      <h1>Moonlight Peaks <em>初心者ガイド</em></h1>
+      <p class="intro">
+        体験版と公式トレーラーから判明している情報をまとめました。{GAME.releaseLabel}には、
+        正確な数値を含む完全な初日攻略ガイドになります。最終更新:{SITE.updated}。
+      </p>
+
+      <h2>最初に確認すること</h2>
+      <ol class="steps">
+        <li><strong>プラットフォームを確認する。</strong>最初のセーブデータを作る前に、Steam、Switch、Switch 2、Steam Deck、Mac、Androidの対応状況を確認しましょう。</li>
+        <li><strong>無料体験版を試す。</strong>操作方法、キャラクター作成、釣り、フラワーアレンジメント、刺繍、そして序盤の雰囲気を試すのに最適です。</li>
+        <li><strong>夜のサイクルを覚える。</strong>Moonlight Peaksはコージーなライフシムですが、吸血鬼のスケジュールによって農業への考え方が変わります。</li>
+        <li><strong>最初の方向性を決める。</strong>農業、人間関係、インテリア、釣り、魔法、ノクトゥルナはそれぞれ別の攻略グループにつながっています。</li>
+      </ol>
+
+      <h2>基本的なゲームループ</h2>
+      <p>
+        荒廃した実家の農場を受け継ぎ、コージー・ゴシックな農園として再建していきます。日々の中心となるのは
+        <strong>神秘的な作物</strong>の世話、<strong>魔法の家畜</strong>の飼育、そして魔法(制御されたじょうろや呪文)を
+        使った農作業です。このジャンルには珍しく、農業は夜に行うようになっており、吸血鬼のライフスタイルに合っています。
+      </p>
+
+      <h2>ゲーム内でできること</h2>
+      <ul>
+        <li><strong>農業と畜産</strong> — 魅惑の作物を育て、町独自の生き物を飼育する。</li>
+        <li><strong>呪文とポーション</strong> — 魔法を学び、農作業や採集に役立てる。</li>
+        <li><strong>釣りと採集</strong> — 定番のコージー要素に、超自然的なひねりを加えたもの。</li>
+        <li><strong>料理</strong> — 収穫物を料理や飲み物に変える。</li>
+        <li><strong>刺繍とフラワーアレンジメント</strong> — 体験版でも紹介された、ゆったりとした趣味の活動。</li>
+        <li><strong>ノクトゥルナ</strong> — カードを集めて、町で人気のゲームを住民と対戦する。</li>
+        <li><strong>インテリアデザイン</strong> — ゴシック風のコテージを装飾し(ぴったりの棺を選ぼう)、土地を発展させる。</li>
+      </ul>
+
+      <h2>吸血鬼であること</h2>
+      <p>
+        あなたの血筋は単なるテーマではなく、実用的な能力でもあります。<strong>変身</strong>して
+        コウモリになれば町を素早く移動でき、隠されたエリアにもたどり着けます。ゲームを進めるにつれて、
+        強化された感覚をはじめとする古代の能力も解放されていきます。探索できる鉱山エリアもありますが、
+        <strong>戦闘は一切ありません</strong>ので、終始のんびりとした雰囲気が保たれます。多くの住民も
+        超自然的な存在なので、あなたも自然に馴染めるでしょう。
+      </p>
+
+      <h2>町とその住民たち</h2>
+      <p>
+        Moonlight Peaksには、人間と夜の生き物からなる7つの家族が暮らしています——人狼、魔女、人魚など、
+        そして注目キャラクターの一人には死神その人も含まれます。彼らと友情や恋愛関係を築くことはゲームの
+        中心的な要素であり、<a href="/romance">恋愛と家族のページ</a>では発売時に各候補者とその贈り物の
+        好みを追跡していく予定です。
+      </p>
+
+      <h2>発売前に気にしなくていいこと</h2>
+      <p>
+        今の段階で厳密な効率ルートを追い求める必要はありません。正式版が発売されるまで、作物の収益、
+        贈り物の価値、魚の出現、レシピの価格、クエスト報酬、住民のスケジュールについては、発売時に
+        判明するデータとして扱ってください。今の時点で有益なのは、システムを理解し、必要な参考ページを
+        保存しておくことです。
+      </p>
+
+      <h2>目的別おすすめページ</h2>
+      <table class="facts">
+        <tr><th>初日からプレイしたい方</th><td><a href="/release-date">発売日</a>、<a href="/demo">体験版ガイド</a>、<a href="/platforms">対応機種ガイド</a></td></tr>
+        <tr><th>恋愛を楽しみたい方</th><td><a href="/romance">恋愛ガイド</a>、<a href="/characters">キャラクター一覧</a>、<a href="/characters/saga">サーガ</a></td></tr>
+        <tr><th>農業をしたい方</th><td><a href="/farming">農業ガイド</a>、<a href="/magic">魔法</a>、<a href="/activities">アクティビティ</a></td></tr>
+        <tr><th>コレクションをしたい方</th><td><a href="/activities/fishing">釣り</a>、<a href="/activities/foraging">採集</a>、<a href="/locations">ロケーション</a>、<a href="/map">マップ</a></td></tr>
+      </table>
+
+      <div class="callout wip">
+        発売前のエントリーです。正確な作物価格、魚のリスト、贈り物一覧、チートコマンドは、
+        {GAME.releaseLabel}に正式版が発売されるまで判明しません——判明次第すぐに追加します。
+        このページのリンクは、日本語版が用意されるまで各ガイドの英語版へ移動します。
+        追加すべき情報を見つけた場合は{SITE.contact}までご連絡ください。
+      </div>
+    </div>
+  </article>
+</Base>

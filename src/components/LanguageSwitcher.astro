@@ -1,0 +1,38 @@
+---
+import type { Locale } from '../i18n/nav';
+
+interface Props { lang: Locale; path: string; }
+const { lang, path } = Astro.props;
+
+const labels: Record<Locale, string> = { en: 'EN', es: 'ES', ja: '日本語', zh: '中文' };
+// Only pages in this set exist in translated form so far. Falls back to the English
+// version of the current page for any locale/page combo not yet translated.
+const translatedPaths = new Set<string>(['/', '/beginner-guide']);
+const bare = path.replace(/^\/(es|ja|zh)(\/|$)/, '/');
+const isTranslated = translatedPaths.has(bare);
+
+const hrefFor = (target: Locale): string => {
+  if (!isTranslated) return target === 'en' ? bare : `/${target}`; // send untranslated pages to that language's homepage instead of a 404
+  if (target === 'en') return bare;
+  return bare === '/' ? `/${target}` : `/${target}${bare}`;
+};
+---
+<div class="lang-switcher">
+  {(['en', 'es', 'ja', 'zh'] as Locale[]).map((code) => (
+    <a href={hrefFor(code)} class={code === lang ? 'is-current' : ''} aria-current={code === lang ? 'true' : undefined}>
+      {labels[code]}
+    </a>
+  ))}
+</div>
+
+<style>
+  .lang-switcher { display: flex; gap: 4px; flex: 0 0 auto; }
+  .lang-switcher a {
+    font-family: var(--mono); font-size: 0.68rem; color: var(--faint);
+    border: 1px solid var(--line); border-radius: 999px; padding: 5px 9px;
+    transition: color .15s ease, border-color .15s ease;
+  }
+  .lang-switcher a:hover { color: var(--mist); border-color: color-mix(in srgb, var(--candle) 45%, var(--line)); }
+  .lang-switcher a.is-current { color: var(--candle); border-color: color-mix(in srgb, var(--candle) 55%, var(--line)); }
+  @media (max-width: 900px) { .lang-switcher { display: none; } }
+</style>

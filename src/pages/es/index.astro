@@ -1,0 +1,105 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+
+const entries = [
+  { title: 'Fecha de lanzamiento y plataformas', desc: 'Cuándo, dónde, precio y la demo gratuita — todo para jugar el primer día.', href: '/release-date', img: '/card-release.webp' },
+  { title: 'Requisitos del sistema', desc: 'Comprobaciones de rendimiento en PC, Mac, Steam Deck y la demo antes de comprar.', href: '/system-requirements', img: '/card-guide.webp' },
+  { title: 'Idiomas', desc: 'Soporte de japonés, chino, coreano, alemán e inglés a confirmar en el lanzamiento.', href: '/languages', img: '/card-guide.webp' },
+  { title: 'Guía para principiantes', desc: 'Todo lo que sabemos hasta ahora, para empezar con ventaja el primer día.', href: '/beginner-guide', img: '/card-guide.webp' },
+  { title: 'El juego de cartas Nokturna', desc: 'El juego favorito del pueblo: cómo funciona, las cartas y cómo ganar.', href: '/nokturna', img: '/card-nokturna.webp' },
+  { title: 'Romance y familias', desc: 'Las siete familias, a quién puedes conquistar y los regalos favoritos.', href: '/romance', img: '/card-romance.webp' },
+  { title: 'Trucos y consola', desc: 'Comandos de consola y trucos de dinero — publicados en el lanzamiento.', href: '/cheats', img: '/card-cheats.webp' },
+  { title: 'Cultivos y estaciones', desc: 'Cultivos místicos, ganado mágico y el ciclo de cultivo nocturno.', href: '/farming', img: '/card-crops.webp' },
+];
+
+const explore = [
+  { k: 'Personajes', d: 'Residentes, familias y a quién puedes conquistar', href: '/characters', img: '/count-dracula.webp' },
+  { k: 'Ubicaciones', d: 'El pueblo, tu granja, el bosque, el lago y más', href: '/locations', img: '/hero-loc-town.webp' },
+  { k: 'Familias', d: 'Las siete familias sobrenaturales del pueblo', href: '/families', img: '/hero-fam-vampires.webp' },
+  { k: 'Actividades', d: 'Pesca, magia, manualidades y pasatiempos acogedores', href: '/activities', img: '/hero-act-seasonal-events.webp' },
+  { k: 'Objetos', d: 'Herramientas, pociones, decoraciones y otras categorías', href: '/items', img: null, c1: '#3a4a2f', c2: '#8ab06a' },
+  { k: 'Preguntas frecuentes', d: 'Respuestas rápidas a las preguntas más comunes', href: '/faq', img: '/card-faq.webp' },
+  { k: 'Guías y noticias', d: 'Impresiones de la demo, avances de prensa y tutoriales', href: '/previews', img: '/hero-first-five-minutes.webp' },
+  { k: 'Exportar a PDF', d: 'Elige cualquier guía y expórtalas juntas en un solo PDF', href: '/export', img: '/card-export-pdf.webp' },
+];
+
+const jsonLd = {
+  '@context': 'https://schema.org', '@type': 'WebSite', name: 'Moonlight Peaks Wiki & Guide (Español)',
+  url: `${SITE.url}/es`, inLanguage: 'es',
+  description: 'Guía en español hecha por fans de Moonlight Peaks, el life-sim de vampiros: fecha de lanzamiento, guía para principiantes, romance y trucos.',
+};
+---
+<Base
+  title="Moonlight Peaks — Guía en Español: Lanzamiento, Consejos y Trucos"
+  description="Tu guía en español hecha por fans de Moonlight Peaks, el cozy life-sim de vampiros. Fecha de lanzamiento, consejos para principiantes, romance y trucos."
+  path="/es"
+  jsonLd={jsonLd}
+  lang="es"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">El almanaque de campo de un vampiro granjero</p>
+      <h1><em>Moonlight Peaks</em> abre sus puertas pronto.</h1>
+      <p class="intro">
+        La guía cozy-gótica del life-sim de vampiros de {GAME.developer}. Estamos en línea antes del
+        lanzamiento para que empieces el primer día conociendo el pueblo — información de lanzamiento
+        ahora, y consejos, Nokturna, romance y trucos en cuanto llegue {GAME.title}.
+      </p>
+      <p class="callout wip">
+        Esta versión en español cubre las páginas más importantes por ahora. El resto del contenido
+        (artículos, perfiles de personajes, preguntas frecuentes) todavía está solo en inglés — lo
+        iremos traduciendo por partes. Los enlaces de esta página te llevarán a esas páginas en inglés
+        hasta que estén disponibles en español.
+      </p>
+
+      <h2>Empieza por aquí</h2>
+      <div class="es-grid">
+        {entries.map((e) => (
+          <a class="es-card" href={e.href}>
+            <img src={e.img} alt="" loading="lazy" width="64" height="64" />
+            <span>
+              <strong>{e.title}</strong>
+              <em>{e.desc}</em>
+            </span>
+          </a>
+        ))}
+      </div>
+
+      <h2>Explora el mundo</h2>
+      <div class="es-grid">
+        {explore.map((x) => (
+          <a class="es-card" href={x.href}>
+            <span class="es-thumb" style={!x.img ? `background: linear-gradient(135deg, ${x.c1}, ${x.c2})` : undefined}>
+              {x.img ? <img src={x.img} alt="" loading="lazy" width="64" height="64" /> : <span class="es-thumb-letter">{x.k[0]}</span>}
+            </span>
+            <span>
+              <strong>{x.k}</strong>
+              <em>{x.d}</em>
+            </span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </article>
+
+  <style>
+    .page { padding: 32px 0 60px; }
+    .eyebrow { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--faint); }
+    h1 { font-family: var(--display); font-size: 2rem; margin: 6px 0 14px; }
+    h1 em { color: var(--candle); font-style: normal; }
+    .intro { color: var(--muted); font-size: 1rem; line-height: 1.6; max-width: 640px; margin-bottom: 16px; }
+    .callout.wip { border-left: 2px solid var(--candle); background: var(--ink-2); padding: 12px 16px; border-radius: 0 10px 10px 0; color: var(--muted); font-size: 0.88rem; margin: 0 0 32px; }
+    h2 { font-family: var(--display); font-size: 1.3rem; margin: 28px 0 12px; }
+    .es-grid { display: grid; grid-template-columns: 1fr; gap: 10px; }
+    @media (min-width: 640px) { .es-grid { grid-template-columns: 1fr 1fr; } }
+    .es-card { display: flex; align-items: center; gap: 12px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); padding: 12px; transition: border-color .15s ease; }
+    .es-card:hover { border-color: color-mix(in srgb, var(--candle) 50%, var(--line)); }
+    .es-card img { border-radius: 10px; object-fit: cover; width: 64px; height: 64px; flex: 0 0 auto; }
+    .es-thumb { flex: 0 0 auto; width: 64px; height: 64px; border-radius: 10px; display: flex; align-items: center; justify-content: center; border: 1px solid var(--line); }
+    .es-thumb-letter { font-family: var(--display); font-weight: 700; font-size: 1.4rem; color: rgba(255,255,255,0.9); }
+    .es-card span:not(.es-thumb) { display: flex; flex-direction: column; min-width: 0; }
+    .es-card strong { font-family: var(--display); font-weight: 600; font-size: 0.96rem; color: var(--mist); }
+    .es-card em { font-style: normal; font-size: 0.8rem; color: var(--faint); margin-top: 2px; }
+  </style>
+</Base>

@@ -1,0 +1,101 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+
+const jsonLd = {
+  '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Inicio', item: `${SITE.url}/es` },
+    { '@type': 'ListItem', position: 2, name: 'Guía para principiantes', item: `${SITE.url}/es/beginner-guide` },
+  ],
+};
+---
+<Base
+  title="Moonlight Peaks — Guía para Principiantes Antes del Lanzamiento"
+  description="Guía para principiantes de Moonlight Peaks antes del lanzamiento: el ciclo de cultivo nocturno, poderes de vampiro, las siete familias, romance, pesca, pociones y Nokturna."
+  path="/es/beginner-guide"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Guía para principiantes' }]}
+  lang="es"
+  showExport
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Entrada · Guía</p>
+      <h1>Guía para <em>principiantes</em> de Moonlight Peaks</h1>
+      <p class="intro">
+        Lo que sabemos hasta ahora, recopilado de la demo y los tráilers oficiales. El {GAME.releaseLabel}
+        esto se convertirá en una guía completa del primer día con cifras exactas. Actualizado {SITE.updated}.
+      </p>
+
+      <h2>Lista para empezar</h2>
+      <ol class="steps">
+        <li><strong>Confirma tu plataforma.</strong> Revisa la compatibilidad con Steam, Switch, Switch 2, Steam Deck, Mac y Android antes de planear tu primera partida.</li>
+        <li><strong>Prueba la demo gratuita.</strong> Úsala para probar los controles, la creación de personaje, la pesca, los arreglos florales, el bordado y el tono general del juego.</li>
+        <li><strong>Aprende el ciclo nocturno.</strong> Moonlight Peaks es un cozy life-sim, pero el horario de vampiro cambia cómo piensas la agricultura.</li>
+        <li><strong>Elige un primer enfoque.</strong> Agricultura, relaciones, decoración, pesca, magia y Nokturna — todo se conecta en distintos grupos de guías.</li>
+      </ol>
+
+      <h2>El bucle principal</h2>
+      <p>
+        Heredas una propiedad familiar en ruinas y la reconstruyes como una granja cozy-gótica. Los días
+        giran en torno a cuidar <strong>cultivos místicos</strong>, criar <strong>ganado mágico</strong>,
+        y usar magia — regaderas encantadas y hechizos — para trabajar la tierra. A diferencia de otros
+        juegos del género, aquí se cultiva de noche, algo que encaja con tu estilo de vida de vampiro.
+      </p>
+
+      <h2>Qué harás en el juego</h2>
+      <ul>
+        <li><strong>Agricultura y ganado</strong> — cultiva plantas encantadas y cría criaturas únicas del pueblo.</li>
+        <li><strong>Hechizos y pociones</strong> — estudia brujería para ayudarte en la granja y al recolectar.</li>
+        <li><strong>Pesca y recolección</strong> — la clásica recolección cozy, con un giro sobrenatural.</li>
+        <li><strong>Cocina</strong> — convierte tu cosecha en comidas y brebajes.</li>
+        <li><strong>Bordado y arreglos florales</strong> — actividades pausadas mostradas en la demo.</li>
+        <li><strong>Nokturna</strong> — colecciona cartas y juega el juego favorito del pueblo contra los residentes.</li>
+        <li><strong>Diseño del hogar</strong> — decora una cabaña gótica (elige el ataúd perfecto) y desarrolla tu propiedad.</li>
+      </ul>
+
+      <h2>Ser un vampiro</h2>
+      <p>
+        Tu linaje es una herramienta, no solo una estética. Puedes <strong>cambiar de forma</strong> —
+        convertirte en murciélago para cruzar el pueblo rápidamente y llegar a zonas ocultas — y
+        desbloquear habilidades ancestrales a medida que avanzas. Hay una zona de minas que explorar,
+        pero ten en cuenta que <strong>no hay combate en ninguna parte</strong>, así que todo se mantiene
+        tranquilo. Muchos residentes también son sobrenaturales, así que encajarás perfectamente.
+      </p>
+
+      <h2>El pueblo y su gente</h2>
+      <p>
+        Moonlight Peaks es hogar de siete familias entre humanos y criaturas de la noche —
+        hombres lobo, brujas, sirenas y más, con la Muerte misma entre los personajes destacados.
+        Hacerte amigo de ellos y conquistarlos es un pilar central; nuestra
+        <a href="/romance">entrada de romance y familias</a> irá registrando cada candidato y sus
+        preferencias de regalo en el lanzamiento.
+      </p>
+
+      <h2>Qué no preocuparte antes del lanzamiento</h2>
+      <p>
+        No persigas todavía rutas exactas de optimización. Hasta que la versión completa esté
+        disponible, las ganancias de cultivos, el valor de los regalos, la aparición de peces, los
+        precios de recetas, las recompensas de misiones y los horarios de los residentes deben
+        tratarse como datos que llegarán en el lanzamiento. Lo útil ahora es aprender los sistemas y
+        guardar las páginas de referencia correctas.
+      </p>
+
+      <h2>Mejores páginas siguientes según tu objetivo</h2>
+      <table class="facts">
+        <tr><th>Si quieres jugar el primer día</th><td><a href="/release-date">Fecha de lanzamiento</a>, <a href="/demo">guía de la demo</a> y <a href="/platforms">guía de plataformas</a></td></tr>
+        <tr><th>Si quieres romance</th><td><a href="/romance">Guía de romance</a>, <a href="/characters">personajes</a> y <a href="/characters/saga">Saga</a></td></tr>
+        <tr><th>Si quieres agricultura</th><td><a href="/farming">Guía de agricultura</a>, <a href="/magic">magia</a> y <a href="/activities">actividades</a></td></tr>
+        <tr><th>Si quieres coleccionar</th><td><a href="/activities/fishing">pesca</a>, <a href="/activities/foraging">recolección</a>, <a href="/locations">ubicaciones</a> y el <a href="/map">mapa</a></td></tr>
+      </table>
+
+      <div class="callout wip">
+        Entrada previa al lanzamiento. Los precios exactos de cultivos, listas de peces, tablas de
+        regalos y comandos de trucos no se pueden saber hasta que el juego completo salga el
+        {GAME.releaseLabel} — los añadiremos rápido. Los enlaces de esta página llevan a las versiones
+        en inglés de esas guías hasta que estén disponibles en español. ¿Encontraste algo que agregar?
+        Escríbenos a {SITE.contact}.
+      </div>
+    </div>
+  </article>
+</Base>

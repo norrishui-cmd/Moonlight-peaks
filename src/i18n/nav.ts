@@ -1,0 +1,41 @@
+// Shared UI strings for site-wide chrome (nav, search, common buttons). Content pages
+// (articles, character bios, FAQ answers) are translated separately in their own files —
+// this dictionary only covers the repeating interface text that appears on every page.
+export type Locale = 'en' | 'es' | 'ja' | 'zh';
+
+export const uiStrings: Record<Locale, Record<string, string>> = {
+  en: {
+    characters: 'Characters', families: 'Families', romance: 'Romance',
+    tools: 'Tools', faq: 'FAQ', about: 'About',
+    guides: 'Guides', allGuides: 'All guides', release: 'Release', demo: 'Demo', platforms: 'Platforms',
+    world: 'World', locations: 'Locations', activities: 'Activities', items: 'Items',
+    search: 'Search', searchPlaceholder: 'Search characters, guides, FAQ, items…',
+    home: 'Home', notFound: 'Not found',
+  },
+  es: {
+    characters: 'Personajes', families: 'Familias', romance: 'Romance',
+    tools: 'Herramientas', faq: 'Preguntas frecuentes', about: 'Acerca de',
+    guides: 'Guías', allGuides: 'Todas las guías', release: 'Lanzamiento', demo: 'Demo', platforms: 'Plataformas',
+    world: 'Mundo', locations: 'Ubicaciones', activities: 'Actividades', items: 'Objetos',
+    search: 'Buscar', searchPlaceholder: 'Busca personajes, guías, preguntas, objetos…',
+    home: 'Inicio', notFound: 'No encontrado',
+  },
+  ja: {
+    characters: 'キャラクター', families: '家族', romance: '恋愛',
+    tools: 'ツール', faq: 'よくある質問', about: 'このサイトについて',
+    guides: 'ガイド', allGuides: 'すべてのガイド', release: 'リリース', demo: '体験版', platforms: '対応機種',
+    world: '世界', locations: 'ロケーション', activities: 'アクティビティ', items: 'アイテム',
+    search: '検索', searchPlaceholder: 'キャラクター、ガイド、FAQ、アイテムを検索…',
+    home: 'ホーム', notFound: 'ページが見つかりません',
+  },
+  zh: {
+    characters: '角色', families: '家族', romance: '恋爱',
+    tools: '工具', faq: '常见问题', about: '关于本站',
+    guides: '攻略', allGuides: '全部攻略', release: '发售', demo: '试玩版', platforms: '平台',
+    world: '世界', locations: '地点', activities: '活动', items: '物品',
+    search: '搜索', searchPlaceholder: '搜索角色、攻略、常见问题、物品…',
+    home: '首页', notFound: '页面未找到',
+  },
+};
+
+export const t = (lang: Locale, key: string): string => uiStrings[lang]?.[key] ?? uiStrings.en[key] ?? key;
