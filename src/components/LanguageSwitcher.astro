@@ -7,7 +7,7 @@ const { lang, path } = Astro.props;
 const labels: Record<Locale, string> = { en: 'EN', es: 'ES', ja: '日本語', zh: '中文' };
 // Only pages in this set exist in translated form so far. Falls back to the English
 // version of the current page for any locale/page combo not yet translated.
-const translatedPaths = new Set<string>(['/', '/beginner-guide']);
+const translatedPaths = new Set<string>(['/', '/beginner-guide', '/release-date', '/faq']);
 const bare = path.replace(/^\/(es|ja|zh)(\/|$)/, '/');
 const isTranslated = translatedPaths.has(bare);
 

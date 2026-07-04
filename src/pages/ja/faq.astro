@@ -1,0 +1,60 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+
+const faq = [
+  { q: 'Moonlight Peaksで結婚はできますか?', a: 'はい、結婚は確定している要素です。住民に求愛し、共に暮らすことができます。' },
+  { q: 'Moonlight Peaksで子供は持てますか?', a: 'いいえ——子供が登場しないことは確定事項として発表されており、単なる未実装要素ではありません。' },
+  { q: 'Moonlight Peaksに戦闘はありますか?', a: '鉱山エリアを含め、これまで公開されたどのエリアでも戦闘は確認されていません。戦闘システムのないコージーなライフシムです。' },
+  { q: '恋愛対象は何人いますか?', a: 'Steamのストアページでは、恋愛対象になれる住民が約2ダース(24人前後)と説明されています。以前の報道では15人とされていたため、開発の過程で人数が増えたようです。' },
+  { q: '人狼と恋愛関係になれますか?', a: 'はい——サーガは開発元が発表した確定の恋愛対象で、満月とともにエネルギーが変化する人狼の住民です。' },
+  { q: 'Moonlight Peaksは恋愛シミュレーションゲームですか?', a: '主にはそうではありません——Stardew Valleyのようなコージーな農業・ライフシムが本質で、恋愛や結婚は農業、魔法、インテリア、探索と並ぶシステムの一つです。' },
+  { q: 'Moonlight Peaksにお店はありますか?', a: '発売前のデータマイニングにより町にいくつかの店舗があることが分かっており、あるプレイヤーは種や装飾品を売る行商人について報告しています。お店のシステムがどう機能するかは、まだ完全には確定していません。' },
+  { q: 'Moonlight Peaksのレーティングは何歳ですか?', a: '現時点ではESRBによるレーティングはまだ発表されていません。戦闘がなくコージー・ゴシックなトーンであることから、低い年齢区分になる可能性が高いですが、公式発表があり次第更新します。' },
+  { q: '恋愛を一切せずにプレイできますか?', a: 'ほぼ間違いなく可能です。このジャンルのゲームでは恋愛は基本的にオプション要素であり、Moonlight Peaksが例外である様子はありません——恋愛関係を追わずに、農業やインテリア、探索を楽しむことができます。' },
+  { q: 'Moonlight Peaksはモバイルにも来ますか?', a: 'はい——発売日当日にGoogle Play経由でAndroid版が配信されます。iOS/iPhone版は発表されていません。' },
+  { q: 'Moonlight Peaksにローカルまたはオンラインの協力プレイはありますか?', a: '協力プレイモードは発表されていません。現時点の情報はすべて、Moonlight Peaksがシングルプレイヤー専用であることを示しています。' },
+  { q: '恋愛はジェンダーニュートラルですか?', a: 'はい——キャラクターモデルは意図的にジェンダーニュートラルに設計されており、自分の吸血鬼キャラクターをどう作成しても、条件を満たすどの住民とも恋愛関係になれます。' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'ホーム', item: `${SITE.url}/ja` },
+    { '@type': 'ListItem', position: 2, name: 'よくある質問', item: `${SITE.url}/ja/faq` },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks — よくある質問(FAQ)"
+  description="Moonlight Peaksに関するよくある質問への回答:結婚、子供、戦闘、恋愛、お店、年齢レーティングについて。"
+  path="/ja/faq"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'よくある質問' }]}
+  lang="ja"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">エントリー・FAQ</p>
+      <h1>よくある<em>質問</em></h1>
+      <p class="intro">
+        {GAME.title}に関してよく聞かれる質問に、正直にお答えします。何が確定していて、何がまだ
+        確定していないかを明確に区別しています。最終更新:{SITE.updated}。
+      </p>
+
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        これは検索の多い質問を厳選し、日本語に翻訳したものです。50件を超える全質問一覧は、まだ英語版の
+        <a href="/faq">FAQページ</a>のみでご覧いただけます——日本語版は今後少しずつ拡充していく予定です。
+      </div>
+    </div>
+  </article>
+</Base>

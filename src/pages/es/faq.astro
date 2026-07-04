@@ -1,0 +1,62 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+
+const faq = [
+  { q: '¿Puedes casarte en Moonlight Peaks?', a: 'Sí, el matrimonio está confirmado como una función del juego. Puedes cortejar a un residente y establecerte con él o ella.' },
+  { q: '¿Puedes tener hijos en Moonlight Peaks?', a: 'No — está confirmado que no hay hijos en el juego, no es simplemente algo que falte por implementar.' },
+  { q: '¿Hay combate en Moonlight Peaks?', a: 'No se ha visto combate en ninguna zona mostrada hasta ahora, incluida la zona de minas. Es un cozy life-sim sin sistemas de combate.' },
+  { q: '¿Cuántas opciones de romance hay?', a: 'La página de Steam describe alrededor de dos docenas (unos 24) de residentes conquistables. La cobertura anterior mencionaba 15, así que el elenco creció durante el desarrollo.' },
+  { q: '¿Puedes tener una relación con un hombre lobo?', a: 'Sí — Saga es una opción de romance confirmada por los desarrolladores, y es una residente hombre lobo cuya energía cambia con la luna llena.' },
+  { q: '¿Moonlight Peaks es un dating sim?', a: 'No principalmente — es ante todo un cozy farming y life-sim, al estilo de Stardew Valley, donde las citas y el matrimonio son un sistema más entre varios (agricultura, magia, decoración, exploración).' },
+  { q: '¿Hay tiendas en Moonlight Peaks?', a: 'Archivos del juego filtrados antes del lanzamiento mencionan varias tiendas en el pueblo, y un jugador describió un mercader ambulante que vende semillas y decoración. Aún no está confirmado del todo cómo funciona el sistema de tiendas.' },
+  { q: '¿Qué clasificación de edad tiene Moonlight Peaks?', a: 'Hasta donde sabemos, todavía no ha sido clasificado por la ESRB. Dado que no hay combate y el tono es cozy-gótico, es probable que reciba una clasificación de edad baja, pero lo actualizaremos en cuanto se confirme oficialmente.' },
+  { q: '¿Puedes jugar sin tener ningún romance?', a: 'Casi con toda seguridad sí. Todos los juegos de este estilo tratan el romance como opcional, y nada sugiere que Moonlight Peaks sea diferente — puedes cultivar, decorar y explorar sin perseguir ninguna relación.' },
+  { q: '¿Moonlight Peaks llega a móviles?', a: 'Sí — en Android, a través de Google Play, el mismo día del lanzamiento. No se ha anunciado una versión para iOS/iPhone.' },
+  { q: '¿Moonlight Peaks tiene cooperativo local u online?', a: 'No se ha anunciado ningún modo cooperativo. Toda la información actual apunta a que Moonlight Peaks es un juego para un solo jugador.' },
+  { q: '¿El romance es neutral en cuanto al género?', a: 'Sí — los modelos de personaje son deliberadamente neutrales en género, por lo que puedes conquistar a cualquier residente elegible sin importar cómo construyas a tu propio vampiro.' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Inicio', item: `${SITE.url}/es` },
+    { '@type': 'ListItem', position: 2, name: 'Preguntas frecuentes', item: `${SITE.url}/es/faq` },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks — Preguntas Frecuentes (FAQ)"
+  description="Respuestas a las preguntas más comunes sobre Moonlight Peaks: matrimonio, hijos, combate, romance, tiendas y clasificación de edad."
+  path="/es/faq"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Preguntas frecuentes' }]}
+  lang="es"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Entrada · FAQ</p>
+      <h1>Preguntas <em>frecuentes</em></h1>
+      <p class="intro">
+        Respuestas rápidas y honestas a las preguntas que más se repiten sobre {GAME.title}. Marcamos
+        claramente qué está confirmado y qué todavía no. Última actualización: {SITE.updated}.
+      </p>
+
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        Esta es una selección de las preguntas más buscadas, traducida al español. La lista completa
+        de preguntas frecuentes (más de 50) todavía está solo en inglés en
+        <a href="/faq">nuestra página de FAQ completa</a> — iremos ampliando la versión en español
+        con el tiempo.
+      </div>
+    </div>
+  </article>
+</Base>

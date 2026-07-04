@@ -1,0 +1,95 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+import YouTube from '../../components/YouTube.astro';
+
+const faq = [
+  { q: 'Moonlight Peaks 什么时候发售?', a: `Moonlight Peaks 预计在 ${GAME.releaseLabel} 左右于 Steam、Nintendo Switch、Nintendo Switch 2 及 Google Play(Android)同步发售。` },
+  { q: 'Moonlight Peaks 多少钱?', a: `Steam(PC/Mac)、Switch 和 Android 版售价 ${GAME.price},Switch 2 版售价 $39.99,${GAME.launchDiscount}。` },
+  { q: 'Moonlight Peaks 有试玩版吗?', a: '有。Steam(PC/Mac)和 Nintendo Switch eShop(Switch 2 同样可玩)上都有免费试玩版,包含角色创建、钓鱼、插花和刺绣内容。' },
+  { q: 'Moonlight Peaks 能在主机上玩吗?', a: '可以——除了 PC 和 Android,还会同步登陆 Nintendo Switch 与 Switch 2。Switch 试玩版在 Switch 2 上同样可以运行。' },
+  { q: 'Moonlight Peaks 支持多人游戏吗?', a: 'Moonlight Peaks 是一款专注于耕种、社交关系和小镇谜团的单人温馨生活模拟游戏,目前没有公布联机合作模式。' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '首页', item: `${SITE.url}/zh` },
+    { '@type': 'ListItem', position: 2, name: '发售日期', item: `${SITE.url}/zh/release-date` },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks 发售日期 — Steam、Switch 与 PC"
+  description="Moonlight Peaks 在 Steam、Switch、Switch 2 与 Android 上的发售日期攻略:试玩版、价格、配置需求与语言支持。"
+  path="/zh/release-date"
+  jsonLd={jsonLd}
+  crumbs={[{ label: '发售日期' }]}
+  lang="zh"
+  showExport
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">词条 · 发售信息</p>
+      <h1>Moonlight Peaks <em>发售日期</em> —— Switch、Switch 2 与 PC</h1>
+      <p class="intro">
+        关于 {GAME.title} 发售的全部确认信息——具体日期、能在哪玩、价格,以及现在就能试玩的免费 demo。
+        最后更新:{SITE.updated}。
+      </p>
+
+      <YouTube id="VL_15TiRRAM" title="Moonlight Peaks release date trailer" />
+
+      <h2>基本信息</h2>
+      <table class="facts">
+        <tr><th>发售日期</th><td>{GAME.releaseLabel}</td></tr>
+        <tr><th>平台</th><td>{GAME.platforms.join(' · ')}</td></tr>
+        <tr><th>价格</th><td>{GAME.price}(Switch 2 版:$39.99)· {GAME.launchDiscount}</td></tr>
+        <tr><th>试玩版</th><td>{GAME.demo}</td></tr>
+        <tr><th>开发商</th><td>{GAME.developer}</td></tr>
+        <tr><th>发行商</th><td>{GAME.publisher}(美洲地区)· Marvelous Europe(欧洲地区)</td></tr>
+        <tr><th>玩家人数</th><td>单人温馨生活模拟游戏</td></tr>
+      </table>
+
+      <h2>Moonlight Peaks 是一款什么样的游戏?</h2>
+      <p>
+        Moonlight Peaks 是一款哥特温馨风生活模拟游戏,你将扮演一名吸血鬼(德古拉伯爵之子/女),
+        在一座住满狼人、女巫、美人鱼等夜之生物的小镇里,安顿进家族废弃已久的祖宅。你会种植神秘作物、
+        饲养魔法家畜、学习法术与炼药,并和镇上居民交朋友甚至谈恋爱——同时向你那位心存怀疑的父亲证明,
+        身为不死族也能过上更温柔的生活。
+      </p>
+
+      <h2>发售前先玩玩试玩版</h2>
+      <p>
+        判断 {GAME.title} 是否合你口味,免费试玩版是最好的方式。它能让你体验角色创建,以及钓鱼、插花、
+        刺绣等一系列惬意的活动,还能提前和镇上居民打个照面。试玩版进度不会带入正式版,但足以真实体验到
+        游戏每日循环的基本玩法。
+      </p>
+
+      <h2>购买前值得确认的几件事</h2>
+      <p>
+        购买前最值得确认的是平台、配置需求、语言支持,以及试玩版在你的设备上运行是否流畅。这几个页面
+        一直保持保守的态度,只引用官方商店页面的真实信息,不会为了内容而编造发售细节。
+      </p>
+      <ul>
+        <li><a href="/system-requirements">配置需求</a>——PC、Mac 和 Steam Deck 的具体要求。</li>
+        <li><a href="/languages">语言支持</a>——英语、德语、日语、韩语、简体中文与繁体中文。</li>
+        <li><a href="/platforms">平台攻略</a>——Steam、Switch、Switch 2、Steam Deck 与 Android。</li>
+      </ul>
+
+      <h2>常见问题</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        这个页面用中文汇总了发售相关的核心信息。试玩体验感想、媒体评测和更详细的攻略文章目前还只有英文版——
+        可以先去<a href="/previews">文章列表页</a>(英文)看看,其余内容我们会分批继续翻译。
+      </div>
+    </div>
+  </article>
+</Base>
