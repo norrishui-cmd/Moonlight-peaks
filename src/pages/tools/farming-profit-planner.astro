@@ -1,0 +1,175 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: SITE.url },
+      { '@type': 'ListItem', position: 2, name: 'Tools', item: new URL('/tools', SITE.url).href },
+      { '@type': 'ListItem', position: 3, name: 'Farming Profit Planner', item: new URL('/tools/farming-profit-planner', SITE.url).href },
+    ],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebApplication',
+    name: 'Moonlight Peaks Farming Profit Planner',
+    applicationCategory: 'GameApplication',
+    operatingSystem: 'Web',
+    url: new URL('/tools/farming-profit-planner', SITE.url).href,
+    description: 'A Moonlight Peaks crop profit calculator for seed price, sell price, growth days, repeat harvests, and fertilizer planning.',
+  },
+];
+---
+<Base
+  title="Moonlight Peaks Farming Profit Planner - Crop Calculator & Best Crops"
+  description="Plan Moonlight Peaks crop profits with a launch-ready farming calculator. Compare seed price, sell price, grow days, harvest count, and fertilizer assumptions."
+  path="/tools/farming-profit-planner"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Tools', href: '/tools' }, { label: 'Farming Profit Planner' }]}
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Tool / Farming planner</p>
+      <h1>Moonlight Peaks <em>farming profit planner</em></h1>
+      <p class="intro">
+        Compare crops by profit per night once real {GAME.title} prices are known. Until launch data is verified,
+        use the manual fields below to test scenarios without pretending unknown crop values are final.
+      </p>
+
+      <section class="profit-tool" data-profit-tool>
+        <form class="profit-form">
+          <label><span>Crop name</span><input data-crop value="To be confirmed crop" /></label>
+          <label><span>Seed price</span><input data-seed type="number" min="0" value="0" /></label>
+          <label><span>Sell price per harvest</span><input data-sell type="number" min="0" value="0" /></label>
+          <label><span>Growth days</span><input data-days type="number" min="1" value="1" /></label>
+          <label><span>Harvest count</span><input data-harvests type="number" min="1" value="1" /></label>
+          <label><span>Extra cost</span><input data-extra type="number" min="0" value="0" /></label>
+          <button type="button" class="btn btn-primary" data-add>Add comparison</button>
+        </form>
+
+        <aside class="profit-result">
+          <span class="result-kicker">Current estimate</span>
+          <h2 data-profit>0</h2>
+          <p data-profit-copy>Enter prices after launch to calculate total profit and profit per day.</p>
+        </aside>
+      </section>
+
+      <h2>Crop comparisons</h2>
+      <div class="profit-table-wrap">
+        <table class="profit-table">
+          <thead>
+            <tr>
+              <th>Crop</th>
+              <th>Seed</th>
+              <th>Sell</th>
+              <th>Days</th>
+              <th>Harvests</th>
+              <th>Total profit</th>
+              <th>Profit/day</th>
+            </tr>
+          </thead>
+          <tbody data-rows>
+            <tr><td colspan="7">Add crops after launch data is available.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout">
+        Safe data rule: crop names, seed prices, sell values, growth time, fertilizer effects, and regrowth rules
+        should be verified from live gameplay or official materials before being treated as guide content.
+      </div>
+    </div>
+  </article>
+
+  <script>
+    const root = document.querySelector('[data-profit-tool]');
+    const rowsEl = document.querySelector('[data-rows]');
+    if (root && rowsEl) {
+      const els = {
+        crop: root.querySelector('[data-crop]'),
+        seed: root.querySelector('[data-seed]'),
+        sell: root.querySelector('[data-sell]'),
+        days: root.querySelector('[data-days]'),
+        harvests: root.querySelector('[data-harvests]'),
+        extra: root.querySelector('[data-extra]'),
+        add: root.querySelector('[data-add]'),
+        profit: root.querySelector('[data-profit]'),
+        copy: root.querySelector('[data-profit-copy]'),
+      };
+      const key = 'moonlight-farming-planner-v1';
+      let rows = JSON.parse(localStorage.getItem(key) || '[]');
+      const num = (el) => Math.max(0, Number(el.value || 0));
+      const calc = () => {
+        const seed = num(els.seed);
+        const sell = num(els.sell);
+        const days = Math.max(1, num(els.days));
+        const harvests = Math.max(1, num(els.harvests));
+        const extra = num(els.extra);
+        const totalRevenue = sell * harvests;
+        const totalProfit = totalRevenue - seed - extra;
+        const perDay = totalProfit / days;
+        els.profit.textContent = Math.round(totalProfit).toString();
+        els.copy.textContent = `${perDay.toFixed(2)} profit per day over ${days} day(s).`;
+        return { crop: els.crop.value || 'To be confirmed crop', seed, sell, days, harvests, totalProfit, perDay };
+      };
+      const renderRows = () => {
+        rowsEl.innerHTML = rows.length ? rows.map((r) => `
+          <tr>
+            <td>${r.crop}</td>
+            <td>${r.seed}</td>
+            <td>${r.sell}</td>
+            <td>${r.days}</td>
+            <td>${r.harvests}</td>
+            <td>${Math.round(r.totalProfit)}</td>
+            <td>${Number(r.perDay).toFixed(2)}</td>
+          </tr>
+        `).join('') : '<tr><td colspan="7">Add crops after launch data is available.</td></tr>';
+      };
+      const save = () => localStorage.setItem(key, JSON.stringify(rows.slice(-12)));
+      root.addEventListener('input', calc);
+      els.add.addEventListener('click', () => {
+        rows.push(calc());
+        save();
+        renderRows();
+      });
+      calc();
+      renderRows();
+    }
+  </script>
+
+  <style>
+    .profit-tool { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 18px; margin: 28px 0; }
+    @media (max-width: 820px) { .profit-tool { grid-template-columns: 1fr; } }
+    .profit-form, .profit-result {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--surface);
+      padding: 18px;
+    }
+    .profit-form { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    @media (max-width: 640px) { .profit-form { grid-template-columns: 1fr; } }
+    .profit-form label span { display: block; margin-bottom: 6px; color: var(--mist); font-weight: 600; }
+    .profit-form input {
+      width: 100%;
+      min-height: 44px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: var(--ink);
+      color: var(--mist);
+      padding: 0 12px;
+      font: inherit;
+    }
+    .profit-form button { grid-column: 1 / -1; justify-content: center; }
+    .result-kicker { font-family: var(--mono); color: var(--candle); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; }
+    .profit-result h2 { font-size: 3rem; margin: 8px 0; }
+    .profit-result p { color: var(--muted); }
+    .profit-table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); }
+    .profit-table { width: 100%; min-width: 720px; border-collapse: collapse; }
+    .profit-table th, .profit-table td { border-bottom: 1px solid var(--line); padding: 10px 12px; text-align: left; }
+    .profit-table th { color: var(--candle); font-family: var(--mono); font-size: 0.68rem; text-transform: uppercase; }
+    .profit-table tr:last-child td { border-bottom: 0; }
+  </style>
+</Base>

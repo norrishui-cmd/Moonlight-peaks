@@ -1,0 +1,169 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: SITE.url },
+      { '@type': 'ListItem', position: 2, name: 'Tools', item: new URL('/tools', SITE.url).href },
+      { '@type': 'ListItem', position: 3, name: 'Submit Data', item: new URL('/tools/submit-data', SITE.url).href },
+    ],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebApplication',
+    name: 'Moonlight Peaks Data Submitter',
+    applicationCategory: 'GameApplication',
+    operatingSystem: 'Web',
+    url: new URL('/tools/submit-data', SITE.url).href,
+    description: 'A local Moonlight Peaks data submission draft tool for launch-week item, recipe, location, gift, and bug discoveries.',
+  },
+];
+---
+<Base
+  title="Moonlight Peaks Data Submitter - Share Fish, Items, Gifts, Recipes & Bugs"
+  description="Draft Moonlight Peaks launch data submissions for fish, critters, recipes, potions, gifts, locations, shops, bugs, and other verified discoveries."
+  path="/tools/submit-data"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Tools', href: '/tools' }, { label: 'Submit Data' }]}
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Tool / Community data</p>
+      <h1>Moonlight Peaks <em>data submitter</em></h1>
+      <p class="intro">
+        Prepare launch-week discoveries for manual review: fish, critters, recipes, potions, NPC gifts, shops,
+        locations, bugs, and platform notes. Nothing is published automatically.
+      </p>
+
+      <section class="submit-shell" data-submit-tool>
+        <form class="submit-form">
+          <label>
+            <span>Data type</span>
+            <select name="type">
+              <option>Fish</option>
+              <option>Critter</option>
+              <option>Recipe</option>
+              <option>Potion</option>
+              <option>NPC gift</option>
+              <option>Location</option>
+              <option>Shop</option>
+              <option>Bug or issue</option>
+              <option>Other</option>
+            </select>
+          </label>
+          <label><span>Name or title</span><input name="name" placeholder="Example: To be confirmed" /></label>
+          <label><span>Location / source</span><input name="location" placeholder="Where you found it" /></label>
+          <label><span>Season / time / weather</span><input name="conditions" placeholder="If relevant" /></label>
+          <label><span>Price / value / effect</span><input name="value" placeholder="If visible in-game" /></label>
+          <label><span>Evidence note</span><input name="evidence" placeholder="Screenshot, official post, or live-game observation" /></label>
+          <label class="wide"><span>Notes</span><textarea name="notes" rows="5" placeholder="Add exact wording, recipe ingredients, character reaction, bug steps, or other details."></textarea></label>
+          <button type="button" class="btn btn-primary" data-save>Save draft locally</button>
+        </form>
+
+        <aside class="review-card">
+          <span>Review policy</span>
+          <h2>Manual review only</h2>
+          <p>
+            Drafts are stored in your browser and can be exported. Publish only after checking official sources,
+            live-game screenshots, or repeatable in-game evidence.
+          </p>
+          <button type="button" class="btn btn-ghost" data-export>Export JSON</button>
+        </aside>
+      </section>
+
+      <h2>Saved drafts</h2>
+      <div class="draft-list" data-drafts></div>
+
+      <div class="callout">
+        Recommended source rule: cite official channels, storefronts, or neutral social posts when possible. Do
+        not cite competing wiki pages as the source for published data.
+      </div>
+    </div>
+  </article>
+
+  <script>
+    const root = document.querySelector('[data-submit-tool]');
+    const draftsEl = document.querySelector('[data-drafts]');
+    if (root && draftsEl) {
+      const key = 'moonlight-data-drafts-v1';
+      const form = root.querySelector('.submit-form');
+      const saveButton = root.querySelector('[data-save]');
+      const exportButton = root.querySelector('[data-export]');
+      let drafts = JSON.parse(localStorage.getItem(key) || '[]');
+
+      const save = () => localStorage.setItem(key, JSON.stringify(drafts));
+      const render = () => {
+        draftsEl.innerHTML = drafts.length ? drafts.map((draft, index) => `
+          <article class="draft-card">
+            <span>${draft.type}</span>
+            <h3>${draft.name || 'Untitled draft'}</h3>
+            <p>${draft.notes || 'No notes yet.'}</p>
+            <small>${draft.location || 'Location pending'} - ${draft.evidence || 'Evidence pending'}</small>
+            <button type="button" data-delete="${index}">Delete</button>
+          </article>
+        `).join('') : '<p class="empty">No local drafts yet.</p>';
+      };
+
+      saveButton.addEventListener('click', () => {
+        const data = Object.fromEntries(new FormData(form).entries());
+        data.createdAt = new Date().toISOString();
+        drafts.unshift(data);
+        drafts = drafts.slice(0, 25);
+        save();
+        form.reset();
+        render();
+      });
+      draftsEl.addEventListener('click', (event) => {
+        const button = event.target.closest('button[data-delete]');
+        if (!button) return;
+        drafts.splice(Number(button.dataset.delete), 1);
+        save();
+        render();
+      });
+      exportButton.addEventListener('click', async () => {
+        const text = JSON.stringify(drafts, null, 2);
+        await navigator.clipboard.writeText(text);
+        exportButton.textContent = 'Copied JSON';
+        setTimeout(() => { exportButton.textContent = 'Export JSON'; }, 1600);
+      });
+      render();
+    }
+  </script>
+
+  <style>
+    .submit-shell { display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 18px; margin: 28px 0; }
+    @media (max-width: 860px) { .submit-shell { grid-template-columns: 1fr; } }
+    .submit-form, .review-card, .draft-card, .empty {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--surface);
+    }
+    .submit-form { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; padding: 18px; }
+    @media (max-width: 640px) { .submit-form { grid-template-columns: 1fr; } }
+    .submit-form .wide, .submit-form button { grid-column: 1 / -1; }
+    .submit-form span { display: block; margin-bottom: 6px; color: var(--mist); font-weight: 600; }
+    .submit-form input, .submit-form select, .submit-form textarea {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: var(--ink);
+      color: var(--mist);
+      padding: 11px 12px;
+      font: inherit;
+    }
+    .review-card { padding: 18px; align-self: start; }
+    .review-card > span { font-family: var(--mono); color: var(--candle); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; }
+    .review-card p { color: var(--muted); }
+    .draft-list { display: grid; gap: 10px; }
+    .draft-card, .empty { padding: 14px; }
+    .draft-card span { color: var(--candle); font-family: var(--mono); font-size: 0.68rem; text-transform: uppercase; }
+    .draft-card h3 { margin: 5px 0; }
+    .draft-card p { color: var(--muted); margin: 0 0 8px; }
+    .draft-card small { color: var(--faint); }
+    .draft-card button { float: right; border: 1px solid var(--line); border-radius: 999px; background: transparent; color: var(--muted); padding: 4px 9px; cursor: pointer; }
+  </style>
+</Base>

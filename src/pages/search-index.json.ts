@@ -45,7 +45,10 @@ const staticPages: Doc[] = [
   { t: 'Known issues', d: 'Launch-week bug tracker for crashes, saves, controller issues, Steam Deck, Switch, and performance notes.', u: '/known-issues', k: 'Guide' },
   { t: 'Best settings', d: 'Safe settings checklist for PC, Mac, Steam Deck, Switch, Switch 2, controls, readability, and demo testing.', u: '/best-settings', k: 'Guide' },
   { t: 'Interactive map', d: 'The town, farm, forest, lake, mines and named spots.', u: '/map', k: 'Guide' },
-  { t: 'Tools', d: 'Platform picker and romance gift finder.', u: '/tools', k: 'Tool' },
+  { t: 'Tools', d: 'Platform picker, romance tools, item tracker, farming calculator, and data submitter.', u: '/tools', k: 'Tool' },
+  { t: 'Item Tracker', d: 'Track fish, critters, recipes, potions, artifacts, mineables, decorations, and other item categories.', u: '/tools/item-tracker', k: 'Tool' },
+  { t: 'Farming Profit Planner', d: 'Compare crop profit by seed price, sell price, growth days, harvests, and extra costs.', u: '/tools/farming-profit-planner', k: 'Tool' },
+  { t: 'Data Submitter', d: 'Save launch-week discovery drafts for items, gifts, recipes, locations, bugs, and shops before manual review.', u: '/tools/submit-data', k: 'Tool' },
   { t: 'Export guides to PDF', d: 'Pick any guides and export them together as one PDF.', u: '/export', k: 'Tool' },
   { t: 'About', d: 'About this independent fan guide and its accuracy tiers.', u: '/about', k: 'Page' },
 ];
