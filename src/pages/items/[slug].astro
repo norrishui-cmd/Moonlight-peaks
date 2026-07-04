@@ -1,7 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
 import { SITE, GAME } from '../../consts';
-import { itemCategories, itemLaunchNote } from '../../data/items';
+import { getItemFramework, itemCategories, itemLaunchNote } from '../../data/items';
 import type { ItemCategory } from '../../data/items';
 
 export function getStaticPaths() {
@@ -17,6 +17,7 @@ export function getStaticPaths() {
 
 const { item, prev, next } = Astro.props as { item: ItemCategory; prev: ItemCategory; next: ItemCategory };
 const url = new URL(`/items/${item.slug}`, SITE.url).href;
+const framework = getItemFramework(item.slug);
 const relatedCategories = itemCategories
   .filter((entry) => entry.slug !== item.slug && (entry.group === item.group || item.related.some((link) => link.href === `/items/${entry.slug}`)))
   .slice(0, 3);
@@ -69,6 +70,16 @@ const jsonLd = [
       <h2>Overview</h2>
       <p>{item.summary}</p>
 
+      <h2>Parameters to fill after launch</h2>
+      <div class="param-grid">
+        {framework.parameters.map((param) => (
+          <div class="param-card">
+            <span>{param.label}</span>
+            <strong>{param.value}</strong>
+          </div>
+        ))}
+      </div>
+
       <div class="item-grid">
         <section>
           <h2>What this category may include</h2>
@@ -84,6 +95,30 @@ const jsonLd = [
           </ul>
         </section>
       </div>
+
+      <h2>{item.name} data table</h2>
+      <p>
+        This table is intentionally structured before the full launch data is available. Unknown values are
+        marked as <strong>To be confirmed</strong> so the page can collect real values later without changing
+        the URL or inventing facts.
+      </p>
+      <div class="item-table-wrap">
+        <table class="item-data-table">
+          <thead>
+            <tr>
+              {framework.columns.map((column) => <th>{column}</th>)}
+            </tr>
+          </thead>
+          <tbody>
+            {framework.rows.map((row) => (
+              <tr>
+                {row.map((cell) => <td>{cell}</td>)}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="source-note"><strong>Source rule:</strong> {framework.sourceNote}</p>
 
       <h2>How players will use this page</h2>
       <p>
@@ -134,6 +169,24 @@ const jsonLd = [
     .itbadge.is-confirmed { color: #9be6b4; border: 1px solid #2f6a45; }
     .itbadge.is-expected { color: var(--candle); border: 1px solid var(--candle-dim); }
     .itbadge.is-datamined { color: #9ac6e0; border: 1px solid #2f5a70; }
+    .param-grid { display: grid; grid-template-columns: 1fr; gap: 10px; margin: 12px 0 22px; }
+    @media (min-width: 720px) { .param-grid { grid-template-columns: repeat(3, 1fr); } }
+    .param-card {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: var(--surface);
+      padding: 12px;
+    }
+    .param-card span {
+      display: block;
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--faint);
+      margin-bottom: 6px;
+    }
+    .param-card strong { color: #f0e9f6; font-size: 0.9rem; line-height: 1.45; }
     .item-grid { display: grid; grid-template-columns: 1fr; gap: 12px; margin: 14px 0 22px; }
     @media (min-width: 760px) { .item-grid { grid-template-columns: 1fr 1fr; } }
     .item-grid section {
@@ -143,6 +196,42 @@ const jsonLd = [
       padding: 14px;
     }
     .item-grid h2 { margin-top: 0; font-size: 1.1rem; }
+    .item-table-wrap {
+      overflow-x: auto;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: var(--surface);
+      margin: 12px 0;
+    }
+    .item-data-table {
+      width: 100%;
+      min-width: 760px;
+      border-collapse: collapse;
+      font-size: 0.84rem;
+    }
+    .item-data-table th,
+    .item-data-table td {
+      border-bottom: 1px solid var(--line);
+      padding: 10px 12px;
+      text-align: left;
+      vertical-align: top;
+    }
+    .item-data-table th {
+      color: var(--candle);
+      font-family: var(--mono);
+      font-size: 0.66rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      background: rgba(21, 16, 29, 0.58);
+      white-space: nowrap;
+    }
+    .item-data-table tr:last-child td { border-bottom: 0; }
+    .source-note {
+      border-left: 3px solid var(--candle-dim);
+      color: #ded3e6;
+      padding-left: 12px;
+      font-size: 0.88rem;
+    }
     .link-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; }
     .link-row a {
       border: 1px solid var(--line);
