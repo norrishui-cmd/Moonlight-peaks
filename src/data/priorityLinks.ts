@@ -12,6 +12,8 @@ export const homepagePriorityLinks: PriorityLink[] = [
   { label: 'Moonlight Peaks release date', href: '/release-date', note: 'Launch date, platforms, price, and demo status.' },
   { label: 'Moonlight Peaks demo guide', href: '/demo', note: 'Download, what is inside, and demo FAQ.' },
   { label: 'Moonlight Peaks platforms', href: '/platforms', note: 'Switch, Switch 2, Steam, Steam Deck, and Android.' },
+  { label: 'System requirements', href: '/system-requirements', note: 'PC, Mac, Steam Deck, and demo performance checks.' },
+  { label: 'Languages', href: '/languages', note: 'Japanese, Chinese, Korean, German, and English support.' },
   { label: 'Moonlight Peaks characters', href: '/characters', note: 'Known residents, families, profiles, and romance status.' },
   { label: 'Moonlight Peaks romance guide', href: '/romance', note: 'Marriage, dating, and the seven families.' },
   { label: 'Beginner guide', href: '/beginner-guide', note: 'What to know before starting the cozy vampire life sim.' },
@@ -21,6 +23,8 @@ export const homepagePriorityLinks: PriorityLink[] = [
 ];
 
 export const releasePriorityLinks: PriorityLink[] = [
+  { label: 'System requirements', href: '/system-requirements', note: 'PC, Mac, Steam Deck, and hardware checks.' },
+  { label: 'Languages', href: '/languages', note: 'Supported languages and launch verification.' },
   { label: 'Nintendo Switch', href: '/platforms/switch', note: 'Original Switch launch, price, and the demo.' },
   { label: 'Nintendo Switch 2', href: '/platforms/switch-2', note: 'Native Switch 2 edition, price, and upgrade notes.' },
   { label: 'Steam Deck', href: '/platforms/steam-deck', note: 'Portable PC play and verification status.' },
@@ -30,6 +34,8 @@ export const releasePriorityLinks: PriorityLink[] = [
 ];
 
 export const platformPriorityLinks: PriorityLink[] = [
+  { label: 'System requirements', href: '/system-requirements', note: 'Steam PC, Mac, and Steam Deck checks.' },
+  { label: 'Languages', href: '/languages', note: 'Storefront language support to verify before buying.' },
   { label: 'Nintendo Switch', href: '/platforms/switch', note: 'The highest-traffic platform question, answered.' },
   { label: 'Nintendo Switch 2', href: '/platforms/switch-2', note: 'Switch 2 edition pricing and upgrade notes.' },
   { label: 'Steam Deck', href: '/platforms/steam-deck', note: 'Deck play and verification expectations.' },

@@ -39,6 +39,8 @@ const staticPages: Doc[] = [
   { t: 'Behind the scenes', d: "What the dev team's own diaries reveal about making the game.", u: '/behind-the-scenes', k: 'Guide' },
   { t: 'Moonlight Peaks vs Stardew Valley', d: 'How the two cozy sims compare.', u: '/moonlight-peaks-vs-stardew-valley', k: 'Compare' },
   { t: 'Release date & platforms', d: 'When, where, price, and the free demo.', u: '/release-date', k: 'Guide' },
+  { t: 'System requirements', d: 'PC, Mac, Steam Deck, demo testing, and launch hardware checks.', u: '/system-requirements', k: 'Guide' },
+  { t: 'Languages', d: 'English, German, Japanese, Korean, Simplified Chinese, and Traditional Chinese support.', u: '/languages', k: 'Guide' },
   { t: 'Interactive map', d: 'The town, farm, forest, lake, mines and named spots.', u: '/map', k: 'Guide' },
   { t: 'Tools', d: 'Platform picker and romance gift finder.', u: '/tools', k: 'Tool' },
   { t: 'Export guides to PDF', d: 'Pick any guides and export them together as one PDF.', u: '/export', k: 'Tool' },

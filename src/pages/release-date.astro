@@ -7,7 +7,7 @@ import { previews } from '../data/previews';
 import { releasePriorityLinks } from '../data/priorityLinks';
 
 const faq = [
-  { q: 'When does Moonlight Peaks release?', a: `Moonlight Peaks launches on ${GAME.releaseLabel} on Steam, Nintendo Switch, Nintendo Switch 2, and Android via Google Play.` },
+  { q: 'When does Moonlight Peaks release?', a: `Moonlight Peaks launches around ${GAME.releaseLabel} on Steam, Nintendo Switch, Nintendo Switch 2, and Android via Google Play. ${GAME.releaseNote}` },
   { q: 'How much does Moonlight Peaks cost?', a: `It is ${GAME.price} on Steam (PC/Mac), Switch, and Android, and $39.99 on Switch 2, with ${GAME.launchDiscount}.` },
   { q: 'Is there a Moonlight Peaks demo?', a: 'Yes. A free demo is available on Steam (PC/Mac) and the Nintendo Switch eShop (also playable on Switch 2). It includes character creation, fishing, flower arranging, and embroidery.' },
   { q: 'Is Moonlight Peaks on console?', a: 'Yes — it launches on Nintendo Switch and Switch 2 alongside PC and Android. The Switch demo is playable on Switch 2.' },
@@ -23,8 +23,8 @@ const jsonLd = [
 ];
 ---
 <Base
-  title="Moonlight Peaks Release Date — Switch & PC (July 7, 2026)"
-  description="Moonlight Peaks releases July 7, 2026 on Switch, Switch 2, Steam, and Android. Price, the free demo, and what to expect at launch — all in one place."
+  title="Moonlight Peaks Release Date - Steam, Switch, PC & Android"
+  description="Moonlight Peaks release date guide for Steam, Switch, Switch 2, Android, demo access, price, system requirements, languages, and launch timing."
   path="/release-date"
   jsonLd={jsonLd}
   crumbs={[{ label: 'Release date' }]}
@@ -75,6 +75,20 @@ const jsonLd = [
         carry into the full game, but it is a faithful taste of the daily loop.
       </p>
 
+
+
+      <h2>Launch checks before you buy</h2>
+      <p>
+        The most useful pre-purchase checks are platform, system requirements, language support,
+        and whether the demo feels comfortable on your device. These pages stay conservative and
+        point back to official storefront data instead of inventing launch details.
+      </p>
+      <ul>
+        <li><a href="/system-requirements">System requirements</a> for PC, Mac, and Steam Deck checks.</li>
+        <li><a href="/languages">Languages</a> for English, German, Japanese, Korean, Simplified Chinese, and Traditional Chinese support.</li>
+        <li><a href="/platforms">Platforms</a> for Steam, Switch, Switch 2, Steam Deck, and Android.</li>
+      </ul>
+
       <h2>Demo impressions & player feedback</h2>
       <p>
         Want to know how the demo actually lands before you download it? We rounded up what players
@@ -94,7 +108,7 @@ const jsonLd = [
       </ul>
 
       <div class="callout">
-        Bookmark this page. The moment {GAME.title} goes live on {GAME.releaseLabel}, we publish the
+        Bookmark this page. The moment {GAME.title} goes live around {GAME.releaseLabel}, we publish the
         day-one cheat list, crop and fishing data, and the full Nokturna card guide.
       </div>
 

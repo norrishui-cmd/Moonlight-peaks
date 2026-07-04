@@ -10,6 +10,8 @@ const facts = [
   ['Price', `${GAME.price} (Nintendo Switch 2 edition $39.99)`],
   ['Platforms', GAME.platforms.join(', ')],
   ['Free demo', GAME.demo],
+  ['System requirements', 'Check Steam for live PC/Mac requirements; use the demo for practical testing'],
+  ['Languages', GAME.languages.join(', ')],
   ['PS5 / Xbox / iOS', 'Not announced'],
 ];
 
@@ -19,7 +21,7 @@ const jsonLd = [
     { '@type': 'ListItem', position: 2, name: 'Platforms', item: new URL('/platforms', SITE.url).href },
   ] },
   { '@context': 'https://schema.org', '@type': 'VideoGame', name: GAME.title, gamePlatform: GAME.platforms,
-    publisher: { '@type': 'Organization', name: GAME.publisher }, datePublished: '2026-07-07' },
+    publisher: { '@type': 'Organization', name: GAME.publisher }, datePublished: GAME.releaseISO },
 ];
 ---
 <Base
@@ -48,10 +50,10 @@ const jsonLd = [
       <div class="pf-grid">
         {platforms.map((p) => (
           <a class="pf-card" href={`/platforms/${p.slug}`}>
-            <span class="pf-tag">{p.tag}{p.status && p.status !== 'confirmed' ? ` · ${p.status}` : ''}</span>
+            <span class="pf-tag">{p.tag}{p.status && p.status !== 'confirmed' ? ` - ${p.status}` : ''}</span>
             <span class="pf-title">{p.title.replace('Moonlight Peaks on ', '')}</span>
             <span class="pf-dek">{p.dek}</span>
-            <span class="pf-go">Open →</span>
+            <span class="pf-go">Open -&gt;</span>
           </a>
         ))}
       </div>
@@ -70,8 +72,9 @@ const jsonLd = [
       </p>
 
       <div class="callout">
-        Related: <a href="/release-date">release date</a> · <a href="/demo">the demo</a> ·
-        <a href="/compare">compare with other sims</a> · <a href="/faq">FAQ</a>.
+        Related: <a href="/release-date">release date</a> - <a href="/demo">the demo</a> -
+        <a href="/system-requirements">system requirements</a> - <a href="/languages">languages</a> -
+        <a href="/compare">compare with other sims</a> - <a href="/faq">FAQ</a>.
       </div>
     </div>
   </article>

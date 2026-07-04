@@ -8,6 +8,8 @@ import { homepagePriorityLinks } from '../data/priorityLinks';
 
 const entries = [
   { ent: 'Entry · Release', title: 'Release date & platforms', desc: 'When, where, price, and the free demo — everything to play day one.', href: '/release-date', live: true, img: '/card-release.webp' },
+  { ent: 'Entry / Specs', title: 'System requirements', desc: 'PC, Mac, Steam Deck, and demo performance checks before buying.', href: '/system-requirements', live: true, img: '/card-guide.webp' },
+  { ent: 'Entry / Languages', title: 'Languages', desc: 'Japanese, Chinese, Korean, German, and English support to verify at launch.', href: '/languages', live: true, img: '/card-guide.webp' },
   { ent: 'Entry · Guide', title: 'Beginner guide', desc: 'Everything known so far, shaping into your day-one head start.', href: '/beginner-guide', live: true, img: '/card-guide.webp' },
   { ent: 'Entry · Cards', title: 'Nokturna card game', desc: "The town's favorite game — how it works, cards, and how to win.", href: '/nokturna', live: true, img: '/card-nokturna.webp' },
   { ent: 'Entry · Hearts', title: 'Romance & families', desc: 'The seven families, who you can romance, and gift favorites.', href: '/romance', live: true, img: '/card-romance.webp' },
@@ -45,7 +47,7 @@ const jsonLd = [
     gamePlatform: GAME.platforms,
     publisher: { '@type': 'Organization', name: GAME.publisher },
     author: { '@type': 'Organization', name: GAME.developer },
-    datePublished: '2026-07-07',
+    datePublished: GAME.releaseISO,
   },
 ];
 ---
@@ -70,15 +72,22 @@ const jsonLd = [
         and cheats the moment {GAME.title} arrives.
       </p>
       <div class="actions">
-        <a class="btn btn-primary" href="/release-date">Release & demo <span class="arr">→</span></a>
+        <a class="btn btn-primary" href="/release-date">Release & demo <span class="arr">-&gt;</span></a>
         <a class="btn btn-ghost" href="/beginner-guide">What we know</a>
       </div>
 
       <div class="countdown" id="cd" data-release={GAME.releaseISO} aria-label="Time until launch">
-        <div class="cd-cell"><div class="n" data-d>—</div><div class="u">days</div></div>
-        <div class="cd-cell"><div class="n" data-h>—</div><div class="u">hours</div></div>
-        <div class="cd-cell"><div class="n" data-m>—</div><div class="u">min</div></div>
-        <span class="cd-note" id="cd-note">until {GAME.releaseLabel} · {GAME.demo}</span>
+        <div class="cd-cell"><div class="n" data-d>-</div><div class="u">days</div></div>
+        <div class="cd-cell"><div class="n" data-h>-</div><div class="u">hours</div></div>
+        <div class="cd-cell"><div class="n" data-m>-</div><div class="u">min</div></div>
+        <span class="cd-note" id="cd-note">until {GAME.releaseLabel} - {GAME.demo}</span>
+      </div>
+      <div class="launch-strip" aria-label="Launch checklist">
+        <a href="/release-date">Launch date</a>
+        <a href="/demo">Free demo</a>
+        <a href="/system-requirements">System requirements</a>
+        <a href="/languages">Languages</a>
+        <a href="/platforms">Platforms</a>
       </div>
       </div>
     </div>
@@ -98,7 +107,7 @@ const jsonLd = [
             <span class="ent">{e.ent}</span>
             <h3>{e.title}</h3>
             <p>{e.desc}</p>
-            <span class="go">{e.live ? 'read entry →' : 'at launch'}</span>
+            <span class="go">{e.live ? 'read entry ->' : 'at launch'}</span>
           </a>
         ))}
       </div>
@@ -116,7 +125,7 @@ const jsonLd = [
           <a class="ex-card" href={x.href}>
             <span class="ex-k">{x.k}</span>
             <span class="ex-d">{x.d}</span>
-            <span class="ex-go">Open →</span>
+            <span class="ex-go">Open -&gt;</span>
           </a>
         ))}
       </div>
@@ -359,6 +368,26 @@ const jsonLd = [
       .prev-list a { flex-direction: column; }
       .pl-thumb { width: 100%; height: auto; aspect-ratio: 1200 / 630; }
     }
+
+    .launch-strip {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 14px;
+      max-width: 720px;
+    }
+    .launch-strip a {
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 999px;
+      background: rgba(21,16,29,0.48);
+      color: var(--mist);
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      padding: 7px 10px;
+      text-decoration: none;
+      backdrop-filter: blur(10px);
+    }
+    .launch-strip a:hover { border-color: color-mix(in srgb, var(--candle) 60%, rgba(255,255,255,0.2)); color: var(--candle); }
   </style>
 
   <script>

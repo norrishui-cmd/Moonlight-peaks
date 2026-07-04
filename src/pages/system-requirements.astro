@@ -1,0 +1,134 @@
+---
+import Base from '../layouts/Base.astro';
+import { SITE, GAME } from '../consts';
+
+const checklist = [
+  ['Store page', 'Use the official Steam page as the final source before buying or updating a guide.'],
+  ['Windows / Mac', 'Moonlight Peaks is listed for Steam on PC and Mac; check the current Steam system requirements panel for exact OS, processor, memory, graphics, DirectX, and storage notes.'],
+  ['Steam Deck', 'Treat Steam Deck status as a launch check until Valve shows a final compatibility rating.'],
+  ['Controller', 'The demo is useful for checking gamepad comfort, text readability, and UI scale before the full release.'],
+  ['Storage', 'Do not publish an exact storage number unless it is visible on the official store page or launch notes.'],
+];
+
+const faq = [
+  {
+    q: 'What are the Moonlight Peaks system requirements?',
+    a: 'Check the official Steam store page for the live Windows and Mac system requirements. This page tracks what to verify without inventing hardware numbers before launch.',
+  },
+  {
+    q: 'Can Moonlight Peaks run on Mac?',
+    a: 'Moonlight Peaks is listed for Steam on PC and Mac. Exact Mac version and hardware requirements should be checked against the current Steam page.',
+  },
+  {
+    q: 'Is Moonlight Peaks Steam Deck Verified?',
+    a: 'Steam Deck support should be checked at launch. The game is on Steam, but the final Deck compatibility rating is a Valve/storefront signal.',
+  },
+  {
+    q: 'Should I use the demo to test performance?',
+    a: 'Yes. The free demo is the safest way to test controls, text size, camera comfort, and general performance on your own device before buying.',
+  },
+];
+
+const steamUrl = 'https://store.steampowered.com/app/2209900/Moonlight_Peaks/';
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: SITE.url },
+    { '@type': 'ListItem', position: 2, name: 'System requirements', item: new URL('/system-requirements', SITE.url).href },
+  ] },
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })) },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'TechArticle',
+    headline: 'Moonlight Peaks system requirements',
+    description: 'Launch-safe Moonlight Peaks system requirements guide for Steam, Mac, Steam Deck, demo testing, and what to verify before buying.',
+    url: new URL('/system-requirements', SITE.url).href,
+    author: { '@type': 'Organization', name: SITE.brand },
+    publisher: { '@type': 'Organization', name: SITE.brand },
+    about: { '@type': 'VideoGame', name: GAME.title, gamePlatform: GAME.platforms },
+    citation: [steamUrl],
+  },
+];
+---
+<Base
+  title="Moonlight Peaks System Requirements - PC, Mac & Steam Deck"
+  description="Moonlight Peaks system requirements guide for Steam PC, Mac, Steam Deck checks, demo testing, and what to verify before launch."
+  path="/system-requirements"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'System requirements' }]}
+  showExport
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Launch / System requirements</p>
+      <h1>Moonlight Peaks <em>system requirements</em></h1>
+      <p class="intro">
+        A launch-safe requirements page for players checking whether {GAME.title} runs on their PC,
+        Mac, or Steam Deck. Exact hardware numbers should always be verified against the official
+        Steam page before you buy, because store metadata can change right before release.
+      </p>
+
+      <div class="callout">
+        <strong>Release note:</strong> {GAME.releaseNote}
+      </div>
+
+      <h2>Official source to check first</h2>
+      <p>
+        Use the official Steam listing for live system requirements, supported platforms, demo
+        availability, and launch timing. This page is intentionally conservative: it tells you what
+        to verify and how to test the demo, but it does not invent CPU, GPU, RAM, storage, or OS
+        values that are not visible from an official source.
+      </p>
+      <p><a href={steamUrl} target="_blank" rel="noopener noreferrer nofollow">Open the official Steam page</a></p>
+
+      <h2>Pre-launch checklist</h2>
+      <table class="facts">
+        {checklist.map((row) => (<tr><th>{row[0]}</th><td>{row[1]}</td></tr>))}
+      </table>
+
+      <h2>How to test with the demo</h2>
+      <p>
+        The demo is the most useful practical benchmark because it runs on your actual hardware.
+        Test movement, menus, text readability, controller comfort, fishing, flower arranging,
+        embroidery, and character creation. If you plan to play handheld, try the demo in that same
+        setup instead of judging from desktop footage.
+      </p>
+      <ul>
+        <li><strong>PC:</strong> check resolution, frame pacing, mouse and keyboard comfort, and loading.</li>
+        <li><strong>Mac:</strong> confirm the exact Mac requirement on Steam, then test the demo if available to you.</li>
+        <li><strong>Steam Deck:</strong> check controls, text size, battery comfort, and the final Deck rating after launch.</li>
+      </ul>
+
+      <h2>Related launch pages</h2>
+      <div class="link-grid">
+        <a href="/release-date">Release date</a>
+        <a href="/demo">Demo guide</a>
+        <a href="/platforms">Platforms</a>
+        <a href="/platforms/steam-deck">Steam Deck</a>
+        <a href="/languages">Languages</a>
+        <a href="/beginner-guide">Beginner guide</a>
+      </div>
+
+      <h2>FAQ</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </article>
+
+  <style>
+    .link-grid { display: grid; grid-template-columns: 1fr; gap: 10px; margin-top: 10px; }
+    @media (min-width: 640px) { .link-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+    .link-grid a { border: 1px solid var(--line); border-radius: 10px; background: var(--surface); color: var(--mist); padding: 12px 14px; text-decoration: none; }
+    .link-grid a:hover { border-color: color-mix(in srgb, var(--candle) 55%, var(--line)); }
+  </style>
+</Base>

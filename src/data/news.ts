@@ -15,7 +15,7 @@ export const news: NewsItem[] = [
     slug: 'steam-final-launch-countdown',
     date: '2026-07-01',
     title: 'Steam page enters the final launch countdown',
-    body: 'The Steam listing now shows Moonlight Peaks planned for July 7, 2026, with the demo still available and six supported interface/subtitle languages listed.',
+    body: 'The Steam listing now shows Moonlight Peaks entering its final launch countdown, with the demo still available and six supported interface/subtitle languages listed.',
     details: [
       'The Steam page remains the cleanest launch reference for PC and Mac players because it combines the current release timing, demo access, interface language list, and core feature framing in one place.',
       'For players comparing platforms, this is also a useful pre-launch checkpoint before deciding between Steam, Steam Deck, Switch, Switch 2, and Android.',

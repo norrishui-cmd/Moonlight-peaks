@@ -1,0 +1,128 @@
+---
+import Base from '../layouts/Base.astro';
+import { SITE, GAME } from '../consts';
+
+const rows = [
+  ['English', 'Listed language support; useful for default UI and guide terminology.'],
+  ['German', 'Listed language support; check launch build for UI, subtitles, and store wording.'],
+  ['Japanese', 'Listed language support; high-value page intent for JP players checking Steam/Switch.'],
+  ['Korean', 'Listed language support; check launch build for UI and subtitle coverage.'],
+  ['Simplified Chinese', 'Listed language support; important for Chinese search demand and Steam players.'],
+  ['Traditional Chinese', 'Listed language support; useful for Taiwan/Hong Kong storefront and player searches.'],
+];
+
+const faq = [
+  {
+    q: 'What languages does Moonlight Peaks support?',
+    a: `The currently tracked languages are ${GAME.languages.join(', ')}. Check the official store page at launch for the final UI/subtitle/audio breakdown.`,
+  },
+  {
+    q: 'Does Moonlight Peaks support Simplified Chinese?',
+    a: 'Simplified Chinese is tracked as a supported language. Check the store page and launch build for final interface and subtitle details.',
+  },
+  {
+    q: 'Does Moonlight Peaks support Japanese?',
+    a: 'Japanese is tracked as a supported language. Japanese players should still check the final store page for exact language feature coverage.',
+  },
+  {
+    q: 'Will language support change after launch?',
+    a: 'It can. Store language metadata can change with launch builds and updates, so this page should be rechecked after release.',
+  },
+];
+
+const steamUrl = 'https://store.steampowered.com/app/2209900/Moonlight_Peaks/';
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: SITE.url },
+    { '@type': 'ListItem', position: 2, name: 'Languages', item: new URL('/languages', SITE.url).href },
+  ] },
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })) },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: 'Moonlight Peaks language support',
+    description: 'Moonlight Peaks language support guide covering English, German, Japanese, Korean, Simplified Chinese, and Traditional Chinese.',
+    url: new URL('/languages', SITE.url).href,
+    author: { '@type': 'Organization', name: SITE.brand },
+    publisher: { '@type': 'Organization', name: SITE.brand },
+    about: { '@type': 'VideoGame', name: GAME.title, gamePlatform: GAME.platforms },
+    citation: [steamUrl],
+  },
+];
+---
+<Base
+  title="Moonlight Peaks Languages - Japanese, Chinese, Korean & More"
+  description="Moonlight Peaks language support guide for English, German, Japanese, Korean, Simplified Chinese, Traditional Chinese, and launch verification."
+  path="/languages"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Languages' }]}
+  showExport
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Launch / Languages</p>
+      <h1>Moonlight Peaks <em>language support</em></h1>
+      <p class="intro">
+        A quick guide to the languages currently tracked for {GAME.title}, with launch-day checks
+        for players searching in Japanese, Chinese, Korean, German, and English.
+      </p>
+
+      <div class="callout">
+        <strong>Verify at launch:</strong> language metadata can change close to release. Recheck the
+        official store page for the final interface, subtitle, and audio breakdown.
+      </div>
+
+      <h2>Tracked languages</h2>
+      <table class="facts">
+        {rows.map((row) => (<tr><th>{row[0]}</th><td>{row[1]}</td></tr>))}
+      </table>
+
+      <h2>Why this matters before release</h2>
+      <p>
+        Language support is a high-intent launch search. Players want to know whether they can play
+        comfortably before buying, especially on Steam, Switch, Switch 2, and Android. This page is
+        built to answer those searches without overstating unverified details.
+      </p>
+
+      <h2>Launch verification checklist</h2>
+      <ul>
+        <li>Check the Steam language table for interface, subtitles, and audio columns.</li>
+        <li>Check Nintendo eShop and Google Play pages separately if their language tables differ.</li>
+        <li>Update guide terms after launch so item names, character names, and UI labels match the live game.</li>
+        <li>Prioritize Japanese, Simplified Chinese, and Traditional Chinese pages if search impressions grow.</li>
+      </ul>
+
+      <h2>Related pages</h2>
+      <div class="link-grid">
+        <a href="/release-date">Release date</a>
+        <a href="/platforms">Platforms</a>
+        <a href="/system-requirements">System requirements</a>
+        <a href="/demo">Demo guide</a>
+        <a href="/faq">FAQ</a>
+        <a href="/guides">Guides</a>
+      </div>
+
+      <h2>FAQ</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </article>
+
+  <style>
+    .link-grid { display: grid; grid-template-columns: 1fr; gap: 10px; margin-top: 10px; }
+    @media (min-width: 640px) { .link-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+    .link-grid a { border: 1px solid var(--line); border-radius: 10px; background: var(--surface); color: var(--mist); padding: 12px 14px; text-decoration: none; }
+    .link-grid a:hover { border-color: color-mix(in srgb, var(--candle) 55%, var(--line)); }
+  </style>
+</Base>
