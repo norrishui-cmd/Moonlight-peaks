@@ -98,10 +98,13 @@ const jsonLd = [
         {previews.map((p) => (
           <li>
             <a href={`/previews/${p.slug}`}>
-              <span class="pl-tag">{p.tag}</span>
-              <span class="pl-title">{p.title}</span>
-              <span class="pl-dek">{p.dek}</span>
-              <span class="pl-meta">{p.readTime} · {p.date}</span>
+              <img class="pl-thumb" src={p.image} alt={`${p.title} — Moonlight Peaks`} width="160" height="84" loading="lazy" />
+              <span class="pl-body">
+                <span class="pl-tag">{p.tag}</span>
+                <span class="pl-title">{p.title}</span>
+                <span class="pl-dek">{p.dek}</span>
+                <span class="pl-meta">{p.readTime} · {p.date}</span>
+              </span>
             </a>
           </li>
         ))}
@@ -126,11 +129,17 @@ const jsonLd = [
 
   <style>
     .prev-list { list-style: none; padding: 0; margin: 8px 0 0; display: grid; gap: 10px; }
-    .prev-list a { display: block; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); padding: 14px 16px; transition: border-color .15s ease, transform .15s ease; }
+    .prev-list a { display: flex; gap: 14px; align-items: stretch; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); padding: 12px; transition: border-color .15s ease, transform .15s ease; }
     .prev-list a:hover { border-color: color-mix(in srgb, var(--candle) 50%, var(--line)); transform: translateY(-2px); }
+    .pl-thumb { flex: 0 0 auto; width: 160px; height: 84px; object-fit: cover; border-radius: 10px; border: 1px solid var(--line); }
+    .pl-body { min-width: 0; display: block; }
     .pl-tag { display: block; font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--faint); }
     .pl-title { display: block; font-family: var(--display); font-weight: 600; font-size: 1.1rem; color: var(--mist); margin: 3px 0 2px; }
     .pl-dek { display: block; color: var(--muted); font-size: 0.88rem; }
     .pl-meta { display: block; font-family: var(--mono); font-size: 0.68rem; color: var(--faint); margin-top: 6px; }
+    @media (max-width: 560px) {
+      .prev-list a { flex-direction: column; }
+      .pl-thumb { width: 100%; height: auto; aspect-ratio: 1200 / 630; }
+    }
   </style>
 </Base>
