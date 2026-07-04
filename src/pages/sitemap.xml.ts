@@ -21,7 +21,9 @@ type Entry = { path: string; images?: string[] };
 
 const homeImages = ['/card-release.webp', '/card-guide.webp', '/card-nokturna.webp', '/card-romance.webp', '/card-cheats.webp', '/card-crops.webp'];
 
-const staticPaths = ['/release-date', '/demo', '/platforms', '/system-requirements', '/languages', '/launch-day', '/known-issues', '/best-settings', '/beginner-guide', '/guides', '/tools', '/tools/platform-picker', '/tools/romance-gift-finder', '/tools/romance-match-quiz', '/tools/romance-planner', '/tools/item-tracker', '/tools/farming-profit-planner', '/tools/submit-data', '/export', '/farming', '/magic', '/character-creator', '/shapeshifting', '/items', '/environment', '/behind-the-scenes', '/activities', '/characters', '/moonlight-peaks-vs-stardew-valley', '/nokturna', '/map', '/romance', '/cheats', '/about', '/privacy', '/previews', '/faq', '/locations', '/families', '/compare', '/es', '/es/beginner-guide', '/es/release-date', '/es/faq', '/ja', '/ja/beginner-guide', '/ja/release-date', '/ja/faq', '/zh', '/zh/beginner-guide', '/zh/release-date', '/zh/faq'];
+const staticPaths = ['/release-date', '/demo', '/platforms', '/system-requirements', '/languages', '/launch-day', '/known-issues', '/best-settings', '/beginner-guide', '/guides', '/tools', '/tools/platform-picker', '/tools/romance-gift-finder', '/tools/romance-match-quiz', '/tools/romance-planner', '/tools/item-tracker', '/tools/farming-profit-planner', '/tools/submit-data', '/export', '/farming', '/magic', '/character-creator', '/shapeshifting', '/items', '/environment', '/behind-the-scenes', '/activities', '/characters', '/moonlight-peaks-vs-stardew-valley', '/nokturna', '/map', '/romance', '/cheats', '/about', '/privacy', '/previews', '/faq', '/locations', '/families', '/compare', '/es', '/es/beginner-guide', '/es/release-date', '/es/faq', '/es/characters', '/ja', '/ja/beginner-guide', '/ja/release-date', '/ja/faq', '/ja/characters', '/zh', '/zh/beginner-guide', '/zh/release-date', '/zh/faq', '/zh/characters'];
+const translatedCharIds = ['count-dracula', 'saga', 'luna', 'orlock', 'logan', 'the-warlock'];
+const translatedCharPaths = ['es', 'ja', 'zh'].flatMap((l) => translatedCharIds.map((id) => `/${l}/characters/${id}`));
 
 const topic = (base: string, items: { slug: string; image?: string }[]): Entry[] =>
   items.map((it) => ({ path: `${base}/${it.slug}`, images: it.image ? [it.image] : [] }));
@@ -33,6 +35,7 @@ export const GET: APIRoute = () => {
   const entries: Entry[] = [
     { path: '/', images: homeImages },
     ...staticPaths.map((p) => ({ path: p })),
+    ...translatedCharPaths.map((p) => ({ path: p })),
     ...charEntries,
     ...topic('/locations', locations),
     ...topic('/families', families),

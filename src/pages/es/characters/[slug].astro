@@ -1,0 +1,108 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { SITE, GAME } from '../../../consts';
+import { characters } from '../../../data/characters';
+import { charTranslations } from '../../../i18n/characters-data';
+
+const translations = charTranslations.es;
+
+export function getStaticPaths() {
+  return Object.keys(translations).map((slug) => ({ params: { slug } }));
+}
+
+const { slug } = Astro.params;
+const base = characters.find((c) => c.id === slug)!;
+const tr = translations[slug as keyof typeof translations];
+
+const url = new URL(`/es/characters/${slug}`, SITE.url).href;
+const imgAbs = base.img ? new URL(base.img, SITE.url).href : undefined;
+const statusLabel =
+  base.status === 'confirmed' ? 'Confirmado por los desarrolladores'
+  : base.status === 'reported' ? 'Reportado en avances o cobertura; a confirmar en el lanzamiento'
+  : base.status === 'datamined' ? 'Encontrado en archivos del juego — nombre verificado, rol sin confirmar'
+  : 'Sin confirmar';
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Inicio', item: `${SITE.url}/es` },
+    { '@type': 'ListItem', position: 2, name: 'Personajes', item: `${SITE.url}/es/characters` },
+    { '@type': 'ListItem', position: 3, name: tr.name, item: url },
+  ] },
+  { '@context': 'https://schema.org', '@type': 'Person', name: tr.name, description: tr.desc, ...(imgAbs ? { image: imgAbs } : {}) },
+];
+
+const romanceText = base.romanceable === true ? tr.romanceYes : base.romanceable === false ? tr.romanceNo : tr.romanceTbc;
+---
+<Base
+  title={`${tr.name} — Guía de Personajes de Moonlight Peaks`}
+  description={`${tr.name} en Moonlight Peaks: ${tr.desc} Familia, estado de romance y lo que sabemos hasta ahora.`}
+  path={`/es/characters/${slug}`}
+  jsonLd={jsonLd}
+  ogImage={base.img}
+  crumbs={[{ label: 'Personajes', href: '/es/characters' }, { label: tr.name }]}
+  lang="es"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Personaje · {tr.typeLabel}</p>
+
+      <div class="chead">
+        <div class="cavatar">
+          {base.img ? (
+            <img src={base.img} alt={`${tr.name} — retrato de personaje de Moonlight Peaks`} width="160" height="160" />
+          ) : (
+            <svg viewBox="0 0 160 160" width="160" height="160" aria-hidden="true">
+              <defs><linearGradient id={`g-es-${slug}`} x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color={base.c1} /><stop offset="1" stop-color={base.c2} /></linearGradient></defs>
+              <rect width="160" height="160" fill={`url(#g-es-${slug})`} />
+              <text x="80" y="104" text-anchor="middle" font-family="Fraunces, serif" font-size="68" fill="rgba(255,255,255,0.9)">{tr.name.charAt(0)}</text>
+            </svg>
+          )}
+        </div>
+        <div class="cmeta">
+          <h1>{tr.name}</h1>
+          <div class="ctags">
+            <span class={`cbadge ${base.status === 'confirmed' ? 'is-conf' : base.status === 'reported' ? 'is-rep' : base.status === 'datamined' ? 'is-dm' : 'is-unc'}`}>{base.status}</span>
+            <span class="ctag fam">{tr.familyLabel}</span>
+            {base.romanceable === true && <span class="ctag heart">Corazón: Conquistable</span>}
+            {base.romanceable === false && <span class="ctag">No conquistable</span>}
+            {base.romanceable === null && <span class="ctag">Romance: por confirmar</span>}
+          </div>
+          <p class="cdesc">{tr.desc}</p>
+        </div>
+      </div>
+
+      <h2>Lo que sabemos</h2>
+      <ul>{tr.knownInfo.map((k) => (<li>{k}</li>))}</ul>
+
+      <h2>Romance</h2>
+      <p>{romanceText}</p>
+
+      <div class="callout">
+        <strong>Precisión:</strong> {statusLabel}. Marcamos lo que está confirmado por los desarrolladores frente a lo reportado en avances, y nunca inventamos tablas de regalos ni estadísticas. Los detalles completos llegan en el lanzamiento, el {GAME.releaseLabel}.
+      </div>
+
+      <div class="callout wip">
+        Más: <a href="/es/characters">todos los personajes</a> (en español) · <a href="/romance">romance</a>,
+        <a href="/families">familias</a> y <a href="/characters">ficha completa de personajes</a> (en inglés).
+      </div>
+    </div>
+  </article>
+
+  <style>
+    .chead { display: flex; gap: 18px; align-items: flex-start; flex-wrap: wrap; margin: 4px 0 8px; }
+    .cavatar { flex: 0 0 auto; width: 160px; height: 160px; border-radius: 18px; overflow: hidden; border: 1px solid var(--line); }
+    .cavatar img, .cavatar svg { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .cmeta { flex: 1; min-width: 240px; }
+    .cmeta h1 { margin: 0 0 8px; }
+    .ctags { display: flex; gap: 6px; flex-wrap: wrap; margin: 0 0 10px; }
+    .cbadge { font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.04em; text-transform: uppercase; border-radius: 5px; padding: 2px 6px; }
+    .cbadge.is-conf { color: #9be6b4; border: 1px solid #2f6a45; }
+    .cbadge.is-rep { color: var(--faint); border: 1px solid var(--line); }
+    .cbadge.is-dm { color: #9ac6e0; border: 1px solid #2f5a70; }
+    .cbadge.is-unc { color: #7c6e90; border: 1px dashed var(--line); }
+    .ctag { font-family: var(--mono); font-size: 0.66rem; color: var(--candle); border: 1px solid var(--candle-dim); border-radius: 6px; padding: 2px 7px; }
+    .ctag.fam { color: #cbb4f0; border-color: #5a4a7a; }
+    .ctag.heart { color: var(--wine); border-color: #7a2f45; }
+    .cdesc { color: #ded3e6; margin: 0; }
+  </style>
+</Base>

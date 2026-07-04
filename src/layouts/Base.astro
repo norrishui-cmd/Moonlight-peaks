@@ -3,6 +3,7 @@ import { SITE, GA_MEASUREMENT_ID } from '../consts';
 import '../styles/global.css';
 import SiteSearch from '../components/SiteSearch.astro';
 import { t, type Locale } from '../i18n/nav';
+import { charTranslations } from '../i18n/characters-data';
 import LanguageSwitcher from '../components/LanguageSwitcher.astro';
 interface Crumb { label: string; href?: string; }
 interface Props {
@@ -66,9 +67,12 @@ const isWorldGroupActive = worldGroup.children.some((c) => isActive(c.href));
 // Only /  and /beginner-guide are translated so far. Every other nav target still only
 // exists in English — linking to a non-existent /es/characters etc. would 404. As more
 // pages get translated, add their bare English path here and links will follow automatically.
-const translatedPaths = new Set<string>(['/', '/beginner-guide', '/release-date', '/faq']);
+const translatedPaths = new Set<string>(['/', '/beginner-guide', '/release-date', '/faq', '/characters']);
+const translatedCharSlugs = new Set<string>(Object.keys(charTranslations.es)); // same slugs across es/ja/zh
 const localizedHref = (href: string): string => {
   if (lang === 'en') return href;
+  const charMatch = href.match(/^\/characters\/([a-z0-9-]+)$/);
+  if (charMatch && translatedCharSlugs.has(charMatch[1])) return `/${lang}${href}`;
   if (translatedPaths.has(href)) return href === '/' ? `/${lang}` : `/${lang}${href}`;
   return href; // not translated yet — send to the English version rather than a 404
 };
