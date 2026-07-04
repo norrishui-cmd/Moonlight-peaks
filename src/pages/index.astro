@@ -36,9 +36,27 @@ const jsonLd = [
   {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
+    '@id': `${SITE.url}/#website`,
+    name: SITE.brand,
+    alternateName: ['Moonlight Peaks Wiki', 'Moonlight Peaks Guide', 'Moonlight Peaks Fan Wiki'],
+    url: SITE.url,
+    inLanguage: 'en',
+    description: 'Fan-made guide and wiki for Moonlight Peaks: release info, beginner guide, Nokturna, romance, and cheats.',
+    publisher: { '@id': `${SITE.url}/#organization` },
+    potentialAction: {
+      '@type': 'SearchAction',
+      target: { '@type': 'EntryPoint', urlTemplate: `${SITE.url}/search?q={search_term_string}` },
+      'query-input': 'required name=search_term_string',
+    },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    '@id': `${SITE.url}/#organization`,
     name: SITE.brand,
     url: SITE.url,
-    description: 'Fan-made guide and wiki for Moonlight Peaks: release info, beginner guide, Nokturna, romance, and cheats.',
+    logo: `${SITE.url}/favicon.svg`,
+    description: 'An independent, fan-made wiki and guide covering Moonlight Peaks — not affiliated with the game\u2019s developer or publisher.',
   },
   {
     '@context': 'https://schema.org',

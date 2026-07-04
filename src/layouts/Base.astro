@@ -11,8 +11,9 @@ interface Props {
   crumbs?: Crumb[];
   ogImage?: string;
   showExport?: boolean;
+  noindex?: boolean;
 }
-const { title, description, path = '/', jsonLd, crumbs = [], ogImage, showExport = false } = Astro.props;
+const { title, description, path = '/', jsonLd, crumbs = [], ogImage, showExport = false, noindex = false } = Astro.props;
 const canonical = new URL(path, SITE.url).href;
 const ogImageUrl = ogImage ? new URL(ogImage, SITE.url).href : undefined;
 const navPeople = [
@@ -99,6 +100,7 @@ const ld = rawLd.map(enrichStructuredData);
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex, follow" />}
     <link rel="canonical" href={canonical} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="alternate" type="application/rss+xml" title="Moonlight Peaks — Articles & Guides" href="/rss.xml" />
