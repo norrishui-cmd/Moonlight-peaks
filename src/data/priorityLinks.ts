@@ -9,6 +9,9 @@ export type PriorityLink = {
 // NOT link into generated /quests, /crafting, /romance/<x>/<y>, etc. paths.
 
 export const homepagePriorityLinks: PriorityLink[] = [
+  { label: 'Launch day guide', href: '/launch-day', note: 'What to check first when Moonlight Peaks goes live.' },
+  { label: 'Known issues', href: '/known-issues', note: 'Launch bugs, saves, controller notes, and platform issues.' },
+  { label: 'Best settings', href: '/best-settings', note: 'PC, Mac, Steam Deck, Switch, and Switch 2 setup checks.' },
   { label: 'Moonlight Peaks release date', href: '/release-date', note: 'Launch date, platforms, price, and demo status.' },
   { label: 'Moonlight Peaks demo guide', href: '/demo', note: 'Download, what is inside, and demo FAQ.' },
   { label: 'Moonlight Peaks platforms', href: '/platforms', note: 'Switch, Switch 2, Steam, Steam Deck, and Android.' },
@@ -23,6 +26,9 @@ export const homepagePriorityLinks: PriorityLink[] = [
 ];
 
 export const releasePriorityLinks: PriorityLink[] = [
+  { label: 'Launch day guide', href: '/launch-day', note: 'Start here when the game goes live.' },
+  { label: 'Known issues', href: '/known-issues', note: 'Launch-week bugs and safe fix tracking.' },
+  { label: 'Best settings', href: '/best-settings', note: 'PC, Steam Deck, Switch, Mac, and readability checks.' },
   { label: 'System requirements', href: '/system-requirements', note: 'PC, Mac, Steam Deck, and hardware checks.' },
   { label: 'Languages', href: '/languages', note: 'Supported languages and launch verification.' },
   { label: 'Nintendo Switch', href: '/platforms/switch', note: 'Original Switch launch, price, and the demo.' },
@@ -96,6 +102,9 @@ export const beginnerPriorityLinks: PriorityLink[] = [
 ];
 
 export const guideHubPriorityLinks: PriorityLink[] = [
+  { label: 'Launch day guide', href: '/launch-day', note: 'What to check first when the game launches.' },
+  { label: 'Known issues', href: '/known-issues', note: 'Launch-week bug and performance tracker.' },
+  { label: 'Best settings', href: '/best-settings', note: 'Safe setup checks for each platform.' },
   { label: 'Beginner guide', href: '/beginner-guide', note: 'Best first page for new players.' },
   { label: 'Farming', href: '/farming', note: 'Night farming, crops, livestock, and magic.' },
   { label: 'Magic', href: '/magic', note: 'Wands, runes, mana, potions, and shapeshifting.' },

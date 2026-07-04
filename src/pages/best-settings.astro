@@ -1,0 +1,124 @@
+---
+import Base from '../layouts/Base.astro';
+import { SITE, GAME } from '../consts';
+
+const settingsRows = [
+  ['PC', 'Start with native resolution, comfortable UI scale, and controller or keyboard testing in the demo. Add exact graphics recommendations after launch testing.'],
+  ['Mac', 'Confirm the current Steam Mac requirements first, then test resolution, readability, and input comfort on your own hardware.'],
+  ['Steam Deck', 'Check the final compatibility rating, text size, controller prompts, battery comfort, and whether any launch-week settings are repeatedly recommended.'],
+  ['Nintendo Switch', 'Focus on readability, handheld comfort, load times, and whether any platform-specific issues appear at launch.'],
+  ['Nintendo Switch 2', 'Compare the native version with original Switch notes, especially load times, resolution, and upgrade-pass wording.'],
+];
+
+const testingSteps = [
+  'Test character creation and menus first, because text size and UI comfort show up immediately.',
+  'Play one early activity such as fishing, flower arranging, or embroidery to check controls.',
+  'Try both handheld and docked modes if you are on Switch or Steam Deck.',
+  'Wait for repeated reports before recommending a hard setting as the best option.',
+  'Keep exact FPS, battery, and graphics claims out until they are measured or well sourced.',
+];
+
+const faq = [
+  {
+    q: 'What are the best Moonlight Peaks settings?',
+    a: 'Before launch, the safest advice is to test readability, controls, resolution, and comfort in the demo. Exact best settings should be added after launch testing.',
+  },
+  {
+    q: 'What are the best Steam Deck settings for Moonlight Peaks?',
+    a: 'Check the final Steam Deck compatibility rating first, then verify text size, controls, battery comfort, and launch-week player reports before publishing a fixed setup.',
+  },
+  {
+    q: 'Should I use controller or keyboard?',
+    a: 'Try both if you can. Moonlight Peaks is a cozy life sim, so comfort in menus, movement, fishing, and decorating matters more than competitive precision.',
+  },
+  {
+    q: 'Will this page change after launch?',
+    a: 'Yes. It is designed to be updated with measured PC, Mac, Steam Deck, Switch, and Switch 2 settings once reliable data exists.',
+  },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: SITE.url },
+    { '@type': 'ListItem', position: 2, name: 'Best settings', item: new URL('/best-settings', SITE.url).href },
+  ] },
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })) },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'HowTo',
+    name: 'How to choose Moonlight Peaks settings safely at launch',
+    description: 'A launch-safe settings checklist for Moonlight Peaks on PC, Mac, Steam Deck, Switch, and Switch 2.',
+    step: testingSteps.map((text, index) => ({
+      '@type': 'HowToStep',
+      position: index + 1,
+      text,
+    })),
+  },
+];
+---
+<Base
+  title="Moonlight Peaks Best Settings - PC, Steam Deck, Switch & Mac"
+  description="Moonlight Peaks best settings guide for PC, Mac, Steam Deck, Switch, Switch 2, controller comfort, readability, demo testing, and launch updates."
+  path="/best-settings"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Best settings' }]}
+  showExport
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Launch / Best settings</p>
+      <h1>Moonlight Peaks <em>best settings</em></h1>
+      <p class="intro">
+        A safe launch settings page for {GAME.title}. Use it before release to test comfort in the
+        demo, then update it with real PC, Mac, Steam Deck, Switch, and Switch 2 settings once the
+        live build confirms them.
+      </p>
+
+      <div class="callout">
+        <strong>No fake benchmarks:</strong> exact FPS, graphics presets, battery life, and platform
+        performance notes should be added only after launch testing or reliable source confirmation.
+      </div>
+
+      <h2>Platform checklist</h2>
+      <table class="facts">
+        {settingsRows.map((row) => (<tr><th>{row[0]}</th><td>{row[1]}</td></tr>))}
+      </table>
+
+      <h2>What to test first</h2>
+      <ol>
+        {testingSteps.map((step) => (<li>{step}</li>))}
+      </ol>
+
+      <h2>Related pages</h2>
+      <div class="link-grid">
+        <a href="/demo">Demo guide</a>
+        <a href="/system-requirements">System requirements</a>
+        <a href="/known-issues">Known issues</a>
+        <a href="/platforms">Platforms</a>
+        <a href="/platforms/steam-deck">Steam Deck</a>
+        <a href="/launch-day">Launch day hub</a>
+      </div>
+
+      <h2>FAQ</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </article>
+
+  <style>
+    .link-grid { display: grid; grid-template-columns: 1fr; gap: 10px; margin-top: 10px; }
+    @media (min-width: 640px) { .link-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+    .link-grid a { border: 1px solid var(--line); border-radius: 10px; background: var(--surface); color: var(--mist); padding: 12px 14px; text-decoration: none; }
+    .link-grid a:hover { border-color: color-mix(in srgb, var(--candle) 55%, var(--line)); }
+  </style>
+</Base>

@@ -1,0 +1,122 @@
+---
+import Base from '../layouts/Base.astro';
+import { SITE, GAME } from '../consts';
+
+const issueRows = [
+  ['Crash / launch failure', 'Not verified yet', 'Check official notes, Steam discussions, and repeated player reports before listing a fix.'],
+  ['Save file / cloud save', 'Not verified yet', 'Do not publish save paths until confirmed on the live build.'],
+  ['Controller input', 'Not verified yet', 'Use demo and launch build testing to separate platform-specific issues from general comfort notes.'],
+  ['Steam Deck', 'Not verified yet', 'Wait for Valve/storefront rating and launch-week player reports before giving a hard verdict.'],
+  ['Switch / Switch 2 performance', 'Not verified yet', 'Track load times, readability, controls, and any upgrade-pass wording once storefront data is live.'],
+];
+
+const reportChecklist = [
+  'Exact platform and storefront',
+  'Game version or build date if visible',
+  'What happened and what you were doing',
+  'Whether it repeats after restarting',
+  'Any official note, patch note, or neutral source confirming the issue',
+];
+
+const faq = [
+  {
+    q: 'Are there known Moonlight Peaks bugs at launch?',
+    a: 'This page is prepared for launch-week tracking. Issues should only be listed after they are confirmed by official notes, repeated player reports, or reliable neutral coverage.',
+  },
+  {
+    q: 'Where should save or cloud save problems go?',
+    a: 'Save and cloud save reports belong here first, then on a dedicated save file page once exact paths and fixes are verified.',
+  },
+  {
+    q: 'Should I trust random fix posts?',
+    a: 'Use caution. A fix should be repeatable, platform-specific, and ideally backed by official notes or multiple independent reports before it is treated as reliable.',
+  },
+  {
+    q: 'Does this page replace official support?',
+    a: 'No. This is a fan-maintained tracker that points players toward verified public information and avoids unsupported claims.',
+  },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: SITE.url },
+    { '@type': 'ListItem', position: 2, name: 'Known issues', item: new URL('/known-issues', SITE.url).href },
+  ] },
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })) },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'TechArticle',
+    headline: 'Moonlight Peaks known issues',
+    description: 'Launch-week known issues tracker for Moonlight Peaks crashes, saves, controller input, Steam Deck, Switch, and performance notes.',
+    url: new URL('/known-issues', SITE.url).href,
+    author: { '@type': 'Organization', name: SITE.brand },
+    publisher: { '@type': 'Organization', name: SITE.brand },
+    about: { '@type': 'VideoGame', name: GAME.title, gamePlatform: GAME.platforms },
+  },
+];
+---
+<Base
+  title="Moonlight Peaks Known Issues - Bugs, Saves & Performance"
+  description="Moonlight Peaks known issues tracker for launch-week bugs, crashes, save problems, controller input, Steam Deck, Switch performance, and verified fixes."
+  path="/known-issues"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Known issues' }]}
+  showExport
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Launch / Known issues</p>
+      <h1>Moonlight Peaks <em>known issues</em></h1>
+      <p class="intro">
+        A launch-week tracker for bugs, crashes, saves, controller problems, Steam Deck notes, and
+        platform-specific performance reports. It is ready now, but fixes are added only after they
+        are confirmed.
+      </p>
+
+      <h2>Current tracker</h2>
+      <table class="facts">
+        {issueRows.map((row) => (<tr><th>{row[0]}</th><td><strong>{row[1]}</strong><br />{row[2]}</td></tr>))}
+      </table>
+
+      <h2>Before listing an issue</h2>
+      <p>
+        Launch-week bug pages can become messy fast. Keep this page useful by separating confirmed
+        issues from one-off reports, and by naming the exact platform whenever possible.
+      </p>
+      <ul>
+        {reportChecklist.map((item) => (<li>{item}</li>))}
+      </ul>
+
+      <h2>Related checks</h2>
+      <div class="link-grid">
+        <a href="/best-settings">Best settings</a>
+        <a href="/system-requirements">System requirements</a>
+        <a href="/platforms/steam-deck">Steam Deck</a>
+        <a href="/platforms/switch">Nintendo Switch</a>
+        <a href="/platforms/switch-2">Nintendo Switch 2</a>
+        <a href="/launch-day">Launch day hub</a>
+      </div>
+
+      <h2>FAQ</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </article>
+
+  <style>
+    .link-grid { display: grid; grid-template-columns: 1fr; gap: 10px; margin-top: 10px; }
+    @media (min-width: 640px) { .link-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+    .link-grid a { border: 1px solid var(--line); border-radius: 10px; background: var(--surface); color: var(--mist); padding: 12px 14px; text-decoration: none; }
+    .link-grid a:hover { border-color: color-mix(in srgb, var(--candle) 55%, var(--line)); }
+  </style>
+</Base>
