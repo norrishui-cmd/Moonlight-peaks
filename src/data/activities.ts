@@ -31,7 +31,7 @@ export const activities: TopicItem[] = [
     related: [{ label: 'The forest', href: '/locations/forest' }, { label: 'Fishing', href: '/activities/fishing' }],
   },
   {
-    slug: 'flower-arranging', title: 'Flower Arranging', tag: 'Craft', status: 'confirmed', image: '/hero-loc-your-cottage.webp',
+    slug: 'flower-arranging', title: 'Flower Arranging', tag: 'Craft', status: 'confirmed', image: '/hero-act-flower-arranging.webp',
     dek: 'A relaxing creative craft included in the demo.',
     body: [
       'Flower arranging is one of the cozy crafts confirmed for the game and shown in the free demo.',
@@ -40,7 +40,7 @@ export const activities: TopicItem[] = [
     related: [{ label: 'Embroidery', href: '/activities/embroidery' }, { label: 'Your cottage', href: '/locations/your-cottage' }],
   },
   {
-    slug: 'embroidery', title: 'Embroidery', tag: 'Craft', status: 'confirmed', image: '/hero-loc-your-cottage.webp',
+    slug: 'embroidery', title: 'Embroidery', tag: 'Craft', status: 'confirmed', image: '/hero-act-embroidery.webp',
     dek: 'Stitch designs — one of the demo\u2019s relaxing crafts.',
     body: [
       'Embroidery is a confirmed craft and appears in the free demo alongside the other cozy activities.',
@@ -49,7 +49,7 @@ export const activities: TopicItem[] = [
     related: [{ label: 'Flower arranging', href: '/activities/flower-arranging' }, { label: 'Decorating', href: '/activities/decorating' }],
   },
   {
-    slug: 'potion-brewing', title: 'Potion Brewing', tag: 'Magic', status: 'confirmed', image: '/hero-fam-witches.webp',
+    slug: 'potion-brewing', title: 'Potion Brewing', tag: 'Magic', status: 'confirmed', image: '/hero-act-potion-brewing.webp',
     dek: 'Brew potions — including the Alter Ego Elixir that changes your appearance.',
     body: [
       'Potion-crafting is a confirmed activity. One named example is the Alter Ego Elixir, a potion that changes your appearance.',
@@ -67,7 +67,7 @@ export const activities: TopicItem[] = [
     related: [{ label: 'Your cottage', href: '/locations/your-cottage' }, { label: 'Character creator', href: '/activities/character-creator' }],
   },
   {
-    slug: 'character-creator', title: 'Character Creator', tag: 'Activity', status: 'confirmed', image: '/hero-loc-town.webp',
+    slug: 'character-creator', title: 'Character Creator', tag: 'Activity', status: 'confirmed', image: '/hero-act-character-creator.webp',
     dek: 'Build your own vampire — the character creator is playable in the demo.',
     body: [
       'You create your own vampire in the character creator, which is part of the free demo. Character models are deliberately gender-neutral, and dating is not gender-locked.',
@@ -76,7 +76,7 @@ export const activities: TopicItem[] = [
     related: [{ label: 'Romance', href: '/romance' }, { label: 'Is dating gender-locked?', href: '/faq/is-dating-gender-locked-in-moonlight-peaks' }],
   },
   {
-    slug: 'shapeshifting', title: 'Shapeshifting', tag: 'Magic', status: 'confirmed', image: '/hero-loc-town.webp',
+    slug: 'shapeshifting', title: 'Shapeshifting', tag: 'Magic', status: 'confirmed', image: '/hero-act-shapeshifting.webp',
     dek: 'Turn into a bat to roam town after dark and reach hidden spots.',
     body: [
       'As a vampire you can shapeshift — into a bat, for example — to get around town quickly and reach places you couldn\u2019t on foot.',
@@ -85,7 +85,7 @@ export const activities: TopicItem[] = [
     related: [{ label: 'Can you shapeshift?', href: '/faq/can-you-shapeshift-in-moonlight-peaks' }, { label: 'Magic', href: '/magic' }],
   },
   {
-    slug: 'seasonal-events', title: 'Seasonal Events', tag: 'Events', status: 'reported', image: '/hero-loc-town-square.webp',
+    slug: 'seasonal-events', title: 'Seasonal Events', tag: 'Events', status: 'reported', image: '/hero-act-seasonal-events.webp',
     dek: 'Town celebrations hosted across the year.',
     body: [
       'Seasonal celebrations are part of town life, and a theatrical event host (Pumpkin Head) has been shown livening up gatherings.',
