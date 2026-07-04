@@ -100,7 +100,7 @@ export const locations: TopicItem[] = [
     related: [{ label: 'The town', href: '/locations/town' }, { label: 'Vampires', href: '/families/vampires' }],
   },
   {
-    slug: 'shops', title: 'Town Shops', tag: 'Town', status: 'datamined',
+    slug: 'shops', title: 'Town Shops', tag: 'Town', status: 'datamined', image: '/hero-loc-shops.webp',
     dek: 'The named shops around town, per pre-launch datamined game files 鈥?not yet developer-confirmed.',
     body: [
       'Beyond the general sense that Moonlight Peaks\u2019 town has shops to browse and buy from, pre-launch datamined game files (cross-referenced against pre-launch references) name several specific storefronts: Howling Hammer, The Broken Lamp, Coffee & Coffins, Third Eye Threads, Webb of Wonders, Midnight Market, and Bloom Boutique.',
@@ -109,7 +109,7 @@ export const locations: TopicItem[] = [
     related: [{ label: 'The town', href: '/locations/town' }, { label: 'Landmarks', href: '/locations/landmarks' }, { label: 'Characters', href: '/characters' }],
   },
   {
-    slug: 'landmarks', title: 'Landmarks & Notable Places', tag: 'Wilds', status: 'datamined',
+    slug: 'landmarks', title: 'Landmarks & Notable Places', tag: 'Wilds', status: 'datamined', image: '/hero-loc-landmarks.webp',
     dek: 'Named places beyond the core areas, per pre-launch datamined game files 鈥?not yet developer-confirmed.',
     body: [
       'Alongside the town, farm, forest, lake, mines, and graveyard, pre-launch datamined game files (cross-referenced against pre-launch references) name several other spots: the Crypt, Moonlit Pines, Howling Marshes, Misty Shores, Moonlight Tower, Luna Bay, and Pink Grove.',
@@ -118,5 +118,4 @@ export const locations: TopicItem[] = [
     related: [{ label: 'The forest', href: '/locations/forest' }, { label: 'The mines', href: '/locations/mines' }, { label: 'Shops', href: '/locations/shops' }],
   },
 ];
-
 
