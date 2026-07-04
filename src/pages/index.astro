@@ -18,14 +18,14 @@ const entries = [
 ];
 
 const explore = [
-  { k: 'Characters', d: 'Residents, families & who you can romance', href: '/characters' },
-  { k: 'Locations', d: 'The town, your farm, the forest, the lake & more', href: '/locations' },
-  { k: 'Families', d: 'The seven supernatural families of the town', href: '/families' },
-  { k: 'Activities', d: 'Fishing, magic, crafts & cozy diversions', href: '/activities' },
-  { k: 'Items', d: 'Tools, potions, decorations & other categories', href: '/items' },
-  { k: 'FAQ', d: 'Quick answers to the most common questions', href: '/faq' },
-  { k: 'Previews & guides', d: 'Demo impressions, press hands-on & how-tos', href: '/previews' },
-  { k: 'Export to PDF', d: 'Pick any guides and export them together as one PDF', href: '/export' },
+  { k: 'Characters', d: 'Residents, families & who you can romance', href: '/characters', img: '/count-dracula.webp' },
+  { k: 'Locations', d: 'The town, your farm, the forest, the lake & more', href: '/locations', img: '/hero-loc-town.webp' },
+  { k: 'Families', d: 'The seven supernatural families of the town', href: '/families', img: '/hero-fam-vampires.webp' },
+  { k: 'Activities', d: 'Fishing, magic, crafts & cozy diversions', href: '/activities', img: '/hero-act-seasonal-events.webp' },
+  { k: 'Items', d: 'Tools, potions, decorations & other categories', href: '/items', img: null, c1: '#3a4a2f', c2: '#8ab06a' },
+  { k: 'FAQ', d: 'Quick answers to the most common questions', href: '/faq', img: null, c1: '#2f3a4a', c2: '#6a8ab0' },
+  { k: 'Previews & guides', d: 'Demo impressions, press hands-on & how-tos', href: '/previews', img: '/hero-first-five-minutes.webp' },
+  { k: 'Export to PDF', d: 'Pick any guides and export them together as one PDF', href: '/export', img: null, c1: '#4a3a2f', c2: '#c0a06a' },
 ];
 
 const demoPosts = previews.filter((p) => p.category === 'preview').slice(0, 5);
@@ -144,9 +144,14 @@ const jsonLd = [
       <div class="explore">
         {explore.map((x) => (
           <a class="ex-card" href={x.href}>
-            <span class="ex-k">{x.k}</span>
-            <span class="ex-d">{x.d}</span>
-            <span class="ex-go">Open -&gt;</span>
+            <span class="ex-thumb" style={!x.img ? `background: linear-gradient(135deg, ${x.c1}, ${x.c2})` : undefined}>
+              {x.img ? <img src={x.img} alt="" loading="lazy" width="72" height="72" /> : <span class="ex-thumb-letter">{x.k[0]}</span>}
+            </span>
+            <span class="ex-body">
+              <span class="ex-k">{x.k}</span>
+              <span class="ex-d">{x.d}</span>
+              <span class="ex-go">Open -&gt;</span>
+            </span>
           </a>
         ))}
       </div>
@@ -368,11 +373,18 @@ const jsonLd = [
     .explore { display: grid; grid-template-columns: 1fr; gap: 12px; }
     @media (min-width: 560px) { .explore { grid-template-columns: 1fr 1fr; } }
     @media (min-width: 880px) { .explore { grid-template-columns: 1fr 1fr 1fr; } }
-    .ex-card { display: flex; flex-direction: column; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); padding: 16px; transition: border-color .15s ease, transform .15s ease; }
+    .ex-card { display: flex; flex-direction: row; align-items: center; gap: 14px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); padding: 12px; transition: border-color .15s ease, transform .15s ease; }
     .ex-card:hover { border-color: color-mix(in srgb, var(--candle) 50%, var(--line)); transform: translateY(-2px); }
-    .ex-k { font-family: var(--display); font-weight: 600; font-size: 1.12rem; color: var(--mist); }
-    .ex-d { color: var(--muted); font-size: 0.86rem; margin: 4px 0 12px; }
-    .ex-go { font-family: var(--mono); font-size: 0.72rem; color: var(--candle); margin-top: auto; }
+    .ex-thumb {
+      flex: 0 0 auto; width: 64px; height: 64px; border-radius: 10px; overflow: hidden;
+      display: flex; align-items: center; justify-content: center; border: 1px solid var(--line);
+    }
+    .ex-thumb img { width: 100%; height: 100%; object-fit: cover; }
+    .ex-thumb-letter { font-family: var(--display); font-weight: 700; font-size: 1.6rem; color: rgba(255,255,255,0.9); }
+    .ex-body { display: flex; flex-direction: column; min-width: 0; }
+    .ex-k { font-family: var(--display); font-weight: 600; font-size: 1.05rem; color: var(--mist); }
+    .ex-d { color: var(--muted); font-size: 0.82rem; margin: 2px 0 6px; }
+    .ex-go { font-family: var(--mono); font-size: 0.7rem; color: var(--candle); }
 
     .prev-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
     .prev-list a { display: flex; gap: 14px; align-items: stretch; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); padding: 12px; transition: border-color .15s ease, transform .15s ease; }
