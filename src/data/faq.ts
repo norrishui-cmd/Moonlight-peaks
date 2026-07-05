@@ -311,6 +311,66 @@ export const faqs: Faq[] = [
     a: 'Not confirmed as a game mechanic, but it fits the tone: vampires and werewolves are reported to bicker constantly, and press coverage describes an old feud between the town\u2019s supernatural families. Whether that translates into an actual in-game disapproval mechanic for cross-family romance is unknown.',
     related: [{ label: 'The family feud, explained', href: '/previews/family-feud-explained' }, { label: 'Can you romance a werewolf?', href: '/faq/can-you-romance-a-werewolf' }],
   },
+  {
+    slug: 'is-moonlight-peaks-scary', cat: 'general',
+    q: 'Is Moonlight Peaks scary or a horror game?',
+    a: 'No. Despite the gothic aesthetic (vampires, graveyards, a character literally named Death), everything shown so far — the demo, press previews, official trailers — points to a cozy, lighthearted tone. Coverage has described it as \u201cchibi-cute but seriously toxic\u201d in its social drama, not frightening. There is no confirmed combat or horror content.',
+    related: [{ label: 'Is Moonlight Peaks a cozy game?', href: '/faq/is-moonlight-peaks-cozy' }, { label: 'Beginner guide', href: '/beginner-guide' }],
+  },
+  {
+    slug: 'is-moonlight-peaks-based-on-a-book-or-show', cat: 'general',
+    q: 'Is Moonlight Peaks based on a book, movie, or TV show?',
+    a: 'No. As far as we\u2019ve found, Moonlight Peaks is an original property created by Little Chicken Game Company \u2014 it isn\u2019t adapting an existing book, film, or series.',
+    related: [{ label: 'Who makes Moonlight Peaks?', href: '/faq/who-makes-moonlight-peaks' }, { label: 'What is Moonlight Peaks about?', href: '/faq/what-is-moonlight-peaks-about' }],
+  },
+  {
+    slug: 'does-moonlight-peaks-have-a-tutorial', cat: 'general',
+    q: 'Does Moonlight Peaks have a tutorial for new players?',
+    a: 'Not confirmed in detail, but the free demo already walks new players through character creation and a handful of core activities (fishing, flower arranging, embroidery) with early town interactions \u2014 which functions as a soft introduction even without a formally announced tutorial mode.',
+    related: [{ label: 'Demo guide', href: '/demo' }, { label: 'Beginner guide', href: '/beginner-guide' }],
+  },
+  {
+    slug: 'does-moonlight-peaks-have-a-story', cat: 'general',
+    q: 'Does Moonlight Peaks have a story, or is it open-ended?',
+    a: 'It has a light story hook \u2014 you\u2019re a vampire moving into your family\u2019s abandoned homestead to prove to your skeptical father that a gentler undead life is possible \u2014 layered onto an open-ended cozy life-sim loop of farming, magic, and relationships. Exactly how much scripted story content there is beyond that premise isn\u2019t detailed yet.',
+    related: [{ label: 'What is Moonlight Peaks about?', href: '/faq/what-is-moonlight-peaks-about' }, { label: 'Count Dracula profile', href: '/characters/count-dracula' }],
+  },
+  {
+    slug: 'does-moonlight-peaks-support-a-controller', cat: 'platforms',
+    q: 'Can you play Moonlight Peaks with a controller?',
+    a: 'Yes on Switch, Switch 2, and Steam Deck, where a controller is the default input. On PC, a hands-on press preview specifically recommended using a gamepad over mouse and keyboard, suggesting the game is designed with controller play in mind even on Steam.',
+    related: [{ label: 'Platforms', href: '/platforms' }, { label: 'System requirements', href: '/system-requirements' }],
+  },
+  {
+    slug: 'is-moonlight-peaks-difficult', cat: 'general',
+    q: 'Is Moonlight Peaks difficult, or can you fail?',
+    a: 'Nothing suggests a punishing difficulty \u2014 there\u2019s no confirmed combat, and the tone throughout is cozy rather than challenge-focused. Whether there are fail states (like running out of money) or difficulty options hasn\u2019t been detailed yet.',
+    related: [{ label: 'Is Moonlight Peaks a cozy game?', href: '/faq/is-moonlight-peaks-cozy' }, { label: 'Is there combat in Moonlight Peaks?', href: '/faq/is-there-combat-in-moonlight-peaks' }],
+  },
+  {
+    slug: 'does-moonlight-peaks-have-voice-acting', cat: 'general',
+    q: 'Does Moonlight Peaks have voice acting?',
+    a: 'Not confirmed. Nothing in the demo, trailers, or press coverage we\u2019ve seen mentions voiced dialogue \u2014 treat this as unconfirmed either way until the full game is out.',
+    related: [{ label: 'Languages', href: '/languages' }, { label: 'Demo guide', href: '/demo' }],
+  },
+  {
+    slug: 'is-moonlight-peaks-turn-based-or-real-time', cat: 'general',
+    q: 'Is Moonlight Peaks turn-based or real-time?',
+    a: 'Real-time, like most cozy life-sims in this genre \u2014 the day/night clock keeps moving as you farm, explore, and talk to residents, rather than waiting for you to end a turn.',
+    related: [{ label: 'Is Moonlight Peaks a cozy game?', href: '/faq/is-moonlight-peaks-cozy' }, { label: 'Farming', href: '/farming' }],
+  },
+  {
+    slug: 'does-moonlight-peaks-have-achievements', cat: 'platforms',
+    q: 'Does Moonlight Peaks have achievements or trophies?',
+    a: 'Not confirmed yet for any platform. If Steam achievements or platform-specific trophy lists exist, we\u2019ll document them once the full game launches.',
+    related: [{ label: 'Platforms', href: '/platforms' }, { label: 'System requirements', href: '/system-requirements' }],
+  },
+  {
+    slug: 'is-moonlight-peaks-family-friendly', cat: 'general',
+    q: 'Is Moonlight Peaks appropriate for kids?',
+    a: 'Likely yes for most ages given the cozy tone and lack of combat, but we can\u2019t give a firm answer \u2014 the game has not been ESRB-rated as of this writing (some outlets have reported a T for Teen rating on consoles/mobile, which we haven\u2019t been able to independently verify). Check the official rating once it\u2019s confirmed, especially given the game\u2019s adult-oriented romance and marriage systems.',
+    related: [{ label: 'What age rating does Moonlight Peaks have?', href: '/faq/what-age-rating-is-moonlight-peaks' }, { label: 'How old are the romanceable characters?', href: '/faq/how-old-are-the-romanceable-characters' }],
+  },
 ];
 
 // ───────────────────────── PENDING (no confirmed answer yet — fill at launch, then move up) ─────────────────────────

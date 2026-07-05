@@ -12,6 +12,18 @@ export type NewsItem = {
 
 export const news: NewsItem[] = [
   {
+    slug: 'launch-discount-expands-platform-wide',
+    date: '2026-07-05',
+    title: 'Launch discount expands to PC and Google Play worldwide',
+    body: 'The 15% pre-order discount, previously confirmed for Nintendo platforms in the Americas, expands on launch day to cover Steam and Google Play Games globally for a full week.',
+    details: [
+      'The window runs seven days starting July 7, 2026 — so late deciders who skip pre-ordering still get the same 15% off if they buy within that first week.',
+      'This is a straightforward widening of an already-confirmed discount, not a new promotion — worth knowing if you were holding off on Steam or Android specifically because you assumed the discount was Nintendo-only.',
+    ],
+    sourceLabel: 'itemku',
+    sourceUrl: 'https://www.itemku.com/en/blog/moonlight-peaks/moonlight-peaks-release-date/4072/',
+  },
+  {
     slug: 'steam-final-launch-countdown',
     date: '2026-07-01',
     title: 'Steam page enters the final launch countdown',
