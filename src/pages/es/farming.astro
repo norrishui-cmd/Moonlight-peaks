@@ -1,0 +1,93 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+
+const faq = [
+  { q: '¿Se cultiva de noche en Moonlight Peaks?', a: 'Sí. Interpretas a un vampiro, así que cultivar y cuidar la granja se hace a la luz de la luna — solo recuerda volver a tu ataúd antes del amanecer. La agricultura nocturna es el giro característico del bucle cozy de cultivo.' },
+  { q: '¿Qué es un Draculamb?', a: 'Un Draculamb es uno de los animales mágicos que puedes criar en tu granja. También puedes tener como mascota a un adorable Hellkitten de tres ojos.' },
+  { q: '¿Qué tipo de cultivos se pueden sembrar?', a: 'Como vampiro cultivas plantas encantadas y malditas, y flores brillantes — algunos ejemplos tempranos incluyen uvas de sangre, "cruelcumbers", calabazas y belladona. La lista completa de cultivos, precios, estaciones y tiempos de crecimiento se añadirá en el lanzamiento.' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Inicio', item: `${SITE.url}/es` },
+    { '@type': 'ListItem', position: 2, name: 'Agricultura', item: `${SITE.url}/es/farming` },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks — Agricultura, Cultivos y Ganado Mágico"
+  description="Cómo funciona la agricultura en Moonlight Peaks: cultivos encantados y flores brillantes a la luz de la luna, ganado mágico como los Draculambs, y magia que ayuda a trabajar la tierra."
+  path="/es/farming"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Agricultura' }]}
+  lang="es"
+  showExport
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Entrada · Granja</p>
+      <h1>Moonlight Peaks — <em>agricultura</em> y cultivos encantados</h1>
+      <p class="intro">
+        La granja es el corazón de {GAME.title} — con un giro vampírico. Así es como funcionan el
+        cultivo a la luz de la luna, las plantas encantadas y el ganado mágico. Actualizado {SITE.updated}.
+      </p>
+
+      <h2>Cultivar a la luz de la luna</h2>
+      <p>
+        Como criatura de la noche, siembras y cuidas tus plantas después del anochecer — solo recuerda
+        volver a tu ataúd antes de que salga el sol. Es el ritmo familiar de sembrar-cuidar-cosechar de
+        un cozy farming sim, pero invertido hacia la noche.
+      </p>
+
+      <h2>Cultivos encantados y flores brillantes</h2>
+      <p>
+        Las técnicas de cultivo paranormales dan resultados interesantes: en vez de productos comunes,
+        cultivas plantas y flores encantadas y brillantes. Como vampiro tu sustento es comida maldita,
+        así que cultivarás y maldecirás cultivos — entre los primeros vistos están las
+        <strong>uvas de sangre</strong>, los "cruelcumbers", calabazas y belladona. La lista completa de
+        cultivos con precios, estaciones y tiempos de crecimiento se documentará aquí en el lanzamiento.
+      </p>
+
+      <h2>Ganado mágico y mascotas</h2>
+      <p>
+        Tu granja no es solo plantas. Puedes criar ganado mágico como los <strong>Draculambs</strong>, y
+        tener como mascota a un adorable <strong>Hellkitten</strong> de tres ojos por la propiedad.
+      </p>
+
+      <h2>Magia y herramientas</h2>
+      <p>
+        La agricultura y la brujería van de la mano — puedes regar los cultivos con regaderas
+        telequinéticas y aprender <a href="/magic">hechizos</a> (incluyendo un minijuego de riego) que
+        aceleran las tareas de granja y recolección. A medida que avanzas, obtienes nuevas herramientas y
+        desarrollas tu propiedad para cultivar aún más.
+      </p>
+
+      <h2>Llega en el lanzamiento ({GAME.releaseLabel})</h2>
+      <ul>
+        <li>Base de datos completa de <strong>cultivos</strong>: precios de compra/venta, estaciones, tiempos de crecimiento, dónde comprar semillas.</li>
+        <li><strong>Mejores cultivos</strong> por estación y ganancia.</li>
+        <li><strong>Cuidado del ganado</strong> y qué produce cada animal.</li>
+        <li>Puntos de granja marcados en el <a href="/map">mapa interactivo</a>.</li>
+      </ul>
+
+      <h2>FAQ</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        Entrada previa al lanzamiento — los datos de cultivos y ganado llegan en el lanzamiento.
+        Relacionado: <a href="/magic">magia</a>, <a href="/items">objetos</a>,
+        <a href="/environment">entorno</a>, <a href="/map">mapa interactivo</a>,
+        <a href="/es/beginner-guide">guía para principiantes</a> (en español).
+      </div>
+    </div>
+  </article>
+</Base>

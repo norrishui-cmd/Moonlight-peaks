@@ -1,0 +1,89 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+
+const faq = [
+  { q: 'Moonlight Peaks 是在夜间耕种吗?', a: '是的。你扮演的是一名吸血鬼,所以种植和照料作物都是在月光下进行——只要记得日出前赶回棺材就行。夜间耕种是这套温馨向耕种循环里最具特色的一处设计。' },
+  { q: '德古拉羊(Draculamb)是什么?', a: '德古拉羊是你农场里可以饲养的魔法家畜之一。你还可以养一只可爱的三眼地狱猫(Hellkitten)当宠物。' },
+  { q: '能种哪些作物?', a: '作为吸血鬼,你种的是被施了咒的魅惑作物和会发光的花——目前已知的早期例子包括血葡萄、"魔黄瓜"、南瓜和颠茄。完整的作物清单、价格、季节与生长时间会在正式发售时补上。' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '首页', item: `${SITE.url}/zh` },
+    { '@type': 'ListItem', position: 2, name: '耕种攻略', item: `${SITE.url}/zh/farming` },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks —— 耕种攻略、作物与魔法家畜"
+  description="Moonlight Peaks 的耕种系统:月光下种植的魅惑作物与发光花朵、德古拉羊等魔法家畜,以及帮你打理土地的魔法。"
+  path="/zh/farming"
+  jsonLd={jsonLd}
+  crumbs={[{ label: '耕种攻略' }]}
+  lang="zh"
+  showExport
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">词条 · 农场</p>
+      <h1>Moonlight Peaks 的<em>耕种</em>与魅惑作物</h1>
+      <p class="intro">
+        农场是 {GAME.title} 的核心玩法——只是多了一层吸血鬼式的反转。这里讲清楚月光耕种、
+        魅惑作物和魔法家畜是怎么运作的。最后更新:{SITE.updated}。
+      </p>
+
+      <h2>在月光下耕种</h2>
+      <p>
+        作为一名夜之生物,你的种植和照料都是在天黑之后进行——只要记得太阳升起前赶回棺材就好。
+        这本质上还是那套熟悉的"种植-照料-收获"温馨耕种循环,只是把节奏翻转到了夜晚。
+      </p>
+
+      <h2>魅惑作物与发光花朵</h2>
+      <p>
+        超自然的耕种手法带来了有趣的结果:你种出来的不是普通农产品,而是被施了魅惑、会发光的作物和花朵。
+        作为吸血鬼,你的口粮本身就是被诅咒的食物,所以你种的作物也带着诅咒——目前已知的早期品种包括
+        <strong>血葡萄</strong>、"魔黄瓜"、南瓜和颠茄。完整的作物清单(含价格、季节、生长时间)会在
+        正式发售时收录进来。
+      </p>
+
+      <h2>魔法家畜与宠物</h2>
+      <p>
+        你的农场不只是种植物。你可以饲养像<strong>德古拉羊</strong>这样的魔法家畜,还能在庄园里养一只
+        可爱的三眼<strong>地狱猫</strong>当宠物。
+      </p>
+
+      <h2>魔法与工具</h2>
+      <p>
+        耕种和巫术是相辅相成的——你可以用意念控制的浇水壶给作物浇水,学习能加快农活和采集速度的
+        <a href="/magic">法术</a>(包括一个浇水小游戏)。随着游戏推进,你会拿到新工具,把地产逐步
+        发展壮大,种出更多东西。
+      </p>
+
+      <h2>正式发售({GAME.releaseLabel})后会补上的内容</h2>
+      <ul>
+        <li>完整的<strong>作物数据库</strong>:买卖价格、季节、生长时间、种子购买地点。</li>
+        <li>按季节和利润排序的<strong>最赚钱作物</strong>推荐。</li>
+        <li><strong>家畜照料</strong>方式与各自的产出。</li>
+        <li><a href="/map">互动地图</a>上标注的农场位置。</li>
+      </ul>
+
+      <h2>常见问题</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        这是发售前的占位词条——作物和家畜数据会在正式发售时补上。相关内容:
+        <a href="/magic">魔法</a>、<a href="/items">物品</a>、<a href="/environment">环境</a>、
+        <a href="/map">互动地图</a>、<a href="/zh/beginner-guide">新手入门攻略</a>(中文)。
+      </div>
+    </div>
+  </article>
+</Base>

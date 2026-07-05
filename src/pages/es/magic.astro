@@ -1,0 +1,87 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+
+const faq = [
+  { q: '¿Cómo se aprenden hechizos en Moonlight Peaks?', a: 'Aprendes hechicería de las brujas del pueblo. Los hechizos ayudan con tareas cotidianas — trabajar la granja y recolectar recursos — y tu repertorio crece a medida que estudias.' },
+  { q: '¿Qué hace el Elixir de Álter Ego?', a: 'El Elixir de Álter Ego es una poción que cambia tu apariencia. Es un ejemplo entre los muchos brebajes que puedes preparar mediante la alquimia de pociones.' },
+  { q: '¿Es obligatoria la magia para jugar?', a: 'La brujería es un pilar central del juego y facilita la agricultura y la recolección, pero Moonlight Peaks es un cozy life-sim — puedes jugar a tu propio ritmo. Las listas completas de hechizos y pociones se añadirán en el lanzamiento.' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Inicio', item: `${SITE.url}/es` },
+    { '@type': 'ListItem', position: 2, name: 'Magia', item: `${SITE.url}/es/magic` },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks — Magia: Hechizos, Pociones y Elixires"
+  description="Cómo funciona la magia en Moonlight Peaks: aprender hechizos de las brujas del pueblo, preparar pociones como el Elixir de Álter Ego, y cómo la brujería ayuda en la agricultura y la recolección."
+  path="/es/magic"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Magia' }]}
+  lang="es"
+  showExport
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Entrada · Magia</p>
+      <h1>Moonlight Peaks — <em>magia</em>, hechizos y pociones</h1>
+      <p class="intro">
+        La brujería es uno de los pilares centrales de {GAME.title}. Así es como funcionan la
+        hechicería y la alquimia de pociones, y cómo ayudan en tu cozy vida de vampiro. Actualizado
+        {SITE.updated}.
+      </p>
+
+      <h2>Aprender hechizos</h2>
+      <p>
+        Estudias hechicería con las brujas del pueblo. La magia no es solo decorativa — hay un pequeño
+        minijuego de conjuros para regar plantas, además de hechizos que ahorran energía y que
+        desbloqueas para facilitar el trabajo de granja y la recolección. A medida que aprendes,
+        amplías tu repertorio de hechizos.
+      </p>
+
+      <h2>Pociones y el Elixir de Álter Ego</h2>
+      <p>
+        Junto con los hechizos, preparas pociones para desbloquear todo tipo de efectos. El ejemplo
+        estrella es el <strong>Elixir de Álter Ego</strong>, que cambia tu apariencia. La alquimia de
+        pociones se describe como una habilidad clave, así que puedes esperar una variedad de brebajes
+        con distintos usos a lo largo del juego.
+      </p>
+
+      <h2>Brujería y tus poderes de vampiro</h2>
+      <p>
+        La magia convive con tus habilidades de vampiro — desde sentidos mejorados hasta transformarte
+        en <a href="/shapeshifting">murciélago para moverte por el pueblo de noche, con otras formas
+        insinuadas</a>. Consulta la <a href="/beginner-guide">guía para principiantes</a> para ver
+        cómo encaja el lado sobrenatural.
+      </p>
+
+      <h2>Llega en el lanzamiento ({GAME.releaseLabel})</h2>
+      <ul>
+        <li>La <strong>lista completa de hechizos</strong>, qué hace cada uno y cómo desbloquearlo.</li>
+        <li>Cada <strong>receta de poción</strong>, sus ingredientes y su efecto.</li>
+        <li>Qué brujas enseñan qué, y los mejores hechizos tempranos a priorizar.</li>
+      </ul>
+
+      <h2>FAQ</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        Entrada previa al lanzamiento — los datos de hechizos y pociones llegan en el lanzamiento.
+        Relacionado: <a href="/farming">agricultura y cultivos</a>, <a href="/character-creator">creador de personaje</a>,
+        <a href="/shapeshifting">cambio de forma</a>, <a href="/items">objetos</a>,
+        <a href="/es/beginner-guide">guía para principiantes</a> (en español).
+      </div>
+    </div>
+  </article>
+</Base>

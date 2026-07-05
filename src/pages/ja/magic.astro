@@ -1,0 +1,84 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+
+const faq = [
+  { q: 'Moonlight Peaksで呪文はどうやって覚えますか?', a: '町の魔女たちから魔術を学びます。呪文は農作業や資源採集といった日常のタスクに役立ち、学ぶほどにレパートリーが増えていきます。' },
+  { q: 'オルターエゴ・エリクサーとは何ですか?', a: 'オルターエゴ・エリクサーは、見た目を変えるポーションです。ポーション作りで作れる数多くの薬の一例です。' },
+  { q: '魔法を使わないとプレイできませんか?', a: '魔術はゲームの中心的な柱の一つで、農作業や採集を楽にしてくれますが、Moonlight Peaksはコージーなライフシムなので自分のペースで遊べます。呪文とポーションの完全なリストは発売時に追加されます。' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'ホーム', item: `${SITE.url}/ja` },
+    { '@type': 'ListItem', position: 2, name: '魔法', item: `${SITE.url}/ja/magic` },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks — 魔法・呪文とポーション、エリクサー"
+  description="Moonlight Peaksの魔法システム:町の魔女から呪文を学び、オルターエゴ・エリクサーのようなポーションを作り、魔術が農作業や採集にどう役立つか。"
+  path="/ja/magic"
+  jsonLd={jsonLd}
+  crumbs={[{ label: '魔法' }]}
+  lang="ja"
+  showExport
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">エントリー・魔法</p>
+      <h1>Moonlight Peaksの<em>魔法</em>・呪文とポーション</h1>
+      <p class="intro">
+        魔術は{GAME.title}の中心的な柱の一つです。呪文とポーション作りがどう機能するか、そして
+        あなたのコージーな吸血鬼ライフにどう役立つかをまとめました。最終更新:{SITE.updated}。
+      </p>
+
+      <h2>呪文を覚える</h2>
+      <p>
+        町の魔女たちのもとで魔術を学びます。魔法は見た目だけのものではありません——植物に水をやる
+        小さな呪文ミニゲームがあるほか、農作業や採集を楽にしてくれる省エネ系の呪文も解放できます。
+        学ぶにつれて、呪文のレパートリーが広がっていきます。
+      </p>
+
+      <h2>ポーションとオルターエゴ・エリクサー</h2>
+      <p>
+        呪文と並行して、さまざまな効果を持つポーションを調合できます。代表的な例が
+        <strong>オルターエゴ・エリクサー</strong>で、見た目を変える効果があります。ポーション作りは
+        重要なスキルとして紹介されており、ゲーム内には用途の異なるさまざまな薬が登場すると考えられます。
+      </p>
+
+      <h2>魔術と吸血鬼の力</h2>
+      <p>
+        魔法はあなたの吸血鬼としての能力と並んで存在します——感覚の強化から、
+        <a href="/shapeshifting">夜の町を移動するためにコウモリに変身する能力まで、他の姿も
+        ほのめかされています</a>。超自然的な要素がどうつながっているかは
+        <a href="/beginner-guide">初心者ガイド</a>をご覧ください。
+      </p>
+
+      <h2>発売時({GAME.releaseLabel})に追加される情報</h2>
+      <ul>
+        <li>各呪文の効果と解放方法を含む、完全な<strong>呪文リスト</strong>。</li>
+        <li>すべての<strong>ポーションレシピ</strong>、その材料と効果。</li>
+        <li>どの魔女が何を教えてくれるか、序盤で優先すべき呪文。</li>
+      </ul>
+
+      <h2>よくある質問</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        発売前のエントリーです——呪文とポーションのデータは発売時に追加されます。関連ページ:
+        <a href="/farming">農業と作物</a>、<a href="/character-creator">キャラクター作成</a>、
+        <a href="/shapeshifting">変身</a>、<a href="/items">アイテム</a>、
+        <a href="/ja/beginner-guide">初心者ガイド</a>(日本語)。
+      </div>
+    </div>
+  </article>
+</Base>

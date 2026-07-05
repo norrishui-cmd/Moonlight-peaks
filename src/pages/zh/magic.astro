@@ -1,0 +1,81 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+
+const faq = [
+  { q: 'Moonlight Peaks 里怎么学法术?', a: '你跟镇上的女巫学习巫术。法术能帮你完成日常任务——打理农场和采集资源——随着不断学习,你会的法术也会越来越多。' },
+  { q: '"变身药水"(Alter Ego Elixir)是干什么用的?', a: '"变身药水"是一种能改变你外貌的药水,是炼药术里能做出的众多药剂之一。' },
+  { q: '必须用魔法才能玩吗?', a: '巫术是游戏的核心支柱之一,能让耕种和采集变得更轻松,但 Moonlight Peaks 本质是一款温馨生活模拟游戏——你完全可以按自己的节奏来玩。完整的法术和药水清单会在正式发售时补上。' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '首页', item: `${SITE.url}/zh` },
+    { '@type': 'ListItem', position: 2, name: '魔法攻略', item: `${SITE.url}/zh/magic` },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks —— 魔法攻略:法术、药水与变身药剂"
+  description="Moonlight Peaks 的魔法系统:向镇上的女巫学习法术、调配像"变身药水"这样的药剂,以及巫术如何帮你耕种和采集。"
+  path="/zh/magic"
+  jsonLd={jsonLd}
+  crumbs={[{ label: '魔法攻略' }]}
+  lang="zh"
+  showExport
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">词条 · 魔法</p>
+      <h1>Moonlight Peaks 的<em>魔法</em>——法术与药水</h1>
+      <p class="intro">
+        巫术是 {GAME.title} 的核心支柱之一。这里讲清楚施法和炼药是怎么运作的,以及它们如何融入你
+        温馨的吸血鬼生活。最后更新:{SITE.updated}。
+      </p>
+
+      <h2>学习法术</h2>
+      <p>
+        你会跟着镇上的女巫学习巫术。魔法不只是摆设——游戏里有个给植物浇水的小型施法小游戏,
+        还有能解锁的省力法术,让农活和采集变得更轻松。随着不断学习,你的法术储备也会越来越丰富。
+      </p>
+
+      <h2>药水与"变身药水"</h2>
+      <p>
+        除了法术,你还能调配药水解锁各种效果。最具代表性的例子就是<strong>变身药水</strong>,
+        能改变你的外貌。炼药术被描述为一项关键技能,可以预期游戏里会有一系列用途各异的药剂。
+      </p>
+
+      <h2>巫术与你的吸血鬼能力</h2>
+      <p>
+        魔法和你的吸血鬼能力是并存的——从强化的感官,到<a href="/shapeshifting">变身成蝙蝠在夜里
+        穿梭小镇,还暗示了其它形态</a>。想了解超自然元素怎么串联起来,可以看看
+        <a href="/beginner-guide">新手入门攻略</a>。
+      </p>
+
+      <h2>正式发售({GAME.releaseLabel})后会补上的内容</h2>
+      <ul>
+        <li>完整的<strong>法术清单</strong>,每个法术的效果和解锁方式。</li>
+        <li>每一份<strong>药水配方</strong>、所需材料及效果。</li>
+        <li>哪位女巫教哪些法术,以及前期最值得优先学的法术。</li>
+      </ul>
+
+      <h2>常见问题</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        这是发售前的占位词条——法术和药水数据会在正式发售时补上。相关内容:
+        <a href="/farming">耕种与作物</a>、<a href="/character-creator">角色创建</a>、
+        <a href="/shapeshifting">变身</a>、<a href="/items">物品</a>、
+        <a href="/zh/beginner-guide">新手入门攻略</a>(中文)。
+      </div>
+    </div>
+  </article>
+</Base>
