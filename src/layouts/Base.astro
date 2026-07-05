@@ -30,9 +30,15 @@ const hreflangs: { code: string; href: string }[] = [
   { code: 'ja', href: new URL(`/ja${barePath}`.replace(/\/$/, '') || '/ja', SITE.url).href },
   { code: 'zh', href: new URL(`/zh${barePath}`.replace(/\/$/, '') || '/zh', SITE.url).href },
 ];
+const peopleGroup = {
+  label: t(lang, 'characters'),
+  href: '/characters',
+  children: [
+    { href: '/characters', label: t(lang, 'characters') },
+    { href: '/families', label: t(lang, 'families') },
+  ],
+};
 const navPeople = [
-  { href: '/characters', label: t(lang, 'characters') },
-  { href: '/families', label: t(lang, 'families') },
   { href: '/romance', label: t(lang, 'romance') },
 ];
 const navUtility = [
@@ -62,6 +68,7 @@ const worldGroup = {
 const here = Astro.url.pathname.replace(/\/$/, '') || '/';
 const isActive = (href: string) => here === href || (href !== '/' && here.startsWith(`${href}/`));
 const isGuideGroupActive = guideGroup.children.some((c) => isActive(c.href));
+const isPeopleGroupActive = peopleGroup.children.some((c) => isActive(c.href));
 const isWorldGroupActive = worldGroup.children.some((c) => isActive(c.href));
 
 // Only /  and /beginner-guide are translated so far. Every other nav target still only
@@ -187,7 +194,7 @@ const ld = rawLd.map(enrichStructuredData);
           </span>
         </a>
         <nav class="nav" aria-label="Primary">
-          <details class="nav-dd" open={isGuideGroupActive ? true : undefined}>
+          <details class="nav-dd">
             <summary aria-current={isGuideGroupActive ? 'page' : undefined}>{guideGroup.label}</summary>
             <div class="nav-dd-menu">
               {guideGroup.children.map((c) => (
@@ -195,10 +202,18 @@ const ld = rawLd.map(enrichStructuredData);
               ))}
             </div>
           </details>
+          <details class="nav-dd">
+            <summary aria-current={isPeopleGroupActive ? 'page' : undefined}>{peopleGroup.label}</summary>
+            <div class="nav-dd-menu">
+              {peopleGroup.children.map((c) => (
+                <a href={localizedHref(c.href)} aria-current={isActive(c.href) ? 'page' : undefined}>{c.label}</a>
+              ))}
+            </div>
+          </details>
           {navPeople.map((n) => (
             <a href={localizedHref(n.href)} aria-current={isActive(n.href) ? 'page' : undefined}>{n.label}</a>
           ))}
-          <details class="nav-dd" open={isWorldGroupActive ? true : undefined}>
+          <details class="nav-dd">
             <summary aria-current={isWorldGroupActive ? 'page' : undefined}>{worldGroup.label}</summary>
             <div class="nav-dd-menu">
               {worldGroup.children.map((c) => (

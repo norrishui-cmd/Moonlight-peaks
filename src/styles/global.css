@@ -58,18 +58,19 @@ button, input, select, textarea { font: inherit; }
   background: color-mix(in srgb, var(--ink) 84%, transparent);
   border-bottom: 1px solid var(--line);
 }
-.site-header .bar { display: flex; align-items: center; justify-content: space-between; min-height: 60px; padding: 8px 0; }
-.brand { display: flex; align-items: center; gap: 10px; font-family: var(--display); }
+.site-header .wrap { max-width: 1320px; }
+.site-header .bar { display: flex; align-items: center; justify-content: space-between; gap: 14px; min-height: 60px; padding: 8px 20px; }
+.brand { display: flex; align-items: center; gap: 10px; flex: 0 0 auto; font-family: var(--display); }
 .brand .moon {
   width: 18px; height: 18px; border-radius: 50%; flex: 0 0 auto;
   background: radial-gradient(circle at 32% 32%, var(--candle), #cda23f);
   box-shadow: 0 0 14px rgba(243,201,105,0.5);
 }
 .brand .mark { display: flex; flex-direction: column; line-height: 1.2; }
-.brand .mark-title { font-weight: 600; font-size: 1.12rem; letter-spacing: -0.01em; color: var(--mist); }
-.brand .mark-sub { font-size: 0.72rem; font-style: italic; font-weight: 500; color: var(--candle); }
-.nav { display: flex; gap: 18px; flex-wrap: wrap; justify-content: flex-end; font-size: 0.9rem; }
-.nav a { color: var(--muted); transition: color .15s ease; }
+.brand .mark-title { display: block; font-weight: 600; font-size: 1.12rem; letter-spacing: -0.01em; color: var(--mist); white-space: nowrap; }
+.brand .mark-sub { display: block; font-size: 0.72rem; font-style: italic; font-weight: 500; color: var(--candle); white-space: nowrap; }
+.nav { display: flex; align-items: center; gap: clamp(10px, 1.15vw, 16px); flex: 1 1 auto; min-width: 0; flex-wrap: nowrap; justify-content: flex-end; font-size: 0.9rem; }
+.nav a { color: var(--muted); transition: color .15s ease; white-space: nowrap; }
 .nav a:hover, .nav a[aria-current="page"] { color: var(--candle); }
 
 /* Guides dropdown — zero-JS via native <details>/<summary>. Desktop: absolute popup under the
@@ -78,7 +79,7 @@ button, input, select, textarea { font: inherit; }
 .nav-dd { position: relative; }
 .nav-dd > summary {
   list-style: none; cursor: pointer; color: var(--muted); transition: color .15s ease;
-  display: inline-flex; align-items: center; gap: 4px;
+  display: inline-flex; align-items: center; gap: 4px; white-space: nowrap;
 }
 .nav-dd > summary::-webkit-details-marker { display: none; }
 .nav-dd > summary::after {
@@ -100,6 +101,7 @@ button, input, select, textarea { font: inherit; }
   color: var(--muted); transition: color .15s ease, background .15s ease;
 }
 .nav-dd-menu a:hover, .nav-dd-menu a[aria-current="page"] { color: var(--candle); background: color-mix(in srgb, var(--surface) 80%, transparent); }
+.lang-dd { flex: 0 0 auto; }
 @media (max-width: 760px) {
   .site-header {
     position: sticky;
