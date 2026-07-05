@@ -1,0 +1,88 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+import YouTube from '../../components/YouTube.astro';
+
+const facts = [
+  ['価格', '無料'],
+  ['プレイ場所', 'SteamとNintendo eショップ、Switch 2対応'],
+  ['進行状況の引き継ぎ', '確認された引き継ぎはなし。体験版は独立したお試し版として扱ってください'],
+  ['収録アクティビティ', 'キャラクター作成、釣り、フラワーアレンジメント、刺繍、序盤の町の住民とのやり取り'],
+  ['正式版発売', GAME.releaseLabel],
+];
+
+const faq = [
+  { q: 'Moonlight Peaksの体験版は無料ですか?', a: 'はい。体験版はSteamとNintendo eショップで無料配信されています。' },
+  { q: '体験版の進行状況は引き継がれますか?', a: '引き継ぎについての公式発表はまだないため、発売時の公式情報で別の案内がない限り、正式版は最初から始めることになります。' },
+  { q: '体験版では何ができますか?', a: '体験版ではキャラクター作成のほか、釣り、フラワーアレンジメント、刺繍といったコージーなアクティビティの一部、そして序盤の住民とのやり取りを体験できます。' },
+  { q: '体験版はSwitch 2で遊べますか?', a: 'Nintendo eショップの体験版はSwitchとSwitch 2の両方でプレイ可能です。' },
+  { q: '購入前に体験版を試すべきですか?', a: '発売前に雰囲気や操作性、序盤のゲームループを確認したいなら、試す価値があります。' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'ホーム', item: `${SITE.url}/ja` },
+    { '@type': 'ListItem', position: 2, name: '体験版', item: `${SITE.url}/ja/demo` },
+  ] },
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+];
+---
+<Base
+  title="Moonlight Peaks 体験版ガイド — ダウンロード・内容・FAQ"
+  description="Moonlight Peaks体験版ガイド:ダウンロード場所、収録内容、進行状況の引き継ぎ、Switch/Steam対応、コツ、既知の制限について。"
+  path="/ja/demo"
+  jsonLd={jsonLd}
+  crumbs={[{ label: '体験版' }]}
+  lang="ja"
+  showExport
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">エントリー・体験版</p>
+      <h1>Moonlight Peaks <em>体験版</em>ガイド</h1>
+      <p class="intro">
+        無料のMoonlight Peaks体験版は、{GAME.releaseLabel}の正式発売前にこのコージーな吸血鬼
+        ライフシムを試せる、最も手軽な方法です。ダウンロード場所、収録内容、引き継がれない要素を
+        まとめました。
+      </p>
+
+      <div class="demo-video">
+        <YouTube id="BvfEwKHmMfg" title="Moonlight Peaks demo video" />
+      </div>
+
+      <h2>基本情報</h2>
+      <table class="facts">
+        {facts.map((row) => (<tr><th>{row[0]}</th><td>{row[1]}</td></tr>))}
+      </table>
+
+      <h2>体験版で確認すべきこと</h2>
+      <p>
+        雰囲気や操作性、カメラワーク、ゆったりとしたコージーなアクティビティが自分に合うかどうかを
+        判断するのに体験版を使いましょう。全てのシステムを網羅しているわけではありません。
+        正確な作物の価値、完全な贈り物一覧、後半のクエスト、コレクションの完全なリストは
+        正式版のみで確認できます。
+      </p>
+      <ul>
+        <li><strong>雰囲気を確かめる:</strong>体験版は雰囲気と操作性の確認に最適です。</li>
+        <li><strong>序盤のアクティビティを試す:</strong>釣り、フラワーアレンジメント、刺繍、住民との交流が参考になります。</li>
+        <li><strong>過度に最適化しない:</strong>進行状況の引き継ぎが未確認なので、体験版は練習だと考えましょう。</li>
+        <li><strong>プラットフォームを比較する:</strong>Steam、Switch、Switch 2それぞれで操作性やパフォーマンスを個別に確認しましょう。</li>
+      </ul>
+
+      <h2>よくある質問</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        関連ページ:<a href="/ja/release-date">発売日</a>、<a href="/ja/platforms">対応機種</a>、
+        <a href="/demo">体験版の詳細ガイド</a>(英語)。
+      </div>
+    </div>
+  </article>
+</Base>

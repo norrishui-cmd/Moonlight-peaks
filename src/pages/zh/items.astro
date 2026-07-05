@@ -1,0 +1,59 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+
+const faq = [
+  { q: 'Moonlight Peaks 里有哪些物品?', a: '发售前的结构里列出了工具、肥料、服装、鱼类、小生物、Vampster、灵魂史莱姆(Soul Blobs)、烹饪、手工、神器、农活助手、药水、矿物和装饰品等物品分类。具体名字、效果、价格和获取方式还要等正式发售才能确认。' },
+  { q: 'Moonlight Peaks 里有药水吗?', a: '有。炼药是已确认的玩法,能改变外貌的"变身药水"就是一个确认过的例子。完整的药水清单会在发售后逐步确认。' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '首页', item: `${SITE.url}/zh` },
+    { '@type': 'ListItem', position: 2, name: '物品', item: `${SITE.url}/zh/items` },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks —— 物品:工具、药水与分类"
+  description="Moonlight Peaks 的物品分类:工具、肥料、服装、鱼类、小生物、烹饪、手工、神器、药水、矿物与装饰品。"
+  path="/zh/items"
+  jsonLd={jsonLd}
+  crumbs={[{ label: '物品' }]}
+  lang="zh"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">词条 · 物品</p>
+      <h1><em>Moonlight Peaks</em> 的物品</h1>
+      <p class="intro">
+        这是你在 {GAME.title} 的吸血鬼农场里会收集、制作、烹饪、挖掘和使用的物品索引。部分系统已经
+        确认,但具体的物品名称和效果还需要正式版上线后才能验证。
+      </p>
+
+      <h2>物品分类</h2>
+      <p>
+        已确认或预期存在的分类包括工具、肥料、服装、鱼类、小生物、Vampster、灵魂史莱姆、烹饪、手工、
+        神器、农活助手、药水、矿物和装饰品。每个分类都有各自的详细页面——目前<a href="/items">只有英文版</a>——
+        具体名字、效果和获取来源会在正式发售确认后补充进去。
+      </p>
+
+      <h2>常见问题</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        相关内容:<a href="/farming">耕种</a>、<a href="/magic">魔法与药水</a>、
+        <a href="/activities">活动</a>、<a href="/locations">地点</a>、
+        <a href="/items">完整分类列表</a>(英文)。
+      </div>
+    </div>
+  </article>
+</Base>

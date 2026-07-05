@@ -1,0 +1,60 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+
+const faq = [
+  { q: 'Moonlight Peaksにはどんなアイテムがありますか?', a: '発売前の構造では、道具、肥料、衣類、魚、生き物、Vampster、Soul Blobs、料理、クラフト、アーティファクト、農作業補助、ポーション、鉱物、インテリアといったアイテムカテゴリが確認されています。具体的な名前、効果、価格、入手方法は発売時の確認が必要です。' },
+  { q: 'Moonlight Peaksにポーションはありますか?', a: 'はい。ポーション作りは確認済みの要素で、見た目を変えるオルターエゴ・エリクサーがその一例として確認されています。ポーションの完全なリストは発売後に確認されます。' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'ホーム', item: `${SITE.url}/ja` },
+    { '@type': 'ListItem', position: 2, name: 'アイテム', item: `${SITE.url}/ja/items` },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks — アイテム:道具・ポーション・カテゴリ"
+  description="Moonlight Peaksのアイテムカテゴリ:道具、肥料、衣類、魚、生き物、料理、クラフト、アーティファクト、ポーション、鉱物、インテリア。"
+  path="/ja/items"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'アイテム' }]}
+  lang="ja"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">エントリー・アイテム</p>
+      <h1><em>Moonlight Peaks</em>のアイテム</h1>
+      <p class="intro">
+        {GAME.title}の吸血鬼農場で集めたり、作ったり、料理したり、採掘したり、使ったりするアイテムの
+        一覧です。一部のシステムは確認済みですが、具体的なアイテム名や効果は正式版での確認が必要です。
+      </p>
+
+      <h2>アイテムカテゴリ</h2>
+      <p>
+        確認済み・予想されるカテゴリには、道具、肥料、衣類、魚、生き物、Vampster、Soul Blobs、料理、
+        クラフト、アーティファクト、農作業補助、ポーション、鉱物、インテリアなどがあります。
+        各カテゴリには専用の詳細ページがあり——現時点では<a href="/items">英語版のみ</a>——
+        具体的な名前・効果・入手方法は発売時に確認され次第追加されます。
+      </p>
+
+      <h2>よくある質問</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        関連ページ:<a href="/farming">農業</a>、<a href="/magic">魔法とポーション</a>、
+        <a href="/activities">アクティビティ</a>、<a href="/locations">ロケーション</a>、
+        <a href="/items">全カテゴリ一覧</a>(英語)。
+      </div>
+    </div>
+  </article>
+</Base>

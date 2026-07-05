@@ -1,0 +1,62 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+
+const faq = [
+  { q: '¿Qué objetos hay en Moonlight Peaks?', a: 'La estructura previa al lanzamiento lista categorías de objetos incluyendo herramientas, fertilizante, ropa, peces, criaturas, Vampster, Soul Blobs, cocina, artesanía, artefactos, ayudantes de granja, pociones, minerales y decoraciones. Nombres, efectos, precios y fuentes específicas aún necesitan verificación en el lanzamiento.' },
+  { q: '¿Hay pociones en Moonlight Peaks?', a: 'Sí. La alquimia de pociones es una actividad confirmada, y el Elixir de Álter Ego, que cambia tu apariencia, es un ejemplo confirmado. La lista completa de pociones se verificará después del lanzamiento.' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Inicio', item: `${SITE.url}/es` },
+    { '@type': 'ListItem', position: 2, name: 'Objetos', item: `${SITE.url}/es/items` },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks — Objetos: Herramientas, Pociones y Categorías"
+  description="Categorías de objetos en Moonlight Peaks: herramientas, fertilizante, ropa, peces, criaturas, cocina, artesanía, artefactos, pociones, minerales y decoraciones."
+  path="/es/items"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Objetos' }]}
+  lang="es"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Hub · Objetos</p>
+      <h1>Objetos de <em>Moonlight Peaks</em></h1>
+      <p class="intro">
+        Un índice de los objetos que recolectarás, fabricarás, cocinarás, minarás y usarás en tu
+        granja vampírica de {GAME.title}. Algunos sistemas están confirmados, mientras que los
+        nombres y efectos exactos de los objetos aún necesitan verificación con el juego en vivo.
+      </p>
+
+      <h2>Categorías de objetos</h2>
+      <p>
+        Las categorías confirmadas o esperadas incluyen herramientas, fertilizante, ropa, peces,
+        criaturas, Vampster, Soul Blobs, cocina, artesanía, artefactos, ayudantes de granja, pociones,
+        minerales y decoraciones. Cada categoría tiene su propia página detallada —
+        <a href="/items">disponible en inglés</a> por ahora — con nombres específicos, efectos y
+        fuentes en cuanto se confirmen en el lanzamiento.
+      </p>
+
+      <h2>FAQ</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        Relacionado: <a href="/farming">agricultura</a>, <a href="/magic">magia y pociones</a>,
+        <a href="/activities">actividades</a>, <a href="/locations">ubicaciones</a>,
+        <a href="/items">todas las categorías</a> (en inglés).
+      </div>
+    </div>
+  </article>
+</Base>

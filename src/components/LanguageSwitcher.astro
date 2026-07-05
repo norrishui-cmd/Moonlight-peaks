@@ -9,7 +9,7 @@ const labels: Record<Locale, string> = { en: 'English', es: 'Español', ja: '日
 const shortLabels: Record<Locale, string> = { en: 'EN', es: 'ES', ja: 'JA', zh: 'ZH' };
 // Only pages in this set exist in translated form so far. Falls back to the English
 // version of the current page for any locale/page combo not yet translated.
-const translatedPaths = new Set<string>(['/', '/beginner-guide', '/release-date', '/faq', '/characters', '/farming', '/magic', '/platforms', '/romance']);
+const translatedPaths = new Set<string>(['/', '/beginner-guide', '/release-date', '/faq', '/characters', '/farming', '/magic', '/platforms', '/romance', '/environment', '/items', '/demo']);
 const translatedCharSlugs = new Set<string>(Object.keys(charTranslations.es)); // same slugs across es/ja/zh
 const bare = path.replace(/^\/(es|ja|zh)(\/|$)/, '/');
 const charMatch = bare.match(/^\/characters\/([a-z0-9-]+)$/);

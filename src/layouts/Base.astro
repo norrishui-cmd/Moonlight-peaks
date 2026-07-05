@@ -67,7 +67,7 @@ const isWorldGroupActive = worldGroup.children.some((c) => isActive(c.href));
 // Only /  and /beginner-guide are translated so far. Every other nav target still only
 // exists in English — linking to a non-existent /es/characters etc. would 404. As more
 // pages get translated, add their bare English path here and links will follow automatically.
-const translatedPaths = new Set<string>(['/', '/beginner-guide', '/release-date', '/faq', '/characters', '/farming', '/magic', '/platforms', '/romance']);
+const translatedPaths = new Set<string>(['/', '/beginner-guide', '/release-date', '/faq', '/characters', '/farming', '/magic', '/platforms', '/romance', '/environment', '/items', '/demo']);
 const translatedCharSlugs = new Set<string>(Object.keys(charTranslations.es)); // same slugs across es/ja/zh
 const localizedHref = (href: string): string => {
   if (lang === 'en') return href;
