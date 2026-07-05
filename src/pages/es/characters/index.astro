@@ -4,23 +4,26 @@ import { SITE, GAME } from '../../../consts';
 import { characters } from '../../../data/characters';
 import { charTranslations } from '../../../i18n/characters-data';
 
+const translatedSlugs = ['count-dracula', 'saga', 'luna', 'orlock', 'logan', 'the-warlock'] as const;
 const translations = charTranslations.es;
-const list = Object.keys(translations).map((slug) => ({
+const list = translatedSlugs.map((slug) => ({
   slug,
   base: characters.find((c) => c.id === slug)!,
-  tr: translations[slug as keyof typeof translations],
+  tr: translations[slug],
 }));
 
 const jsonLd = {
-  '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
     { '@type': 'ListItem', position: 1, name: 'Inicio', item: `${SITE.url}/es` },
     { '@type': 'ListItem', position: 2, name: 'Personajes', item: `${SITE.url}/es/characters` },
   ],
 };
 ---
 <Base
-  title="Personajes de Moonlight Peaks — Guía en Español"
-  description="Perfiles en español de los personajes de Moonlight Peaks: familia, estado de romance y lo que sabemos hasta ahora sobre cada uno."
+  title="Personajes de Moonlight Peaks - Guia en Espanol"
+  description="Perfiles en espanol de los personajes de Moonlight Peaks: familia, estado de romance y datos confirmados hasta ahora."
   path="/es/characters"
   jsonLd={jsonLd}
   crumbs={[{ label: 'Personajes' }]}
@@ -28,11 +31,11 @@ const jsonLd = {
 >
   <article class="page">
     <div class="wrap">
-      <p class="eyebrow">Entrada · Personajes</p>
+      <p class="eyebrow">Entrada / Personajes</p>
       <h1>Personajes de <em>Moonlight Peaks</em></h1>
       <p class="intro">
-        Perfiles en español de los residentes más buscados de {GAME.title}. Marcamos claramente qué
-        está confirmado por los desarrolladores frente a lo reportado en avances de prensa.
+        Perfiles en espanol de los residentes mas buscados de {GAME.title}. Esta seccion marca
+        lo confirmado y separa los detalles que aun necesitan verificacion en la version final.
       </p>
 
       <div class="cx-grid">
@@ -50,9 +53,8 @@ const jsonLd = {
       </div>
 
       <div class="callout wip">
-        Estos son los 6 personajes traducidos hasta ahora. La ficha completa de todos los residentes
-        está disponible en <a href="/characters">la página de personajes en inglés</a> — seguiremos
-        añadiendo más traducciones por partes.
+        Esta primera fase incluye 6 perfiles traducidos. La lista completa de residentes sigue
+        disponible en <a href="/characters">la pagina principal de personajes</a>.
       </div>
     </div>
   </article>

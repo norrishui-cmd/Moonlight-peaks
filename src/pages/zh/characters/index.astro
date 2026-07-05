@@ -4,11 +4,12 @@ import { SITE, GAME } from '../../../consts';
 import { characters } from '../../../data/characters';
 import { charTranslations } from '../../../i18n/characters-data';
 
+const translatedSlugs = ['count-dracula', 'saga', 'luna', 'orlock', 'logan', 'the-warlock'] as const;
 const translations = charTranslations.zh;
-const list = Object.keys(translations).map((slug) => ({
+const list = translatedSlugs.map((slug) => ({
   slug,
   base: characters.find((c) => c.id === slug)!,
-  tr: translations[slug as keyof typeof translations],
+  tr: translations[slug],
 }));
 
 const jsonLd = {
@@ -22,7 +23,7 @@ const jsonLd = {
 ---
 <Base
   title="Moonlight Peaks 角色列表 - 中文攻略"
-  description="Moonlight Peaks 角色中文资料: 所属家族、恋爱状态、已知居民信息和中文角色页面入口。"
+  description="Moonlight Peaks 角色中文资料，整理主要角色、所属家族、恋爱状态和上线前已确认的信息。"
   path="/zh/characters"
   jsonLd={jsonLd}
   crumbs={[{ label: '角色' }]}
@@ -30,10 +31,10 @@ const jsonLd = {
 >
   <article class="page">
     <div class="wrap">
-      <p class="eyebrow">词条 · 角色</p>
+      <p class="eyebrow">词条 / 角色</p>
       <h1><em>Moonlight Peaks</em> 角色列表</h1>
       <p class="intro">
-        这里整理 {GAME.title} 中目前已经翻译的角色资料。页面会区分已确认信息和仍需正式版验证的内容,
+        这里整理 {GAME.title} 目前已经翻译的角色资料。页面会区分已确认信息和仍需正式版验证的内容，
         并在游戏上线后继续补充更多居民、家族、礼物和恋爱状态。
       </p>
 
@@ -41,13 +42,7 @@ const jsonLd = {
         {list.map(({ slug, base, tr }) => (
           <a class="cx-card" href={`/zh/characters/${slug}`}>
             <span class="cx-thumb">
-              {base.img ? (
-                <img src={base.img} alt="" loading="lazy" width="72" height="72" />
-              ) : (
-                <span class="cx-letter" style={`background: linear-gradient(135deg, ${base.c1}, ${base.c2})`}>
-                  {tr.name.charAt(0)}
-                </span>
-              )}
+              {base.img ? <img src={base.img} alt="" loading="lazy" width="72" height="72" /> : <span class="cx-letter" style={`background: linear-gradient(135deg, ${base.c1}, ${base.c2})`}>{tr.name.charAt(0)}</span>}
             </span>
             <span>
               <strong>{tr.name}</strong>
@@ -58,8 +53,8 @@ const jsonLd = {
       </div>
 
       <div class="callout wip">
-        中文角色页会持续分批扩充。完整角色资料可以先查看
-        <a href="/characters">英文角色列表</a>、<a href="/families">家族页面</a> 和
+        中文角色页会继续分批扩充。完整资料可先查看
+        <a href="/characters">英文角色列表</a>、<a href="/families">家族页面</a>和
         <a href="/romance">恋爱攻略</a>。
       </div>
     </div>

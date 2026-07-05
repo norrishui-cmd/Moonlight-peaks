@@ -1,0 +1,127 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+
+const rows = [
+  ['英语', '作为默认界面和攻略术语的基础语言进行追踪。'],
+  ['德语', '已列入追踪语言；上线时需要以官方商店语言表为准。'],
+  ['日语', '对日本玩家查询 Steam、Switch 等版本很重要。'],
+  ['韩语', '已列入追踪语言；界面和字幕覆盖范围需要上线后确认。'],
+  ['简体中文', '对中文搜索需求和 Steam 玩家很重要。'],
+  ['繁体中文', '对台湾、香港及区域商店搜索有帮助。'],
+];
+
+const faq = [
+  {
+    q: 'Moonlight Peaks 支持哪些语言？',
+    a: `目前追踪到的语言包括 ${GAME.languages.join(', ')}。最终的界面、字幕和语音覆盖范围，请以上线时官方商店页面为准。`,
+  },
+  {
+    q: 'Moonlight Peaks 支持简体中文吗？',
+    a: '简体中文已列入追踪语言。不过具体是否覆盖界面、字幕等细项，仍需要查看官方商店页面和正式版。'
+  },
+  {
+    q: 'Moonlight Peaks 支持日语吗？',
+    a: '日语已列入追踪语言。日本玩家仍应在游戏上线后查看官方商店页面，确认最终语言功能覆盖。'
+  },
+  {
+    q: '上线后语言支持会变化吗？',
+    a: '有可能。商店语言信息可能随着正式版和后续更新变化，所以这个页面上线后也需要继续复核。'
+  },
+];
+
+const steamUrl = 'https://store.steampowered.com/app/2209900/Moonlight_Peaks/';
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '首页', item: `${SITE.url}/zh` },
+    { '@type': 'ListItem', position: 2, name: '语言支持', item: new URL('/zh/languages', SITE.url).href },
+  ] },
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })) },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: 'Moonlight Peaks 语言支持',
+    description: 'Moonlight Peaks 英语、德语、日语、韩语、简体中文和繁体中文语言支持指南。',
+    url: new URL('/zh/languages', SITE.url).href,
+    author: { '@type': 'Organization', name: SITE.brand },
+    publisher: { '@type': 'Organization', name: SITE.brand },
+    about: { '@type': 'VideoGame', name: GAME.title, gamePlatform: GAME.platforms },
+    citation: [steamUrl],
+  },
+];
+---
+<Base
+  title="Moonlight Peaks 语言支持 - 日语、中文、韩语等"
+  description="Moonlight Peaks 语言支持指南，覆盖英语、德语、日语、韩语、简体中文、繁体中文，以及上线后的核查重点。"
+  path="/zh/languages"
+  jsonLd={jsonLd}
+  crumbs={[{ label: '语言支持' }]}
+  lang="zh"
+  showExport
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">上线 / 语言支持</p>
+      <h1>Moonlight Peaks <em>语言支持</em></h1>
+      <p class="intro">
+        这里整理 {GAME.title} 目前追踪到的语言信息，方便中文、日语、韩语、德语和英语玩家
+        在购买前快速确认是否适合自己。
+      </p>
+
+      <div class="callout">
+        <strong>上线后请复核：</strong>语言信息可能在发售前后调整。请以官方商店页面中的界面、
+        字幕和语音列为最终依据。
+      </div>
+
+      <h2>已追踪语言</h2>
+      <table class="facts">
+        {rows.map((row) => (<tr><th>{row[0]}</th><td>{row[1]}</td></tr>))}
+      </table>
+
+      <h2>为什么这个页面重要</h2>
+      <p>
+        语言支持是发售前非常明确的搜索需求。玩家在 Steam、Switch、Switch 2 或 Android 上购买前，
+        通常会先确认自己是否能看懂界面、字幕和核心游戏术语。
+      </p>
+
+      <h2>上线核查清单</h2>
+      <ul>
+        <li>检查 Steam 语言表中的界面、字幕和语音列。</li>
+        <li>如果 Nintendo eShop 或 Google Play 语言表不同，需要分别确认。</li>
+        <li>上线后把物品名、角色名和 UI 术语同步为正式版写法。</li>
+        <li>如果日语、简体中文、繁体中文搜索曝光增长，优先扩充对应页面。</li>
+      </ul>
+
+      <h2>相关页面</h2>
+      <div class="link-grid">
+        <a href="/zh/release-date">发售日期</a>
+        <a href="/zh/platforms">平台信息</a>
+        <a href="/zh/demo">Demo 指南</a>
+        <a href="/zh/faq">常见问题</a>
+        <a href="/zh/beginner-guide">新手指南</a>
+      </div>
+
+      <h2>FAQ</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </article>
+
+  <style>
+    .link-grid { display: grid; grid-template-columns: 1fr; gap: 10px; margin-top: 10px; }
+    @media (min-width: 640px) { .link-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+    .link-grid a { border: 1px solid var(--line); border-radius: 10px; background: var(--surface); color: var(--mist); padding: 12px 14px; text-decoration: none; }
+    .link-grid a:hover { border-color: color-mix(in srgb, var(--candle) 55%, var(--line)); }
+  </style>
+</Base>

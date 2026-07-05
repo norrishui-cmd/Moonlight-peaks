@@ -1,0 +1,127 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+
+const rows = [
+  ['英語', '基本UIとガイド用語の基準になる言語として追跡しています。'],
+  ['ドイツ語', '対応言語として追跡中です。発売時の公式ストア表で最終確認します。'],
+  ['日本語', '日本のプレイヤーがSteamやSwitch版を確認するときに重要な対応言語です。'],
+  ['韓国語', '対応言語として追跡中です。UIと字幕の範囲は発売後に確認します。'],
+  ['簡体字中国語', '中国語検索とSteamユーザーにとって重要な対応言語です。'],
+  ['繁体字中国語', '台湾、香港、地域ストアでの検索に役立つ対応言語です。'],
+];
+
+const faq = [
+  {
+    q: 'Moonlight Peaksはどの言語に対応していますか？',
+    a: `現在追跡している言語は ${GAME.languages.join(', ')} です。インターフェース、字幕、音声の最終的な内訳は発売時の公式ストアで確認してください。`,
+  },
+  {
+    q: 'Moonlight Peaksは簡体字中国語に対応していますか？',
+    a: '簡体字中国語は対応言語として追跡しています。ただし、UIや字幕の正確な対応範囲は公式ストアページで確認する必要があります。',
+  },
+  {
+    q: 'Moonlight Peaksは日本語に対応していますか？',
+    a: '日本語は対応言語として追跡しています。発売後にストアページで最終的な言語機能の範囲を確認してください。',
+  },
+  {
+    q: '発売後に対応言語が変わることはありますか？',
+    a: 'あります。ストアの言語メタデータは発売ビルドやアップデートで変わる可能性があるため、このページも発売後に再確認します。',
+  },
+];
+
+const steamUrl = 'https://store.steampowered.com/app/2209900/Moonlight_Peaks/';
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'ホーム', item: `${SITE.url}/ja` },
+    { '@type': 'ListItem', position: 2, name: '対応言語', item: new URL('/ja/languages', SITE.url).href },
+  ] },
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })) },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: 'Moonlight Peaksの対応言語',
+    description: 'Moonlight Peaksの英語、ドイツ語、日本語、韓国語、簡体字中国語、繁体字中国語の対応状況ガイド。',
+    url: new URL('/ja/languages', SITE.url).href,
+    author: { '@type': 'Organization', name: SITE.brand },
+    publisher: { '@type': 'Organization', name: SITE.brand },
+    about: { '@type': 'VideoGame', name: GAME.title, gamePlatform: GAME.platforms },
+    citation: [steamUrl],
+  },
+];
+---
+<Base
+  title="Moonlight Peaks 対応言語 - 日本語・中国語・韓国語など"
+  description="Moonlight Peaksの英語、ドイツ語、日本語、韓国語、簡体字中国語、繁体字中国語の対応状況と発売時の確認ポイント。"
+  path="/ja/languages"
+  jsonLd={jsonLd}
+  crumbs={[{ label: '対応言語' }]}
+  lang="ja"
+  showExport
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">発売 / 対応言語</p>
+      <h1>Moonlight Peaksの<em>対応言語</em></h1>
+      <p class="intro">
+        {GAME.title}で現在追跡している対応言語をまとめたページです。日本語、中国語、韓国語、
+        ドイツ語、英語で検索するプレイヤーが発売前に確認しやすいように整理しています。
+      </p>
+
+      <div class="callout">
+        <strong>発売時に再確認:</strong> 言語情報は発売直前や発売後に変わることがあります。
+        公式ストアでインターフェース、字幕、音声の対応範囲を確認してください。
+      </div>
+
+      <h2>追跡中の言語</h2>
+      <table class="facts">
+        {rows.map((row) => (<tr><th>{row[0]}</th><td>{row[1]}</td></tr>))}
+      </table>
+
+      <h2>発売前に重要な理由</h2>
+      <p>
+        言語対応は購入前の重要な検索意図です。Steam、Switch、Switch 2、Androidで遊ぶ前に、
+        自分の言語で快適に遊べるかを確認したいプレイヤーが多くいます。
+      </p>
+
+      <h2>確認チェックリスト</h2>
+      <ul>
+        <li>Steamの言語表でインターフェース、字幕、音声の列を確認する。</li>
+        <li>Nintendo eShopとGoogle Playは別々に確認する。</li>
+        <li>発売後、アイテム名、キャラクター名、UI用語を実機表記に合わせる。</li>
+        <li>日本語、簡体字中国語、繁体字中国語の検索表示が伸びたら優先して更新する。</li>
+      </ul>
+
+      <h2>関連ページ</h2>
+      <div class="link-grid">
+        <a href="/ja/release-date">発売日</a>
+        <a href="/ja/platforms">プラットフォーム</a>
+        <a href="/ja/demo">デモガイド</a>
+        <a href="/ja/faq">よくある質問</a>
+        <a href="/ja/beginner-guide">初心者ガイド</a>
+      </div>
+
+      <h2>FAQ</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </article>
+
+  <style>
+    .link-grid { display: grid; grid-template-columns: 1fr; gap: 10px; margin-top: 10px; }
+    @media (min-width: 640px) { .link-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+    .link-grid a { border: 1px solid var(--line); border-radius: 10px; background: var(--surface); color: var(--mist); padding: 12px 14px; text-decoration: none; }
+    .link-grid a:hover { border-color: color-mix(in srgb, var(--candle) 55%, var(--line)); }
+  </style>
+</Base>
