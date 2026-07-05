@@ -1,0 +1,92 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+
+const faq = [
+  { q: '¿Puedes personalizar tu personaje en Moonlight Peaks?', a: 'Sí. Hay un creador de personaje completo — ya jugable en la demo gratuita — donde eliges el tono de piel, ojos, peinado, maquillaje y atuendos de tu vampiro. Las opciones están diseñadas para ser inclusivas con cualquier estilo, con un toque sobrenatural.' },
+  { q: '¿El creador de personaje de Moonlight Peaks es neutral en género?', a: 'Sí. Los modelos de personaje son intencionalmente neutrales en género, y el sistema de citas no está limitado por género, así que puedes construir el vampiro que quieras y conquistar a cualquier residente elegible sin importar cómo te presentes.' },
+  { q: '¿Puedes cambiar tu apariencia después de crear tu personaje?', a: 'Sí. El Elixir de Álter Ego es una poción que cambia tu apariencia, así que no estás atado permanentemente a tu look inicial. Los detalles exactos llegan en el lanzamiento.' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Inicio', item: `${SITE.url}/es` },
+    { '@type': 'ListItem', position: 2, name: 'Creador de personaje', item: `${SITE.url}/es/character-creator` },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks — Creador de Personaje: Opciones de Personalización"
+  description="Cómo funciona la creación de personaje en Moonlight Peaks: el creador de vampiro de la demo — tonos de piel, ojos, peinados, maquillaje y atuendos, neutral en género e inclusivo."
+  path="/es/character-creator"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Creador de personaje' }]}
+  lang="es"
+  showExport
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Entrada · Creador de personaje</p>
+      <h1>El <em>creador de personaje</em> de Moonlight Peaks</h1>
+      <p class="intro">
+        Antes de cuidar un solo cultivo bajo la luna, diseñas a tu vampiro. Esto es lo que permite
+        hacer el creador de personaje de {GAME.title} — según los detalles oficiales y la demo
+        gratuita, que ya lo incluye. Actualizado {SITE.updated}.
+      </p>
+
+      <h2>Pruébalo ahora en la demo gratuita</h2>
+      <p>
+        El creador de personaje es una de las funciones estrella de la demo gratuita en Steam y
+        Nintendo eShop, así que puedes construir a tu vampiro y experimentar con looks ahora mismo,
+        antes del lanzamiento completo. Consulta nuestra <a href="/demo">guía de la demo</a> para ver
+        qué más incluye.
+      </p>
+
+      <h2>Qué puedes personalizar</h2>
+      <p>
+        Das forma a la apariencia de tu vampiro con tonos de piel, ojos, peinados, maquillaje y
+        atuendos. El estudio describe las opciones como inclusivas con cualquier estilo, todas con un
+        toque sobrenatural — ya sea que quieras verte casual, caprichoso, o, apropiadamente, letalmente
+        hermoso.
+      </p>
+
+      <h2>Neutral en género por diseño</h2>
+      <p>
+        Los modelos de personaje son intencionalmente neutrales en género, y el sistema de citas no
+        está limitado por género. En otras palabras, construyes al vampiro que quieras y puedes
+        <a href="/romance">conquistar</a> a cualquier residente elegible sin importar cómo te presentes.
+      </p>
+
+      <h2>No estás atado — el Elixir de Álter Ego</h2>
+      <p>
+        Si cambias de opinión más adelante, no te quedarás con tu look inicial: el
+        <strong>Elixir de Álter Ego</strong>, una de las pociones que puedes preparar, cambia tu
+        apariencia. Consulta <a href="/magic">magia y pociones</a> para ver cómo funciona la alquimia.
+      </p>
+
+      <h2>Llega en el lanzamiento ({GAME.releaseLabel})</h2>
+      <ul>
+        <li>La lista completa de <strong>opciones</strong> — peinados, rostros, tonos de piel y prendas.</li>
+        <li>Si hay <strong>preajustes</strong> y cuánto se puede ajustar con detalle.</li>
+        <li>Cualquier cosmético o estilo que <strong>desbloquees</strong> durante el juego completo.</li>
+      </ul>
+
+      <h2>FAQ</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        Entrada previa al lanzamiento — las listas completas de opciones llegan en el lanzamiento.
+        Relacionado: <a href="/shapeshifting">cambio de forma</a>, <a href="/characters">personajes</a>,
+        <a href="/demo">la demo</a>.
+      </div>
+    </div>
+  </article>
+</Base>

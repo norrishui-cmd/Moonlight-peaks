@@ -1,0 +1,55 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+
+const jsonLd = {
+  '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'ホーム', item: `${SITE.url}/ja` },
+    { '@type': 'ListItem', position: 2, name: 'チート', item: `${SITE.url}/ja/cheats` },
+  ],
+};
+---
+<Base
+  title="Moonlight Peaks — チート・コンソールコマンド"
+  description="Moonlight Peaksのチートとコンソールコマンド:チートコンソールの仕組みと、お金・スキル・アイテムの完全なコマンドリスト——2026年7月7日の発売時に公開。"
+  path="/ja/cheats"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'チート' }]}
+  lang="ja"
+  showExport
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">エントリー・チート</p>
+      <h1>Moonlight Peaksの<em>チート</em>とコンソール</h1>
+      <p class="intro">
+        コマンドの完全なリストは、{GAME.title}が発売される日({GAME.releaseLabel})に公開されます。
+        ここでは何を期待できるか、コージーなライフシムでチートコンソールが通常どう機能するかを
+        まとめています。最終更新:{SITE.updated}。
+      </p>
+
+      <h2>チートコンソールはありますか?</h2>
+      <p>
+        {GAME.title}にプレイヤー向けのどんなチートが搭載されるかは、まだ確認されていません——
+        それは正式版が発売されて初めて分かることです。この手のコージーなライフシムでは、
+        キー入力の組み合わせでコンソールを開き、お金を追加したりスキルを強化したりするコマンドを
+        入力する形式がよく見られます。発売され次第、正確なキー操作、確認済みのコマンド、
+        注意点(例えばチートが実績を無効化するかどうかなど)をまとめます。
+      </p>
+
+      <h2>発売時に公開される情報</h2>
+      <ul>
+        <li><strong>コンソールの開き方</strong>——PCとSwitch(該当する場合)の正確なキー操作。</li>
+        <li><strong>お金コマンド</strong>——通貨を追加する確認済みコード。</li>
+        <li><strong>スキル・欲求・アイテム</strong>——カテゴリ別の完全なリスト。</li>
+        <li><strong>注意事項</strong>——セーブデータの安定性や実績に関する注意点。</li>
+      </ul>
+
+      <div class="callout wip">
+        コマンドを勝手に作ることはしません。ここに載る情報はすべて正式版または開発元からの
+        確認済み情報です——確認できていないものは掲載しません。{GAME.releaseLabel}にまた
+        チェックしてください。
+      </div>
+    </div>
+  </article>
+</Base>

@@ -1,0 +1,54 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+
+const jsonLd = {
+  '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Inicio', item: `${SITE.url}/es` },
+    { '@type': 'ListItem', position: 2, name: 'Trucos', item: `${SITE.url}/es/cheats` },
+  ],
+};
+---
+<Base
+  title="Moonlight Peaks — Trucos y Comandos de Consola"
+  description="Trucos y comandos de consola de Moonlight Peaks: cómo funciona la consola de trucos y la lista completa de comandos de dinero, habilidades y objetos — publicada en el lanzamiento el 7 de julio de 2026."
+  path="/es/cheats"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Trucos' }]}
+  lang="es"
+  showExport
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Entrada · Trucos</p>
+      <h1>Moonlight Peaks — <em>trucos</em> y consola</h1>
+      <p class="intro">
+        La lista completa de comandos se publica el día que se lanza {GAME.title} ({GAME.releaseLabel}).
+        Esto es lo que se puede esperar y cómo suelen funcionar las consolas de trucos en los cozy
+        life sims. Actualizado {SITE.updated}.
+      </p>
+
+      <h2>¿Hay una consola de trucos?</h2>
+      <p>
+        Todavía no está confirmado qué trucos para jugadores incluirá {GAME.title} — eso solo se
+        sabrá cuando salga el juego completo. Los cozy life sims de este estilo suelen incluir una
+        consola que se abre con una combinación de teclas, donde escribes un comando como dar dinero
+        o mejorar una habilidad. En cuanto se lance el juego, documentaremos la tecla exacta, los
+        comandos verificados, y cualquier advertencia (por ejemplo, si los trucos desactivan los logros).
+      </p>
+
+      <h2>Se publica en el lanzamiento</h2>
+      <ul>
+        <li><strong>Cómo abrir la consola</strong> — la combinación exacta de teclas, para PC y Switch donde aplique.</li>
+        <li><strong>Comandos de dinero</strong> — los códigos verificados para añadir moneda.</li>
+        <li><strong>Habilidades, necesidades, objetos</strong> — la lista completa por categorías.</li>
+        <li><strong>Advertencias</strong> — notas sobre estabilidad de partidas guardadas y logros.</li>
+      </ul>
+
+      <div class="callout wip">
+        No inventaremos comandos. Todo aquí proviene del juego en vivo o de los desarrolladores — si
+        no está verificado, no aparecerá listado. Vuelve a consultar el {GAME.releaseLabel}.
+      </div>
+    </div>
+  </article>
+</Base>

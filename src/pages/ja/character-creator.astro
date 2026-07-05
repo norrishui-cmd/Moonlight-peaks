@@ -1,0 +1,90 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+
+const faq = [
+  { q: 'Moonlight Peaksでキャラクターをカスタマイズできますか?', a: 'はい。無料体験版ですでにプレイできる本格的なキャラクター作成機能があり、肌の色、目、髪型、メイク、衣装を設定できます。オプションはどんなスタイルにも対応するよう作られており、超自然的な要素も加わっています。' },
+  { q: 'Moonlight Peaksのキャラクター作成はジェンダーニュートラルですか?', a: 'はい。キャラクターモデルは意図的にジェンダーニュートラルに設計されており、恋愛システムも性別で制限されないため、好きな吸血鬼を作り、見た目にかかわらず条件を満たす住民なら誰とでも恋愛関係になれます。' },
+  { q: 'キャラクター作成後に見た目を変えられますか?', a: 'はい。オルターエゴ・エリクサーというポーションで見た目を変えられるので、最初の見た目に永久に縛られることはありません。詳細は発売時に判明します。' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'ホーム', item: `${SITE.url}/ja` },
+    { '@type': 'ListItem', position: 2, name: 'キャラクター作成', item: `${SITE.url}/ja/character-creator` },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks — キャラクター作成:カスタマイズ内容"
+  description="Moonlight Peaksのキャラクター作成の仕組み:体験版の吸血鬼作成機能——肌の色、目、髪型、メイク、衣装。ジェンダーニュートラルで幅広いスタイルに対応。"
+  path="/ja/character-creator"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'キャラクター作成' }]}
+  lang="ja"
+  showExport
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">エントリー・キャラクター作成</p>
+      <h1>Moonlight Peaksの<em>キャラクター作成</em></h1>
+      <p class="intro">
+        月明かりの作物を育て始める前に、あなたは自分の吸血鬼をデザインします。公式情報とすでに
+        収録されている無料体験版をもとに、{GAME.title}のキャラクター作成でできることをまとめました。
+        最終更新:{SITE.updated}。
+      </p>
+
+      <h2>今すぐ無料体験版で試せる</h2>
+      <p>
+        キャラクター作成は、SteamとNintendo eショップの無料体験版の目玉機能の一つなので、
+        正式発売前の今すぐ、自分の吸血鬼を作って見た目を試すことができます。その他の収録内容は
+        <a href="/demo">体験版ガイド</a>をご覧ください。
+      </p>
+
+      <h2>カスタマイズできる内容</h2>
+      <p>
+        肌の色、目、髪型、メイク、衣装を通じて吸血鬼の見た目を作り込めます。開発スタジオは、
+        どんなスタイルにも対応できるオプションだと説明しており、そこに超自然的な要素も加わります——
+        カジュアルにも、風変わりにも、あるいはふさわしく、息をのむほど美しくもできます。
+      </p>
+
+      <h2>設計段階からジェンダーニュートラル</h2>
+      <p>
+        キャラクターモデルは意図的にジェンダーニュートラルに作られており、恋愛システムも性別で
+        制限されません。つまり、好きな吸血鬼を作りつつ、見た目にかかわらず条件を満たす住民なら
+        誰とでも<a href="/romance">恋愛関係</a>になれます。
+      </p>
+
+      <h2>見た目に縛られない——オルターエゴ・エリクサー</h2>
+      <p>
+        後で気が変わっても、最初の見た目に縛られることはありません。調合できるポーションの一つ
+        <strong>オルターエゴ・エリクサー</strong>で見た目を変えられます。調合の仕組みについては
+        <a href="/magic">魔法とポーション</a>をご覧ください。
+      </p>
+
+      <h2>発売時({GAME.releaseLabel})に追加される情報</h2>
+      <ul>
+        <li>髪型、顔立ち、肌の色、衣装パーツを含む<strong>オプションの完全なリスト</strong>。</li>
+        <li><strong>プリセット</strong>の有無と、どこまで細かく調整できるか。</li>
+        <li>正式版を進める中で<strong>解放される</strong>コスメやスタイル。</li>
+      </ul>
+
+      <h2>よくある質問</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        発売前のエントリーです——オプションの完全なリストは発売時に追加されます。関連ページ:
+        <a href="/shapeshifting">変身</a>、<a href="/characters">キャラクター</a>、
+        <a href="/demo">体験版</a>。
+      </div>
+    </div>
+  </article>
+</Base>

@@ -1,0 +1,84 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+
+const faq = [
+  { q: '¿Puedes convertirte en murciélago en Moonlight Peaks?', a: 'Sí. Como vampiro puedes transformarte en murciélago, una forma rápida de moverte por el pueblo de noche — volar se describe como convenientemente veloz.' },
+  { q: '¿En qué otras formas te puedes transformar?', a: 'Los desarrolladores han insinuado que puedes aprender a transformarte en otras formas además del murciélago, y jugadores de la demo han descrito moverse rápido como gato. Se espera la lista completa de formas en el lanzamiento.' },
+  { q: '¿Cómo se desbloquea el cambio de forma?', a: `El cambio de forma es parte de tu linaje vampírico y tus habilidades sobrenaturales. Cómo y cuándo se desbloquea cada forma se confirmará cuando salga el juego completo el ${GAME.releaseLabel}.` },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Inicio', item: `${SITE.url}/es` },
+    { '@type': 'ListItem', position: 2, name: 'Cambio de forma', item: `${SITE.url}/es/shapeshifting` },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks — Cambio de Forma: Murciélago y Otras Formas"
+  description="Cómo funciona el cambio de forma en Moonlight Peaks: convertirte en murciélago para viajar de noche, las otras formas que los desarrolladores han insinuado, y cómo encaja con tus poderes de vampiro."
+  path="/es/shapeshifting"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Cambio de forma' }]}
+  lang="es"
+  showExport
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Entrada · Cambio de forma</p>
+      <h1>El <em>cambio de forma</em> en Moonlight Peaks</h1>
+      <p class="intro">
+        Una de las ventajas de ser vampiro en {GAME.title} es cambiar de forma. Esto es lo realmente
+        confirmado sobre el cambio de forma — y lo que los desarrolladores solo han insinuado hasta
+        ahora. Actualizado {SITE.updated}.
+      </p>
+
+      <h2>Conviértete en murciélago para moverte</h2>
+      <p>
+        La forma estrella confirmada es el clásico murciélago vampírico. Transformarte en murciélago
+        te permite volar rápido por el pueblo de noche, útil cuando compaginas la granja, los mandados
+        y la vida social antes del amanecer.
+      </p>
+
+      <h2>Se insinúan otras formas</h2>
+      <p>
+        El estudio ha adelantado que puedes aprender a transformarte en otras formas además del
+        murciélago. Jugadores que probaron la demo describieron moverse rápido como gato, pero el
+        conjunto completo de formas — y para qué sirve cada una — aún no se ha detallado del todo.
+      </p>
+
+      <h2>Parte de tus poderes de vampiro</h2>
+      <p>
+        El cambio de forma convive con el resto de tus habilidades sobrenaturales y te ayuda a explorar
+        todo lo que ofrece el pueblo. Encaja de forma natural con la <a href="/magic">brujería y las
+        pociones</a> — y como todo lo demás en tu (no-)vida, funciona bajo la regla de volver a tu
+        ataúd antes de que salga el sol.
+      </p>
+
+      <h2>Llega en el lanzamiento ({GAME.releaseLabel})</h2>
+      <ul>
+        <li>La <strong>lista completa de formas</strong> que puedes adoptar, más allá del murciélago.</li>
+        <li>Cómo se <strong>desbloquea</strong> cada forma y para qué sirve.</li>
+        <li>Cualquier límite — energía, momento, o dónde puedes y no puedes transformarte.</li>
+      </ul>
+
+      <h2>FAQ</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        Entrada previa al lanzamiento — la lista completa de formas llega en el lanzamiento.
+        Relacionado: <a href="/magic">magia y pociones</a>, <a href="/character-creator">creador de personaje</a>,
+        <a href="/es/beginner-guide">guía para principiantes</a> (en español).
+      </div>
+    </div>
+  </article>
+</Base>

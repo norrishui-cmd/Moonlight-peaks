@@ -1,0 +1,52 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+
+const jsonLd = {
+  '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '首页', item: `${SITE.url}/zh` },
+    { '@type': 'ListItem', position: 2, name: '作弊码', item: `${SITE.url}/zh/cheats` },
+  ],
+};
+---
+<Base
+  title="Moonlight Peaks —— 作弊码与控制台指令"
+  description="Moonlight Peaks 的作弊码与控制台指令:作弊控制台怎么用,完整的金钱、技能与物品指令列表——将于 2026 年 7 月 7 日发售时公布。"
+  path="/zh/cheats"
+  jsonLd={jsonLd}
+  crumbs={[{ label: '作弊码' }]}
+  lang="zh"
+  showExport
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">词条 · 作弊码</p>
+      <h1>Moonlight Peaks 的<em>作弊码</em>与控制台</h1>
+      <p class="intro">
+        完整的指令列表会在 {GAME.title} 发售当天({GAME.releaseLabel})上线。这里先说说可以
+        预期什么,以及同类温馨生活模拟游戏的作弊控制台通常怎么运作。最后更新:{SITE.updated}。
+      </p>
+
+      <h2>有作弊控制台吗?</h2>
+      <p>
+        {GAME.title} 到底会内置哪些面向玩家的作弊功能,目前还没有确认——这要等正式版上线才能知道。
+        这类温馨生活模拟游戏通常会用一个按键组合打开控制台,然后输入指令,比如增加金钱或提升技能。
+        游戏一发售,我们就会整理出准确的按键、经过验证的指令,以及各种注意事项(比如作弊会不会
+        导致成就失效)。
+      </p>
+
+      <h2>发售时会公布的内容</h2>
+      <ul>
+        <li><strong>怎么打开控制台</strong>——PC 和 Switch(如适用)的准确按键组合。</li>
+        <li><strong>金钱指令</strong>——经过验证、能增加货币的代码。</li>
+        <li><strong>技能、需求、物品</strong>——按分类整理的完整列表。</li>
+        <li><strong>注意事项</strong>——关于存档稳定性和成就的说明。</li>
+      </ul>
+
+      <div class="callout wip">
+        我们不会编造指令。这里的所有内容都来自正式版游戏或开发商——没验证过的东西不会列出来。
+        {GAME.releaseLabel} 记得回来看看。
+      </div>
+    </div>
+  </article>
+</Base>

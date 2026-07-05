@@ -1,0 +1,80 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+
+const faq = [
+  { q: 'Moonlight Peaks 里能变身成蝙蝠吗?', a: '可以。作为吸血鬼,你能变身成蝙蝠,这是夜里在小镇里快速移动的方式——据描述,飞行速度相当快,很方便。' },
+  { q: '还能变成什么形态?', a: '开发商暗示过除了蝙蝠之外还能学会变成别的形态,试玩过的玩家提到过能变成猫快速穿梭。完整的形态清单预计会在正式发售时公布。' },
+  { q: '变身能力怎么解锁?', a: `变身是你吸血鬼血统和超自然能力的一部分。每种形态具体怎么解锁、什么时候解锁,会在 ${GAME.releaseLabel} 正式发售时确认。` },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '首页', item: `${SITE.url}/zh` },
+    { '@type': 'ListItem', position: 2, name: '变身', item: `${SITE.url}/zh/shapeshifting` },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks —— 变身:蝙蝠形态与其它形态"
+  description="Moonlight Peaks 的变身系统:变成蝙蝠在夜里出行,开发商暗示过的其它形态,以及这如何融入你的吸血鬼能力。"
+  path="/zh/shapeshifting"
+  jsonLd={jsonLd}
+  crumbs={[{ label: '变身' }]}
+  lang="zh"
+  showExport
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">词条 · 变身</p>
+      <h1>Moonlight Peaks 的<em>变身</em>能力</h1>
+      <p class="intro">
+        在 {GAME.title} 里当吸血鬼的福利之一就是能变换形态。这里说清楚变身系统真正已经确认的部分,
+        以及开发商目前只是暗示过的内容。最后更新:{SITE.updated}。
+      </p>
+
+      <h2>变成蝙蝠出行</h2>
+      <p>
+        目前确认的招牌形态是经典的吸血鬼蝙蝠。变身成蝙蝠能让你在夜里快速飞越小镇,在日出前
+        要兼顾农活、跑腿和社交时特别好用。
+      </p>
+
+      <h2>暗示过的其它形态</h2>
+      <p>
+        开发团队透露过,除了蝙蝠之外还能学会变成其它形态。试玩过的玩家提到能变成猫四处快速奔跑,
+        但完整的形态清单以及各自的用途,目前还没有详细公布。
+      </p>
+
+      <h2>吸血鬼能力的一部分</h2>
+      <p>
+        变身和你其它的超自然能力并存,能帮你探索小镇的方方面面。它自然而然地和
+        <a href="/magic">巫术与药水</a>搭配使用——而且和你(不死)生活的其它方面一样,
+        都要遵守日出前赶回棺材这条规则。
+      </p>
+
+      <h2>正式发售({GAME.releaseLabel})后会补上的内容</h2>
+      <ul>
+        <li>除了蝙蝠之外,能变成的<strong>完整形态列表</strong>。</li>
+        <li>每种形态怎么<strong>解锁</strong>,各自有什么用途。</li>
+        <li>是否有能量、时机或场地方面的变身限制。</li>
+      </ul>
+
+      <h2>常见问题</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        这是发售前的占位词条——完整形态清单会在正式发售时补上。相关内容:
+        <a href="/magic">魔法与药水</a>、<a href="/character-creator">角色创建</a>、
+        <a href="/zh/beginner-guide">新手入门攻略</a>(中文)。
+      </div>
+    </div>
+  </article>
+</Base>

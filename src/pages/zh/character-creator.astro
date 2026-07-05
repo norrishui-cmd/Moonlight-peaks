@@ -1,0 +1,85 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+
+const faq = [
+  { q: 'Moonlight Peaks 里能自定义角色吗?', a: '可以。游戏有一套完整的角色创建系统——在免费试玩版里就已经能玩到——可以设置你吸血鬼角色的肤色、眼睛、发型、妆容和服装。这些选项的设计理念是照顾各种风格,再加一层超自然色彩。' },
+  { q: 'Moonlight Peaks 的角色创建是性别中立的吗?', a: '是的。角色模型刻意设计成性别中立,恋爱系统也不受性别限制,所以不管你怎么捏自己的吸血鬼,都能追求任何符合条件的居民。' },
+  { q: '创建角色后还能改外貌吗?', a: '可以。"变身药水"是一种能改变外貌的药水,所以你不会被最初的造型永久锁死。具体细节要等正式发售才能确认。' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '首页', item: `${SITE.url}/zh` },
+    { '@type': 'ListItem', position: 2, name: '角色创建', item: `${SITE.url}/zh/character-creator` },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks —— 角色创建:自定义选项"
+  description="Moonlight Peaks 的角色创建系统:试玩版里的吸血鬼捏脸功能——肤色、眼睛、发型、妆容与服装,性别中立且包容多样风格。"
+  path="/zh/character-creator"
+  jsonLd={jsonLd}
+  crumbs={[{ label: '角色创建' }]}
+  lang="zh"
+  showExport
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">词条 · 角色创建</p>
+      <h1>Moonlight Peaks 的<em>角色创建</em></h1>
+      <p class="intro">
+        在你打理第一株月光作物之前,先要设计自己的吸血鬼。根据官方信息和已经收录这个功能的免费
+        试玩版,这里说清楚 {GAME.title} 的角色创建系统能做到什么。最后更新:{SITE.updated}。
+      </p>
+
+      <h2>现在就能在免费试玩版里体验</h2>
+      <p>
+        角色创建是 Steam 和 Nintendo eShop 免费试玩版的主打功能之一,所以你现在就能在正式发售前
+        捏出自己的吸血鬼、尝试各种造型。想知道试玩版还有什么内容,可以看看
+        <a href="/demo">试玩版攻略</a>。
+      </p>
+
+      <h2>能自定义哪些内容</h2>
+      <p>
+        你可以从肤色、眼睛、发型、妆容和服装几个方面塑造吸血鬼的外貌。开发团队表示这些选项照顾到
+        各种风格,同时都带着一层超自然气质——不管你想要休闲风、奇趣风,还是恰如其分的"美到要命"。
+      </p>
+
+      <h2>设计上就是性别中立的</h2>
+      <p>
+        角色模型刻意设计成性别中立,恋爱系统也不受性别限制。也就是说,你可以捏出想要的吸血鬼形象,
+        同时不管你怎么呈现自己,都能<a href="/romance">追求</a>任何符合条件的居民。
+      </p>
+
+      <h2>不会被锁死——"变身药水"</h2>
+      <p>
+        就算后来改了主意,你也不会被最初的造型困住:可以调配的药水之一
+        <strong>"变身药水"</strong>能改变你的外貌。调配方式详见<a href="/magic">魔法与药水</a>。
+      </p>
+
+      <h2>正式发售({GAME.releaseLabel})后会补上的内容</h2>
+      <ul>
+        <li>发型、脸型、肤色和服装部件的<strong>完整选项列表</strong>。</li>
+        <li>有没有<strong>预设方案</strong>,以及能微调到什么程度。</li>
+        <li>正式版流程中能<strong>解锁</strong>的美妆或造型。</li>
+      </ul>
+
+      <h2>常见问题</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        这是发售前的占位词条——完整选项列表会在正式发售时补上。相关内容:
+        <a href="/shapeshifting">变身</a>、<a href="/characters">角色</a>、<a href="/demo">试玩版</a>。
+      </div>
+    </div>
+  </article>
+</Base>
