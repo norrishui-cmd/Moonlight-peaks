@@ -1,0 +1,71 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE } from '../../consts';
+
+const tools = [
+  { href: '/tools/platform-picker', tag: 'Decision', title: 'Platform Picker', text: 'Steam、Steam Deck、Switch、Switch 2、Androidから発売時に安全な選択肢を考えます。', status: 'Live' },
+  { href: '/tools/romance-gift-finder', tag: 'Romance', title: 'Romance Gift Finder', text: '住民、恋愛状況、家族の手がかり、確認済みギフト情報を整理します。', status: 'Live' },
+  { href: '/tools/romance-match-quiz', tag: 'Quiz', title: 'Romance Match Quiz', text: '簡単な質問で、自分に合いそうな恋愛候補を探します。', status: 'Live' },
+  { href: '/tools/romance-planner', tag: 'Planner', title: 'Romance Planner', text: '候補、メモ、発売日チェックリストをブラウザ内に保存します。', status: 'Live' },
+  { href: '/tools/item-tracker', tag: 'Collection', title: 'Item Tracker', text: '魚、虫、レシピ、ポーション、装飾などの収集状況を追跡します。', status: 'Live' },
+  { href: '/tools/farming-profit-planner', tag: 'Farming', title: 'Farming Profit Planner', text: '価格や成長日数が確認できたら、作物の利益を比較できます。', status: 'Live' },
+  { href: '/tools/submit-data', tag: 'Community', title: 'Data Submitter', text: '発売週の発見をローカル下書きとして保存し、あとで確認できます。', status: 'Live' },
+  { href: '/ja/demo', tag: 'Demo', title: 'Demo Guide', text: 'ダウンロード、制限、発売前に試すべき内容を確認します。', status: 'Guide' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'ホーム', item: `${SITE.url}/ja` },
+    { '@type': 'ListItem', position: 2, name: 'ツール', item: new URL('/ja/tools', SITE.url).href },
+  ] },
+  { '@context': 'https://schema.org', '@type': 'CollectionPage', name: 'Moonlight Peaks ツール', url: new URL('/ja/tools', SITE.url).href },
+];
+---
+<Base
+  title="Moonlight Peaks ツール - プラットフォーム、恋愛、収集"
+  description="Moonlight Peaksの日本語ツール入口。プラットフォーム選び、恋愛、ギフト、アイテム追跡、農業利益、発売データ整理に対応。"
+  path="/ja/tools"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'ツール' }]}
+  lang="ja"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">ツール / プレイヤー補助</p>
+      <h1>Moonlight Peaks <em>ツール</em></h1>
+      <p class="intro">
+        プラットフォーム選び、恋愛準備、ギフト確認、アイテム収集、農業計算など、
+        発売前後に役立つ実用ツールをまとめています。
+      </p>
+
+      <section class="tool-grid" aria-label="Moonlight Peaks tools">
+        {tools.map((tool) => (
+          <a class="tool-card" href={tool.href}>
+            <span class="tool-status">{tool.status}</span>
+            <span class="tool-tag">{tool.tag}</span>
+            <strong>{tool.title}</strong>
+            <span>{tool.text}</span>
+            <em>ツールを開く -&gt;</em>
+          </a>
+        ))}
+      </section>
+
+      <h2>このツール集の方針</h2>
+      <p>
+        発売前に未確認データを断定しないことを重視しています。未確認の項目は保留として扱い、
+        信頼できる情報が確認できたら同じURLで更新します。
+      </p>
+    </div>
+  </article>
+
+  <style>
+    .tool-grid { display: grid; grid-template-columns: 1fr; gap: 14px; margin: 24px 0; }
+    @media (min-width: 760px) { .tool-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    @media (min-width: 1080px) { .tool-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+    .tool-card { min-height: 190px; display: flex; flex-direction: column; gap: 10px; border: 1px solid var(--line); border-radius: 12px; background: linear-gradient(135deg, rgba(244,202,104,.12), var(--surface)); padding: 16px; text-decoration: none; }
+    .tool-card strong { font-family: var(--display); font-size: 1.25rem; color: var(--mist); }
+    .tool-card span { color: var(--muted); }
+    .tool-status, .tool-tag, .tool-card em { font-family: var(--mono); color: var(--candle); font-style: normal; }
+    .tool-card em { margin-top: auto; }
+  </style>
+</Base>

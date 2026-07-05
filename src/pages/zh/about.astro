@@ -1,0 +1,80 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+
+const coverage = [
+  ['发售与平台', '发售日期、Demo、Steam、Steam Deck、Switch、Switch 2、Android 和购买前检查。'],
+  ['玩家攻略', '新手、种田、魔法、活动、物品、地图、对比页面和开局建议。'],
+  ['角色与恋爱', '居民、家族、恋爱候选人、礼物、结婚，以及发售后需要验证的数据。'],
+  ['工具与 FAQ', 'Platform Picker、恋爱工具、Item Tracker、种田计算、FAQ 和持续更新页面。'],
+];
+
+const principles = [
+  '区分已确认信息、Demo 观察、预览内容和待验证数据。',
+  '先回答玩家真正的问题，而不是堆关键词。',
+  '保持页面在手机端快速、清晰、好阅读。',
+  '可靠数据出现后，在同一个 URL 上继续更新。'
+];
+
+const faq = [
+  { q: 'Moonlight Peaks Wiki & Guide 是官网吗？', a: `不是。${SITE.brand} 是玩家制作的独立攻略站，与 ${GAME.developer} 或 ${GAME.publisher} 没有官方从属或背书关系。` },
+  { q: '这个网站覆盖哪些内容？', a: '覆盖发售日期、Demo、平台、角色、家族、恋爱、礼物、种田、魔法、物品、工具、FAQ 和对比页面。' },
+  { q: '未确认信息会怎么处理？', a: '会标明为待确认或需要验证，不把推测内容写成最终数据。' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'AboutPage', name: `关于 ${SITE.brand}`, url: new URL('/zh/about', SITE.url).href },
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '首页', item: `${SITE.url}/zh` },
+    { '@type': 'ListItem', position: 2, name: '关于本站', item: new URL('/zh/about', SITE.url).href },
+  ] },
+];
+---
+<Base
+  title={`关于 ${SITE.brand} - Moonlight Peaks 独立攻略站`}
+  description={`${SITE.brand} 是 Moonlight Peaks 独立攻略站，覆盖发售日期、Demo、平台、恋爱、角色、种田、魔法、工具、FAQ 和更新。`}
+  path="/zh/about"
+  jsonLd={jsonLd}
+  crumbs={[{ label: '关于本站' }]}
+  lang="zh"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">独立玩家攻略</p>
+      <h1>关于 <em>{SITE.brand}</em></h1>
+      <p class="intro">
+        {SITE.brand} 是为 {GAME.title} 玩家制作的独立攻略站，帮助玩家快速了解发售日期、
+        Demo、平台、恋爱、角色、礼物、种田、魔法、工具和发售前准备。
+      </p>
+
+      <h2>我们覆盖什么</h2>
+      <div class="info-grid">
+        {coverage.map((item) => <section><h3>{item[0]}</h3><p>{item[1]}</p></section>)}
+      </div>
+
+      <h2>编辑原则</h2>
+      <ul>
+        {principles.map((item) => <li>{item}</li>)}
+      </ul>
+
+      <h2>独立声明</h2>
+      <p>
+        本站不是官方网站，也没有与 {GAME.developer} 或 {GAME.publisher} 建立官方合作、授权或背书关系。
+        Moonlight Peaks 相关名称和素材归各自权利方所有。
+      </p>
+
+      <h2>FAQ</h2>
+      <div class="faq">
+        {faq.map((f) => <details><summary>{f.q}</summary><p>{f.a}</p></details>)}
+      </div>
+    </div>
+  </article>
+
+  <style>
+    .info-grid { display: grid; grid-template-columns: 1fr; gap: 12px; margin: 16px 0 24px; }
+    @media (min-width: 760px) { .info-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    .info-grid section { border: 1px solid var(--line); border-radius: 12px; background: var(--surface); padding: 16px; }
+    .info-grid h3 { margin-top: 0; }
+  </style>
+</Base>

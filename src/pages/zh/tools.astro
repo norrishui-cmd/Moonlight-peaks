@@ -1,0 +1,71 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE } from '../../consts';
+
+const tools = [
+  { href: '/tools/platform-picker', tag: 'Decision', title: 'Platform Picker', text: '在 Steam、Steam Deck、Switch、Switch 2 和 Android 之间给出更稳妥的平台建议。', status: 'Live' },
+  { href: '/tools/romance-gift-finder', tag: 'Romance', title: 'Romance Gift Finder', text: '整理居民、恋爱状态、家族线索和已验证礼物数据。', status: 'Live' },
+  { href: '/tools/romance-match-quiz', tag: 'Quiz', title: 'Romance Match Quiz', text: '用简单问题匹配可能适合你的恋爱候选人。', status: 'Live' },
+  { href: '/tools/romance-planner', tag: 'Planner', title: 'Romance Planner', text: '在浏览器本地保存候选人、私人备注和发售日准备清单。', status: 'Live' },
+  { href: '/tools/item-tracker', tag: 'Collection', title: 'Item Tracker', text: '追踪鱼类、虫类、食谱、药剂、神器、装饰和其他收集项。', status: 'Live' },
+  { href: '/tools/farming-profit-planner', tag: 'Farming', title: 'Farming Profit Planner', text: '在价格和生长天数确认后，用来比较作物收益。', status: 'Live' },
+  { href: '/tools/submit-data', tag: 'Community', title: 'Data Submitter', text: '把发售周发现先保存为本地草稿，方便后续人工审核。', status: 'Live' },
+  { href: '/zh/demo', tag: 'Demo', title: 'Demo Guide', text: '查看下载、限制和正式发售前最值得测试的内容。', status: 'Guide' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '首页', item: `${SITE.url}/zh` },
+    { '@type': 'ListItem', position: 2, name: '工具', item: new URL('/zh/tools', SITE.url).href },
+  ] },
+  { '@context': 'https://schema.org', '@type': 'CollectionPage', name: 'Moonlight Peaks 工具', url: new URL('/zh/tools', SITE.url).href },
+];
+---
+<Base
+  title="Moonlight Peaks 工具 - 平台、恋爱与收集助手"
+  description="Moonlight Peaks 中文工具入口，覆盖平台选择、恋爱礼物、物品追踪、种田收益、发售数据整理和 Demo 指南。"
+  path="/zh/tools"
+  jsonLd={jsonLd}
+  crumbs={[{ label: '工具' }]}
+  lang="zh"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">工具 / 玩家助手</p>
+      <h1>Moonlight Peaks <em>工具</em></h1>
+      <p class="intro">
+        这里集中整理能直接解决问题的工具：平台选择、恋爱准备、礼物确认、物品收集、
+        种田收益和发售数据整理。
+      </p>
+
+      <section class="tool-grid" aria-label="Moonlight Peaks tools">
+        {tools.map((tool) => (
+          <a class="tool-card" href={tool.href}>
+            <span class="tool-status">{tool.status}</span>
+            <span class="tool-tag">{tool.tag}</span>
+            <strong>{tool.title}</strong>
+            <span>{tool.text}</span>
+            <em>打开工具 -&gt;</em>
+          </a>
+        ))}
+      </section>
+
+      <h2>工具页的原则</h2>
+      <p>
+        发售前不把未确认数据写成确定答案。未知内容会标为待确认，等正式版或可靠来源出现后，
+        再在同一个 URL 上继续更新。
+      </p>
+    </div>
+  </article>
+
+  <style>
+    .tool-grid { display: grid; grid-template-columns: 1fr; gap: 14px; margin: 24px 0; }
+    @media (min-width: 760px) { .tool-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    @media (min-width: 1080px) { .tool-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+    .tool-card { min-height: 190px; display: flex; flex-direction: column; gap: 10px; border: 1px solid var(--line); border-radius: 12px; background: linear-gradient(135deg, rgba(244,202,104,.12), var(--surface)); padding: 16px; text-decoration: none; }
+    .tool-card strong { font-family: var(--display); font-size: 1.25rem; color: var(--mist); }
+    .tool-card span { color: var(--muted); }
+    .tool-status, .tool-tag, .tool-card em { font-family: var(--mono); color: var(--candle); font-style: normal; }
+    .tool-card em { margin-top: auto; }
+  </style>
+</Base>

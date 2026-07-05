@@ -1,0 +1,87 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+
+const rows = [
+  ['最初に読む', '初心者ガイド、デモ、発売日、対応プラットフォーム。'],
+  ['基本システム', '農業、釣り、魔法、アクティビティ、アイテム、マップ、Nokturna。'],
+  ['人間関係', 'キャラクター、家族、恋愛、ギフト、結婚、友情ルート。'],
+  ['収集要素', '魚、虫、レシピ、ポーション、アーティファクト、装飾、素材。'],
+  ['購入前チェック', 'Steam Deck、Switch、Android、価格、デモ、比較ページ。'],
+];
+
+const links = [
+  { href: '/ja/beginner-guide', label: '初心者ガイド' },
+  { href: '/ja/release-date', label: '発売日' },
+  { href: '/ja/demo', label: 'デモ' },
+  { href: '/ja/platforms', label: 'プラットフォーム' },
+  { href: '/ja/characters', label: 'キャラクター' },
+  { href: '/ja/romance', label: '恋愛' },
+  { href: '/ja/farming', label: '農業' },
+  { href: '/ja/magic', label: '魔法' },
+  { href: '/ja/items', label: 'アイテム' },
+  { href: '/tools', label: 'ツール' },
+];
+
+const faq = [
+  { q: '最初に読むべきMoonlight Peaksガイドは？', a: 'まず初心者ガイドを読み、次にデモ、発売日、プラットフォーム、キャラクター、恋愛ページを目的に合わせて確認してください。' },
+  { q: 'ガイドの情報は発売前から確定ですか？', a: 'すべてが確定ではありません。確定情報、デモ観察、プレビュー情報、発売後に確認が必要な項目を分けて扱います。' },
+  { q: 'ギフト、魚、作物の表はどこに入りますか？', a: '恋愛、キャラクター、アイテム、農業、アクティビティの各ページに、信頼できるデータが確認でき次第追加します。' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'ホーム', item: `${SITE.url}/ja` },
+    { '@type': 'ListItem', position: 2, name: 'ガイド', item: new URL('/ja/guides', SITE.url).href },
+  ] },
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+];
+---
+<Base
+  title="Moonlight Peaks ガイド - 初心者・農業・恋愛"
+  description="Moonlight Peaksの日本語ガイド集。初心者、デモ、発売日、プラットフォーム、農業、魔法、キャラクター、恋愛、アイテムを整理。"
+  path="/ja/guides"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'ガイド' }]}
+  lang="ja"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">ハブ / ガイド</p>
+      <h1>Moonlight Peaks <em>ガイド</em></h1>
+      <p class="intro">
+        {GAME.title}を始める前に読むべきページをまとめたガイドハブです。発売後に確認できた
+        詳細データは、各テーマページへ追加していきます。
+      </p>
+
+      <h2>ガイドマップ</h2>
+      <table class="facts">
+        {rows.map((row) => (<tr><th>{row[0]}</th><td>{row[1]}</td></tr>))}
+      </table>
+
+      <h2>主要ページ</h2>
+      <div class="link-grid">
+        {links.map((link) => <a href={link.href}>{link.label}</a>)}
+      </div>
+
+      <h2>おすすめの読み順</h2>
+      <ol class="steps">
+        <li>発売日、デモ、プラットフォームを確認する。</li>
+        <li>最初の夜を始める前に初心者ガイドを読む。</li>
+        <li>農業、魔法、恋愛、収集、探索から最初の目標を選ぶ。</li>
+        <li>具体的な答えが必要なときは個別ページを使う。</li>
+      </ol>
+
+      <h2>FAQ</h2>
+      <div class="faq">
+        {faq.map((f) => <details><summary>{f.q}</summary><p>{f.a}</p></details>)}
+      </div>
+    </div>
+  </article>
+
+  <style>
+    .link-grid { display: grid; grid-template-columns: 1fr; gap: 10px; margin: 12px 0 24px; }
+    @media (min-width: 720px) { .link-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    .link-grid a { border: 1px solid var(--line); border-radius: 10px; background: var(--surface); color: var(--mist); padding: 12px 14px; text-decoration: none; }
+  </style>
+</Base>

@@ -1,0 +1,87 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+
+const rows = [
+  ['Empieza aqui', 'Guia para principiantes, demo, fecha de lanzamiento y plataformas.'],
+  ['Sistemas principales', 'Cultivo, pesca, magia, actividades, objetos, mapa y Nokturna.'],
+  ['Relaciones', 'Personajes, familias, romance, regalos, matrimonio y rutas de amistad.'],
+  ['Coleccion', 'Peces, critters, recetas, pociones, artefactos, decoraciones y materiales.'],
+  ['Antes de comprar', 'Plataformas, Steam Deck, Switch, Android, precio, demo y comparaciones.'],
+];
+
+const links = [
+  { href: '/es/beginner-guide', label: 'Guia para principiantes' },
+  { href: '/es/release-date', label: 'Fecha de lanzamiento' },
+  { href: '/es/demo', label: 'Demo' },
+  { href: '/es/platforms', label: 'Plataformas' },
+  { href: '/es/characters', label: 'Personajes' },
+  { href: '/es/romance', label: 'Romance' },
+  { href: '/es/farming', label: 'Cultivo' },
+  { href: '/es/magic', label: 'Magia' },
+  { href: '/es/items', label: 'Objetos' },
+  { href: '/tools', label: 'Herramientas' },
+];
+
+const faq = [
+  { q: 'Que guia de Moonlight Peaks deberia leer primero?', a: 'Empieza por la guia para principiantes y despues revisa demo, fecha de lanzamiento, plataformas, personajes o romance segun lo que quieras resolver.' },
+  { q: 'Los datos de las guias son definitivos?', a: 'No siempre. Los hechos confirmados se separan de notas de demo, previews y datos que aun deben verificarse con el juego final.' },
+  { q: 'Donde estaran las tablas de regalos, peces y cultivos?', a: 'Las paginas de romance, personajes, items, farming y actividades se ampliaran con tablas cuando haya datos fiables del juego en vivo.' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Inicio', item: `${SITE.url}/es` },
+    { '@type': 'ListItem', position: 2, name: 'Guias', item: new URL('/es/guides', SITE.url).href },
+  ] },
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+];
+---
+<Base
+  title="Guias de Moonlight Peaks - principiantes, cultivo y romance"
+  description="Centro de guias de Moonlight Peaks en espanol: principiantes, demo, plataformas, cultivo, magia, personajes, romance, objetos y lanzamiento."
+  path="/es/guides"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Guias' }]}
+  lang="es"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Hub / Guias</p>
+      <h1>Guias de <em>Moonlight Peaks</em></h1>
+      <p class="intro">
+        Un centro practico para {GAME.title}: que leer primero, que sistemas importan y donde se
+        ampliaran las tablas detalladas cuando el juego completo este disponible.
+      </p>
+
+      <h2>Mapa de guias</h2>
+      <table class="facts">
+        {rows.map((row) => (<tr><th>{row[0]}</th><td>{row[1]}</td></tr>))}
+      </table>
+
+      <h2>Lecturas principales</h2>
+      <div class="link-grid">
+        {links.map((link) => <a href={link.href}>{link.label}</a>)}
+      </div>
+
+      <h2>Orden recomendado</h2>
+      <ol class="steps">
+        <li>Comprueba fecha de lanzamiento, demo y plataforma.</li>
+        <li>Lee la guia para principiantes antes de planear tu primera noche.</li>
+        <li>Elige un objetivo: cultivo, magia, romance, coleccion o exploracion.</li>
+        <li>Usa paginas especificas cuando necesites una respuesta concreta.</li>
+      </ol>
+
+      <h2>FAQ</h2>
+      <div class="faq">
+        {faq.map((f) => <details><summary>{f.q}</summary><p>{f.a}</p></details>)}
+      </div>
+    </div>
+  </article>
+
+  <style>
+    .link-grid { display: grid; grid-template-columns: 1fr; gap: 10px; margin: 12px 0 24px; }
+    @media (min-width: 720px) { .link-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    .link-grid a { border: 1px solid var(--line); border-radius: 10px; background: var(--surface); color: var(--mist); padding: 12px 14px; text-decoration: none; }
+  </style>
+</Base>

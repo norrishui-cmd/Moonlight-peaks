@@ -1,0 +1,82 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+
+const coverage = [
+  ['Lanzamiento y plataformas', 'Fecha de lanzamiento, demo, Steam, Steam Deck, Switch, Switch 2, Android y notas de compra.'],
+  ['Guias para jugadores', 'Principiantes, cultivo, magia, actividades, objetos, mapa, comparaciones y consejos de primera partida.'],
+  ['Personajes y romance', 'Residentes, familias, candidatos de romance, regalos, matrimonio y datos que se confirmaran tras el lanzamiento.'],
+  ['Herramientas y FAQ', 'Platform picker, romance tools, item tracker, calculadora de cultivo, FAQ y paginas de actualizacion.'],
+];
+
+const principles = [
+  'Separar hechos confirmados de previews, demo y datos pendientes.',
+  'Responder primero la pregunta del jugador, no solo llenar palabras clave.',
+  'Mantener paginas rapidas, claras y utiles en movil.',
+  'Actualizar las mismas URLs cuando aparezcan datos fiables del juego final.',
+];
+
+const faq = [
+  { q: 'Moonlight Peaks Wiki & Guide es oficial?', a: `No. ${SITE.brand} es una guia fan-made e independiente, sin afiliacion oficial con ${GAME.developer} ni ${GAME.publisher}.` },
+  { q: 'Que cubre esta web?', a: 'Cubre lanzamiento, demo, plataformas, personajes, familias, romance, regalos, cultivo, magia, objetos, herramientas, FAQ y comparaciones.' },
+  { q: 'Como se trata la informacion no confirmada?', a: 'Se marca como pendiente o por verificar. La intencion es no presentar rumores como datos finales.' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'AboutPage', name: `Acerca de ${SITE.brand}`, url: new URL('/es/about', SITE.url).href },
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Inicio', item: `${SITE.url}/es` },
+    { '@type': 'ListItem', position: 2, name: 'Acerca de', item: new URL('/es/about', SITE.url).href },
+  ] },
+];
+---
+<Base
+  title={`Acerca de ${SITE.brand} - guia independiente de Moonlight Peaks`}
+  description={`${SITE.brand} es una wiki y guia independiente de Moonlight Peaks sobre lanzamiento, demo, plataformas, romance, personajes, cultivo, magia, herramientas y FAQ.`}
+  path="/es/about"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Acerca de' }]}
+  lang="es"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Guia independiente</p>
+      <h1>Acerca de <em>{SITE.brand}</em></h1>
+      <p class="intro">
+        {SITE.brand} es una guia fan-made para {GAME.title}, pensada para jugadores que quieren
+        respuestas claras sobre lanzamiento, demo, plataformas, romance, personajes, regalos,
+        cultivo, magia, herramientas y preparacion para el dia de salida.
+      </p>
+
+      <h2>Que cubrimos</h2>
+      <div class="info-grid">
+        {coverage.map((item) => <section><h3>{item[0]}</h3><p>{item[1]}</p></section>)}
+      </div>
+
+      <h2>Principios editoriales</h2>
+      <ul>
+        {principles.map((item) => <li>{item}</li>)}
+      </ul>
+
+      <h2>Independencia</h2>
+      <p>
+        Esta web no es oficial y no esta afiliada, aprobada ni conectada oficialmente con
+        {` ${GAME.developer}`} o {GAME.publisher}. Las marcas y materiales de Moonlight Peaks
+        pertenecen a sus respectivos propietarios.
+      </p>
+
+      <h2>FAQ</h2>
+      <div class="faq">
+        {faq.map((f) => <details><summary>{f.q}</summary><p>{f.a}</p></details>)}
+      </div>
+    </div>
+  </article>
+
+  <style>
+    .info-grid { display: grid; grid-template-columns: 1fr; gap: 12px; margin: 16px 0 24px; }
+    @media (min-width: 760px) { .info-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    .info-grid section { border: 1px solid var(--line); border-radius: 12px; background: var(--surface); padding: 16px; }
+    .info-grid h3 { margin-top: 0; }
+  </style>
+</Base>

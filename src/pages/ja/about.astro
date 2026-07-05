@@ -1,0 +1,80 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+
+const coverage = [
+  ['発売とプラットフォーム', '発売日、デモ、Steam、Steam Deck、Switch、Switch 2、Android、購入前チェック。'],
+  ['プレイヤーガイド', '初心者、農業、魔法、アクティビティ、アイテム、マップ、比較、序盤の進め方。'],
+  ['キャラクターと恋愛', '住民、家族、恋愛候補、ギフト、結婚、発売後に確認するデータ。'],
+  ['ツールとFAQ', 'Platform Picker、恋愛ツール、Item Tracker、農業計算、FAQ、更新ページ。'],
+];
+
+const principles = [
+  '確定情報、デモ観察、プレビュー情報、未確認データを分けて扱う。',
+  'キーワードよりも、プレイヤーの疑問に先に答える。',
+  'スマホでも読みやすく、速く、使いやすいページにする。',
+  '信頼できるデータが確認できたら、同じURLで更新する。',
+];
+
+const faq = [
+  { q: 'Moonlight Peaks Wiki & Guideは公式ですか？', a: `いいえ。${SITE.brand}はファン制作の独立ガイドであり、${GAME.developer}や${GAME.publisher}と公式な関係はありません。` },
+  { q: 'このサイトでは何を扱いますか？', a: '発売日、デモ、プラットフォーム、キャラクター、家族、恋愛、ギフト、農業、魔法、アイテム、ツール、FAQ、比較ページを扱います。' },
+  { q: '未確認情報はどう扱いますか？', a: '未確認または確認待ちとして明記します。推測を最終データのように書かない方針です。' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'AboutPage', name: `${SITE.brand}について`, url: new URL('/ja/about', SITE.url).href },
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'ホーム', item: `${SITE.url}/ja` },
+    { '@type': 'ListItem', position: 2, name: 'このサイトについて', item: new URL('/ja/about', SITE.url).href },
+  ] },
+];
+---
+<Base
+  title={`${SITE.brand}について - Moonlight Peaks 独立ガイド`}
+  description={`${SITE.brand}はMoonlight Peaksの発売日、デモ、プラットフォーム、恋愛、キャラクター、農業、魔法、ツール、FAQを扱う独立ガイドです。`}
+  path="/ja/about"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'このサイトについて' }]}
+  lang="ja"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">独立ファンガイド</p>
+      <h1><em>{SITE.brand}</em>について</h1>
+      <p class="intro">
+        {SITE.brand}は{GAME.title}のファン制作ガイドです。発売日、デモ、プラットフォーム、
+        恋愛、キャラクター、ギフト、農業、魔法、ツール、発売準備をすばやく確認できるように作っています。
+      </p>
+
+      <h2>扱う内容</h2>
+      <div class="info-grid">
+        {coverage.map((item) => <section><h3>{item[0]}</h3><p>{item[1]}</p></section>)}
+      </div>
+
+      <h2>編集方針</h2>
+      <ul>
+        {principles.map((item) => <li>{item}</li>)}
+      </ul>
+
+      <h2>独立性について</h2>
+      <p>
+        このサイトは公式サイトではなく、{GAME.developer}または{GAME.publisher}と提携、承認、
+        関連しているものではありません。Moonlight Peaksに関する名称や素材は各権利者に帰属します。
+      </p>
+
+      <h2>FAQ</h2>
+      <div class="faq">
+        {faq.map((f) => <details><summary>{f.q}</summary><p>{f.a}</p></details>)}
+      </div>
+    </div>
+  </article>
+
+  <style>
+    .info-grid { display: grid; grid-template-columns: 1fr; gap: 12px; margin: 16px 0 24px; }
+    @media (min-width: 760px) { .info-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    .info-grid section { border: 1px solid var(--line); border-radius: 12px; background: var(--surface); padding: 16px; }
+    .info-grid h3 { margin-top: 0; }
+  </style>
+</Base>

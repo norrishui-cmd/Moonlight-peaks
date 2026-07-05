@@ -1,0 +1,87 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+
+const rows = [
+  ['从这里开始', '新手指南、Demo、发售日期和平台信息。'],
+  ['核心系统', '种田、钓鱼、魔法、活动、物品、地图和 Nokturna。'],
+  ['关系玩法', '角色、家族、恋爱、礼物、结婚和好感路线。'],
+  ['收集玩法', '鱼类、虫类、食谱、药剂、神器、装饰和素材。'],
+  ['购买前查询', 'Steam Deck、Switch、Android、价格、Demo 和对比页面。'],
+];
+
+const links = [
+  { href: '/zh/beginner-guide', label: '新手指南' },
+  { href: '/zh/release-date', label: '发售日期' },
+  { href: '/zh/demo', label: 'Demo' },
+  { href: '/zh/platforms', label: '平台信息' },
+  { href: '/zh/characters', label: '角色' },
+  { href: '/zh/romance', label: '恋爱' },
+  { href: '/zh/farming', label: '种田' },
+  { href: '/zh/magic', label: '魔法' },
+  { href: '/zh/items', label: '物品' },
+  { href: '/tools', label: '工具' },
+];
+
+const faq = [
+  { q: '应该先看哪篇 Moonlight Peaks 攻略？', a: '建议先看新手指南，然后根据需求查看 Demo、发售日期、平台、角色或恋爱页面。' },
+  { q: '发售前的攻略数据都是最终版吗？', a: '不是。页面会区分已确认信息、Demo 观察、媒体预览和仍需正式版验证的内容。' },
+  { q: '礼物、鱼类和作物表会放在哪里？', a: '确认可靠数据后，会补充到恋爱、角色、物品、种田和活动等页面。' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '首页', item: `${SITE.url}/zh` },
+    { '@type': 'ListItem', position: 2, name: '攻略', item: new URL('/zh/guides', SITE.url).href },
+  ] },
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+];
+---
+<Base
+  title="Moonlight Peaks 攻略 - 新手、种田与恋爱"
+  description="Moonlight Peaks 中文攻略中心，整理新手、Demo、发售日期、平台、种田、魔法、角色、恋爱和物品等入口。"
+  path="/zh/guides"
+  jsonLd={jsonLd}
+  crumbs={[{ label: '攻略' }]}
+  lang="zh"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">中心 / 攻略</p>
+      <h1>Moonlight Peaks <em>攻略</em></h1>
+      <p class="intro">
+        这是 {GAME.title} 的中文攻略入口，用来整理玩家最常查询的发售、平台、Demo、
+        新手、种田、魔法、角色和恋爱内容。
+      </p>
+
+      <h2>攻略地图</h2>
+      <table class="facts">
+        {rows.map((row) => (<tr><th>{row[0]}</th><td>{row[1]}</td></tr>))}
+      </table>
+
+      <h2>主要页面</h2>
+      <div class="link-grid">
+        {links.map((link) => <a href={link.href}>{link.label}</a>)}
+      </div>
+
+      <h2>推荐阅读顺序</h2>
+      <ol class="steps">
+        <li>先确认发售日期、Demo 和平台。</li>
+        <li>开始第一夜之前阅读新手指南。</li>
+        <li>从种田、魔法、恋爱、收集或探索中选择第一个目标。</li>
+        <li>需要具体答案时，再进入对应专题页。</li>
+      </ol>
+
+      <h2>FAQ</h2>
+      <div class="faq">
+        {faq.map((f) => <details><summary>{f.q}</summary><p>{f.a}</p></details>)}
+      </div>
+    </div>
+  </article>
+
+  <style>
+    .link-grid { display: grid; grid-template-columns: 1fr; gap: 10px; margin: 12px 0 24px; }
+    @media (min-width: 720px) { .link-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    .link-grid a { border: 1px solid var(--line); border-radius: 10px; background: var(--surface); color: var(--mist); padding: 12px 14px; text-decoration: none; }
+  </style>
+</Base>

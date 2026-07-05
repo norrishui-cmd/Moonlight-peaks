@@ -1,0 +1,71 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE } from '../../consts';
+
+const tools = [
+  { href: '/tools/platform-picker', tag: 'Decision', title: 'Platform Picker', text: 'Elige entre Steam, Steam Deck, Switch, Switch 2 y Android con una recomendacion prudente para el lanzamiento.', status: 'Live' },
+  { href: '/tools/romance-gift-finder', tag: 'Romance', title: 'Romance Gift Finder', text: 'Consulta residentes, estado de romance, pistas de familia y datos de regalos cuando esten verificados.', status: 'Live' },
+  { href: '/tools/romance-match-quiz', tag: 'Quiz', title: 'Romance Match Quiz', text: 'Un cuestionario rapido para encontrar que residente encaja con tu estilo antes del lanzamiento.', status: 'Live' },
+  { href: '/tools/romance-planner', tag: 'Planner', title: 'Romance Planner', text: 'Guarda candidatos, notas privadas y preparativos para el dia de lanzamiento en tu navegador.', status: 'Live' },
+  { href: '/tools/item-tracker', tag: 'Collection', title: 'Item Tracker', text: 'Sigue peces, critters, recetas, pociones, artefactos, decoraciones y otras categorias.', status: 'Live' },
+  { href: '/tools/farming-profit-planner', tag: 'Farming', title: 'Farming Profit Planner', text: 'Compara beneficios de cultivos cuando se confirmen precios, dias de crecimiento y cosechas.', status: 'Live' },
+  { href: '/tools/submit-data', tag: 'Community', title: 'Data Submitter', text: 'Prepara borradores locales para hallazgos de lanzamiento antes de una revision manual.', status: 'Live' },
+  { href: '/es/demo', tag: 'Demo', title: 'Demo Guide', text: 'Revisa descarga, limites y que probar antes del lanzamiento completo.', status: 'Guide' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Inicio', item: `${SITE.url}/es` },
+    { '@type': 'ListItem', position: 2, name: 'Herramientas', item: new URL('/es/tools', SITE.url).href },
+  ] },
+  { '@context': 'https://schema.org', '@type': 'CollectionPage', name: 'Herramientas de Moonlight Peaks', url: new URL('/es/tools', SITE.url).href },
+];
+---
+<Base
+  title="Herramientas de Moonlight Peaks - plataformas, romance y coleccion"
+  description="Herramientas de Moonlight Peaks en espanol para elegir plataforma, planear romance, seguir objetos, calcular cultivo y preparar datos de lanzamiento."
+  path="/es/tools"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Herramientas' }]}
+  lang="es"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Herramientas / Ayuda practica</p>
+      <h1>Herramientas de <em>Moonlight Peaks</em></h1>
+      <p class="intro">
+        Utilidades pensadas para resolver decisiones concretas: plataforma, romance, regalos,
+        coleccion, cultivo y datos que todavia deben verificarse tras el lanzamiento.
+      </p>
+
+      <section class="tool-grid" aria-label="Herramientas de Moonlight Peaks">
+        {tools.map((tool) => (
+          <a class="tool-card" href={tool.href}>
+            <span class="tool-status">{tool.status}</span>
+            <span class="tool-tag">{tool.tag}</span>
+            <strong>{tool.title}</strong>
+            <span>{tool.text}</span>
+            <em>Abrir herramienta -&gt;</em>
+          </a>
+        ))}
+      </section>
+
+      <h2>Por que son utiles</h2>
+      <p>
+        Estas herramientas evitan inventar datos antes del lanzamiento. Cuando algo no esta confirmado,
+        se marca como pendiente y se actualiza cuando existan fuentes fiables.
+      </p>
+    </div>
+  </article>
+
+  <style>
+    .tool-grid { display: grid; grid-template-columns: 1fr; gap: 14px; margin: 24px 0; }
+    @media (min-width: 760px) { .tool-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    @media (min-width: 1080px) { .tool-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+    .tool-card { min-height: 190px; display: flex; flex-direction: column; gap: 10px; border: 1px solid var(--line); border-radius: 12px; background: linear-gradient(135deg, rgba(244,202,104,.12), var(--surface)); padding: 16px; text-decoration: none; }
+    .tool-card strong { font-family: var(--display); font-size: 1.25rem; color: var(--mist); }
+    .tool-card span { color: var(--muted); }
+    .tool-status, .tool-tag, .tool-card em { font-family: var(--mono); color: var(--candle); font-style: normal; }
+    .tool-card em { margin-top: auto; }
+  </style>
+</Base>
