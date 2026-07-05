@@ -58,15 +58,16 @@ button, input, select, textarea { font: inherit; }
   background: color-mix(in srgb, var(--ink) 84%, transparent);
   border-bottom: 1px solid var(--line);
 }
-.site-header .bar { display: flex; align-items: center; justify-content: space-between; height: 60px; }
+.site-header .bar { display: flex; align-items: center; justify-content: space-between; min-height: 60px; padding: 8px 0; }
 .brand { display: flex; align-items: center; gap: 10px; font-family: var(--display); }
 .brand .moon {
-  width: 18px; height: 18px; border-radius: 50%;
+  width: 18px; height: 18px; border-radius: 50%; flex: 0 0 auto;
   background: radial-gradient(circle at 32% 32%, var(--candle), #cda23f);
   box-shadow: 0 0 14px rgba(243,201,105,0.5);
 }
-.brand .mark { font-weight: 600; font-size: 1.12rem; letter-spacing: -0.01em; color: var(--mist); }
-.brand .mark em { color: var(--candle); font-style: italic; }
+.brand .mark { display: flex; flex-direction: column; line-height: 1.2; }
+.brand .mark-title { font-weight: 600; font-size: 1.12rem; letter-spacing: -0.01em; color: var(--mist); }
+.brand .mark-sub { font-size: 0.72rem; font-style: italic; font-weight: 500; color: var(--candle); }
 .nav { display: flex; gap: 18px; flex-wrap: wrap; justify-content: flex-end; font-size: 0.9rem; }
 .nav a { color: var(--muted); transition: color .15s ease; }
 .nav a:hover, .nav a[aria-current="page"] { color: var(--candle); }
@@ -115,7 +116,8 @@ button, input, select, textarea { font: inherit; }
     min-height: 34px;
     width: max-content;
   }
-  .brand .mark { font-size: 1rem; }
+  .brand .mark-title { font-size: 1rem; }
+  .brand .mark-sub { font-size: 0.66rem; }
   .nav {
     display: flex;
     flex-wrap: nowrap;

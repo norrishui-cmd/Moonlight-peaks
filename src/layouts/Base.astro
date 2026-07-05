@@ -181,7 +181,10 @@ const ld = rawLd.map(enrichStructuredData);
       <div class="wrap bar">
         <a class="brand" href={localizedHref('/')} aria-label={`${SITE.brand} home`}>
           <span class="moon" aria-hidden="true"></span>
-          <span class="mark">Moonlight Peaks <em>Wiki &amp; Guide</em></span>
+          <span class="mark">
+            <span class="mark-title">Moonlight Peaks</span>
+            <span class="mark-sub">Wiki &amp; Guide</span>
+          </span>
         </a>
         <nav class="nav" aria-label="Primary">
           <details class="nav-dd" open={isGuideGroupActive ? true : undefined}>
