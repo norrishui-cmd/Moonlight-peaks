@@ -1,8 +1,8 @@
 ---
-import Base from '../../layouts/Base.astro';
-import { SITE, GAME } from '../../consts';
-import { characters } from '../../data/characters';
-import { charTranslations } from '../../i18n/characters-data';
+import Base from '../../../layouts/Base.astro';
+import { SITE, GAME } from '../../../consts';
+import { characters } from '../../../data/characters';
+import { charTranslations } from '../../../i18n/characters-data';
 
 const translations = charTranslations.zh;
 const list = Object.keys(translations).map((slug) => ({
@@ -12,15 +12,17 @@ const list = Object.keys(translations).map((slug) => ({
 }));
 
 const jsonLd = {
-  '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
     { '@type': 'ListItem', position: 1, name: '首页', item: `${SITE.url}/zh` },
     { '@type': 'ListItem', position: 2, name: '角色', item: `${SITE.url}/zh/characters` },
   ],
 };
 ---
 <Base
-  title="Moonlight Peaks 角色列表 — 中文攻略"
-  description="Moonlight Peaks 角色中文资料:所属家族、是否可攻略,以及目前已知的全部信息。"
+  title="Moonlight Peaks 角色列表 - 中文攻略"
+  description="Moonlight Peaks 角色中文资料: 所属家族、恋爱状态、已知居民信息和中文角色页面入口。"
   path="/zh/characters"
   jsonLd={jsonLd}
   crumbs={[{ label: '角色' }]}
@@ -31,15 +33,21 @@ const jsonLd = {
       <p class="eyebrow">词条 · 角色</p>
       <h1><em>Moonlight Peaks</em> 角色列表</h1>
       <p class="intro">
-        {GAME.title} 里搜索热度最高的几位居民,中文资料。我们会清楚区分开发商已确认的信息和
-        试玩/媒体报道推测的信息。
+        这里整理 {GAME.title} 中目前已经翻译的角色资料。页面会区分已确认信息和仍需正式版验证的内容,
+        并在游戏上线后继续补充更多居民、家族、礼物和恋爱状态。
       </p>
 
       <div class="cx-grid">
         {list.map(({ slug, base, tr }) => (
           <a class="cx-card" href={`/zh/characters/${slug}`}>
             <span class="cx-thumb">
-              {base.img ? <img src={base.img} alt="" loading="lazy" width="72" height="72" /> : <span class="cx-letter" style={`background: linear-gradient(135deg, ${base.c1}, ${base.c2})`}>{tr.name.charAt(0)}</span>}
+              {base.img ? (
+                <img src={base.img} alt="" loading="lazy" width="72" height="72" />
+              ) : (
+                <span class="cx-letter" style={`background: linear-gradient(135deg, ${base.c1}, ${base.c2})`}>
+                  {tr.name.charAt(0)}
+                </span>
+              )}
             </span>
             <span>
               <strong>{tr.name}</strong>
@@ -50,8 +58,9 @@ const jsonLd = {
       </div>
 
       <div class="callout wip">
-        目前只有这 6 位角色做了中文资料。完整的全部角色列表可以去
-        <a href="/characters">英文版角色页面</a>看,中文版会持续分批扩充。
+        中文角色页会持续分批扩充。完整角色资料可以先查看
+        <a href="/characters">英文角色列表</a>、<a href="/families">家族页面</a> 和
+        <a href="/romance">恋爱攻略</a>。
       </div>
     </div>
   </article>
