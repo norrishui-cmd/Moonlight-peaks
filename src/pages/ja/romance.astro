@@ -1,0 +1,126 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+import YouTube from '../../components/YouTube.astro';
+
+const named = [
+  { name: 'ドラキュラ伯爵', slug: 'count-dracula', family: '吸血鬼', note: 'あなたの父親。物語の中心人物——恋愛対象ではありません。', status: 'confirmed' },
+  { name: 'サーガ', slug: 'saga', family: '人狼', note: '開発元が発表した住民。満月とともにエネルギーが変化する。', status: 'reported' },
+  { name: 'ミナ', slug: 'mina', family: '—', note: '開発元が発表した住民。恋愛対象かどうかは未確認。', status: 'reported' },
+  { name: 'オルロック', slug: 'orlock', family: '吸血鬼', note: 'ある吸血鬼一族の長。', status: 'reported' },
+  { name: 'ルナ', slug: 'luna', family: '魔女', note: '農業を営む魔女。', status: 'reported' },
+  { name: 'パンプキンヘッド', slug: 'pumpkin-head', family: '—', note: '町のイベントの司会役。', status: 'reported' },
+  { name: 'ローガン', slug: 'logan', family: '人狼', note: '特徴的な人狼の家を持つ。', status: 'reported' },
+  { name: 'デス', slug: 'death', family: '—', note: 'ゲームファイルで発見された住民で、自分の家(「デスの小屋」)を持つ。恋愛対象かどうかは推測の域を出ず、未確認。', status: 'datamined' },
+];
+
+const faq = [
+  { q: 'Moonlight Peaksには何人の恋愛対象がいますか?', a: '約2ダース(24人前後)です。以前の報道では15人とされていたため、開発中にキャストが増えたようです。開発元は今後も追加していきたいと述べています。' },
+  { q: 'Moonlight Peaksで結婚はできますか?', a: 'はい、恋愛相手と結婚できます。ゲーム内に子供は登場しません。' },
+  { q: '恋愛対象は性別で制限されますか?', a: 'いいえ。キャラクターモデルは意図的にジェンダーニュートラルに設計されており、自分の吸血鬼キャラクターをどう作成しても、条件を満たす住民なら誰とでも恋愛関係になれます。' },
+  { q: '吸血鬼が人狼と恋愛関係になれますか?', a: 'はい。町の吸血鬼と人狼はあまり仲が良くなく、ちょっとした言い争いをすることが多いので、サーガのような人狼を口説くことは、その隔たりを越えることを意味します——それもまた魅力の一つです。' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'ホーム', item: `${SITE.url}/ja` },
+    { '@type': 'ListItem', position: 2, name: '恋愛', item: `${SITE.url}/ja/romance` },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks — 恋愛と結婚:恋愛対象キャラクター"
+  description="Moonlight Peaksの恋愛システム:約2ダースの恋愛対象、ジェンダーニュートラルな恋愛、結婚(子供はなし)、7つの家族、現時点で判明している名前つきキャラクター。"
+  path="/ja/romance"
+  jsonLd={jsonLd}
+  crumbs={[{ label: '恋愛と家族' }]}
+  lang="ja"
+  showExport
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">エントリー・恋愛</p>
+      <h1>Moonlight Peaksの<em>恋愛</em>と7つの家族</h1>
+      <p class="intro">
+        恋愛は{GAME.title}の目玉機能の一つです:超自然的な独身者であふれる町、ジェンダーニュートラルな
+        恋愛、そして結婚(ただし子供はなし)。ここでは現時点で確認されている情報を、正式版でしか
+        確認できない情報と分けてまとめています。
+      </p>
+
+      <div class="romance-video">
+        <YouTube id="YFb9capELQw" title="Moonlight Peaks romance video" />
+      </div>
+
+      <h2>まずはここから:恋愛ルートを計画する</h2>
+      <p>
+        確定した贈り物リストや好感度システムはまだありませんが、{GAME.releaseLabel}までに準備できる
+        誠実な方法があります。順番に4つのステップです:
+      </p>
+      <div class="rp-steps">
+        <a class="rp-step" href="/tools/romance-match-quiz">
+          <span class="rp-step-num">1</span>
+          <strong>診断を受ける</strong>
+          <span>実際の情報に基づいた楽しいマッチングで、気になる相手を絞り込む。</span>
+        </a>
+        <a class="rp-step" href="/previews/day-one-romance-route">
+          <span class="rp-step-num">2</span>
+          <strong>初日のルートを確認する</strong>
+          <span>データマイニングされたファイルで、どの住民の家がすでに判明しているかチェック。</span>
+        </a>
+        <a class="rp-step" href="/tools/romance-planner">
+          <span class="rp-step-num">3</span>
+          <strong>候補リストを作る</strong>
+          <span>Romance Plannerを使って、選んだ相手とメモをブラウザにプライベートに保存。</span>
+        </a>
+        <a class="rp-step" href="/previews/what-to-expect-from-romance-mechanics">
+          <span class="rp-step-num">4</span>
+          <strong>期待値を調整する</strong>
+          <span>始める前に、ジャンルの定番と実際に確認済みの情報の違いを知っておく。</span>
+        </a>
+      </div>
+
+      <h2>基本情報</h2>
+      <p>
+        町の7つの家族——吸血鬼、人狼、魔女、人魚など——にまたがって、約2ダースの住民が恋愛対象になれます。
+        彼らと友情を育んだり、恋愛関係を築いたりして、最終的には結婚することもできます。各家族との関係性は、
+        祭りや贈り物、そしてどの扉が開かれるかに影響すると予想されています。
+      </p>
+
+      <h2>現時点で判明している名前つきキャラクター</h2>
+      <p>物語の中心人物として一次情報で確認されているのはドラキュラ伯爵のみです。その他は開発元の発表や発売前の報道で登場しており、発売時に確認される予定です。</p>
+      <table class="facts">
+        <tr><th>キャラクター</th><th>家族・状態</th></tr>
+        {named.map((c) => (
+          <tr>
+            <td><strong><a href={`/characters/${c.slug}`}>{c.name}</a></strong> {(c.status === 'reported' || c.status === 'datamined') && <span style="color:var(--faint);font-family:var(--mono);font-size:0.7rem">{c.status}</span>}<br /><span style="color:var(--muted);font-size:0.85rem">{c.note}</span></td>
+            <td>{c.family === '—' ? '—' : c.family}</td>
+          </tr>
+        ))}
+      </table>
+
+      <h2>贈り物ガイド</h2>
+      <p>
+        各キャラクターの好みの贈り物は、{GAME.releaseLabel}に正式版が確認され次第公開し、
+        贈り物トラッカーとしてもまとめる予定です。ゲーム内で確認できるまでは、どの贈り物も
+        「好み」とは記載しません。
+      </p>
+
+      <h2>よくある質問</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        発売前のエントリーです。発売時には全キャラクター一覧と贈り物トラッカーになります。関連ページ:
+        <a href="/characters">全キャラクター</a>、<a href="/families">7つの家族</a>、
+        <a href="/ja/characters">キャラクター(日本語)</a>。
+      </div>
+    </div>
+  </article>
+</Base>

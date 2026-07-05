@@ -1,0 +1,127 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+import YouTube from '../../components/YouTube.astro';
+
+const named = [
+  { name: 'Conde Drácula', slug: 'count-dracula', family: 'Vampiro', note: 'Tu padre. Personaje de la historia — no es conquistable.', status: 'confirmed' },
+  { name: 'Saga', slug: 'saga', family: 'Hombre lobo', note: 'Residente revelada por los desarrolladores; su energía cambia con la luna llena.', status: 'reported' },
+  { name: 'Mina', slug: 'mina', family: '—', note: 'Residente revelada por los desarrolladores; estado de romance por confirmar.', status: 'reported' },
+  { name: 'Orlock', slug: 'orlock', family: 'Vampiro', note: 'Cabeza de una familia de vampiros.', status: 'reported' },
+  { name: 'Luna', slug: 'luna', family: 'Bruja', note: 'Una bruja agricultora.', status: 'reported' },
+  { name: 'Cabeza de Calabaza', slug: 'pumpkin-head', family: '—', note: 'Presentador teatral de eventos por el pueblo.', status: 'reported' },
+  { name: 'Logan', slug: 'logan', family: 'Hombre lobo', note: 'Tiene una casa de hombre lobo muy particular.', status: 'reported' },
+  { name: 'Muerte', slug: 'death', family: '—', note: 'Residente hallado en archivos del juego, con su propia casa ("la choza de la Muerte"); su estado de romance es especulación, no confirmado.', status: 'datamined' },
+];
+
+const faq = [
+  { q: '¿Cuántos personajes conquistables hay en Moonlight Peaks?', a: 'Alrededor de dos docenas (unos 24). Coberturas anteriores citaban 15, así que el elenco creció durante el desarrollo, y los desarrolladores han dicho que esperan seguir ampliándolo.' },
+  { q: '¿Puedes casarte en Moonlight Peaks?', a: 'Sí, puedes casarte con tu pareja de romance. No hay hijos en el juego.' },
+  { q: '¿El romance está limitado por género?', a: 'No. Los modelos de personaje son deliberadamente neutrales en género, así que puedes conquistar a cualquier residente elegible sin importar cómo construyas a tu propio vampiro.' },
+  { q: '¿Un vampiro puede tener una relación con un hombre lobo?', a: 'Sí. Los vampiros y los hombres lobo del pueblo rara vez se llevan bien y suelen tener roces — así que conquistar a alguien como Saga significa cruzar esa división, lo cual es parte del encanto.' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Inicio', item: `${SITE.url}/es` },
+    { '@type': 'ListItem', position: 2, name: 'Romance', item: `${SITE.url}/es/romance` },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks — Romance y Matrimonio: Personajes Conquistables"
+  description="Romance en Moonlight Peaks: alrededor de dos docenas de residentes conquistables, citas neutrales en género, matrimonio (sin hijos), las siete familias, y los personajes nombrados hasta ahora."
+  path="/es/romance"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Romance y familias' }]}
+  lang="es"
+  showExport
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Entrada · Corazones</p>
+      <h1>Moonlight Peaks — <em>romance</em> y las siete familias</h1>
+      <p class="intro">
+        El romance es una característica estrella de {GAME.title}: todo un pueblo de solteros
+        sobrenaturales, citas neutrales en género, y matrimonio (aunque sin hijos). Esto es lo
+        confirmado hasta ahora, separado de lo que solo verificaremos cuando el juego esté en vivo.
+      </p>
+
+      <div class="romance-video">
+        <YouTube id="YFb9capELQw" title="Moonlight Peaks romance video" />
+      </div>
+
+      <h2>Empieza aquí: planea tu ruta de romance</h2>
+      <p>
+        Todavía no existen listas de regalos ni mecánicas de afecto confirmadas, pero hay una forma
+        honesta de prepararte antes del {GAME.releaseLabel}. Cuatro pasos, en orden:
+      </p>
+      <div class="rp-steps">
+        <a class="rp-step" href="/tools/romance-match-quiz">
+          <span class="rp-step-num">1</span>
+          <strong>Haz el quiz</strong>
+          <span>Un match divertido basado en pistas reales para acotar quién te llama la atención.</span>
+        </a>
+        <a class="rp-step" href="/previews/day-one-romance-route">
+          <span class="rp-step-num">2</span>
+          <strong>Revisa la ruta del primer día</strong>
+          <span>Descubre qué residentes ya tienen una casa conocida en los archivos filtrados.</span>
+        </a>
+        <a class="rp-step" href="/tools/romance-planner">
+          <span class="rp-step-num">3</span>
+          <strong>Arma tu lista corta</strong>
+          <span>Guarda tus favoritos y notas de forma privada en tu navegador con el Romance Planner.</span>
+        </a>
+        <a class="rp-step" href="/previews/what-to-expect-from-romance-mechanics">
+          <span class="rp-step-num">4</span>
+          <strong>Ajusta tus expectativas</strong>
+          <span>Entiende qué es típico del género frente a lo realmente confirmado antes de empezar.</span>
+        </a>
+      </div>
+
+      <h2>Lo básico</h2>
+      <p>
+        Alrededor de dos docenas de residentes son conquistables, repartidos entre las siete familias
+        del pueblo — vampiros, hombres lobo, brujas, sirenas y más. Puedes hacerte amigo o conquistarlos,
+        construir una relación, y eventualmente casarte. Se espera que tu posición con cada familia
+        influya en festivales, regalos y qué puertas se te abren.
+      </p>
+
+      <h2>Personajes nombrados hasta ahora</h2>
+      <p>Solo el Conde Drácula está confirmado oficialmente como personaje central de la historia; los demás aparecen en revelaciones de los desarrolladores y cobertura previa al lanzamiento, y se verificarán en el lanzamiento.</p>
+      <table class="facts">
+        <tr><th>Personaje</th><th>Familia / estado</th></tr>
+        {named.map((c) => (
+          <tr>
+            <td><strong><a href={`/characters/${c.slug}`}>{c.name}</a></strong> {(c.status === 'reported' || c.status === 'datamined') && <span style="color:var(--faint);font-family:var(--mono);font-size:0.7rem">{c.status}</span>}<br /><span style="color:var(--muted);font-size:0.85rem">{c.note}</span></td>
+            <td>{c.family === '—' ? '—' : c.family}</td>
+          </tr>
+        ))}
+      </table>
+
+      <h2>Guía de regalos</h2>
+      <p>
+        Los regalos favoritos y apreciados de cada personaje se publicarán — y se convertirán en un
+        rastreador de regalos — en cuanto el juego en vivo los confirme el {GAME.releaseLabel}. No
+        listaremos un regalo como "favorito" hasta que esté verificado dentro del juego.
+      </p>
+
+      <h2>FAQ</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        Entrada previa al lanzamiento. En el lanzamiento esto se convertirá en el elenco completo más
+        un rastreador de regalos. Relacionado: <a href="/characters">todos los personajes</a>,
+        <a href="/families">las siete familias</a>, <a href="/es/characters">personajes en español</a>.
+      </div>
+    </div>
+  </article>
+</Base>
