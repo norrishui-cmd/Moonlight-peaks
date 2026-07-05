@@ -1,0 +1,195 @@
+---
+import Base from '../layouts/Base.astro';
+import { SITE } from '../consts';
+import type { LocalizedWorldCopy, LocalizedWorldKind, LocalizedWorldLang } from '../data/localizedWorldPages';
+
+type HubItem = {
+  slug: string;
+  title: string;
+  tag?: string;
+  status?: string;
+  image?: string;
+  dek?: string;
+  summary?: string;
+  group?: string;
+};
+
+interface Props {
+  lang: LocalizedWorldLang;
+  kind: LocalizedWorldKind;
+  copy: LocalizedWorldCopy;
+  items: HubItem[];
+}
+
+const { lang, kind, copy, items } = Astro.props;
+const path = `/${lang}/${kind}`;
+const englishBase = `/${kind}`;
+const homeLabel = lang === 'es' ? 'Inicio' : 'Home';
+const displayTitle = (item: HubItem) => copy.labels[item.slug] ?? item.title;
+const displayDek = (item: HubItem) => item.dek ?? item.summary ?? '';
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: homeLabel, item: `${SITE.url}/${lang}` },
+      { '@type': 'ListItem', position: 2, name: copy.crumb, item: `${SITE.url}${path}` },
+    ],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: copy.crumb,
+    itemListElement: items.map((item, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: displayTitle(item),
+      url: `${SITE.url}${englishBase}/${item.slug}`,
+    })),
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: copy.faq.map((f) => ({
+      '@type': 'Question',
+      name: f.q,
+      acceptedAnswer: { '@type': 'Answer', text: f.a },
+    })),
+  },
+];
+---
+<Base title={copy.title} description={copy.description} path={path} jsonLd={jsonLd} crumbs={[{ label: copy.crumb }]} lang={lang}>
+  <article class="localized-hub">
+    <div class="wrap">
+      <p class="eyebrow">{copy.eyebrow}</p>
+      <h1 set:html={copy.heading}></h1>
+      <p class="intro">{copy.intro}</p>
+
+      <section class="hub-section" aria-labelledby={`${kind}-grid-title`}>
+        <div class="section-head">
+          <h2 id={`${kind}-grid-title`}>{copy.sectionTitle}</h2>
+          <p>{copy.sectionIntro}</p>
+        </div>
+
+        <div class="hub-grid">
+          {items.map((item) => (
+            <a class="hub-card" href={`${englishBase}/${item.slug}`} aria-label={`${copy.exploreLabel}: ${displayTitle(item)}`}>
+              {item.image && (
+                <div class="card-media">
+                  <img src={item.image} alt={displayTitle(item)} loading="lazy" />
+                </div>
+              )}
+              <div class="card-body">
+                <div class="card-meta">
+                  <span>{item.tag ?? item.group ?? copy.crumb}</span>
+                  {item.status && <span>{copy.statusLabel}: {item.status}</span>}
+                </div>
+                <h3>{displayTitle(item)}</h3>
+                <p>{displayDek(item)}</p>
+                <span class="detail-note">{copy.detailNote}</span>
+                <strong>{copy.exploreLabel} -&gt;</strong>
+              </div>
+            </a>
+          ))}
+        </div>
+      </section>
+
+      <section class="faq-block" aria-labelledby={`${kind}-faq-title`}>
+        <h2 id={`${kind}-faq-title`}>{copy.faqTitle}</h2>
+        <div class="faq-list">
+          {copy.faq.map((f) => (
+            <details>
+              <summary>{f.q}</summary>
+              <p>{f.a}</p>
+            </details>
+          ))}
+        </div>
+      </section>
+    </div>
+  </article>
+</Base>
+
+<style>
+  .localized-hub { padding: 34px 0 72px; }
+  .wrap { max-width: 1180px; margin: 0 auto; padding: 0 22px; }
+  .eyebrow {
+    color: var(--gold);
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+  h1 { max-width: 900px; margin: 12px 0 18px; font-size: clamp(2.4rem, 5vw, 4.7rem); line-height: 0.95; }
+  h1 :global(em) { color: var(--gold); }
+  .intro {
+    max-width: 880px;
+    margin: 0 0 32px;
+    color: var(--muted);
+    font-size: clamp(1.04rem, 1.6vw, 1.28rem);
+    line-height: 1.72;
+  }
+  .section-head { max-width: 860px; margin-bottom: 20px; }
+  .section-head h2,
+  .faq-block h2 { margin: 0 0 8px; font-size: clamp(1.45rem, 2.4vw, 2.1rem); }
+  .section-head p { margin: 0; color: var(--muted); line-height: 1.7; }
+  .hub-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+  }
+  .hub-card {
+    display: flex;
+    min-height: 100%;
+    flex-direction: column;
+    overflow: hidden;
+    border: 1px solid rgba(185, 151, 255, 0.24);
+    border-radius: 12px;
+    background: linear-gradient(180deg, rgba(42, 31, 56, 0.96), rgba(28, 21, 40, 0.98));
+    color: inherit;
+    text-decoration: none;
+    transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+  }
+  .hub-card:hover {
+    transform: translateY(-3px);
+    border-color: rgba(255, 212, 112, 0.58);
+    box-shadow: 0 18px 44px rgba(0, 0, 0, 0.24);
+  }
+  .card-media { aspect-ratio: 16 / 9; overflow: hidden; background: rgba(255, 255, 255, 0.04); }
+  .card-media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .card-body { display: flex; flex: 1; flex-direction: column; gap: 12px; padding: 20px; }
+  .card-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    color: var(--gold);
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .card-body h3 { margin: 0; font-size: 1.5rem; line-height: 1.12; }
+  .card-body p { margin: 0; color: var(--text); line-height: 1.65; }
+  .detail-note { margin-top: auto; color: var(--muted); font-size: 0.88rem; line-height: 1.45; }
+  .card-body strong { color: var(--gold); font-family: var(--mono); font-size: 0.86rem; }
+  .faq-block { margin-top: 44px; }
+  .faq-list { display: grid; gap: 12px; max-width: 940px; }
+  details {
+    border: 1px solid rgba(185, 151, 255, 0.2);
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.035);
+    padding: 16px 18px;
+  }
+  summary { cursor: pointer; font-weight: 700; }
+  details p { margin: 12px 0 0; color: var(--muted); line-height: 1.65; }
+  @media (max-width: 980px) {
+    .hub-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+  @media (max-width: 640px) {
+    .localized-hub { padding-top: 24px; }
+    .wrap { padding: 0 16px; }
+    .hub-grid { grid-template-columns: 1fr; }
+    .card-body { padding: 17px; }
+  }
+</style>

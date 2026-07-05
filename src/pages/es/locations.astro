@@ -1,0 +1,6 @@
+---
+import LocalizedWorldHub from '../../components/LocalizedWorldHub.astro';
+import { locations } from '../../data/locations';
+import { localizedWorldPages } from '../../data/localizedWorldPages';
+---
+<LocalizedWorldHub lang="es" kind="locations" copy={localizedWorldPages.es.locations} items={locations} />
