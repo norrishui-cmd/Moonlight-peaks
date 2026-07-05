@@ -1,26 +1,25 @@
 ---
 import Base from '../../../layouts/Base.astro';
-import { SITE, GAME } from '../../../consts';
+import { SITE } from '../../../consts';
 import { characters } from '../../../data/characters';
 import { charTranslations } from '../../../i18n/characters-data';
 
-const translations = charTranslations.zh;
-
 export function getStaticPaths() {
-  return Object.keys(translations).map((slug) => ({ params: { slug } }));
+  return Object.keys(charTranslations.zh).map((slug) => ({ params: { slug } }));
 }
 
 const { slug } = Astro.params;
 const base = characters.find((c) => c.id === slug)!;
-const tr = translations[slug as keyof typeof translations];
+const tr = charTranslations.zh[slug as keyof typeof charTranslations.zh];
 
 const url = new URL(`/zh/characters/${slug}`, SITE.url).href;
 const imgAbs = base.img ? new URL(base.img, SITE.url).href : undefined;
 const statusLabel =
-  base.status === 'confirmed' ? '开发商已确认'
-  : base.status === 'reported' ? '来自试玩报道或媒体报道,发售时以正式版为准'
-  : base.status === 'datamined' ? '数据挖掘发现——名字已核实,角色身份未确认'
+  base.status === 'confirmed' ? '已确认'
+  : base.status === 'reported' ? '报道信息'
+  : base.status === 'datamined' ? '数据挖掘'
   : '未确认';
+const romanceText = base.romanceable === true ? tr.romanceYes : base.romanceable === false ? tr.romanceNo : tr.romanceTbc;
 
 const jsonLd = [
   { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
@@ -30,12 +29,10 @@ const jsonLd = [
   ] },
   { '@context': 'https://schema.org', '@type': 'Person', name: tr.name, description: tr.desc, ...(imgAbs ? { image: imgAbs } : {}) },
 ];
-
-const romanceText = base.romanceable === true ? tr.romanceYes : base.romanceable === false ? tr.romanceNo : tr.romanceTbc;
 ---
 <Base
-  title={`${tr.name} — Moonlight Peaks 角色攻略`}
-  description={`Moonlight Peaks 里的${tr.name}:${tr.desc} 所属家族、是否可攻略,以及目前已知的全部信息。`}
+  title={`${tr.name} - Moonlight Peaks 角色攻略`}
+  description={`Moonlight Peaks 里的${tr.name}: ${tr.desc} 所属家族、恋爱状态和目前已知信息。`}
   path={`/zh/characters/${slug}`}
   jsonLd={jsonLd}
   ogImage={base.img}
@@ -49,23 +46,19 @@ const romanceText = base.romanceable === true ? tr.romanceYes : base.romanceable
       <div class="chead">
         <div class="cavatar">
           {base.img ? (
-            <img src={base.img} alt={`${tr.name} —— Moonlight Peaks 角色立绘`} width="160" height="160" />
+            <img src={base.img} alt={`${tr.name} portrait`} width="160" height="160" />
           ) : (
-            <svg viewBox="0 0 160 160" width="160" height="160" aria-hidden="true">
-              <defs><linearGradient id={`g-zh-${slug}`} x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color={base.c1} /><stop offset="1" stop-color={base.c2} /></linearGradient></defs>
-              <rect width="160" height="160" fill={`url(#g-zh-${slug})`} />
-              <text x="80" y="104" text-anchor="middle" font-family="Fraunces, serif" font-size="68" fill="rgba(255,255,255,0.9)">{tr.name.charAt(0)}</text>
-            </svg>
+            <span class="fallback-avatar" style={`background: linear-gradient(135deg, ${base.c1}, ${base.c2})`}>{tr.name.charAt(0)}</span>
           )}
         </div>
         <div class="cmeta">
           <h1>{tr.name}</h1>
           <div class="ctags">
-            <span class={`cbadge ${base.status === 'confirmed' ? 'is-conf' : base.status === 'reported' ? 'is-rep' : base.status === 'datamined' ? 'is-dm' : 'is-unc'}`}>{base.status}</span>
+            <span class={`cbadge ${base.status === 'confirmed' ? 'is-conf' : base.status === 'reported' ? 'is-rep' : base.status === 'datamined' ? 'is-dm' : 'is-unc'}`}>{statusLabel}</span>
             <span class="ctag fam">{tr.familyLabel}</span>
-            {base.romanceable === true && <span class="ctag heart">可攻略</span>}
-            {base.romanceable === false && <span class="ctag">不可攻略</span>}
-            {base.romanceable === null && <span class="ctag">恋爱状态待定</span>}
+            {base.romanceable === true && <span class="ctag heart">可恋爱</span>}
+            {base.romanceable === false && <span class="ctag">不可恋爱</span>}
+            {base.romanceable === null && <span class="ctag">恋爱状态待确认</span>}
           </div>
           <p class="cdesc">{tr.desc}</p>
         </div>
@@ -78,31 +71,9 @@ const romanceText = base.romanceable === true ? tr.romanceYes : base.romanceable
       <p>{romanceText}</p>
 
       <div class="callout">
-        <strong>准确度:</strong>{statusLabel}。我们会清楚区分开发商已确认的信息和试玩/媒体报道推测的信息,绝不编造礼物表或数值。完整细节会在 {GAME.releaseLabel} 正式发售时揭晓。
-      </div>
-
-      <div class="callout wip">
-        更多:<a href="/zh/characters">角色列表</a>(中文)、<a href="/romance">恋爱攻略</a>、
-        <a href="/families">家族</a>、<a href="/characters">完整角色资料</a>(英文)。
+        相关页面: <a href="/zh/characters">中文角色列表</a>、<a href="/romance">恋爱攻略</a>、
+        <a href="/families">家族</a>、<a href="/characters">英文完整角色资料</a>。
       </div>
     </div>
   </article>
-
-  <style>
-    .chead { display: flex; gap: 18px; align-items: flex-start; flex-wrap: wrap; margin: 4px 0 8px; }
-    .cavatar { flex: 0 0 auto; width: 160px; height: 160px; border-radius: 18px; overflow: hidden; border: 1px solid var(--line); }
-    .cavatar img, .cavatar svg { width: 100%; height: 100%; object-fit: cover; display: block; }
-    .cmeta { flex: 1; min-width: 240px; }
-    .cmeta h1 { margin: 0 0 8px; }
-    .ctags { display: flex; gap: 6px; flex-wrap: wrap; margin: 0 0 10px; }
-    .cbadge { font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.04em; text-transform: uppercase; border-radius: 5px; padding: 2px 6px; }
-    .cbadge.is-conf { color: #9be6b4; border: 1px solid #2f6a45; }
-    .cbadge.is-rep { color: var(--faint); border: 1px solid var(--line); }
-    .cbadge.is-dm { color: #9ac6e0; border: 1px solid #2f5a70; }
-    .cbadge.is-unc { color: #7c6e90; border: 1px dashed var(--line); }
-    .ctag { font-family: var(--mono); font-size: 0.66rem; color: var(--candle); border: 1px solid var(--candle-dim); border-radius: 6px; padding: 2px 7px; }
-    .ctag.fam { color: #cbb4f0; border-color: #5a4a7a; }
-    .ctag.heart { color: var(--wine); border-color: #7a2f45; }
-    .cdesc { color: #ded3e6; margin: 0; }
-  </style>
 </Base>
