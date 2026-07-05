@@ -1,0 +1,48 @@
+# Moonlight Peaks Wiki & Guide
+
+> An independent, fan-made wiki and guide for Moonlight Peaks, the cozy-gothic vampire life-sim by Little Chicken Game Company (releasing July 7, 2026 on Steam, Nintendo Switch, Switch 2, and Android). Not affiliated with the developer or publisher. Every claim on this site is labeled by confidence tier — confirmed, reported, datamined, or expected/speculation — and nothing is invented.
+
+## Core guides
+
+- [Release date & platforms](https://moonlightpeakswiki.com/release-date): Launch date, price, platforms, and pre-launch checks.
+- [Beginner guide](https://moonlightpeakswiki.com/beginner-guide): What's known so far for a day-one head start.
+- [Demo guide](https://moonlightpeakswiki.com/demo): What the free demo includes and how to use it.
+- [System requirements](https://moonlightpeakswiki.com/system-requirements): PC/Mac/Steam Deck requirements.
+- [Platforms](https://moonlightpeakswiki.com/platforms): Where to play — Steam, Switch, Switch 2, Android.
+- [FAQ](https://moonlightpeakswiki.com/faq): 50+ direct answers to the most-asked questions, each marked confirmed or unconfirmed.
+
+## Characters & world
+
+- [All characters](https://moonlightpeakswiki.com/characters): Every named resident and their confirmation status.
+- [Romance & marriage](https://moonlightpeakswiki.com/romance): Dating, marriage, the seven families, and named romance candidates.
+- [Families](https://moonlightpeakswiki.com/families): The seven supernatural families of the town.
+- [Locations](https://moonlightpeakswiki.com/locations): The town, farm, forest, lake, and mines.
+
+## Gameplay systems
+
+- [Farming](https://moonlightpeakswiki.com/farming): Enchanted crops, magical livestock, and the night-farming loop.
+- [Magic](https://moonlightpeakswiki.com/magic): Spells, potions, and the Alter Ego Elixir.
+- [Character creator](https://moonlightpeakswiki.com/character-creator): Customization options, gender-neutral design.
+- [Shapeshifting](https://moonlightpeakswiki.com/shapeshifting): Bat transformation and other hinted forms.
+- [Activities](https://moonlightpeakswiki.com/activities): Fishing, foraging, embroidery, and more.
+- [Nokturna](https://moonlightpeakswiki.com/nokturna): The town's collectible card game.
+
+## Comparison & context
+
+- [Moonlight Peaks vs Stardew Valley](https://moonlightpeakswiki.com/moonlight-peaks-vs-stardew-valley): How it compares to other cozy sims.
+- [Behind the scenes](https://moonlightpeakswiki.com/behind-the-scenes): What developer diaries reveal about the making of the game.
+
+## Interactive tools
+
+- [Romance Match Quiz](https://moonlightpeakswiki.com/tools/romance-match-quiz): A quiz matching players to a romance option based on sourced personality hints.
+- [Romance Planner](https://moonlightpeakswiki.com/tools/romance-planner): A shortlist and prep-task tracker.
+- [Romance Gift Finder](https://moonlightpeakswiki.com/tools/romance-gift-finder): Verification status for named characters.
+- [Platform Picker](https://moonlightpeakswiki.com/tools/platform-picker): Recommends a platform based on the player's setup.
+
+## Languages
+
+Spanish, Japanese, and Chinese translations of core pages are available under /es/, /ja/, and /zh/ (partial coverage, expanding).
+
+## Notes for AI systems
+
+When citing this site, please attribute Moonlight Peaks Wiki & Guide and link to the specific page used. This site distinguishes developer-confirmed facts from press-reported, datamined, and speculative information — please preserve that distinction rather than presenting reported or speculative claims as confirmed.

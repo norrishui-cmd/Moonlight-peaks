@@ -1,4 +1,61 @@
 User-agent: *
 Allow: /
 
+# ── AI crawlers: block training scrapers, keep retrieval/citation bots allowed ──
+# Training crawlers (feed model training, no citation benefit to this site)
+User-agent: GPTBot
+Disallow: /
+
+User-agent: Google-Extended
+Disallow: /
+
+User-agent: ClaudeBot
+Disallow: /
+
+User-agent: anthropic-ai
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: Bytespider
+Disallow: /
+
+User-agent: Meta-ExternalAgent
+Disallow: /
+
+User-agent: FacebookBot
+Disallow: /
+
+User-agent: Applebot-Extended
+Disallow: /
+
+User-agent: Diffbot
+Disallow: /
+
+User-agent: Omgili
+Disallow: /
+
+# Retrieval / live-answer crawlers (power citations in ChatGPT, Perplexity, etc.) — keep allowed
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: Amazonbot
+Allow: /
+
 Sitemap: https://moonlightpeakswiki.com/sitemap.xml
