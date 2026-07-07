@@ -199,12 +199,11 @@ export const characters: Character[] = [
   // --- Datamined names WITH a second corroborating detail (a matching named location, or notable
   // cross-coverage) —enough for a short, honest standalone page rather than a bare table row.
   // No fan art exists for these; img is left empty and falls back to the letter-avatar. ---
-  { id: 'albertus', name: 'Albertus', family: 'Unknown', type: 'other', status: 'datamined', romanceable: null, img: '/albertus.webp', c1: '#3a4a3a', c2: '#7ab08a',
-    desc: 'Name verified via pre-launch datamined game files, which also list "Albertus\u2019 Jobs" as a separate entry —possibly a job board or task-giving role.',
+  { id: 'albertus', name: 'Albertus', family: 'Unknown', type: 'other', status: 'confirmed', romanceable: null, img: '/albertus.webp', c1: '#3a4a3a', c2: '#7ab08a',
+    desc: 'An owl who runs the town\u2019s bulletin board \u2014 confirmed at launch as the source of "Albertus\u2019 Jobs," the board where players check available quests/tasks.',
     traits: [], knownInfo: [
-      'Listed as a Moonlight Peaks resident in pre-launch datamined game files (cross-referenced against pre-launch references).',
-      'The same files list a distinct "Albertus\u2019 Jobs" entry alongside his name, hinting he may be connected to jobs or tasks in some way —not developer-confirmed.',
-      'The portrait shown here comes from the pre-launch roster image supplied for this guide; family, species, and role are unverified until launch.',
+      'Confirmed at launch: Albertus is an owl, and "Albertus\u2019 Jobs" is the in-town bulletin board for checking quests.',
+      'Resolves earlier pre-launch datamined speculation that his name was tied to a jobs/task system.',
     ] },
   { id: 'alina', name: 'Alina', family: 'Seer (Khazan)', type: 'seer', status: 'reported', romanceable: true, img: '/alina.webp', c1: '#4a3a4a', c2: '#b08ac0',
     desc: 'The resident rebel of the Khazan family \u2014 stubborn, fiery, and unable to stand lying, with unconventional seer powers and a preference for the shadows.',

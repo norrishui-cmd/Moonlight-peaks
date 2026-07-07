@@ -94,6 +94,36 @@ export const faqs: Faq[] = [
     more: ['If an official subreddit is confirmed, we will add it here rather than pointing to an unverified one.'],
     related: [{ label: 'Review roundup', href: '/reviews' }, { label: 'Previews & community reception', href: '/previews' }],
   },
+  {
+    slug: 'how-to-get-married-in-moonlight-peaks', cat: 'romance',
+    q: 'How do you get married in Moonlight Peaks?',
+    a: 'Confirmed at launch: dating unlocks once a resident hits Heart Level 4. From there you can invite them on dates, which involve minigames — it\u2019s possible to fail a date (e.g. by showing up late), which costs friendship points rather than ending the relationship outright. Marriage itself is monogamous once it happens. Exact proposal steps and heart-event requirements beyond that are still being verified.',
+    related: [{ label: 'Romance guide', href: '/romance' }, { label: 'Gift Tracker', href: '/tools/gift-tracker' }],
+  },
+  {
+    slug: 'how-to-turn-into-a-bat-hellkitten', cat: 'world',
+    q: 'How do you turn into a bat or Hellkitten in Moonlight Peaks?',
+    a: 'Confirmed at launch: once shapeshifting is unlocked through story progression, hold the left shoulder button to open a magic wheel and pick your form — bat for fast travel, or your three-eyed Hellkitten for faster movement and free tilling.',
+    related: [{ label: 'Shapeshifting', href: '/shapeshifting' }],
+  },
+  {
+    slug: 'how-to-find-quests-heart-events', cat: 'world',
+    q: 'How do you find quests and heart events in Moonlight Peaks?',
+    a: 'Confirmed at launch: check the map for markers — an exclamation point means entering that area triggers a cutscene, and a sparkling aura around a building means going inside triggers one. The bulletin board in town (run by Albertus, an owl) also lists available jobs/quests.',
+    related: [{ label: 'Characters', href: '/characters' }, { label: 'Beginner guide', href: '/beginner-guide' }],
+  },
+  {
+    slug: 'how-to-change-portrait-style', cat: 'general',
+    q: 'How do you change your character\u2019s portrait style in Moonlight Peaks?',
+    a: 'Confirmed at launch: open the main game menu (the "+" button on Nintendo Switch) to switch your character\u2019s portrait between two presets — a cartoon style with realistic shading, or a cuter, anime-inspired style.',
+    related: [{ label: 'Character creator', href: '/character-creator' }],
+  },
+  {
+    slug: 'moonlight-peaks-age-rating', cat: 'general',
+    q: 'What is the age rating for Moonlight Peaks?',
+    a: 'Confirmed at launch: PEGI 12 in the UK/Europe and ESRB Teen (T) in the US, due to references to alcohol (you can craft and drink beer and wine) and mildly suggestive romantic language.',
+    related: [{ label: 'Review roundup', href: '/reviews' }],
+  },
 
   // ── World & gameplay ──
   {
