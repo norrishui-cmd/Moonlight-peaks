@@ -27,7 +27,7 @@ export type Fish = {
   status: SourceStatus;
 };
 
-// Start empty-but-typed. Replace this row with the first verified fish today.
+// Start empty-but-typed. No species/prices sourced anywhere yet — replace rows as confirmed.
 export const fish: Fish[] = [
   {
     id: 'example-fish', name: '(replace at launch)', location: '', season: [],
@@ -39,6 +39,14 @@ export const fish: Fish[] = [
   //   timeOfDay: 'Night', weather: '', sellPrice: 120, rarity: 'Uncommon',
   //   notes: 'Only bites after dark.', status: 'confirmed' },
 ];
+
+// Confirmed at launch: the fishing rod is NOT available from the start — you unlock it by
+// winning a bet against Noel (250 gold on the line) to catch three different fish before he does.
+// Bug net comes later, from Death, once the Ambrosia castle area is unlocked. No fish species,
+// locations, or prices are sourced yet — do not invent them.
+export const UNLOCK_NOTE =
+  'Fishing rod: unlocked via a 250-gold bet with Noel (catch 3 different fish before he does). ' +
+  'Bug net: obtained from Death after unlocking the Ambrosia castle area. Species list not yet sourced.';
 
 // "Most valuable fish" — safe on empty/partial data (only ranks rows with a known sellPrice).
 export const fishByValue: Fish[] = [...fish]

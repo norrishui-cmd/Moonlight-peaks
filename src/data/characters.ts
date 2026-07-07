@@ -11,12 +11,14 @@
 // (/tools/romance-gift-finder) and each profile page read these fields directly. Keep giftStatus
 // honest — only 'confirmed' once you've verified the gift reaction in the live game.
 
-export type CharType = 'vampire' | 'werewolf' | 'witch' | 'other';
+export type CharType = 'vampire' | 'werewolf' | 'witch' | 'mermaid' | 'human' | 'other';
 
 export const typeLabels: Record<CharType, string> = {
   vampire: 'Vampire',
   werewolf: 'Werewolf',
   witch: 'Witch',
+  mermaid: 'Mermaid',
+  human: 'Human',
   other: 'Other',
 };
 
@@ -55,6 +57,7 @@ export const characters: Character[] = [
       'He is your father; the story frames your move to Moonlight Peaks as stepping out of his long shadow.',
       'A central story figure rather than a romance option.',
       'The setup has you proving that a kinder, gentler undead life is possible —something he is skeptical of.',
+      'Note: some coverage refers to a strict, protective father figure named "Vlad" \u2014 unclear if this is an alternate name for Count Dracula or a distinct character; not resolved here.',
     ],
   },
   {
@@ -75,13 +78,24 @@ export const characters: Character[] = [
     giftStatus: 'unconfirmed',
   },
   {
-    id: 'mina', name: 'Mina', family: 'Unknown', type: 'other',
-    status: 'confirmed', romanceable: null, img: '/mina.webp', c1: '#3a4a6a', c2: '#7aa2d0',
-    desc: 'A townsperson revealed by the developers. Family role and romance status to be verified at launch.',
-    traits: [['Mystery', 70], ['Charm', 65]], traitsPlaceholder: true,
+    id: 'mina', name: 'Mina', family: 'Vampire (Ambrosia)', type: 'vampire',
+    status: 'confirmed', romanceable: true, img: '/mina.webp', c1: '#3a4a6a', c2: '#7aa2d0',
+    desc: 'A cheerful vampire, Orlock\u2019s daughter, who co-runs the town caf\u00e9 "Coffee & Coffins" with her sibling Evan.',
+    traits: [['Warmth', 80], ['Charm', 70]], traitsPlaceholder: true,
     knownInfo: [
-      'A townsperson revealed by the developers.',
-      'Family affiliation and romance status have not been detailed yet —to be verified at launch.',
+      'Confirmed at launch as Orlock\u2019s daughter and Evan\u2019s sibling; the two run "Coffee & Coffins" together.',
+      'Orlock reportedly wanted to shut the caf\u00e9 down after their mother left, but Mina talked him out of it.',
+      'Loves baking and stays determinedly bright and cheery.',
+    ],
+  },
+  {
+    id: 'evan', name: 'Evan', family: 'Vampire (Ambrosia)', type: 'vampire',
+    status: 'confirmed', romanceable: true, img: '/evan.webp', c1: '#3a3a4a', c2: '#8a8ab0',
+    desc: 'A quiet, aloof vampire who co-runs "Coffee & Coffins" with his sister Mina; his father Orlock pressures him to take over the family name.',
+    traits: [['Calm', 85], ['Aloofness', 60]], traitsPlaceholder: true,
+    knownInfo: [
+      'Confirmed at launch as Orlock\u2019s son and Mina\u2019s sibling, co-running the town caf\u00e9.',
+      'Prefers counting stars to taking over the family name his father wants him to inherit.',
     ],
   },
   {
@@ -96,14 +110,14 @@ export const characters: Character[] = [
     ],
   },
   {
-    id: 'orlock', name: 'Orlock', family: 'Vampire', type: 'vampire',
-    status: 'reported', romanceable: true, img: '/orlock.webp', c1: '#6a2f3f', c2: '#c0436a',
-    desc: 'Reported as a head of a vampire family —a figure of old-world influence in town.',
-    traits: [['Influence', 82], ['Tradition', 78]], traitsPlaceholder: true,
+    id: 'orlock', name: 'Orlock', family: 'Vampire (Ambrosia)', type: 'vampire',
+    status: 'confirmed', romanceable: true, img: '/orlock.webp', c1: '#6a2f3f', c2: '#c0436a',
+    desc: 'An obstinate, self-pitying vampire family head; the first resident you meet, demanding you make him wine. His wife left long ago and there is a rift with his kids Mina and Evan, but a sensitive side shows through with patience.',
+    traits: [['Influence', 82], ['Tradition', 78], ['Warmth', 30]], traitsPlaceholder: true,
     knownInfo: [
-      'Reported as the head of a vampire family.',
-      'Written as a comedic figure in hands-on previews.',
-      'An old-world presence among the town\u2019s vampires.',
+      'The first named resident players meet at launch; he asks for wine and gives starter Blood Grape seeds.',
+      'Father of Mina and Evan (who run "Coffee & Coffins"); his wife left long ago and there is a rift with his kids.',
+      'Haughty and self-pitying on the surface, with a caring side confirmed reviewers found worth pursuing.',
     ],
   },
   {
@@ -145,36 +159,29 @@ export const characters: Character[] = [
 
   // --- Names verified via pre-launch game-file datamines (pre-launch references), cross-referenced.
   // Role, family, and relationships are NOT developer-confirmed —do not treat as final. ---
-  { id: 'ridge',   name: 'Ridge',   family: 'Unknown', type: 'other', status: 'datamined', romanceable: null, img: '/ridge.webp',   c1: '#4a3a2a', c2: '#b08a4a',
-    desc: 'Name verified via pre-launch datamined game files; role and family not yet confirmed by the developers.',
-    traits: [], knownInfo: ['Listed as a Moonlight Peaks resident in pre-launch datamined game files (cross-referenced against pre-launch references).', 'Family, species, and relationship status are not yet developer-confirmed —treat as unverified until launch.'] },
-  { id: 'sabrina', name: 'Sabrina', family: 'Unknown', type: 'other', status: 'datamined', romanceable: null, img: '/sabrina.webp', c1: '#3a3a4a', c2: '#8a8ab0',
-    desc: 'Name verified via pre-launch datamined game files; role and family not yet confirmed by the developers.',
-    traits: [], knownInfo: ['Listed as a Moonlight Peaks resident in pre-launch datamined game files (cross-referenced against pre-launch references).', 'Family, species, and relationship status are not yet developer-confirmed —treat as unverified until launch.'] },
-  { id: 'noel',    name: 'Noel',    family: 'Unknown', type: 'other', status: 'datamined', romanceable: null, img: '/noel.webp',    c1: '#4a3a3a', c2: '#b08a8a',
-    desc: 'Name verified via pre-launch datamined game files, which also list a "Noel\u2019s House" —role and family not yet confirmed.',
-    traits: [], knownInfo: ['Listed as a Moonlight Peaks resident in pre-launch datamined game files (cross-referenced against pre-launch references), which also reference a "Noel\u2019s House" as a named location.', 'Family, species, and relationship status are not yet developer-confirmed —treat as unverified until launch.'] },
+  { id: 'ridge',   name: 'Ridge',   family: 'Werewolf', type: 'werewolf', status: 'confirmed', romanceable: true, img: '/ridge.webp',   c1: '#4a3a2a', c2: '#b08a4a',
+    desc: 'A rugged, dependable werewolf carpenter and total pacifist who uses his werewolf hours to scout high-quality wood; deeply cares about family.',
+    traits: [['Dependability', 85], ['Gentleness', 75]], traitsPlaceholder: true,
+    knownInfo: ['Confirmed as a werewolf carpenter and pacifist.', 'Scouts wood during his werewolf hours and is close with family.'] },
+  { id: 'sabrina', name: 'Sabrina', family: 'Witch', type: 'witch', status: 'confirmed', romanceable: null, img: '/sabrina.webp', c1: '#3a3a4a', c2: '#8a8ab0',
+    desc: 'A witch who runs "Web of Wonders," the shop that sells the Alter Ego Elixir (appearance-changing potion).',
+    traits: [], knownInfo: ['Confirmed as the witch running the "Web of Wonders" shop.', 'Sells the Alter Ego Elixir, used to change your character\u2019s look.'] },
+  { id: 'noel',    name: 'Noel',    family: 'Unknown', type: 'other', status: 'confirmed', romanceable: null, img: '/noel.webp',    c1: '#4a3a3a', c2: '#b08a8a',
+    desc: 'A dashing flirt who calls himself "the face of Moonlight Peaks"; bets 250 gold that you can\u2019t out-fish him, and hands over the fishing rod once you win.',
+    traits: [['Confidence', 90]], traitsPlaceholder: true,
+    knownInfo: ['Confirmed at launch; gives players the fishing rod after a 250-gold fishing bet.', 'Romance status not explicitly confirmed yet \u2014 verify in-game.'] },
   { id: 'jada',    name: 'Jada',    family: 'Unknown', type: 'other', status: 'datamined', romanceable: null, img: '/jada.webp',    c1: '#5a4a3a', c2: '#c0a07a',
     desc: 'Name verified via pre-launch datamined game files; role and family not yet confirmed by the developers.',
     traits: [], knownInfo: ['Listed as a Moonlight Peaks resident in pre-launch datamined game files (cross-referenced against pre-launch references).', 'Family, species, and relationship status are not yet developer-confirmed —treat as unverified until launch.'] },
   { id: 'brook',   name: 'Brook',   family: 'Unknown', type: 'other', status: 'datamined', romanceable: null, img: '/brook.webp',   c1: '#4a3a2a', c2: '#a08a5a',
     desc: 'Name verified via pre-launch datamined game files; role and family not yet confirmed by the developers.',
     traits: [], knownInfo: ['Listed as a Moonlight Peaks resident in pre-launch datamined game files (cross-referenced against pre-launch references).', 'Family, species, and relationship status are not yet developer-confirmed —treat as unverified until launch.'] },
-  { id: 'elvira',  name: 'Elvira',  family: 'Unknown', type: 'other', status: 'datamined', romanceable: null, img: '/elvira.webp',  c1: '#5a2f4a', c2: '#c06a9a',
-    desc: 'Name verified via pre-launch datamined game files, which also list an "Elvira\u2019s House" —role and family not yet confirmed.',
-    traits: [], knownInfo: ['Listed as a Moonlight Peaks resident in pre-launch datamined game files (cross-referenced against pre-launch references), which also reference an "Elvira\u2019s House" as a named location.', 'Family, species, and relationship status are not yet developer-confirmed —treat as unverified until launch.'] },
   { id: 'jarvis',  name: 'Jarvis',  family: 'Unknown', type: 'other', status: 'datamined', romanceable: null, img: '/jarvis.webp',  c1: '#2f4a5a', c2: '#6ab0c0',
     desc: 'Name verified via pre-launch datamined game files; role and family not yet confirmed by the developers.',
     traits: [], knownInfo: ['Listed as a Moonlight Peaks resident in pre-launch datamined game files (cross-referenced against pre-launch references).', 'Family, species, and relationship status are not yet developer-confirmed —treat as unverified until launch.'] },
-  { id: 'fiona',   name: 'Fiona',   family: 'Unknown', type: 'other', status: 'datamined', romanceable: null, img: '/fiona.webp',   c1: '#4a2f5a', c2: '#a06ac0',
-    desc: 'Name verified via pre-launch datamined game files, which also list a "Fiona\u2019s House" —role and family not yet confirmed.',
-    traits: [], knownInfo: ['Listed as a Moonlight Peaks resident in pre-launch datamined game files (cross-referenced against pre-launch references), which also reference a "Fiona\u2019s House" as a named location.', 'Family, species, and relationship status are not yet developer-confirmed —treat as unverified until launch.'] },
   { id: 'dragan',  name: 'Dragan',  family: 'Unknown', type: 'other', status: 'datamined', romanceable: null, img: '/dragan.webp',  c1: '#2f5a4a', c2: '#6ac0a0',
     desc: 'Name verified via pre-launch datamined game files, which also list a "Dragan\u2019s House" —role and family not yet confirmed.',
     traits: [], knownInfo: ['Listed as a Moonlight Peaks resident in pre-launch datamined game files (cross-referenced against pre-launch references), which also reference a "Dragan\u2019s House" as a named location.', 'Family, species, and relationship status are not yet developer-confirmed —treat as unverified until launch.'] },
-  { id: 'evan',    name: 'Evan',    family: 'Unknown', type: 'other', status: 'datamined', romanceable: null, img: '/evan.webp',    c1: '#3a3a4a', c2: '#8a8ab0',
-    desc: 'Name verified via pre-launch datamined game files; role and family not yet confirmed by the developers.',
-    traits: [], knownInfo: ['Listed as a Moonlight Peaks resident in pre-launch datamined game files (cross-referenced against pre-launch references).', 'Family, species, and relationship status are not yet developer-confirmed —treat as unverified until launch.'] },
 
   // --- Datamined names WITH a second corroborating detail (a matching named location, or notable
   // cross-coverage) —enough for a short, honest standalone page rather than a bare table row.
@@ -193,20 +200,59 @@ export const characters: Character[] = [
       'The same files reference an "Alina\u2019s House," suggesting she is a homeowner/resident rather than a passing or event-only figure.',
       'The portrait shown here comes from the pre-launch roster image supplied for this guide; family, species, and relationship status are unverified until launch.',
     ] },
-  { id: 'death', name: 'Death', family: 'Unknown', type: 'other', status: 'datamined', romanceable: null, img: '/death.webp', c1: '#2a2a2a', c2: '#8a8a9a',
-    desc: 'Name verified via pre-launch datamined game files, which also list "Death\u2019s Shack" —some pre-launch chatter has floated Death as a possible romance option, unconfirmed.',
+  { id: 'death', name: 'Death', family: 'Unknown', type: 'other',
+    status: 'confirmed', romanceable: true, img: '/death.webp', c1: '#2a2a2a', c2: '#8a8a9a',
+    desc: 'Confirmed at launch as a romanceable resident \u2014 the "grave lover" the developers teased, living at "Death\u2019s Shack".',
     traits: [], knownInfo: [
-      'Listed as a Moonlight Peaks resident in pre-launch datamined game files (cross-referenced against pre-launch references), which also reference a "Death\u2019s Shack" as his home.',
-      'Some pre-launch community discussion has speculated Death could be a romance option, playing on the game\u2019s cozy-gothic tone —this is speculation, not a developer confirmation, and we are not treating it as fact.',
-      'The portrait shown here comes from the pre-launch roster image supplied for this guide; role and relationship status are unverified until launch.',
+      'Confirmed as a romance option \u2014 not a pre-launch rumor, as it once was.',
+      'Resides at "Death\u2019s Shack".',
     ] },
-  { id: 'samael', name: 'Samael', family: 'Unknown', type: 'other', status: 'datamined', romanceable: null, img: '/samael.webp', c1: '#4a2a2a', c2: '#b06a6a',
-    desc: 'Name verified via pre-launch datamined game files, which also list "Samael\u2019s House" as a named location.',
-    traits: [], knownInfo: [
-      'Listed as a Moonlight Peaks resident in pre-launch datamined game files (cross-referenced against pre-launch references).',
-      'The same files reference a "Samael\u2019s House," suggesting he is a homeowner/resident rather than a passing or event-only figure.',
-      'The portrait shown here comes from the pre-launch roster image supplied for this guide; family, species, and relationship status are unverified until launch.',
+  { id: 'samael', name: 'Samael', family: 'Vampire (Ambrosia)', type: 'vampire',
+    status: 'confirmed', romanceable: true, img: '/samael.webp', c1: '#4a2a2a', c2: '#b06a6a',
+    desc: 'A mysterious, brooding vampire of the Ambrosia family who has run the town bar, "The Broken Lamp," for centuries. Elvira\u2019s brother.',
+    traits: [['Mystery', 88], ['Devotion', 75]], traitsPlaceholder: true,
+    knownInfo: [
+      'Runs "The Broken Lamp," the town bar, and is a member of the Ambrosia family.',
+      'Elvira\u2019s brother; described as a true romantic beneath an intense, solitary exterior.',
     ] },
+  { id: 'elvira', name: 'Elvira', family: 'Vampire (Ambrosia)', type: 'vampire',
+    status: 'confirmed', romanceable: true, img: '/elvira.webp', c1: '#5a2f4a', c2: '#c06a9a',
+    desc: 'Samael\u2019s sister \u2014 an artistic, restless vampire who keeps jumping into new side projects, often annoying her uncle Orlock.',
+    traits: [['Creativity', 80], ['Restlessness', 70]], traitsPlaceholder: true,
+    knownInfo: [
+      'Confirmed as Samael\u2019s sister and Orlock\u2019s niece.',
+      'Hides a fragile, artistic side that only Samael is said to fully know.',
+    ] },
+  { id: 'fiona', name: 'Fiona', family: 'Witch', type: 'witch', status: 'confirmed', romanceable: null, img: '/fiona.webp', c1: '#4a2f5a', c2: '#a06ac0',
+    desc: 'A witch resident who introduces the homestead mailbox delivery quests early on.',
+    traits: [], knownInfo: ['Confirmed witch resident.', 'Gives players mailbox delivery quests during the early homestead loop.'] },
+
+  // --- Named in GameWatcher's post-launch confirmed-NPC roundup (July 7, 2026); no further
+  // role/family/gift detail sourced yet beyond species where stated. Add detail as verified. ---
+  { id: 'kim', name: 'Kim', family: 'Unknown', type: 'mermaid', status: 'confirmed', romanceable: null, img: '/kim.webp', c1: '#2a5a6a', c2: '#5ac0d0',
+    desc: 'A confirmed mermaid resident of Moonlight Peaks.', traits: [],
+    knownInfo: ['Confirmed NPC (mermaid); further role and gift details not yet sourced.'] },
+  { id: 'ludo', name: 'Ludo', family: 'Unknown', type: 'other', status: 'confirmed', romanceable: null, img: '/ludo.webp', c1: '#3a4a3a', c2: '#7ab08a',
+    desc: 'A confirmed Moonlight Peaks resident; role and family not yet sourced.', traits: [],
+    knownInfo: ['Confirmed NPC; further detail not yet sourced.'] },
+  { id: 'tae', name: 'Tae', family: 'Unknown', type: 'other', status: 'confirmed', romanceable: null, img: '/tae.webp', c1: '#4a3a3a', c2: '#b08a8a',
+    desc: 'A confirmed Moonlight Peaks resident; role and family not yet sourced.', traits: [],
+    knownInfo: ['Confirmed NPC; further detail not yet sourced.'] },
+  { id: 'winston', name: 'Winston', family: 'Unknown', type: 'other', status: 'confirmed', romanceable: null, img: '/winston.webp', c1: '#3a3a4a', c2: '#8a8ab0',
+    desc: 'A confirmed Moonlight Peaks resident; role and family not yet sourced.', traits: [],
+    knownInfo: ['Confirmed NPC; further detail not yet sourced.'] },
+  { id: 'rei', name: 'Rei', family: 'Unknown', type: 'other', status: 'confirmed', romanceable: null, img: '/rei.webp', c1: '#5a3a4a', c2: '#c08a9a',
+    desc: 'A confirmed Moonlight Peaks resident; role and family not yet sourced.', traits: [],
+    knownInfo: ['Confirmed NPC; further detail not yet sourced.'] },
+  { id: 'aras', name: 'Aras', family: 'Unknown', type: 'other', status: 'confirmed', romanceable: null, img: '/aras.webp', c1: '#4a4a3a', c2: '#b0b08a',
+    desc: 'A confirmed Moonlight Peaks resident; role and family not yet sourced.', traits: [],
+    knownInfo: ['Confirmed NPC; further detail not yet sourced.'] },
+  { id: 'persephone', name: 'Persephone', family: 'Unknown', type: 'other', status: 'confirmed', romanceable: null, img: '/persephone.webp', c1: '#4a2f4a', c2: '#b06ab0',
+    desc: 'A confirmed Moonlight Peaks resident; role and family not yet sourced.', traits: [],
+    knownInfo: ['Confirmed NPC; further detail not yet sourced.'] },
+  { id: 'llemi', name: 'Llemi', family: 'Unknown', type: 'other', status: 'confirmed', romanceable: null, img: '/llemi.webp', c1: '#2f4a4a', c2: '#6ab0b0',
+    desc: 'A confirmed Moonlight Peaks resident; role and family not yet sourced.', traits: [],
+    knownInfo: ['Confirmed NPC; further detail not yet sourced.'] },
 ];
 
 

@@ -40,13 +40,14 @@ export const crops: Crop[] = [
   {
     id: 'blood-grapes', name: 'Blood Grapes', category: 'crop', season: [],
     buyPrice: null, sellPrice: null, growDays: null, regrowDays: null,
-    source: '', notes: 'Teased as an early vampire crop — verify season/prices in-game.',
-    status: 'reported',
+    source: 'Given free by Orlock as your starter seeds on night one.',
+    notes: 'Confirmed starter crop. Reviewers report raw grapes sell for very little \u2014 process into wine/juice at a keg for real profit. Exact prices not yet sourced.',
+    status: 'confirmed',
   },
   {
     id: 'cruelcumber', name: 'Cruelcumber', category: 'crop', season: [],
     buyPrice: null, sellPrice: null, growDays: null, regrowDays: null,
-    source: '', notes: 'Named in previews.',
+    source: '', notes: 'Named in official marketing/previews.',
     status: 'reported',
   },
   {
@@ -66,6 +67,13 @@ export const crops: Crop[] = [
   //   buyPrice: 40, sellPrice: 90, growDays: 5, regrowDays: null,
   //   source: 'Nocturne Seeds', notes: 'Glows at night.', status: 'confirmed' },
 ];
+
+// Confirmed at launch: raw crops (esp. Blood Grapes) sell for very little; processing into
+// wine/juice via a keg (and jam/cheese for livestock goods) is the real money-maker. No exact
+// sell-price table exists yet anywhere — do not invent numbers; keep this note until verified.
+export const PROFIT_NOTE =
+  'Confirmed by reviewers: raw crop sale is low-value. Process crops into wine/juice (keg) or ' +
+  'jam/cheese before selling for meaningfully more gold. Exact numeric prices not yet verified.';
 
 // "Best crops for money" — safe on empty/partial data (only ranks rows with a known sellPrice).
 export const cropsByProfit: Crop[] = [...crops]
