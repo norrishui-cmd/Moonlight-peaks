@@ -95,7 +95,19 @@ const jsonLd = [
         {c.romanceable === null && `Whether ${c.name} can be romanced has not been confirmed yet - we will update this at launch.`}
       </p>
 
-      {c.traits.length > 0 && (
+      {((c.lovedGifts?.length || c.likedGifts?.length || c.dislikedGifts?.length || c.birthday)) && (
+        <>
+          <h2>Gifts</h2>
+          <p class="cnote">
+            {c.giftStatus === 'confirmed' ? 'Verified in the live game.' : 'Reported / not yet fully verified - check back as we confirm.'}
+          </p>
+          {c.birthday && <p><strong>Birthday:</strong> {c.birthday}</p>}
+          {c.lovedGifts && c.lovedGifts.length > 0 && (<p><strong>Loved:</strong> {c.lovedGifts.join(', ')}</p>)}
+          {c.likedGifts && c.likedGifts.length > 0 && (<p><strong>Liked:</strong> {c.likedGifts.join(', ')}</p>)}
+          {c.dislikedGifts && c.dislikedGifts.length > 0 && (<p><strong>Disliked:</strong> {c.dislikedGifts.join(', ')}</p>)}
+        </>
+      )}
+
         <>
           <h2>Personality read</h2>
           <p class="cnote">Illustrative personality traits (not in-game combat stats) - Moonlight Peaks has no combat. Replaced with confirmed detail at launch.</p>

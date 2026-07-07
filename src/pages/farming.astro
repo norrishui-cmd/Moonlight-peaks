@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import { SITE, GAME } from '../consts';
+import { crops, cropsByProfit } from '../data/crops';
 
 const faq = [
   { q: 'Do you farm at night in Moonlight Peaks?', a: 'Yes. You play a vampire, so growing and nurturing is done by moonlight — just be back in your coffin before sunrise. Night farming is a signature twist on the cozy farming loop.' },
@@ -62,10 +63,35 @@ const jsonLd = [
         and gathering. As you progress, you obtain new tools and develop your property to grow even more.
       </p>
 
+      <h2>Crop database</h2>
+      {crops.length > 0 ? (
+        <table class="facts compact">
+          <tr><th>Crop</th><th>Season</th><th>Buy</th><th>Sell</th><th>Grow days</th><th>Regrow</th><th>Status</th></tr>
+          {crops.map((c) => (
+            <tr>
+              <td>{c.name}</td>
+              <td>{c.season.length ? c.season.join(', ') : '—'}</td>
+              <td>{c.buyPrice ?? '—'}</td>
+              <td>{c.sellPrice ?? '—'}</td>
+              <td>{c.growDays ?? '—'}</td>
+              <td>{c.regrowDays ?? '—'}</td>
+              <td>{c.status}</td>
+            </tr>
+          ))}
+        </table>
+      ) : (
+        <p>Crop data will be added as it is verified in the live game.</p>
+      )}
+
+      {cropsByProfit.length > 0 && (
+        <>
+          <h2>Best crops for money</h2>
+          <ol>{cropsByProfit.map((c) => (<li>{c.name} — {c.sellPrice}g</li>))}</ol>
+        </>
+      )}
+
       <h2>Coming at launch ({GAME.releaseLabel})</h2>
       <ul>
-        <li>Full <strong>crop database</strong>: buy/sell prices, seasons, growth times, where to buy seeds.</li>
-        <li><strong>Best crops</strong> by season and profit.</li>
         <li><strong>Livestock care</strong> and what each animal produces.</li>
         <li>Farm spots marked on the <a href="/map">interactive map</a>.</li>
       </ul>

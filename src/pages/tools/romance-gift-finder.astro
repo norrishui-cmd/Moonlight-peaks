@@ -15,7 +15,13 @@ const romanceCharacters = characters
     href: `/characters/${character.id}`,
     note: character.desc,
     clues: character.knownInfo || [],
-    gifts: 'Not verified yet',
+    gifts: (character.lovedGifts?.length || character.likedGifts?.length)
+      ? [
+          character.lovedGifts?.length ? `Loved: ${character.lovedGifts.join(', ')}` : '',
+          character.likedGifts?.length ? `Liked: ${character.likedGifts.join(', ')}` : '',
+          character.dislikedGifts?.length ? `Disliked: ${character.dislikedGifts.join(', ')}` : '',
+        ].filter(Boolean).join(' | ')
+      : 'Not verified yet',
   }));
 
 const jsonLd = [
