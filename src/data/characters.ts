@@ -59,6 +59,8 @@ export const characters: Character[] = [
       'He is your father; the story frames your move to Moonlight Peaks as stepping out of his long shadow.',
       'A central story figure rather than a romance option.',
       'The setup has you proving that a kinder, gentler undead life is possible —something he is skeptical of.',
+      'Reported detail: Moonlight Peaks is your witchy mother\u2019s former hometown, not just a random escape — suggesting mixed vampire/witch heritage for your character.',
+      'Confirmed at launch: vampires and werewolves in town rarely get along, trading petty spats; an early quest has you finding an artifact to help reconcile the two family heads.',
     ],
   },
   {
@@ -71,12 +73,12 @@ export const characters: Character[] = [
   {
     id: 'saga', name: 'Saga', family: 'Werewolf (Logan)', type: 'werewolf',
     status: 'confirmed', romanceable: true, img: '/saga.webp', c1: '#5a4a2a', c2: '#caa24a',
-    desc: 'A townsperson revealed by the developers; her energy shifts with the full moon.',
+    desc: 'A prickly-but-devoted werewolf who keeps the town running — fixing potholes and chasing down missing pumpkins — with little time left for romance until it sneaks up on her.',
     traits: [['Energy', 85], ['Loyalty', 80], ['Calm', 40]], traitsPlaceholder: true,
     knownInfo: [
-      'A werewolf townsperson revealed by the developers.',
+      'Confirmed as the town\u2019s go-to problem-solver, handling community issues like potholes and missing pumpkins.',
+      'Has a prickly exterior but a deep love for the town and its residents; throws herself into helping others.',
       'Her energy is described as shifting with the full moon.',
-      'A Steam Next Fest write-up singled her out among the cast.',
     ],
     // EXAMPLE of the gift shape — replace [] with verified in-game gifts today, then flip giftStatus.
     lovedGifts: [],        // e.g. ['Blood Grapes', 'Moon Pearl']
@@ -135,6 +137,7 @@ export const characters: Character[] = [
     traits: [['Strength', 80], ['Sociability', 60]], traitsPlaceholder: true,
     knownInfo: [
       'A werewolf resident seen in gameplay footage.',
+      'Naming conflict: earlier pre-launch coverage referred to him as "the werewolf mayor Logan," but hands-on launch coverage instead names Brook as the mayor players register with at Town Hall — we\u2019re not resolving this in Logan\u2019s favor and flag it as unconfirmed.',
       'In dialogue he references an old church down the road on the edge of town.',
       'A Little Chicken 3D artist\u2019s own dev-diary post (via Steam Community) describes redesigning a werewolf-themed room for Logan\u2019s house, which independently corroborates his name.',
     ],
@@ -176,9 +179,9 @@ export const characters: Character[] = [
     traits: [['Rebellion', 80]], traitsPlaceholder: true,
     knownInfo: ['Confirmed as the witch running the "Web of Wonders" shop; reported as part of the Webb family and Fiona\u2019s cousin.', 'Sells the Alter Ego Elixir, used to change your character\u2019s look.'] },
   { id: 'noel',    name: 'Noel',    family: 'Webb', type: 'other', status: 'confirmed', romanceable: true, img: '/noel.webp',    c1: '#4a3a3a', c2: '#b08a8a',
-    desc: 'The town blacksmith and a dashing flirt of the Webb family who calls himself "the face of Moonlight Peaks"; bets 250 gold that you can\u2019t out-fish him, handing over the fishing rod once you win.',
+    desc: 'The town blacksmith and a dashing flirt of the Webb family who calls himself "the face of Moonlight Peaks"; underneath the confidence, he struggles with his self-image and wants to be accepted for who he really is.',
     traits: [['Confidence', 90]], traitsPlaceholder: true,
-    knownInfo: ['Confirmed at launch; gives players the fishing rod after a 250-gold fishing bet.', 'Reported as the town blacksmith and part of the Webb family.'] },
+    knownInfo: ['Confirmed at launch; gives players the fishing rod after a 250-gold fishing bet.', 'Reported as the town blacksmith and part of the Webb family.', 'Confirmed depth: his surface confidence hides real self-image struggles.'] },
   { id: 'jada',    name: 'Jada',    family: 'Unknown', type: 'other', status: 'reported', romanceable: true, img: '/jada.webp',    c1: '#5a4a3a', c2: '#c0a07a',
     desc: 'A high-energy supernatural enthusiast and relic collector who happily info-dumps about history and moves fast.',
     traits: [], knownInfo: ['Reported as a relic collector and history enthusiast.', 'Persephone is described as her relative, newly arrived in town.'] },
@@ -189,8 +192,8 @@ export const characters: Character[] = [
     desc: 'One of the town\u2019s ghosts, reported alongside fellow ghost Balthasar in launch-week hands-on coverage.',
     traits: [], knownInfo: ['Confirmed as a ghost resident.', 'Datamined files also reference a "Jarvis\u2019 House."'] },
   { id: 'dragan',  name: 'Dragan',  family: 'Seer (Khazan)', type: 'seer', status: 'reported', romanceable: true, img: '/dragan.webp',  c1: '#2f5a4a', c2: '#6ac0a0',
-    desc: 'A struggling seer of the Khazan family whose predictions are usually wrong — better known as the inventor of the town\u2019s popular card game, Nocturna.',
-    traits: [], knownInfo: ['Reported as a member of the Khazan seer family and the in-universe inventor of Nokturna (also spelled "Nocturna" in some coverage).', 'Datamined files also list a "Dragan\u2019s House" location.'] },
+    desc: 'The oldest of the Khazan seer siblings — his own predictions are usually wrong, but he\u2019s better known as the in-universe inventor of the town\u2019s popular card game, Nokturna.',
+    traits: [], knownInfo: ['Confirmed as the oldest sibling in the Khazan seer family, ahead of Aras and Alina.', 'Reported as the in-universe inventor of Nokturna (also spelled "Nocturna" in some coverage).', 'Datamined files also list a "Dragan\u2019s House" location.'] },
 
   // --- Datamined names WITH a second corroborating detail (a matching named location, or notable
   // cross-coverage) —enough for a short, honest standalone page rather than a bare table row.
@@ -205,16 +208,17 @@ export const characters: Character[] = [
   { id: 'alina', name: 'Alina', family: 'Seer (Khazan)', type: 'seer', status: 'reported', romanceable: true, img: '/alina.webp', c1: '#4a3a4a', c2: '#b08ac0',
     desc: 'The resident rebel of the Khazan family \u2014 stubborn, fiery, and unable to stand lying, with unconventional seer powers and a preference for the shadows.',
     traits: [], knownInfo: [
-      'Reported as part of the Khazan seer family.',
+      'Reported as part of the Khazan seer family — Dragan\u2019s younger sibling, alongside Aras.',
       'The same files reference an "Alina\u2019s House," suggesting she is a homeowner/resident rather than a passing or event-only figure.',
       'The portrait shown here comes from the pre-launch roster image supplied for this guide; family, species, and relationship status are unverified until launch.',
     ] },
   { id: 'death', name: 'Death', family: 'Unknown', type: 'other',
     status: 'confirmed', romanceable: true, img: '/death.webp', c1: '#2a2a2a', c2: '#8a8a9a',
-    desc: 'Confirmed at launch as a romanceable resident \u2014 the "grave lover" the developers teased, living at "Death\u2019s Shack".',
+    desc: 'The literal Grim Reaper, in town on holiday to unwind — dry sense of humor, tends the local cemetery, and collects both flowers and souls. Wears a Hawaiian shirt over his robes.',
     traits: [], knownInfo: [
       'Confirmed as a romance option \u2014 not a pre-launch rumor, as it once was.',
-      'Resides at "Death\u2019s Shack".',
+      'Confirmed personality: dry humor, tends the cemetery, collects flowers and souls, and is dressed in a Hawaiian shirt over his Grim Reaper robes.',
+      'Resides at "Death\u2019s Shack", found in the Misty Shores graveyard area.',
     ] },
   { id: 'samael', name: 'Samael', family: 'Vampire (Ambrosia)', type: 'vampire',
     status: 'confirmed', romanceable: true, img: '/samael.webp', c1: '#4a2a2a', c2: '#b06a6a',
@@ -262,7 +266,7 @@ export const characters: Character[] = [
   { id: 'aras', name: 'Aras', family: 'Seer (Khazan)', type: 'seer', status: 'reported', romanceable: true, img: '', c1: '#4a4a3a', c2: '#b0b08a',
     desc: 'The local tailor of the Khazan seer family, running "Third Eye Threads." He avoids using his own seer powers to keep his future a mystery.',
     traits: [['Style', 80], ['Warmth', 65]], traitsPlaceholder: true,
-    knownInfo: ['Reported as a member of the Khazan seer family, running the "Third Eye Threads" tailor shop.', 'Loves fashion and cozy conversation.'] },
+    knownInfo: ['Reported as a member of the Khazan seer family, running the "Third Eye Threads" tailor shop — Dragan\u2019s younger sibling, alongside Alina.', 'Loves fashion and cozy conversation.'] },
   { id: 'persephone', name: 'Persephone', family: 'Unknown (relative of Jada)', type: 'other', status: 'reported', romanceable: true, img: '', c1: '#4a2f4a', c2: '#b06ab0',
     desc: "Reported as Jada's relative, newly arrived in town for a fresh start, with a love of astrology and crystals.",
     traits: [['Mysticism', 80]], traitsPlaceholder: true,
@@ -273,9 +277,9 @@ export const characters: Character[] = [
     knownInfo: ['Reported as a demon resident of the Pink Grove.', 'Said to only be seen in town during festivals; winning his heart is described as taking real effort.'] },
 
   // --- Non-romanceable creature/side characters confirmed via launch-week hands-on coverage ---
-  { id: 'viktor-dracula', name: 'Viktor Dracula', family: 'Unknown', type: 'other', status: 'confirmed', romanceable: false, img: '', c1: '#3a2a3a', c2: '#8a6a8a',
-    desc: 'A bat companion character encountered around town — not a romance option.',
-    traits: [], knownInfo: ['Confirmed non-romanceable creature character, distinct from Count Dracula and Vlad.'] },
+  { id: 'viktor-dracula', name: 'Viktor Dracula', family: 'Vampire (Ambrosia)', type: 'other', status: 'confirmed', romanceable: false, img: '', c1: '#3a2a3a', c2: '#8a6a8a',
+    desc: 'Orlock\u2019s old uncle, who long ago turned into a bat and now lives in a crypt on your land. Not a romance option.',
+    traits: [], knownInfo: ['Confirmed as Orlock\u2019s uncle and a bat companion character found in a crypt on the player\u2019s land.', 'Distinct from both Count Dracula and Vlad.'] },
   { id: 'balthasar', name: 'Balthasar', family: 'Ghost', type: 'ghost', status: 'confirmed', romanceable: false, img: '', c1: '#3a3a3a', c2: '#8a8a9a',
     desc: 'A ghost resident of the town, named alongside fellow ghost Jarvis — not a romance option.',
     traits: [], knownInfo: ['Confirmed as one of the town\u2019s ghost characters, part of a reported Ghost family.'] },
