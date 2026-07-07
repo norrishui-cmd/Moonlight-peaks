@@ -7,6 +7,9 @@
 // knownInfo: real, sourced bullets shown on the character's profile page. Keep factual; leave empty for unconfirmed.
 // IMAGE: square images in /public -> URL is /<id>.webp. img:'' falls back to the SVG letter avatar.
 // Profile pages at /characters/<id> are generated ONLY for confirmed/reported characters (not unconfirmed).
+// GIFTS: lovedGifts/likedGifts/dislikedGifts + birthday are filled at launch. The gift finder
+// (/tools/romance-gift-finder) and each profile page read these fields directly. Keep giftStatus
+// honest — only 'confirmed' once you've verified the gift reaction in the live game.
 
 export type CharType = 'vampire' | 'werewolf' | 'witch' | 'other';
 
@@ -30,6 +33,14 @@ export type Character = {
   traits: [string, number][];
   traitsPlaceholder?: boolean;
   knownInfo?: string[];
+  // --- Gift data (fill at launch) ---
+  // Item NAMES this resident loves / likes / dislikes. Omit or leave [] until verified in-game.
+  lovedGifts?: string[];
+  likedGifts?: string[];
+  dislikedGifts?: string[];
+  birthday?: string;   // e.g. 'Summer 14' — birthday gifts often score higher; fill at launch
+  // Verification of THIS character's gift data specifically (separate from the `status` name-field above).
+  giftStatus?: 'confirmed' | 'reported' | 'datamined' | 'unconfirmed';
 };
 
 const UNCONFIRMED_DESC = 'Portrait shown; not yet confirmed as a Moonlight Peaks character. Name, family, and details will be verified at launch.';
@@ -56,6 +67,12 @@ export const characters: Character[] = [
       'Her energy is described as shifting with the full moon.',
       'A Steam Next Fest write-up singled her out among the cast.',
     ],
+    // EXAMPLE of the gift shape — replace [] with verified in-game gifts today, then flip giftStatus.
+    lovedGifts: [],        // e.g. ['Blood Grapes', 'Moon Pearl']
+    likedGifts: [],
+    dislikedGifts: [],
+    birthday: '',          // e.g. 'Autumn 3'
+    giftStatus: 'unconfirmed',
   },
   {
     id: 'mina', name: 'Mina', family: 'Unknown', type: 'other',
