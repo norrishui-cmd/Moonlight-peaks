@@ -12,6 +12,20 @@ export type NewsItem = {
 
 export const news: NewsItem[] = [
   {
+    slug: 'moonlight-peaks-is-out-now',
+    date: '2026-07-07',
+    title: 'Moonlight Peaks is out now on Steam, Switch, Switch 2 and Android',
+    body: 'Launch day has arrived. Early reviews are live, and the first wave of confirmed details — starting crops, tool unlocks, and named residents — is landing on this wiki as we verify it in the live game.',
+    details: [
+      'Starter crop confirmed: Orlock hands you Blood Grape seeds on night one; raw crops sell low, so processing into wine/juice is the early money-maker.',
+      'Tool unlocks confirmed: the fishing rod comes from winning a 250-gold bet with Noel, and the bug net comes from Death after the Ambrosia castle area opens up.',
+      'Character roster is filling in with real family ties (Orlock is Mina and Evan\u2019s father; Samael and Elvira are siblings) as reviews and datamines are cross-checked.',
+      'Exact prices, gift lists, and the Nokturna card list are not out anywhere yet — we are not inventing numbers and will add them as they are verified.',
+    ],
+    sourceLabel: 'Launch-day review roundup',
+    sourceUrl: 'https://ladiesgamers.com/moonlight-peaks-review/',
+  },
+  {
     slug: 'launch-discount-expands-platform-wide',
     date: '2026-07-05',
     title: 'Launch discount expands to PC and Google Play worldwide',
