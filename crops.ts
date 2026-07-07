@@ -1,0 +1,79 @@
+// Moonlight Peaks — crop & flower database.
+// ------------------------------------------------------------------
+// STATUS (mirrors the convention in characters.ts):
+//   'confirmed'   = verified in the live game or by devs/official
+//   'reported'    = seen in previews / marketing / coverage, not yet verified in-build
+//   'datamined'   = pulled from game files, cross-checked, not dev-confirmed
+//   'unconfirmed' = name floating around with no source yet
+//
+// FILL AT LAUNCH:
+//   - Replace the example rows with verified data as you confirm it today.
+//   - Use `null` (NOT 0) for any number you don't know yet — render "—" for null on the page.
+//   - Only mark a row 'confirmed' once you've actually seen it in-game.
+//
+// WIRING (src/pages/farming.astro):
+//   import { crops, cropsByProfit } from '../data/crops';
+//   ...then render a table where the "Coming at launch" <ul> currently sits.
+//   `cropsByProfit` powers a "best crops for money" section (target keyword).
+// ------------------------------------------------------------------
+
+export type Season = 'Spring' | 'Summer' | 'Autumn' | 'Winter' | 'All' | 'Special';
+export type SourceStatus = 'confirmed' | 'reported' | 'datamined' | 'unconfirmed';
+
+export type Crop = {
+  id: string;                 // slug, e.g. 'blood-grapes'
+  name: string;
+  category: 'crop' | 'flower' | 'tree' | 'special';
+  season: Season[];           // one or more; [] = unknown
+  buyPrice: number | null;    // seed cost; null = unknown
+  sellPrice: number | null;   // base sell value of the harvest; null = unknown
+  growDays: number | null;    // days to first harvest; null = unknown
+  regrowDays: number | null;  // days between regrows; null = does not regrow OR unknown
+  source: string;             // where to buy seeds / how to obtain ('' = unknown)
+  notes: string;              // cursing, uses (cursed food / cooking), quirks ('' = none)
+  status: SourceStatus;
+};
+
+// Example rows use crop names teased in marketing/previews → status 'reported'.
+// Numbers stay null until verified in the live game today. Replace / extend freely.
+export const crops: Crop[] = [
+  {
+    id: 'blood-grapes', name: 'Blood Grapes', category: 'crop', season: [],
+    buyPrice: null, sellPrice: null, growDays: null, regrowDays: null,
+    source: '', notes: 'Teased as an early vampire crop — verify season/prices in-game.',
+    status: 'reported',
+  },
+  {
+    id: 'cruelcumber', name: 'Cruelcumber', category: 'crop', season: [],
+    buyPrice: null, sellPrice: null, growDays: null, regrowDays: null,
+    source: '', notes: 'Named in previews.',
+    status: 'reported',
+  },
+  {
+    id: 'pumpkin', name: 'Pumpkin', category: 'crop', season: [],
+    buyPrice: null, sellPrice: null, growDays: null, regrowDays: null,
+    source: '', notes: 'Shown in early footage.',
+    status: 'reported',
+  },
+  {
+    id: 'nightshade', name: 'Nightshade', category: 'crop', season: [],
+    buyPrice: null, sellPrice: null, growDays: null, regrowDays: null,
+    source: '', notes: 'Shown in early footage; likely used in curses/potions.',
+    status: 'reported',
+  },
+  // Add glowing flowers, trees, and special crops here as you confirm them, e.g.:
+  // { id: 'moonpetal', name: 'Moonpetal', category: 'flower', season: ['Summer'],
+  //   buyPrice: 40, sellPrice: 90, growDays: 5, regrowDays: null,
+  //   source: 'Nocturne Seeds', notes: 'Glows at night.', status: 'confirmed' },
+];
+
+// "Best crops for money" — safe on empty/partial data (only ranks rows with a known sellPrice).
+export const cropsByProfit: Crop[] = [...crops]
+  .filter((c) => c.sellPrice != null)
+  .sort((a, b) => (b.sellPrice as number) - (a.sellPrice as number));
+
+// Crops grouped by season (skips rows whose season is still unknown).
+export const cropsBySeason: Record<Season, Crop[]> =
+  (['Spring', 'Summer', 'Autumn', 'Winter', 'All', 'Special'] as Season[])
+    .reduce((acc, s) => { acc[s] = crops.filter((c) => c.season.includes(s)); return acc; },
+      {} as Record<Season, Crop[]>);
