@@ -11,13 +11,15 @@
 // (/tools/romance-gift-finder) and each profile page read these fields directly. Keep giftStatus
 // honest — only 'confirmed' once you've verified the gift reaction in the live game.
 
-export type CharType = 'vampire' | 'werewolf' | 'witch' | 'mermaid' | 'human' | 'other';
+export type CharType = 'vampire' | 'werewolf' | 'witch' | 'mermaid' | 'seer' | 'ghost' | 'human' | 'other';
 
 export const typeLabels: Record<CharType, string> = {
   vampire: 'Vampire',
   werewolf: 'Werewolf',
   witch: 'Witch',
   mermaid: 'Mermaid',
+  seer: 'Seer',
+  ghost: 'Ghost',
   human: 'Human',
   other: 'Other',
 };
@@ -183,10 +185,10 @@ export const characters: Character[] = [
   { id: 'brook',   name: 'Brook',   family: 'Unknown', type: 'other', status: 'confirmed', romanceable: null, img: '/brook.webp',   c1: '#4a3a2a', c2: '#a08a5a',
     desc: 'The mayor of Moonlight Peaks. You register with him at Town Hall as one of your first tasks — he\u2019s described as not a very friendly character.',
     traits: [], knownInfo: ['Confirmed as the town mayor; players register with him at Town Hall early on.', 'Datamined files also reference a "Brook\u2019s House" location.'] },
-  { id: 'jarvis',  name: 'Jarvis',  family: 'Unknown', type: 'other', status: 'datamined', romanceable: null, img: '/jarvis.webp',  c1: '#2f4a5a', c2: '#6ab0c0',
-    desc: 'Name verified via pre-launch datamined game files; role and family not yet confirmed by the developers.',
-    traits: [], knownInfo: ['Listed as a Moonlight Peaks resident in pre-launch datamined game files (cross-referenced against pre-launch references).', 'Family, species, and relationship status are not yet developer-confirmed —treat as unverified until launch.'] },
-  { id: 'dragan',  name: 'Dragan',  family: 'Seer (Khazan)', type: 'other', status: 'reported', romanceable: true, img: '/dragan.webp',  c1: '#2f5a4a', c2: '#6ac0a0',
+  { id: 'jarvis',  name: 'Jarvis',  family: 'Ghost', type: 'ghost', status: 'confirmed', romanceable: null, img: '/jarvis.webp',  c1: '#2f4a5a', c2: '#6ab0c0',
+    desc: 'One of the town\u2019s ghosts, reported alongside fellow ghost Balthasar in launch-week hands-on coverage.',
+    traits: [], knownInfo: ['Confirmed as a ghost resident.', 'Datamined files also reference a "Jarvis\u2019 House."'] },
+  { id: 'dragan',  name: 'Dragan',  family: 'Seer (Khazan)', type: 'seer', status: 'reported', romanceable: true, img: '/dragan.webp',  c1: '#2f5a4a', c2: '#6ac0a0',
     desc: 'A struggling seer of the Khazan family whose predictions are usually wrong — better known as the inventor of the town\u2019s popular card game, Nocturna.',
     traits: [], knownInfo: ['Reported as a member of the Khazan seer family and the in-universe inventor of Nokturna (also spelled "Nocturna" in some coverage).', 'Datamined files also list a "Dragan\u2019s House" location.'] },
 
@@ -200,7 +202,7 @@ export const characters: Character[] = [
       'The same files list a distinct "Albertus\u2019 Jobs" entry alongside his name, hinting he may be connected to jobs or tasks in some way —not developer-confirmed.',
       'The portrait shown here comes from the pre-launch roster image supplied for this guide; family, species, and role are unverified until launch.',
     ] },
-  { id: 'alina', name: 'Alina', family: 'Seer (Khazan)', type: 'other', status: 'reported', romanceable: true, img: '/alina.webp', c1: '#4a3a4a', c2: '#b08ac0',
+  { id: 'alina', name: 'Alina', family: 'Seer (Khazan)', type: 'seer', status: 'reported', romanceable: true, img: '/alina.webp', c1: '#4a3a4a', c2: '#b08ac0',
     desc: 'The resident rebel of the Khazan family \u2014 stubborn, fiery, and unable to stand lying, with unconventional seer powers and a preference for the shadows.',
     traits: [], knownInfo: [
       'Reported as part of the Khazan seer family.',
@@ -257,7 +259,7 @@ export const characters: Character[] = [
     desc: 'A quiet, shy mermaid of the Horseus family obsessed with the environment, spending her days cleaning the shores.',
     traits: [['Gentleness', 80], ['Environmentalism', 85]], traitsPlaceholder: true,
     knownInfo: ['Reported as a member of the Horseus (mermaid) family; name also seen spelled "Rei" in other coverage \u2014 unresolved.', 'Focused on shoreline cleanup and teaching locals to respect nature.'] },
-  { id: 'aras', name: 'Aras', family: 'Seer (Khazan)', type: 'other', status: 'reported', romanceable: true, img: '', c1: '#4a4a3a', c2: '#b0b08a',
+  { id: 'aras', name: 'Aras', family: 'Seer (Khazan)', type: 'seer', status: 'reported', romanceable: true, img: '', c1: '#4a4a3a', c2: '#b0b08a',
     desc: 'The local tailor of the Khazan seer family, running "Third Eye Threads." He avoids using his own seer powers to keep his future a mystery.',
     traits: [['Style', 80], ['Warmth', 65]], traitsPlaceholder: true,
     knownInfo: ['Reported as a member of the Khazan seer family, running the "Third Eye Threads" tailor shop.', 'Loves fashion and cozy conversation.'] },
@@ -274,9 +276,9 @@ export const characters: Character[] = [
   { id: 'viktor-dracula', name: 'Viktor Dracula', family: 'Unknown', type: 'other', status: 'confirmed', romanceable: false, img: '', c1: '#3a2a3a', c2: '#8a6a8a',
     desc: 'A bat companion character encountered around town — not a romance option.',
     traits: [], knownInfo: ['Confirmed non-romanceable creature character, distinct from Count Dracula and Vlad.'] },
-  { id: 'balthasar', name: 'Balthasar', family: 'Unknown', type: 'other', status: 'confirmed', romanceable: false, img: '', c1: '#3a3a3a', c2: '#8a8a9a',
-    desc: 'A ghost resident of the town — not a romance option.',
-    traits: [], knownInfo: ['Confirmed as one of the town\u2019s ghost characters.'] },
+  { id: 'balthasar', name: 'Balthasar', family: 'Ghost', type: 'ghost', status: 'confirmed', romanceable: false, img: '', c1: '#3a3a3a', c2: '#8a8a9a',
+    desc: 'A ghost resident of the town, named alongside fellow ghost Jarvis — not a romance option.',
+    traits: [], knownInfo: ['Confirmed as one of the town\u2019s ghost characters, part of a reported Ghost family.'] },
 ];
 
 
