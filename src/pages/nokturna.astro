@@ -33,23 +33,28 @@ const jsonLd = [
       <h1>Nokturna — the <em>Moonlight Peaks</em> card game</h1>
       <p class="intro">
         Nokturna is the town's favourite card game: collect cards and challenge residents to a match.
-        This is your searchable card database plus a how-to-win guide. Updated {SITE.updated}.
+        Confirmed at launch: it's a best-of-three format with over 67 cards and multiple deck
+        archetypes, invented in-universe by the seer Dragan. This is your searchable card database
+        plus a how-to-win guide. Updated {SITE.updated}.
       </p>
 
       <h2>How to play</h2>
       <p>
-        The full rules — turn structure, win conditions, and scoring — will be confirmed when
-        {GAME.title} launches on {GAME.releaseLabel}. At its core, you collect cards across the game
-        and play them in matches against the townsfolk. We'll publish a clear, step-by-step rules
-        breakdown the day the game is out.
+        Confirmed at launch: Nokturna is played best-of-three against a resident, and your progress
+        with each person — including whether you've played Nokturna with them — is tracked in their
+        friendship menu alongside conversations and gifts. The full card pool is confirmed to be
+        over 67 cards across multiple deck archetypes. Exact turn structure and win conditions
+        within a round are still being verified — we'll publish the full step-by-step rules as we
+        confirm them rather than guessing.
       </p>
 
       <h2>Card database</h2>
       {cards.length === 0 ? (
         <div class="nok-empty">
-          <p><strong>The card list lands at launch.</strong> The real cards aren't public yet, so we
-          haven't listed any — we won't invent cards. On {GAME.releaseLabel} this becomes a fully
-          searchable database of every Nokturna card, its effect, and how to get it.</p>
+          <p><strong>Confirmed: over 67 cards exist, in multiple deck archetypes.</strong> The
+          individual card names and effects aren't public yet, so we haven't listed any — we won't
+          invent cards. This becomes a fully searchable database of every Nokturna card, its effect,
+          and how to get it as we verify them.</p>
         </div>
       ) : (
         <div class="nok-tool">

@@ -3,9 +3,10 @@ import Base from '../layouts/Base.astro';
 import { SITE, GAME } from '../consts';
 
 const faq = [
-  { q: 'Can you turn into a bat in Moonlight Peaks?', a: 'Yes. As a vampire you can shapeshift into a bat, which is a quick way to get around the town at night — flying around is described as conveniently fast.' },
-  { q: 'What other forms can you shapeshift into?', a: 'The developers have hinted that you can learn to shapeshift into other forms beyond the bat, and demo players have described dashing around as a cat. The full list of forms is expected at launch.' },
-  { q: 'How do you unlock shapeshifting?', a: 'Shapeshifting is part of your vampire lineage and supernatural abilities. Exactly how and when each form unlocks will be confirmed when the full game launches on ' + GAME.releaseLabel + '.' },
+  { q: 'Can you turn into a bat in Moonlight Peaks?', a: 'Yes, confirmed at launch. As a vampire you can shapeshift into a bat for fast travel around town at night — accessed via a magic wheel (hold the left shoulder button and pick your form).' },
+  { q: 'What is the Hellkitten form?', a: "Confirmed at launch: you can also shapeshift into your three-eyed Hellkitten companion. In Hellkitten form you move faster and can till patches of dirt without a shovel, at a fraction of the normal energy cost." },
+  { q: 'What other forms can you shapeshift into?', a: 'Two forms are confirmed at launch — bat and Hellkitten. The developers have teased more forms exist beyond these, but the full list has not been detailed yet.' },
+  { q: 'How do you unlock shapeshifting?', a: 'Shapeshifting is unlocked through story progression rather than available from the very first night. Once unlocked, you switch forms from a magic wheel accessed with the left shoulder button.' },
 ];
 
 const jsonLd = [
@@ -29,31 +30,38 @@ const jsonLd = [
       <p class="eyebrow">Entry · Shapeshifting</p>
       <h1>Moonlight Peaks <em>shapeshifting</em></h1>
       <p class="intro">
-        One of the perks of being a vampire in {GAME.title} is changing your shape. Here's what's
-        actually confirmed about shapeshifting — and what the developers have only hinted at so far.
-        Updated {SITE.updated}.
+        One of the perks of being a vampire in {GAME.title} is changing your shape. Two forms are
+        confirmed at launch — bat and Hellkitten — accessed via a magic wheel. Updated {SITE.updated}.
       </p>
 
       <h2>Turn into a bat to get around</h2>
       <p>
-        The confirmed headline form is the classic vampire bat. Shifting into a bat lets you fly
-        around the town quickly at night, which is handy when you're juggling the farm, errands and
+        Confirmed at launch: the classic vampire bat form. Shifting into a bat lets you fly around
+        the town quickly at night, which is handy when you're juggling the farm, errands and
         socialising before sunrise.
+      </p>
+
+      <h2>Hellkitten form — faster movement and free tilling</h2>
+      <p>
+        Confirmed at launch: you can also shapeshift into your three-eyed Hellkitten companion.
+        In Hellkitten form you move noticeably faster around the map, and you can till dirt patches
+        without a shovel at a fraction of the usual energy cost — a genuine quality-of-life form,
+        not just cosmetic.
       </p>
 
       <h2>Other forms are hinted at</h2>
       <p>
-        The studio has teased that you can learn to shapeshift into other forms too, beyond the bat.
-        Players who tried the demo described dashing around as a cat, but the complete set of forms —
+        The studio has teased that more forms exist beyond bat and Hellkitten, but the complete set —
         and what each one is good for — hasn't been fully detailed yet.
       </p>
 
       <h2>Part of your vampire powers</h2>
       <p>
         Shapeshifting sits alongside the rest of your supernatural abilities and helps you explore
-        everything the town has to offer. It pairs naturally with <a href="/magic">witchcraft and
-        potions</a> — and like everything else in your (un-)life, it works around the rule that you
-        return to your coffin before the sun comes up.
+        everything the town has to offer. Both confirmed forms are accessed from a magic wheel (hold
+        the left shoulder button, then pick a form). It pairs naturally with <a href="/magic">witchcraft
+        and potions</a> — and like everything else in your (un-)life, it works around the rule that
+        you return to your coffin before the sun comes up.
       </p>
 
       <h2>Coming at launch ({GAME.releaseLabel})</h2>

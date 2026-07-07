@@ -42,6 +42,16 @@ const jsonLd = [
         </div>
       )}
 
+      <h2>Confirmed named areas</h2>
+      <p>
+        The marker positions below are still placeholders, but these district names are confirmed
+        from launch-week coverage: <strong>Misty Shores</strong> (the Ambrosia family's home turf,
+        reached via the "A Bridge Too Far" quest, with a graveyard where you meet Death),
+        <strong> Moonlit Pines</strong> (where the witches' coven is based), the <strong>Pink Grove</strong>
+        (home to the love demon Llemi, visited mainly during festivals), and the <strong>Town Hall</strong>
+        (where you register with the mayor). We'll place these precisely once exact coordinates are verified.
+      </p>
+
       <div class="maplegend" id="maplegend">
         {categories.map((c) => (
           <button class="lg" data-cat={c.id} style={`--mk:${c.color}`} type="button" aria-pressed="true">
