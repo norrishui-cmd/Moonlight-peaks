@@ -20,6 +20,7 @@ export const homepagePriorityLinks: PriorityLink[] = [
   { label: 'Moonlight Peaks characters', href: '/characters', note: 'Known residents, families, profiles, and romance status.' },
   { label: 'Moonlight Peaks romance guide', href: '/romance', note: 'Marriage, dating, and the seven families.' },
   { label: 'Beginner guide', href: '/beginner-guide', note: 'What to know before starting the cozy vampire life sim.' },
+  { label: 'Moonlight Peaks review roundup', href: '/reviews', note: 'Real critic scores from Prima Games, GameWatcher, Gamereactor and more.' },
   { label: 'Guides hub', href: '/guides', note: 'Beginner, farming, magic, romance, and more.' },
   { label: 'Item Tracker', href: '/tools/item-tracker', note: 'Track fish, recipes, potions, artifacts, and collection progress.' },
   { label: 'Farming Profit Planner', href: '/tools/farming-profit-planner', note: 'Compare crop profits once launch prices are verified.' },
@@ -39,6 +40,7 @@ export const releasePriorityLinks: PriorityLink[] = [
   { label: 'Steam Deck', href: '/platforms/steam-deck', note: 'Portable PC play and verification status.' },
   { label: 'Android', href: '/platforms/android', note: 'Day-one mobile release via Google Play.' },
   { label: 'All platforms & price', href: '/platforms', note: 'Every platform and the price in one place.' },
+  { label: 'Review roundup', href: '/reviews', note: 'Real critic scores as launch-week reviews land.' },
   { label: 'Demo download', href: '/demo/how-to-download-the-demo', note: 'Where to get the free demo before launch.' },
 ];
 

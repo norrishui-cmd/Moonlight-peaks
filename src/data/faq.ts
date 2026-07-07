@@ -87,6 +87,13 @@ export const faqs: Faq[] = [
     more: ['If co-op is announced later, we will update this page.'],
     related: [{ label: 'Price & platforms FAQ', href: '/previews/price-platforms-faq' }],
   },
+  {
+    slug: 'moonlight-peaks-reddit-discord-community', cat: 'general',
+    q: 'Is there a Moonlight Peaks Reddit or Discord?',
+    a: "We haven't sourced a dedicated official subreddit yet — we won't guess at one or link an unofficial community and call it official. The confirmed community hubs are the official Discord server and the Steam Community discussion boards for the game, both linked by the developers.",
+    more: ['If an official subreddit is confirmed, we will add it here rather than pointing to an unverified one.'],
+    related: [{ label: 'Review roundup', href: '/reviews' }, { label: 'Previews & community reception', href: '/previews' }],
+  },
 
   // ── World & gameplay ──
   {

@@ -1,0 +1,89 @@
+---
+import Base from '../layouts/Base.astro';
+import { SITE, GAME } from '../consts';
+
+// Real critic scores gathered from launch-week coverage. Each score is attributed to its outlet;
+// we do not average them into a single invented "aggregate" number.
+const reviews = [
+  { outlet: 'Prima Games', score: '9.5 / 10', takeaway: 'One of the strongest cozy farming sims in recent memory, praising meaningful progression, memorable characters, and how thoroughly the supernatural theme is woven into every system.' },
+  { outlet: 'GameWatcher', score: '7.5 / 10', takeaway: 'A slow start for players well-versed in the genre, but a rewarding, relaxed life sim once it opens up, in a charmingly supernatural setting.' },
+  { outlet: 'Gamereactor', score: '7 / 10', takeaway: "Enjoyed the nocturnal twist on the life-sim formula, but flagged the stamina bar stacked on top of the sunrise deadline as redundant rather than adding depth." },
+  { outlet: 'Nintendo World Report', score: 'Reviewed (Switch 2)', takeaway: 'Confirmed a Switch 2-specific review is live, describing the horror theming as working well for a cozy life sim; a specific numeric score is not yet sourced here.' },
+];
+
+const faq = [
+  { q: 'Is Moonlight Peaks good? What do reviews say?', a: 'Early critic scores range from 7 to 9.5 out of 10 across outlets like Prima Games, GameWatcher, and Gamereactor — broadly positive, with the supernatural theming and character writing praised most, and some pacing/stamina-system complaints.' },
+  { q: 'What is the Moonlight Peaks Metacritic score?', a: 'We have not sourced an aggregate Metacritic or OpenCritic score yet; check those sites directly for the current average, since we do not invent aggregate numbers.' },
+  { q: 'What do reviews criticize about Moonlight Peaks?', a: 'The most specific critical note so far: Gamereactor called the combination of a hard nightly sunrise deadline and a separate stamina bar redundant, since the sunrise cutoff already limits your night on its own.' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: SITE.url },
+    { '@type': 'ListItem', position: 2, name: 'Reviews', item: new URL('/reviews', SITE.url).href },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks Review Roundup — Critic Scores & Verdicts"
+  description="Is Moonlight Peaks good? A roundup of real launch-week critic reviews and scores from Prima Games, GameWatcher, Gamereactor and more, updated as new reviews land."
+  path="/reviews"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Reviews' }]}
+  showExport
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Entry · Reviews</p>
+      <h1>Moonlight Peaks <em>review</em> roundup</h1>
+      <p class="intro">
+        Real critic scores and verdicts for {GAME.title}, gathered as reviews land — not our own
+        opinion, and not an invented aggregate. See our <a href="/previews">pre-launch previews &amp;
+        demo impressions</a> for the earlier hands-on picture. Updated {SITE.updated}.
+      </p>
+
+      <h2>Critic scores so far</h2>
+      <table class="facts">
+        <tr><th>Outlet</th><th>Score</th><th>Takeaway</th></tr>
+        {reviews.map((r) => (
+          <tr>
+            <td>{r.outlet}</td>
+            <td>{r.score}</td>
+            <td>{r.takeaway}</td>
+          </tr>
+        ))}
+      </table>
+
+      <h2>What critics agree on</h2>
+      <p>
+        Reviewers consistently single out the supernatural twist on the cozy-farm-sim formula —
+        the nocturnal schedule, the seven families, and the depth of character writing — as the
+        game's strongest asset. The art direction and "charmingly supernatural" tone come up
+        across multiple outlets independently.
+      </p>
+
+      <h2>What critics push back on</h2>
+      <p>
+        The most specific, sourced criticism so far is pacing-related: Gamereactor's review flagged
+        the stamina bar as redundant on top of the hard sunrise cutoff already limiting each night.
+        GameWatcher noted a slow opening for players already deep into the life-sim genre.
+      </p>
+
+      <div class="callout">
+        This roundup only lists scores we can attribute to a named outlet. We don't calculate our
+        own aggregate score, and we'll add outlets here as more reviews are verified.
+      </div>
+
+      <h2>FAQ</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </article>
+</Base>
