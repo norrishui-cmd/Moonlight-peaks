@@ -50,7 +50,7 @@ export const families: TopicItem[] = [
     related: [{ label: 'Kim', href: '/characters/kim' }, { label: 'Ray', href: '/characters/rei' }, { label: 'Tay', href: '/characters/tae' }, { label: 'Fishing', href: '/fishing' }],
   },
   {
-    slug: 'seers', title: 'Seers', tag: 'Family', status: 'confirmed',
+    slug: 'seers', title: 'Seers', tag: 'Family', status: 'confirmed', image: '/hero-fam-seers.webp',
     dek: 'Fortune-tellers of the Khazan family — one of the two families that were still under wraps.',
     body: [
       'One of the two previously-unrevealed families: the Khazans, a family of seers with fortune-telling powers of varying reliability.',
@@ -59,7 +59,7 @@ export const families: TopicItem[] = [
     related: [{ label: 'Dragan', href: '/characters/dragan' }, { label: 'Alina', href: '/characters/alina' }, { label: 'Aras', href: '/characters/aras' }, { label: 'Nokturna', href: '/nokturna' }],
   },
   {
-    slug: 'ghosts', title: 'Ghosts', tag: 'Family', status: 'confirmed',
+    slug: 'ghosts', title: 'Ghosts', tag: 'Family', status: 'confirmed', image: '/hero-fam-ghosts.webp',
     dek: 'The town\u2019s spectral residents — the second family that was still under wraps.',
     body: [
       'The second previously-unrevealed family: a Ghost family, confirmed via launch-week hands-on coverage rather than official marketing.',
