@@ -46,7 +46,9 @@ export const fish: Fish[] = [
 // locations, or prices are sourced yet — do not invent them.
 export const UNLOCK_NOTE =
   'Fishing rod: unlocked via a 250-gold bet with Noel (catch 3 different fish before he does). ' +
-  'Bug net: obtained from Death after unlocking the Ambrosia castle area. Species list not yet sourced.';
+  'Bug net: confirmed to require meeting Death twice after unlocking Misty Shores and the Ambrosia ' +
+  'Graveyard via the "A Bridge Too Far" quest (Fiona cursed the bridge to Orlock\u2019s home after a ' +
+  'drunken argument). Species list not yet sourced.';
 
 // "Most valuable fish" — safe on empty/partial data (only ranks rows with a known sellPrice).
 export const fishByValue: Fish[] = [...fish]

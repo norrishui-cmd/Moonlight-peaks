@@ -116,6 +116,7 @@ export const characters: Character[] = [
     knownInfo: [
       'Reported as a "sea witch" who runs the town\u2019s plant stalls and brews potions.',
       'Also tends livestock, including Draculambs — sources vary slightly on the exact farming/plant split, to be confirmed in-game.',
+      'Confirmed: sells livestock (waiting outside her house) once players have bought a Barn from Ridge — first animal is typically a Cheeken, which likes petting and hats.',
       'Details to be confirmed against the live game at launch.',
     ],
   },
@@ -173,7 +174,7 @@ export const characters: Character[] = [
   { id: 'ridge',   name: 'Ridge',   family: 'Werewolf (Logan)', type: 'werewolf', status: 'confirmed', romanceable: true, img: '/ridge.webp',   c1: '#4a3a2a', c2: '#b08a4a',
     desc: 'A rugged, dependable werewolf carpenter and total pacifist who uses his werewolf hours to scout high-quality wood; deeply cares about family.',
     traits: [['Dependability', 85], ['Gentleness', 75]], traitsPlaceholder: true,
-    knownInfo: ['Confirmed as a werewolf carpenter and pacifist.', 'Scouts wood during his werewolf hours and is close with family.'] },
+    knownInfo: ['Confirmed as a werewolf carpenter and pacifist.', 'Scouts wood during his werewolf hours and is close with family.', 'Confirmed: sells players their first Barn (for money + materials), required before buying livestock from Luna.'] },
   { id: 'sabrina', name: 'Sabrina', family: 'Witch (Webb)', type: 'witch', status: 'confirmed', romanceable: true, img: '/sabrina.webp', c1: '#3a3a4a', c2: '#8a8ab0',
     desc: 'A gothic witch of the Webb family who runs "Web of Wonders," selling the Alter Ego Elixir; a rule-breaking free spirit, to her cousin Fiona\u2019s annoyance.',
     traits: [['Rebellion', 80]], traitsPlaceholder: true,
@@ -187,7 +188,7 @@ export const characters: Character[] = [
     traits: [], knownInfo: ['Reported as a relic collector and history enthusiast.', 'Persephone is described as her relative, newly arrived in town.'] },
   { id: 'brook',   name: 'Brook',   family: 'Unknown', type: 'other', status: 'confirmed', romanceable: null, img: '/brook.webp',   c1: '#4a3a2a', c2: '#a08a5a',
     desc: 'The mayor of Moonlight Peaks. You register with him at Town Hall as one of your first tasks — he\u2019s described as not a very friendly character.',
-    traits: [], knownInfo: ['Confirmed as the town mayor; players register with him at Town Hall early on.', 'Datamined files also reference a "Brook\u2019s House" location.'] },
+    traits: [], knownInfo: ['Confirmed as the town mayor; players register with him at Town Hall early on.', 'Confirmed: during that registration he gifts players Chester, the living storage chest used to sell goods overnight.', 'Datamined files also reference a "Brook\u2019s House" location.'] },
   { id: 'jarvis',  name: 'Jarvis',  family: 'Ghost', type: 'ghost', status: 'confirmed', romanceable: null, img: '/jarvis.webp',  c1: '#2f4a5a', c2: '#6ab0c0',
     desc: 'One of the town\u2019s ghosts, reported alongside fellow ghost Balthasar in launch-week hands-on coverage.',
     traits: [], knownInfo: ['Confirmed as a ghost resident.', 'Datamined files also reference a "Jarvis\u2019 House."'] },
@@ -219,6 +220,7 @@ export const characters: Character[] = [
       'Confirmed as a romance option \u2014 not a pre-launch rumor, as it once was.',
       'Confirmed personality: dry humor, tends the cemetery, collects flowers and souls, and is dressed in a Hawaiian shirt over his Grim Reaper robes.',
       'Resides at "Death\u2019s Shack", found in the Misty Shores graveyard area.',
+      'Confirmed unlock chain: players meet him twice after unlocking Misty Shores/the Ambrosia Graveyard (via the "A Bridge Too Far" quest) before he gives the bug net.',
     ] },
   { id: 'samael', name: 'Samael', family: 'Vampire (Ambrosia)', type: 'vampire',
     status: 'confirmed', romanceable: true, img: '/samael.webp', c1: '#4a2a2a', c2: '#b06a6a',
@@ -239,7 +241,7 @@ export const characters: Character[] = [
   { id: 'fiona', name: 'Fiona', family: 'Witch (Webb)', type: 'witch', status: 'confirmed', romanceable: true, img: '/fiona.webp', c1: '#4a2f5a', c2: '#a06ac0',
     desc: 'Head of the Webb family and leader of the local coven, and the town florist; rigid on the surface but warm and creative once she opens up.',
     traits: [['Discipline', 75], ['Warmth', 55]], traitsPlaceholder: true,
-    knownInfo: ['Confirmed witch resident; reported as head of the Webb family and town florist.', 'Gives players mailbox delivery quests during the early homestead loop.'] },
+    knownInfo: ['Confirmed witch resident; reported as head of the Webb family and town florist.', 'Gives players mailbox delivery quests during the early homestead loop.', 'Confirmed quest detail: she cursed the bridge to Orlock\u2019s home after a drunken argument, blocking the Misty Shores area until the "A Bridge Too Far" quest lifts it.'] },
 
   // --- Named in GameWatcher's post-launch confirmed-NPC roundup (July 7, 2026); no further
   // role/family/gift detail sourced yet beyond species where stated. Add detail as verified. ---
