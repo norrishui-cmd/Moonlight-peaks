@@ -3,11 +3,13 @@ import Base from '../layouts/Base.astro';
 import { SITE, GAME } from '../consts';
 
 const issueRows = [
-  ['Crash / launch failure', 'Not verified yet', 'Check official notes, Steam discussions, and repeated player reports before listing a fix.'],
-  ['Save file / cloud save', 'Not verified yet', 'Do not publish save paths until confirmed on the live build.'],
-  ['Controller input', 'Not verified yet', 'Use demo and launch build testing to separate platform-specific issues from general comfort notes.'],
-  ['Steam Deck', 'Not verified yet', 'Wait for Valve/storefront rating and launch-week player reports before giving a hard verdict.'],
-  ['Switch / Switch 2 performance', 'Not verified yet', 'Track load times, readability, controls, and any upgrade-pass wording once storefront data is live.'],
+  ['Steam Deck crash on startup', 'Confirmed workaround', 'Multiple players report the game crashing on launch, even after reinstalling and verifying files. Reported fix: switch the Steam Deck compatibility tool to Proton 9.0-4.'],
+  ['Micro-freezes / stutter every few seconds', 'Confirmed, unresolved', 'Reported by players on high-end PCs (e.g. RTX 5090) as well as mid-range hardware, so it does not appear to be a hardware-specific issue. No official fix yet — try updating GPU drivers and setting Moonlight Peaks to "High performance" in your system\u2019s graphics settings as a partial mitigation.'],
+  ['Crash when leaving the farm', 'Reported, unresolved', 'Some players report a reliable crash specifically when exiting the farm area. No official fix yet — try verifying game files.'],
+  ['Controller stops responding mid-game', 'Reported, unresolved', 'Controller works during character creation but then stops responding, with button-mapping options greyed out in Settings. No confirmed fix yet; try unplugging/reconnecting the controller or switching to keyboard/mouse as a workaround.'],
+  ['NPC gets stuck / can\u2019t be talked to', 'Reported, unresolved', 'Reported with Orlock specifically getting stuck in one spot and becoming untalkable. Reloading the area and sleeping to the next day have both failed to fix it for affected players.'],
+  ['Can\u2019t interact with objects indoors', 'Reported, unresolved', 'Some players report being unable to click on objects inside their house (e.g. the coffin to sleep, pets) while outdoor interactions work fine.'],
+  ['Switch 2 loading times', 'Confirmed by reviewers', 'Multiple reviewers flagged long loading times specifically on Nintendo Switch 2 as the main technical complaint; no official fix announced yet.'],
 ];
 
 const reportChecklist = [
@@ -20,8 +22,24 @@ const reportChecklist = [
 
 const faq = [
   {
+    q: 'Why does Moonlight Peaks keep freezing or stuttering?',
+    a: 'Confirmed player reports (including on high-end PCs) describe brief freezes every few seconds regardless of hardware, so this doesn\u2019t appear to be a hardware-specific problem. There\u2019s no official fix yet — updating your GPU drivers and setting the game to "High performance" in your system\u2019s graphics settings are the most common partial mitigations reported so far.',
+  },
+  {
+    q: 'Moonlight Peaks crashes on startup on Steam Deck — how do I fix it?',
+    a: 'Multiple players report this. The most repeated fix: open the game\u2019s Properties in Steam, go to Compatibility, and switch the Proton version to 9.0-4.',
+  },
+  {
+    q: 'My controller stopped working in Moonlight Peaks — what do I do?',
+    a: 'This is a reported, unresolved issue — the controller works during character creation but stops responding afterward, with control-remapping options greyed out. No confirmed fix exists yet; try disconnecting and reconnecting your controller, or switch to keyboard/mouse in the meantime.',
+  },
+  {
+    q: 'An NPC in Moonlight Peaks is stuck and I can\u2019t talk to them — help?',
+    a: 'This has been reported (notably with Orlock getting stuck in place). Reloading the area and sleeping to the next day have not fixed it for affected players so far; there\u2019s no confirmed fix yet, so consider reporting it to support@xseedgames.com with your platform and a description.',
+  },
+  {
     q: 'Are there known Moonlight Peaks bugs at launch?',
-    a: 'This page is prepared for launch-week tracking. Issues should only be listed after they are confirmed by official notes, repeated player reports, or reliable neutral coverage.',
+    a: 'Yes — see the tracker above for the specific issues currently being reported and their status. We only list something here once it\u2019s backed by official notes, repeated player reports, or reliable neutral coverage.',
   },
   {
     q: 'Where should save or cloud save problems go?',
@@ -33,7 +51,7 @@ const faq = [
   },
   {
     q: 'Does this page replace official support?',
-    a: 'No. This is a fan-maintained tracker that points players toward verified public information and avoids unsupported claims.',
+    a: 'No. For unresolved issues, email support@xseedgames.com with your platform, a crash dump if available, and a description of what happened.',
   },
 ];
 
@@ -60,8 +78,8 @@ const jsonLd = [
 ];
 ---
 <Base
-  title="Moonlight Peaks Known Issues - Bugs, Saves & Performance"
-  description="Moonlight Peaks known issues tracker for launch-week bugs, crashes, save problems, controller input, Steam Deck, Switch performance, and verified fixes."
+  title="Moonlight Peaks Known Issues — Crashes, Controller & Freezing Fixes"
+  description="Confirmed Moonlight Peaks bugs and fixes: Steam Deck crash on startup, controller not working, freezing/stutter, stuck NPCs, save file locations, and Switch 2 loading times."
   path="/known-issues"
   jsonLd={jsonLd}
   crumbs={[{ label: 'Known issues' }]}
@@ -72,9 +90,18 @@ const jsonLd = [
       <p class="eyebrow">Launch / Known issues</p>
       <h1>Moonlight Peaks <em>known issues</em></h1>
       <p class="intro">
-        A launch-week tracker for bugs, crashes, saves, controller problems, Steam Deck notes, and
-        platform-specific performance reports. It is ready now, but fixes are added only after they
-        are confirmed.
+        A launch-week tracker for confirmed bugs, crashes, saves, controller problems, and
+        platform-specific reports — sourced from official support notes and Steam Community
+        discussions, updated as fixes are confirmed.
+      </p>
+
+      <h2>Save file location</h2>
+      <p>
+        Confirmed by the developers: on Windows, saves are at
+        <code>%USERPROFILE%/AppData/LocalLow/Little Chicken Game Company/Moonlight Peaks/</code>.
+        On Mac, they're at <code>~/Library/Application Support/Little Chicken Game Company/Moonlight Peaks/</code>.
+        Crash dumps on Windows are typically under <code>%LOCALAPPDATA%\CrashDumps</code>, from
+        "Moonlight Peaks.exe" — attach these if you email support.
       </p>
 
       <h2>Current tracker</h2>

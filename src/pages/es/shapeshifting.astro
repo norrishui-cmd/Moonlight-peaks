@@ -3,9 +3,10 @@ import Base from '../../layouts/Base.astro';
 import { SITE, GAME } from '../../consts';
 
 const faq = [
-  { q: '¿Puedes convertirte en murciélago en Moonlight Peaks?', a: 'Sí. Como vampiro puedes transformarte en murciélago, una forma rápida de moverte por el pueblo de noche — volar se describe como convenientemente veloz.' },
-  { q: '¿En qué otras formas te puedes transformar?', a: 'Los desarrolladores han insinuado que puedes aprender a transformarte en otras formas además del murciélago, y jugadores de la demo han descrito moverse rápido como gato. Se espera la lista completa de formas en el lanzamiento.' },
-  { q: '¿Cómo se desbloquea el cambio de forma?', a: `El cambio de forma es parte de tu linaje vampírico y tus habilidades sobrenaturales. Cómo y cuándo se desbloquea cada forma se confirmará cuando salga el juego completo el ${GAME.releaseLabel}.` },
+  { q: '¿Puedes convertirte en murciélago en Moonlight Peaks?', a: 'Sí, confirmado. Como vampiro puedes transformarte en murciélago, una forma rápida de moverte por el pueblo de noche.' },
+  { q: '¿Qué es la forma Hellkitten?', a: 'Confirmado: también puedes transformarte en tu compañero Hellkitten de tres ojos. En esta forma te mueves más rápido y puedes arar parcelas de tierra sin pala, por una fracción de la energía habitual.' },
+  { q: '¿En qué otras formas te puedes transformar?', a: 'Actualmente solo hay dos formas confirmadas: murciélago y Hellkitten. Los desarrolladores han insinuado que existen más formas, pero la lista completa aún no se ha publicado.' },
+  { q: '¿Cómo se desbloquea el cambio de forma?', a: 'Confirmado: desbloquear la forma Hellkitten requiere completar cuatro misiones — "A Bridge Too Far", "Tension in the Crest Garden", "A Croak and a Crest" y "The Dinner Party". Una vez desbloqueado, cambias de forma desde una rueda mágica (botón L).' },
 ];
 
 const jsonLd = [
@@ -42,11 +43,19 @@ const jsonLd = [
         y la vida social antes del amanecer.
       </p>
 
+      <h2>Forma Hellkitten — más velocidad y arado gratuito</h2>
+      <p>
+        Confirmado: tras completar cuatro misiones — "A Bridge Too Far", "Tension in the Crest
+        Garden", "A Croak and a Crest" y "The Dinner Party" — puedes transformarte en tu compañero
+        Hellkitten de tres ojos. En esta forma te mueves notablemente más rápido y, presionando Y,
+        puedes arar parcelas de tierra sin pala por una fracción de la energía habitual — una forma
+        realmente útil, no solo cosmética.
+      </p>
+
       <h2>Se insinúan otras formas</h2>
       <p>
-        El estudio ha adelantado que puedes aprender a transformarte en otras formas además del
-        murciélago. Jugadores que probaron la demo describieron moverse rápido como gato, pero el
-        conjunto completo de formas — y para qué sirve cada una — aún no se ha detallado del todo.
+        El estudio ha adelantado que existen más formas además del murciélago y Hellkitten, pero el
+        conjunto completo — y para qué sirve cada una — aún no se ha detallado.
       </p>
 
       <h2>Parte de tus poderes de vampiro</h2>
@@ -75,8 +84,8 @@ const jsonLd = [
       </div>
 
       <div class="callout wip">
-        Entrada previa al lanzamiento — la lista completa de formas llega en el lanzamiento.
-        Relacionado: <a href="/magic">magia y pociones</a>, <a href="/character-creator">creador de personaje</a>,
+        Entrada post-lanzamiento, actualizada con datos reales del juego. Relacionado:
+        <a href="/magic">magia y pociones</a>, <a href="/character-creator">creador de personaje</a>,
         <a href="/es/beginner-guide">guía para principiantes</a> (en español).
       </div>
     </div>

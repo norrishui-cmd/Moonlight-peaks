@@ -4,8 +4,9 @@ import { SITE, GAME } from '../../consts';
 
 const faq = [
   { q: '¿Se cultiva de noche en Moonlight Peaks?', a: 'Sí. Interpretas a un vampiro, así que cultivar y cuidar la granja se hace a la luz de la luna — solo recuerda volver a tu ataúd antes del amanecer. La agricultura nocturna es el giro característico del bucle cozy de cultivo.' },
-  { q: '¿Qué es un Draculamb?', a: 'Un Draculamb es uno de los animales mágicos que puedes criar en tu granja. También puedes tener como mascota a un adorable Hellkitten de tres ojos.' },
-  { q: '¿Qué tipo de cultivos se pueden sembrar?', a: 'Como vampiro cultivas plantas encantadas y malditas, y flores brillantes — algunos ejemplos tempranos incluyen uvas de sangre, "cruelcumbers", calabazas y belladona. La lista completa de cultivos, precios, estaciones y tiempos de crecimiento se añadirá en el lanzamiento.' },
+  { q: '¿Qué es un Draculamb?', a: 'Es una de las especies de ganado confirmadas, junto a Cheeken (pollo), Piggoat y Cowcula. También puedes transformarte en un Hellkitten de tres ojos.' },
+  { q: '¿Qué tipo de cultivos se pueden sembrar?', a: 'Tu primer cultivo confirmado son las uvas de sangre (semillas iniciales de Orlock, 5 días para crecer), que puedes procesar en un barril para obtener "vino de sangre". También se han confirmado "cruelcumbers", calabazas y belladona, aunque los precios exactos no son públicos aún.' },
+  { q: '¿Cómo se compran animales de granja?', a: 'Confirmado: primero compra un Granero a Ridge por 4,000 monedas de oro más materiales, luego compra animales a Luna (solo los que estén disponibles fuera de su casa en ese momento).' },
 ];
 
 const jsonLd = [
@@ -44,31 +45,42 @@ const jsonLd = [
       <h2>Cultivos encantados y flores brillantes</h2>
       <p>
         Las técnicas de cultivo paranormales dan resultados interesantes: en vez de productos comunes,
-        cultivas plantas y flores encantadas y brillantes. Como vampiro tu sustento es comida maldita,
-        así que cultivarás y maldecirás cultivos — entre los primeros vistos están las
-        <strong>uvas de sangre</strong>, los "cruelcumbers", calabazas y belladona. La lista completa de
-        cultivos con precios, estaciones y tiempos de crecimiento se documentará aquí en el lanzamiento.
+        cultivas plantas y flores encantadas y brillantes. Tu primer cultivo confirmado son las
+        <strong>uvas de sangre</strong> (semillas de Orlock la primera noche, 5 días para crecer),
+        que se procesan en un barril para obtener "vino de sangre" — vender las uvas crudas da muy
+        poco dinero. También confirmados: "cruelcumbers", calabazas y belladona, sin precios exactos aún.
       </p>
 
-      <h2>Ganado mágico y mascotas</h2>
+      <h2>Herramientas iniciales</h2>
       <p>
-        Tu granja no es solo plantas. Puedes criar ganado mágico como los <strong>Draculambs</strong>, y
-        tener como mascota a un adorable <strong>Hellkitten</strong> de tres ojos por la propiedad.
+        Confirmadas (accesibles desde la rueda de herramientas, mantén presionado R en Switch): pala
+        (no hay azadón separado — la pala cumple esa función), regadera (3 niveles: 1,000 / 2,000 /
+        3,500 monedas, cada nivel reduce el agua usada por casilla), hacha, pico, hoz, y una varita rota
+        al inicio. Confirmado: mejorar el <strong>pico primero</strong> es prioritario — rompe rocas
+        grandes cerca de casa y libera espacio para más graneros.
+      </p>
+
+      <h2>Ganado — flujo de compra confirmado</h2>
+      <p>
+        Confirmado: no puedes comprar animales de inmediato. Primero compra un <strong>Granero</strong>
+        a <strong>Ridge</strong> por 4,000 monedas más materiales, luego compra ganado a
+        <strong>Luna</strong> (solo los disponibles en ese momento fuera de su casa). Especies
+        confirmadas: <strong>Cheeken</strong> (compra habitual inicial, le gusta que lo acaricien y
+        los sombreros), <strong>Piggoat</strong>, <strong>Draculamb</strong>, <strong>Cowcula</strong>.
+        Se alimentan con Forraje (hecho en una refinadora), y más adelante Forraje Premium.
       </p>
 
       <h2>Magia y herramientas</h2>
       <p>
-        La agricultura y la brujería van de la mano — puedes regar los cultivos con regaderas
-        telequinéticas y aprender <a href="/magic">hechizos</a> (incluyendo un minijuego de riego) que
-        aceleran las tareas de granja y recolección. A medida que avanzas, obtienes nuevas herramientas y
-        desarrollas tu propiedad para cultivar aún más.
+        La agricultura y la brujería van de la mano — el primer hechizo confirmado es
+        <strong>Aquaflux</strong> (riego automático), desbloqueado con Luna. A medida que avanzas,
+        obtienes nuevas herramientas y desarrollas tu propiedad para cultivar aún más.
       </p>
 
       <h2>Llega en el lanzamiento ({GAME.releaseLabel})</h2>
       <ul>
-        <li>Base de datos completa de <strong>cultivos</strong>: precios de compra/venta, estaciones, tiempos de crecimiento, dónde comprar semillas.</li>
+        <li>Base de datos completa de <strong>cultivos</strong>: precios exactos, estaciones.</li>
         <li><strong>Mejores cultivos</strong> por estación y ganancia.</li>
-        <li><strong>Cuidado del ganado</strong> y qué produce cada animal.</li>
         <li>Puntos de granja marcados en el <a href="/map">mapa interactivo</a>.</li>
       </ul>
 
@@ -83,7 +95,7 @@ const jsonLd = [
       </div>
 
       <div class="callout wip">
-        Entrada previa al lanzamiento — los datos de cultivos y ganado llegan en el lanzamiento.
+        Entrada post-lanzamiento, actualizada con datos reales del juego.
         Relacionado: <a href="/magic">magia</a>, <a href="/items">objetos</a>,
         <a href="/environment">entorno</a>, <a href="/map">mapa interactivo</a>,
         <a href="/es/beginner-guide">guía para principiantes</a> (en español).

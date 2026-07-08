@@ -136,6 +136,30 @@ export const faqs: Faq[] = [
     a: 'Confirmed at launch: PEGI 12 in the UK/Europe and ESRB Teen (T) in the US, due to references to alcohol (you can craft and drink beer and wine) and mildly suggestive romantic language.',
     related: [{ label: 'Review roundup', href: '/reviews' }],
   },
+  {
+    slug: 'moonlight-peaks-crashing-freezing', cat: 'general',
+    q: 'Why is Moonlight Peaks crashing or freezing?',
+    a: 'Multiple confirmed player reports describe brief freezes every few seconds (even on high-end PCs) and crashes when leaving the farm or on Steam Deck startup. There\u2019s no official fix yet, but updating GPU drivers, setting "High performance" mode, and switching Steam Deck to Proton 9.0-4 have helped some players.',
+    related: [{ label: 'Known issues tracker', href: '/known-issues' }],
+  },
+  {
+    slug: 'moonlight-peaks-controller-not-working', cat: 'general',
+    q: 'My controller isn\u2019t working in Moonlight Peaks — what do I do?',
+    a: 'This is a reported, unresolved issue — controllers work during character creation but can stop responding afterward, with remapping options greyed out. Try disconnecting/reconnecting your controller or switching to keyboard/mouse until an official fix lands.',
+    related: [{ label: 'Known issues tracker', href: '/known-issues' }],
+  },
+  {
+    slug: 'moonlight-peaks-crops-wither-season-change', cat: 'farming',
+    q: 'Do crops die when the season changes in Moonlight Peaks?',
+    a: 'Yes — confirmed by reviewers: when Spring turns to Summer (and presumably at other season changes), Spring crops wither, including magical ones. Plan your harvests around season boundaries.',
+    related: [{ label: 'Farming guide', href: '/farming' }],
+  },
+  {
+    slug: 'moonlight-peaks-mana-stamina-balance', cat: 'world',
+    q: 'Is mana/stamina management difficult in Moonlight Peaks?',
+    a: 'Multiple reviewers flagged mana management as a rough edge, especially early on — you start with a small mana pool that only refills by one star per night\u2019s sleep, and food/drinks that restore it are rare early. Several critics felt this, stacked with the stamina bar and sunrise deadline, could use better balancing.',
+    related: [{ label: 'Magic guide', href: '/magic' }],
+  },
 
   // ── World & gameplay ──
   {
