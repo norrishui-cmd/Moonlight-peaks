@@ -56,12 +56,58 @@ export const platformPriorityLinks: PriorityLink[] = [
 ];
 
 export const characterPriorityLinks: PriorityLink[] = [
-  { label: 'Saga', href: '/characters/saga', note: 'The confirmed romanceable werewolf.' },
-  { label: 'Luna', href: '/characters/luna', note: 'Reported witch resident profile.' },
-  { label: 'Orlock', href: '/characters/orlock', note: 'Reported vampire resident profile.' },
-  { label: 'Mina', href: '/characters/mina', note: 'Confirmed resident profile.' },
+  { label: 'All characters', href: '/characters', note: '35 residents, confirmed vs. reported status.' },
+  { label: 'Saga', href: '/characters/saga', note: 'Confirmed werewolf romance, with real gift data.' },
+  { label: 'Orlock', href: '/characters/orlock', note: 'The first resident you meet, Ambrosia family head.' },
+  { label: 'Fiona', href: '/characters/fiona', note: 'Webb family coven leader and town florist.' },
+  { label: 'Dragan', href: '/characters/dragan', note: 'Khazan family seer and Nokturna\u2019s inventor.' },
+  { label: 'Death', href: '/characters/death', note: 'Confirmed romance option, belongs to no family.' },
+  { label: 'Families Explorer', href: '/tools/families-explorer', note: 'Browse all 35 residents grouped by family.' },
   { label: 'Romance & marriage', href: '/romance', note: 'Dating, marriage, and the no-children answer.' },
-  { label: 'The seven families', href: '/families', note: 'Vampires, werewolves, witches, mermaids, and normies.' },
+  { label: 'The seven families', href: '/families', note: 'Vampires, werewolves, witches, mermaids, seers, humans.' },
+];
+
+export const farmMagicPriorityLinks: PriorityLink[] = [
+  { label: 'Farming guide', href: '/farming', note: 'Crops, livestock, and the confirmed buying flow.' },
+  { label: 'Magic guide', href: '/magic', note: 'Aquaflux, spell list, mana, and the wand-fix quest.' },
+  { label: 'Shapeshifting', href: '/shapeshifting', note: 'Bat and Hellkitten forms, plus the unlock chain.' },
+  { label: 'Fishing guide', href: '/fishing', note: 'The rod-unlock bet with Noel and the bug net.' },
+  { label: 'Farming Profit Planner', href: '/tools/farming-profit-planner', note: 'Compare crop profits as prices are verified.' },
+];
+
+export const databasePriorityLinks: PriorityLink[] = [
+  { label: 'Item categories', href: '/items', note: 'Tools, livestock, potions, Soul Blobs, and more.' },
+  { label: 'Locations', href: '/locations', note: 'Town Hall, Misty Shores, the Cave of Echoes, and more.' },
+  { label: 'Interactive map', href: '/map', note: 'Confirmed named areas around town.' },
+  { label: 'The seven families', href: '/families', note: 'Every named family and its members.' },
+  { label: 'Item Tracker', href: '/tools/item-tracker', note: 'A browser-saved checklist across item categories.' },
+];
+
+export const systemsPriorityLinks: PriorityLink[] = [
+  { label: 'Nokturna guide', href: '/nokturna', note: '67+ cards, deck archetypes, and best-of-three rules.' },
+  { label: 'Nokturna Tracker', href: '/tools/nokturna-tracker', note: 'Log your own card collection privately.' },
+  { label: 'Gift Tracker', href: '/tools/gift-tracker', note: 'Log gift reactions per resident until data is public.' },
+  { label: 'Romance Match Quiz', href: '/tools/romance-match-quiz', note: 'A fun, sourced-hints matchmaking quiz.' },
+];
+
+export const toolsHubPriorityLinks: PriorityLink[] = [
+  { label: 'All tools', href: '/tools', note: 'Every planner, tracker, and finder in one place.' },
+  { label: 'Families Explorer', href: '/tools/families-explorer', note: 'Filter all residents by family, type, and romance.' },
+  { label: 'Gift Tracker', href: '/tools/gift-tracker', note: 'Personal, browser-saved gift-testing log.' },
+  { label: 'Nokturna Tracker', href: '/tools/nokturna-tracker', note: 'Personal card-collection log.' },
+  { label: 'Romance Gift Finder', href: '/tools/romance-gift-finder', note: 'Verification status for every named character.' },
+  { label: 'Romance Planner', href: '/tools/romance-planner', note: 'Shortlist, notes, and a launch-day prep checklist.' },
+  { label: 'Item Tracker', href: '/tools/item-tracker', note: 'Track fish, recipes, potions, artifacts, and progress.' },
+  { label: 'Farming Profit Planner', href: '/tools/farming-profit-planner', note: 'Compare crop profits with verified prices.' },
+  { label: 'Platform Picker', href: '/tools/platform-picker', note: 'Find the best platform for your setup.' },
+];
+
+export const launchStatusPriorityLinks: PriorityLink[] = [
+  { label: 'Known issues', href: '/known-issues', note: 'Confirmed crashes, controller fixes, and save locations.' },
+  { label: 'Review roundup', href: '/reviews', note: 'Real critic scores from Prima Games, GameWatcher, and more.' },
+  { label: 'Best settings', href: '/best-settings', note: 'PC, Mac, Steam Deck, Switch, and Switch 2 checks.' },
+  { label: 'System requirements', href: '/system-requirements', note: 'Hardware checks before you install.' },
+  { label: 'Cheats & console commands', href: '/cheats', note: 'The cheat console and full command list.' },
 ];
 
 export const romancePriorityLinks: PriorityLink[] = [
@@ -113,14 +159,23 @@ export const guideHubPriorityLinks: PriorityLink[] = [
   { label: 'Beginner guide', href: '/beginner-guide', note: 'Best first page for new players.' },
   { label: 'Farming', href: '/farming', note: 'Night farming, crops, livestock, and magic.' },
   { label: 'Magic', href: '/magic', note: 'Wands, runes, mana, potions, and shapeshifting.' },
+  { label: 'Shapeshifting', href: '/shapeshifting', note: 'Bat and Hellkitten forms, and the unlock chain.' },
+  { label: 'Fishing', href: '/fishing', note: 'The Noel bet and the bug net unlock.' },
   { label: 'Activities', href: '/activities', note: 'Fishing, foraging, crafts, and the character creator.' },
+  { label: 'Character creator', href: '/character-creator', note: 'Appearance options and naming your Hellkitten.' },
+  { label: 'Nokturna', href: '/nokturna', note: '67+ cards, deck archetypes, and how to play.' },
   { label: 'Items', href: '/items', note: 'Tools, clothing, potions, and the other item categories.' },
+  { label: 'Interactive map', href: '/map', note: 'Confirmed named areas around town.' },
+  { label: 'Families Explorer', href: '/tools/families-explorer', note: 'All residents grouped by family.' },
+  { label: 'Gift Tracker', href: '/tools/gift-tracker', note: 'Log your own gift-testing results.' },
+  { label: 'Nokturna Tracker', href: '/tools/nokturna-tracker', note: 'Log your own card collection.' },
   { label: 'Item Tracker', href: '/tools/item-tracker', note: 'A browser-saved checklist for item categories.' },
   { label: 'Farming Profit Planner', href: '/tools/farming-profit-planner', note: 'Manual crop profit calculator for verified launch data.' },
   { label: 'Data Submitter', href: '/tools/submit-data', note: 'Draft fish, gift, recipe, shop, and bug findings locally.' },
   { label: 'Environment', href: '/environment', note: 'Weather, seasons, and festivals.' },
   { label: 'Romance', href: '/romance', note: 'Gifts, friendship, marriage, and characters.' },
   { label: 'Characters', href: '/characters', note: 'Every known resident and their status.' },
+  { label: 'Review roundup', href: '/reviews', note: 'Real critic scores from launch-week coverage.' },
   { label: 'Compare with other sims', href: '/compare', note: 'How Moonlight Peaks differs from other cozy games.' },
   { label: 'Behind the scenes', href: '/behind-the-scenes', note: 'What the dev team\u2019s own diaries reveal about making the game.' },
   { label: 'Release date & platforms', href: '/release-date', note: 'Date, price, and where to play.' },
@@ -128,9 +183,17 @@ export const guideHubPriorityLinks: PriorityLink[] = [
 
 export const comparisonPriorityLinks: PriorityLink[] = [
   { label: 'All comparisons', href: '/compare', note: 'Every Moonlight Peaks versus page.' },
-  { label: 'Moonlight Peaks vs Fae Farm', href: '/compare/fae-farm', note: 'Cozy magic farm with co-op versus a solo vampire farm.' },
-  { label: 'Moonlight Peaks vs Coral Island', href: '/compare/coral-island', note: 'Tropical co-op farm versus a gothic solo farm.' },
-  { label: 'Moonlight Peaks vs Witchbrook', href: '/compare/witchbrook', note: 'Witch college versus vampire town.' },
-  { label: 'Moonlight Peaks vs Wylde Flowers', href: '/compare/wylde-flowers', note: 'The closest cozy-witch cousin.' },
-  { label: 'Compare with Stardew Valley', href: '/moonlight-peaks-vs-stardew-valley', note: 'The genre benchmark, side by side.' },
+  { label: 'vs Stardew Valley', href: '/moonlight-peaks-vs-stardew-valley', note: 'The genre benchmark, side by side.' },
+  { label: 'vs Palia', href: '/compare/palia', note: 'Free-to-play multiplayer versus a solo vampire farm.' },
+  { label: 'vs Coral Island', href: '/compare/coral-island', note: 'Tropical co-op farm versus a gothic solo farm.' },
+  { label: 'vs Fae Farm', href: '/compare/fae-farm', note: 'Cozy magic farm with co-op versus a solo vampire farm.' },
+  { label: 'vs Witchbrook', href: '/compare/witchbrook', note: 'Witch college versus vampire town.' },
+  { label: 'vs Wylde Flowers', href: '/compare/wylde-flowers', note: 'The closest cozy-witch cousin.' },
+  { label: 'vs Fields of Mistria', href: '/compare/fields-of-mistria', note: 'Pixel-art farm sim versus 3D gothic farm.' },
+  { label: 'vs Sun Haven', href: '/compare/sun-haven', note: 'Fantasy races versus supernatural families.' },
+  { label: 'vs Harvest Moon', href: '/compare/harvest-moon', note: 'The original genre roots versus the vampire twist.' },
+  { label: 'vs Grave Seasons', href: '/compare/grave-seasons', note: 'Another gothic-flavored cozy sim, compared directly.' },
+  { label: 'vs Disney Dreamlight Valley', href: '/compare/disney-dreamlight-valley', note: 'Licensed friendship sim versus original vampire romance.' },
+  { label: 'vs Go-Go Town!', href: '/compare/go-go-town', note: 'Co-op town management versus solo farming with romance.' },
+  { label: 'vs My Time at Evershine', href: '/compare/my-time-at-evershine', note: 'Upcoming co-op settlement sim versus a finished solo game.' },
 ];

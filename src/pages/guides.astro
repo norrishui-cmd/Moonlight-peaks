@@ -2,21 +2,24 @@
 import Base from '../layouts/Base.astro';
 import { SITE, GAME } from '../consts';
 import PriorityLinks from '../components/PriorityLinks.astro';
-import { guideHubPriorityLinks, beginnerPriorityLinks } from '../data/priorityLinks';
-
-const guideRows = [
-  ['Start here', 'Beginner guide, demo guide, release date, and platform guide'],
-  ['Core systems', 'Farming, fishing, magic, cooking, crafting, decorating, and Nokturna'],
-  ['Relationship play', 'Characters, romance, gifts, heart events, marriage, and schedules'],
-  ['Collection play', 'Fish, bugs, crops, flowers, minerals, gems, artifacts, and recipes'],
-  ['Buying intent', 'Best platform, before you buy, review, pros and cons, and comparison pages'],
-];
+import {
+  releasePriorityLinks,
+  characterPriorityLinks,
+  romancePriorityLinks,
+  farmMagicPriorityLinks,
+  databasePriorityLinks,
+  systemsPriorityLinks,
+  toolsHubPriorityLinks,
+  launchStatusPriorityLinks,
+  comparisonPriorityLinks,
+  beginnerPriorityLinks,
+} from '../data/priorityLinks';
 
 const faq = [
-  { q: 'What Moonlight Peaks guide should I read first?', a: 'Start with the beginner guide, then check release date, demo, platforms, characters, and romance depending on what you plan to do first.' },
-  { q: 'Are all guide details final before launch?', a: 'No. Confirmed facts are separated from launch placeholders. Exact values such as prices, gifts, schedules, and item locations are updated after reliable sources confirm them.' },
-  { q: 'Where will crop, fish, and gift tables live?', a: 'Farming, fishing, collectibles, characters, and romance pages will hold the detailed tables once the full game confirms the data.' },
-  { q: 'Why are there many guide URLs?', a: 'The site is organized as topic clusters so players and search engines can find specific answers such as Steam release date, Saga gifts, or Switch performance.' },
+  { q: 'What Moonlight Peaks guide should I read first?', a: 'Start with the beginner guide, then check platforms and release date if you haven\u2019t bought yet, or jump straight to farming, characters, and romance if you\u2019re already playing.' },
+  { q: 'Are all guide details confirmed?', a: 'No — every page marks facts as confirmed, reported, or datamined. We update tables and FAQs as real launch-week data replaces earlier reports rather than guessing.' },
+  { q: 'Where do I find data for crops, gifts, and cards?', a: 'Farming, characters, and Nokturna each have their own database sections. Where data isn\u2019t public yet, we point you to the matching tracker tool instead of inventing numbers.' },
+  { q: 'Why are there so many guide URLs?', a: 'The site is organized as topic clusters so both players and search engines can land on the specific answer they need — like a single character\u2019s gifts, a platform question, or a known bug fix.' },
 ];
 
 const jsonLd = [
@@ -29,17 +32,11 @@ const jsonLd = [
     name: f.q,
     acceptedAnswer: { '@type': 'Answer', text: f.a },
   })) },
-  { '@context': 'https://schema.org', '@type': 'ItemList', itemListElement: guideHubPriorityLinks.map((item, index) => ({
-    '@type': 'ListItem',
-    position: index + 1,
-    name: item.label,
-    url: new URL(item.href, SITE.url).href,
-  })) },
 ];
 ---
 <Base
   title="Moonlight Peaks Guides — Beginner, Farming & Romance"
-  description="Moonlight Peaks guides hub for beginners, farming, fishing, romance, money, decorating, platform questions, collectibles, and launch-week updates."
+  description="Moonlight Peaks guides hub for beginners, farming, fishing, romance, tools, database, and launch-week updates — organized by what you're trying to do."
   path="/guides"
   jsonLd={jsonLd}
   crumbs={[{ label: 'Guides' }]}
@@ -49,34 +46,38 @@ const jsonLd = [
       <p class="eyebrow">Hub / Guides</p>
       <h1>Moonlight Peaks <em>guides</em></h1>
       <p class="intro">
-        A practical guide hub for {GAME.title}: where to start, which systems matter, and where each
-        detailed table will live once the full game launches on {GAME.releaseLabel}.
+        Pick a cluster by what you're trying to do, not a generic link wall. {GAME.title} is out now
+        on {GAME.platforms.join(', ')} — everything below is organized by intent and updated as we
+        verify more. Updated {SITE.updated}.
       </p>
-
-      <h2>Guide map</h2>
-      <table class="facts">
-        {guideRows.map((row) => (<tr><th>{row[0]}</th><td>{row[1]}</td></tr>))}
-      </table>
-
-      <PriorityLinks
-        title="Main Moonlight Peaks guides"
-        note="core guides"
-        links={guideHubPriorityLinks}
-      />
 
       <h2>Recommended reading order</h2>
       <ol class="steps">
-        <li><strong>Check release and demo details.</strong> Confirm your platform, price, demo access, and whether your preferred device is covered.</li>
-        <li><strong>Read the beginner guide.</strong> Learn the night-farming loop, vampire powers, magic, townsfolk, and what is still unknown before launch.</li>
-        <li><strong>Pick your first goal.</strong> Farming, fishing, decorating, romance, and Nokturna each lead to different topic clusters.</li>
-        <li><strong>Use specific long-tail pages.</strong> When you need one answer, use pages like Saga gifts, Steam release date, or Switch performance.</li>
+        <li><strong>Check release and platform details.</strong> Confirm your platform, price, demo access, and whether your device is covered.</li>
+        <li><strong>Read the beginner guide.</strong> Learn the night-farming loop, vampire powers, magic, townsfolk, and quest markers.</li>
+        <li><strong>Pick your first goal.</strong> Farming, romance, Nokturna, and the item database each lead to different clusters below.</li>
+        <li><strong>Use specific long-tail pages.</strong> When you need one answer, use pages like Saga's gifts, known issues, or a platform comparison.</li>
       </ol>
 
-      <PriorityLinks
-        title="Start-here pages"
-        note="first session"
-        links={beginnerPriorityLinks}
-      />
+      <PriorityLinks title="Start here" note="release, demo, platforms" links={beginnerPriorityLinks} />
+
+      <PriorityLinks title="Platforms & release" note="where to play" links={releasePriorityLinks} />
+
+      <PriorityLinks title="Characters & relationships" note="residents, families, gifts" links={characterPriorityLinks} />
+
+      <PriorityLinks title="Romance & marriage" note="dating, heart levels, weddings" links={romancePriorityLinks} />
+
+      <PriorityLinks title="Farm & magic" note="crops, livestock, spells, shapeshifting" links={farmMagicPriorityLinks} />
+
+      <PriorityLinks title="Database" note="items, locations, the map" links={databasePriorityLinks} />
+
+      <PriorityLinks title="Systems" note="Nokturna and trackers" links={systemsPriorityLinks} />
+
+      <PriorityLinks title="Tools" note="every planner & tracker" links={toolsHubPriorityLinks} />
+
+      <PriorityLinks title="Launch status & safety" note="bugs, settings, cheats" links={launchStatusPriorityLinks} />
+
+      <PriorityLinks title="Comparisons" note="vs. other cozy sims" links={comparisonPriorityLinks} />
 
       <h2>FAQ</h2>
       <div class="faq">
