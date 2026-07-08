@@ -9,6 +9,13 @@ import { dataminedNpcs, dataminedPetNames } from '../data/npc-datamine';
 const types = [...new Set(characters.map((c) => c.type))];
 const hasProfile = () => true;
 
+// Split into the main/official cast (every romanceable resident, plus Count Dracula as the
+// story-central protagonist's father) versus supporting NPCs (mayor, shopkeeper-adjacent,
+// ghosts, event hosts, and unconfirmed names). Rule-based, not a subjective judgment call.
+const isMainCast = (c: (typeof characters)[number]) => c.romanceable === true || c.id === 'count-dracula';
+const mainCast = characters.filter(isMainCast);
+const npcs = characters.filter((c) => !isMainCast(c));
+
 const jsonLd = [
   { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
     { '@type': 'ListItem', position: 1, name: 'Home', item: SITE.url },
@@ -33,8 +40,9 @@ const jsonLd = [
       <h1>Moonlight Peaks <em>characters</em></h1>
       <p class="intro">
         The residents of {GAME.title} — their family, type, and whether you can romance them.
-        Confirmed, reported, and datamined residents have full profiles (tap a card to open). Each is
-        tagged <strong>confirmed</strong>, <strong>reported</strong>, <strong>datamined</strong>
+        Split into the <strong>main cast</strong> (every romanceable resident, plus Count Dracula)
+        and <strong>NPCs & other residents</strong> (the mayor, shopkeepers, ghosts, and event hosts).
+        Each is tagged <strong>confirmed</strong>, <strong>reported</strong>, <strong>datamined</strong>
         (name verified via pre-launch game files, role unconfirmed), or <strong>unconfirmed</strong>
         (portrait shown but name not yet sourced anywhere). Updated {SITE.updated}.
       </p>
@@ -44,8 +52,50 @@ const jsonLd = [
         {types.map((t) => <button class="cchip" data-type={t} type="button">{typeLabels[t]}</button>)}
       </div>
 
-      <div class="cgrid" id="cgrid">
-        {characters.map((c) => {
+      <h2>Main cast ({mainCast.length})</h2>
+      <p class="cnote" style="margin: 0 0 12px;">Every romanceable resident, plus Count Dracula as the story-central father figure.</p>
+      <div class="cgrid" id="cgrid-main">
+        {mainCast.map((c) => {
+          const Inner = (
+            <>
+              <div class="cavatar">
+                {c.img ? (
+                  <img src={c.img} alt={`${c.name} — Moonlight Peaks`} width="72" height="72" loading="lazy" />
+                ) : (
+                  <svg viewBox="0 0 72 72" width="72" height="72" aria-hidden="true">
+                    <defs><linearGradient id={`g-${c.id}`} x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color={c.c1} /><stop offset="1" stop-color={c.c2} /></linearGradient></defs>
+                    <rect width="72" height="72" fill={`url(#g-${c.id})`} />
+                    <text x="36" y="46" text-anchor="middle" font-family="Fraunces, serif" font-size="30" fill="rgba(255,255,255,0.9)">{c.name.charAt(0)}</text>
+                  </svg>
+                )}
+              </div>
+              <div class="cbody">
+                <h2 class="cname">
+                  {c.name}
+                  <span class={`cbadge ${c.status === 'confirmed' ? 'is-conf' : c.status === 'reported' ? 'is-rep' : c.status === 'datamined' ? 'is-dm' : 'is-unc'}`}>{c.status}</span>
+                </h2>
+                <div class="ctags">
+                  <span class="ctag fam">{typeLabels[c.type]}</span>
+                  {c.family !== 'Unknown' && c.family !== typeLabels[c.type] && <span class="ctag fam">{c.family}</span>}
+                  {c.romanceable === true && <span class="ctag heart">♥ Romanceable</span>}
+                  {c.romanceable === false && <span class="ctag">Not romanceable</span>}
+                  {c.romanceable === null && <span class="ctag">Romance: TBC</span>}
+                </div>
+                <p class="cdesc">{c.desc}</p>
+                {hasProfile(c) && <span class="cmore">View profile →</span>}
+              </div>
+            </>
+          );
+          return hasProfile(c)
+            ? <a class="ccard link" data-type={c.type} href={`/characters/${c.id}`}>{Inner}</a>
+            : <article class="ccard" data-type={c.type}>{Inner}</article>;
+        })}
+      </div>
+
+      <h2>NPCs & other residents ({npcs.length})</h2>
+      <p class="cnote" style="margin: 0 0 12px;">The mayor, shopkeepers, ghosts, event hosts, and names still being verified — not romance options (or not yet confirmed either way).</p>
+      <div class="cgrid" id="cgrid-npc">
+        {npcs.map((c) => {
           const Inner = (
             <>
               <div class="cavatar">
@@ -85,7 +135,7 @@ const jsonLd = [
       <p class="cnote">
         Trait reads on profiles are illustrative (personality-style, not combat stats) — Moonlight Peaks
         is a cozy life sim with no combat. "Unconfirmed" entries show art only; names and details are
-        verified and updated when the game launches on {GAME.releaseLabel}.
+        verified and updated as the live game is checked.
       </p>
 
       <h2>More residents named in pre-launch datamined files</h2>
