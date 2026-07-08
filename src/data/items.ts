@@ -196,18 +196,23 @@ export const itemLaunchNote = launchNote;
 export const itemFrameworks: Record<string, ItemFramework> = {
   tools: {
     parameters: [
-      { label: 'Data status', value: 'Category known; exact tool list pending' },
-      { label: 'Primary use', value: 'Farming, gathering, fishing, mining, world interaction' },
-      { label: 'Upgrade fields', value: 'Tier, material cost, unlock source, stamina impact' },
+      { label: 'Data status', value: 'Confirmed at launch — starting kit and most upgrade costs verified' },
+      { label: 'Primary use', value: 'Farming, gathering, fishing, bug/Soul Blob catching, spellcasting' },
+      { label: 'Upgrade source', value: 'Ridge, at his shop (commonly named the Howling Hammer), weekdays only' },
     ],
-    columns: ['Tool', 'Use', 'How to get', 'Upgrade tier', 'Energy/stamina', 'Related system'],
+    columns: ['Tool', 'Starting kit?', 'How to get', 'Upgrade cost', 'Effect', 'Related system'],
     rows: [
-      ['Starter farming tool', 'Soil preparation and crop care', tbc, tbc, tbc, 'Farming'],
-      ['Watering tool', 'Crop watering or garden upkeep', tbc, tbc, tbc, 'Farming'],
-      ['Fishing tool', 'Catching fish in water locations', tbc, tbc, tbc, 'Fishing'],
-      ['Mining/gathering tool', 'Collecting underground or wild resources', tbc, tbc, tbc, 'Mines / resources'],
+      ['Shovel', 'Yes', 'Given at the start — no separate hoe exists', tbc, 'Tills soil and digs; doubles as the hoe', 'Farming'],
+      ['Watering Can', 'Yes', 'Given at the start', '3 tiers: 1,000 / 2,000 / 3,500 coins', 'Each tier reduces water used per tile', 'Farming'],
+      ['Axe', 'Yes', 'Given at the start', tbc, 'Fewer hits to chop trees; unlocks stronger wood over tiers', 'Farming'],
+      ['Pickaxe', 'Yes', 'Given at the start', tbc, 'Fewer hits to break rocks; unlocks bigger rocks/minerals (copper, iron, gold) — confirmed top upgrade priority', 'Mining'],
+      ['Scythe', 'Yes', 'Given at the start', tbc, 'Reduces energy cost when clearing grass', 'Farming'],
+      ['Wand', 'Yes (starts broken)', 'Fixed via a quest chain: the Dinner Party event \u2192 Luna \u2192 Sabrina \u2192 actually fixed by Noel, with duct tape', 'No standard shop upgrade path', 'Enables spellcasting (Aquaflux and more)', 'Magic'],
+      ['Fishing Rod', 'No', 'Win a 250-gold bet vs. Noel (catch 3 different fish before he does)', 'Single Premium upgrade: 3,500 coins + 3 Gold Bars', 'Premium tier improves efficiency and catch size', 'Fishing'],
+      ['The Net (bug net)', 'No', 'Given by Death after the "A Bridge Too Far" quest unlocks Misty Shores', tbc, 'Catches bugs and Soul Blobs', 'Soul Blobs / Critters'],
+      ['The Broom', 'No', tbc, tbc, 'A movement-speed tool', 'Movement'],
     ],
-    sourceNote: 'Use official launch gameplay, in-game item screens, and player-verified screenshots before replacing these rows.',
+    sourceNote: 'Costs and unlock methods above are confirmed from launch-week guides; blank ("To be confirmed") cells are genuinely unverified, not omitted for space.',
   },
   fertilizer: {
     parameters: [
@@ -267,29 +272,29 @@ export const itemFrameworks: Record<string, ItemFramework> = {
   },
   vampster: {
     parameters: [
-      { label: 'Data status', value: 'Name appears in pre-launch structure; gameplay role unknown' },
-      { label: 'Possible role', value: 'Creature, pet, collectible, or internal category label' },
-      { label: 'Safety rule', value: 'Treat every detail as pending until verified in-game' },
+      { label: 'Data status', value: 'Confirmed at launch as a side-quest creature' },
+      { label: 'Confirmed role', value: 'Small black creature tied to a homestead side-quest' },
+      { label: 'Key rule', value: 'Only carried in bat/vampire form — not stored in your regular inventory' },
     ],
     columns: ['Entry', 'Role', 'Where found', 'Interaction', 'Variants', 'Confirmed?'],
     rows: [
-      ['Vampster', tbc, tbc, tbc, tbc, 'Not yet verified'],
+      ['Vampster', 'Side-quest creature', 'Hidden around your homestead/land', 'Carry one at a time (bat/vampire form only, not inventory); deliver to a cave near Orlock\u2019s mansion', tbc, 'Confirmed'],
       ['Vampster variant entry', tbc, tbc, tbc, tbc, 'Not yet verified'],
     ],
-    sourceNote: 'This page should stay conservative because the category name does not prove a player-facing item.',
+    sourceNote: 'Total Vampster count and any quest reward are not yet sourced — this row will expand as those are confirmed.',
   },
   'soul-blobs': {
     parameters: [
-      { label: 'Data status', value: 'Category known; function pending' },
-      { label: 'Likely table fields', value: 'Source, drop rule, recipe use, quest use, sell value' },
-      { label: 'Related systems', value: 'Magic, crafting, quests, supernatural resources' },
+      { label: 'Data status', value: 'Confirmed at launch — count and reward verified' },
+      { label: 'Confirmed total', value: '100 Soul Blobs scattered around the world' },
+      { label: 'Confirmed reward', value: 'Collecting all 100 rewards the Antique Clock (extends night length 15\u219225 min)' },
     ],
     columns: ['Soul Blob entry', 'Source', 'Drop/location', 'Use', 'Sell value', 'Quest/crafting link'],
     rows: [
-      ['Soul Blob', tbc, tbc, tbc, tbc, tbc],
+      ['Soul Blob', 'Death introduces them after your second in-town meeting with him', 'Scattered around the world (exact zones not yet mapped)', 'Caught with the Net, not by hand', tbc, 'Collect all 100 for the Antique Clock (extends night from 15 to 25 minutes)'],
       ['Rare Soul Blob entry', tbc, tbc, tbc, tbc, tbc],
     ],
-    sourceNote: 'Do not define Soul Blobs as currency, crafting material, or drop until the live game confirms it.',
+    sourceNote: 'The 100-count and Antique Clock reward are confirmed; exact spawn zones and any sell value are not yet sourced.',
   },
   cooking: {
     parameters: [
@@ -354,7 +359,7 @@ export const itemFrameworks: Record<string, ItemFramework> = {
     ],
     columns: ['Potion', 'Ingredients', 'Station', 'Effect', 'Duration', 'Unlock/source'],
     rows: [
-      ['Alter Ego Elixir', tbc, tbc, 'Changes appearance', tbc, tbc],
+      ['Alter Ego Elixir', tbc, 'Sold by Sabrina at Web of Wonders (not brewed by the player)', 'Changes appearance', tbc, 'Sabrina / Web of Wonders shop'],
       ['Utility potion entry', tbc, tbc, tbc, tbc, tbc],
       ['Transformation potion entry', tbc, tbc, tbc, tbc, tbc],
     ],

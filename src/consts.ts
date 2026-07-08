@@ -11,6 +11,7 @@ export const SITE = {
 // exactly as before. As soon as you fill it in, GA4 loads in consent-gated mode (see Base.astro):
 // nothing is sent until the visitor accepts the cookie banner.
 export const GA_MEASUREMENT_ID = 'G-SBKWNJHDT1';
+export const ADSENSE_CLIENT_ID = 'ca-pub-9505220977121599';
 
 export const GAME = {
   title: 'Moonlight Peaks',
