@@ -97,8 +97,20 @@ export const faqs: Faq[] = [
   {
     slug: 'how-to-get-married-in-moonlight-peaks', cat: 'romance',
     q: 'How do you get married in Moonlight Peaks?',
-    a: 'Confirmed at launch: dating unlocks once a resident hits Heart Level 4. From there you can invite them on dates, which involve minigames — it\u2019s possible to fail a date (e.g. by showing up late), which costs friendship points rather than ending the relationship outright. Marriage itself is monogamous once it happens. Exact proposal steps and heart-event requirements beyond that are still being verified.',
+    a: 'Confirmed at launch: dating unlocks at Heart Level 4, and you can propose at Heart Level 8. Dates play out as minigames (like assembling a bouquet in requested colours) — it\u2019s possible to fail one, e.g. by showing up late, which costs friendship points rather than ending things outright. The wedding happens within a week of proposing and is attended by the town\u2019s vampires and werewolves. Marriage itself is monogamous, and your spouse moves onto your farm afterward.',
     related: [{ label: 'Romance guide', href: '/romance' }, { label: 'Gift Tracker', href: '/tools/gift-tracker' }],
+  },
+  {
+    slug: 'can-you-date-multiple-people-moonlight-peaks', cat: 'romance',
+    q: 'Can you date multiple people at once in Moonlight Peaks?',
+    a: 'Yes, confirmed at launch — you can pursue several residents at the same time. They\u2019ll notice and comment on it, but it\u2019s described as mild jealousy rather than a hard rivalry system. Marriage itself is strictly monogamous once you propose.',
+    related: [{ label: 'Romance guide', href: '/romance' }],
+  },
+  {
+    slug: 'moonlight-peaks-step-parent-children', cat: 'romance',
+    q: 'Can you have children or become a step-parent in Moonlight Peaks?',
+    a: 'You cannot have biological children — confirmed by multiple sources with no announced plans to add the mechanic. Reported detail: marrying an older character who already has children, such as Orlock (father to Mina and Evan), is said to make you their step-parent instead.',
+    related: [{ label: 'Orlock', href: '/characters/orlock' }, { label: 'Romance guide', href: '/romance' }],
   },
   {
     slug: 'how-to-turn-into-a-bat-hellkitten', cat: 'world',

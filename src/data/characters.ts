@@ -73,7 +73,8 @@ export const characters: Character[] = [
       'Confirmed as the town\u2019s go-to problem-solver, handling community issues like potholes and missing pumpkins.',
       'Has a prickly exterior but a deep love for the town and its residents; throws herself into helping others.',
       'Her energy is described as shifting with the full moon.',
-      'Confirmed: Brook\u2019s daughter, wanting to follow in her mayor father\u2019s footsteps; Ridge is her uncle, Ludo her sibling.',
+      'Confirmed: Brook\u2019s daughter, wanting to follow in her mayor father\u2019s footsteps; Ridge is her uncle, Ludo her sibling — she often plays referee between Brook and Orlock.',
+      'Confirmed dating progression: dates unlock at Heart Level 4, and you can propose at Heart Level 8; the wedding takes place within a week, attended by the town\u2019s vampires and werewolves.',
       'Confirmed home: a houseboat near the main path to Town Hall (find her there when it\u2019s raining); on dry days she\u2019s often at Coffee & Coffins or wandering near Town Hall.',
     ],
     // First confirmed gift data on the site, via direct in-game testing (Pocket Tactics).
@@ -125,6 +126,7 @@ export const characters: Character[] = [
       'The first named resident players meet at launch; he asks for wine and gives starter Blood Grape seeds.',
       'Father of Mina and Evan (who run "Coffee & Coffins"); his wife left long ago and there is a rift with his kids.',
       'Haughty and self-pitying on the surface, with a caring side confirmed reviewers found worth pursuing.',
+      'Reported: since he\u2019s already a father to Mina and Evan, marrying Orlock is said to make you their step-parent (there are no biological children in the game).',
     ],
   },
   {
@@ -241,7 +243,7 @@ export const characters: Character[] = [
   { id: 'kim', name: 'Kim', family: 'Mermaid (Hosu)', type: 'mermaid', status: 'confirmed', romanceable: true, img: '', c1: '#2a5a6a', c2: '#5ac0d0',
     desc: 'A boundlessly energetic, sunny mermaid of the Hosu family, arriving in town about a year into the story; the quest to reunite her with a lost love is part of her arc.',
     traits: [['Energy', 90], ['Curiosity', 85]], traitsPlaceholder: true,
-    knownInfo: ['Confirmed as a member of the Hosu mermaid family (also spelled Horseus/Hisu in some coverage), siblings with Rei and Tae.', 'Described as cheerful and endlessly curious in launch-week coverage.', 'Confirmed: the Hosu family arrives partway through your first year and needs help rejoining the town.'] },
+    knownInfo: ['Confirmed as a member of the Hosu mermaid family (also spelled Horseus/Hisu in some coverage), siblings with Rei and Tae.', 'Described as cheerful and endlessly curious in launch-week coverage.', 'Confirmed: the Hosu family arrives partway through your first year and needs help rejoining the town, living together in Luna Bay.'] },
   { id: 'ludo', name: 'Ludo', family: 'Werewolf (Logan)', type: 'werewolf', status: 'confirmed', romanceable: true, img: '', c1: '#3a4a3a', c2: '#7ab08a',
     desc: "Mayor Brook's carefree child (Saga's sibling, Ridge's nephew/niece) who'd rather sleep the night away than learn the family's carpentry craft; writes vampire surf-rock operas and talks to a haiku-spouting toad named Yabbis.",
     traits: [['Chaos', 80], ['Warmth', 60]], traitsPlaceholder: true,

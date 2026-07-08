@@ -4,29 +4,41 @@ import { SITE, GAME } from '../consts';
 import YouTube from '../components/YouTube.astro';
 import PriorityLinks from '../components/PriorityLinks.astro';
 import { romancePriorityLinks } from '../data/priorityLinks';
+import { characters, typeLabels } from '../data/characters';
 
-const named = [
-  { name: 'Count Dracula', slug: 'count-dracula', family: 'Vampire', note: 'Your father. Story character — not romanceable.', status: 'confirmed' },
-  { name: 'Saga', slug: 'saga', family: 'Werewolf', note: 'Townsperson revealed by the developers; her energy shifts with the full moon.', status: 'reported' },
-  { name: 'Mina', slug: 'mina', family: '—', note: 'Townsperson revealed by the developers; romance status to verify.', status: 'reported' },
-  { name: 'Orlock', slug: 'orlock', family: 'Vampire', note: 'A vampire family head.', status: 'reported' },
-  { name: 'Luna', slug: 'luna', family: 'Witch', note: 'A farming witch.', status: 'reported' },
-  { name: 'Pumpkin Head', slug: 'pumpkin-head', family: '—', note: 'Theatrical event host around town.', status: 'reported' },
-  { name: 'Logan', slug: 'logan', family: 'Werewolf', note: 'Has a distinctive werewolf house.', status: 'reported' },
-  { name: 'Death', slug: 'death', family: '—', note: 'Datamined resident with his own home ("Death\u2019s Shack"); romance status is speculation, not confirmed.', status: 'datamined' },
-];
+// Dynamically pull every romanceable resident straight from the character data (23 confirmed at
+// launch), grouped by family, instead of a stale hand-maintained list.
+const romanceable = characters.filter((c) => c.romanceable === true);
+const groups = new Map<string, typeof romanceable>();
+for (const c of romanceable) {
+  const key = c.family || 'Unknown';
+  if (!groups.has(key)) groups.set(key, []);
+  groups.get(key)!.push(c);
+}
+const familyGroups = [...groups.entries()].sort((a, b) => b[1].length - a[1].length);
 
 const famHref = (family: string) =>
-  family === 'Vampire' ? '/families/vampires'
-  : family === 'Werewolf' ? '/families/werewolves'
-  : family === 'Witch' ? '/families/witches'
+  family.includes('Ambrosia') || family.includes('Dracula') ? '/families/vampires'
+  : family.includes('Logan') ? '/families/werewolves'
+  : family.includes('Webb') ? '/families/witches'
+  : family.includes('Hosu') ? '/families/mermaids'
+  : family.includes('Khazan') ? '/families/seers'
+  : family.includes('Henderson') ? '/families/henderson'
   : '/families';
 
 const faq = [
-  { q: 'How many romanceable characters are in Moonlight Peaks?', a: 'Around two dozen (roughly 24). Earlier coverage cited 15, so the cast grew during development, and the developers have said they hope to keep adding to it.' },
-  { q: 'Can you get married in Moonlight Peaks?', a: 'Yes, you can marry a romance partner. There are no children in the game.' },
-  { q: 'Is dating gender-locked?', a: 'No. Character models are intentionally gender-neutral, so you can romance any eligible resident regardless of how you build your own vampire.' },
+  { q: 'How many romanceable characters are in Moonlight Peaks?', a: 'Confirmed at launch: 23, via the official launch romance showcase — up from around 15 cited in earlier pre-launch coverage. They span six families (Ambrosia, Webb, Logan, Hosu, Khazan, Henderson) plus two wild cards who belong to no family: Death and the love demon Llemi.' },
+  { q: 'What heart level do you need to start dating?', a: 'Confirmed at launch: dating unlocks at Heart Level 4, when you can invite a resident on dates.' },
+  { q: 'What heart level do you need to get married?', a: 'Confirmed at launch: you can propose at Heart Level 8. The wedding happens within a week of proposing, and is attended by the town\u2019s vampires and werewolves.' },
+  { q: 'Can you date multiple people at once?', a: 'Yes — confirmed at launch. Partners will notice and comment if you\u2019re juggling several of them, but it\u2019s mild jealousy rather than a hard rivalry system. Marriage itself is strictly monogamous.' },
+  { q: 'What happens if you turn down too many dates?', a: 'Confirmed at launch: reject a partner\u2019s date invitations too often and they\u2019ll break up with you, then go quiet for a few days before forgiving you.' },
+  { q: 'What are dates like in Moonlight Peaks?', a: 'Confirmed at launch: dates play out as short minigames rather than passive scenes — examples include assembling a flower bouquet in colours your partner asks for, or roasting a marshmallow to their preferred doneness.' },
+  { q: 'Can you get married in Moonlight Peaks?', a: 'Yes. You can marry one partner, and your spouse moves onto your farm afterward, unlocking a further heart event as your spouse. There are no children.' },
+  { q: 'Can you have children in Moonlight Peaks?', a: 'No — confirmed by multiple sources, with no announced plans to add the mechanic. Marrying an older character with existing children (Orlock, for example, is father to Mina and Evan) is reported to make you a step-parent instead.' },
+  { q: 'Can you turn your spouse into a vampire?', a: 'Yes, confirmed at launch — marrying a non-vampire partner lets you turn them into a vampire afterward.' },
+  { q: 'Is dating gender-locked?', a: 'No. Dating is fully gender-neutral \u2014 every romanceable character is open to every player, regardless of how you build your own vampire.' },
   { q: 'Can a vampire romance a werewolf?', a: 'Yes. Vampires and werewolves in town rarely get along and trade petty spats, so pursuing a werewolf such as Saga means romancing across that divide — which is part of the charm.' },
+  { q: 'What do you get from building relationships?', a: 'Confirmed at launch: relationships unlock special blueprints and crafting materials for your farm, plus personal character stories — so courting the whole town pays off beyond romance itself.' },
 ];
 
 const jsonLd = [
@@ -50,19 +62,37 @@ const jsonLd = [
       <p class="eyebrow">Entry · Hearts</p>
       <h1>Moonlight Peaks <em>romance</em> & the seven families</h1>
       <p class="intro">
-        Romance is a headline feature of {GAME.title}: a whole town of supernatural singles, gender-neutral
-        dating, and marriage (though no children). Here is what is confirmed so far, kept separate from
-        what we will only verify once the game is live.
+        Romance is a headline feature of {GAME.title}: 23 confirmed dateable residents, gender-neutral
+        dating, and marriage (though no children). This page is built directly from our character data,
+        so the roster below updates automatically as we verify more. Updated {SITE.updated}.
       </p>
 
       <div class="romance-video">
         <YouTube id="YFb9capELQw" title="Moonlight Peaks romance video" />
       </div>
 
+      <h2>How romance actually works</h2>
+      <p>
+        Confirmed at launch: talk to residents and give gifts to raise your relationship, tracked in a
+        relationship menu that shows recent gifts and their reactions. <strong>Heart Level 4</strong>
+        unlocks dating — invites play out as short minigames (like assembling a bouquet in the colours
+        your date asks for) rather than passive scenes. <strong>Heart Level 8</strong> unlocks a
+        marriage proposal; the wedding happens within a week and is attended by the town's vampires
+        and werewolves.
+      </p>
+      <p>
+        You can date several residents at once — partners will notice and comment, but it's mild
+        jealousy rather than a hard rivalry. Marriage itself is strictly monogamous, and turning down
+        a partner's date invites too often leads to a breakup (with a cooldown before they'll forgive
+        you). After marriage, your spouse moves onto your farm, unlocks a further heart event, and can
+        be turned into a vampire. Building relationships more broadly unlocks blueprints and crafting
+        materials, not just the romance itself.
+      </p>
+
       <h2>Start here: planning your romance route</h2>
       <p>
-        No confirmed gift lists or affection mechanics exist yet, but there's a real, honest way to get
-        ready before {GAME.releaseLabel}. Four steps, in order:
+        With 23 options and no full gift/heart-event database published anywhere yet, a shortlist beats
+        trying to court everyone at once. Four steps, in order:
       </p>
       <div class="rp-steps">
         <a class="rp-step" href="/tools/romance-match-quiz">
@@ -70,48 +100,55 @@ const jsonLd = [
           <strong>Take the quiz</strong>
           <span>A fun, sourced-hints match to narrow down who catches your eye.</span>
         </a>
-        <a class="rp-step" href="/previews/day-one-romance-route">
+        <a class="rp-step" href="/tools/families-explorer">
           <span class="rp-step-num">2</span>
-          <strong>Check the day-one route</strong>
-          <span>See which residents already have a known home in datamined files.</span>
+          <strong>Browse by family</strong>
+          <span>See all 23 romanceable residents grouped by their real family ties.</span>
         </a>
         <a class="rp-step" href="/tools/romance-planner">
           <span class="rp-step-num">3</span>
           <strong>Build your shortlist</strong>
           <span>Save your picks and notes privately in your browser with the Romance Planner.</span>
         </a>
-        <a class="rp-step" href="/previews/what-to-expect-from-romance-mechanics">
+        <a class="rp-step" href="/tools/gift-tracker">
           <span class="rp-step-num">4</span>
-          <strong>Set your expectations</strong>
-          <span>Know what's genre-typical versus actually confirmed before you dive in.</span>
+          <strong>Log your own gifts</strong>
+          <span>Track what you've tried with each resident until the full gift guide fills in.</span>
         </a>
       </div>
 
       <h2>The basics</h2>
       <p>
-        Around two dozen residents are dateable, spread across the town's seven families — vampires,
-        werewolves, witches, mermaids and more. You can befriend or romance them, build a relationship,
-        and ultimately marry. Standing with a family is expected to shape festivals, gifts, and which
-        doors open to you.
+        23 residents are dateable, spread across six families — vampires (Ambrosia), werewolves
+        (Logan), witches (Webb), mermaids (Hosu), seers (Khazan), and humans (Henderson) — plus two
+        wild cards who belong to no family: Death and the love demon Llemi. Standing with a family
+        is expected to shape festivals, gifts, and which doors open to you.
       </p>
 
-      <h2>Named characters so far</h2>
-      <p>Only Count Dracula is first-party confirmed as story-central; the others appear in developer reveals and pre-launch coverage and will be verified at launch.</p>
-      <table class="facts">
-        <tr><th>Character</th><th>Family / status</th></tr>
-        {named.map((c) => (
-          <tr>
-            <td><strong><a href={`/characters/${c.slug}`}>{c.name}</a></strong> {(c.status === 'reported' || c.status === 'datamined') && <span style="color:var(--faint);font-family:var(--mono);font-size:0.7rem">{c.status}</span>}<br /><span style="color:var(--muted);font-size:0.85rem">{c.note}</span></td>
-            <td>{c.family === '—' ? '—' : <a href={famHref(c.family)}>{c.family}</a>}</td>
-          </tr>
-        ))}
-      </table>
+      <h2>All 23 romanceable residents, by family</h2>
+      <p>Pulled directly from our character data — each name links to a full profile with what's confirmed so far.</p>
+      {familyGroups.map(([family, members]) => (
+        <div class="romance-family-group">
+          <h3><a href={famHref(family)}>{family}</a> <span class="rf-count">({members.length})</span></h3>
+          <table class="facts">
+            <tr><th>Character</th><th>Type</th><th>Status</th></tr>
+            {members.map((c) => (
+              <tr>
+                <td><a href={`/characters/${c.id}`}>{c.name}</a></td>
+                <td>{typeLabels[c.type] || c.type}</td>
+                <td>{c.status}</td>
+              </tr>
+            ))}
+          </table>
+        </div>
+      ))}
 
       <h2>Gift guide</h2>
       <p>
-        Loved and liked gifts for each character will be published — and turned into a gift tracker —
-        once the live build confirms them on {GAME.releaseLabel}. We won't list a gift as "loved"
-        until it's verified in-game.
+        Full loved/liked/disliked gift lists aren't public for most residents yet — Saga is the first
+        with confirmed gift data (she loves white wine). See her <a href="/characters/saga">profile</a>
+        for what's verified, and use the <a href="/tools/gift-tracker">Gift Tracker</a> to log your own
+        finds until the rest of the roster catches up.
       </p>
 
       <PriorityLinks
@@ -131,13 +168,16 @@ const jsonLd = [
       </div>
 
       <div class="callout wip">
-        Pre-launch entry. At launch this becomes the full named cast + a gift tracker. Related:
+        Post-launch entry, built from live character data. Related:
         <a href="/characters">all characters</a>, <a href="/families">the seven families</a>,
-        <a href="/activities/character-creator">character creator</a>, <a href="/beginner-guide">beginner guide</a>.
+        <a href="/character-creator">character creator</a>, <a href="/beginner-guide">beginner guide</a>.
       </div>
     </div>
   </article>
   <style>
+    .romance-family-group { margin: 20px 0; }
+    .romance-family-group h3 { margin: 0 0 8px; }
+    .rf-count { color: var(--muted); font-weight: 400; font-size: 0.85rem; }
     .rp-steps { display: grid; grid-template-columns: 1fr; gap: 10px; margin: 14px 0 24px; }
     @media (min-width: 640px) { .rp-steps { grid-template-columns: 1fr 1fr; } }
     .rp-step {

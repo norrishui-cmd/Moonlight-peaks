@@ -44,7 +44,7 @@ export const families: TopicItem[] = [
     slug: 'mermaids', title: 'Mermaids', tag: 'Family', status: 'confirmed', image: '/hero-fam-mermaids.webp',
     dek: 'Of the lake and tides — the Hosu family.',
     body: [
-      'Mermaids are confirmed as one of the seven families, tied to the town\u2019s water areas. The named mermaid family is the Hosus (also spelled Horseus/Hisu in some coverage) — three siblings who arrive roughly a year into the story and need help rejoining the town.',
+      'Mermaids are confirmed as one of the seven families, tied to the town\u2019s water areas. The named mermaid family is the Hosus (also spelled Horseus/Hisu in some coverage) — three siblings who live together in Luna Bay and arrive roughly a year into the story, needing help rejoining the town.',
       'Confirmed members: Kim (sunny and endlessly curious, with a lost-love reunion arc), Rei (a quiet, shy environmentalist), and Tae (a confident, encouraging merman).',
     ],
     related: [{ label: 'Kim', href: '/characters/kim' }, { label: 'Rei', href: '/characters/rei' }, { label: 'Tae', href: '/characters/tae' }, { label: 'Fishing', href: '/fishing' }],
