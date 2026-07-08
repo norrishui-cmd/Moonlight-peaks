@@ -24,6 +24,26 @@ export const typeLabels: Record<CharType, string> = {
   other: 'Other',
 };
 
+// Simple, thematic SVG icon marks (viewBox 0 0 100 100, stroke/fill inherit currentColor) used as
+// the avatar fallback for characters without real portrait art, instead of a plain letter.
+// 'other' has no icon — it falls back to the initial letter, since it's a catch-all category.
+export const typeIcons: Partial<Record<CharType, string>> = {
+  vampire:
+    '<path d="M50 20 C38 30 20 28 12 40 C24 38 34 42 40 50 C34 52 26 58 22 68 C34 64 44 66 50 74 C56 66 66 64 78 68 C74 58 66 52 60 50 C66 42 76 38 88 40 C80 28 62 30 50 20 Z" />',
+  werewolf:
+    '<path d="M62 22 A26 26 0 1 0 66 70 A20 20 0 1 1 62 22 Z" /><path d="M30 78 L36 66 L42 78 M46 80 L50 68 L54 80 M58 80 L64 68 L68 80" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round" />',
+  witch:
+    '<path d="M50 16 L74 66 Q50 58 26 66 Z" /><ellipse cx="50" cy="68" rx="26" ry="6" />',
+  mermaid:
+    '<path d="M14 40 Q26 28 38 40 Q50 52 62 40 Q74 28 86 40" stroke-width="5" fill="none" stroke-linecap="round" /><path d="M14 58 Q26 46 38 58 Q50 70 62 58 Q74 46 86 58" stroke-width="5" fill="none" stroke-linecap="round" /><path d="M14 76 Q26 64 38 76 Q50 88 62 76 Q74 64 86 76" stroke-width="5" fill="none" stroke-linecap="round" />',
+  seer:
+    '<path d="M10 50 Q50 18 90 50 Q50 82 10 50 Z" fill="none" stroke-width="4" /><circle cx="50" cy="50" r="13" />',
+  ghost:
+    '<path d="M28 82 V46 a22 22 0 0 1 44 0 V82 L62 72 L50 82 L38 72 Z" /><circle cx="41" cy="46" r="3.5" fill="#1a1420" /><circle cx="59" cy="46" r="3.5" fill="#1a1420" />',
+  human:
+    '<circle cx="50" cy="36" r="16" /><path d="M20 86 Q50 58 80 86 Z" />',
+};
+
 export type Character = {
   id: string;
   name: string;
@@ -106,12 +126,12 @@ export const characters: Character[] = [
     ],
   },
   {
-    id: 'luna', name: 'Luna', family: 'Witch (Webb)', type: 'witch',
-    status: 'reported', romanceable: true, img: '/luna.webp', c1: '#4a2f6a', c2: '#a06ad0',
-    desc: 'Reported as the local sea witch \u2014 calm, brews magical potions, runs the plant stalls, and cares for quirky, slightly cursed livestock like Draculambs.',
+    id: 'luna', name: 'Luna', family: 'Witch (Aranea, distant Webb cousin)', type: 'witch',
+    status: 'confirmed', romanceable: true, img: '/luna.webp', c1: '#4a2f6a', c2: '#a06ad0',
+    desc: 'The town\u2019s nature/sea witch, surname Aranea \u2014 a distant cousin of the Webb family, calm, brews magical potions, runs the plant stalls, and cares for quirky, slightly cursed livestock like Draculambs.',
     traits: [['Magic', 88], ['Nurture', 75], ['Mischief', 45]], traitsPlaceholder: true,
     knownInfo: [
-      'Reported as a "sea witch" who runs the town\u2019s plant stalls and brews potions.',
+      'Confirmed surname Aranea; a distant cousin of the Webb family rather than a direct member.',
       'Also tends livestock, including Draculambs — sources vary slightly on the exact farming/plant split, to be confirmed in-game.',
       'Confirmed: sells livestock (waiting outside her house) once players have bought a Barn from Ridge — first animal is typically a Cheeken, which likes petting and hats.',
       'Details to be confirmed against the live game at launch.',
@@ -170,7 +190,7 @@ export const characters: Character[] = [
   { id: 'ridge',   name: 'Ridge',   family: 'Werewolf (Logan)', type: 'werewolf', status: 'confirmed', romanceable: true, img: '/ridge.webp',   c1: '#4a3a2a', c2: '#b08a4a',
     desc: 'The town carpenter and a rugged, dependable pacifist who uses his werewolf hours to scout high-quality wood; deeply cares about family. Mayor Brook\u2019s younger brother.',
     traits: [['Dependability', 85], ['Gentleness', 75]], traitsPlaceholder: true,
-    knownInfo: ['Confirmed as a werewolf carpenter and pacifist.', 'Scouts wood during his werewolf hours and is close with family.', 'Confirmed: sells players their first Barn (for money + materials), required before buying livestock from Luna.'] },
+    knownInfo: ['Confirmed as a werewolf carpenter and pacifist.', 'Scouts wood during his werewolf hours and is close with family.', 'Confirmed: sells players their first Barn (4,000 gold + materials, 10x6 space, 1 night to build, holds 4 animals), required before buying livestock from Luna.', 'Confirmed: runs the Howling Hammer tool-upgrade shop, open Monday\u2013Friday, 6 PM to midnight.'] },
   { id: 'sabrina', name: 'Sabrina', family: 'Witch (Webb)', type: 'witch', status: 'confirmed', romanceable: true, img: '/sabrina.webp', c1: '#3a3a4a', c2: '#8a8ab0',
     desc: 'A gothic witch of the Webb family who runs "Webb of Wonders," selling the Alter Ego Elixir; a rule-breaking free spirit, to her cousin Fiona\u2019s annoyance.',
     traits: [['Rebellion', 80]], traitsPlaceholder: true,
@@ -274,9 +294,15 @@ export const characters: Character[] = [
     knownInfo: ['Reported as a demon resident of the Pink Grove.', 'Said to only be seen in town during festivals; winning his heart is described as taking real effort.'] },
 
   // --- Non-romanceable creature/side characters confirmed via launch-week hands-on coverage ---
-  { id: 'viktor-dracula', name: 'Viktor Dracula', family: 'Vampire (Ambrosia)', type: 'other', status: 'confirmed', romanceable: false, img: '', c1: '#3a2a3a', c2: '#8a6a8a',
-    desc: 'Orlock\u2019s old uncle, who long ago turned into a bat and now lives in a crypt on your land. Not a romance option.',
+  { id: 'viktor-dracula', name: 'Viktor', family: 'Vampire (Ambrosia)', type: 'other', status: 'confirmed', romanceable: false, img: '', c1: '#3a2a3a', c2: '#8a6a8a',
+    desc: 'Orlock\u2019s old uncle, who long ago turned into a bat and now lives in a crypt on your land. Not a romance option. (Officially listed simply as "Viktor" \u2014 our earlier "Viktor Dracula" label was our own addition, not the confirmed name.)',
     traits: [], knownInfo: ['Confirmed as Orlock\u2019s uncle and a bat companion character found in a crypt on the player\u2019s land.', 'Distinct from both Count Dracula and Vlad.'] },
+  { id: 'judge', name: 'Judge', family: 'Unknown', type: 'other', status: 'confirmed', romanceable: null, img: '', c1: '#3a3a3a', c2: '#8a8a8a',
+    desc: 'Name confirmed to exist via official wiki navigation; role not yet sourced.',
+    traits: [], knownInfo: ['Listed on the official wiki; no further detail sourced yet.'] },
+  { id: 'skull-girl', name: 'Skull Girl', family: 'Unknown', type: 'other', status: 'confirmed', romanceable: null, img: '', c1: '#3a3a4a', c2: '#8a8ab0',
+    desc: 'Name confirmed to exist via official wiki navigation; role not yet sourced.',
+    traits: [], knownInfo: ['Listed on the official wiki; no further detail sourced yet.'] },
   { id: 'balthasar', name: 'Balthasar', family: 'Unknown (no family)', type: 'ghost', status: 'confirmed', romanceable: false, img: '', c1: '#3a3a3a', c2: '#8a8a9a',
     desc: 'A ghost resident of the town, named alongside fellow ghost Jarvis — not a romance option, and not part of any of the seven families (like Death).',
     traits: [], knownInfo: ['Confirmed as one of the town\u2019s ghost characters, belonging to no family. (Correction: an earlier version of this entry guessed at a "Ghost family" as the seven\u2019s families; post-launch sources instead confirm the seventh family is the Hendersons.)'] },

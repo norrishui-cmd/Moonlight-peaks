@@ -1,0 +1,91 @@
+---
+import Base from '../layouts/Base.astro';
+import { SITE, GAME } from '../consts';
+
+// Confirmed quest names sourced from launch-week guides. Full quest chains, rewards, and order
+// are not yet mapped — add rows as they're verified rather than guessing at structure.
+const quests = [
+  { name: "Orlock's Wine Scheme", giver: 'Orlock', unlocks: 'Leads into "A Bridge Too Far" — apologize to Orlock, pay a 350-gold debt to Samael at The Broken Lamp, then report back', status: 'confirmed' },
+  { name: 'A Bridge Too Far', giver: 'Related to Orlock / Fiona', unlocks: 'Misty Shores area, meeting Death', status: 'confirmed' },
+  { name: 'The Dinner Party', giver: 'Story event', unlocks: 'Start of the magic questline (Luna\u2019s letter)', status: 'confirmed' },
+  { name: 'Tension in the Crest Garden', giver: 'To be confirmed', unlocks: 'Part of the Hellkitten shapeshift unlock chain', status: 'confirmed' },
+  { name: 'A Croak and a Crest', giver: 'To be confirmed', unlocks: 'Part of the Hellkitten shapeshift unlock chain', status: 'confirmed' },
+  { name: 'Vampster side-quest', giver: 'Environmental (no giver NPC)', unlocks: 'None confirmed; deliver Vampsters to a cave near Orlock\u2019s mansion', status: 'confirmed' },
+  { name: "Elvira's treasure hunt", giver: 'Elvira', unlocks: 'Tied to the "Raiders of the Lost Art" achievement', status: 'reported' },
+  { name: 'Building a treehouse with Ridge', giver: 'Ridge', unlocks: 'Tied to the "A Childhood Dream" achievement', status: 'reported' },
+];
+
+const faq = [
+  { q: 'How do quests work in Moonlight Peaks?', a: 'Confirmed at launch: quest markers appear on the map — an exclamation point means entering an area triggers a cutscene, and a sparkling aura around a building means going inside triggers one. The town bulletin board (Albertus\u2019 Jobs, run by an owl) also lists available jobs.' },
+  { q: 'What happens if my quest log is empty?', a: 'Revisit key areas and talk to residents tied to recent story events, check the town bulletin board, and make sure you\u2019ve tried any newly unlocked spell or form — some quests gate on those rather than a visible marker.' },
+  { q: 'Are there missable quests?', a: 'Not yet confirmed either way. Until verified, treat story-relevant conversations as worth revisiting rather than skipping.' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: SITE.url },
+    { '@type': 'ListItem', position: 2, name: 'Quests', item: new URL('/quests', SITE.url).href },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks Quests — Named Quests & How Unlocks Work"
+  description="Moonlight Peaks quest guide: confirmed named quests like A Bridge Too Far and The Dinner Party, how quest markers work, and the job board."
+  path="/quests"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Quests' }]}
+  showExport
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Entry · Quests</p>
+      <h1>Moonlight Peaks <em>quests</em></h1>
+      <p class="intro">
+        A structured page for {GAME.title}'s quest system — filled with real confirmed quests as we
+        verify them, not a guessed-at list. Updated {SITE.updated}.
+      </p>
+
+      <h2>How quests and unlocks work</h2>
+      <p>
+        Confirmed at launch: the map shows quest markers — an exclamation point triggers a cutscene
+        when you enter that area, and a sparkling aura on a building triggers one when you go inside.
+        The town's bulletin board, <a href="/characters/albertus">Albertus' Jobs</a> (run by an owl),
+        lists available jobs separately from the main story quests.
+      </p>
+
+      <h2>Confirmed quests so far</h2>
+      <table class="facts">
+        <tr><th>Quest</th><th>Giver</th><th>Leads to</th><th>Status</th></tr>
+        {quests.map((q) => (
+          <tr>
+            <td>{q.name}</td>
+            <td>{q.giver}</td>
+            <td>{q.unlocks}</td>
+            <td>{q.status}</td>
+          </tr>
+        ))}
+      </table>
+
+      <div class="callout">
+        This table grows as more quests are confirmed. We don't invent quest names, givers, or
+        rewards — every row above traces to a real source.
+      </div>
+
+      <h2>FAQ</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        Related: <a href="/beginner-guide">beginner guide</a>, <a href="/shapeshifting">shapeshifting</a>,
+        <a href="/magic">magic</a>, <a href="/characters/albertus">Albertus</a>, <a href="/achievements">achievements</a>.
+      </div>
+    </div>
+  </article>
+</Base>

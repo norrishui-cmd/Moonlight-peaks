@@ -1,0 +1,68 @@
+---
+import Base from '../layouts/Base.astro';
+import { SITE, GAME } from '../consts';
+
+const faq = [
+  { q: 'Is friendship different from romance in Moonlight Peaks?', a: 'Yes — every resident (romanceable or not) has a relationship you can build through talking and gifting, tracked in a relationship menu. Romance and marriage are an optional deeper track only available with the 23 confirmed romance options; everyone else can still become a friend.' },
+  { q: 'What do you get from building friendships?', a: 'Confirmed at launch: relationships unlock special blueprints and crafting materials, plus personal character stories — so befriending the whole town pays off beyond any romantic route.' },
+  { q: 'Can you play Nokturna with friends?', a: 'Yes — Nokturna matches with a resident are tracked in their friendship menu alongside conversations and gifts, so it doubles as a way to build the relationship.' },
+  { q: 'Do gifts work the same for friendship and romance?', a: 'The mechanic is the same — give gifts to raise the relationship level — though loved/liked/disliked reactions likely differ per person regardless of whether you\u2019re pursuing romance.' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: SITE.url },
+    { '@type': 'ListItem', position: 2, name: 'Friendship', item: new URL('/friendship', SITE.url).href },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks Friendship — Relationship Menu & Rewards"
+  description="How friendship works in Moonlight Peaks, separate from romance: the relationship menu, gift reactions, and what building friendships unlocks."
+  path="/friendship"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Friendship' }]}
+  showExport
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Entry · Friendship</p>
+      <h1>Moonlight Peaks <em>friendship</em></h1>
+      <p class="intro">
+        Not every resident is a romance option, but everyone has a relationship you can build. This
+        page covers the platonic side, separate from the <a href="/romance">romance guide</a>.
+        Updated {SITE.updated}.
+      </p>
+
+      <h2>How friendship works</h2>
+      <p>
+        Confirmed at launch: talking to residents and giving them gifts raises your relationship
+        level, tracked in a relationship menu that shows recent gifts and how each one landed. This
+        applies to every named resident — the 23 romance options and the wider cast of NPCs alike.
+      </p>
+
+      <h2>What friendship unlocks</h2>
+      <p>
+        Confirmed: deeper relationships unlock blueprints and crafting materials, plus personal
+        character stories, independent of whether you're pursuing romance with that person. Playing
+        Nokturna with a resident is also tracked in their friendship menu.
+      </p>
+
+      <h2>FAQ</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        Related: <a href="/romance">romance</a>, <a href="/characters">characters</a>,
+        <a href="/tools/gift-tracker">gift tracker</a>, <a href="/nokturna">Nokturna</a>.
+      </div>
+    </div>
+  </article>
+</Base>

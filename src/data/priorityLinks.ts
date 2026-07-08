@@ -79,6 +79,9 @@ export const databasePriorityLinks: PriorityLink[] = [
   { label: 'Item categories', href: '/items', note: 'Tools, livestock, potions, Soul Blobs, and more.' },
   { label: 'Locations', href: '/locations', note: 'Town Hall, Misty Shores, the Cave of Echoes, and more.' },
   { label: 'Interactive map', href: '/map', note: 'Confirmed named areas around town.' },
+  { label: 'Inventory', href: '/inventory', note: 'The universal house storage system.' },
+  { label: 'Shipping & selling', href: '/shipping', note: 'Chester and the processing economy.' },
+  { label: 'House & decorating', href: '/house', note: 'Cottage customization and building upgrades.' },
   { label: 'The seven families', href: '/families', note: 'Every named family and its members.' },
   { label: 'Item Tracker', href: '/tools/item-tracker', note: 'A browser-saved checklist across item categories.' },
 ];
@@ -86,6 +89,9 @@ export const databasePriorityLinks: PriorityLink[] = [
 export const systemsPriorityLinks: PriorityLink[] = [
   { label: 'Nokturna guide', href: '/nokturna', note: '67+ cards, deck archetypes, and best-of-three rules.' },
   { label: 'Nokturna Tracker', href: '/tools/nokturna-tracker', note: 'Log your own card collection privately.' },
+  { label: 'Quests', href: '/quests', note: 'Named quests and unlock chains.' },
+  { label: 'Mini-games', href: '/mini-games', note: 'Dates, fishing, and spellcasting.' },
+  { label: 'Achievements', href: '/achievements', note: '59 confirmed Steam achievements.' },
   { label: 'Gift Tracker', href: '/tools/gift-tracker', note: 'Log gift reactions per resident until data is public.' },
   { label: 'Romance Match Quiz', href: '/tools/romance-match-quiz', note: 'A fun, sourced-hints matchmaking quiz.' },
 ];
@@ -112,6 +118,7 @@ export const launchStatusPriorityLinks: PriorityLink[] = [
 ];
 
 export const romancePriorityLinks: PriorityLink[] = [
+  { label: 'Friendship (non-romantic)', href: '/friendship', note: 'The relationship track for everyone, not just romance options.' },
   { label: 'Can you get married?', href: '/faq/can-you-get-married-in-moonlight-peaks', note: 'Marriage and proposal status.' },
   { label: 'Can you have children?', href: '/faq/can-you-have-children-in-moonlight-peaks', note: 'The confirmed no-children answer.' },
   { label: 'How many romance options?', href: '/faq/how-many-romance-options-are-there', note: 'The size of the dating roster.' },
@@ -165,6 +172,12 @@ export const guideHubPriorityLinks: PriorityLink[] = [
   { label: 'Activities', href: '/activities', note: 'Fishing, foraging, crafts, and the character creator.' },
   { label: 'Character creator', href: '/character-creator', note: 'Appearance options and naming your Hellkitten.' },
   { label: 'Nokturna', href: '/nokturna', note: '67+ cards, deck archetypes, and how to play.' },
+  { label: 'Quests', href: '/quests', note: 'Named quests and how unlocks work.' },
+  { label: 'Mini-games', href: '/mini-games', note: 'Dates, fishing, and spellcasting mechanics.' },
+  { label: 'Inventory', href: '/inventory', note: 'The universal house storage system.' },
+  { label: 'Shipping & selling', href: '/shipping', note: 'How Chester and the money loop work.' },
+  { label: 'House & decorating', href: '/house', note: 'Cottage customization and building upgrades.' },
+  { label: 'Friendship', href: '/friendship', note: 'The platonic relationship track, separate from romance.' },
   { label: 'Items', href: '/items', note: 'Tools, clothing, potions, and the other item categories.' },
   { label: 'Interactive map', href: '/map', note: 'Confirmed named areas around town.' },
   { label: 'Families Explorer', href: '/tools/families-explorer', note: 'All residents grouped by family.' },
