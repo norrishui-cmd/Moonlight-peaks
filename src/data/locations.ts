@@ -61,14 +61,13 @@ export const locations: TopicItem[] = [
     related: [{ label: 'Foraging', href: '/activities/foraging' }, { label: 'Werewolves', href: '/families/werewolves' }, { label: 'The town', href: '/locations/town' }],
   },
   {
-    slug: 'lake', title: 'The Lake', tag: 'Water', status: 'reported', image: '/hero-loc-lake.webp',
-    dek: 'The town\u2019s waters, home to fishing and to the mermaid family.',
+    slug: 'lake', title: 'Silverveil Lake', tag: 'Water', status: 'confirmed', image: '/hero-loc-lake.webp',
+    dek: 'The town\u2019s confirmed lake, home to fishing and the mermaid family.',
     body: [
-      'Water areas support fishing, one of the demo\u2019s featured activities. The town\u2019s mermaids —one of the seven families —are tied to the water.',
-      'Pre-launch datamined game files (cross-referenced against pre-launch references) list a "Silverveil Lake" —likely this location\u2019s proper in-game name, though not yet developer-confirmed.',
-      'Named fish and specific spots are confirmed at launch.',
+      'Confirmed name: Silverveil Lake. Water areas support fishing, one of the demo\u2019s featured activities, and the town\u2019s mermaids (the Hosu family) are tied to the water.',
+      'Named fish and specific fishing spots are not yet sourced — see the fishing guide for what is confirmed so far.',
     ],
-    related: [{ label: 'Fishing', href: '/activities/fishing' }, { label: 'Mermaids', href: '/families/mermaids' }, { label: 'The pier', href: '/locations/pier' }],
+    related: [{ label: 'Fishing', href: '/fishing' }, { label: 'Mermaids', href: '/families/mermaids' }, { label: 'The pier', href: '/locations/pier' }],
   },
   {
     slug: 'pier', title: 'The Pier', tag: 'Water', status: 'expected', image: '/hero-loc-pier.webp',
@@ -104,7 +103,7 @@ export const locations: TopicItem[] = [
     slug: 'shops', title: 'Town Shops', tag: 'Town', status: 'confirmed', image: '/hero-loc-shops.webp',
     dek: 'The named shops around town — now confirmed with owners for most of them.',
     body: [
-      'Confirmed shops and owners: the Howling Hammer is Ridge\u2019s tool-upgrade shop (open weekdays only); The Broken Lamp is Samael\u2019s bar; Coffee & Coffins is Mina and Evan\u2019s caf\u00e9; Third Eye Threads is Aras\u2019 tailor shop; and Web of Wonders is Sabrina\u2019s shop, selling the Alter Ego Elixir and spells (also spelled "Webb of Wonders" in some coverage).',
+      'Confirmed shops and owners: the Howling Hammer is Ridge\u2019s tool-upgrade shop (open weekdays only); The Broken Lamp is Samael\u2019s bar; Coffee & Coffins is Mina and Evan\u2019s caf\u00e9; Third Eye Threads is Aras\u2019 tailor shop; and Webb of Wonders is Sabrina\u2019s shop, selling the Alter Ego Elixir and spells \u2014 a pun on her own Webb family name.',
       'Pre-launch datamined game files additionally named a Midnight Market and Bloom Boutique — not yet confirmed against the live game.',
     ],
     related: [{ label: 'The town', href: '/locations/town' }, { label: 'Landmarks', href: '/locations/landmarks' }, { label: 'Characters', href: '/characters' }],
@@ -114,7 +113,7 @@ export const locations: TopicItem[] = [
     dek: 'Named places beyond the core areas — most now confirmed with real context.',
     body: [
       'Confirmed: Misty Shores is the Ambrosia family\u2019s area, home to the Cave of Echoes (ore) and the graveyard where you meet Death, unlocked via the "A Bridge Too Far" quest. Moonlit Pines is where the witches\u2019 coven is based. Pink Grove is home to the love demon Llemi, who mostly only appears there during festivals. Luna Bay is where the Hosu mermaid family lives, arriving roughly a year into the story.',
-      'Pre-launch datamined game files additionally named the Crypt, Howling Marshes, and Moonlight Tower — not yet confirmed against the live game.',
+      'Confirmed via the game\u2019s official wiki: the Crypt, Howling Marshes, and Moonlight Tower are real locations too, alongside Moonlit Slopes and the Khazan family\u2019s Crest Garden — full descriptions of each are still being verified.',
     ],
     related: [{ label: 'Death', href: '/characters/death' }, { label: 'Mermaids', href: '/families/mermaids' }, { label: 'Seers', href: '/families/seers' }],
   },
@@ -126,6 +125,46 @@ export const locations: TopicItem[] = [
       'The town\u2019s bulletin board — Albertus\u2019 Jobs, run by an owl named Albertus — is also based here, listing available quests.',
     ],
     related: [{ label: 'Brook', href: '/characters/brook' }, { label: 'Albertus', href: '/characters/albertus' }, { label: 'The town', href: '/locations/town' }],
+  },
+  {
+    slug: 'ambrosia-mansion', title: 'Ambrosia Mansion', tag: 'Homestead', status: 'confirmed', image: '/hero-loc-landmarks.webp',
+    dek: 'The Ambrosia vampire family\u2019s ancestral home.',
+    body: [
+      'Confirmed via the game\u2019s official wiki: Ambrosia Mansion is the vampire Ambrosia family\u2019s home, paired with the nearby Ambrosia Graveyard where Death can be found.',
+    ],
+    related: [{ label: 'Orlock', href: '/characters/orlock' }, { label: 'Vampires', href: '/families/vampires' }, { label: 'The graveyard', href: '/locations/graveyard' }],
+  },
+  {
+    slug: 'silverveil-museum', title: 'The Museum', tag: 'Town', status: 'confirmed', image: '/hero-loc-town.webp',
+    dek: 'A confirmed collection/donation building in town.',
+    body: [
+      'Confirmed to exist via the game\u2019s official wiki. What you can donate and what it rewards are not yet sourced — many cozy sims use a museum for turning in fish, minerals, or artifacts.',
+    ],
+    related: [{ label: 'Items', href: '/items' }, { label: 'Fishing', href: '/fishing' }],
+  },
+  {
+    slug: 'yoga-shack', title: 'Yoga Shack', tag: 'Town', status: 'confirmed', image: '/hero-loc-town.webp',
+    dek: 'A confirmed activity spot for yoga, one of the game\u2019s "dark diversions."',
+    body: [
+      'Confirmed to exist via the game\u2019s official wiki, tied to yoga — one of the hobby activities alongside fishing, cooking, and Nokturna.',
+    ],
+    related: [{ label: 'Activities', href: '/activities' }],
+  },
+  {
+    slug: 'khazan-temple', title: 'Khazan Temple', tag: 'Wilds', status: 'confirmed', image: '/hero-loc-landmarks.webp',
+    dek: 'A location tied to the Khazan seer family.',
+    body: [
+      'Confirmed to exist via the game\u2019s official wiki. Further detail on what happens here is not yet sourced.',
+    ],
+    related: [{ label: 'Seers', href: '/families/seers' }, { label: 'Dragan', href: '/characters/dragan' }],
+  },
+  {
+    slug: 'crystal-cave', title: 'Crystal Cave & Twilight Catacombs', tag: 'Underground', status: 'confirmed', image: '/hero-loc-mines.webp',
+    dek: 'Additional underground zones beyond the Cave of Echoes.',
+    body: [
+      'Confirmed to exist via the game\u2019s official wiki, alongside the Cave of Echoes and Lost Moon Alcove — suggesting the mines are split into several distinct underground zones rather than one cave.',
+    ],
+    related: [{ label: 'The mines', href: '/locations/mines' }, { label: 'Tools', href: '/items/tools' }],
   },
 ];
 

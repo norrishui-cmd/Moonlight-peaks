@@ -359,7 +359,7 @@ export const itemFrameworks: Record<string, ItemFramework> = {
     ],
     columns: ['Potion', 'Ingredients', 'Station', 'Effect', 'Duration', 'Unlock/source'],
     rows: [
-      ['Alter Ego Elixir', tbc, 'Sold by Sabrina at Web of Wonders (not brewed by the player)', 'Changes appearance', tbc, 'Sabrina / Web of Wonders shop'],
+      ['Alter Ego Elixir', tbc, 'Sold by Sabrina at Webb of Wonders (not brewed by the player)', 'Changes appearance', tbc, 'Sabrina / Webb of Wonders shop'],
       ['Utility potion entry', tbc, tbc, tbc, tbc, tbc],
       ['Transformation potion entry', tbc, tbc, tbc, tbc, tbc],
     ],

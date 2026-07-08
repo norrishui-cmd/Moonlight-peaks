@@ -36,7 +36,7 @@ export const families: TopicItem[] = [
     dek: 'Keepers of wand and potion in the magical town — the Webb family.',
     body: [
       'Witches are one of the seven families, tied to the game\u2019s wand-based magic and potion-brewing. The named witch family is the Webbs, previously led by Laveau (the player character\u2019s mother) before she left to marry into the Dracula family.',
-      'Fiona now leads the Webb family and the local coven as the town florist, with high expectations of her brother Noel (the town blacksmith), her cousin Sabrina (who runs the Web of Wonders shop), and Luna (the town\u2019s sea witch).',
+      'Fiona now leads the Webb family and the local coven as the town florist, with high expectations of her brother Noel (the town blacksmith), her cousin Sabrina (who runs the Webb of Wonders shop), and Luna (the town\u2019s sea witch).',
     ],
     related: [{ label: 'Fiona', href: '/characters/fiona' }, { label: 'Sabrina', href: '/characters/sabrina' }, { label: 'Luna', href: '/characters/luna' }, { label: 'Magic', href: '/magic' }],
   },
