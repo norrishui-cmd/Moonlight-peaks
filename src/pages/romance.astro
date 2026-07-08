@@ -28,6 +28,7 @@ const famHref = (family: string) =>
 
 const faq = [
   { q: 'How many romanceable characters are in Moonlight Peaks?', a: 'Confirmed at launch: 23, via the official launch romance showcase — up from around 15 cited in earlier pre-launch coverage. They span six families (Ambrosia, Webb, Logan, Hosu, Khazan, Henderson) plus two wild cards who belong to no family: Death and the love demon Llemi.' },
+  { q: 'Who are the bachelors and marriage candidates in Moonlight Peaks?', a: 'Dating is fully gender-neutral, so Moonlight Peaks doesn\u2019t lock characters into separate bachelor/bachelorette pools — all 23 dateable characters (and marriage candidates) are open to every player. Browse the full list of romance options by family below.' },
   { q: 'What heart level do you need to start dating?', a: 'Confirmed at launch: dating unlocks at Heart Level 4, when you can invite a resident on dates.' },
   { q: 'What heart level do you need to get married?', a: 'Confirmed at launch: you can propose at Heart Level 8. The wedding happens within a week of proposing, and is attended by the town\u2019s vampires and werewolves.' },
   { q: 'Can you date multiple people at once?', a: 'Yes — confirmed at launch. Partners will notice and comment if you\u2019re juggling several of them, but it\u2019s mild jealousy rather than a hard rivalry system. Marriage itself is strictly monogamous.' },
@@ -50,8 +51,8 @@ const jsonLd = [
 ];
 ---
 <Base
-  title="Moonlight Peaks Romance & Marriage — Dateable Characters"
-  description="Romance in Moonlight Peaks: around two dozen dateable residents, gender-neutral dating, marriage (no children), the seven families, and named characters so far."
+  title="Moonlight Peaks Romance Options — Bachelors & Marriage Candidates"
+  description="All 23 Moonlight Peaks romance options: bachelors, bachelorettes and marriage candidates, gender-neutral dating, dateable characters by family, and how marriage works."
   path="/romance"
   jsonLd={jsonLd}
   crumbs={[{ label: 'Romance & families' }]}
@@ -60,11 +61,12 @@ const jsonLd = [
   <article class="page">
     <div class="wrap">
       <p class="eyebrow">Entry · Hearts</p>
-      <h1>Moonlight Peaks <em>romance</em> & the seven families</h1>
+      <h1>Moonlight Peaks <em>romance options</em>, bachelors & marriage candidates</h1>
       <p class="intro">
-        Romance is a headline feature of {GAME.title}: 23 confirmed dateable residents, gender-neutral
-        dating, and marriage (though no children). This page is built directly from our character data,
-        so the roster below updates automatically as we verify more. Updated {SITE.updated}.
+        Romance is a headline feature of {GAME.title}: 23 confirmed romance options — bachelors,
+        bachelorettes, and marriage candidates alike — with gender-neutral dating and marriage (though
+        no children). This page is built directly from our character data, so the roster of dateable
+        characters below updates automatically as we verify more. Updated {SITE.updated}.
       </p>
 
       <div class="romance-video">
