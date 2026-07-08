@@ -104,6 +104,7 @@ export const toolsHubPriorityLinks: PriorityLink[] = [
 
 export const launchStatusPriorityLinks: PriorityLink[] = [
   { label: 'Known issues', href: '/known-issues', note: 'Confirmed crashes, controller fixes, and save locations.' },
+  { label: 'Achievements', href: '/achievements', note: '59 confirmed Steam achievements, named ones sourced so far.' },
   { label: 'Review roundup', href: '/reviews', note: 'Real critic scores from Prima Games, GameWatcher, and more.' },
   { label: 'Best settings', href: '/best-settings', note: 'PC, Mac, Steam Deck, Switch, and Switch 2 checks.' },
   { label: 'System requirements', href: '/system-requirements', note: 'Hardware checks before you install.' },

@@ -1,0 +1,91 @@
+---
+import Base from '../layouts/Base.astro';
+import { SITE, GAME } from '../consts';
+
+// Confirmed named achievements, sourced from Exophase's Steam achievement listing (launch week).
+// 59 total achievements are confirmed to exist; only some names have been sourced so far.
+const achievements = [
+  { name: 'Discover all locations', desc: 'Find every location in Moonlight Peaks.' },
+  { name: 'A Farming Monopoly', desc: 'Earn 1,000,000 coins.' },
+  { name: 'Skulls in a Net', desc: 'Collect all Soul Blobs.' },
+  { name: 'Back to the Den', desc: 'Return all Vampsters to their den.' },
+  { name: 'Making Mina Proud', desc: 'Cook 25 different recipes.' },
+  { name: "Albertus' Helper", desc: 'Complete 25 jobs from the job board.' },
+  { name: 'Magic at Max Capacity', desc: 'Reach maximum Mana.' },
+  { name: 'Fully Energized', desc: 'Reach maximum Energy.' },
+  { name: 'Moonlit Stretching', desc: 'Attend your first Yoga session.' },
+  { name: 'Back in Place', desc: 'Return all plastic chairs.' },
+  { name: 'Tree Hugger', desc: 'Fall in love with a tree.' },
+  { name: 'The Pumpking', desc: 'Meet a peculiar pumpkin.' },
+  { name: 'Raiders of the Lost Art', desc: "Complete Elvira's treasure hunt." },
+  { name: 'A Childhood Dream', desc: 'Build a treehouse with Ridge.' },
+];
+
+const faq = [
+  { q: 'How many achievements does Moonlight Peaks have?', a: 'Confirmed at launch: 59 Steam achievements total. Only some of the names have been sourced publicly so far — see the table above for what\u2019s confirmed.' },
+  { q: 'Does Moonlight Peaks have Steam Trading Cards?', a: 'Yes — the Steam store page lists Steam Achievements, Steam Trading Cards, Steam Cloud saves, and full controller support.' },
+  { q: 'What is the hardest or most obscure achievement?', a: 'Several confirmed names suggest quirky, easy-to-miss achievements rather than pure grinds — "Tree Hugger" (fall in love with a tree) and "The Pumpking" (meet a peculiar pumpkin) both sound tied to specific one-off interactions rather than repeated actions.' },
+  { q: 'Are there achievements for romance or relationships?', a: 'None of the 14 names sourced so far are explicitly romance-tagged, though "A Childhood Dream" (building a treehouse with Ridge) and "Raiders of the Lost Art" (Elvira\u2019s treasure hunt) are tied to specific named residents.' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: SITE.url },
+    { '@type': 'ListItem', position: 2, name: 'Achievements', item: new URL('/achievements', SITE.url).href },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks Achievements — Full Trophy & Steam Achievement Guide"
+  description="Moonlight Peaks has 59 confirmed achievements. See the named achievements sourced so far, from collecting Soul Blobs to earning 1,000,000 coins."
+  path="/achievements"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Achievements' }]}
+  showExport
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Entry · Achievements</p>
+      <h1>Moonlight Peaks <em>achievements</em></h1>
+      <p class="intro">
+        Confirmed at launch: {GAME.title} has <strong>59 Steam achievements</strong>, alongside Steam
+        Trading Cards, Cloud saves, and full controller support. Only some achievement names are
+        public so far — this page lists exactly what's sourced, and grows as more are confirmed.
+        Updated {SITE.updated}.
+      </p>
+
+      <h2>Confirmed achievements ({achievements.length} of 59)</h2>
+      <table class="facts">
+        <tr><th>Achievement</th><th>How to unlock</th></tr>
+        {achievements.map((a) => (
+          <tr>
+            <td>{a.name}</td>
+            <td>{a.desc}</td>
+          </tr>
+        ))}
+      </table>
+
+      <div class="callout">
+        45 achievements are still unnamed here — we only list what's been sourced from real Steam
+        achievement data, not guessed at. Check back as more are confirmed.
+      </div>
+
+      <h2>FAQ</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        Related: <a href="/items">items</a>, <a href="/farming">farming</a>,
+        <a href="/characters/albertus">Albertus (job board)</a>, <a href="/characters/ridge">Ridge</a>,
+        <a href="/characters/elvira">Elvira</a>.
+      </div>
+    </div>
+  </article>
+</Base>

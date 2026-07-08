@@ -160,6 +160,36 @@ export const faqs: Faq[] = [
     a: 'Multiple reviewers flagged mana management as a rough edge, especially early on — you start with a small mana pool that only refills by one star per night\u2019s sleep, and food/drinks that restore it are rare early. Several critics felt this, stacked with the stamina bar and sunrise deadline, could use better balancing.',
     related: [{ label: 'Magic guide', href: '/magic' }],
   },
+  {
+    slug: 'moonlight-peaks-night-length-cycle', cat: 'world',
+    q: 'How long is a night in Moonlight Peaks?',
+    a: 'Confirmed: your night runs from 6 PM to 6 AM in-game, lasting about 15 real-world minutes by default (similar to a Stardew Valley day). Collecting all 100 Soul Blobs for Death rewards the Antique Clock, which extends this to 25 minutes.',
+    related: [{ label: 'Beginner guide', href: '/beginner-guide' }],
+  },
+  {
+    slug: 'moonlight-peaks-how-to-save', cat: 'world',
+    q: 'How do you save your game in Moonlight Peaks?',
+    a: 'Confirmed: you can only save by sleeping in your coffin, which advances you to 6 PM the next night. There is no mid-night manual save, so plan your errands with enough time to get home before sunrise.',
+    related: [{ label: 'Known issues', href: '/known-issues' }],
+  },
+  {
+    slug: 'moonlight-peaks-starting-mana-energy', cat: 'world',
+    q: 'How much mana and energy do you start with?',
+    a: 'Confirmed: you start with just 3 mana points, regenerating roughly one star per night\u2019s sleep rather than fully refilling. Both your energy (stamina) and mana bars are restored by eating cooked food, so keeping a small food stockpile matters more than relying on cash crops alone.',
+    related: [{ label: 'Magic guide', href: '/magic' }],
+  },
+  {
+    slug: 'moonlight-peaks-mini-map', cat: 'world',
+    q: 'Does Moonlight Peaks have a mini-map?',
+    a: 'No — confirmed there is no mini-map. Your position and key landmarks appear on a full overworld map instead, which also shows where residents currently are.',
+    related: [{ label: 'Interactive map', href: '/map' }],
+  },
+  {
+    slug: 'moonlight-peaks-well-price', cat: 'farming',
+    q: 'How much does the well cost in Moonlight Peaks?',
+    a: 'Reported: the well costs 1,500 gold and helps with watering — a cheaper early purchase than the 4,000-gold Barn.',
+    related: [{ label: 'Farming guide', href: '/farming' }],
+  },
 
   // ── World & gameplay ──
   {
