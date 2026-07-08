@@ -41,7 +41,7 @@ export const crops: Crop[] = [
     id: 'blood-grapes', name: 'Blood Grapes', category: 'crop', season: [],
     buyPrice: null, sellPrice: null, growDays: null, regrowDays: null,
     source: 'Given free by Orlock as your starter seeds on night one.',
-    notes: 'Confirmed starter crop. Reviewers report raw grapes sell for very little \u2014 process into wine/juice at a keg for real profit. Exact prices not yet sourced.',
+    notes: 'Confirmed starter crop. Confirmed: process the harvest into "Blood Wine" via a keg for real profit \u2014 raw grapes sell for very little on their own. Exact prices not yet sourced.',
     status: 'confirmed',
   },
   {

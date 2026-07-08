@@ -14,5 +14,11 @@ export type NokturnaCard = {
   howToGet?: string;   // how to obtain it
 };
 
-// Keep empty until the game is out, then fill with verified cards.
-export const cards: NokturnaCard[] = [];
+// First verified card, sourced from a launch-week review (Prima Games). Add more as they're confirmed.
+export const cards: NokturnaCard[] = [
+  {
+    id: 'alpha-wolf', name: 'Alpha Wolf', type: 'Werewolf deck',
+    effect: 'On Play: Has +2 point value for every other Werewolf card you have in play.',
+    howToGet: 'Not yet sourced — confirmed to exist via a launch-week review, but the specific unlock method isn\u2019t documented yet.',
+  },
+];
