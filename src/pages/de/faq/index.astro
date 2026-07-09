@@ -1,0 +1,50 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { SITE, GAME } from '../../../consts';
+
+const faqLinks = [
+  { q: 'Ist Moonlight Peaks auf PS5 oder Xbox erhältlich?', href: '/de/faq/is-moonlight-peaks-on-ps5-or-xbox' },
+  { q: 'Ist Moonlight Peaks Multiplayer?', href: '/de/faq/is-moonlight-peaks-multiplayer' },
+];
+
+const jsonLd = {
+  '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Startseite', item: `${SITE.url}/de` },
+    { '@type': 'ListItem', position: 2, name: 'FAQ', item: `${SITE.url}/de/faq` },
+  ],
+};
+---
+<Base
+  title="Moonlight Peaks FAQ — Häufige Fragen (Deutsch)"
+  description="Schnelle, bestätigte Antworten auf die häufigsten Fragen zu Moonlight Peaks — auf Deutsch."
+  path="/de/faq"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'FAQ' }]}
+  lang="de"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Hub / FAQ</p>
+      <h1>Moonlight Peaks <em>FAQ</em></h1>
+      <p class="intro">
+        Schnelle, bestätigte Antworten auf die häufigsten Fragen zu {GAME.title}, das seit dem
+        7. Juli 2026 erhältlich ist. Wir beantworten nur, was bestätigt oder berichtet ist.
+      </p>
+
+      <h2>Häufigste Fragen</h2>
+      <ul class="link-list">
+        {faqLinks.map((f) => (<li><a href={f.href}>{f.q}</a></li>))}
+      </ul>
+
+      <div class="callout wip">
+        Weiterführend: <a href="/faq">vollständige FAQ (Englisch)</a>.
+      </div>
+    </div>
+  </article>
+  <style>
+    .link-list { list-style: none; padding: 0; margin: 12px 0; }
+    .link-list li { border-bottom: 1px solid var(--line); padding: 10px 0; }
+    .link-list a { color: var(--mist); text-decoration: none; }
+    .link-list a:hover { color: var(--candle); }
+  </style>
+</Base>

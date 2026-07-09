@@ -1,0 +1,55 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE } from '../../consts';
+
+const jsonLd = {
+  '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Startseite', item: `${SITE.url}/de` },
+    { '@type': 'ListItem', position: 2, name: 'Orte', item: `${SITE.url}/de/locations` },
+  ],
+};
+---
+<Base
+  title="Moonlight Peaks Orte — Stadt, Farm & Howling Marshes (Deutsch)"
+  description="Alle bestätigten Orte in Moonlight Peaks auf Deutsch: die Stadt, deine Farm, Misty Shores, Cave of Echoes und Howling Marshes."
+  path="/de/locations"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Orte' }]}
+  lang="de"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Eintrag / Welt</p>
+      <h1>Orte in <em>Moonlight Peaks</em></h1>
+      <p class="intro">
+        Die Orte, aus denen Moonlight Peaks besteht — die magische Bergstadt, dein Hof und die
+        wilden Gebiete drumherum. Bestätigte Fakten sind von Berichten getrennt gekennzeichnet.
+      </p>
+
+      <h2>Deine Farm</h2>
+      <p>
+        Bestätigt: Du benennst deine eigene Farm bei der Charaktererstellung — es gibt keinen
+        einzigen festen "offiziellen" Namen, da du ihn selbst wählst.
+      </p>
+
+      <h2>Misty Shores & Cave of Echoes</h2>
+      <p>
+        Bestätigt: Misty Shores ist das Gebiet der Ambrosia-Familie, mit der Cave of Echoes
+        (Erzabbau) und dem Friedhof, wo du Tod triffst — freigeschaltet durch die Quest
+        "A Bridge Too Far". Siehe unseren <a href="/de/locations/mines">Cave-of-Echoes-Guide</a>
+        für Details.
+      </p>
+
+      <h2>Howling Marshes</h2>
+      <p>
+        Bestätigt über das offizielle Wiki des Spiels als real existierender Ort. Eine vollständige
+        Beschreibung ist hier noch nicht unabhängig verifiziert.
+      </p>
+
+      <div class="callout wip">
+        Weiterführend: <a href="/de/locations/mines">Cave of Echoes</a>,
+        <a href="/locations">vollständiger Orte-Guide (Englisch)</a>.
+      </div>
+    </div>
+  </article>
+</Base>

@@ -1,0 +1,38 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { SITE } from '../../../consts';
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: [{
+    '@type': 'Question', name: 'Ist Moonlight Peaks Multiplayer?',
+    acceptedAnswer: { '@type': 'Answer', text: 'Nein — Moonlight Peaks ist reines Singleplayer. Es wurde kein Multiplayer oder Koop angekündigt; auf Steam ist es als Singleplayer gelistet.' },
+  }] },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Startseite', item: `${SITE.url}/de` },
+    { '@type': 'ListItem', position: 2, name: 'FAQ', item: `${SITE.url}/de/faq` },
+  ] },
+];
+---
+<Base
+  title="Ist Moonlight Peaks Multiplayer?"
+  description="Nein — Moonlight Peaks ist reines Singleplayer. Kein Multiplayer oder Koop wurde angekündigt."
+  path="/de/faq/is-moonlight-peaks-multiplayer"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'FAQ', href: '/de/faq' }, { label: 'Multiplayer' }]}
+  lang="de"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">FAQ</p>
+      <h1>Ist Moonlight Peaks <em>Multiplayer</em>?</h1>
+      <p class="intro">
+        Nein — Moonlight Peaks ist reines Singleplayer. Es wurde kein Multiplayer oder Koop
+        angekündigt; auf Steam ist es als Singleplayer gelistet. Ein Spieler hat die Entwickler
+        direkt in den Steam-Community-Diskussionen nach Online-Koop gefragt, ohne Bestätigung.
+      </p>
+      <div class="callout wip">
+        Weiterführend: <a href="/de/platforms">Plattformen</a>.
+      </div>
+    </div>
+  </article>
+</Base>

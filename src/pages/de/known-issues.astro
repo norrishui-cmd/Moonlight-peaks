@@ -1,0 +1,68 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE } from '../../consts';
+
+const issueRows = [
+  ['Absturz beim Start (Steam Deck)', 'Von Spielern berichtet · Workaround vorhanden', 'Mehrere Spieler berichten von Abstürzen beim Start. Berichteter Fix: Kompatibilitätstool auf Proton 9.0-4 umstellen.'],
+  ['Mikroruckler alle paar Sekunden', 'Von Spielern berichtet · Keine bestätigte Lösung', 'Betrifft auch leistungsstarke PCs — scheint kein reines Hardware-Problem zu sein.'],
+  ['Controller reagiert nicht mehr', 'Von Spielern berichtet · Workaround vorhanden', 'Controller funktioniert bei der Charaktererstellung, reagiert danach nicht mehr. Workaround: Controller neu verbinden oder auf Tastatur/Maus wechseln.'],
+];
+
+const faq = [
+  { q: 'Moonlight Peaks stürzt auf dem Steam Deck ab — was tun?', a: 'Von Spielern berichtet: In den Spiel-Eigenschaften auf Steam unter Kompatibilität das Proton-Tool auf 9.0-4 umstellen.' },
+  { q: 'Mein Controller funktioniert nicht mehr — was kann ich tun?', a: 'Von Spielern berichtet, ungelöst: Controller neu verbinden oder vorübergehend auf Tastatur/Maus wechseln.' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Startseite', item: `${SITE.url}/de` },
+    { '@type': 'ListItem', position: 2, name: 'Bekannte Probleme', item: `${SITE.url}/de/known-issues` },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks Bekannte Probleme — Abstürze & Controller (Deutsch)"
+  description="Bekannte Probleme in Moonlight Peaks auf Deutsch: Steam-Deck-Abstürze, Controller-Probleme und bestätigte Workarounds, klar von Community-Berichten getrennt."
+  path="/de/known-issues"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Bekannte Probleme' }]}
+  lang="de"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Eintrag / Probleme</p>
+      <h1>Moonlight Peaks <em>bekannte Probleme</em></h1>
+      <p class="intro">
+        Ein Tracker für bestätigte Fehler, Abstürze und Controller-Probleme — klar zwischen
+        bestätigt und von Spielern berichtet unterschieden.
+      </p>
+
+      <table class="facts">
+        <tr><th>Problem</th><th>Status</th><th>Details</th></tr>
+        {issueRows.map((r) => (<tr><td>{r[0]}</td><td>{r[1]}</td><td>{r[2]}</td></tr>))}
+      </table>
+
+      <h2>Speicherort</h2>
+      <p>
+        Bestätigt: Unter Windows liegen Spielstände unter
+        <code>%USERPROFILE%/AppData/LocalLow/Little Chicken Game Company/Moonlight Peaks/</code>.
+      </p>
+
+      <h2>Häufige Fragen</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        Weiterführend: <a href="/de/platforms">Plattformen</a>,
+        <a href="/known-issues">vollständiger Guide (Englisch)</a>.
+      </div>
+    </div>
+  </article>
+</Base>

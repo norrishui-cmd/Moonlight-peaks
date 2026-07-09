@@ -3,6 +3,7 @@ import { SITE, GA_MEASUREMENT_ID, ADSENSE_CLIENT_ID } from '../consts';
 import '../styles/global.css';
 import SiteSearch from '../components/SiteSearch.astro';
 import { t, type Locale } from '../i18n/nav';
+import { isPathTranslated } from '../i18n/translated-paths';
 import { charTranslations } from '../i18n/characters-data';
 import LanguageSwitcher from '../components/LanguageSwitcher.astro';
 interface Crumb { label: string; href?: string; }
@@ -15,20 +16,23 @@ interface Props {
   ogImage?: string;
   showExport?: boolean;
   noindex?: boolean;
-  lang?: 'en' | 'es' | 'ja' | 'zh';
+  lang?: 'en' | 'es' | 'ja' | 'zh' | 'de';
 }
 const { title, description, path = '/', jsonLd, crumbs = [], ogImage, showExport = false, noindex = false, lang = 'en' } = Astro.props;
 const canonical = new URL(path, SITE.url).href;
 const ogImageUrl = ogImage ? new URL(ogImage, SITE.url).href : undefined;
 
-// hreflang alternates: strip any existing /es/ /ja/ /zh/ prefix to get the "bare" path,
-// then rebuild it for each locale. English has no prefix (the default locale).
-const barePath = path.replace(/^\/(es|ja|zh)(\/|$)/, '/');
+// hreflang alternates: strip any existing /es/ /ja/ /zh/ /de/ prefix to get the "bare" path,
+// then only emit an alternate for a locale if that locale genuinely has a translation for this
+// path — otherwise we'd be telling search engines a /de/... (or /es/.../ etc.) page exists when
+// it doesn't. English (the source) and the current page's own locale are always included.
+const barePath = path.replace(/^\/(es|ja|zh|de)(\/|$)/, '/');
+const localeUrl = (code: string) => new URL(code === 'en' ? barePath : `/${code}${barePath}`.replace(/\/$/, '') || `/${code}`, SITE.url).href;
 const hreflangs: { code: string; href: string }[] = [
-  { code: 'en', href: new URL(barePath, SITE.url).href },
-  { code: 'es', href: new URL(`/es${barePath}`.replace(/\/$/, '') || '/es', SITE.url).href },
-  { code: 'ja', href: new URL(`/ja${barePath}`.replace(/\/$/, '') || '/ja', SITE.url).href },
-  { code: 'zh', href: new URL(`/zh${barePath}`.replace(/\/$/, '') || '/zh', SITE.url).href },
+  { code: 'en', href: localeUrl('en') },
+  ...(['es', 'ja', 'zh', 'de'] as const)
+    .filter((code) => code === lang || isPathTranslated(code, barePath))
+    .map((code) => ({ code, href: localeUrl(code) })),
 ];
 const peopleGroup = {
   label: t(lang, 'characters'),

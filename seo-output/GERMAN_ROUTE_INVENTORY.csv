@@ -1,0 +1,16 @@
+route,english_equivalent,title,indexable,canonical,hreflang_en,hreflang_de,sitemap_included,source_file
+/de,/,"Moonlight Peaks Wiki auf Deutsch — Release, Guides & Tipps",yes,/de,yes,yes,yes,src/pages/de/index.astro
+/de/beginner-guide,/beginner-guide,Moonlight Peaks Einsteiger-Guide (Deutsch),yes,/de/beginner-guide,yes,yes,yes,src/pages/de/beginner-guide.astro
+/de/characters,/characters,Moonlight Peaks Charaktere — Deutscher Guide,yes,/de/characters,yes,yes,yes,src/pages/de/characters.astro
+/de/romance,/romance,Moonlight Peaks Romanze — 23 Optionen & Heirat (Deutsch),yes,/de/romance,yes,yes,yes,src/pages/de/romance.astro
+/de/platforms,/platforms,"Moonlight Peaks Plattformen — PS5, Xbox & Preis (Deutsch)",yes,/de/platforms,yes,yes,yes,src/pages/de/platforms.astro
+/de/release-date,/release-date,Moonlight Peaks Release-Datum & Plattformen (Deutsch),yes,/de/release-date,yes,yes,yes,src/pages/de/release-date.astro
+/de/demo,/demo,Moonlight Peaks Demo — Download & Infos (Deutsch),yes,/de/demo,yes,yes,yes,src/pages/de/demo.astro
+/de/magic,/magic,"Moonlight Peaks Magie — Zauberstab, Moon Fruit & Mana (Deutsch)",yes,/de/magic,yes,yes,yes,src/pages/de/magic.astro
+/de/locations,/locations,"Moonlight Peaks Orte — Stadt, Farm & Howling Marshes (Deutsch)",yes,/de/locations,yes,yes,yes,src/pages/de/locations.astro
+/de/locations/mines,/locations/mines,Moonlight Peaks Cave of Echoes — Freischaltung & Erz (Deutsch),yes,/de/locations/mines,yes,yes,yes,src/pages/de/locations/mines.astro
+/de/known-issues,/known-issues,Moonlight Peaks Bekannte Probleme — Abstürze & Controller (Deutsch),yes,/de/known-issues,yes,yes,yes,src/pages/de/known-issues.astro
+/de/quests/a-bridge-too-far,/quests/a-bridge-too-far,Moonlight Peaks: A Bridge Too Far Quest-Guide (Deutsch),yes,/de/quests/a-bridge-too-far,yes,yes,yes,src/pages/de/quests/a-bridge-too-far.astro
+/de/faq,/faq,Moonlight Peaks FAQ — Häufige Fragen (Deutsch),yes,/de/faq,yes,yes,yes,src/pages/de/faq/index.astro
+/de/faq/is-moonlight-peaks-on-ps5-or-xbox,/faq/is-moonlight-peaks-on-ps5-or-xbox,Ist Moonlight Peaks auf PS5 oder Xbox erhältlich?,yes,/de/faq/is-moonlight-peaks-on-ps5-or-xbox,yes,yes,yes,src/pages/de/faq/is-moonlight-peaks-on-ps5-or-xbox.astro
+/de/faq/is-moonlight-peaks-multiplayer,/faq/is-moonlight-peaks-multiplayer,Ist Moonlight Peaks Multiplayer?,yes,/de/faq/is-moonlight-peaks-multiplayer,yes,yes,yes,src/pages/de/faq/is-moonlight-peaks-multiplayer.astro

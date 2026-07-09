@@ -1,0 +1,84 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE } from '../../consts';
+
+const faq = [
+  { q: 'Wie viele Romanze-Optionen gibt es in Moonlight Peaks?', a: 'Bestätigt: 23 Bewohner sind romantisch verfügbar, verteilt auf sechs Familien (Vampire, Werwölfe, Hexen, Meerjungfrauen, Seher, Menschen) plus zwei ohne Familienzugehörigkeit (Tod und der Liebesdämon Llemi).' },
+  { q: 'Ab welcher Herzstufe kann man daten und heiraten?', a: 'Bestätigt: Ab Herzstufe 4 können Dates stattfinden. Ab Herzstufe 8 kann man einen Heiratsantrag machen. Die Hochzeit findet innerhalb einer Woche statt.' },
+  { q: 'Kann man in Moonlight Peaks Kinder bekommen?', a: 'Nein — bestätigt aus mehreren Quellen, keine Pläne dafür angekündigt. Man kann heiraten, aber es gibt kein Kindersystem.' },
+  { q: 'Ist die Romanze geschlechtsneutral?', a: 'Ja, vollständig. Das Dating-System ist unabhängig vom Geschlecht deines eigenen Charakters.' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Startseite', item: `${SITE.url}/de` },
+    { '@type': 'ListItem', position: 2, name: 'Romanze', item: `${SITE.url}/de/romance` },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks Romanze — 23 Optionen & Heirat (Deutsch)"
+  description="Moonlight Peaks Romanze-Guide auf Deutsch: 23 bestätigte Romanze-Optionen, geschlechtsneutrales Dating, Herzstufen und Heirat."
+  path="/de/romance"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Romanze' }]}
+  lang="de"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Eintrag / Herzen</p>
+      <h1>Romanze in <em>Moonlight Peaks</em></h1>
+      <p class="intro">
+        23 bestätigte Romanze-Optionen in Moonlight Peaks — geschlechtsneutrales Dating, ganz
+        gleich wie du deinen Charakter gestaltest. Heirat ist bestätigt (aber ohne Kinder).
+      </p>
+
+      <h2>So funktioniert die Romanze</h2>
+      <p>
+        Bestätigt: Gespräche und Geschenke erhöhen die Beziehung. Ab <strong>Herzstufe 4</strong>
+        kannst du Dates starten — diese sind als kleine Minispiele gestaltet (z. B. einen
+        Blumenstrauß in der gewünschten Farbe zusammenstellen), keine reinen Zwischensequenzen.
+        Ab <strong>Herzstufe 8</strong> kannst du einen Heiratsantrag machen; die Hochzeit findet
+        innerhalb einer Woche statt und wird von den Vampiren und Werwölfen der Stadt besucht.
+      </p>
+      <p>
+        Du kannst mehrere Personen gleichzeitig daten — sie bemerken es und kommentieren es
+        (leichte Eifersucht), aber die Ehe selbst ist streng monogam. Nach der Hochzeit zieht dein
+        Partner auf deine Farm und ein weiteres Herz-Event wird freigeschaltet. Es gibt keine
+        Kinder — bestätigt aus mehreren Quellen, ohne angekündigte Pläne dafür.
+      </p>
+
+      <h2>Sechs Familien, 23 Optionen</h2>
+      <p>
+        Die romantisch verfügbaren Bewohner verteilen sich auf Vampire (Ambrosia), Werwölfe
+        (Logan), Hexen (Webb), Meerjungfrauen (Hosu), Seher (Khazan) und Menschen (Henderson) —
+        plus zwei ohne Familie: Tod und der Liebesdämon Llemi.
+      </p>
+
+      <h2>Geschenke</h2>
+      <p>
+        Vollständige Geschenklisten sind für die meisten Bewohner noch nicht öffentlich bekannt —
+        <strong>Saga</strong> ist die Erste mit bestätigten Daten (sie liebt Weißwein, mag Rotwein,
+        Bier und einzelne Blumen, aber keine Blumensträuße).
+        Siehe ihr <a href="/characters/saga">Profil</a> für Details.
+      </p>
+
+      <h2>Häufige Fragen</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        Weiterführend: <a href="/de/characters">Charaktere</a>,
+        <a href="/de/beginner-guide">Einsteiger-Guide</a>,
+        <a href="/romance">vollständiger Romanze-Guide (Englisch)</a>.
+      </div>
+    </div>
+  </article>
+</Base>

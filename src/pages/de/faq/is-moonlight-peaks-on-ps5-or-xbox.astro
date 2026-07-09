@@ -1,0 +1,39 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { SITE } from '../../../consts';
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: [{
+    '@type': 'Question', name: 'Ist Moonlight Peaks auf PS5 oder Xbox erhältlich?',
+    acceptedAnswer: { '@type': 'Answer', text: 'Nein — es wurde keine PlayStation- oder Xbox-Version angekündigt. Bestätigte Plattformen sind Steam, Steam Deck, Nintendo Switch, Nintendo Switch 2 und Android.' },
+  }] },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Startseite', item: `${SITE.url}/de` },
+    { '@type': 'ListItem', position: 2, name: 'FAQ', item: `${SITE.url}/de/faq` },
+  ] },
+];
+---
+<Base
+  title="Ist Moonlight Peaks auf PS5 oder Xbox erhältlich?"
+  description="Nein — Moonlight Peaks ist nicht auf PS5 oder Xbox erhältlich. Bestätigte Plattformen: Steam, Steam Deck, Switch, Switch 2, Android."
+  path="/de/faq/is-moonlight-peaks-on-ps5-or-xbox"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'FAQ', href: '/de/faq' }, { label: 'PS5/Xbox' }]}
+  lang="de"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">FAQ</p>
+      <h1>Ist Moonlight Peaks auf <em>PS5 oder Xbox</em> erhältlich?</h1>
+      <p class="intro">
+        Kurz gesagt: nein. Es wurde keine PlayStation- oder Xbox-Version angekündigt. Bestätigte
+        Plattformen sind Steam, Steam Deck, Nintendo Switch, Nintendo Switch 2 und Android.
+      </p>
+      <p>Sollte später eine PS5- oder Xbox-Version angekündigt werden, aktualisieren wir diese Seite.</p>
+      <div class="callout wip">
+        Weiterführend: <a href="/de/platforms">Plattformen</a>,
+        <a href="/de/release-date">Release-Datum</a>.
+      </div>
+    </div>
+  </article>
+</Base>

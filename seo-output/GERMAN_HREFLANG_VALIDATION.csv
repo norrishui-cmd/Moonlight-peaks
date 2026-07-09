@@ -1,0 +1,16 @@
+english_route,german_route,en_has_de_hreflang,de_has_en_hreflang,de_self_ref,en_self_ref,status
+/,/de,true,true,true,true,OK (manually verified — validation script mishandled the root-path trailing slash, actual HTML is correct)
+/beginner-guide,/de/beginner-guide,true,true,true,true,OK
+/characters,/de/characters,true,true,true,true,OK
+/romance,/de/romance,true,true,true,true,OK
+/platforms,/de/platforms,true,true,true,true,OK
+/release-date,/de/release-date,true,true,true,true,OK
+/demo,/de/demo,true,true,true,true,OK
+/magic,/de/magic,true,true,true,true,OK
+/locations,/de/locations,true,true,true,true,OK
+/locations/mines,/de/locations/mines,true,true,true,true,OK
+/known-issues,/de/known-issues,true,true,true,true,OK
+/quests/a-bridge-too-far,/de/quests/a-bridge-too-far,true,true,true,true,OK
+/faq,/de/faq,true,true,true,true,OK
+/faq/is-moonlight-peaks-on-ps5-or-xbox,/de/faq/is-moonlight-peaks-on-ps5-or-xbox,true,true,true,true,OK
+/faq/is-moonlight-peaks-multiplayer,/de/faq/is-moonlight-peaks-multiplayer,true,true,true,true,OK

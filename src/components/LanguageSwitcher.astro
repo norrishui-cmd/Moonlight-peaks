@@ -1,26 +1,20 @@
 ---
 import type { Locale } from '../i18n/nav';
-import { charTranslations } from '../i18n/characters-data';
+import { isPathTranslated } from '../i18n/translated-paths';
 
 interface Props { lang: Locale; path: string; }
 const { lang, path } = Astro.props;
 
-const labels: Record<Locale, string> = { en: 'English', es: 'Español', ja: '日本語', zh: '中文' };
-const shortLabels: Record<Locale, string> = { en: 'EN', es: 'ES', ja: 'JA', zh: 'ZH' };
-// Only pages in this set exist in translated form so far. Falls back to the English
-// version of the current page for any locale/page combo not yet translated.
-const translatedPaths = new Set<string>(['/', '/beginner-guide', '/release-date', '/faq', '/characters', '/farming', '/magic', '/platforms', '/romance', '/environment', '/items', '/demo', '/cheats', '/character-creator', '/shapeshifting', '/languages', '/guides', '/tools', '/about', '/families', '/locations', '/activities']);
-const translatedCharSlugs = new Set<string>(Object.keys(charTranslations.es)); // same slugs across es/ja/zh
-const bare = path.replace(/^\/(es|ja|zh)(\/|$)/, '/');
-const charMatch = bare.match(/^\/characters\/([a-z0-9-]+)$/);
-const isTranslated = translatedPaths.has(bare) || (charMatch !== null && translatedCharSlugs.has(charMatch[1]));
+const labels: Record<Locale, string> = { en: 'English', es: 'Español', ja: '日本語', zh: '中文', de: 'Deutsch' };
+const shortLabels: Record<Locale, string> = { en: 'EN', es: 'ES', ja: 'JA', zh: 'ZH', de: 'DE' };
+const bare = path.replace(/^\/(es|ja|zh|de)(\/|$)/, '/');
 
 const hrefFor = (target: Locale): string => {
-  if (!isTranslated) return target === 'en' ? bare : `/${target}`; // send untranslated pages to that language's homepage instead of a 404
-  if (target === 'en') return bare;
+  if (target === 'en') return bare; // English (source) always exists for a translated page's bare path.
+  if (!isPathTranslated(target, bare)) return `/${target}`; // no translation for this page — go to that locale's homepage instead of a broken link.
   return bare === '/' ? `/${target}` : `/${target}${bare}`;
 };
-const locales: Locale[] = ['en', 'es', 'ja', 'zh'];
+const locales: Locale[] = ['en', 'es', 'ja', 'zh', 'de'];
 ---
 <details class="nav-dd lang-dd">
   <summary aria-label="Change language">

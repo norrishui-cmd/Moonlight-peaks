@@ -1,0 +1,81 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { SITE } from '../../../consts';
+
+const faq = [
+  { q: 'Wie startet man A Bridge Too Far in Moonlight Peaks?', a: 'Bestätigt: Diese Quest folgt direkt auf "Orlock\u2019s Wine Scheme" — bei Orlock entschuldigen, Samaels Schulden (350 Gold) begleichen, dann zurückmelden.' },
+  { q: 'Was schaltet A Bridge Too Far frei?', a: 'Bestätigt: Das Ambrosia-Anwesen und das gesamte Misty-Shores-Gebiet, einschließlich der Cave of Echoes (Kupfererz).' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Startseite', item: `${SITE.url}/de` },
+    { '@type': 'ListItem', position: 2, name: 'Quests', item: `${SITE.url}/de/quests/a-bridge-too-far` },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks: A Bridge Too Far Quest-Guide (Deutsch)"
+  description="Moonlight Peaks A Bridge Too Far auf Deutsch: wie man die Quest startet, die Fehde zwischen Orlock und Fiona, und was sie freischaltet (Misty Shores, Cave of Echoes)."
+  path="/de/quests/a-bridge-too-far"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Quests' }, { label: 'A Bridge Too Far' }]}
+  lang="de"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Quest-Guide</p>
+      <h1>Moonlight Peaks: <em>A Bridge Too Far</em></h1>
+
+      <div class="callout">
+        <strong>Kurzantwort:</strong> A Bridge Too Far schaltet sich nach "Orlock's Wine Scheme"
+        frei. Sprich mit den Zauberkundigen der Stadt und kehre zur Brücke beim
+        Ambrosia-Anwesen zurück. Der Abschluss öffnet Misty Shores und die Cave of Echoes.
+      </div>
+
+      <h2>Wie man die Quest startet</h2>
+      <p>
+        Bestätigt: Diese Quest folgt direkt auf <strong>Orlock's Wine Scheme</strong>, bei der du
+        für Orlock Blood Wine herstellst. Nach Entschuldigung bei Orlock und Begleichung von
+        Samaels 350-Gold-Schulden im Broken Lamp löst die Quest automatisch beim nächsten
+        Stadtbesuch aus.
+      </p>
+
+      <h2>Warum die Brücke gesperrt ist</h2>
+      <p>
+        <span class="tag-community">Community-berichtet</span> Orlock glaubt, Fiona habe die
+        Brücke verflucht. Tatsächlich gibt es keinen echten Fluch — die beiden hatten einen Streit,
+        bei dem Orlock unhöflich war.
+      </p>
+
+      <h2>Was die Quest freischaltet</h2>
+      <p>
+        Bestätigt: Der Abschluss öffnet das Ambrosia-Anwesen und das gesamte
+        Misty-Shores-Gebiet, einschließlich der Cave of Echoes.
+      </p>
+
+      <h2>Häufige Fragen</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        Weiterführend: <a href="/de/locations/mines">Cave of Echoes</a>,
+        <a href="/quests/a-bridge-too-far">vollständiger Guide (Englisch)</a>.
+      </div>
+    </div>
+  </article>
+  <style>
+    .tag-community {
+      display: inline-block; font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.02em;
+      color: var(--faint); border: 1px solid var(--line); border-radius: 999px; padding: 2px 8px;
+      margin-right: 6px; vertical-align: middle;
+    }
+  </style>
+</Base>

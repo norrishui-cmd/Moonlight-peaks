@@ -14,7 +14,20 @@ export type CharTranslation = {
   romanceTbc: string;
 };
 
-export const charTranslations: Record<'es' | 'ja' | 'zh', Record<string, CharTranslation>> = {
+export const charTranslations: Record<'es' | 'ja' | 'zh' | 'de', Record<string, CharTranslation>> = {
+  de: {
+    saga: {
+      name: 'Saga', familyLabel: 'Werwolf', typeLabel: 'Werwolf',
+      desc: 'Eine bestätigte Romanze-Option — Werwölfin, Tochter von Bürgermeister Brook, Schwester von Ludo und Nichte von Ridge. Ihre Energie verändert sich mit dem Vollmond.',
+      knownInfo: [
+        'Bestätigt: Tochter von Brook (Bürgermeister), Schwester von Ludo und Nichte von Ridge.',
+        'Bestätigte Geschenke: liebt Weißwein; mag Rotwein, Bier und einzelne Blumen (keine Blumensträuße); mag keine Blumensträuße.',
+        'Geburtstag bestätigt: Sommer 27. Wohnt auf einem Hausboot in der Nähe des Rathauses.',
+      ],
+      romanceYes: 'Saga ist eine bestätigte Romanze-Option. Dates werden ab Herzstufe 4 freigeschaltet, ein Heiratsantrag ab Herzstufe 8.',
+      romanceNo: '', romanceTbc: '',
+    },
+  },
   es: {
     'count-dracula': {
       name: 'Conde Drácula', familyLabel: 'Vampiro', typeLabel: 'Vampiro',

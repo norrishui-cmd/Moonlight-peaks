@@ -1,0 +1,82 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { SITE } from '../../../consts';
+
+const faq = [
+  { q: 'Wie schaltet man die Cave of Echoes in Moonlight Peaks frei?', a: 'Bestätigt: Die Cave of Echoes liegt im Südwesten von Misty Shores. Sie ist zunächst gesperrt und öffnet sich, sobald du die Quest "A Bridge Too Far" abgeschlossen hast.' },
+  { q: 'Wo findet man Kupfererz in Moonlight Peaks?', a: 'Community-berichtet: In der Cave of Echoes, nach Abschluss von "A Bridge Too Far". Kupfererz sieht aus wie normaler Stein mit kupferfarbenen Flecken und wird mit der Spitzhacke abgebaut.' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Startseite', item: `${SITE.url}/de` },
+    { '@type': 'ListItem', position: 2, name: 'Orte', item: `${SITE.url}/de/locations` },
+    { '@type': 'ListItem', position: 3, name: 'Cave of Echoes', item: `${SITE.url}/de/locations/mines` },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks Cave of Echoes — Freischaltung & Erz (Deutsch)"
+  description="Moonlight Peaks Cave of Echoes auf Deutsch: wie man sie freischaltet, wo man Kupfererz findet, und häufige Probleme beim Minenfortschritt."
+  path="/de/locations/mines"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Orte', href: '/de/locations' }, { label: 'Cave of Echoes' }]}
+  lang="de"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Eintrag / Minen</p>
+      <h1>Moonlight Peaks <em>Cave of Echoes</em></h1>
+
+      <div class="callout">
+        <strong>Kurzantwort:</strong> Die Cave of Echoes schaltet sich frei, sobald du die Quest
+        "A Bridge Too Far" abgeschlossen hast. Danach findest du dort Kupfererz mit der Spitzhacke.
+      </div>
+
+      <h2>Freischaltung</h2>
+      <p>
+        Bestätigt: Die Cave of Echoes liegt im Südwesten des Gebiets Misty Shores und ist zu
+        Beginn gesperrt. Sie öffnet sich zusammen mit dem restlichen Misty-Shores-Gebiet, sobald
+        du die Quest "A Bridge Too Far" abschließt.
+      </p>
+
+      <h2>Warum die Höhle noch gesperrt ist</h2>
+      <p>
+        Wenn du sie noch nicht erreichen kannst, ist fast immer die Quest — nicht ein fehlender
+        Gegenstand — der eigentliche Grund. Community-berichtet: Das Gebiet ist durch eine
+        Fehde zwischen Orlock und Fiona um eine angeblich verfluchte Brücke blockiert.
+      </p>
+
+      <h2>Kupfererz</h2>
+      <p>
+        <span class="tag-community">Community-berichtet</span> Kupfererz sieht wie normaler Stein
+        mit kupferfarbenen Flecken aus und wird mit der Spitzhacke abgebaut. Größere Erzvorkommen
+        können bis zu 6 Erz statt 1 liefern.
+      </p>
+
+      <h2>Häufige Fragen</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        Weiterführend: <a href="/de/locations">Orte</a>,
+        <a href="/de/quests/a-bridge-too-far">A-Bridge-Too-Far-Guide</a>,
+        <a href="/locations/mines">vollständiger Guide (Englisch)</a>.
+      </div>
+    </div>
+  </article>
+  <style>
+    .tag-community {
+      display: inline-block; font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.02em;
+      color: var(--faint); border: 1px solid var(--line); border-radius: 999px; padding: 2px 8px;
+      margin-right: 6px; vertical-align: middle;
+    }
+  </style>
+</Base>

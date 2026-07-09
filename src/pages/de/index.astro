@@ -1,0 +1,76 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+
+const entries = [
+  { title: 'Einsteiger-Guide', desc: 'Was in der ersten Woche wirklich zählt — bestätigt aus dem laufenden Spiel.', href: '/de/beginner-guide', img: '/card-guide.webp' },
+  { title: 'Release & Plattformen', desc: 'Seit dem 7. Juli erhältlich — Preis, Plattformen und PS5/Xbox-Status.', href: '/de/release-date', img: '/card-release.webp' },
+  { title: 'Charaktere', desc: 'Bewohner, Familien und wen du romantisch verfolgen kannst.', href: '/de/characters', img: '/count-dracula.webp' },
+  { title: 'Romanze', desc: '23 bestätigte Romanze-Optionen, Herzstufen und Heirat.', href: '/de/romance', img: '/card-romance.webp' },
+  { title: 'Magie', desc: 'Der zerbrochene Zauberstab, Moon Fruit und Mana-Fortschritt.', href: '/de/magic', img: '/card-guide.webp' },
+  { title: 'Orte', desc: 'Die Stadt, deine Farm, Howling Marshes und mehr.', href: '/de/locations', img: '/hero-loc-town.webp' },
+  { title: 'Cave of Echoes', desc: 'Freischaltung, Erz und die Minen im Detail.', href: '/de/locations/mines', img: '/hero-loc-mines.webp' },
+  { title: 'Bekannte Probleme', desc: 'Abstürze, Controller-Probleme und bestätigte Workarounds.', href: '/de/known-issues', img: '/card-guide.webp' },
+];
+
+const jsonLd = {
+  '@context': 'https://schema.org', '@type': 'WebSite', name: 'Moonlight Peaks Wiki (Deutsch)',
+  url: `${SITE.url}/de`, inLanguage: 'de',
+  description: 'Deutscher Fan-Guide zu Moonlight Peaks, dem gemütlichen Vampir-Life-Sim: Release, Einsteiger-Tipps, Romanze und mehr.',
+};
+---
+<Base
+  title="Moonlight Peaks Wiki auf Deutsch — Release, Guides & Tipps"
+  description="Der deutsche Fan-Guide zu Moonlight Peaks: Release-Infos, Einsteiger-Guide, Romanze, Charaktere und bekannte Probleme — seit dem 7. Juli 2026 verfügbar."
+  path="/de"
+  jsonLd={jsonLd}
+  lang="de"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Der Feldkalender eines Vampir-Farmers</p>
+      <h1><em>Moonlight Peaks</em> ist jetzt erhältlich.</h1>
+      <p class="intro">
+        Der gemütlich-gotische Guide zu {GAME.developer}s Vampir-Life-Sim. {GAME.title} ist seit dem
+        7. Juli 2026 auf Steam, Nintendo Switch, Switch 2 und Android verfügbar. Diese deutsche
+        Version deckt die wichtigsten Seiten ab.
+      </p>
+      <p class="callout wip">
+        Diese deutschsprachige Version umfasst aktuell {entries.length} zentrale Seiten. Weitere
+        Inhalte (Charakterprofile, FAQ, Aktivitäten) gibt es bisher nur auf Englisch — Links dorthin
+        sind entsprechend gekennzeichnet.
+      </p>
+
+      <h2>Fang hier an</h2>
+      <div class="es-grid">
+        {entries.map((e) => (
+          <a class="es-card" href={e.href}>
+            <img src={e.img} alt="" loading="lazy" width="64" height="64" />
+            <span>
+              <strong>{e.title}</strong>
+              <em>{e.desc}</em>
+            </span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </article>
+
+  <style>
+    .page { padding: 32px 0 60px; }
+    .eyebrow { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--faint); }
+    h1 { font-family: var(--display); font-size: 2rem; margin: 6px 0 14px; }
+    h1 em { color: var(--candle); font-style: normal; }
+    .intro { color: var(--muted); font-size: 1rem; line-height: 1.6; max-width: 640px; margin-bottom: 16px; }
+    .callout.wip { border-left: 2px solid var(--candle); background: var(--ink-2); padding: 12px 16px; border-radius: 0 10px 10px 0; color: var(--muted); font-size: 0.88rem; margin: 0 0 32px; }
+    h2 { font-family: var(--display); font-size: 1.3rem; margin: 28px 0 12px; }
+    .es-grid { display: grid; grid-template-columns: 1fr; gap: 10px; }
+    @media (min-width: 640px) { .es-grid { grid-template-columns: 1fr 1fr; } }
+    .es-card { display: flex; align-items: center; gap: 12px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); padding: 12px; transition: border-color .15s ease; }
+    .es-card:hover { border-color: color-mix(in srgb, var(--candle) 50%, var(--line)); }
+    .es-card img { border-radius: 10px; object-fit: cover; width: 64px; height: 64px; flex: 0 0 auto; }
+    .es-card span:not(.es-thumb) { display: flex; flex-direction: column; min-width: 0; }
+    .es-card strong { font-family: var(--display); font-weight: 600; font-size: 0.96rem; color: var(--mist); }
+    .es-card em { font-style: normal; font-size: 0.8rem; color: var(--faint); margin-top: 2px; }
+  </style>
+</Base>

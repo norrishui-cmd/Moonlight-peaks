@@ -1,0 +1,75 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+import { characters } from '../../data/characters';
+import { charTranslations } from '../../i18n/characters-data';
+
+const translatedSlugs = ['saga'] as const;
+const translations = charTranslations.de;
+const list = translatedSlugs.map((slug) => ({
+  slug,
+  base: characters.find((c) => c.id === slug)!,
+  tr: translations[slug],
+}));
+
+const jsonLd = {
+  '@context': 'https://schema.org', '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Startseite', item: `${SITE.url}/de` },
+    { '@type': 'ListItem', position: 2, name: 'Charaktere', item: `${SITE.url}/de/characters` },
+  ],
+};
+---
+<Base
+  title="Moonlight Peaks Charaktere — Deutscher Guide"
+  description="Moonlight Peaks Charaktere auf Deutsch: 23 bestätigte Romanze-Optionen, sieben Familien und wer wirklich verheiratet werden kann."
+  path="/de/characters"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Charaktere' }]}
+  lang="de"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Eintrag / Charaktere</p>
+      <h1>Charaktere in <em>Moonlight Peaks</em></h1>
+      <p class="intro">
+        Bestätigt: {GAME.title} hat 23 bestätigte Romanze-Optionen, verteilt auf sechs Familien
+        (Vampire, Werwölfe, Hexen, Meerjungfrauen, Seher, Menschen) plus zwei Bewohner ohne
+        Familienzugehörigkeit (Tod und der Liebesdämon Llemi).
+      </p>
+
+      <div class="cx-grid">
+        {list.map(({ slug, base, tr }) => (
+          <a class="cx-card" href={`/characters/${slug}`}>
+            <span class="cx-thumb">
+              {base.img ? <img src={base.img} alt="" loading="lazy" width="72" height="72" /> : <span class="cx-letter" style={`background: linear-gradient(135deg, ${base.c1}, ${base.c2})`}>{tr.name.charAt(0)}</span>}
+            </span>
+            <span>
+              <strong>{tr.name}</strong>
+              <em>{tr.familyLabel}</em>
+            </span>
+          </a>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        Diese deutsche Version enthält bisher 1 vollständig übersetztes Profil (Saga, mit
+        bestätigten Geschenkdaten). Die vollständige Liste aller Bewohner findest du auf der
+        <a href="/characters">englischen Charakterseite</a>.
+      </div>
+    </div>
+  </article>
+
+  <style>
+    .cx-grid { display: grid; grid-template-columns: 1fr; gap: 10px; margin: 8px 0 24px; }
+    @media (min-width: 640px) { .cx-grid { grid-template-columns: 1fr 1fr; } }
+    .cx-card { display: flex; align-items: center; gap: 12px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); padding: 12px; transition: border-color .15s ease; }
+    .cx-card:hover { border-color: color-mix(in srgb, var(--candle) 50%, var(--line)); }
+    .cx-thumb { flex: 0 0 auto; width: 72px; height: 72px; border-radius: 10px; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+    .cx-thumb img { width: 100%; height: 100%; object-fit: cover; }
+    .cx-letter { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-family: var(--display); font-weight: 700; font-size: 1.6rem; color: rgba(255,255,255,0.9); }
+    .cx-card span:not(.cx-thumb) { display: flex; flex-direction: column; }
+    .cx-card strong { font-family: var(--display); font-weight: 600; font-size: 0.96rem; color: var(--mist); }
+    .cx-card em { font-style: normal; font-size: 0.78rem; color: var(--faint); margin-top: 2px; }
+  </style>
+</Base>

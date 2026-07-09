@@ -1,0 +1,87 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+
+const faq = [
+  { q: 'Wie repariert man den zerbrochenen Zauberstab in Moonlight Peaks?', a: 'Bestätigt: Dein Zauberstab ist zu Beginn zerbrochen. Die Reparatur geschieht automatisch im Rahmen der Quest "The Magic of Crops" — Luna schickt dich zu Sabrina, aber tatsächlich repariert Noel ihn mit Klebeband.' },
+  { q: 'Warum hat sich die Zauberstab-Quest noch nicht ausgelöst?', a: 'Bestätigt: "The Magic of Crops" setzt voraus, dass du zuerst "The Dinner Party" abgeschlossen hast, plus etwa 2 Spieltage Wartezeit für Lunas Brief. Community-berichtet: einige Quellen nennen andere genaue Zeitpunkte — wir behandeln das als nicht endgültig bestätigt.' },
+  { q: 'Was ist Moon Fruit?', a: 'Community-berichtet: Moon Fruit ist eine magische, mondsichelförmige Ernte, die nur mit dem Zauber Aquaflux gegossen werden kann — eine normale Gießkanne funktioniert nicht.' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Startseite', item: `${SITE.url}/de` },
+    { '@type': 'ListItem', position: 2, name: 'Magie', item: `${SITE.url}/de/magic` },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks Magie — Zauberstab, Moon Fruit & Mana (Deutsch)"
+  description="Moonlight Peaks Magie-Guide auf Deutsch: den zerbrochenen Zauberstab reparieren, Moon Fruit und Mana-Fortschritt — bestätigte Fakten von Community-Berichten getrennt."
+  path="/de/magic"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Magie' }]}
+  lang="de"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Eintrag / Magie</p>
+      <h1>Magie in <em>Moonlight Peaks</em></h1>
+      <p class="intro">
+        Hexerei ist eine zentrale Säule von {GAME.title}. So funktioniert das Zaubern, so reparierst
+        du deinen Zauberstab — bestätigte Fakten getrennt von Community-Berichten.
+      </p>
+
+      <div class="callout">
+        <strong>Kurzantwort:</strong> Dein Zauberstab ist anfangs zerbrochen. Er wird automatisch
+        im Rahmen der Quest "The Magic of Crops" repariert — kein separater Kauf nötig.
+      </div>
+
+      <h2>Den Zauberstab reparieren</h2>
+      <p>
+        Bestätigt: Dein Zauberstab funktioniert zu Beginn nicht. Luna schickt dich zu Sabrina bei
+        Webb of Wonders — tatsächlich ist es aber <strong>Noel</strong>, der ihn am Ende mit
+        Klebeband repariert.
+      </p>
+
+      <h2>Warum die Quest nicht startet</h2>
+      <p>
+        Bestätigt: "The Magic of Crops" setzt voraus, dass "The Dinner Party" abgeschlossen ist,
+        plus etwa 2 Tage Wartezeit auf Lunas Brief. <span class="tag-community">Community-berichtet</span>
+        Quellen nennen leicht unterschiedliche genaue Zeitpunkte — wir behandeln keinen davon als
+        endgültig bestätigt.
+      </p>
+
+      <h2>Moon Fruit & Mana</h2>
+      <p>
+        <span class="tag-community">Community-berichtet</span> Moon Fruit ist eine magische,
+        mondsichelförmige Ernte, die nur mit dem Zauber <strong>Aquaflux</strong> gegossen werden
+        kann. Bestätigt: Du startest mit nur 3 Mana-Punkten, die sich pro Nacht um etwa 1 Punkt
+        regenerieren.
+      </p>
+
+      <h2>Häufige Fragen</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        Weiterführend: <a href="/de/beginner-guide">Einsteiger-Guide</a>,
+        <a href="/magic">vollständiger Magie-Guide (Englisch)</a>.
+      </div>
+    </div>
+  </article>
+  <style>
+    .tag-community {
+      display: inline-block; font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.02em;
+      color: var(--faint); border: 1px solid var(--line); border-radius: 999px; padding: 2px 8px;
+      margin-right: 6px; vertical-align: middle;
+    }
+  </style>
+</Base>

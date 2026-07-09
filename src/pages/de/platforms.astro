@@ -1,0 +1,63 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+
+const faq = [
+  { q: 'Ist Moonlight Peaks auf PS5 oder Xbox erhältlich?', a: 'Nein — es wurde keine PlayStation- oder Xbox-Version angekündigt. Bestätigte Plattformen sind Steam, Steam Deck, Nintendo Switch, Nintendo Switch 2 und Android.' },
+  { q: 'Auf welchen Plattformen ist Moonlight Peaks erhältlich?', a: 'Moonlight Peaks ist seit dem 7. Juli 2026 auf Steam (Windows und Mac), Steam Deck, Nintendo Switch, Nintendo Switch 2 und Android (Google Play) erhältlich.' },
+  { q: 'Was kostet Moonlight Peaks?', a: `Es kostet ${GAME.price} auf Steam, Switch und Android, sowie 39,99 $ auf Switch 2.` },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Startseite', item: `${SITE.url}/de` },
+    { '@type': 'ListItem', position: 2, name: 'Plattformen', item: `${SITE.url}/de/platforms` },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks Plattformen — PS5, Xbox & Preis (Deutsch)"
+  description="Moonlight Peaks ist seit dem 7. Juli 2026 auf Steam, Switch, Switch 2 und Android erhältlich — nicht auf PS5 oder Xbox. Preis und Demo-Infos auf Deutsch."
+  path="/de/platforms"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Plattformen' }]}
+  lang="de"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Eintrag / Release</p>
+      <h1>Moonlight Peaks <em>Plattformen</em> & Preis</h1>
+      <p class="intro">
+        Moonlight Peaks ist seit dem 7. Juli 2026 auf Steam (PC/Mac), Steam Deck, Nintendo Switch,
+        Nintendo Switch 2 und Android erhältlich — nicht auf PS5 oder Xbox.
+      </p>
+
+      <div class="callout">
+        <strong>Kurzantwort:</strong> Keine PlayStation- (PS5) oder Xbox-Version wurde angekündigt.
+        Bestätigte Plattformen: Steam, Steam Deck, Nintendo Switch, Nintendo Switch 2, Android.
+      </div>
+
+      <h2>Preis</h2>
+      <p>
+        {GAME.price} auf Steam, Switch und Android, 39,99 $ auf Switch 2. Eine kostenlose Demo ist
+        auf Steam und im Nintendo eShop verfügbar.
+      </p>
+
+      <h2>Häufige Fragen</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        Weiterführend: <a href="/de/release-date">Release-Datum</a>, <a href="/de/demo">Demo</a>,
+        <a href="/de/faq/is-moonlight-peaks-on-ps5-or-xbox">PS5/Xbox FAQ</a>.
+      </div>
+    </div>
+  </article>
+</Base>
