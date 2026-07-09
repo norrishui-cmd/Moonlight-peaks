@@ -1,0 +1,6 @@
+---
+import LocalizedWorldHub from '../../components/LocalizedWorldHub.astro';
+import { itemCategories } from '../../data/items';
+import { localizedWorldPages } from '../../data/localizedWorldPages';
+---
+<LocalizedWorldHub lang="zh-hant" kind="items" copy={localizedWorldPages['zh-hant'].items} items={itemCategories} />

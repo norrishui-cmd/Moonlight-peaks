@@ -1,0 +1,105 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+
+const faq = [
+  { q: 'Moonlight Peaks 是在夜間耕種嗎?', a: '是的。你扮演的是一名吸血鬼,所以種植和照料作物都是在月光下進行——只要記得日出前趕回棺材就行。夜間耕種是這套溫馨向耕種迴圈裡最具特色的一處設計。' },
+  { q: '德古拉羊(Draculamb)是什麼?', a: '德古拉羊是確認的家畜品種之一,此外還有 Cheeken(雞)、Piggoat(豬羊)和 Cowcula(牛)。你還可以變身成可愛的三眼地獄貓(Hellkitten)當形態之一。' },
+  { q: '能種哪些作物?', a: '作為吸血鬼,你種的第一批作物是血葡萄(Orlock 給的起始種子,已確認 5 天成熟),收穫後可以在酒桶裡加工成"血葡萄酒"。其他已知品種包括"魔黃瓜"、南瓜和顛茄,具體售價仍未公開。' },
+  { q: '怎麼買到農場動物?', a: '已確認:要先花 4,000 金加材料,找 Ridge 買一個穀倉,才能去找 Luna 購買(只能買她房子外面現有的那批動物)。' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '首頁', item: `${SITE.url}/zh-hant` },
+    { '@type': 'ListItem', position: 2, name: '耕種攻略', item: `${SITE.url}/zh-hant/farming` },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks —— 耕種攻略、作物與魔法家畜"
+  description="Moonlight Peaks 的耕種系統:月光下種植的魅惑作物與發光花朵、德古拉羊等魔法家畜,以及幫你打理土地的魔法。"
+  path="/zh-hant/farming"
+  jsonLd={jsonLd}
+  crumbs={[{ label: '耕種攻略' }]}
+  lang="zh-hant"
+  showExport
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">詞條 · 農場</p>
+      <h1>Moonlight Peaks 的<em>耕種</em>與魅惑作物</h1>
+      <p class="intro">
+        農場是 {GAME.title} 的核心玩法——只是多了一層吸血鬼式的反轉。這裡講清楚月光耕種、
+        魅惑作物和魔法家畜是怎麼運作的。最後更新:{SITE.updated}。
+      </p>
+
+      <h2>在月光下耕種</h2>
+      <p>
+        作為一名夜之生物,你的種植和照料都是在天黑之後進行——只要記得太陽昇起前趕回棺材就好。
+        這本質上還是那套熟悉的"種植-照料-收穫"溫馨耕種迴圈,只是把節奏翻轉到了夜晚。
+      </p>
+
+      <h2>魅惑作物與發光花朵</h2>
+      <p>
+        超自然的耕種手法帶來了有趣的結果:你種出來的不是普通農產品,而是被施了魅惑、會發光的作物和花朵。
+        已確認起始作物是<strong>血葡萄</strong>(Orlock 第一晚給的種子,5 天成熟),收穫後可以用酒桶
+        加工成"血葡萄酒"——生葡萄直接賣錢不值幾個錢,加工才是真正賺錢的方式。其他已知品種包括
+        "魔黃瓜"、南瓜和顛茄,具體售價仍未公開。
+      </p>
+
+      <h2>起始工具</h2>
+      <p>
+        已確認的起始工具(透過工具輪盤使用,Switch 上長按 R 鍵):鏟子(沒有單獨的鋤頭,鏟子身兼兩職)、
+        澆水壺(3 檔升級:1,000/2,000/3,500 金,每檔減少每格用水量)、斧頭、鎬子、鐮刀,以及一根一開始
+        是壞的法杖。已確認<strong>鎬子升級優先順序最高</strong>——能敲開家裡空地上的大石頭,騰出地方
+        蓋更多穀倉和建築。
+      </p>
+
+      <h2>畜牧——已確認的購買流程</h2>
+      <p>
+        已確認:不能一開始就買動物。要先找 <strong>Ridge</strong> 花 4,000 金加材料買一個穀倉,
+        再去找 <strong>Luna</strong> 購買家畜(只能買她房子外現有的那批)。已確認的動物品種:
+        <strong>Cheeken</strong>(常見的第一隻,喜歡被摸和買帽子)、<strong>Piggoat</strong>、
+        <strong>Draculamb</strong>、<strong>Cowcula</strong>。餵食用飼料(精煉機制作),後期還有
+        更好的高階飼料。
+      </p>
+
+      <h2>Vampster 支線任務</h2>
+      <p>
+        已確認:農場周圍藏著黑色小怪物 Vampster。只能用蝙蝠/吸血鬼形態搬運(不進揹包),一次只能帶一隻,
+        任務是把找到的每一隻都送到 Orlock 宅邸附近的洞穴。
+      </p>
+
+      <h2>魔法與工具</h2>
+      <p>
+        耕種和巫術是相輔相成的——已確認第一個法術叫 <strong>Aquaflux</strong>(自動澆水),從 Luna 處
+        解鎖,能解放雙手澆水。隨著遊戲推進,你會拿到新工具,把地產逐步發展壯大,種出更多東西。
+      </p>
+
+      <h2>正式發售({GAME.releaseLabel})後會補上的內容</h2>
+      <ul>
+        <li>完整的<strong>作物資料庫</strong>:精確買賣價格、季節。</li>
+        <li>按季節和利潤排序的<strong>最賺錢作物</strong>推薦。</li>
+        <li><a href="/map">互動地圖</a>上標註的農場位置。</li>
+      </ul>
+
+      <h2>常見問題</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        發售後詞條,持續更新真實遊戲資料。相關內容:
+        <a href="/magic">魔法</a>、<a href="/items">物品</a>、<a href="/environment">環境</a>、
+        <a href="/map">互動地圖</a>、<a href="/zh-hant/beginner-guide">新手入門攻略</a>(中文)。
+      </div>
+    </div>
+  </article>
+</Base>

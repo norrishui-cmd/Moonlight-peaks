@@ -1,0 +1,103 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+
+const entries = [
+  { title: '發售日與平臺', desc: '什麼時候、在哪玩、多少錢,以及免費試玩版——上線第一天需要的全部資訊。', href: '/release-date', img: '/card-release.webp' },
+  { title: '配置需求', desc: '購買前先看 PC、Mac、Steam Deck 和試玩版的效能表現。', href: '/system-requirements', img: '/card-guide.webp' },
+  { title: '語言支援', desc: '日語、中文、韓語、德語、英語支援情況——以發售時為準。', href: '/languages', img: '/card-guide.webp' },
+  { title: '新手入門攻略', desc: '目前已知的全部資訊,幫你在第一天就搶佔先機。', href: '/beginner-guide', img: '/card-guide.webp' },
+  { title: 'Nokturna 卡牌遊戲', desc: '小鎮最受歡迎的遊戲——玩法、卡牌與獲勝技巧。', href: '/nokturna', img: '/card-nokturna.webp' },
+  { title: '戀愛與家族', desc: '七大家族、可攻略角色,以及送禮偏好。', href: '/romance', img: '/card-romance.webp' },
+  { title: '作弊碼與主機', desc: '控制檯指令與賺錢作弊碼——發售當天公佈。', href: '/cheats', img: '/card-cheats.webp' },
+  { title: '作物與季節', desc: '神秘作物、魔法家畜,以及夜間耕種迴圈。', href: '/farming', img: '/card-crops.webp' },
+];
+
+const explore = [
+  { k: '角色', d: '居民、家族,以及可以追求的對象', href: '/characters', img: '/count-dracula.webp' },
+  { k: '地點', d: '小鎮、你的農場、森林、湖泊等等', href: '/locations', img: '/hero-loc-town.webp' },
+  { k: '家族', d: '小鎮裡七個超自然家族', href: '/families', img: '/hero-fam-vampires.webp' },
+  { k: '活動', d: '釣魚、魔法、手工與愜意的休閒活動', href: '/activities', img: '/hero-act-seasonal-events.webp' },
+  { k: '物品', d: '工具、藥水、裝飾品及其它分類', href: '/items', img: null, c1: '#3a4a2f', c2: '#8ab06a' },
+  { k: '常見問題', d: '最常見問題的快速解答', href: '/faq', img: '/card-faq.webp' },
+  { k: '攻略與資訊', d: 'Demo 體驗感想、媒體試玩報道與教程', href: '/previews', img: '/hero-first-five-minutes.webp' },
+  { k: '匯出為 PDF', d: '挑選任意攻略,合併匯出成一份 PDF', href: '/export', img: '/card-export-pdf.webp' },
+];
+
+const jsonLd = {
+  '@context': 'https://schema.org', '@type': 'WebSite', name: 'Moonlight Peaks 繁體中文攻略維基',
+  url: `${SITE.url}/zh-hant`, inLanguage: 'zh-Hant',
+  description: '吸血鬼生活模擬遊戲 Moonlight Peaks 的繁體中文同人攻略站:發售日期、新手攻略、戀愛系統與作弊碼。',
+};
+---
+<Base
+  title="Moonlight Peaks 中文攻略 — 發售日期、新手攻略與作弊碼"
+  description="哥特風吸血鬼生活模擬遊戲 Moonlight Peaks 的繁體中文同人攻略站。發售日期、新手技巧、戀愛系統與作弊碼。"
+  path="/zh-hant"
+  jsonLd={jsonLd}
+  lang="zh-hant"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">一本吸血鬼農夫的田野手記</p>
+      <h1><em>Moonlight Peaks</em> 即將開門迎客。</h1>
+      <p class="intro">
+        由 {GAME.developer} 打造的哥特風溫馨吸血鬼生活模擬遊戲,這是它的繁體中文同人攻略站。我們在遊戲正式發售前就已經上線,
+        讓你在第一天就對小鎮瞭如指掌——現在先提供發售資訊,等 {GAME.title} 正式上線,攻略技巧、Nokturna、
+        戀愛系統和作弊碼會第一時間跟上。
+      </p>
+      <p class="callout wip">
+        目前這個繁體中文版本先覆蓋了最重要的幾個入口頁面。其餘內容(文章、角色資料、常見問題)暫時還只有英文版,
+        我們會分批翻譯。這個頁面上的連結在對應繁體中文版做好之前,會先帶你去英文原版頁面。
+      </p>
+
+      <h2>從這裡開始</h2>
+      <div class="es-grid">
+        {entries.map((e) => (
+          <a class="es-card" href={e.href}>
+            <img src={e.img} alt="" loading="lazy" width="64" height="64" />
+            <span>
+              <strong>{e.title}</strong>
+              <em>{e.desc}</em>
+            </span>
+          </a>
+        ))}
+      </div>
+
+      <h2>探索這個世界</h2>
+      <div class="es-grid">
+        {explore.map((x) => (
+          <a class="es-card" href={x.href}>
+            <span class="es-thumb" style={!x.img ? `background: linear-gradient(135deg, ${x.c1}, ${x.c2})` : undefined}>
+              {x.img ? <img src={x.img} alt="" loading="lazy" width="64" height="64" /> : <span class="es-thumb-letter">{x.k[0]}</span>}
+            </span>
+            <span>
+              <strong>{x.k}</strong>
+              <em>{x.d}</em>
+            </span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </article>
+
+  <style>
+    .page { padding: 32px 0 60px; }
+    .eyebrow { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--faint); }
+    h1 { font-family: var(--display); font-size: 2rem; margin: 6px 0 14px; }
+    h1 em { color: var(--candle); font-style: normal; }
+    .intro { color: var(--muted); font-size: 1rem; line-height: 1.7; max-width: 640px; margin-bottom: 16px; }
+    .callout.wip { border-left: 2px solid var(--candle); background: var(--ink-2); padding: 12px 16px; border-radius: 0 10px 10px 0; color: var(--muted); font-size: 0.88rem; margin: 0 0 32px; }
+    h2 { font-family: var(--display); font-size: 1.3rem; margin: 28px 0 12px; }
+    .es-grid { display: grid; grid-template-columns: 1fr; gap: 10px; }
+    @media (min-width: 640px) { .es-grid { grid-template-columns: 1fr 1fr; } }
+    .es-card { display: flex; align-items: center; gap: 12px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); padding: 12px; transition: border-color .15s ease; }
+    .es-card:hover { border-color: color-mix(in srgb, var(--candle) 50%, var(--line)); }
+    .es-card img { border-radius: 10px; object-fit: cover; width: 64px; height: 64px; flex: 0 0 auto; }
+    .es-thumb { flex: 0 0 auto; width: 64px; height: 64px; border-radius: 10px; display: flex; align-items: center; justify-content: center; border: 1px solid var(--line); }
+    .es-thumb-letter { font-family: var(--display); font-weight: 700; font-size: 1.4rem; color: rgba(255,255,255,0.9); }
+    .es-card span:not(.es-thumb) { display: flex; flex-direction: column; min-width: 0; }
+    .es-card strong { font-family: var(--display); font-weight: 600; font-size: 0.96rem; color: var(--mist); }
+    .es-card em { font-style: normal; font-size: 0.8rem; color: var(--faint); margin-top: 2px; }
+  </style>
+</Base>

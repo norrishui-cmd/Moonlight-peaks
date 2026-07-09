@@ -26,6 +26,7 @@ export const translatedPathsByLocale: Record<Locale, Set<string>> = {
   es: new Set(sharedEsJaZhPaths),
   ja: new Set(sharedEsJaZhPaths),
   zh: new Set(sharedEsJaZhPaths),
+  'zh-hant': new Set(sharedEsJaZhPaths), // mirrors the same 21 pages as zh, converted via OpenCC
   de: new Set(dePaths),
 };
 
@@ -35,6 +36,7 @@ export const translatedCharSlugsByLocale: Record<Locale, Set<string>> = {
   es: new Set(Object.keys(charTranslations.es)),
   ja: new Set(Object.keys(charTranslations.ja)),
   zh: new Set(Object.keys(charTranslations.zh)),
+  'zh-hant': new Set(Object.keys(charTranslations['zh-hant'] || {})),
   de: new Set(Object.keys(charTranslations.de || {})),
 };
 

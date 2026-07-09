@@ -1,0 +1,60 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+
+const faq = [
+  { q: 'Moonlight Peaks 裡能結婚嗎?', a: '可以,結婚是已經確認的遊戲功能。你可以追求某位居民,和對方安定下來。' },
+  { q: 'Moonlight Peaks 裡能生孩子嗎?', a: '不能——官方已經明確表態遊戲裡沒有孩子這個設定,這不是"還沒做出來",而是確認不會有。' },
+  { q: 'Moonlight Peaks 裡有戰鬥嗎?', a: '目前公開過的所有區域(包括礦洞)都沒有出現過戰鬥內容。這是一款沒有戰鬥系統的溫馨生活模擬遊戲。' },
+  { q: '有多少個可攻略對象?', a: 'Steam 商店頁面寫著大約兩打(約 24 位)可攻略居民。早期報道曾提到過 15 位,說明這個數字在開發過程中漲了不少。' },
+  { q: '能和狼人談戀愛嗎?', a: '可以——Saga 是開發商確認的可攻略角色,她是一位狼人居民,情緒狀態會隨滿月變化。' },
+  { q: 'Moonlight Peaks 是戀愛遊戲嗎?', a: '主要不是——它首先是一款溫馨向農場生活模擬遊戲,風格接近 Stardew Valley,戀愛和結婚只是眾多系統之一(還有耕種、魔法、裝飾、探索等)。' },
+  { q: 'Moonlight Peaks 裡有商店嗎?', a: '發售前的資料探勘顯示鎮上有好幾家商店,還有一位玩家提到過一個賣種子和裝飾品的行商。具體的商店系統怎麼運作,目前還沒有完全確認。' },
+  { q: 'Moonlight Peaks 的分級是多少歲?', a: '據我們所知,目前 ESRB 尚未給出評級。考慮到遊戲沒有戰鬥、整體基調是溫馨哥特風,大機率會拿到較低的年齡分級,但我們會在官方公佈後第一時間更新。' },
+  { q: '可以完全不談戀愛來玩這個遊戲嗎?', a: '幾乎可以肯定可以。這類遊戲裡戀愛通常都是可選內容,沒有跡象表明 Moonlight Peaks 會不一樣——你完全可以只種地、裝飾、探索,不追求任何一段感情。' },
+  { q: 'Moonlight Peaks 會上手機嗎?', a: '會——發售當天就會透過 Google Play 上線 Android 版。目前沒有公佈 iOS/iPhone 版本。' },
+  { q: 'Moonlight Peaks 有本地或線上聯機合作模式嗎?', a: '目前沒有公佈任何聯機合作模式。所有現有資訊都指向這是一款單人遊戲。' },
+  { q: '戀愛系統是性別中立的嗎?', a: '是的——角色模型刻意設計成性別中立,不管你怎麼捏自己的吸血鬼角色,都可以追求任何符合條件的居民。' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '首頁', item: `${SITE.url}/zh-hant` },
+    { '@type': 'ListItem', position: 2, name: '常見問題', item: `${SITE.url}/zh-hant/faq` },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks — 常見問題解答(FAQ)"
+  description="Moonlight Peaks 常見問題解答:能不能結婚、生孩子、有沒有戰鬥、戀愛系統、商店與年齡分級。"
+  path="/zh-hant/faq"
+  jsonLd={jsonLd}
+  crumbs={[{ label: '常見問題' }]}
+  lang="zh-hant"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">詞條 · 常見問題</p>
+      <h1>常見<em>問題</em></h1>
+      <p class="intro">
+        針對關於 {GAME.title} 最常被問到的問題,給出誠實、直接的回答。哪些已確認、哪些還沒確認,
+        我們都會明確標註清楚。最後更新:{SITE.updated}。
+      </p>
+
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        這是從搜尋量最高的問題裡精選出來、翻譯成中文的一批。完整的常見問題列表(超過 50 條)目前
+        還只有<a href="/faq">英文版 FAQ 頁面</a>——中文版會逐步擴充。
+      </div>
+    </div>
+  </article>
+</Base>

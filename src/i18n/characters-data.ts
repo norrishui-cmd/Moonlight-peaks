@@ -14,7 +14,7 @@ export type CharTranslation = {
   romanceTbc: string;
 };
 
-export const charTranslations: Record<'es' | 'ja' | 'zh' | 'de', Record<string, CharTranslation>> = {
+export const charTranslations: Record<'es' | 'ja' | 'zh' | 'zh-hant' | 'de', Record<string, CharTranslation>> = {
   de: {
     saga: {
       name: 'Saga', familyLabel: 'Werwolf', typeLabel: 'Werwolf',
@@ -221,6 +221,71 @@ export const charTranslations: Record<'es' | 'ja' | 'zh' | 'de', Record<string, 
         '他在游戏里的真实姓名目前还没有确认。',
       ],
       romanceYes: '', romanceNo: '', romanceTbc: '这位术士能不能被攻略目前还没有确认——正式版上线后会更新。',
+    },
+  },
+  'zh-hant': {
+    'count-dracula': {
+      name: '德古拉伯爵', familyLabel: '吸血鬼', typeLabel: '吸血鬼',
+      desc: '你的父親,也是小鎮的傳奇人物,你此行正是為了走出他的陰影。他是故事的核心人物——不是可攻略角色。',
+      knownInfo: [
+        '他是你的父親;故事把你搬到 Moonlight Peaks 這件事,設定成走出他長年陰影的一步。',
+        '他是故事的核心人物,而不是戀愛對象。',
+        '遊戲的設定是讓你證明一種更溫柔、更善良的不死生活方式是可能的——而這正是他一直心存懷疑的事。',
+      ],
+      romanceYes: '', romanceNo: '德古拉伯爵不是可攻略角色。', romanceTbc: '',
+    },
+    saga: {
+      name: 'Saga', familyLabel: '狼人', typeLabel: '狼人',
+      desc: '開發商公開介紹過的一位居民,她的情緒狀態會隨滿月變化。',
+      knownInfo: [
+        '開發商公開介紹過的一位狼人居民。',
+        '據描述,她的狀態會隨滿月起伏變化。',
+        'Steam Next Fest 的一篇報道特意點名提到了她。',
+      ],
+      romanceYes: 'Saga 是官方確認的可攻略角色。禮物偏好和心動事件會在正式版確認後補充。',
+      romanceNo: '', romanceTbc: '',
+    },
+    luna: {
+      name: 'Luna', familyLabel: '女巫', typeLabel: '女巫',
+      desc: '據報道是一位務農的女巫——很可能是前期法術和園藝知識的重要來源。',
+      knownInfo: [
+        '在試玩報道中被描述為一位務農的女巫。',
+        '很可能是前期法術和園藝知識的重要來源。',
+        '具體細節要等正式版上線後確認。',
+      ],
+      romanceYes: '據報道 Luna 是可攻略角色。禮物偏好和心動事件會在正式版確認後補充。',
+      romanceNo: '', romanceTbc: '',
+    },
+    orlock: {
+      name: 'Orlock', familyLabel: '吸血鬼', typeLabel: '吸血鬼',
+      desc: '據報道是某個吸血鬼家族的家主——在鎮上是位帶著舊世界影響力的人物。',
+      knownInfo: [
+        '據報道是某個吸血鬼家族的家主。',
+        '在試玩報道里被描寫成一個喜劇感十足的角色。',
+        '在鎮上的吸血鬼群體中帶著舊世界式的存在感。',
+      ],
+      romanceYes: '據報道 Orlock 是可攻略角色。禮物偏好和心動事件會在正式版確認後補充。',
+      romanceNo: '', romanceTbc: '',
+    },
+    brook: {
+      name: 'Brook', familyLabel: '狼人', typeLabel: '狼人',
+      desc: 'Moonlight Peaks 的鎮長,狼人洛根(Logan)家族的家長,不可攻略。',
+      knownInfo: [
+        '已確認為鎮長,負責在鎮公所辦理登記手續,並把 Chester 交給你。',
+        '洛根家族家長,Saga 和 Ludo 的父親,Ridge 的兄長。',
+        '經營 Howling Hammer 工具升級商店,週一到週五 18:00 至凌晨營業。',
+      ],
+      romanceYes: '', romanceNo: 'Brook 未被確認為可攻略角色。', romanceTbc: '',
+    },
+    'the-warlock': {
+      name: '神秘術士', familyLabel: '女巫', typeLabel: '女巫',
+      desc: '在一篇試玩報道中出現過,是鎮上一位相當自戀的術士,真實姓名尚未確認。',
+      knownInfo: [
+        '在一篇試玩報道中出現過的一位自戀術士。',
+        '據那篇報道描述,他會不斷打斷對話向玩家搭訕調情。',
+        '他在遊戲裡的真實姓名目前還沒有確認。',
+      ],
+      romanceYes: '', romanceNo: '', romanceTbc: '這位術士能不能被攻略目前還沒有確認——正式版上線後會更新。',
     },
   },
 };

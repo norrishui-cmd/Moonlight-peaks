@@ -1,0 +1,89 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+
+const faq = [
+  { q: 'Moonlight Peaks 裡能變身成蝙蝠嗎?', a: '可以,已確認。作為吸血鬼,你能變身成蝙蝠,這是夜裡在小鎮裡快速移動的方式。' },
+  { q: '地獄貓(Hellkitten)形態是什麼?', a: '已確認:你還能變身成三眼地獄貓夥伴。地獄貓形態下移動速度更快,還能不用鏟子直接翻地(能量消耗只是正常的一小部分)。' },
+  { q: '還能變成什麼形態?', a: '已確認的形態目前只有蝙蝠和地獄貓兩種。開發商暗示過還有更多形態存在,但完整清單尚未公佈。' },
+  { q: '變身能力怎麼解鎖?', a: '已確認:解鎖地獄貓形態需要完成四條任務線——"A Bridge Too Far"、"Tension in the Crest Garden"、"A Croak and a Crest" 和 "The Dinner Party"。解鎖後透過魔法輪盤(左肩鍵)切換形態。' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '首頁', item: `${SITE.url}/zh-hant` },
+    { '@type': 'ListItem', position: 2, name: '變身', item: `${SITE.url}/zh-hant/shapeshifting` },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks —— 變身:蝙蝠形態與其它形態"
+  description="Moonlight Peaks 的變身系統:變成蝙蝠在夜裡出行,開發商暗示過的其它形態,以及這如何融入你的吸血鬼能力。"
+  path="/zh-hant/shapeshifting"
+  jsonLd={jsonLd}
+  crumbs={[{ label: '變身' }]}
+  lang="zh-hant"
+  showExport
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">詞條 · 變身</p>
+      <h1>Moonlight Peaks 的<em>變身</em>能力</h1>
+      <p class="intro">
+        在 {GAME.title} 裡當吸血鬼的福利之一就是能變換形態。這裡說清楚變身系統真正已經確認的部分,
+        以及開發商目前只是暗示過的內容。最後更新:{SITE.updated}。
+      </p>
+
+      <h2>變成蝙蝠出行</h2>
+      <p>
+        目前確認的招牌形態是經典的吸血鬼蝙蝠。變身成蝙蝠能讓你在夜裡快速飛越小鎮,在日出前
+        要兼顧農活、跑腿和社交時特別好用。
+      </p>
+
+      <h2>地獄貓形態——移動更快,免費翻地</h2>
+      <p>
+        已確認:完成四條任務線——"A Bridge Too Far"、"Tension in the Crest Garden"、
+        "A Croak and a Crest"、"The Dinner Party"——之後,可以變身成三眼<strong>地獄貓</strong>夥伴。
+        地獄貓形態下移動明顯更快,按 Y 鍵還能不用鏟子直接翻地,只消耗很少能量——是真正實用的功能形態,
+        不只是好看。
+      </p>
+
+      <h2>暗示過的其它形態</h2>
+      <p>
+        開發團隊透露過,除了蝙蝠和地獄貓之外還能學會變成其它形態,但完整的形態清單以及各自的用途,
+        目前還沒有詳細公佈。
+      </p>
+
+      <h2>吸血鬼能力的一部分</h2>
+      <p>
+        變身和你其它的超自然能力並存,能幫你探索小鎮的方方面面。它自然而然地和
+        <a href="/magic">巫術與藥水</a>搭配使用——而且和你(不死)生活的其它方面一樣,
+        都要遵守日出前趕回棺材這條規則。
+      </p>
+
+      <h2>正式發售({GAME.releaseLabel})後會補上的內容</h2>
+      <ul>
+        <li>除了蝙蝠之外,能變成的<strong>完整形態列表</strong>。</li>
+        <li>每種形態怎麼<strong>解鎖</strong>,各自有什麼用途。</li>
+        <li>是否有能量、時機或場地方面的變身限制。</li>
+      </ul>
+
+      <h2>常見問題</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        發售後詞條,持續更新真實遊戲資料。相關內容:
+        <a href="/magic">魔法與藥水</a>、<a href="/character-creator">角色建立</a>、
+        <a href="/zh-hant/beginner-guide">新手入門攻略</a>(中文)。
+      </div>
+    </div>
+  </article>
+</Base>

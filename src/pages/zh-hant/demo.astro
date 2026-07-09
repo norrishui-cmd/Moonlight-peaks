@@ -1,0 +1,85 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+import YouTube from '../../components/YouTube.astro';
+
+const facts = [
+  ['價格', '免費'],
+  ['在哪玩', 'Steam 與 Nintendo eShop,支援 Switch 2'],
+  ['進度是否延續', '目前沒有確認會延續;把試玩版當成獨立的體驗來看待'],
+  ['包含的活動', '角色建立、釣魚、插花、刺繡,以及前期與鎮上居民的互動'],
+  ['正式版發售', GAME.releaseLabel],
+];
+
+const faq = [
+  { q: 'Moonlight Peaks 試玩版免費嗎?', a: '是的。試玩版在 Steam 和 Nintendo eShop 上都是免費的。' },
+  { q: '試玩版進度會延續到正式版嗎?', a: '目前沒有官方確認會延續,除非發售時官方說明另有安排,否則請把正式版當作全新開局。' },
+  { q: '試玩版裡能做什麼?', a: '試玩版展示了角色建立器,以及釣魚、插花、刺繡等一部分溫馨活動,還有前期與居民的互動。' },
+  { q: '試玩版支援 Switch 2 嗎?', a: 'Nintendo eShop 的試玩版可以在 Switch 和 Switch 2 上執行。' },
+  { q: '購買前應該先玩試玩版嗎?', a: '如果你想在發售前先感受一下基調、操作手感和前期迴圈,值得先試玩。' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '首頁', item: `${SITE.url}/zh-hant` },
+    { '@type': 'ListItem', position: 2, name: '試玩版', item: `${SITE.url}/zh-hant/demo` },
+  ] },
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+];
+---
+<Base
+  title="Moonlight Peaks 試玩版攻略 —— 下載、內容與常見問題"
+  description="Moonlight Peaks 試玩版攻略:去哪下載、包含什麼內容、進度是否延續、Switch/Steam 支援情況、小貼士與已知限制。"
+  path="/zh-hant/demo"
+  jsonLd={jsonLd}
+  crumbs={[{ label: '試玩版' }]}
+  lang="zh-hant"
+  showExport
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">詞條 · 試玩版</p>
+      <h1>Moonlight Peaks <em>試玩版</em>攻略</h1>
+      <p class="intro">
+        免費的 Moonlight Peaks 試玩版是在 {GAME.releaseLabel} 正式發售前,提前體驗這款溫馨吸血鬼
+        生活模擬遊戲最穩妥的方式。這裡說清楚去哪下載、裡面有什麼,以及哪些內容不會延續到正式版。
+      </p>
+
+      <div class="demo-video">
+        <YouTube id="BvfEwKHmMfg" title="Moonlight Peaks demo video" />
+      </div>
+
+      <h2>基本資訊</h2>
+      <table class="facts">
+        {facts.map((row) => (<tr><th>{row[0]}</th><td>{row[1]}</td></tr>))}
+      </table>
+
+      <h2>試玩版最適合用來做什麼</h2>
+      <p>
+        用試玩版判斷遊戲的基調、操作手感、鏡頭視角和節奏偏慢的溫馨活動是否合你口味。它不是用來
+        展示全部系統的。具體的作物數值、完整禮物表、後期任務和完整收集清單,都要等正式版才有。
+      </p>
+      <ul>
+        <li><strong>感受氛圍:</strong>試玩版最適合用來判斷基調和操作手感。</li>
+        <li><strong>試試前期活動:</strong>釣魚、插花、刺繡和居民初見互動是不錯的體驗樣本。</li>
+        <li><strong>別過度鑽研:</strong>既然進度延續沒有確認,不如把試玩版當成練手。</li>
+        <li><strong>對比平臺差異:</strong>Steam、Switch、Switch 2 玩家應該分別關注各自的操作和效能表現。</li>
+      </ul>
+
+      <h2>常見問題</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        相關內容:<a href="/zh-hant/release-date">發售日期</a>、<a href="/zh-hant/platforms">平臺攻略</a>、
+        <a href="/demo">詳細試玩版攻略</a>(英文)。
+      </div>
+    </div>
+  </article>
+</Base>

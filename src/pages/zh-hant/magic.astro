@@ -1,0 +1,105 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+
+const faq = [
+  {
+    q: 'Moonlight Peaks 裡怎麼學習魔法?',
+    a: '你會跟鎮上的女巫學習巫術。魔法可以幫助你完成日常任務,包括照料農場、採集資源和解鎖更多夜間生活玩法。',
+  },
+  {
+    q: '“變身藥水”(Alter Ego Elixir)是做什麼用的?',
+    a: '“變身藥水”是一種能改變外貌的藥劑,屬於煉藥玩法中可以製作的藥劑之一。完整配方和效果需要等正式版確認。',
+  },
+  {
+    q: '必須使用魔法才能玩 Moonlight Peaks 嗎?',
+    a: '巫術是遊戲的重要系統之一,但 Moonlight Peaks 本質仍是溫馨生活模擬遊戲。你可以按自己的節奏探索農場、居民、戀愛、採集和魔法系統。',
+  },
+];
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faq.map((f) => ({
+      '@type': 'Question',
+      name: f.q,
+      acceptedAnswer: { '@type': 'Answer', text: f.a },
+    })),
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: '首頁', item: `${SITE.url}/zh-hant` },
+      { '@type': 'ListItem', position: 2, name: '魔法攻略', item: `${SITE.url}/zh-hant/magic` },
+    ],
+  },
+];
+---
+<Base
+  title="Moonlight Peaks 魔法攻略: 法術、藥水與變身藥劑"
+  description="Moonlight Peaks 的魔法系統: 向鎮上的女巫學習法術、調配像變身藥水這樣的藥劑,以及巫術如何幫助你耕種和採集。"
+  path="/zh-hant/magic"
+  jsonLd={jsonLd}
+  crumbs={[{ label: '魔法攻略' }]}
+  lang="zh-hant"
+  showExport
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">詞條 · 魔法</p>
+      <h1>Moonlight Peaks 的 <em>魔法</em>: 法術與藥水</h1>
+      <p class="intro">
+        巫術是 {GAME.title} 的核心繫統之一。這裡整理目前已知的魔法、煉藥、變身和夜間生活資訊,並在正式發售後繼續補充完整資料。
+        最後更新: {SITE.updated}。
+      </p>
+
+      <h2>學習法術</h2>
+      <p>
+        你會跟鎮上的女巫學習巫術。魔法不只是裝飾設定,它會融入日常行動,例如幫助照料植物、採集資源、提升夜間探索效率,
+        並隨著遊戲進度解鎖更多用途。完整法術清單會在正式版上線後補充。
+      </p>
+
+      <h2>藥水與“變身藥水”</h2>
+      <p>
+        除了法術,玩家還可以調配藥水來獲得不同效果。當前最值得關注的是 <strong>變身藥水</strong>,
+        它被描述為能夠改變角色外貌的藥劑。具體配方、材料、持續時間和限制條件仍需正式版確認。
+      </p>
+
+      <h2>巫術與吸血鬼能力</h2>
+      <p>
+        魔法系統會和你的吸血鬼身份一起構成 Moonlight Peaks 的特色玩法。除了藥水和法術,
+        遊戲還包含 <a href="/shapeshifting">變身</a>、夜間農場、角色關係、採集和製作等內容。
+        如果你想從整體流程開始,可以先看 <a href="/zh-hant/beginner-guide">中文新手攻略</a>。
+      </p>
+
+      <h2>正式發售後會補充的內容</h2>
+      <ul>
+        <li>完整法術清單、解鎖條件和實際效果。</li>
+        <li>藥水配方、材料來源、製作地點和持續時間。</li>
+        <li>哪些角色會教你魔法,以及前期優先學習什麼。</li>
+        <li>魔法如何影響耕種、採集、探索、任務和戀愛流程。</li>
+      </ul>
+
+      <h2>常見問題</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        這是發售前的中文佔位詞條。法術、藥水、配方和材料資料會在正式版釋出後繼續補全。
+        相關頁面:
+        <a href="/farming">耕種</a>、
+        <a href="/character-creator">角色建立</a>、
+        <a href="/shapeshifting">變身</a>、
+        <a href="/items">物品</a>。
+      </div>
+    </div>
+  </article>
+</Base>

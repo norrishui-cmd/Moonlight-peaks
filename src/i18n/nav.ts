@@ -1,7 +1,7 @@
 // Shared UI strings for site-wide chrome (nav, search, common buttons). Content pages
 // (articles, character bios, FAQ answers) are translated separately in their own files —
 // this dictionary only covers the repeating interface text that appears on every page.
-export type Locale = 'en' | 'es' | 'ja' | 'zh' | 'de';
+export type Locale = 'en' | 'es' | 'ja' | 'zh' | 'zh-hant' | 'de';
 
 export const uiStrings: Record<Locale, Record<string, string>> = {
   en: {
@@ -35,6 +35,14 @@ export const uiStrings: Record<Locale, Record<string, string>> = {
     world: '世界', locations: '地点', activities: '活动', items: '物品',
     search: '搜索', searchPlaceholder: '搜索角色、攻略、常见问题、物品…',
     home: '首页', notFound: '页面未找到',
+  },
+  'zh-hant': {
+    characters: '角色', families: '家族', romance: '戀愛',
+    tools: '工具', faq: '常見問題', about: '關於本站',
+    guides: '攻略', allGuides: '全部攻略', release: '發售', demo: '試玩版', platforms: '平台',
+    world: '世界', locations: '地點', activities: '活動', items: '物品',
+    search: '搜尋', searchPlaceholder: '搜尋角色、攻略、常見問題、物品…',
+    home: '首頁', notFound: '頁面未找到',
   },
   de: {
     characters: 'Charaktere', families: 'Familien', romance: 'Romanze',

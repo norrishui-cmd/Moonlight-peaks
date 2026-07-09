@@ -1,0 +1,182 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+import YouTube from '../../components/YouTube.astro';
+import { characters, typeLabels } from '../../data/characters';
+
+const familyNameZh: Record<string, string> = {
+  'Vampire (Ambrosia)': '吸血鬼 · 安布羅西亞家族',
+  'Vampire (Dracula)': '吸血鬼 · 德古拉家族',
+  'Witch (Webb)': '女巫 · 韋伯家族',
+  'Werewolf (Logan)': '狼人 · 洛根家族',
+  'Mermaid (Hosu)': '美人魚 · 侯蘇家族',
+  'Seer (Khazan)': '先知 · 卡贊家族',
+  'Human (Henderson)': '人類 · 亨德森家族',
+  'Unknown': '不屬於任何家族',
+};
+const typeZh: Record<string, string> = {
+  vampire: '吸血鬼', werewolf: '狼人', witch: '女巫', mermaid: '美人魚',
+  seer: '先知', ghost: '幽靈', human: '人類', other: '其他',
+};
+
+const romanceable = characters.filter((c) => c.romanceable === true);
+const groups = new Map<string, typeof romanceable>();
+for (const c of romanceable) {
+  const key = c.family || 'Unknown';
+  if (!groups.has(key)) groups.set(key, []);
+  groups.get(key)!.push(c);
+}
+const familyGroups = [...groups.entries()].sort((a, b) => b[1].length - a[1].length);
+
+const statusZh: Record<string, string> = { confirmed: '已確認', reported: '已報道', datamined: '資料探勘', unconfirmed: '未確認' };
+
+const faq = [
+  { q: 'Moonlight Peaks 裡有多少可攻略角色?', a: '發售時官方公佈確認為 23 位——早期報道曾提到 15 位左右,說明這個數字在開發過程中漲了不少。分佈在六大家族(安布羅西亞、韋伯、洛根、侯蘇、卡贊、亨德森),外加兩位不屬於任何家族的"編外"角色:Death 和愛情惡魔 Llemi。' },
+  { q: '什麼好感度可以開始約會、什麼時候能求婚?', a: '已確認:好感度達到 4 級解鎖約會;達到 8 級可以求婚。求婚後一週內舉行婚禮,鎮上的吸血鬼和狼人都會來參加。' },
+  { q: '可以同時和多個角色約會嗎?', a: '可以,已確認。同時追求多人的話,對方會察覺並吐槽你,不過只是輕微的"吃醋",不是硬性的競爭機制。正式結婚後則是嚴格一對一。' },
+  { q: '拒絕約會邀請太多次會怎樣?', a: '已確認:如果經常拒絕對方的約會邀請,會導致分手,對方會先冷淡你幾天,之後才會重新原諒你。' },
+  { q: 'Moonlight Peaks 裡能結婚嗎?能生孩子嗎?', a: '可以結婚,結婚後配偶會搬進你的農場,並解鎖一段新的專屬劇情;還能把配偶變成吸血鬼。但遊戲裡沒有生育系統——多個資訊源確認,且開發商暫無相關計劃。娶像 Orlock 這樣已有孩子的角色,據報道會讓你成為繼父/繼母。' },
+  { q: '戀愛對象受性別限制嗎?', a: '不受限制。約會系統完全性別中立,不管你怎麼捏自己的吸血鬼角色,都能追求任何一位可攻略居民。' },
+  { q: '吸血鬼能和狼人談戀愛嗎?', a: '可以。鎮上的吸血鬼和狼人關係一向不太好,經常拌嘴,所以追求像 Saga 這樣的狼人角色,意味著要跨越這層隔閡——這也是樂趣所在。' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '首頁', item: `${SITE.url}/zh-hant` },
+    { '@type': 'ListItem', position: 2, name: '戀愛攻略', item: `${SITE.url}/zh-hant/romance` },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks 戀愛攻略——23位可攻略角色與結婚系統"
+  description="Moonlight Peaks 戀愛系統全解:確認的23位可攻略角色、性別中立約會、好感度4級解鎖約會/8級可求婚、結婚(無子女)與七大家族。"
+  path="/zh-hant/romance"
+  jsonLd={jsonLd}
+  crumbs={[{ label: '戀愛與家族' }]}
+  lang="zh-hant"
+  showExport
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">詞條 · 戀愛</p>
+      <h1>Moonlight Peaks <em>戀愛系統</em>與七大家族</h1>
+      <p class="intro">
+        戀愛是 {GAME.title} 的招牌玩法之一:確認的 23 位可攻略角色、性別中立的戀愛系統、
+        以及結婚(但沒有孩子)。本頁資料直接來自我們的角色資料庫,角色資訊更新後本頁會自動同步。
+        更新於 {SITE.updated}。
+      </p>
+
+      <div class="romance-video">
+        <YouTube id="YFb9capELQw" title="Moonlight Peaks romance video" />
+      </div>
+
+      <h2>戀愛機制是怎麼運作的</h2>
+      <p>
+        已確認:透過對話和送禮提升好感度,關係選單會記錄你最近送出的禮物和對方的反應。
+        <strong>好感度 4 級</strong>解鎖約會——約會是小遊戲形式(比如按對方要求的顏色扎一束花),
+        而不是被動過場動畫。<strong>好感度 8 級</strong>解鎖求婚;婚禮在求婚後一週內舉行,
+        鎮上的吸血鬼和狼人都會來參加。
+      </p>
+      <p>
+        可以同時追求多人——對方會察覺並吐槽,但只是輕微吃醋,不是硬性競爭;正式結婚後則嚴格一對一,
+        經常拒絕約會邀請會導致分手(有幾天冷靜期)。婚後配偶會搬進你的農場,解鎖新劇情,還能把配偶
+        變成吸血鬼。建立關係還會解鎖專屬圖紙和製作材料,不只是戀愛本身的回報。
+      </p>
+
+      <h2>從這裡開始:規劃你的戀愛路線</h2>
+      <p>23 位候選、目前全網還沒有完整的禮物/好感事件資料庫,先鎖定幾位再深入,比想追遍全鎮更實際:</p>
+      <div class="rp-steps">
+        <a class="rp-step" href="/tools/romance-match-quiz">
+          <span class="rp-step-num">1</span>
+          <strong>做個小測試</strong>
+          <span>基於真實線索的趣味匹配,幫你縮小心動對象的範圍。</span>
+        </a>
+        <a class="rp-step" href="/tools/families-explorer">
+          <span class="rp-step-num">2</span>
+          <strong>按家族瀏覽</strong>
+          <span>檢視全部23位可攻略角色的真實家族關係。</span>
+        </a>
+        <a class="rp-step" href="/tools/romance-planner">
+          <span class="rp-step-num">3</span>
+          <strong>建立候補名單</strong>
+          <span>把你的選擇和筆記私密儲存在瀏覽器裡。</span>
+        </a>
+        <a class="rp-step" href="/tools/gift-tracker">
+          <span class="rp-step-num">4</span>
+          <strong>記錄你的送禮結果</strong>
+          <span>官方禮物清單還沒公開前,自己記錄每次送禮的反應。</span>
+        </a>
+      </div>
+
+      <h2>基本情況</h2>
+      <p>
+        23 位可攻略居民,分佈在六大家族——吸血鬼(安布羅西亞)、狼人(洛根)、女巫(韋伯)、
+        美人魚(侯蘇)、先知(卡贊)、人類(亨德森)——外加兩位不屬於任何家族的角色:Death 和愛情惡魔 Llemi。
+        與各家族的關係預計會影響節日活動、禮物,以及哪些門會向你敞開。
+      </p>
+
+      <h2>全部23位可攻略角色,按家族分組</h2>
+      <p>資料直接來自角色資料庫——點選角色名檢視完整檔案(角色詳情頁目前為英文)。</p>
+      {familyGroups.map(([family, members]) => (
+        <div class="romance-family-group">
+          <h3>{familyNameZh[family] || family} <span class="rf-count">({members.length}位)</span></h3>
+          <table class="facts">
+            <tr><th>角色</th><th>型別</th><th>確認狀態</th></tr>
+            {members.map((c) => (
+              <tr>
+                <td><a href={`/characters/${c.id}`}>{c.name}</a></td>
+                <td>{typeZh[c.type] || typeLabels[c.type] || c.type}</td>
+                <td>{statusZh[c.status] || c.status}</td>
+              </tr>
+            ))}
+          </table>
+        </div>
+      ))}
+
+      <h2>禮物攻略</h2>
+      <p>
+        大部分角色的完整禮物清單目前全網都還沒公開——目前唯一確認的是 <strong>Saga</strong>
+        (她最愛白葡萄酒)。檢視她的<a href="/characters/saga">角色檔案</a>瞭解詳情,
+        並可以用<a href="/tools/gift-tracker">送禮記錄工具</a>記錄你自己的發現。
+      </p>
+
+      <h2>常見問題</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        發售後詞條,資料直接來自角色資料庫。相關內容:
+        <a href="/characters">全部角色</a>、<a href="/families">七大家族</a>、
+        <a href="/zh-hant/character-creator">角色建立(中文)</a>、<a href="/zh-hant/beginner-guide">新手攻略(中文)</a>。
+      </div>
+    </div>
+  </article>
+  <style>
+    .romance-family-group { margin: 20px 0; }
+    .romance-family-group h3 { margin: 0 0 8px; }
+    .rf-count { color: var(--muted); font-weight: 400; font-size: 0.85rem; }
+    .rp-steps { display: grid; grid-template-columns: 1fr; gap: 10px; margin: 14px 0 24px; }
+    @media (min-width: 640px) { .rp-steps { grid-template-columns: 1fr 1fr; } }
+    .rp-step {
+      display: flex; flex-direction: column; gap: 4px; border: 1px solid var(--line); border-radius: 14px;
+      background: var(--surface); padding: 14px 16px; text-decoration: none; position: relative;
+      transition: border-color .15s ease;
+    }
+    .rp-step:hover { border-color: color-mix(in srgb, var(--candle) 45%, var(--line)); }
+    .rp-step-num {
+      position: absolute; top: 12px; right: 14px; font-family: var(--mono); font-size: 0.7rem; color: var(--candle);
+      border: 1px solid color-mix(in srgb, var(--candle) 40%, var(--line)); border-radius: 999px; width: 20px; height: 20px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .rp-step strong { font-family: var(--display); font-weight: 600; font-size: 0.94rem; color: var(--mist); padding-right: 26px; }
+    .rp-step span:last-child { font-size: 0.8rem; color: var(--faint); line-height: 1.4; }
+    .romance-video { margin: clamp(1.6rem, 4vw, 2.6rem) 0 clamp(2rem, 5vw, 3rem); }
+  </style>
+</Base>
