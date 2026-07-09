@@ -6,7 +6,7 @@
 // To add a DAILY post: copy a block, set category:'daily', give it a unique slug + date, and it shows in the homepage "Daily updates" area.
 // image: hero lives in /public as /hero-<slug>.webp (original art, safe to use). alt is auto-built from the title.
 
-export type Block = { type: 'h2' | 'p' | 'ul' | 'callout' | 'image'; text?: string; items?: string[]; src?: string; caption?: string };
+export type Block = { type: 'h2' | 'p' | 'ul' | 'callout' | 'image' | 'link'; text?: string; items?: string[]; src?: string; caption?: string; href?: string; linkLabel?: string };
 export type Source = { label: string; url: string };
 export type Category = 'preview' | 'guide' | 'daily';
 export type Preview = {
@@ -65,6 +65,7 @@ export const previews: Preview[] = [
       { type: 'p', text: 'Press who played extended builds described meeting named residents and seeing story beats, so the newer demo is much closer to the real experience than the farm-only one.' },
       { type: 'h2', text: 'Why it matters' },
       { type: 'p', text: 'If you tried an older demo and bounced off the farm-locked loop, the newer build is worth another look. And when you read criticism online, check which version it is describing before you let it shape your expectations.' },
+      { type: 'link', text: 'For download links, what the current demo includes, and whether progress carries over to the full game, see the', href: '/demo', linkLabel: 'main demo guide' },
       { type: 'callout', text: 'A roundup of public info and feedback, in our own words — not a first-hand review.' },
     ],
     sources: [

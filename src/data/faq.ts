@@ -43,15 +43,15 @@ export const faqs: Faq[] = [
   {
     slug: 'what-platforms-is-moonlight-peaks-on', cat: 'platforms',
     q: 'What platforms is Moonlight Peaks on?',
-    a: 'Steam (Windows and Mac), Steam Deck, Nintendo Switch, Nintendo Switch 2, and Android via Google Play.',
+    a: 'Moonlight Peaks is out now on Steam (Windows and Mac), Steam Deck, Nintendo Switch, Nintendo Switch 2, and Android via Google Play.',
     related: [{ label: 'Platforms guide', href: '/platforms' }],
   },
   {
     slug: 'is-moonlight-peaks-on-ps5-or-xbox', cat: 'platforms',
     q: 'Is Moonlight Peaks on PS5 or Xbox?',
-    a: 'No PlayStation or Xbox version has been announced. The confirmed platforms are Steam, Steam Deck, Switch, Switch 2, and Android.',
+    a: 'In short: no. No PlayStation or Xbox version has been announced. The confirmed platforms are Steam, Steam Deck, Switch, Switch 2, and Android.',
     more: ['If a PS5 or Xbox release is announced later, we will update this page.'],
-    related: [{ label: 'Platforms guide', href: '/platforms' }],
+    related: [{ label: 'Platforms guide', href: '/platforms' }, { label: 'Release date', href: '/release-date' }],
   },
   {
     slug: 'is-there-a-moonlight-peaks-demo', cat: 'platforms',
@@ -63,8 +63,8 @@ export const faqs: Faq[] = [
   {
     slug: 'does-demo-progress-carry-over', cat: 'platforms',
     q: 'Does Moonlight Peaks demo progress carry over?',
-    a: 'No — treat the demo as a taster. The full game starts fresh.',
-    related: [{ label: 'Demo guide', href: '/demo' }],
+    a: 'No — no confirmed carryover has been announced, so the full game starts fresh regardless of how far you got in the demo. Treat the demo as a taster for testing the tone, controls, and early loop.',
+    related: [{ label: 'Demo guide', href: '/demo' }, { label: "Demo's two versions explained", href: '/previews/demo-versions-explained' }],
   },
 
   // ── General ──
@@ -84,9 +84,9 @@ export const faqs: Faq[] = [
   {
     slug: 'is-moonlight-peaks-multiplayer', cat: 'general',
     q: 'Is Moonlight Peaks multiplayer?',
-    a: 'No multiplayer or co-op has been announced — it is a single-player life sim (Steam lists it as Singleplayer).',
+    a: 'No — Moonlight Peaks is single-player only. No multiplayer or co-op has been announced; Steam lists it as Singleplayer, and a developer was asked about online co-op directly in Steam Community discussions with no confirmation given.',
     more: ['If co-op is announced later, we will update this page.'],
-    related: [{ label: 'Price & platforms FAQ', href: '/previews/price-platforms-faq' }],
+    related: [{ label: 'Price & platforms FAQ', href: '/previews/price-platforms-faq' }, { label: 'Does it have co-op?', href: '/faq/does-moonlight-peaks-have-co-op' }],
   },
   {
     slug: 'moonlight-peaks-reddit-discord-community', cat: 'general',

@@ -44,6 +44,7 @@ const jsonLd = [
         b.type === 'h2' ? <h2>{b.text}</h2>
         : b.type === 'ul' ? <ul>{(b.items || []).map((i) => (<li>{i}</li>))}</ul>
         : b.type === 'callout' ? <div class="callout">{b.text}</div>
+        : b.type === 'link' ? <p>{b.text} <a href={b.href}>{b.linkLabel}</a>.</p>
         : b.type === 'image' ? (
             <figure class="article-fig">
               <img src={b.src} alt={b.caption || article.title} loading="lazy" />
