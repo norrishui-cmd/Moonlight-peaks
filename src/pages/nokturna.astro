@@ -1,14 +1,14 @@
 ---
 import Base from '../layouts/Base.astro';
-import { SITE, GAME } from '../consts';
+import { SITE } from '../consts';
 import { cards } from '../data/nokturna';
 
 const types = [...new Set(cards.map((c) => c.type).filter(Boolean))] as string[];
 
 const faq = [
-  { q: 'What is Nokturna in Moonlight Peaks?', a: "Nokturna is the town's favourite collectible card game. You collect cards and challenge the residents of Moonlight Peaks to matches." },
-  { q: 'How do you play Nokturna?', a: `The full rules will be confirmed when the game launches on ${GAME.releaseLabel}. In short, you build a collection of cards and play them against townsfolk.` },
-  { q: 'Where do you get Nokturna cards?', a: `How to obtain each card will be documented here at launch — we will list the verified source for every card rather than guessing.` },
+  { q: 'What is Nokturna in Moonlight Peaks?', a: "Nokturna is the town's favourite collectible card game. You collect cards and challenge the residents of Moonlight Peaks to matches, and it also doubles as a way to build friendships." },
+  { q: 'How do you play Nokturna?', a: 'Confirmed: matches are best-of-three, with 3 cards played per round; a tie means both sides win that round. Cards use a "Persist" keyword mechanic, and decks lean into archetypes like Werewolf, Vampire, Plant, and Aquatic, or mixed builds.' },
+  { q: 'Where do you get Nokturna cards?', a: 'Not fully mapped yet — we have one confirmed card so far (Alpha Wolf, a Werewolf-archetype card that buffs other Werewolf cards). We add each card here only once its source is verified rather than guessing at a full list.' },
 ];
 
 const jsonLd = [

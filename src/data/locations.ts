@@ -79,14 +79,20 @@ export const locations: TopicItem[] = [
     related: [{ label: 'Fishing', href: '/activities/fishing' }, { label: 'The lake', href: '/locations/lake' }],
   },
   {
-    slug: 'mines', title: 'The Mines', tag: 'Underground', status: 'confirmed', image: '/hero-loc-mines.webp',
-    dek: 'Underground areas you can explore — with no combat — including the confirmed Cave of Echoes.',
-    body: [
-      'Hands-on press coverage describes a mines area you can explore, and confirms there is no combat anywhere in the game, so heading underground stays peaceful.',
-      'Confirmed: the Cave of Echoes sits at the bottom-left of the map, inside the Misty Shores area, and is your source of ore (copper, iron, gold) for tool upgrades. It unlocks more material types as the story progresses rather than all at once.',
-      'Pre-launch datamined game files also referenced Crystal Cave, Twilight Catacombs, and Lost Moon Alcove as other underground zone names — not yet developer-confirmed alongside the Cave of Echoes.',
+    slug: 'mines', title: 'Cave of Echoes & Mines', tag: 'Underground', status: 'confirmed', image: '/hero-loc-mines.webp',
+    dek: 'How to unlock the Cave of Echoes, where to find copper and iron, and the most common progression blockers.',
+    body: [],
+    sections: [
+      { title: 'How to unlock Cave of Echoes', body: 'Confirmed: the Cave of Echoes sits in the lower-left of the Misty Shores area, west of Orlock\u2019s mansion. It\u2019s locked at first and opens once you finish the "A Bridge Too Far" quest, which reopens the Ambrosia Estate and the Misty Shores area around it.' },
+      { title: 'Why Cave of Echoes is still locked', body: 'If you can\u2019t reach it yet, the quest — not a missing key item or shop purchase — is almost always the actual blocker. Community-reported: the area is locked by an in-story feud between Orlock and Fiona over a supposedly cursed bridge.' },
+      { title: 'How A Bridge Too Far relates to progression', body: 'See the full A Bridge Too Far quest guide for prerequisites and steps. In short: finish "Orlock\u2019s Wine Scheme" first, then talk to the town\u2019s spellcasters and return to the bridge to lift the feud/curse and open this area.' },
+      { title: 'Where to find Copper Ore', body: 'Community-reported: once inside, Copper Ore looks like ordinary rock with copper flecks, mined with a Pickaxe. Large ore clusters can drop up to 6 ore versus 1 from a regular node. Make a Copper Bar at the Furnace using 4 Copper Ore + 1 Charcoal.' },
+      { title: 'Where to find Iron Ore', body: 'Confirmed to exist as a later-tier resource in the same mine system, unlocked as the story progresses past the initial copper tier. Exact unlock trigger and in-cave location are not yet independently verified here.' },
+      { title: 'When new ore types unlock', body: 'Confirmed: ore access is staged rather than all-at-once — Copper Ore is available first, with Iron Ore and Gold Ore opening up later as you progress the main story, not immediately upon entering the cave.' },
+      { title: 'Common mine progression problems', body: 'If you\u2019re missing copper, check A Bridge Too Far first rather than searching the cave harder. If your Pickaxe can\u2019t break a node, it likely needs a tier upgrade at the Howling Hammer (Ridge\u2019s shop) before it can mine that ore type.' },
+      { title: 'Is there combat in the mines?', body: 'No — confirmed there is no combat anywhere in Moonlight Peaks, including the mines, so exploring underground stays peaceful.' },
     ],
-    related: [{ label: 'Is there combat?', href: '/faq/is-there-combat-in-moonlight-peaks' }, { label: 'Tools', href: '/items/tools' }, { label: 'The town', href: '/locations/town' }],
+    related: [{ label: 'A Bridge Too Far quest guide', href: '/quests/a-bridge-too-far' }, { label: 'Is there combat?', href: '/faq/is-there-combat-in-moonlight-peaks' }, { label: 'Tools', href: '/items/tools' }, { label: 'The town', href: '/locations/town' }],
     faq: [{ q: 'Is there combat in the mines?', a: 'No — previews confirm there is no combat anywhere in Moonlight Peaks, including the mines.' }],
   },
   {

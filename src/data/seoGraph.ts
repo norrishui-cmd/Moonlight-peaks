@@ -434,7 +434,7 @@ const sectionsFor = (hub: Hub, topic: Topic, modifier?: Topic) => {
     },
     {
       title: 'Current status',
-      body: 'Moonlight Peaks launches on July 7, 2026. Exact late-game tables, schedules, prices, item stats, and quest outcomes are updated only when reliable information is available.',
+      body: 'Moonlight Peaks released on July 7, 2026 and is out now. Exact late-game tables, schedules, prices, item stats, and quest outcomes are updated only when reliable post-launch information is available.',
     },
     {
       title: 'How it connects',
@@ -553,30 +553,59 @@ const characterSeoPages: SeoPage[] = characters
       guardianSource,
     ];
 
+    const hasRealGifts = !!(character.lovedGifts && character.lovedGifts.length > 0);
+    const giftPage: SeoPage = hasRealGifts
+      ? {
+          path: `/characters/${character.id}/gifts`,
+          hub: 'Character Hub',
+          hubPath: '/characters',
+          kind: 'guide' as const,
+          title: `${character.name} Gifts | Moonlight Peaks Character Guide`,
+          description: `${character.name}'s confirmed loved, liked, and disliked gifts in Moonlight Peaks.`,
+          h1: `${character.name} gifts`,
+          intro: `Confirmed gift data for ${character.name}, sourced from launch-week coverage rather than guessed.`,
+          sections: [
+            { title: 'Loved gifts', body: `${character.name}'s confirmed loved gift${character.lovedGifts!.length > 1 ? 's are' : ' is'} ${character.lovedGifts!.join(', ')} — the single most reliable way to raise their relationship level quickly when you give it as a gift.` },
+            { title: 'Liked gifts', body: character.likedGifts && character.likedGifts.length > 0 ? `Beyond their favorite, ${character.name} also responds well to: ${character.likedGifts.join(', ')}. These are solid everyday choices when you don't have their loved gift on hand.` : `No additional liked gifts are confirmed for ${character.name} yet — check back as more launch-week testing comes in.` },
+            { title: 'Disliked gifts', body: character.dislikedGifts && character.dislikedGifts.length > 0 ? `Avoid giving ${character.name}: ${character.dislikedGifts.join(', ')}. These are confirmed to land poorly, so they're worth remembering even if you're just building friendship rather than romance.` : `No disliked gifts are confirmed for ${character.name} yet.` },
+          ],
+          faqs: [
+            { q: `What gifts does ${character.name} like?`, a: `${character.name} loves ${character.lovedGifts!.join(' and ')}. Log any others you discover with the Gift Tracker.` },
+            { q: `Is ${character.name} romanceable?`, a: character.romanceable === true ? `Yes, ${character.name} is a confirmed romance option.` : `${character.name} is not a romance option.` },
+          ],
+          related: [...baseRelated, { label: 'Gift Tracker', href: '/tools/gift-tracker' }],
+          sources: characterSources,
+          image: character.img,
+        }
+      : {
+          // No real gift data exists yet for this character. This page intentionally has no
+          // concrete answer to "what gifts does X like" and is filtered out by
+          // passesSeoQualityGate's hasConcreteAnswer check below — it will not be published
+          // until real gift data exists, rather than shipping a thin "not published yet" page.
+          path: `/characters/${character.id}/gifts`,
+          hub: 'Character Hub',
+          hubPath: '/characters',
+          kind: 'guide' as const,
+          title: `${character.name} Gifts | Moonlight Peaks Character Guide`,
+          description: `${character.name} gift status in Moonlight Peaks: what is confirmed, what still needs verification.`,
+          h1: `${character.name} gifts`,
+          intro: `A launch-safe gift page for ${character.name}. It tracks gift intent without inventing loved gifts before reliable data exists.`,
+          sections: [
+            { title: 'Gift data status', body: `${character.name} is currently marked as ${statusText}. Confirmed loved gifts, liked gifts, disliked gifts, birthdays, and gift limits are not published yet — this page is intentionally excluded from search indexing until real data exists.` },
+            { title: 'What to verify', body: 'The useful data for this page is the exact gift table: loved gifts, liked gifts, neutral gifts, disliked gifts, birthday rules, relationship points, and whether any gifts are tied to quests or family events.' },
+            { title: 'Why this page exists', body: `Players search for ${character.name} gifts before the full data is available. This page keeps that query honest rather than guessing.` },
+          ],
+          faqs: [
+            { q: `What gifts does ${character.name} like?`, a: `Confirmed ${character.name} gift preferences are not published yet.` },
+            { q: `Is ${character.name} romanceable?`, a: character.romanceable === true ? `${character.name} is currently marked as romanceable.` : character.romanceable === false ? `${character.name} is not marked as a romance option.` : `${character.name}'s romance status is still to be confirmed.` },
+          ],
+          related: baseRelated,
+          sources: characterSources,
+          image: character.img,
+        };
+
     return [
-      {
-        path: `/characters/${character.id}/gifts`,
-        hub: 'Character Hub',
-        hubPath: '/characters',
-        kind: 'guide' as const,
-        title: `${character.name} Gifts | Moonlight Peaks Character Guide`,
-        description: `${character.name} gift status in Moonlight Peaks: what is confirmed, what still needs launch verification, and where to check next.`,
-        h1: `${character.name} gifts`,
-        intro: `A launch-safe gift page for ${character.name}. It tracks gift intent without inventing loved gifts before reliable live-game data exists.`,
-        sections: [
-          { title: 'Gift data status', body: `${character.name} is currently marked as ${statusText}. Confirmed loved gifts, liked gifts, disliked gifts, birthdays, and gift limits will be added only when they can be verified.` },
-          { title: 'What to verify at launch', body: 'The useful data for this page is the exact gift table: loved gifts, liked gifts, neutral gifts, disliked gifts, birthday rules, relationship points, and whether any gifts are tied to quests or family events.' },
-          { title: 'Why this page exists', body: `Players search for ${character.name} gifts before the full data is available. This page keeps that query honest by separating profile facts from gift data that still needs confirmation.` },
-        ],
-        faqs: [
-          { q: `What gifts does ${character.name} like?`, a: `Confirmed ${character.name} gift preferences are not published yet. This page will update after the live game confirms them.` },
-          { q: `Is ${character.name} romanceable?`, a: character.romanceable === true ? `${character.name} is currently marked as romanceable.` : character.romanceable === false ? `${character.name} is not marked as a romance option.` : `${character.name}'s romance status is still to be confirmed.` },
-          { q: 'Are gift tables guessed here?', a: 'No. Gift tables are added only after reliable data exists, because guessed gift pages are bad for players and risky for search quality.' },
-        ],
-        related: baseRelated,
-        sources: characterSources,
-        image: character.img,
-      },
+      giftPage,
       {
         path: `/characters/${character.id}/romance-status`,
         hub: 'Character Hub',
@@ -842,6 +871,24 @@ const hasSafePublicSources = (page: SeoPage): boolean =>
   (page.sources || []).length >= 2 &&
   (page.sources || []).every((source) => !/wiki\.gg|moonlightpeaks\.wiki/i.test(source.href));
 
+// Semantic check: a page can pass every structural metric (word count, section count, FAQ
+// count, related links, sources) while still giving zero real answer to the query it targets —
+// e.g. an FAQ answer that just says "not published yet" or "will be added". This scans the
+// answer-bearing content (intro, section bodies, and FAQ answers — not titles, which often
+// legitimately contain words like "status") for phrases that signal an absent answer, and
+// requires the page's FIRST FAQ answer in particular to contain a concrete claim.
+const NO_ANSWER_PATTERN =
+  /\bnot (?:yet )?(?:published|confirmed|available|sourced|documented|known)(?: yet)?\b|\bwill be added\b|\bto be confirmed\b|\bcheck back later\b|\bdata not published\b|\bcoming later\b|\bstill (?:unknown|to be confirmed)\b|\bnot yet mapped\b|\bnot yet documented\b/i;
+
+const hasConcreteAnswer = (page: SeoPage): boolean => {
+  // By convention every generator puts the FAQ that directly answers the page's target query
+  // FIRST (e.g. "What gifts does X like?" for a gifts page). Checking only that one is what
+  // catches a page that answers a *different*, easier question (like "is X romanceable?")
+  // while dodging the one it was actually built for.
+  if (page.faqs.length === 0) return false;
+  return !NO_ANSWER_PATTERN.test(page.faqs[0].a);
+};
+
 const passesSeoQualityGate = (page: SeoPage): boolean =>
   page.path.split('/').filter(Boolean).length >= 3 &&
   page.sections.length >= 3 &&
@@ -850,6 +897,7 @@ const passesSeoQualityGate = (page: SeoPage): boolean =>
   page.related.length >= 3 &&
   textSize(page) >= 900 &&
   hasSafePublicSources(page) &&
+  hasConcreteAnswer(page) &&
   !hasUnsafeDraftMarker(page);
 
 const computedSeoPages: SeoPage[] = unique(trustedGenerated, (page) => page.path)

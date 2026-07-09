@@ -28,8 +28,8 @@ export const faqs: Faq[] = [
   {
     slug: 'when-does-moonlight-peaks-release', cat: 'platforms',
     q: 'When does Moonlight Peaks release?',
-    a: 'Moonlight Peaks launches on July 7, 2026.',
-    more: ['It arrives the same day on Steam (PC and Mac), Steam Deck, Nintendo Switch, Nintendo Switch 2, and Android via Google Play.'],
+    a: 'Moonlight Peaks released on July 7, 2026, and is out now.',
+    more: ['It arrived the same day on Steam (PC and Mac), Steam Deck, Nintendo Switch, Nintendo Switch 2, and Android via Google Play.'],
     related: [{ label: 'Release date & platforms', href: '/release-date' }, { label: 'Price & platforms FAQ', href: '/previews/price-platforms-faq' }],
   },
   {

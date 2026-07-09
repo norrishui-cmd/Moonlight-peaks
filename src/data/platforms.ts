@@ -13,24 +13,24 @@ export const platformsSection: TopicSection = {
 
 export const platforms: TopicItem[] = [
   {
-    slug: 'steam-deck', title: 'Moonlight Peaks on Steam Deck', tag: 'Steam Deck', status: 'expected',
-    dek: 'Moonlight Peaks releases on Steam for PC, so it is playable on Steam Deck — here is what to expect.',
+    slug: 'steam-deck', title: 'Moonlight Peaks on Steam Deck', tag: 'Steam Deck', status: 'confirmed',
+    dek: 'Moonlight Peaks is out now on Steam for PC and Mac, so it\u2019s playable on Steam Deck.',
     body: [
-      'Because Moonlight Peaks launches on Steam for Windows and Mac, it can be played on Steam Deck like other Steam titles.',
-      'Hands-on previews suggest the game plays well with a gamepad, which bodes well for the Deck. Valve\u2019s official \u201CSteam Deck Verified\u201D rating will be confirmed around launch.',
+      'Moonlight Peaks is available on Steam for Windows and Mac, so it plays on Steam Deck like other Steam titles.',
+      'A confirmed launch-week issue: some players hit a crash on Steam Deck startup. The reported fix is switching the compatibility tool to Proton 9.0-4 in the game\u2019s Properties → Compatibility settings. A formal Valve "Steam Deck Verified" rating has not been confirmed here yet.',
     ],
-    related: [{ label: 'All platforms', href: '/platforms' }, { label: 'Release date', href: '/release-date' }, { label: 'What platforms?', href: '/faq/what-platforms-is-moonlight-peaks-on' }],
-    faq: [{ q: 'Is Moonlight Peaks Steam Deck Verified?', a: 'It launches on Steam, so it is playable on Steam Deck; the official Verified rating will be confirmed around the July 7, 2026 launch.' }],
+    related: [{ label: 'All platforms', href: '/platforms' }, { label: 'Release date', href: '/release-date' }, { label: 'Known issues', href: '/known-issues' }],
+    faq: [{ q: 'Is Moonlight Peaks Steam Deck Verified?', a: 'A formal Valve "Steam Deck Verified" rating isn\u2019t confirmed here yet. The game is playable on Deck via Steam; if you hit a startup crash, switching to Proton 9.0-4 is the reported fix.' }],
   },
   {
     slug: 'switch', title: 'Moonlight Peaks on Nintendo Switch', tag: 'Switch', status: 'confirmed',
-    dek: 'Moonlight Peaks launches on the original Nintendo Switch — price, the free demo, and the Switch 2 upgrade.',
+    dek: 'Moonlight Peaks is out now on the original Nintendo Switch — price, the free demo, and the Switch 2 upgrade.',
     body: [
-      'Moonlight Peaks releases on the original Nintendo Switch on July 7, 2026, and the free demo is available on the eShop.',
-      'There is also a separate, enhanced Nintendo Switch 2 edition; players who buy on the original Switch have been told a Switch-to-Switch 2 upgrade pass will be available.',
+      'Moonlight Peaks released on the original Nintendo Switch on July 7, 2026, and the free demo is available on the eShop.',
+      'There is also a separate, enhanced Nintendo Switch 2 edition; players who bought on the original Switch have been told a Switch-to-Switch 2 upgrade pass will be available.',
     ],
     related: [{ label: 'All platforms', href: '/platforms' }, { label: 'On Switch 2', href: '/platforms/switch-2' }, { label: 'Release date', href: '/release-date' }],
-    faq: [{ q: 'Is Moonlight Peaks on the original Nintendo Switch?', a: 'Yes — it launches on the original Switch on July 7, 2026, and the free demo is on the eShop. A separate, enhanced Switch 2 edition is also available.' }],
+    faq: [{ q: 'Is Moonlight Peaks on the original Nintendo Switch?', a: 'Yes — it released on the original Switch on July 7, 2026, and the free demo is on the eShop. A separate, enhanced Switch 2 edition is also available.' }],
   },
   {
     slug: 'switch-2', title: 'Moonlight Peaks on Nintendo Switch 2', tag: 'Switch 2', status: 'confirmed',
@@ -46,10 +46,10 @@ export const platforms: TopicItem[] = [
     slug: 'android', title: 'Moonlight Peaks on Android (Google Play)', tag: 'Android', status: 'confirmed',
     dek: 'Moonlight Peaks is coming to Android via Google Play — what that means for mobile players.',
     body: [
-      'Moonlight Peaks launches on Android through Google Play (Google Play Games), making it one of the few cozy life sims of this scope to arrive day one on mobile.',
+      'Moonlight Peaks released on Android through Google Play (Google Play Games), making it one of the few cozy life sims of this scope to arrive day one on mobile.',
       'Exact device requirements and touch-control details will be confirmed at launch.',
     ],
     related: [{ label: 'All platforms', href: '/platforms' }, { label: 'What platforms?', href: '/faq/what-platforms-is-moonlight-peaks-on' }],
-    faq: [{ q: 'Is Moonlight Peaks on iOS or iPhone?', a: 'No iOS version has been announced. On mobile, Moonlight Peaks launches on Android via Google Play.' }],
+    faq: [{ q: 'Is Moonlight Peaks on iOS or iPhone?', a: 'No iOS version has been announced. On mobile, Moonlight Peaks is available on Android via Google Play.' }],
   },
 ];

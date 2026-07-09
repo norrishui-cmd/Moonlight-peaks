@@ -1,0 +1,139 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+
+const faq = [
+  { q: 'How do you start A Bridge Too Far in Moonlight Peaks?', a: 'Confirmed: it follows "Orlock\u2019s Wine Scheme" — apologize to Orlock, pay Samael a 350-gold debt at The Broken Lamp, then report back to Orlock. A cutscene then triggers on entering town, showing Orlock, Evan, and Mina locked out of the Ambrosia Estate.' },
+  { q: 'Why is the bridge to Misty Shores blocked?', a: 'Player-reported/community-sourced: Orlock believes Fiona hexed the bridge out of spite. It turns out there was no actual curse — the two had a falling-out where Orlock said something rude, and the "curse" is really just the fallout from that argument.' },
+  { q: 'What do you need to do to fix the bridge?', a: 'Community-reported: speak to each of the requested spellcasters (Fiona, Sabrina, Luna, and Noel are named in coverage) and then return to the bridge. After a short cutscene, the curse lifts and the area opens.' },
+  { q: 'What does A Bridge Too Far unlock?', a: 'Confirmed: completing it reopens the Ambrosia Estate and unlocks Misty Shores, including the Cave of Echoes — your source of Copper Ore for tool upgrades.' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: SITE.url },
+    { '@type': 'ListItem', position: 2, name: 'Quests', item: new URL('/quests', SITE.url).href },
+    { '@type': 'ListItem', position: 3, name: 'A Bridge Too Far', item: new URL('/quests/a-bridge-too-far', SITE.url).href },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks: A Bridge Too Far Quest Guide"
+  description="How to start and finish A Bridge Too Far in Moonlight Peaks: the Orlock/Fiona bridge feud, who to talk to, and what it unlocks (Misty Shores, Cave of Echoes, copper)."
+  path="/quests/a-bridge-too-far"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Quests', href: '/quests' }, { label: 'A Bridge Too Far' }]}
+  showExport
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Quest guide</p>
+      <h1>Moonlight Peaks: <em>A Bridge Too Far</em></h1>
+
+      <div class="callout">
+        <strong>Quick answer:</strong> A Bridge Too Far unlocks after "Orlock's Wine Scheme." Talk to
+        the town's spellcasters (Fiona, Sabrina, Luna, and Noel are named in early walkthroughs), then
+        return to the bridge outside the Ambrosia Estate. Finishing it opens Misty Shores and the Cave
+        of Echoes — your first source of Copper Ore.
+      </div>
+
+      <h2>How to start A Bridge Too Far</h2>
+      <p>
+        Confirmed: this quest follows directly from <strong>Orlock's Wine Scheme</strong>, the
+        opening quest where Orlock asks you to make him Blood Wine. That quest resolves with you
+        apologizing to Orlock, paying off a 350-gold debt to Samael at The Broken Lamp, and reporting
+        back. A Bridge Too Far then triggers automatically the next time you walk into town, with a
+        cutscene showing Orlock, Evan, and Mina locked out of the Ambrosia Estate.
+      </p>
+
+      <h2>Prerequisite quests</h2>
+      <ul>
+        <li><a href="/characters/orlock">Orlock's Wine Scheme</a> — make Blood Wine, resolve the Samael debt.</li>
+      </ul>
+
+      <h2>Why the bridge is blocked</h2>
+      <p>
+        <span class="tag-community">Community-reported</span> Orlock believes Fiona cursed the
+        bridge connecting the Ambrosia Estate to town, out of spite. The twist reported by early
+        players: there's no real curse. Orlock and Fiona had an argument in which Orlock said
+        something rude, and the "hex" is really just fallout from that falling-out — the quest is
+        as much about patching up a family feud as it is a literal magical fix.
+      </p>
+
+      <h2>Step-by-step progression</h2>
+      <p><span class="tag-community">Community-reported</span> — not independently re-verified by us step for step, but consistent across multiple launch-week walkthroughs:</p>
+      <ol class="steps">
+        <li>Finish "Orlock's Wine Scheme" (apologize to Orlock, pay Samael 350 gold, report back).</li>
+        <li>Enter town to trigger the cutscene revealing the Ambrosia Estate lockout.</li>
+        <li>Talk to <a href="/characters/fiona">Fiona</a>, <a href="/characters/sabrina">Sabrina</a>, <a href="/characters/luna">Luna</a>, and <a href="/characters/noel">Noel</a> — the witches/spellcasters named in coverage of this quest.</li>
+        <li>Return to the bridge near the Ambrosia Estate once you've spoken to all of them.</li>
+        <li>Watch the resolution cutscene — the curse lifts and the bridge opens.</li>
+      </ol>
+
+      <h2>What the quest unlocks</h2>
+      <p>
+        Confirmed: finishing A Bridge Too Far reopens the <strong>Ambrosia Estate</strong> and
+        unlocks the wider <strong>Misty Shores</strong> area, including the <strong>Cave of
+        Echoes</strong> — the mine in the lower-left of Misty Shores where you find Copper Ore.
+      </p>
+
+      <h2>Relationship to Misty Shores</h2>
+      <p>
+        Misty Shores stays gated until this quest resolves. If you're blocked on fishing, mining, or
+        other Misty Shores content, this quest — not a missing shop item — is almost always the
+        actual bottleneck.
+      </p>
+
+      <h2>Relationship to the Cave of Echoes</h2>
+      <p>
+        <span class="tag-community">Community-reported</span> Once the bridge opens, head to the far
+        left corner of the beach and enter the hole in the cliffside to reach the Cave of Echoes.
+        Copper Ore looks like ordinary rock with copper flecks; break it with a Pickaxe. Large ore
+        clusters can drop up to 6 ore versus 1 from regular nodes. Make a Copper Bar at the Furnace
+        with 4 Copper Ore + 1 Charcoal.
+      </p>
+
+      <h2>Relationship to finding Death</h2>
+      <p>
+        The Ambrosia Graveyard, where Death can be found, sits near the Ambrosia Mansion in the same
+        area this quest reopens — so if you can't find Death yet, finishing this quest is a likely
+        prerequisite. See the Death profile page for what's separately confirmed about him.
+      </p>
+
+      <h2>Common problems</h2>
+      <ul>
+        <li><strong>Quest won't trigger:</strong> confirm you've actually finished Orlock's Wine
+          Scheme (paid Samael and reported back to Orlock), not just started it.</li>
+        <li><strong>Can't find one of the spellcasters:</strong> Fiona and Noel are both in Moonlit
+          Pines; Sabrina and Luna are usually found in or near their shops in town.</li>
+        <li><strong>Bridge still blocked after talking to everyone:</strong> not yet confirmed here
+          — if you've spoken to all four and it's still stuck, this may be an ordering issue or a
+          bug; check <a href="/known-issues">known issues</a> or report it via the feedback thumbs-down.</li>
+      </ul>
+
+      <h2>FAQ</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        Related: <a href="/quests">all quests</a>, <a href="/locations/mines">Cave of Echoes & mines</a>,
+        <a href="/characters/death">Death</a>, <a href="/characters/orlock">Orlock</a>,
+        <a href="/characters/fiona">Fiona</a>.
+      </div>
+    </div>
+  </article>
+  <style>
+    .tag-community {
+      display: inline-block; font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.02em;
+      color: var(--faint); border: 1px solid var(--line); border-radius: 999px; padding: 2px 8px;
+      margin-right: 6px; vertical-align: middle;
+    }
+  </style>
+</Base>

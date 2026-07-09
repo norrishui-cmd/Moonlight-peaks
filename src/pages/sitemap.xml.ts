@@ -13,15 +13,46 @@ import { news } from '../data/news';
 import { seoPages } from '../data/seoGraph';
 import { itemCategories } from '../data/items';
 
-// Bump LASTMOD only when you push a meaningful content update (not every deploy / not daily),
-// otherwise search engines learn to ignore it.
-const LASTMOD = '2026-07-07';
+// Per-page lastmod is not tracked by a CMS in this project, so instead of one blanket date for
+// every URL (which teaches search engines to ignore lastmod entirely), pages that received real,
+// substantial content edits in recent rounds get that later date; everything else defaults to
+// launch day. Bump a path prefix here only when its actual content changed.
+const LASTMOD_LAUNCH = '2026-07-07';
+const LASTMOD_OVERRIDES: [string, string][] = [
+  // Post-launch data/structure rounds (real content changes), most recent first.
+  ['/quests', '2026-07-09'],
+  ['/mini-games', '2026-07-09'],
+  ['/inventory', '2026-07-09'],
+  ['/shipping', '2026-07-09'],
+  ['/house', '2026-07-09'],
+  ['/friendship', '2026-07-09'],
+  ['/romance', '2026-07-09'],
+  ['/farming', '2026-07-09'],
+  ['/shapeshifting', '2026-07-09'],
+  ['/map', '2026-07-09'],
+  ['/nokturna', '2026-07-09'],
+  ['/platforms', '2026-07-09'],
+  ['/demo', '2026-07-09'],
+  ['/guides', '2026-07-08'],
+  ['/characters', '2026-07-08'],
+  ['/achievements', '2026-07-08'],
+  ['/known-issues', '2026-07-08'],
+  ['/reviews', '2026-07-08'],
+  ['/locations', '2026-07-09'],
+  ['/families', '2026-07-08'],
+  ['/faq', '2026-07-08'],
+  ['/tools', '2026-07-08'],
+];
+const lastmodFor = (path: string): string => {
+  const hit = LASTMOD_OVERRIDES.find(([prefix]) => path === prefix || path.startsWith(`${prefix}/`));
+  return hit ? hit[1] : LASTMOD_LAUNCH;
+};
 
 type Entry = { path: string; images?: string[] };
 
 const homeImages = ['/card-release.webp', '/card-guide.webp', '/card-nokturna.webp', '/card-romance.webp', '/card-cheats.webp', '/card-crops.webp'];
 
-const staticPaths = ['/release-date', '/demo', '/platforms', '/system-requirements', '/languages', '/launch-day', '/known-issues', '/best-settings', '/beginner-guide', '/guides', '/achievements', '/quests', '/mini-games', '/inventory', '/shipping', '/house', '/friendship', '/tools', '/tools/platform-picker', '/tools/romance-gift-finder', '/tools/romance-match-quiz', '/tools/romance-planner', '/tools/item-tracker', '/tools/farming-profit-planner', '/tools/submit-data', '/tools/families-explorer', '/tools/gift-tracker', '/tools/nokturna-tracker', '/export', '/farming', '/fishing', '/magic', '/character-creator', '/shapeshifting', '/items', '/environment', '/behind-the-scenes', '/activities', '/characters', '/moonlight-peaks-vs-stardew-valley', '/nokturna', '/map', '/romance', '/cheats', '/reviews', '/about', '/privacy', '/previews', '/faq', '/locations', '/families', '/compare', '/es', '/es/beginner-guide', '/es/release-date', '/es/faq', '/es/characters', '/es/farming', '/es/magic', '/es/platforms', '/es/romance', '/es/environment', '/es/items', '/es/locations', '/es/families', '/es/activities', '/es/demo', '/es/cheats', '/es/character-creator', '/es/shapeshifting', '/es/languages', '/es/guides', '/es/tools', '/es/about', '/ja', '/ja/beginner-guide', '/ja/release-date', '/ja/faq', '/ja/characters', '/ja/farming', '/ja/magic', '/ja/platforms', '/ja/romance', '/ja/environment', '/ja/items', '/ja/locations', '/ja/families', '/ja/activities', '/ja/demo', '/ja/cheats', '/ja/character-creator', '/ja/shapeshifting', '/ja/languages', '/ja/guides', '/ja/tools', '/ja/about', '/zh', '/zh/beginner-guide', '/zh/release-date', '/zh/faq', '/zh/characters', '/zh/farming', '/zh/magic', '/zh/platforms', '/zh/romance', '/zh/environment', '/zh/items', '/zh/locations', '/zh/families', '/zh/activities', '/zh/demo', '/zh/cheats', '/zh/character-creator', '/zh/shapeshifting', '/zh/languages', '/zh/guides', '/zh/tools', '/zh/about'];
+const staticPaths = ['/release-date', '/demo', '/platforms', '/system-requirements', '/languages', '/launch-day', '/known-issues', '/best-settings', '/beginner-guide', '/guides', '/achievements', '/quests', '/quests/a-bridge-too-far', '/mini-games', '/inventory', '/shipping', '/house', '/friendship', '/tools', '/tools/platform-picker', '/tools/romance-gift-finder', '/tools/romance-match-quiz', '/tools/romance-planner', '/tools/item-tracker', '/tools/farming-profit-planner', '/tools/submit-data', '/tools/families-explorer', '/tools/gift-tracker', '/tools/nokturna-tracker', '/export', '/farming', '/fishing', '/magic', '/character-creator', '/shapeshifting', '/items', '/environment', '/behind-the-scenes', '/activities', '/characters', '/moonlight-peaks-vs-stardew-valley', '/nokturna', '/map', '/romance', '/cheats', '/reviews', '/about', '/privacy', '/previews', '/faq', '/locations', '/families', '/compare', '/es', '/es/beginner-guide', '/es/release-date', '/es/faq', '/es/characters', '/es/farming', '/es/magic', '/es/platforms', '/es/romance', '/es/environment', '/es/items', '/es/locations', '/es/families', '/es/activities', '/es/demo', '/es/cheats', '/es/character-creator', '/es/shapeshifting', '/es/languages', '/es/guides', '/es/tools', '/es/about', '/ja', '/ja/beginner-guide', '/ja/release-date', '/ja/faq', '/ja/characters', '/ja/farming', '/ja/magic', '/ja/platforms', '/ja/romance', '/ja/environment', '/ja/items', '/ja/locations', '/ja/families', '/ja/activities', '/ja/demo', '/ja/cheats', '/ja/character-creator', '/ja/shapeshifting', '/ja/languages', '/ja/guides', '/ja/tools', '/ja/about', '/zh', '/zh/beginner-guide', '/zh/release-date', '/zh/faq', '/zh/characters', '/zh/farming', '/zh/magic', '/zh/platforms', '/zh/romance', '/zh/environment', '/zh/items', '/zh/locations', '/zh/families', '/zh/activities', '/zh/demo', '/zh/cheats', '/zh/character-creator', '/zh/shapeshifting', '/zh/languages', '/zh/guides', '/zh/tools', '/zh/about'];
 const translatedCharIds = ['count-dracula', 'saga', 'luna', 'orlock', 'brook', 'the-warlock'];
 const translatedCharPaths = ['es', 'ja', 'zh'].flatMap((l) => translatedCharIds.map((id) => `/${l}/characters/${id}`));
 
@@ -55,7 +86,7 @@ export const GET: APIRoute = () => {
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
 ${entries.map((e) => `  <url>
     <loc>${abs(e.path)}</loc>
-    <lastmod>${LASTMOD}</lastmod>${(e.images || []).map((img) => `
+    <lastmod>${lastmodFor(e.path)}</lastmod>${(e.images || []).map((img) => `
     <image:image><image:loc>${abs(img)}</image:loc></image:image>`).join('')}
   </url>`).join('\n')}
 </urlset>`;

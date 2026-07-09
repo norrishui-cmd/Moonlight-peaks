@@ -7,8 +7,8 @@ const colorOf = Object.fromEntries(categories.map((c) => [c.id, c.color]));
 const labelOf = Object.fromEntries(categories.map((c) => [c.id, c.label]));
 
 const faq = [
-  { q: 'Is there an interactive map for Moonlight Peaks?', a: `Yes — this is a fan-made interactive town map. It will be filled with verified fishing spots, foraging areas, shops, and resident homes once ${GAME.title} launches on ${GAME.releaseLabel}.` },
-  { q: 'Where can you fish in Moonlight Peaks?', a: 'Exact fishing spots will be marked on this map at launch, with the fish, season, and time for each. Until then the markers shown are placeholders.' },
+  { q: 'Is there an interactive map for Moonlight Peaks?', a: 'Yes — this fan-made map plots real, confirmed location and shop names (Silverveil Lake, Cave of Echoes, Town Hall, Webb of Wonders, Howling Hammer). Positions are schematic approximations based on descriptive clues in guides, not measured from an official map image, so treat placement as directional rather than exact.' },
+  { q: 'Where can you fish in Moonlight Peaks?', a: 'Confirmed: Silverveil Lake supports fishing and is home to the Hosu mermaid family. Exact fish species and specific casting spots within the lake are not yet sourced — see the fishing guide for what is confirmed so far.' },
 ];
 
 const jsonLd = [
@@ -36,9 +36,10 @@ const jsonLd = [
 
       {!markersConfirmed && (
         <div class="callout wip">
-          <strong>Placeholder layout.</strong> The markers below are examples so the tool is usable —
-          they are <em>not</em> real in-game locations yet. We add verified fishing spots, foraging
-          areas, shops, and homes when {GAME.title} launches on {GAME.releaseLabel}.
+          <strong>Schematic positions.</strong> Marker names below (Silverveil Lake, Cave of Echoes,
+          Town Hall, and more) are real and confirmed — but their placement on this map is an
+          approximation based on descriptive clues from guides, not measured from an official map
+          image. We'll switch to pixel-accurate coordinates once we can source them from the live game.
         </div>
       )}
 

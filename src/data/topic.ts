@@ -14,6 +14,9 @@ export type TopicItem = {
   image?: string;
   status?: TopicStatus;
   body: string[];
+  // Optional structured H2 sections, used instead of `body` when a page needs explicit,
+  // named subsections (e.g. "How to Unlock X" / "Common Problems") rather than flat paragraphs.
+  sections?: { title: string; body: string }[];
   related?: TopicLink[];
   faq?: TopicFaq[];
 };

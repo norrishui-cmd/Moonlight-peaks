@@ -1,6 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
-import { SITE, GAME } from '../consts';
+import { SITE } from '../consts';
 import type { TopicSection, TopicItem } from '../data/topic';
 
 interface Props { section: TopicSection; item: TopicItem; prev: TopicItem; next: TopicItem; }
@@ -43,11 +43,22 @@ if (item.faq && item.faq.length > 0) {
       <h1>{item.title}</h1>
       <p class="intro">{item.dek}</p>
 
-      <h2>What we know</h2>
-      {item.body.map((p) => (<p>{p}</p>))}
+      {item.sections && item.sections.length > 0 ? (
+        item.sections.map((s) => (
+          <>
+            <h2>{s.title}</h2>
+            <p>{s.body}</p>
+          </>
+        ))
+      ) : (
+        <>
+          <h2>What we know</h2>
+          {item.body.map((p) => (<p>{p}</p>))}
+        </>
+      )}
 
       <div class="callout">
-        <strong>Status:</strong> {statusLabel}. We keep developer-confirmed facts separate from reported or expected details and never invent data - full details are added at launch on {GAME.releaseLabel}.
+        <strong>Status:</strong> {statusLabel}. We keep developer-confirmed facts separate from reported or expected details and never invent data — this page is updated as real post-launch information is verified.
       </div>
 
       {item.faq && item.faq.length > 0 && (
