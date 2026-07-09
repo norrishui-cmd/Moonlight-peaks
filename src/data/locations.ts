@@ -6,9 +6,9 @@ export const locationsSection: TopicSection = {
   eyebrow: 'World',
   heading: 'Moonlight Peaks <em>locations</em>',
   schemaType: 'Place',
-  title: 'Moonlight Peaks Locations —Town, Farm, Forest & More',
-  description: 'A guide to the places in Moonlight Peaks: the magical mountain town, your farm and cottage, the forest, the lake, the mines and more —what is confirmed and what we expect at launch.',
-  intro: 'The places that make up Moonlight Peaks —the magical mountain town, your homestead, and the wild spots around it. We mark what is developer-confirmed versus reported, datamined (from pre-launch game files, cross-referenced against pre-launch references), or expected, and fill in detail as the July 7, 2026 launch lands.',
+  title: 'Moonlight Peaks Locations: Town, Howling Marshes, Crest Garden & More',
+  description: 'Every confirmed Moonlight Peaks location: the town, your farm, Misty Shores, the Cave of Echoes, Howling Marshes, Crest Garden, and more — developer-confirmed facts kept separate from reports.',
+  intro: 'The places that make up Moonlight Peaks — the magical mountain town, your homestead, and the wild spots around it. We mark what is developer-confirmed versus reported, datamined (from pre-launch game files, cross-referenced against pre-launch references), or expected, updating each entry as more is verified against the live game.',
 };
 
 export const locations: TopicItem[] = [

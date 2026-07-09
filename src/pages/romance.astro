@@ -1,6 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
-import { SITE, GAME } from '../consts';
+import { SITE } from '../consts';
 import YouTube from '../components/YouTube.astro';
 import PriorityLinks from '../components/PriorityLinks.astro';
 import { romancePriorityLinks } from '../data/priorityLinks';
@@ -115,10 +115,11 @@ const jsonLd = [
       <p class="eyebrow">Entry · Hearts</p>
       <h1>Moonlight Peaks <em>romance options</em>, bachelors & marriage candidates</h1>
       <p class="intro">
-        Romance is a headline feature of {GAME.title}: 23 confirmed romance options — bachelors,
-        bachelorettes, and marriage candidates alike — with gender-neutral dating and marriage (though
-        no children). This page is built directly from our character data, so the roster of dateable
-        characters below updates automatically as we verify more. Updated {SITE.updated}.
+        23 confirmed romance options in Moonlight Peaks — bachelors, bachelorettes, and marriage
+        candidates alike, with fully gender-neutral dating regardless of how you build your
+        character. Marriage is confirmed (though there are no children). This page is built
+        directly from our character data, so the roster of dateable characters below updates
+        automatically as we verify more. Updated {SITE.updated}.
       </p>
 
       <div class="romance-video">

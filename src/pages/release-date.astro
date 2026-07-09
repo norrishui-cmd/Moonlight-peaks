@@ -7,11 +7,12 @@ import { previews } from '../data/previews';
 import { releasePriorityLinks } from '../data/priorityLinks';
 
 const faq = [
-  { q: 'When does Moonlight Peaks release?', a: `Moonlight Peaks launches around ${GAME.releaseLabel} on Steam, Nintendo Switch, Nintendo Switch 2, and Android via Google Play. ${GAME.releaseNote}` },
-  { q: 'What time does Moonlight Peaks unlock?', a: `No official hour-by-hour unlock time has been published for ${GAME.title}. Steam and eShop unlocks typically land at a fixed UTC time (commonly midnight UTC, which is late evening the day before on the US West Coast), but the exact minute varies by storefront and region. Check the countdown timer directly on the game's Steam page for the most accurate local unlock time.` },
+  { q: 'When does Moonlight Peaks release?', a: `Moonlight Peaks released on ${GAME.releaseLabel} on Steam, Nintendo Switch, Nintendo Switch 2, and Android via Google Play, and is out now. ${GAME.releaseNote}` },
+  { q: 'What time does Moonlight Peaks unlock?', a: `No official hour-by-hour unlock time was published for ${GAME.title}'s launch. Steam and eShop unlocks typically land at a fixed UTC time (commonly midnight UTC, which is late evening the day before on the US West Coast), but the exact minute varies by storefront and region.` },
   { q: 'How much does Moonlight Peaks cost?', a: `It is ${GAME.price} on Steam (PC/Mac), Switch, and Android, and $39.99 on Switch 2, with ${GAME.launchDiscount}.` },
   { q: 'Is there a Moonlight Peaks demo?', a: 'Yes. A free demo is available on Steam (PC/Mac) and the Nintendo Switch eShop (also playable on Switch 2). It includes character creation, fishing, flower arranging, and embroidery.' },
-  { q: 'Is Moonlight Peaks on console?', a: 'Yes — it launches on Nintendo Switch and Switch 2 alongside PC and Android, with a physical Switch/Switch 2 release also confirmed for Japan with English-language support. The Switch demo is playable on Switch 2.' },
+  { q: 'Is Moonlight Peaks on PS5 or Xbox?', a: 'No — no PlayStation or Xbox version has been announced. Confirmed platforms are Steam (PC/Mac), Steam Deck, Nintendo Switch, Nintendo Switch 2, and Android.' },
+  { q: 'Is Moonlight Peaks on console?', a: 'Yes — it released on Nintendo Switch and Switch 2 alongside PC and Android, with a physical Switch/Switch 2 release also confirmed for Japan with English-language support. The Switch demo is playable on Switch 2.' },
   { q: 'Is Moonlight Peaks multiplayer?', a: 'Moonlight Peaks is a single-player cozy life sim focused on farming, relationships, and town mysteries. There is no announced co-op mode.' },
 ];
 
@@ -24,8 +25,8 @@ const jsonLd = [
 ];
 ---
 <Base
-  title="Moonlight Peaks Release Date - Steam, Switch, PC & Android"
-  description="Moonlight Peaks release date guide for Steam, Switch, Switch 2, Android, demo access, price, system requirements, languages, and launch timing."
+  title="Moonlight Peaks Release Date & Platforms: Is It on PS5 or Xbox?"
+  description="Moonlight Peaks is out now on Steam, Switch, Switch 2, and Android — no PlayStation or Xbox version has been announced. Price, demo access, and launch timing confirmed."
   path="/release-date"
   jsonLd={jsonLd}
   crumbs={[{ label: 'Release date' }]}
@@ -37,7 +38,9 @@ const jsonLd = [
       <h1>Moonlight Peaks <em>release date</em> — Switch, Switch 2 &amp; PC</h1>
       <p class="intro">
         Everything confirmed about the {GAME.title} launch — the date, where to play, the price,
-        and the free demo you can try right now. Last updated {SITE.updated}.
+        and the free demo you can try right now. Confirmed platforms: Steam (PC/Mac), Steam Deck,
+        Nintendo Switch, Nintendo Switch 2, and Android — no PlayStation (PS5) or Xbox version has
+        been announced. Last updated {SITE.updated}.
       </p>
 
       <YouTube id="VL_15TiRRAM" title="Moonlight Peaks release date trailer" />

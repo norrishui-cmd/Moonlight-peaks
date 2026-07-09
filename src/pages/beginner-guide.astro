@@ -1,6 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
-import { SITE, GAME } from '../consts';
+import { SITE } from '../consts';
 import PriorityLinks from '../components/PriorityLinks.astro';
 import { beginnerPriorityLinks } from '../data/priorityLinks';
 
@@ -12,8 +12,8 @@ const jsonLd = {
 };
 ---
 <Base
-  title="Moonlight Peaks Beginner Guide — Tips Before Launch"
-  description="A pre-launch beginner guide to Moonlight Peaks: the night-farming loop, vampire powers, the seven families, romance, fishing, potions, and the Nokturna card game."
+  title="Moonlight Peaks Beginner Guide: First Week Tips & Early Unlocks"
+  description="Moonlight Peaks beginner guide: what to do night one, the vampire farming loop, first quests, magic unlocks, and early progression — confirmed from the live game, not pre-launch guesswork."
   path="/beginner-guide"
   jsonLd={jsonLd}
   crumbs={[{ label: 'Beginner guide' }]}
@@ -24,16 +24,18 @@ const jsonLd = {
       <p class="eyebrow">Entry · Guide</p>
       <h1>Moonlight Peaks <em>beginner guide</em></h1>
       <p class="intro">
-        What we know so far, gathered from the demo and official trailers. On {GAME.releaseLabel}
-        this becomes a full day-one walkthrough with exact numbers. Updated {SITE.updated}.
+        Confirmed from the live game: your first night starts with Orlock handing you Blood Grape
+        seeds, registering at Town Hall (where Brook gives you Chester, your living storage bin),
+        and a broken wand you'll fix later through story progression. Here's what actually matters
+        in your first week. Updated {SITE.updated}.
       </p>
 
       <h2>Start here checklist</h2>
       <ol class="steps">
-        <li><strong>Confirm your platform.</strong> Check Steam, Switch, Switch 2, Steam Deck, Mac, and Android support before planning your first save.</li>
-        <li><strong>Try the free demo.</strong> Use it to test controls, character creation, fishing, flower arranging, embroidery, and the early tone.</li>
-        <li><strong>Learn the night loop.</strong> Moonlight Peaks is a cozy life sim, but the vampire schedule changes how you think about farming.</li>
-        <li><strong>Pick a first focus.</strong> Farming, relationships, decorating, fishing, magic, and Nokturna all connect to separate guide clusters.</li>
+        <li><strong>Plant your first Blood Grapes.</strong> Confirmed 5-day grow time — dig with your shovel (no separate hoe) and water every night.</li>
+        <li><strong>Register at Town Hall.</strong> Meet Brook, get Chester (your overnight sales bin), and check Albertus' Jobs board for early quests.</li>
+        <li><strong>Don't over-plant early.</strong> You're watering by hand until "The Magic of Crops" unlocks Aquaflux — small patches beat an unmanageable field.</li>
+        <li><strong>Pick a first focus.</strong> Farming, romance, Nokturna, and magic all connect to their own guide clusters below.</li>
       </ol>
 
       <PriorityLinks
@@ -75,30 +77,31 @@ const jsonLd = {
         Moonlight Peaks is home to seven families across humans and creatures of the night —
         werewolves, witches, mermaids, and more, with Death himself among the notable characters.
         Befriending and romancing them is a central pillar; our
-        <a href="/romance">romance & families entry</a> will track every candidate and their gift
-        preferences at launch.
+        <a href="/romance">romance & families entry</a> tracks all 23 confirmed romance candidates
+        and their gift preferences as we verify them.
       </p>
 
-      <h2>What not to worry about before launch</h2>
+      <h2>What's still being verified</h2>
       <p>
-        Do not chase exact min-max routes yet. Until the full build is available, crop profit,
-        gift values, fish spawns, recipe prices, quest rewards, and resident schedules should be
-        treated as launch data. The useful pre-launch work is learning the systems and saving the
-        right reference pages.
+        Most core systems are confirmed and documented across this site — night-farming, magic
+        unlocks, quests, and the seven families are all live-game data at this point. What's still
+        catching up: a complete gift table for every resident (only a few are fully confirmed so
+        far), the full Nokturna card list, and exact crop sale prices. We label each of these
+        clearly rather than guessing, and update them as real data comes in.
       </p>
 
       <h2>Best next pages by goal</h2>
       <table class="facts">
-        <tr><th>If you want to play day one</th><td><a href="/release-date">Release date</a>, <a href="/demo">demo guide</a>, and <a href="/platforms">platform guide</a></td></tr>
+        <tr><th>If you're just starting out</th><td><a href="/quests">Quests</a>, <a href="/known-issues">known issues</a>, and <a href="/platforms">platform guide</a></td></tr>
         <tr><th>If you want romance</th><td><a href="/romance">Romance guide</a>, <a href="/characters">characters</a>, and <a href="/characters/saga">Saga</a></td></tr>
         <tr><th>If you want farming</th><td><a href="/farming">Farming guide</a>, <a href="/magic">magic</a>, and <a href="/activities">activities</a></td></tr>
         <tr><th>If you want collecting</th><td><a href="/activities/fishing">fishing</a>, <a href="/activities/foraging">foraging</a>, <a href="/locations">locations</a>, and the <a href="/map">map</a></td></tr>
       </table>
 
       <div class="callout wip">
-        Pre-launch entry. Exact crop prices, fish lists, gift tables, and cheat commands aren't
-        knowable until the full game ships on {GAME.releaseLabel} — we'll fill them in fast. Spot
-        something to add? Email {SITE.contact}.
+        Post-launch entry, updated as we verify more. A few things are still incomplete — full
+        crop prices, complete gift tables, and the full Nokturna card list — and we label those
+        clearly rather than guessing. Spot something to add? Email {SITE.contact}.
       </div>
     </div>
   </article>
