@@ -30,7 +30,11 @@ const explore = [
 
 const demoPosts = previews.filter((p) => p.category === 'preview').slice(0, 5);
 const guidePosts = previews.filter((p) => p.category === 'guide').slice(0, 5);
-const dailyPosts = previews.filter((p) => p.category === 'daily').slice(0, 6);
+const dailyPosts = previews
+  .filter((p) => p.category === 'daily')
+  .slice()
+  .sort((a, b) => (a.date < b.date ? 1 : a.date > b.date ? -1 : 0))
+  .slice(0, 6);
 
 const jsonLd = [
   {
@@ -70,7 +74,7 @@ const jsonLd = [
 ];
 ---
 <Base
-  title="Moonlight Peaks Guide & Wiki - Launch Hub, Tips & Tools"
+  title="Moonlight Peaks Wiki & Guide - Launch Hub, Tips & Tools"
   description="Moonlight Peaks launch hub and fan wiki: where to play, price, beginner guide, platform notes, romance, families, tools, known issues, and launch-week updates."
   path="/"
   jsonLd={jsonLd}

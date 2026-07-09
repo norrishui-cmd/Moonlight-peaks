@@ -272,8 +272,8 @@ export const faqs: Faq[] = [
   {
     slug: 'can-you-get-married-in-moonlight-peaks', cat: 'romance',
     q: 'Can you get married in Moonlight Peaks?',
-    a: 'Yes, you can marry a romance partner. There are no children in the game.',
-    related: [{ label: 'Romance & families', href: '/romance' }],
+    a: 'Yes — confirmed at launch. Propose at Heart Level 8, and the wedding takes place within a week, attended by the town\u2019s vampires and werewolves. Your spouse then moves onto your farm and unlocks a further heart event. There are no children in the game.',
+    related: [{ label: 'Romance & families', href: '/romance' }, { label: 'Can you have children?', href: '/faq/can-you-have-children-in-moonlight-peaks' }],
   },
   {
     slug: 'can-you-have-children-in-moonlight-peaks', cat: 'romance',

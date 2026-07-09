@@ -37,10 +37,13 @@ export const locations: TopicItem[] = [
     body: [
       'Your starting point is an abandoned family homestead, and restoring it into a working farm is the backbone of the game.',
       'You grow enchanted crops and glowing flowers and raise magical livestock like the Draculamb —all tended by night, since you head back to your coffin by sunrise.',
-      'Pre-launch datamined game files (cross-referenced against pre-launch references) refer to this starting farmland internally as "the Plot" —not developer-confirmed as the in-game name players will see.',
+      'Confirmed: you name your own farm during character creation (along with your Hellkitten pet) — there is no single fixed "official" farm name, since it\u2019s a custom name you choose yourself. Pre-launch datamined files did reference an internal working name, "the Plot," but that\u2019s a development-side label, not the name you\u2019ll see or choose in-game.',
     ],
     related: [{ label: 'Farming guide', href: '/farming' }, { label: 'Your cottage', href: '/locations/your-cottage' }, { label: 'Magic', href: '/magic' }],
-    faq: [{ q: 'Do you farm during the day in Moonlight Peaks?', a: 'No —you farm by night and return to your coffin by sunrise.' }],
+    faq: [
+      { q: 'Do you farm during the day in Moonlight Peaks?', a: 'No —you farm by night and return to your coffin by sunrise.' },
+      { q: 'What is the name of your farm in Moonlight Peaks?', a: 'There isn\u2019t a single fixed name — confirmed: you choose your own farm name during character creation, the same way you name your character and your Hellkitten pet.' },
+    ],
   },
   {
     slug: 'your-cottage', title: 'Your Cottage', tag: 'Home', status: 'confirmed', image: '/hero-loc-your-cottage.webp',
@@ -117,9 +120,11 @@ export const locations: TopicItem[] = [
   {
     slug: 'landmarks', title: 'Landmarks & Notable Places', tag: 'Wilds', status: 'confirmed', image: '/hero-loc-landmarks.webp',
     dek: 'Named places beyond the core areas — most now confirmed with real context.',
-    body: [
-      'Confirmed: Misty Shores is the Ambrosia family\u2019s area, home to the Cave of Echoes (ore) and the graveyard where you meet Death, unlocked via the "A Bridge Too Far" quest. Moonlit Pines is where the witches\u2019 coven is based. Pink Grove is home to the love demon Llemi, who mostly only appears there during festivals. Luna Bay is where the Hosu mermaid family lives, arriving roughly a year into the story.',
-      'Confirmed via the game\u2019s official wiki: the Crypt, Howling Marshes, and Moonlight Tower are real locations too, alongside Moonlit Slopes and the Khazan family\u2019s Crest Garden — full descriptions of each are still being verified.',
+    body: [],
+    sections: [
+      { title: 'Misty Shores, Moonlit Pines, Pink Grove & Luna Bay', body: 'Confirmed: Misty Shores is the Ambrosia family\u2019s area, home to the Cave of Echoes (ore) and the graveyard where you meet Death, unlocked via the "A Bridge Too Far" quest. Moonlit Pines is where the witches\u2019 coven is based. Pink Grove is home to the love demon Llemi, who mostly only appears there during festivals. Luna Bay is where the Hosu mermaid family lives, arriving roughly a year into the story.' },
+      { title: 'Howling Marshes', body: 'Confirmed via the game\u2019s official wiki to be a real location. A full description isn\u2019t independently verified here yet, but its existence and name are confirmed \u2014 not a rumor or datamine guess.' },
+      { title: 'Moonlit Slopes, the Crypt, Moonlight Tower & Crest Garden', body: 'Also confirmed via the game\u2019s official wiki: Moonlit Slopes, the Crypt, Moonlight Tower, and the Khazan family\u2019s Crest Garden are all real locations. Full descriptions of each are still being verified.' },
     ],
     related: [{ label: 'Death', href: '/characters/death' }, { label: 'Mermaids', href: '/families/mermaids' }, { label: 'Seers', href: '/families/seers' }],
   },

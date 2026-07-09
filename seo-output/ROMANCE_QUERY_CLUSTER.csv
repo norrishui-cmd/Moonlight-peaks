@@ -1,0 +1,27 @@
+query,clicks,impressions,ctr,position,landing_page_if_known,intent,character_entity,confidence
+moonlight peaks romance options,53,622,8.52,7.92,,general-romance,,High
+moonlight peaks romance,32,237,13.5,6.62,,general-romance,,High
+moonlight peaks love interests,23,229,10.04,6.02,,roster/who-can-you-romance,,High
+moonlight peaks bachelors,12,207,5.8,8.63,,roster/who-can-you-romance,,High
+moonlight peaks dateable characters,9,197,4.57,7.59,,roster/who-can-you-romance,,High
+moonlight peaks marriage,16,114,14.04,6.09,,marriage,,High
+moonlight peaks marriage candidates,6,114,5.26,6.66,,marriage,,High
+moonlight peaks dateables,14,95,14.74,5.29,,roster/who-can-you-romance,,High
+moonlight peaks romanceable characters,8,78,10.26,6.65,,roster/who-can-you-romance,,High
+moonlight peaks bachelorettes,10,68,14.71,5.9,,roster/who-can-you-romance,,High
+moonlight peaks all romance options,2,30,6.67,8.77,,general-romance,,High
+moonlight peak romance,2,29,6.9,5.72,,general-romance,,High
+can you have kids in moonlight peaks,0,29,0.0,3.83,,children-status,,High
+moonlight peaks romance characters,1,24,4.17,6.79,,general-romance,,High
+is there romance in moonlight peaks,1,22,4.55,7.36,,general-romance,,High
+can you get married in moonlight peaks,0,13,0.0,8.08,,marriage,,Medium
+romance options moonlight peaks,0,11,0.0,8.64,,general-romance,,Medium
+moonlight peaks romanceables,1,10,10.0,6.7,,roster/who-can-you-romance,,Medium
+does moonlight peaks have romance,0,9,0.0,8.33,,general-romance,,Medium
+can you date in moonlight peaks,1,8,12.5,5.5,,other-romance,,Medium
+moonlight peaks dating,0,6,0.0,6.5,,other-romance,,Medium
+moonlight peaks romance candidates,1,6,16.67,8.33,,roster/who-can-you-romance,,Medium
+moonlight peaks romances,0,4,0.0,7.75,,general-romance,,Low
+moonlight peaks bachelor,1,2,50.0,7.5,,roster/who-can-you-romance,,Low
+marriage,0,1,0.0,2.0,,marriage,,Low
+romance moonlight peaks,0,1,0.0,11.0,,general-romance,,Low

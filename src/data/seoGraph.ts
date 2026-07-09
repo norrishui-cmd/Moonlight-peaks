@@ -611,8 +611,8 @@ const characterSeoPages: SeoPage[] = characters
         hub: 'Character Hub',
         hubPath: '/characters',
         kind: 'guide' as const,
-        title: `${character.name} Romance Status | Moonlight Peaks Guide`,
-        description: `${character.name} romance status in Moonlight Peaks, with confirmed/reported status, relationship notes, and launch verification checklist.`,
+        title: `${character.name} Romance Status | Moonlight Peaks Wiki`,
+        description: `${character.name} romance status in Moonlight Peaks, with confirmed/reported status and relationship notes, verified against the live game.`,
         h1: `${character.name} romance status`,
         intro: `A focused relationship-status page for ${character.name}, built from the current character data and updated when the live game confirms more.`,
         sections: [
