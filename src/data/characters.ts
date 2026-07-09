@@ -226,7 +226,7 @@ export const characters: Character[] = [
     traits: [], knownInfo: [
       'Reported as part of the Khazan seer family — Dragan\u2019s younger sibling, alongside Aras.',
       'The same files reference an "Alina\u2019s House," suggesting she is a homeowner/resident rather than a passing or event-only figure.',
-      'The portrait shown here comes from the pre-launch roster image supplied for this guide; family, species, and relationship status are unverified until launch.',
+      'The portrait shown here comes from a pre-launch roster image supplied for this guide; family, species, and relationship status are currently unverified against the live game, not yet independently confirmed post-launch.',
     ] },
   { id: 'death', name: 'Death', family: 'Unknown', type: 'other',
     status: 'confirmed', romanceable: true, img: '/death.webp', c1: '#2a2a2a', c2: '#8a8a9a',

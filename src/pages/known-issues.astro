@@ -3,13 +3,16 @@ import Base from '../layouts/Base.astro';
 import { SITE, GAME } from '../consts';
 
 const issueRows = [
-  ['Steam Deck crash on startup', 'Confirmed workaround', 'Multiple players report the game crashing on launch, even after reinstalling and verifying files. Reported fix: switch the Steam Deck compatibility tool to Proton 9.0-4.'],
-  ['Micro-freezes / stutter every few seconds', 'Confirmed, unresolved', 'Reported by players on high-end PCs (e.g. RTX 5090) as well as mid-range hardware, so it does not appear to be a hardware-specific issue. No official fix yet — try updating GPU drivers and setting Moonlight Peaks to "High performance" in your system\u2019s graphics settings as a partial mitigation.'],
-  ['Crash when leaving the farm', 'Reported, unresolved', 'Some players report a reliable crash specifically when exiting the farm area. No official fix yet — try verifying game files.'],
-  ['Controller stops responding mid-game', 'Reported, unresolved', 'Controller works during character creation but then stops responding, with button-mapping options greyed out in Settings. No confirmed fix yet; try unplugging/reconnecting the controller or switching to keyboard/mouse as a workaround.'],
-  ['NPC gets stuck / can\u2019t be talked to', 'Reported, unresolved', 'Reported with Orlock specifically getting stuck in one spot and becoming untalkable. Reloading the area and sleeping to the next day have both failed to fix it for affected players.'],
-  ['Can\u2019t interact with objects indoors', 'Reported, unresolved', 'Some players report being unable to click on objects inside their house (e.g. the coffin to sleep, pets) while outdoor interactions work fine.'],
-  ['Switch 2 loading times', 'Confirmed by reviewers', 'Multiple reviewers flagged long loading times specifically on Nintendo Switch 2 as the main technical complaint; no official fix announced yet.'],
+  ['Steam Deck crash on startup', 'Player-reported · Workaround available', 'Multiple players report the game crashing on launch, even after reinstalling and verifying files. Reported fix: switch the Steam Deck compatibility tool to Proton 9.0-4. Not an official Valve or developer fix — a repeated player workaround.'],
+  ['Micro-freezes / stutter every few seconds', 'Player-reported · No confirmed fix', 'Reported by players on high-end PCs (e.g. RTX 5090) as well as mid-range hardware, so it does not appear to be a hardware-specific issue. No confirmed workaround is currently documented — some players report partial relief from updating GPU drivers and setting Moonlight Peaks to "High performance" in system graphics settings, but this isn\u2019t confirmed to work reliably.'],
+  ['Crash when leaving the farm', 'Player-reported · No confirmed fix', 'Some players report a reliable crash specifically when exiting the farm area. No confirmed workaround is currently documented; verifying game files is a general troubleshooting step some try, without confirmed success.'],
+  ['Controller stops responding mid-game', 'Player-reported · Workaround available', 'Controller works during character creation but then stops responding, with button-mapping options greyed out in Settings. Player-reported workaround: unplugging/reconnecting the controller, or switching to keyboard/mouse.'],
+  ['NPC gets stuck / can\u2019t be talked to', 'Player-reported · No confirmed fix', 'Reported with Orlock specifically getting stuck in one spot and becoming untalkable. Reloading the area and sleeping to the next day have both failed to fix it for affected players.'],
+  ['Can\u2019t interact with objects indoors', 'Player-reported · No confirmed fix', 'Some players report being unable to click on objects inside their house (e.g. the coffin to sleep, pets) while outdoor interactions work fine.'],
+  ['Switch 2 loading times', 'Confirmed by reviewers · No confirmed fix', 'Multiple reviewers flagged long loading times specifically on Nintendo Switch 2 as the main technical complaint. No official fix announced yet.'],
+  ['Accessories not displaying on character', 'Player-reported · No confirmed fix', 'Some players report that certain equipped accessories (e.g. arm/wrist items) don\u2019t visually render on the character model even though they\u2019re equipped. Platform pattern isn\u2019t clearly isolated yet in available reports. No confirmed workaround is currently documented.'],
+  ['Graphics settings reset when switching devices', 'Player-reported · No confirmed fix', 'Players using Steam Cloud across multiple PCs report graphics/display settings not carrying over, requiring manual reconfiguration on each device even though saves sync. No confirmed workaround is currently documented — this may be expected behavior for display settings specifically rather than a bug, but that hasn\u2019t been confirmed either.'],
+  ['UI/text size on handheld (Steam Deck / Switch)', 'Player-reported · No confirmed fix', 'Some handheld players report on-screen text and menus feeling small on a handheld display. No confirmed workaround or in-game text-size option is currently documented.'],
 ];
 
 const reportChecklist = [
@@ -50,6 +53,18 @@ const faq = [
     a: 'Use caution. A fix should be repeatable, platform-specific, and ideally backed by official notes or multiple independent reports before it is treated as reliable.',
   },
   {
+    q: 'Why aren\u2019t my accessories showing up on my character?',
+    a: 'Player-reported: some equipped accessories, particularly arm/wrist items, don\u2019t visually render even though they\u2019re equipped. No confirmed workaround is currently documented.',
+  },
+  {
+    q: 'Why did my graphics settings reset after switching PCs?',
+    a: 'Player-reported: some players using Steam Cloud across multiple PCs find graphics/display settings don\u2019t carry over, even though save files sync correctly. No confirmed workaround is currently documented, and it isn\u2019t confirmed whether this is intended behavior or a bug.',
+  },
+  {
+    q: 'Is the UI too small on Steam Deck or Switch?',
+    a: 'Player-reported: some handheld players find on-screen text and menus small. No confirmed workaround or in-game text-size setting is currently documented — see the platform pages linked below for other handheld-specific notes.',
+  },
+  {
     q: 'Does this page replace official support?',
     a: 'No. For unresolved issues, email support@xseedgames.com with your platform, a crash dump if available, and a description of what happened.',
   },
@@ -78,8 +93,8 @@ const jsonLd = [
 ];
 ---
 <Base
-  title="Moonlight Peaks Known Issues — Crashes, Controller & Freezing Fixes"
-  description="Confirmed Moonlight Peaks bugs and fixes: Steam Deck crash on startup, controller not working, freezing/stutter, stuck NPCs, save file locations, and Switch 2 loading times."
+  title="Moonlight Peaks Known Issues: Crashes, Controllers, Loading & Fixes"
+  description="Moonlight Peaks known issues: Steam Deck crashes, controller problems, freezing, accessories not displaying, and loading times — clearly labeled confirmed vs. player-reported, with workarounds where they exist."
   path="/known-issues"
   jsonLd={jsonLd}
   crumbs={[{ label: 'Known issues' }]}

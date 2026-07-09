@@ -878,7 +878,7 @@ const hasSafePublicSources = (page: SeoPage): boolean =>
 // legitimately contain words like "status") for phrases that signal an absent answer, and
 // requires the page's FIRST FAQ answer in particular to contain a concrete claim.
 const NO_ANSWER_PATTERN =
-  /\bnot (?:yet )?(?:published|confirmed|available|sourced|documented|known)(?: yet)?\b|\bwill be added\b|\bto be confirmed\b|\bcheck back later\b|\bdata not published\b|\bcoming later\b|\bstill (?:unknown|to be confirmed)\b|\bnot yet mapped\b|\bnot yet documented\b/i;
+  /\bnot\s+(?:yet\s+|been\s+|currently\s+|really\s+)*(?:published|confirmed|available|sourced|documented|known)(?:\s+yet)?\b|\bwill be added\b|\bto be confirmed\b|\bcheck back later\b|\bdata not published\b|\bcoming later\b|\bstill (?:unknown|to be confirmed)\b|\bnot yet mapped\b|\bnot yet documented\b|\bhas(?:n't| not) been confirmed\b/i;
 
 const hasConcreteAnswer = (page: SeoPage): boolean => {
   // By convention every generator puts the FAQ that directly answers the page's target query
@@ -889,10 +889,36 @@ const hasConcreteAnswer = (page: SeoPage): boolean => {
   return !NO_ANSWER_PATTERN.test(page.faqs[0].a);
 };
 
+// Section-substance check, made page-type-specific rather than one universal arbitrary
+// threshold applied to every section on every page type (this was the exact cause of the
+// Winston false negative: a genuinely complete romance-status page was rejected because one
+// legitimate ~88-character background section fell 2 characters under a 90-char per-section
+// minimum, even though the page's actual answer — in its first FAQ — was complete and correct).
+//
+// Gift pages keep the strict rule: every section must individually carry real specifics, because
+// a gift page is nothing BUT its per-gift-category breakdown, so a thin section there usually
+// means thin/absent data.
+//
+// Other page types (romance-status, price, launch-checklist, etc.) are judged on aggregate
+// substance instead: every section needs a real title, at least one section must clearly carry
+// real weight (>=90 chars), and the sections combined must clear a reasonable total — this still
+// blocks a page made of several one-line non-answers, but no longer sinks an otherwise-complete
+// page over a single short-but-real section.
+const isGiftPage = (page: SeoPage): boolean => page.path.endsWith('/gifts');
+
+const sectionsSubstanceOk = (page: SeoPage): boolean => {
+  if (isGiftPage(page)) {
+    return page.sections.every((section) => section.title.length >= 4 && section.body.length >= 90);
+  }
+  const totalBody = page.sections.reduce((sum, s) => sum + s.body.length, 0);
+  const hasOneSubstantialSection = page.sections.some((s) => s.body.length >= 90);
+  return page.sections.every((s) => s.title.length >= 4) && hasOneSubstantialSection && totalBody >= 220;
+};
+
 const passesSeoQualityGate = (page: SeoPage): boolean =>
   page.path.split('/').filter(Boolean).length >= 3 &&
   page.sections.length >= 3 &&
-  page.sections.every((section) => section.title.length >= 4 && section.body.length >= 90) &&
+  sectionsSubstanceOk(page) &&
   page.faqs.length >= 2 &&
   page.related.length >= 3 &&
   textSize(page) >= 900 &&
@@ -917,7 +943,7 @@ export const __auditRejected = trustedGenerated.filter((p) => !passesSeoQualityG
 export const __auditGateChecks = (page: SeoPage) => ({
   pathDepthOk: page.path.split('/').filter(Boolean).length >= 3,
   sectionsCountOk: page.sections.length >= 3,
-  sectionsLengthOk: page.sections.every((s) => s.title.length >= 4 && s.body.length >= 90),
+  sectionsLengthOk: sectionsSubstanceOk(page),
   faqsCountOk: page.faqs.length >= 2,
   relatedOk: page.related.length >= 3,
   textSizeOk: textSize(page) >= 900,

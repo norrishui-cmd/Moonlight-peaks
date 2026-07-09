@@ -20,8 +20,8 @@ const jsonLd = [
 ];
 ---
 <Base
-  title="Nokturna Card Game (Moonlight Peaks) — How to Play & Win"
-  description="Nokturna card game guide: confirmed rules, 67+ cards, deck archetypes, and how to win — updated as more cards are verified."
+  title="Moonlight Peaks Nokturna Guide: Decks, Cards & Common Problems"
+  description="Nokturna card game guide for Moonlight Peaks: confirmed rules, 67+ cards, deck archetypes, and honest answers on deck-building questions that aren't documented yet."
   path="/nokturna"
   jsonLd={jsonLd}
   crumbs={[{ label: 'Nokturna' }]}
@@ -51,6 +51,55 @@ const jsonLd = [
         The full card pool is confirmed at over 67 cards across multiple deck archetypes — confirmed
         so far: Werewolf, Vampire, Plant, and Aquatic decks, plus mixed decks.
       </p>
+
+      <h2>Why new Nokturna cards don't appear</h2>
+      <p>
+        This isn't independently documented in our current sources. If a card you've won in a
+        match doesn't show up where you expect, the most likely confirmed fact that applies is
+        this: cards you've won are tracked in your own menu, and playing with a resident is
+        separately logged in their friendship menu — so check both places rather than assuming a
+        card is lost. Beyond that, we don't have a confirmed explanation for cards not appearing,
+        and we won't guess at one. If you're trying to keep track of your own collection in the
+        meantime, the <a href="/tools/nokturna-tracker">Nokturna Tracker</a> lets you log cards
+        privately in your browser.
+      </p>
+
+      <h2>How to create a new deck</h2>
+      <p>
+        Not yet documented in our current sources. We don't have confirmed or even
+        community-reported specifics on a deck-creation menu, deck size, or deck-slot limits for
+        Nokturna — rather than describe a deck-builder we can't verify, we're leaving this section
+        honest about the gap. If you've found this in-game, the mechanic likely lives in the same
+        menu where you review your card collection.
+      </p>
+
+      <h2>Can you edit the starter deck?</h2>
+      <p>
+        Not yet documented. We have no confirmed or community-reported information either way on
+        whether an initial/starter deck is editable, or whether all matches use one shared,
+        player-built deck instead. We'd rather leave this unanswered than invent a rule.
+      </p>
+
+      <h2>How to add collected cards</h2>
+      <p>
+        Not yet documented. Confirmed: winning a match adds a card to your personal collection,
+        visible in your menu. How (or whether) you then have to manually add a won card into an
+        active deck — versus decks drawing automatically from your full collection — isn't
+        something we can confirm from current sources.
+      </p>
+
+      <h2>Common deck-building problems</h2>
+      <ul>
+        <li><strong>Can't tell if a match win actually added a card:</strong> check your card
+          collection menu directly rather than assuming from the match-end screen alone.</li>
+        <li><strong>Not sure which archetype to build toward:</strong> confirmed deck archetypes so
+          far are Werewolf, Vampire, Plant, and Aquatic, plus mixed builds — Alpha Wolf (a
+          Werewolf-archetype card) is the one card we can confirm the effect of, buffing other
+          Werewolf cards, which suggests archetypes reward staying "on-color."</li>
+        <li><strong>Something in the deck-building menu seems locked:</strong> not yet confirmed
+          whether this ties to story progress, friendship level with the seer who invented
+          Nokturna (Dragan), or something else — see <a href="/characters/dragan">Dragan's profile</a>.</li>
+      </ul>
 
       <h2>Card database</h2>
       {cards.length === 0 ? (
@@ -91,9 +140,9 @@ const jsonLd = [
 
       <h2>How to win & best decks</h2>
       <p>
-        Once cards and rules are confirmed at launch, this section gets starter-friendly deck
-        suggestions and answers to the toughest opponents — plus a deck builder. Until then we're
-        keeping it honest rather than guessing at a meta that doesn't exist yet.
+        Once individual card names and effects are more fully documented, this section gets
+        starter-friendly deck suggestions and answers to tougher opponents. Until then we're
+        keeping it honest rather than guessing at a meta built on cards we can't verify.
       </p>
 
       <h2>FAQ</h2>
@@ -108,7 +157,8 @@ const jsonLd = [
 
       <div class="callout wip">
         Related: <a href="/beginner-guide">beginner guide</a>,
-        <a href="/romance">romance & families</a>, <a href="/release-date">release date</a>.
+        <a href="/romance">romance & families</a>, <a href="/tools/nokturna-tracker">Nokturna Tracker</a>,
+        <a href="/characters/dragan">Dragan</a>, <a href="/release-date">release date</a>.
       </div>
     </div>
   </article>

@@ -3,8 +3,9 @@ import Base from '../layouts/Base.astro';
 import { SITE, GAME } from '../consts';
 
 const faq = [
-  { q: 'How do you learn spells in Moonlight Peaks?', a: "Confirmed at launch: your wand starts broken. After the Dinner Party event, Luna sends a letter asking you to visit her farm; she gives you magical seeds to nurture, then points you to Sabrina — though it's actually Noel who fixes the wand, with duct tape. After that, spellcasting opens up." },
-  { q: 'What spells are confirmed?', a: "Confirmed at launch: Aquaflux (a self-pouring watering spell, required for magical crops), maturing crops faster, clearing rocks, summoning rain, and a Witches' Circle teleport spell. You cast by drawing a circle-and-dot pattern with the wand equipped, and spells cost mana." },
+  { q: 'How do you fix the wand in Moonlight Peaks?', a: "Confirmed at launch: your wand starts broken and unusable. The fix happens automatically as part of the \"The Magic of Crops\" quest — Luna sends you to Sabrina at Webb of Wonders, but it's actually Noel who ends up fixing it, with duct tape. There's no separate item to buy or side-errand to run; finishing the quest chain fixes it." },
+  { q: "Why hasn't my wand quest triggered yet?", a: 'Confirmed: "The Magic of Crops" is gated behind finishing "The Dinner Party" quest, then waiting 2 days and reading a letter from Luna. Community-reported: some guides place this trigger at the start of Summer, others describe it happening around two and a half weeks in — if your letter hasn\u2019t arrived, the most likely cause is simply that The Dinner Party or its follow-up wait period isn\u2019t finished yet, not a missed item or shop purchase.' },
+  { q: 'What spells are confirmed?', a: "Confirmed at launch: Aquaflux (a self-pouring watering spell, required for magical crops), maturing crops faster, clearing rocks, summoning rain, and a Witches' Circle teleport spell. You cast by drawing a circle-and-dot pattern with the wand equipped, and spells cost mana. Community-reported: one source's in-game almanac count puts the full spell list at 12 total; not independently cross-verified here." },
   { q: 'What does the Alter Ego Elixir do?', a: 'The Alter Ego Elixir is a potion, sold by Sabrina at Webb of Wonders, that changes your appearance. It is one example of the many brews you can make through potion-making.' },
   { q: 'Is magic required to play?', a: 'Witchcraft is a core pillar of the game and makes farming and gathering easier, but Moonlight Peaks is a cozy life sim — you can play at your own pace.' },
 ];
@@ -18,8 +19,8 @@ const jsonLd = [
 ];
 ---
 <Base
-  title="Moonlight Peaks Magic — Spells, Potions & Elixirs"
-  description="How magic works in Moonlight Peaks: learning spells from town witches, brewing potions like the Alter Ego Elixir, and how witchcraft helps farming and foraging."
+  title="Moonlight Peaks Magic Guide: Fix the Wand, Moon Fruit & Mana Progression"
+  description="How to fix the wand in Moonlight Peaks, why the Magic of Crops quest hasn't triggered, Moon Fruit, and how the Mana Extractor works — confirmed facts kept separate from community reports."
   path="/magic"
   jsonLd={jsonLd}
   crumbs={[{ label: 'Magic' }]}
@@ -28,33 +29,84 @@ const jsonLd = [
   <article class="page">
     <div class="wrap">
       <p class="eyebrow">Entry · Magic</p>
-      <h1>Moonlight Peaks <em>magic</em> — spells & potions</h1>
+      <h1>Moonlight Peaks <em>magic</em> guide</h1>
       <p class="intro">
-        Witchcraft is one of the core pillars of {GAME.title}. Here's how spellcasting and
-        potion-making work, and how they help your cozy vampire life. Updated {SITE.updated}.
+        Witchcraft is one of the core pillars of {GAME.title}. Here's how spellcasting works, how
+        to fix your wand, and what's confirmed versus community-reported about magic progression.
+        Updated {SITE.updated}.
       </p>
 
-      <h2>Unlocking magic — confirmed quest chain</h2>
+      <div class="callout">
+        <strong>Quick answer:</strong> your wand starts broken. It gets fixed automatically as part
+        of the "The Magic of Crops" quest, which unlocks after finishing "The Dinner Party" and
+        waiting on a letter from Luna. Once fixed, spellcasting opens up — no separate purchase or
+        side-errand needed.
+      </div>
+
+      <h2>How to fix the broken wand</h2>
       <p>
-        Confirmed at launch: your wand doesn't work at first. After the Dinner Party event, you get
-        a letter on waking from Luna asking you to come to her farm. She gives you magical seeds to
-        nurture, then — seeing your broken wand — points you toward Sabrina. Confirmed comedic twist:
-        it's actually Noel who ends up fixing it, with duct tape. Once that's done, spellcasting opens up.
+        Confirmed at launch: your wand is inherited and broken from the start, unusable until a
+        specific quest resolves it. Luna sends you a letter, and after visiting her you're pointed
+        toward Sabrina at Webb of Wonders to get the wand repaired. Confirmed comedic twist: it's
+        actually <strong>Noel</strong> who ends up fixing it, with duct tape, not Sabrina herself.
+        There's no item to buy or extra step to hunt for — completing "The Magic of Crops" (below)
+        fixes it as part of the story.
+      </p>
+
+      <h2>Why the wand quest hasn't triggered</h2>
+      <p>
+        Confirmed: "The Magic of Crops" requires finishing <strong>The Dinner Party</strong> quest
+        first, then waiting roughly 2 in-game days for a letter from Luna. <span class="tag-community">Community-reported</span> sources disagree slightly on the exact timing — one
+        describes the letter arriving "around Night 18," another says it lines up with the start
+        of Summer — so we're not treating either as the confirmed trigger day. If your letter
+        hasn't shown up, the most likely explanation is that The Dinner Party (or its follow-up
+        wait) simply isn't finished yet, not a missed shop item or side quest.
+      </p>
+
+      <h2>The Magic of Crops quest</h2>
+      <p>
+        Confirmed: this quest is how spellcasting and your first magical crop both unlock at once.
+        <span class="tag-community">Community-reported</span> step order (consistent across
+        multiple launch-week guides, though not independently re-verified by us step-for-step):
+        Luna's letter leads to a cutscene — sources vary on whether this happens at her farm or in
+        the forest above your own home — where she shows you Moonfruit seeds and asks you to
+        nurture them. Since your wand is broken, she sends you to get it fixed (see above). Once
+        fixed, you water the Moonfruit with your new Aquaflux spell for a couple of nights, which
+        completes the quest and unlocks spellcasting for the rest of the game.
+      </p>
+
+      <h2>How Moon Fruit fits into magic progression</h2>
+      <p>
+        <span class="tag-community">Community-reported</span> Moonfruit is a magical crop, shaped
+        like a crescent moon, that can only be watered with the Aquaflux spell — a regular
+        watering can doesn't work on it. It's the specific crop tied to unlocking spellcasting via
+        "The Magic of Crops," and after that quest, Luna's shop expands to sell magical seeds more
+        generally.
       </p>
 
       <h2>How casting works</h2>
       <p>
         Confirmed at launch: equip your wand, then draw a circle-and-dot pattern, following the
         on-screen prompt with the D-pad (or your Joy-Con/mouse). Below your stamina bar you'll see a
-        separate mana bar — you start with a small pool and regain one star per night's sleep, so
-        managing mana across a night matters. A few rare foods and drinks restore mana early on.
+        separate mana bar — you start with a small pool (3 points) and regain roughly one star per
+        night's sleep, so managing mana across a night matters. A few rare foods and drinks restore
+        mana early on.
+      </p>
+
+      <h2>How the Mana Extractor works</h2>
+      <p>
+        Confirmed: the Mana Extractor is a craftable machine, unlocked through the "Building a
+        Mana Extractor" quest, that produces <strong>Mana Essence</strong> from magical crops and
+        herbs. Consuming Mana Essence (directly or added to food) restores mana faster than sleeping
+        alone — a meaningful upgrade once magic seeds get expensive to keep watered with limited
+        early mana.
       </p>
 
       <h2>Confirmed spell list</h2>
       <p>
         Confirmed spells taught by the town's witches: <strong>Aquaflux</strong>, a self-pouring
-        watering can spell unlocked from Luna after the Dinner Party quest chain (regular watering
-        cans don't work on magical crops — they need Aquaflux); plus <strong>maturing crops</strong>
+        watering can spell unlocked via "The Magic of Crops" (regular watering cans don't work on
+        magical crops — they need Aquaflux); plus <strong>maturing crops</strong>
         faster, <strong>clearing rocks</strong>, <strong>summoning rain</strong>, and a
         <strong>Witches' Circle teleport</strong>. As you learn, you expand your repertoire further.
       </p>
@@ -67,19 +119,28 @@ const jsonLd = [
         different uses across the game.
       </p>
 
+      <h2>Common wand and magic progression problems</h2>
+      <ul>
+        <li><strong>Wand still broken after visiting Sabrina:</strong> confirmed — she doesn't
+          actually fix it herself. Keep progressing "The Magic of Crops"; Noel is the one who
+          completes the repair.</li>
+        <li><strong>No letter from Luna yet:</strong> confirm "The Dinner Party" is actually
+          finished, then allow the reported ~2-day wait before assuming something's stuck.</li>
+        <li><strong>Can't water Moonfruit with your regular watering can:</strong> expected —
+          <span class="tag-community">community-reported</span> magical crops specifically require
+          Aquaflux, not the standard can.</li>
+        <li><strong>Running out of mana constantly:</strong> confirmed as a known early-game
+          bottleneck — see <a href="/known-issues">known issues</a> for how reviewers described
+          this, and prioritize the Mana Extractor and mana-restoring food once available.</li>
+      </ul>
+
       <h2>Witchcraft & your vampire powers</h2>
       <p>
         Magic sits alongside your vampire abilities — including <a href="/shapeshifting">shapeshifting
         into a bat or your Hellkitten</a>. See the
-        <a href="/beginner-guide">beginner guide</a> for how the supernatural side fits together.
+        <a href="/beginner-guide">beginner guide</a> for how the supernatural side fits together,
+        and <a href="/farming">farming</a> for how Aquaflux and magical crops connect to your plot.
       </p>
-
-      <h2>Coming at launch ({GAME.releaseLabel})</h2>
-      <ul>
-        <li>The full <strong>spell list</strong> with what each does and how to unlock it.</li>
-        <li>Every <strong>potion recipe</strong>, its ingredients, and its effect.</li>
-        <li>Which witches teach what, and the best early spells to prioritise.</li>
-      </ul>
 
       <h2>FAQ</h2>
       <div class="faq">
@@ -92,9 +153,15 @@ const jsonLd = [
       </div>
 
       <div class="callout wip">
-        Pre-launch entry — spell and potion data lands at launch. Related:
-        <a href="/farming">farming & crops</a>, <a href="/character-creator">character creator</a>, <a href="/shapeshifting">shapeshifting</a>, <a href="/items">items</a>, <a href="/beginner-guide">beginner guide</a>.
+        Related: <a href="/farming">farming & crops</a>, <a href="/character-creator">character creator</a>, <a href="/shapeshifting">shapeshifting</a>, <a href="/items">items</a>, <a href="/quests">quests</a>, <a href="/beginner-guide">beginner guide</a>.
       </div>
     </div>
   </article>
+  <style>
+    .tag-community {
+      display: inline-block; font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.02em;
+      color: var(--faint); border: 1px solid var(--line); border-radius: 999px; padding: 2px 8px;
+      margin-right: 6px; vertical-align: middle;
+    }
+  </style>
 </Base>

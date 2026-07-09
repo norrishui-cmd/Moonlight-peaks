@@ -1,6 +1,6 @@
 ---
 import Base from '../../layouts/Base.astro';
-import { SITE, GAME } from '../../consts';
+import { SITE } from '../../consts';
 import { characters, typeLabels, typeIcons } from '../../data/characters';
 
 const profiled = characters;
@@ -25,14 +25,23 @@ const statusLabel =
   c.status === 'confirmed'
     ? 'Developer-confirmed'
     : c.status === 'reported'
-      ? 'Reported from previews or coverage; verify at launch'
+      ? 'Reported from previews or coverage; independent verification ongoing'
       : c.status === 'datamined'
-        ? 'Datamined - name verified via pre-launch game files, role unconfirmed'
-        : 'Unconfirmed - portrait shown, name and role still need launch verification';
+        ? 'Datamined - name verified via pre-launch game files, role still unconfirmed'
+        : 'Unconfirmed - portrait shown, name and role still not independently verified';
 
 const familyMap: Record<string, string> = { vampire: '/families/vampires', werewolf: '/families/werewolves', witch: '/families/witches', other: '/families' };
 const familyHref = familyMap[c.type] || '/families';
 const familyLabel = c.type === 'other' ? 'the seven families' : `${typeLabels[c.type].toLowerCase()} family`;
+
+// Death-specific FAQ, built only for his page from real, sourced facts — not a generic
+// per-character FAQ pattern, so this doesn't get duplicated across other profiles.
+const deathFaq = c.id === 'death' ? [
+  { q: 'Where do you find Death in Moonlight Peaks?', a: 'Confirmed: Death lives at "Death\u2019s Shack," in the Ambrosia Graveyard within the Misty Shores area.' },
+  { q: 'Why is Death not appearing for me?', a: 'Confirmed: Misty Shores and the Ambrosia Graveyard are locked until you finish the "A Bridge Too Far" quest. If Death isn\u2019t showing up, the most likely reason is that this quest — not a missed dialogue or wrong time of night — isn\u2019t finished yet.' },
+  { q: 'Does Death appear immediately once Misty Shores unlocks?', a: 'Confirmed: you meet him twice as part of an unlock sequence, before he gives you the bug net — so a single visit right after unlocking the area may not be the full interaction. Exact timing or triggers for each of the two meetings are not detailed in our current sources.' },
+  { q: 'Can you romance Death?', a: 'Yes, confirmed — Death is a romance option, no longer just pre-launch rumor as it once was.' },
+] : [];
 
 const jsonLd = [
   { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
@@ -41,6 +50,7 @@ const jsonLd = [
     { '@type': 'ListItem', position: 3, name: c.name, item: url },
   ] },
   { '@context': 'https://schema.org', '@type': 'Person', name: c.name, description: c.desc, ...(imgAbs ? { image: imgAbs } : {}) },
+  ...(deathFaq.length > 0 ? [{ '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: deathFaq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) }] : []),
 ];
 ---
 <Base
@@ -89,15 +99,77 @@ const jsonLd = [
       {c.knownInfo && c.knownInfo.length > 0 ? (
         <ul>{c.knownInfo.map((k) => (<li>{k}</li>))}</ul>
       ) : (
-        <p>Details are still limited before launch. We will expand this profile as the developers confirm more.</p>
+        <p>Details are still limited post-launch. We expand this profile as more is verified against the live game.</p>
       )}
 
       <h2>Romance</h2>
       <p>
-        {c.romanceable === true && `${c.name} is reported to be romanceable. Gift preferences and heart events will be added once they are confirmed in the live game.`}
+        {c.romanceable === true && `${c.name} is a romance option. Gift preferences and heart events are added here once verified against the live game.`}
         {c.romanceable === false && `${c.name} is not a romance option.`}
-        {c.romanceable === null && `Whether ${c.name} can be romanced has not been confirmed yet - we will update this at launch.`}
+        {c.romanceable === null && `Whether ${c.name} can be romanced is currently unverified — we update this page as soon as it's confirmed.`}
       </p>
+
+      {c.id === 'death' && (
+        <>
+          <h2>Where to find Death</h2>
+          <p>
+            Confirmed: Death lives at "Death's Shack," located in the Ambrosia Graveyard within
+            the Misty Shores area.
+          </p>
+
+          <h2>Why Death is not appearing</h2>
+          <p>
+            Confirmed: Misty Shores and the Ambrosia Graveyard are both locked areas until you
+            finish the <a href="/quests/a-bridge-too-far">"A Bridge Too Far" quest</a>. If you've
+            explored where you think his shack should be and found nothing, this quest — not a
+            missed dialogue option or a specific time of night — is almost always the real reason.
+          </p>
+
+          <h2>How to unlock the relevant area</h2>
+          <p>
+            See the full <a href="/quests/a-bridge-too-far">A Bridge Too Far quest guide</a> for
+            prerequisites and steps. Finishing it reopens the Ambrosia Estate and the wider Misty
+            Shores area, including both the graveyard where Death is found and the
+            <a href="/locations/mines">Cave of Echoes mine</a>.
+          </p>
+
+          <h2>How A Bridge Too Far relates to progression</h2>
+          <p>
+            Confirmed: this single quest is the shared gate behind Death, the Cave of Echoes, and
+            the rest of Misty Shores — they all open together once it resolves, rather than
+            unlocking separately or in a different order.
+          </p>
+
+          <h2>Does Death appear immediately?</h2>
+          <p>
+            Confirmed: you meet him twice as part of an unlock sequence before he gives you the bug
+            net, so don't expect the full interaction on a single first visit right after Misty
+            Shores opens. The exact trigger or timing for the second meeting isn't detailed in our
+            current sources — if you've met him once and he's not reappearing, this is more likely
+            expected pacing than a bug.
+          </p>
+
+          <h2>Common problems when looking for Death</h2>
+          <ul>
+            <li><strong>Can't find Misty Shores at all:</strong> confirm "A Bridge Too Far" is
+              actually finished, not just started.</li>
+            <li><strong>Found the graveyard but no Death:</strong> confirmed he's tied to a
+              two-visit unlock sequence — try returning after progressing another night or two.</li>
+            <li><strong>Got the bug net already but want to keep interacting with Death:</strong>
+              not confirmed either way whether he has further content after that point.</li>
+          </ul>
+
+          <h2>Frequently asked questions</h2>
+          <div class="faq">
+            {deathFaq.map((f) => (
+              <details>
+                <summary>{f.q}</summary>
+                <p>{f.a}</p>
+              </details>
+            ))}
+          </div>
+        </>
+      )}
 
       {((c.lovedGifts?.length || c.likedGifts?.length || c.dislikedGifts?.length || c.birthday)) && (
         <>
@@ -115,7 +187,7 @@ const jsonLd = [
       {c.traits.length > 0 && (
         <>
           <h2>Personality read</h2>
-          <p class="cnote">Illustrative personality traits (not in-game combat stats) - Moonlight Peaks has no combat. Replaced with confirmed detail at launch.</p>
+          <p class="cnote">Illustrative personality traits (not in-game combat stats) - Moonlight Peaks has no combat. Updated as confirmed detail becomes available.</p>
           <div class="ctraits">
             {c.traits.map((t) => (
               <div class="ctrait"><span class="ctrait-l">{t[0]}</span><span class="cbar"><i style={`width:${t[1]}%`}></i></span></div>
@@ -125,7 +197,7 @@ const jsonLd = [
       )}
 
       <div class="callout">
-        <strong>Accuracy:</strong> {statusLabel}. We mark what is developer-confirmed vs reported from previews, and never invent gift tables or stats. Full details arrive at launch on {GAME.releaseLabel}.
+        <strong>Accuracy:</strong> {statusLabel}. We mark what is developer-confirmed vs reported from previews, and never invent gift tables or stats. This page is updated as more is verified against the live game.
       </div>
 
       <h2>Related residents</h2>
