@@ -32,7 +32,7 @@ export const locations: TopicItem[] = [
     related: [{ label: 'Pumpkin Head', href: '/characters/pumpkin-head' }, { label: 'Seasonal events', href: '/activities/seasonal-events' }, { label: 'The town', href: '/locations/town' }],
   },
   {
-    slug: 'your-farm', title: 'Your Farm', tag: 'Homestead', status: 'confirmed', image: '/hero-loc-your-farm.webp',
+    slug: 'your-farm', title: 'Your Farm', tag: 'Homestead', status: 'confirmed', image: '/images/moonlight-peaks/official/farm-06.webp',
     dek: 'The abandoned family homestead you move into and restore into a moonlit farm.',
     body: [
       'Your starting point is an abandoned family homestead, and restoring it into a working farm is the backbone of the game.',
@@ -52,7 +52,7 @@ export const locations: TopicItem[] = [
     related: [{ label: 'Decorating', href: '/activities/decorating' }, { label: 'Character creator', href: '/activities/character-creator' }, { label: 'Your farm', href: '/locations/your-farm' }],
   },
   {
-    slug: 'forest', title: 'The Forest', tag: 'Wilds', status: 'reported', image: '/hero-loc-forest.webp',
+    slug: 'forest', title: 'The Forest', tag: 'Wilds', status: 'reported', image: '/images/moonlight-peaks/official/forest-01-summer.webp',
     dek: 'The woods around town, where you forage after dark.',
     body: [
       'Foraging in the woods is one of the game\u2019s confirmed activities, so expect seasonal finds among the trees on the edge of town.',
@@ -70,7 +70,7 @@ export const locations: TopicItem[] = [
     related: [{ label: 'Fishing', href: '/fishing' }, { label: 'Mermaids', href: '/families/mermaids' }, { label: 'The pier', href: '/locations/pier' }],
   },
   {
-    slug: 'pier', title: 'The Pier', tag: 'Water', status: 'expected', image: '/hero-loc-pier.webp',
+    slug: 'pier', title: 'The Pier', tag: 'Water', status: 'expected', image: '/images/moonlight-peaks/official/pier-01.webp',
     dek: 'A spot out over the water for fishing and quiet moments.',
     body: [
       'Fishing waters in cozy sims usually include a pier or dock to cast from.',
@@ -124,7 +124,7 @@ export const locations: TopicItem[] = [
     related: [{ label: 'Death', href: '/characters/death' }, { label: 'Mermaids', href: '/families/mermaids' }, { label: 'Seers', href: '/families/seers' }],
   },
   {
-    slug: 'town-hall', title: 'Town Hall', tag: 'Town', status: 'confirmed', image: '/hero-loc-town.webp',
+    slug: 'town-hall', title: 'Town Hall', tag: 'Town', status: 'confirmed', image: '/images/moonlight-peaks/official/town-hall-garden-01.webp',
     dek: 'Where you register as a new resident, run by Mayor Brook.',
     body: [
       'Confirmed at launch: Town Hall is where you register as a new resident early on, meeting Mayor Brook (patriarch of the Logan werewolf family), who gifts you Chester, the living storage chest, during that visit.',
@@ -141,7 +141,7 @@ export const locations: TopicItem[] = [
     related: [{ label: 'Orlock', href: '/characters/orlock' }, { label: 'Vampires', href: '/families/vampires' }, { label: 'The graveyard', href: '/locations/graveyard' }],
   },
   {
-    slug: 'silverveil-museum', title: 'The Museum', tag: 'Town', status: 'confirmed', image: '/hero-loc-town.webp',
+    slug: 'silverveil-museum', title: 'The Museum', tag: 'Town', status: 'confirmed', image: '/images/moonlight-peaks/official/museum-02.webp',
     dek: 'A confirmed collection/donation building in town.',
     body: [
       'Confirmed to exist via the game\u2019s official wiki. What you can donate and what it rewards are not yet sourced — many cozy sims use a museum for turning in fish, minerals, or artifacts.',

@@ -51,6 +51,13 @@ const lastmodFor = (path: string): string => {
 type Entry = { path: string; images?: string[] };
 
 const homeImages = ['/card-release.webp', '/card-guide.webp', '/card-nokturna.webp', '/card-romance.webp', '/card-cheats.webp', '/card-crops.webp'];
+// Official press-kit images inserted into single-file pages via <GuideImage> (locations.ts-driven
+// pages already flow their `image` field into the sitemap automatically via topic() below).
+const staticPageImages: Record<string, string[]> = {
+  '/farming': ['/images/moonlight-peaks/official/farm-02.webp'],
+  '/fishing': ['/images/moonlight-peaks/official/pier-01.webp'],
+  '/mini-games': ['/images/moonlight-peaks/official/minigame.webp'],
+};
 
 const staticPaths = ['/release-date', '/demo', '/platforms', '/system-requirements', '/languages', '/launch-day', '/known-issues', '/best-settings', '/beginner-guide', '/guides', '/achievements', '/quests', '/quests/a-bridge-too-far', '/mini-games', '/inventory', '/shipping', '/house', '/friendship', '/tools', '/tools/platform-picker', '/tools/romance-gift-finder', '/tools/romance-match-quiz', '/tools/romance-planner', '/tools/item-tracker', '/tools/farming-profit-planner', '/tools/submit-data', '/tools/families-explorer', '/tools/gift-tracker', '/tools/nokturna-tracker', '/export', '/farming', '/fishing', '/magic', '/character-creator', '/shapeshifting', '/items', '/environment', '/behind-the-scenes', '/activities', '/characters', '/moonlight-peaks-vs-stardew-valley', '/nokturna', '/map', '/romance', '/cheats', '/reviews', '/about', '/privacy', '/previews', '/faq', '/locations', '/families', '/compare', '/es', '/es/beginner-guide', '/es/release-date', '/es/faq', '/es/characters', '/es/farming', '/es/magic', '/es/platforms', '/es/romance', '/es/items', '/es/locations', '/es/families', '/es/activities', '/es/demo', '/es/cheats', '/es/character-creator', '/es/shapeshifting', '/es/languages', '/es/guides', '/es/tools', '/es/about', '/ja', '/ja/beginner-guide', '/ja/release-date', '/ja/faq', '/ja/characters', '/ja/farming', '/ja/magic', '/ja/platforms', '/ja/romance', '/ja/items', '/ja/locations', '/ja/families', '/ja/activities', '/ja/demo', '/ja/cheats', '/ja/character-creator', '/ja/shapeshifting', '/ja/languages', '/ja/guides', '/ja/tools', '/ja/about', '/zh', '/zh/beginner-guide', '/zh/release-date', '/zh/faq', '/zh/characters', '/zh/farming', '/zh/magic', '/zh/platforms', '/zh/romance', '/zh/items', '/zh/locations', '/zh/families', '/zh/activities', '/zh/demo', '/zh/cheats', '/zh/character-creator', '/zh/shapeshifting', '/zh/languages', '/zh/guides', '/zh/tools', '/zh/about'];
 const translatedCharIds = ['count-dracula', 'saga', 'luna', 'orlock', 'brook', 'the-warlock'];
@@ -65,7 +72,7 @@ export const GET: APIRoute = () => {
 
   const entries: Entry[] = [
     { path: '/', images: homeImages },
-    ...staticPaths.map((p) => ({ path: p })),
+    ...staticPaths.map((p) => ({ path: p, images: staticPageImages[p] || [] })),
     ...translatedCharPaths.map((p) => ({ path: p })),
     ...charEntries,
     ...topic('/locations', locations),

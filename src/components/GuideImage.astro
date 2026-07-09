@@ -1,0 +1,52 @@
+---
+// src/components/GuideImage.astro
+// Reusable image component resolved from the image manifest. Only ever renders a real,
+// manifest-backed local asset — never a guessed or external image.
+import { imageManifest } from '../data/image-manifest';
+
+interface Props {
+  imageId: string;
+  contextAlt?: string;
+  caption?: string;
+  priority?: boolean;
+  class?: string;
+}
+
+const { imageId, contextAlt, caption, priority = false, class: className } = Astro.props;
+const image = imageManifest.find((img) => img.id === imageId);
+
+// No image is better than a broken one: if the ID doesn't resolve, render nothing rather than
+// a broken <img> tag or a guessed fallback.
+---
+{image && (
+  <figure class={`guide-image ${className || ''}`}>
+    <img
+      src={image.file}
+      alt={contextAlt || image.altBase || ''}
+      width={image.width || 1920}
+      height={image.height || 1080}
+      loading={priority ? 'eager' : 'lazy'}
+      decoding={priority ? 'sync' : 'async'}
+    />
+    {caption && <figcaption>{caption}</figcaption>}
+  </figure>
+)}
+
+<style>
+  .guide-image {
+    margin: 1.4rem 0;
+  }
+  .guide-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 14px;
+    display: block;
+    border: 1px solid var(--line);
+  }
+  .guide-image figcaption {
+    font-size: 0.78rem;
+    color: var(--faint);
+    margin-top: 6px;
+    text-align: center;
+  }
+</style>

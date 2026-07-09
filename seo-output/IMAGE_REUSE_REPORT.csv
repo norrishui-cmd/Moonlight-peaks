@@ -1,0 +1,20 @@
+image_id,usage_count,routes,topic_spread,risk
+farm-02,1,/farming,single topic,"low — distinct, supported relationships"
+farm-06,1,/locations/your-farm,single topic,"low — distinct, supported relationships"
+forest-01-summer,1,/locations/forest,single topic,"low — distinct, supported relationships"
+forest-02-winter,0,(none),single topic,n/a — not implemented this round
+pier-01,2,/locations/pier; /fishing,location + activity (fishing),"low — distinct, supported relationships"
+town-hall-garden-01,1,/locations/town-hall,single topic,"low — distinct, supported relationships"
+museum-02,1,/locations/silverveil-museum,single topic,"low — distinct, supported relationships"
+museum-05,0,(none),single topic,n/a — not implemented this round
+museum-09,0,(none),single topic,n/a — not implemented this round
+minigame,1,/mini-games,single topic,"low — distinct, supported relationships"
+dracula-castle,0,(none),single topic,n/a — not implemented this round
+marshes-01,0,(none),single topic,n/a — not implemented this round
+moonlit-slopes-03,0,(none),single topic,n/a — not implemented this round
+interior-01,0,(none),single topic,n/a — not implemented this round
+interior-02,0,(none),single topic,n/a — not implemented this round
+interior-04,0,(none),single topic,n/a — not implemented this round
+interior-06,0,(none),single topic,n/a — not implemented this round
+interior-07,0,(none),single topic,n/a — not implemented this round
+interior-09,0,(none),single topic,n/a — not implemented this round

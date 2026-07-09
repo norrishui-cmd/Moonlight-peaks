@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import { SITE, GAME } from '../consts';
+import GuideImage from '../components/GuideImage.astro';
 
 const minigames = [
   { name: 'Spell casting', how: 'Draw a circle-and-dot pattern with your wand equipped, following the D-pad prompt.', where: 'Anywhere, once magic is unlocked' },
@@ -39,6 +40,8 @@ const jsonLd = [
         {GAME.title} folds several mini-games into its systems rather than treating them as separate
         arcade modes. Here's what's confirmed so far. Updated {SITE.updated}.
       </p>
+
+      <GuideImage imageId="minigame" priority />
 
       <table class="facts">
         <tr><th>Mini-game</th><th>How it works</th><th>Where it shows up</th></tr>

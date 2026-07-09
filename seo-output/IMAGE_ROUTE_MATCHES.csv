@@ -1,0 +1,20 @@
+route,image_id,score,match_reason,status,original_filename
+/farming,farm-02,1.00,"explicit exactRoutes match; topics:farming+crops",AUTO_ASSIGN,MoonlightPeaks_Farm02_QHD.jpg
+/farming,farm-06,1.00,"explicit exactRoutes match; topics:farming+crops",AUTO_ASSIGN,MoonlightPeaks_Farm06_QHD.png
+/locations/your-farm,farm-02,1.00,"explicit exactRoutes match; topic:farming",AUTO_ASSIGN,MoonlightPeaks_Farm02_QHD.jpg
+/locations/your-farm,farm-06,1.00,"explicit exactRoutes match; topic:farming",AUTO_ASSIGN,MoonlightPeaks_Farm06_QHD.png
+/locations/forest,forest-01-summer,1.00,"explicit exactRoutes match; location:forest; topic:forest",AUTO_ASSIGN,MoonlightPeaks_Forest01_Summer_4K.png
+/locations/forest,forest-02-winter,1.00,"explicit exactRoutes match; location:forest; topic:forest",AUTO_ASSIGN,MoonlightPeaks_Forest02_Winter_QHD.png
+/locations/pier,pier-01,1.00,"explicit exactRoutes match; location:pier; topics:pier+fishing",AUTO_ASSIGN,MoonlightPeaks_Pier01_4K.jpg
+/locations/town-hall,town-hall-garden-01,1.00,"explicit exactRoutes match; location:town-hall; topic:town-hall",AUTO_ASSIGN,MoonLightPeaks_TownHallGarden01_QHD.jpg
+/locations/silverveil-museum,museum-02,1.00,"explicit exactRoutes match; topic:museum",AUTO_ASSIGN,MoonlightPeaks_Museum02_4K.jpg
+/locations/silverveil-museum,museum-05,1.00,"explicit exactRoutes match; topic:museum",AUTO_ASSIGN,MoonlightPeaks_Museum05_4K.jpg
+/locations/silverveil-museum,museum-09,1.00,"explicit exactRoutes match; topic:museum",AUTO_ASSIGN,MoonlightPeaks_Museum09_4K.jpg
+/mini-games,minigame,1.00,"explicit exactRoutes match; topic:minigames",AUTO_ASSIGN,MoonlightPeaks_Minigame.jpg
+/fishing,pier-01,1.00,"explicit exactRoutes match; location:pier; topics:pier+fishing",AUTO_ASSIGN,MoonlightPeaks_Pier01_4K.jpg
+/environment,forest-01-summer,1.00,"location:forest; topics:forest+season-summer",AUTO_ASSIGN,MoonlightPeaks_Forest01_Summer_4K.png
+/environment,forest-02-winter,1.00,"location:forest; topics:forest+season-winter",AUTO_ASSIGN,MoonlightPeaks_Forest02_Winter_QHD.png
+/locations/landmarks,marshes-01,0.15,"topic:marshes",NO_ASSIGN,MoonlightPeaks_Marshes01_QHD.jpg
+/locations/landmarks,moonlit-slopes-03,0.15,"topic:moonlit-slopes",NO_ASSIGN,MoonlightPeaks_MoonlitSlopes03_4K.png
+/beginner-guide,farm-02,0.15,"topic:farming",NO_ASSIGN,MoonlightPeaks_Farm02_QHD.jpg
+/beginner-guide,farm-06,0.15,"topic:farming",NO_ASSIGN,MoonlightPeaks_Farm06_QHD.png

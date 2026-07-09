@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import { SITE, GAME } from '../consts';
 import { crops, cropsByProfit } from '../data/crops';
+import GuideImage from '../components/GuideImage.astro';
 
 const faq = [
   { q: 'Do you farm at night in Moonlight Peaks?', a: 'Yes. You play a vampire, so growing and nurturing is done by moonlight — just be back in your coffin before sunrise. Night farming is a signature twist on the cozy farming loop.' },
@@ -34,6 +35,8 @@ const jsonLd = [
         magical livestock — Cheeken, Piggoat, Draculamb, and Cowcula. Here's how moonlit farming,
         enchanted crops, and magical livestock actually work. Updated {SITE.updated}.
       </p>
+
+      <GuideImage imageId="farm-02" priority />
 
       <h2>Farming by moonlight</h2>
       <p>
