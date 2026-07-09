@@ -5,7 +5,7 @@ import { characters } from '../../data/characters';
 
 // Only characters with real, sourced descriptive flavor are used — no fabricated personalities.
 // Each entry's blurb is drawn directly from the character's own (already-cited) knownInfo/desc.
-const cast = ['saga', 'luna', 'orlock', 'logan', 'the-warlock', 'death', 'mina']
+const cast = ['saga', 'luna', 'orlock', 'the-warlock', 'death', 'mina']
   .map((id) => characters.find((c) => c.id === id))
   .filter(Boolean);
 
@@ -21,10 +21,6 @@ const results: Record<string, { tagline: string; blurb: string }> = {
   orlock: {
     tagline: 'You want old-world charm and a little bit of power.',
     blurb: 'Orlock is reported as the head of a vampire family — old-world influence, and the kind of presence that walks into a room and changes it.',
-  },
-  logan: {
-    tagline: 'You want someone private, home-proud, and a little mysterious.',
-    blurb: 'Logan is a reported werewolf resident best known for a distinctive house — datamined files and a developer diary both independently point to him being real. Quietly confident, keeps a nice home.',
   },
   'the-warlock': {
     tagline: 'You want confidence, charm, and zero subtlety about it.',
@@ -63,7 +59,7 @@ const questions = [
     q: 'Pick a house you\u2019d want to visit:',
     options: [
       { t: 'A grand family estate, generations old', s: 'orlock' },
-      { t: 'A quietly kept home with a personal touch', s: 'logan' },
+      { t: 'A quietly kept home with a personal touch', s: 'orlock' },
       { t: 'Wherever the crops are best', s: 'luna' },
       { t: 'Somewhere half the town avoids', s: 'death' },
     ],
@@ -83,7 +79,7 @@ const questions = [
       { t: 'Watching from a window, feeling something change', s: 'saga' },
       { t: 'Tending night-blooming flowers', s: 'luna' },
       { t: 'Somewhere no one can see me', s: 'death' },
-      { t: 'Making sure my house looks good in the moonlight', s: 'logan' },
+      { t: 'Making sure my house looks good in the moonlight', s: 'orlock' },
     ],
   },
   {

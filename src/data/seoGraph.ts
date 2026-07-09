@@ -909,6 +909,23 @@ export const seoPages: SeoPage[] = SEO_PROGRAM_ENABLED ? computedSeoPages : [];
 
 export const seoPageByPath = new Map(seoPages.map((page) => [page.path, page]));
 
+// Read-only exports added for validation/audit tooling only — no behavior change. Lets an
+// external script inspect exactly which candidates were rejected and why, without re-deriving
+// the gate logic in a separate file (which could drift out of sync with the real gate).
+export const __auditTrustedGenerated = trustedGenerated;
+export const __auditRejected = trustedGenerated.filter((p) => !passesSeoQualityGate(p));
+export const __auditGateChecks = (page: SeoPage) => ({
+  pathDepthOk: page.path.split('/').filter(Boolean).length >= 3,
+  sectionsCountOk: page.sections.length >= 3,
+  sectionsLengthOk: page.sections.every((s) => s.title.length >= 4 && s.body.length >= 90),
+  faqsCountOk: page.faqs.length >= 2,
+  relatedOk: page.related.length >= 3,
+  textSizeOk: textSize(page) >= 900,
+  sourcesOk: hasSafePublicSources(page),
+  concreteAnswerOk: hasConcreteAnswer(page),
+  noDraftMarker: !hasUnsafeDraftMarker(page),
+});
+
 export const seoStats = {
   hubs: hubs.length,
   urls: seoPages.length,

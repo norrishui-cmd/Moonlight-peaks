@@ -59,16 +59,15 @@ export const charTranslations: Record<'es' | 'ja' | 'zh', Record<string, CharTra
       romanceYes: 'Se reporta que Orlock es conquistable. Las preferencias de regalo y los eventos de corazón se añadirán en cuanto se confirmen en el juego en vivo.',
       romanceNo: '', romanceTbc: '',
     },
-    logan: {
-      name: 'Logan', familyLabel: 'Hombre lobo', typeLabel: 'Hombre lobo',
-      desc: 'Residente hombre lobo reportado, con una casa de diseño distintivo.',
+    brook: {
+      name: 'Brook', familyLabel: 'Hombre lobo', typeLabel: 'Hombre lobo',
+      desc: 'El alcalde de Moonlight Peaks, patriarca de la familia Logan (hombres lobo). No es una opción de romance.',
       knownInfo: [
-        'Un residente hombre lobo visto en material de juego.',
-        'En diálogos hace referencia a una vieja iglesia al borde del pueblo.',
-        'Una publicación del diario de desarrollo de un artista 3D de Little Chicken (vía Steam Community) describe el rediseño de una habitación con temática de hombre lobo para la casa de Logan, lo que corrobora su nombre de forma independiente.',
+        'Confirmado como alcalde del pueblo, a cargo del registro en el Ayuntamiento y de entregarte a Chester.',
+        'Patriarca de la familia Logan; padre de Saga y Ludo, y hermano mayor de Ridge.',
+        'Dirige el Martillo Aullador (Howling Hammer), la tienda de mejoras de herramientas, abierta de lunes a viernes de 18:00 a medianoche.',
       ],
-      romanceYes: 'Se reporta que Logan es conquistable. Las preferencias de regalo y los eventos de corazón se añadirán en cuanto se confirmen en el juego en vivo.',
-      romanceNo: '', romanceTbc: '',
+      romanceYes: '', romanceNo: 'Brook no es una opción de romance confirmada.', romanceTbc: '',
     },
     'the-warlock': {
       name: 'El Brujo', familyLabel: 'Bruja', typeLabel: 'Bruja',
@@ -125,16 +124,15 @@ export const charTranslations: Record<'es' | 'ja' | 'zh', Record<string, CharTra
       romanceYes: 'オルロックは恋愛対象になれると報じられています。好みの贈り物やハートイベントは、正式版で確認され次第追加します。',
       romanceNo: '', romanceTbc: '',
     },
-    logan: {
-      name: 'ローガン', familyLabel: '人狼', typeLabel: '人狼',
-      desc: '特徴的な造りの家を持つ、人狼の住民として報じられている。',
+    brook: {
+      name: 'Brook', familyLabel: '人狼', typeLabel: '人狼',
+      desc: 'Moonlight Peaksの町長で、人狼のローガン家の家長。恋愛対象ではない。',
       knownInfo: [
-        'ゲーム映像内で確認されている人狼の住民。',
-        'セリフの中で、町外れにある古い教会について言及している。',
-        'Little Chickenの3Dアーティストによる開発日記(Steam Community経由)では、ローガンの家のために人狼をテーマにした部屋をデザインし直す様子が紹介されており、彼の名前を別の角度から裏付けている。',
+        '町長として確認済み。タウンホールでの登録とChesterの授与を担当する。',
+        'ローガン家の家長。Sagaの父親でLudoの父親、Ridgeの兄。',
+        'ハウリング・ハンマー(道具アップグレード店)を経営、月曜〜金曜の18時から深夜0時まで営業。',
       ],
-      romanceYes: 'ローガンは恋愛対象になれると報じられています。好みの贈り物やハートイベントは、正式版で確認され次第追加します。',
-      romanceNo: '', romanceTbc: '',
+      romanceYes: '', romanceNo: 'Brookは恋愛対象として確認されていません。', romanceTbc: '',
     },
     'the-warlock': {
       name: '謎の魔術師', familyLabel: '魔女', typeLabel: '魔女',
@@ -191,16 +189,15 @@ export const charTranslations: Record<'es' | 'ja' | 'zh', Record<string, CharTra
       romanceYes: '据报道 Orlock 是可攻略角色。礼物偏好和心动事件会在正式版确认后补充。',
       romanceNo: '', romanceTbc: '',
     },
-    logan: {
-      name: 'Logan', familyLabel: '狼人', typeLabel: '狼人',
-      desc: '据报道是一位狼人居民,住着一栋造型独特的房子。',
+    brook: {
+      name: 'Brook', familyLabel: '狼人', typeLabel: '狼人',
+      desc: 'Moonlight Peaks 的镇长,狼人洛根(Logan)家族的家长,不可攻略。',
       knownInfo: [
-        '在游戏实机画面中出现过的一位狼人居民。',
-        '他在对话里提到过镇子边缘一座古老的教堂。',
-        'Little Chicken 一位 3D 美术师自己发的开发日记(通过 Steam 社区)里,提到重新设计了一个狼人主题的房间用作"Logan 的家",这从另一个角度独立印证了他的名字确实存在。',
+        '已确认为镇长,负责在镇公所办理登记手续,并把 Chester 交给你。',
+        '洛根家族家长,Saga 和 Ludo 的父亲,Ridge 的兄长。',
+        '经营 Howling Hammer 工具升级商店,周一到周五 18:00 至凌晨营业。',
       ],
-      romanceYes: '据报道 Logan 是可攻略角色。礼物偏好和心动事件会在正式版确认后补充。',
-      romanceNo: '', romanceTbc: '',
+      romanceYes: '', romanceNo: 'Brook 未被确认为可攻略角色。', romanceTbc: '',
     },
     'the-warlock': {
       name: '神秘术士', familyLabel: '女巫', typeLabel: '女巫',

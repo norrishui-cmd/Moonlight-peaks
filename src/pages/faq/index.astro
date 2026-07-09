@@ -5,7 +5,7 @@ import PriorityLinks from '../../components/PriorityLinks.astro';
 import { faqs, faqCatLabels } from '../../data/faq';
 import { faqPriorityLinks } from '../../data/priorityLinks';
 
-const cats = ['platforms', 'romance', 'characters', 'world', 'general'] as const;
+const cats = ['platforms', 'romance', 'characters', 'world', 'farming', 'general'] as const;
 const plain = (f) => [f.a, ...(f.more || [])].join(' ');
 
 const jsonLd = [

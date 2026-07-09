@@ -7,7 +7,7 @@ import { characterPriorityLinks } from '../data/priorityLinks';
 import { dataminedNpcs, dataminedPetNames } from '../data/npc-datamine';
 
 const types = [...new Set(characters.map((c) => c.type))];
-const hasProfile = () => true;
+const hasProfile = (_c: (typeof characters)[number]) => true;
 
 // Split into the main/official cast (every romanceable resident, plus Count Dracula as the
 // story-central protagonist's father) versus supporting NPCs (mayor, shopkeeper-adjacent,

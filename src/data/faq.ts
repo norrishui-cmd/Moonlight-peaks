@@ -3,13 +3,14 @@
 // or data that the game has not revealed. Pending questions are kept as commented templates at the
 // bottom — fill them (or I will) once the July 7, 2026 build confirms the answer.
 
-export type FaqCat = 'platforms' | 'romance' | 'characters' | 'world' | 'general';
+export type FaqCat = 'platforms' | 'romance' | 'characters' | 'world' | 'farming' | 'general';
 
 export const faqCatLabels: Record<FaqCat, string> = {
   platforms: 'Platforms, price & demo',
   romance: 'Romance & marriage',
   characters: 'Characters',
   world: 'World & gameplay',
+  farming: 'Farming & economy',
   general: 'General',
 };
 
