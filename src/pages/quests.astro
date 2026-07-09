@@ -2,17 +2,27 @@
 import Base from '../layouts/Base.astro';
 import { SITE, GAME } from '../consts';
 
-// Confirmed quest names sourced from launch-week guides. Full quest chains, rewards, and order
-// are not yet mapped — add rows as they're verified rather than guessing at structure.
+// Confirmed quest names sourced from launch-week walkthroughs (Neoseeker, Bonus Action, Into Indie
+// Games). Full step lists live on those sites; here we map names, unlock conditions, and rewards.
 const quests = [
-  { name: "Orlock's Wine Scheme", giver: 'Orlock', unlocks: 'Leads into "A Bridge Too Far" — apologize to Orlock, pay a 350-gold debt to Samael at The Broken Lamp, then report back', status: 'confirmed' },
-  { name: 'A Bridge Too Far', giver: 'Related to Orlock / Fiona', unlocks: 'Misty Shores area, meeting Death', status: 'confirmed' },
-  { name: 'The Dinner Party', giver: 'Story event', unlocks: 'Start of the magic questline (Luna\u2019s letter)', status: 'confirmed' },
-  { name: 'Tension in the Crest Garden', giver: 'To be confirmed', unlocks: 'Part of the Hellkitten shapeshift unlock chain', status: 'confirmed' },
-  { name: 'A Croak and a Crest', giver: 'To be confirmed', unlocks: 'Part of the Hellkitten shapeshift unlock chain', status: 'confirmed' },
-  { name: 'Vampster side-quest', giver: 'Environmental (no giver NPC)', unlocks: 'None confirmed; deliver Vampsters to a cave near Orlock\u2019s mansion', status: 'confirmed' },
-  { name: "Elvira's treasure hunt", giver: 'Elvira', unlocks: 'Tied to the "Raiders of the Lost Art" achievement', status: 'reported' },
+  { name: 'Register at Town Hall', giver: 'Story (setup)', unlocks: 'Meeting Brook, receiving Chester', status: 'confirmed' },
+  { name: 'Meet the Townsfolk', giver: 'Story (setup)', unlocks: 'Opens early town routes', status: 'confirmed' },
+  { name: "Orlock's Wine Scheme (Blood Wine)", giver: 'Orlock', unlocks: 'Make Blood Wine; apologize to Orlock, pay a 350-gold debt to Samael; leads toward A Bridge Too Far', status: 'confirmed' },
+  { name: 'A Bridge Too Far', giver: 'Story (Orlock/Fiona feud)', unlocks: 'Reopens Ambrosia Estate; unlocks Misty Shores & Cave of Echoes (copper)', status: 'confirmed' },
+  { name: 'Tension in the Crest Garden', giver: 'Story', unlocks: 'Requires A Bridge Too Far + 1 day; leads to A Croak and a Crest', status: 'confirmed' },
+  { name: 'A Croak and a Crest', giver: 'Story', unlocks: 'Part of the Hellkitten form chain', status: 'confirmed' },
+  { name: 'The Dinner Party', giver: 'Story', unlocks: 'Reward: Cat (Hellkitten) form; Aquaflux spell route via Luna', status: 'confirmed' },
+  { name: 'The Magic of Crops', giver: 'Story', unlocks: 'Leads into the mana questline', status: 'confirmed' },
+  { name: 'A Mayor\u2019s Burden', giver: 'Story (Brook)', unlocks: 'Triggers on entering Town after The Magic of Crops', status: 'confirmed' },
+  { name: 'The Quest for Mana', giver: 'Story (Sabrina\u2019s letter)', unlocks: 'Reward: Mana Essence + Mana Extractor blueprint', status: 'confirmed' },
+  { name: 'Building a Mana Extractor', giver: 'Story', unlocks: 'Requires The Quest for Mana + 2 days', status: 'confirmed' },
+  { name: 'The Mermaid\u2019s Wish', giver: 'Story (Hosu family)', unlocks: 'Part of the mermaid/wedding chain', status: 'confirmed' },
+  { name: 'The Rehearsal Dinner / Kim\u2019s Invite', giver: 'Story (Hosu family)', unlocks: 'Requires The Mermaid\u2019s Wish + A Touch of Magic', status: 'confirmed' },
+  { name: 'Elections by Moonlight', giver: 'Story', unlocks: 'Town governance storyline', status: 'confirmed' },
+  { name: 'Darkness over Moonlight Peaks', giver: 'Story', unlocks: 'Main-story progression quest', status: 'confirmed' },
+  { name: "Elvira's treasure hunt", giver: 'Elvira', unlocks: 'Five poetic clues (Samael\u2019s bar → graveyard → mine bell → Cave of Echoes → Khazan Temple); ties to "Raiders of the Lost Art"', status: 'confirmed' },
   { name: 'Building a treehouse with Ridge', giver: 'Ridge', unlocks: 'Tied to the "A Childhood Dream" achievement', status: 'reported' },
+  { name: 'Vampster side-quest', giver: 'Environmental', unlocks: 'Deliver Vampsters to a cave near Orlock\u2019s mansion (carry in bat form only)', status: 'confirmed' },
 ];
 
 const faq = [

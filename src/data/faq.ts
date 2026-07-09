@@ -190,6 +190,42 @@ export const faqs: Faq[] = [
     a: 'Reported: the well costs 1,500 gold and helps with watering — a cheaper early purchase than the 4,000-gold Barn.',
     related: [{ label: 'Farming guide', href: '/farming' }],
   },
+  {
+    slug: 'moonlight-peaks-best-universal-gifts', cat: 'romance',
+    q: 'What are the best gifts to give everyone in Moonlight Peaks?',
+    a: 'Community gift testing (via TheGamer and player reports) points to Purple Tulip as a widely liked gift across many residents, while Onion Seeds are widely disliked — avoid them. Beyond those, most residents have individual preferences that are still being catalogued. Saga is the one fully confirmed case: she loves white wine and single flowers, but dislikes bouquets.',
+    related: [{ label: 'Romance guide', href: '/romance' }, { label: 'Gift Tracker', href: '/tools/gift-tracker' }],
+  },
+  {
+    slug: 'moonlight-peaks-how-to-get-copper', cat: 'world',
+    q: 'How do you get copper in Moonlight Peaks?',
+    a: 'Confirmed: copper comes from the Cave of Echoes, in the lower-left of the Misty Shores area (west of Orlock\u2019s mansion). It\u2019s blocked at first by the Orlock/Fiona feud — you must finish "Orlock\u2019s Wine Scheme" and "A Bridge Too Far" to lift the bridge curse and open the area. Inside, mine the copper-flecked rocks with your pickaxe; large ore clusters can drop 6 ore versus 1 from regular nodes. Make a Copper Bar at the Furnace with 4 Copper Ore + 1 Charcoal.',
+    related: [{ label: 'Quests', href: '/quests' }, { label: 'Locations', href: '/locations/mines' }],
+  },
+  {
+    slug: 'moonlight-peaks-how-to-go-on-dates', cat: 'romance',
+    q: 'How do you go on dates in Moonlight Peaks?',
+    a: 'Confirmed: reach Heart Level 4 with a resident first, then you can invite them on a date. Dates play out as minigames (like assembling a bouquet in requested colors), not passive cutscenes. To find heart-event cutscenes, open your map and look for exclamation points (enter the area) or a sparkling aura on a building (go inside).',
+    related: [{ label: 'Romance guide', href: '/romance' }],
+  },
+  {
+    slug: 'moonlight-peaks-tool-upgrade-materials', cat: 'world',
+    q: 'What do you need to upgrade tools in Moonlight Peaks?',
+    a: 'Confirmed: upgrade tools at the Howling Hammer (Ridge\u2019s shop, open Mon\u2013Fri 6 PM to midnight). Upgrades cost gold plus Copper, Silver, or Gold Bars depending on the tier — so you need mine access first. The Scythe upgrades only twice; other tools can reach a gold tier.',
+    related: [{ label: 'Items & tools', href: '/items/tools' }, { label: 'Quests', href: '/quests' }],
+  },
+  {
+    slug: 'moonlight-peaks-cant-interact-indoors', cat: 'general',
+    q: "Why can't I interact with objects inside my house?",
+    a: 'This is a reported, unresolved bug — some players can\u2019t click objects indoors (like the coffin to sleep or pets) while outdoor interactions work fine. No confirmed fix yet; try reloading the area or sleeping to the next night, and report it to support@xseedgames.com if it persists.',
+    related: [{ label: 'Known issues', href: '/known-issues' }],
+  },
+  {
+    slug: 'moonlight-peaks-exe-deleted-antivirus', cat: 'general',
+    q: 'My antivirus deleted Moonlight Peaks.exe — what do I do?',
+    a: 'Reported: some antivirus software flags and removes "Moonlight Peaks.exe" as a false positive, which can cause launch failures. Add the game\u2019s .exe to your antivirus exception list and verify the game files (Steam → right-click the game → Properties → Installed Files → Verify integrity) to restore it.',
+    related: [{ label: 'Known issues', href: '/known-issues' }],
+  },
 
   // ── World & gameplay ──
   {
