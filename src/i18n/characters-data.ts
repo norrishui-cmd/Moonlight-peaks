@@ -94,6 +94,45 @@ export const charTranslations: Record<'es' | 'ja' | 'zh' | 'zh-hant' | 'de', Rec
     },
   },
   ja: {
+    mina: {
+      name: 'ミナ', familyLabel: '吸血鬼一族(アンブロシア)', typeLabel: '吸血鬼',
+      desc: '明るい性格の吸血鬼で、Orlockの娘。兄弟のEvanと一緒に町のカフェ「Coffee & Coffins」を営んでいる。',
+      knownInfo: [
+        '確認済み:Orlockの娘でEvanの兄弟。二人で「Coffee & Coffins」を経営している。',
+        '母親が去った後、Orlockはカフェを畳もうとしたが、ミナが説得して続けさせたと報告されている。',
+        '焼き菓子作りが好きで、いつも明るく振る舞っている。',
+      ],
+      romanceYes: 'ミナは確認済みの恋愛対象です。', romanceNo: '', romanceTbc: '',
+    },
+    sabrina: {
+      name: 'サブリナ', familyLabel: '魔女一族(ウェッブ)', typeLabel: '魔女',
+      desc: 'ウェッブ家のゴシック系魔女。「Webb of Wonders」を営み、変身エリクサーを販売している。いとこのFionaを困らせる自由奔放な性格。',
+      knownInfo: [
+        '確認済み:「Webb of Wonders」を営む魔女。ウェッブ家の一員でFionaのいとこと報告されている。',
+        'キャラクターの外見を変えられる変身エリクサーを販売している。',
+      ],
+      romanceYes: 'サブリナは確認済みの恋愛対象です。', romanceNo: '', romanceTbc: '',
+    },
+    noel: {
+      name: 'ノエル', familyLabel: '魔女一族(ウェッブ)', typeLabel: 'その他',
+      desc: '町の鍛冶屋で、ウェッブ家の伊達男。Fionaの兄弟で、自らを「ムーンライト・ピークスの顔」と呼ぶ。自信満々に見えるが、内面では自己イメージに悩みを抱えている。',
+      knownInfo: [
+        '確認済み:250ゴールドの釣り勝負の後、プレイヤーに釣竿をくれる。',
+        '確認済み:ウェッブ家のFionaの兄弟。町の鍛冶屋。',
+        '確認された深み:表面上の自信の裏に、本当の自己イメージへの悩みを抱えている。',
+      ],
+      romanceYes: 'ノエルは確認済みの恋愛対象です。', romanceNo: '', romanceTbc: '',
+    },
+    fiona: {
+      name: 'フィオナ', familyLabel: '魔女一族(ウェッブ)', typeLabel: '魔女',
+      desc: 'ウェッブ家の当主であり、地元の魔女団のリーダー(母Laveauの後を継いだ。Laveauはヴラド・ドラキュラと結婚するために家を出た)。町の花屋でもある。冷静で厳しく、兄弟のNoelといとこたちに高い期待を寄せている。',
+      knownInfo: [
+        '確認済み:ウェッブ家と魔女団の当主で、Laveau(プレイヤーキャラクターの母)の後を継いだ。',
+        '序盤の農場生活の中で、郵便配達のクエストをプレイヤーに与える。',
+        '確認済みクエスト詳細:酔った勢いの口論の後、Orlockの家へ続く橋を呪ったとされ、「A Bridge Too Far」クエストで解除されるまでMisty Shores地域を封鎖している。',
+      ],
+      romanceYes: 'フィオナは確認済みの恋愛対象です。', romanceNo: '', romanceTbc: '',
+    },
     'count-dracula': {
       name: 'ドラキュラ伯爵', familyLabel: '吸血鬼', typeLabel: '吸血鬼',
       desc: 'あなたの父親であり、町の伝説的存在。その影から抜け出すことが物語の出発点になる——恋愛対象ではなく、物語の中心人物。',

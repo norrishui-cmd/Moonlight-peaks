@@ -70,6 +70,22 @@ const jsonLd = [
       <h2>恋愛について</h2>
       <p>{romanceText}</p>
 
+      {(base.lovedGifts?.length || base.likedGifts?.length || base.dislikedGifts?.length) && (
+        <>
+          <h2>好きなプレゼント</h2>
+          {base.lovedGifts && base.lovedGifts.length > 0 && (
+            <p><strong>大好き:</strong> {base.lovedGifts.join('、')}</p>
+          )}
+          {base.likedGifts && base.likedGifts.length > 0 && (
+            <p><strong>好き:</strong> {base.likedGifts.join('、')}</p>
+          )}
+          {base.dislikedGifts && base.dislikedGifts.length > 0 && (
+            <p><strong>苦手:</strong> {base.dislikedGifts.join('、')}</p>
+          )}
+          <p class="cnote">発売週の海外メディア調査(TheGamer、2026年7月7日公開)に基づく確認データです。</p>
+        </>
+      )}
+
       <div class="callout">
         関連ページ: <a href="/ja/characters">キャラクター一覧</a>、<a href="/romance">恋愛ガイド</a>、
         <a href="/families">家族</a>、<a href="/characters">英語版の詳細ページ</a>。

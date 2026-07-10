@@ -4,7 +4,7 @@ import { SITE, GAME } from '../../../consts';
 import { characters, typeLabels, type CharType } from '../../../data/characters';
 import { charTranslations } from '../../../i18n/characters-data';
 
-const translatedSlugs = new Set(['count-dracula', 'saga', 'luna', 'orlock', 'brook', 'the-warlock']);
+const translatedSlugs = new Set(['count-dracula', 'saga', 'luna', 'orlock', 'brook', 'the-warlock', 'mina', 'sabrina', 'noel', 'fiona']);
 const jaTranslations = charTranslations.ja;
 
 // Japanese labels for character type/family — not claimed as official localization (no verified
@@ -55,7 +55,7 @@ const jsonLd = {
       <h1>{GAME.title} <em>キャラクター</em>(全住民)</h1>
       <p class="intro">
         確認済みの全住民を、恋愛対象とその他のNPCに分けて掲載しています。プロフィールを日本語に
-        翻訳済みのキャラクター(6名)は日本語ページへ、それ以外は現時点で最も情報が充実している
+        翻訳済みのキャラクター(10名)は日本語ページへ、それ以外は現時点で最も情報が充実している
         英語版プロフィールへリンクしています。
       </p>
 
@@ -90,9 +90,10 @@ const jsonLd = {
       </div>
 
       <div class="callout wip">
-        現在6名(ドラキュラ伯爵、Saga、Luna、Orlock、Brook、謎の術士)のプロフィールを日本語に
-        翻訳済みです。それ以外のキャラクターをクリックすると、確認済み情報がより充実している
-        <a href="/characters">英語版キャラクターページ</a>の該当プロフィールに移動します。
+        現在10名(ドラキュラ伯爵、Saga、Luna、Orlock、Brook、謎の術士、ミナ、サブリナ、ノエル、
+        フィオナ)のプロフィールを日本語に翻訳済みです。それ以外のキャラクターをクリックすると、
+        確認済み情報がより充実している<a href="/characters">英語版キャラクターページ</a>の
+        該当プロフィールに移動します。
       </div>
     </div>
   </article>
