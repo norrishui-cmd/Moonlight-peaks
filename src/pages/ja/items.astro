@@ -1,6 +1,70 @@
 ---
-import LocalizedWorldHub from '../../components/LocalizedWorldHub.astro';
+import Base from '../../layouts/Base.astro';
+import { SITE } from '../../consts';
 import { itemCategories } from '../../data/items';
-import { localizedWorldPages } from '../../data/localizedWorldPages';
+import { itemsJa } from '../../i18n/items-ja';
+
+const statusLabelJa: Record<string, string> = {
+  confirmed: '確認済み', datamined: 'データ解析', expected: '確認予定',
+};
+const groupLabelJa: Record<string, string> = {
+  Equipment: '装備', Resources: '資源', Crafting: 'クラフト', Creatures: '生物', Home: '家',
+};
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'ホーム', item: `${SITE.url}/ja` },
+    { '@type': 'ListItem', position: 2, name: 'アイテム', item: `${SITE.url}/ja/items` },
+  ] },
+  { '@context': 'https://schema.org', '@type': 'ItemList', name: 'Moonlight Peaks アイテムカテゴリ',
+    itemListElement: itemCategories.map((c, i) => ({ '@type': 'ListItem', position: i + 1, name: itemsJa[c.slug].name, url: `${SITE.url}/ja/items/${c.slug}` })) },
+];
 ---
-<LocalizedWorldHub lang="ja" kind="items" copy={localizedWorldPages.ja.items} items={itemCategories} />
+<Base
+  title="ムーンライト・ピークス アイテム一覧 -ヴァンパイアのゴシックライフ-"
+  description="ムーンライト・ピークスのアイテムカテゴリを日本語で整理。道具、家畜、Soul Blobs、Vampsterなど確認済みデータと、まだ確認中の情報を分けて掲載。"
+  path="/ja/items"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'アイテム' }]}
+  lang="ja"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">データベース・アイテム</p>
+      <h1>ムーンライト・ピークス <em>アイテム</em></h1>
+      <p class="intro">
+        アイテムカテゴリを日本語で整理しています。確認済みのデータと、まだ確認中の情報を明確に
+        分けて掲載しており、推測では書きません。
+      </p>
+
+      <div class="ix-grid">
+        {itemCategories.map((c) => {
+          const tr = itemsJa[c.slug];
+          return (
+            <a class="ix-card" href={`/ja/items/${c.slug}`}>
+              <div class="ix-meta">
+                <span>{groupLabelJa[c.group] ?? c.group}</span>
+                <span>{statusLabelJa[c.status] ?? c.status}</span>
+              </div>
+              <h3>{tr.name}</h3>
+              <p>{tr.dek}</p>
+              <strong>詳細を見る →</strong>
+            </a>
+          );
+        })}
+      </div>
+    </div>
+  </article>
+
+  <style>
+    .ix-grid { display: grid; grid-template-columns: 1fr; gap: 14px; margin: 20px 0 40px; }
+    @media (min-width: 720px) { .ix-grid { grid-template-columns: 1fr 1fr; } }
+    @media (min-width: 1080px) { .ix-grid { grid-template-columns: 1fr 1fr 1fr; } }
+    .ix-card { display: flex; flex-direction: column; gap: 10px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); padding: 18px; text-decoration: none; color: inherit; transition: border-color .15s ease, transform .15s ease; }
+    .ix-card:hover { border-color: color-mix(in srgb, var(--candle) 50%, var(--line)); transform: translateY(-2px); }
+    .ix-meta { display: flex; gap: 8px; font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.04em; text-transform: uppercase; color: var(--faint); }
+    .ix-card h3 { margin: 0; font-family: var(--display); font-size: 1.15rem; color: var(--mist); }
+    .ix-card p { margin: 0; color: var(--muted); font-size: 0.88rem; line-height: 1.5; flex: 1; }
+    .ix-card strong { color: var(--candle); font-family: var(--mono); font-size: 0.82rem; }
+  </style>
+</Base>
