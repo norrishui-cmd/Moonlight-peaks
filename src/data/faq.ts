@@ -282,6 +282,12 @@ export const faqs: Faq[] = [
     related: [{ label: 'Romance & families', href: '/romance' }],
   },
   {
+    slug: 'best-general-gifts-in-moonlight-peaks', cat: 'romance',
+    q: 'What are safe, general-purpose gifts in Moonlight Peaks?',
+    a: 'Cross-confirmed across multiple launch-week sources: matching a gift\u2019s colour to a resident\u2019s favourite colour tends to land well generally, and a custom flower bouquet arranged in their preferred colour (via the flower-arranging mini-game) is a safe, always-available option that also works as decor if unclaimed. Handmade presents \u2014 bouquets and embroidered pieces among them \u2014 are reported to land well beyond any resident-specific preferences.',
+    related: [{ label: 'Romance & families', href: '/romance' }, { label: 'Gift Tracker', href: '/tools/gift-tracker' }],
+  },
+  {
     slug: 'how-many-romance-options-are-there', cat: 'romance',
     q: 'How many romance options are in Moonlight Peaks?',
     a: 'The Steam page describes around two dozen (roughly 24) romanceable residents. Earlier coverage cited 15, so the roster grew during development.',

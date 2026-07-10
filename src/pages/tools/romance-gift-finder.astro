@@ -97,6 +97,16 @@ const jsonLd = [
         </div>
       </section>
 
+      <h2>How gift tracking works in-game</h2>
+      <p>
+        Confirmed: the relationship menu tracks the last 8 gifts you\u2019ve given each resident, showing
+        whether each landed as liked, loved, or disliked \u2014 so experimenting is low-risk, since you
+        can review what worked. <span class="tag-community">Community-reported</span> giving a
+        resident\u2019s favourite gift on their birthday grants a bigger friendship boost than usual.
+        Two general tricks also carry across many residents: matching a gift\u2019s colour to their
+        favourite colour, and handmade presents like arranged bouquets or embroidered pieces.
+      </p>
+
       <h2>Gift verification policy</h2>
       <div class="verification-grid">
         <div>
@@ -178,6 +188,11 @@ const jsonLd = [
   </script>
 
   <style>
+    .tag-community {
+      display: inline-block; font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.02em;
+      color: var(--faint); border: 1px solid var(--line); border-radius: 999px; padding: 2px 8px;
+      margin-right: 6px; vertical-align: middle;
+    }
     .gift-tool { display: grid; grid-template-columns: minmax(250px, 0.75fr) minmax(0, 1.25fr); gap: 18px; margin: 28px 0 34px; }
     @media (max-width: 820px) { .gift-tool { grid-template-columns: 1fr; } }
     .gift-controls, .gift-result { border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); padding: 18px; }
