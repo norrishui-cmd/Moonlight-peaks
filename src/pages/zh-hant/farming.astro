@@ -12,8 +12,8 @@ const faq = [
 const jsonLd = [
   { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
   { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
-    { '@type': 'ListItem', position: 1, name: '首頁', item: `${SITE.url}/zh-hant` },
-    { '@type': 'ListItem', position: 2, name: '耕種攻略', item: `${SITE.url}/zh-hant/farming` },
+    { '@type': 'ListItem', position: 1, name: '首頁', item: `${SITE.url}/zh` },
+    { '@type': 'ListItem', position: 2, name: '耕種攻略', item: `${SITE.url}/zh/farming` },
   ] },
 ];
 ---
@@ -78,7 +78,7 @@ const jsonLd = [
         解鎖,能解放雙手澆水。隨著遊戲推進,你會拿到新工具,把地產逐步發展壯大,種出更多東西。
       </p>
 
-      <h2>正式發售({GAME.releaseLabel})後會補上的內容</h2>
+      <h2>仍在核實中的內容</h2>
       <ul>
         <li>完整的<strong>作物資料庫</strong>:精確買賣價格、季節。</li>
         <li>按季節和利潤排序的<strong>最賺錢作物</strong>推薦。</li>
@@ -98,7 +98,7 @@ const jsonLd = [
       <div class="callout wip">
         發售後詞條,持續更新真實遊戲資料。相關內容:
         <a href="/magic">魔法</a>、<a href="/items">物品</a>、<a href="/environment">環境</a>、
-        <a href="/map">互動地圖</a>、<a href="/zh-hant/beginner-guide">新手入門攻略</a>(中文)。
+        <a href="/map">互動地圖</a>、<a href="/zh/beginner-guide">新手入門攻略</a>(中文)。
       </div>
     </div>
   </article>

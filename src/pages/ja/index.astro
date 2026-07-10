@@ -3,36 +3,34 @@ import Base from '../../layouts/Base.astro';
 import { SITE, GAME } from '../../consts';
 
 const entries = [
-  { title: '発売日と対応機種', desc: 'いつ、どこで、価格、そして無料体験版——発売初日に遊ぶために必要な情報。', href: '/release-date', img: '/card-release.webp' },
-  { title: '動作環境', desc: '購入前に確認したいPC、Mac、Steam Deck、体験版のパフォーマンス。', href: '/system-requirements', img: '/card-guide.webp' },
-  { title: '対応言語', desc: '日本語、中国語、韓国語、ドイツ語、英語対応——発売時に確認予定。', href: '/languages', img: '/card-guide.webp' },
-  { title: '初心者ガイド', desc: '現時点で判明している情報をまとめ、初日から有利にスタート。', href: '/beginner-guide', img: '/card-guide.webp' },
-  { title: 'カードゲーム「ノクトゥルナ」', desc: '町で人気のカードゲーム——ルール、カード、勝ち方。', href: '/nokturna', img: '/card-nokturna.webp' },
-  { title: '恋愛と家族', desc: '7つの家族、恋愛対象になれるキャラクター、好みの贈り物。', href: '/romance', img: '/card-romance.webp' },
-  { title: 'チート＆コンソールコマンド', desc: 'コンソールコマンドと金策チート——発売時に公開。', href: '/cheats', img: '/card-cheats.webp' },
-  { title: '作物と季節', desc: '神秘的な作物、魔法の家畜、夜の農業サイクル。', href: '/farming', img: '/card-crops.webp' },
+  { title: '発売日と対応機種', desc: '7月7日にSteam、Switch、Switch 2、Androidで配信開始。価格と無料体験版情報。', href: '/release-date', img: '/card-release.webp' },
+  { title: '初心者ガイド', desc: '最初の1週間で本当に重要なこと——正式版から確認した情報。', href: '/beginner-guide', img: '/card-guide.webp' },
+  { title: '恋愛と家族', desc: '23人の確認済み恋愛対象、7つの家族、好みの贈り物。', href: '/romance', img: '/card-romance.webp' },
+  { title: '農業とファーム', desc: 'ブラッドグレープ、バーン、魔法の家畜——確認済みデータ。', href: '/farming', img: '/card-crops.webp' },
+  { title: '魔法システム', desc: '壊れた杖の直し方、Moon Fruit、マナの進行。', href: '/magic', img: '/card-guide.webp' },
+  { title: 'キャラクター', desc: '住民全員の家族構成と、誰が恋愛対象になれるか。', href: '/characters', img: '/count-dracula.webp' },
+  { title: 'ロケーション', desc: '町、農場、Howling Marshesなど確認済みの場所。', href: '/locations', img: '/hero-loc-town.webp' },
+  { title: '既知の不具合', desc: 'クラッシュ、コントローラーの問題と確認済みの対処法。', href: '/known-issues', img: '/card-guide.webp' },
 ];
 
 const explore = [
-  { k: 'キャラクター', d: '住民、家族、そして恋愛対象について', href: '/characters', img: '/count-dracula.webp' },
-  { k: 'ロケーション', d: '町、農場、森、湖など', href: '/locations', img: '/hero-loc-town.webp' },
+  { k: '恋愛システム', d: '好感度、デート、結婚の仕組み', href: '/romance', img: '/card-romance.webp' },
   { k: '家族', d: '町に住む7つの超自然的な家族', href: '/families', img: '/hero-fam-vampires.webp' },
   { k: 'アクティビティ', d: '釣り、魔法、手芸、のんびり過ごせる遊び', href: '/activities', img: '/hero-act-seasonal-events.webp' },
   { k: 'アイテム', d: '道具、ポーション、インテリアなどのカテゴリ', href: '/items', img: null, c1: '#3a4a2f', c2: '#8ab06a' },
   { k: 'よくある質問', d: 'よくある質問への簡潔な回答', href: '/faq', img: '/card-faq.webp' },
-  { k: 'ガイド＆ニュース', d: '体験版の感想、メディアのプレイレポート、攻略記事', href: '/previews', img: '/hero-first-five-minutes.webp' },
-  { k: 'PDFエクスポート', d: '好きな攻略記事を選んでまとめて1つのPDFに出力', href: '/export', img: '/card-export-pdf.webp' },
+  { k: 'クエスト', d: '「A Bridge Too Far」など確認済みクエスト攻略', href: '/quests', img: '/hero-first-five-minutes.webp' },
 ];
 
 const jsonLd = {
   '@context': 'https://schema.org', '@type': 'WebSite', name: 'Moonlight Peaks Wiki & Guide（日本語）',
   url: `${SITE.url}/ja`, inLanguage: 'ja',
-  description: 'ヴァンパイア・ライフシム「Moonlight Peaks」の日本語ファンガイド。発売日、初心者ガイド、恋愛、チート情報。',
+  description: 'ヴァンパイア・ライフシム「Moonlight Peaks」の日本語ファンガイド。発売情報、初心者ガイド、恋愛、既知の不具合。',
 };
 ---
 <Base
-  title="「ムーンライト・ピークス」日本語攻略ガイド — 発売日・チート"
-  description="コージーなヴァンパイア・ライフシム「Moonlight Peaks」の日本語ファンガイド。発売日、初心者向けのコツ、恋愛、チート情報。"
+  title="「ムーンライト・ピークス」日本語攻略ガイド — 発売情報・既知の不具合"
+  description="コージーなヴァンパイア・ライフシム「Moonlight Peaks」の日本語ファンガイド。7月7日発売、配信中。初心者向けのコツ、恋愛、既知の不具合。"
   path="/ja"
   jsonLd={jsonLd}
   lang="ja"
@@ -40,15 +38,15 @@ const jsonLd = {
   <article class="page">
     <div class="wrap">
       <p class="eyebrow">吸血鬼農家のフィールド暦</p>
-      <h1><em>ムーンライト・ピークス</em>（Moonlight Peaks）がまもなく開門します。</h1>
+      <h1><em>ムーンライト・ピークス</em>（Moonlight Peaks）配信中。</h1>
       <p class="intro">
-        {GAME.developer}が贈るヴァンパイア・ライフシムの、コージー・ゴシック系攻略ガイド。発売前から公開しているので、
-        初日から町のことを知った状態でスタートできます——今はリリース情報を、{GAME.title}が配信され次第、
-        攻略のコツやノクトゥルナ、恋愛、チートを追加していきます。
+        {GAME.developer}が贈るヴァンパイア・ライフシムの、コージー・ゴシック系攻略ガイド。
+        {GAME.title}は2026年7月7日に発売され、現在配信中です。このガイドは実際のゲーム内容を
+        随時確認しながら更新しています。
       </p>
       <p class="callout wip">
-        この日本語版では、現時点で最も重要なページのみを掲載しています。その他のコンテンツ(記事、キャラクタープロフィール、
-        よくある質問)はまだ英語のみです——順次翻訳していきます。日本語版が用意されるまで、このページのリンクは英語ページへ移動します。
+        この日本語版では、現時点で最も重要なページのみを掲載しています。その他のコンテンツ(記事、一部のキャラクタープロフィール)
+        はまだ英語のみです——順次翻訳していきます。日本語版が用意されるまで、このページのリンクは英語ページへ移動します。
       </p>
 
       <h2>まずはここから</h2>

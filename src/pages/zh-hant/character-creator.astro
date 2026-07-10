@@ -11,8 +11,8 @@ const faq = [
 const jsonLd = [
   { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
   { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
-    { '@type': 'ListItem', position: 1, name: '首頁', item: `${SITE.url}/zh-hant` },
-    { '@type': 'ListItem', position: 2, name: '角色建立', item: `${SITE.url}/zh-hant/character-creator` },
+    { '@type': 'ListItem', position: 1, name: '首頁', item: `${SITE.url}/zh` },
+    { '@type': 'ListItem', position: 2, name: '角色建立', item: `${SITE.url}/zh/character-creator` },
   ] },
 ];
 ---
@@ -59,7 +59,7 @@ const jsonLd = [
         <strong>"變身藥水"</strong>能改變你的外貌。調配方式詳見<a href="/magic">魔法與藥水</a>。
       </p>
 
-      <h2>正式發售({GAME.releaseLabel})後會補上的內容</h2>
+      <h2>仍在核實中的內容</h2>
       <ul>
         <li>髮型、臉型、膚色和服裝部件的<strong>完整選項列表</strong>。</li>
         <li>有沒有<strong>預設方案</strong>,以及能微調到什麼程度。</li>

@@ -1,6 +1,6 @@
 ---
 import Base from '../../layouts/Base.astro';
-import { SITE, GAME } from '../../consts';
+import { SITE } from '../../consts';
 
 const jsonLd = {
   '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
@@ -10,8 +10,8 @@ const jsonLd = {
 };
 ---
 <Base
-  title="Moonlight Peaks 发售前新手入门攻略"
-  description="Moonlight Peaks 发售前新手入门攻略:夜间耕种循环、吸血鬼能力、七大家族、恋爱系统、钓鱼、药水与 Nokturna 卡牌游戏。"
+  title="Moonlight Peaks 新手入门攻略:第一周实用技巧"
+  description="Moonlight Peaks 新手入门攻略:第一周真正重要的事——已从正式版游戏确认的内容,不是发售前猜测。"
   path="/zh/beginner-guide"
   jsonLd={jsonLd}
   crumbs={[{ label: '新手入门攻略' }]}
@@ -23,69 +23,62 @@ const jsonLd = {
       <p class="eyebrow">词条 · 攻略</p>
       <h1>Moonlight Peaks <em>新手入门攻略</em></h1>
       <p class="intro">
-        这是目前从试玩版和官方预告片里收集到的全部信息。等到 {GAME.releaseLabel} 正式发售,
-        这篇文章会升级成带精确数值的完整"第一天"攻略。最后更新:{SITE.updated}。
+        已从正式版游戏确认:第一晚,Orlock 会给你血葡萄种子,你需要在镇公所登记(镇长 Brook 会给你
+        Chester,一个能走路的储物箱),你的法杖一开始是坏的,后续剧情里会修好。以下是第一周真正
+        重要的事。最后更新:{SITE.updated}。
       </p>
 
-      <h2>开局检查清单</h2>
+      <div class="callout">
+        <strong>快速答案:</strong>立刻种下血葡萄(5天成熟),去镇公所领取 Chester 和任务告示板,
+        前期不要一次种太多——在魔法系统解锁 Aquaflux 自动浇水之前,你都得手动浇水。
+      </div>
+
+      <h2>第一周检查清单</h2>
       <ol class="steps">
-        <li><strong>先确认你的平台。</strong>在规划第一个存档之前,确认 Steam、Switch、Switch 2、Steam Deck、Mac 和 Android 的支持情况。</li>
-        <li><strong>先玩免费试玩版。</strong>用它熟悉操作方式、角色创建、钓鱼、插花、刺绣,以及游戏前期的整体氛围。</li>
-        <li><strong>了解夜间循环机制。</strong>Moonlight Peaks 是一款温馨系生活模拟游戏,但吸血鬼的作息安排会改变你对"种地"这件事的理解方式。</li>
-        <li><strong>选一个前期主攻方向。</strong>耕种、社交关系、装饰、钓鱼、魔法和 Nokturna 分别对应不同的攻略板块。</li>
+        <li><strong>种下血葡萄。</strong>已确认5天成熟——用铲子挖坑(没有单独的锄头),每晚记得浇水。</li>
+        <li><strong>去镇公所登记。</strong>见到 Brook,拿到 Chester,查看 Albertus 的任务告示板。</li>
+        <li><strong>前期不要贪多。</strong>在解锁 Aquaflux 之前都是手动浇水,小规模种植更容易管理。</li>
+        <li><strong>选一个前期主攻方向。</strong>恋爱、魔法、Nokturna 都有各自独立的攻略板块。</li>
       </ol>
 
       <h2>核心游戏循环</h2>
       <p>
         你继承了一处破败的祖传家产,要把它重建成一座哥特温馨风的农场。日常围绕着照料
-        <strong>神秘作物</strong>、饲养<strong>魔法家畜</strong>,以及用魔法(可控浇水壶和法术)来打理土地。
+        <strong>神秘作物</strong>、饲养<strong>魔法家畜</strong>,以及用魔法来打理土地。
         和同类游戏不太一样的是,这里的耕种是在夜间进行的,正好贴合你吸血鬼的生活方式。
       </p>
 
-      <h2>你在游戏里能做的事</h2>
-      <ul>
-        <li><strong>耕种与畜牧</strong>——种植施了魔法的作物,饲养小镇特有的生物。</li>
-        <li><strong>法术与药水</strong>——学习巫术,帮你在耕种和采集时事半功倍。</li>
-        <li><strong>钓鱼与采集</strong>——经典的温馨向采集玩法,加了点超自然色彩。</li>
-        <li><strong>烹饪</strong>——把收获做成料理和饮品。</li>
-        <li><strong>刺绣与插花</strong>——试玩版里展示过的节奏更慢的休闲活动。</li>
-        <li><strong>Nokturna</strong>——收集卡牌,和居民对战小镇最受欢迎的这款游戏。</li>
-        <li><strong>家居设计</strong>——装饰你的哥特风小屋(挑一口称心如意的棺材),逐步扩建你的地产。</li>
-      </ul>
-
       <h2>作为一名吸血鬼</h2>
       <p>
-        你的血统不只是个主题设定,更是一套实用工具。你可以<strong>变身</strong>——化作蝙蝠快速穿越小镇、
-        抵达隐藏区域——随着游戏进度推进,还能解锁从强化感官开始的一系列古老能力。游戏里有个可探索的矿洞区域,
-        但要注意<strong>全程没有任何战斗</strong>,所以体验始终是轻松惬意的。镇上不少居民本身也是超自然生物,
-        所以你完全能自然地融入其中。
+        你的血统不只是个主题设定,更是一套实用工具。已确认:你可以<strong>变身</strong>成蝙蝠或
+        三眼地狱猫(Hellkitten),快速穿越小镇。游戏里有可探索的矿洞区域(Cave of Echoes),
+        但<strong>全程没有任何战斗</strong>,体验始终是轻松惬意的。
       </p>
 
       <h2>小镇与镇上的居民</h2>
       <p>
         Moonlight Peaks 小镇上住着七个家族,涵盖人类和各种夜之生物——狼人、女巫、美人鱼等等,
         知名角色里甚至还有死神本人。和他们交朋友、谈恋爱是游戏的核心玩法之一;我们的
-        <a href="/romance">恋爱与家族专题</a>会在游戏发售时追踪每一位候选对象及其送礼偏好。
+        <a href="/romance">恋爱与家族专题</a>已收录全部 23 位确认可攻略角色及其送礼数据。
       </p>
 
-      <h2>发售前不用担心的事</h2>
+      <h2>目前还在核实的内容</h2>
       <p>
-        现在还不用急着去追求精确的最优路线。在完整版上线之前,作物利润、礼物价值、鱼类刷新、
-        食谱价格、任务奖励和居民日程这些数据,都应该当作"要等发售才知道"的信息来看待。
-        现阶段真正有用的,是先理解各个系统的运作方式,并收藏好需要的参考页面。
+        大部分核心系统已经确认并写进了本站——夜间耕种、魔法解锁、任务、七大家族都是来自正式版
+        的真实数据。还在补充的是:大部分居民的完整礼物清单(目前只有少数几位完全确认)、
+        Nokturna 完整卡牌列表,以及精确的作物售价。我们会标注清楚,不会瞎猜。
       </p>
 
       <h2>按目标挑选下一步该看的页面</h2>
       <table class="facts">
-        <tr><th>想第一天就开玩</th><td><a href="/release-date">发售日期</a>、<a href="/demo">试玩版攻略</a>、<a href="/platforms">平台攻略</a></td></tr>
+        <tr><th>刚开始玩</th><td><a href="/quests">任务</a>、<a href="/known-issues">已知问题</a>、<a href="/platforms">平台攻略</a></td></tr>
         <tr><th>想谈恋爱</th><td><a href="/romance">恋爱攻略</a>、<a href="/characters">角色列表</a>、<a href="/characters/saga">Saga</a></td></tr>
         <tr><th>想种地</th><td><a href="/farming">耕种攻略</a>、<a href="/magic">魔法</a>、<a href="/activities">活动</a></td></tr>
-        <tr><th>想收集要素</th><td><a href="/activities/fishing">钓鱼</a>、<a href="/activities/foraging">采集</a>、<a href="/locations">地点</a>、<a href="/map">地图</a></td></tr>
       </table>
 
       <div class="callout wip">
-        这是发售前的占位词条。具体的作物价格、鱼类清单、礼物对照表和作弊指令,要等 {GAME.releaseLabel}
-        完整版上线才能确认——我们会第一时间补上。这个页面里的链接在中文版做好之前,会先带你去对应攻略的
+        发售后词条,持续更新真实游戏数据。部分内容(完整礼物表、Nokturna 卡牌列表)仍在核实中,
+        我们会标注清楚而不是瞎猜。这个页面里的链接在中文版做好之前,会先带你去对应攻略的
         英文原版。发现遗漏的内容?欢迎发邮件到 {SITE.contact} 告诉我们。
       </div>
     </div>

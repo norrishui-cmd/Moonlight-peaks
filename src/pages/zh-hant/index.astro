@@ -3,36 +3,34 @@ import Base from '../../layouts/Base.astro';
 import { SITE, GAME } from '../../consts';
 
 const entries = [
-  { title: '發售日與平臺', desc: '什麼時候、在哪玩、多少錢,以及免費試玩版——上線第一天需要的全部資訊。', href: '/release-date', img: '/card-release.webp' },
-  { title: '配置需求', desc: '購買前先看 PC、Mac、Steam Deck 和試玩版的效能表現。', href: '/system-requirements', img: '/card-guide.webp' },
-  { title: '語言支援', desc: '日語、中文、韓語、德語、英語支援情況——以發售時為準。', href: '/languages', img: '/card-guide.webp' },
-  { title: '新手入門攻略', desc: '目前已知的全部資訊,幫你在第一天就搶佔先機。', href: '/beginner-guide', img: '/card-guide.webp' },
-  { title: 'Nokturna 卡牌遊戲', desc: '小鎮最受歡迎的遊戲——玩法、卡牌與獲勝技巧。', href: '/nokturna', img: '/card-nokturna.webp' },
-  { title: '戀愛與家族', desc: '七大家族、可攻略角色,以及送禮偏好。', href: '/romance', img: '/card-romance.webp' },
-  { title: '作弊碼與主機', desc: '控制檯指令與賺錢作弊碼——發售當天公佈。', href: '/cheats', img: '/card-cheats.webp' },
-  { title: '作物與季節', desc: '神秘作物、魔法家畜,以及夜間耕種迴圈。', href: '/farming', img: '/card-crops.webp' },
+  { title: '發售日與平臺', desc: '7月7日已在 Steam、Switch、Switch 2 和安卓上線,價格與免費試玩版資訊。', href: '/release-date', img: '/card-release.webp' },
+  { title: '新手入門攻略', desc: '第一週該做什麼——已從正式版遊戲中確認的真實攻略。', href: '/beginner-guide', img: '/card-guide.webp' },
+  { title: '戀愛與家族', desc: '23 位確認可攻略角色、七大家族,以及送禮偏好。', href: '/romance', img: '/card-romance.webp' },
+  { title: '作物與農場', desc: '血葡萄、穀倉與魔法家畜——確認資料,不是猜測。', href: '/farming', img: '/card-crops.webp' },
+  { title: '魔法系統', desc: '損壞的法杖怎麼修、Moon Fruit 與法力值進度。', href: '/magic', img: '/card-guide.webp' },
+  { title: '角色', desc: '全部居民、家族歸屬,以及誰能被追求。', href: '/characters', img: '/count-dracula.webp' },
+  { title: '地點', desc: '小鎮、你的農場、Howling Marshes 等確認地點。', href: '/locations', img: '/hero-loc-town.webp' },
+  { title: '已知問題', desc: '崩潰、手柄問題與確認可行的解決辦法。', href: '/known-issues', img: '/card-guide.webp' },
 ];
 
 const explore = [
-  { k: '角色', d: '居民、家族,以及可以追求的對象', href: '/characters', img: '/count-dracula.webp' },
-  { k: '地點', d: '小鎮、你的農場、森林、湖泊等等', href: '/locations', img: '/hero-loc-town.webp' },
+  { k: '戀愛系統', d: '好感度機制、約會與結婚', href: '/romance', img: '/card-romance.webp' },
   { k: '家族', d: '小鎮裡七個超自然家族', href: '/families', img: '/hero-fam-vampires.webp' },
   { k: '活動', d: '釣魚、魔法、手工與愜意的休閒活動', href: '/activities', img: '/hero-act-seasonal-events.webp' },
   { k: '物品', d: '工具、藥水、裝飾品及其它分類', href: '/items', img: null, c1: '#3a4a2f', c2: '#8ab06a' },
   { k: '常見問題', d: '最常見問題的快速解答', href: '/faq', img: '/card-faq.webp' },
-  { k: '攻略與資訊', d: 'Demo 體驗感想、媒體試玩報道與教程', href: '/previews', img: '/hero-first-five-minutes.webp' },
-  { k: '匯出為 PDF', d: '挑選任意攻略,合併匯出成一份 PDF', href: '/export', img: '/card-export-pdf.webp' },
+  { k: '任務', d: 'A Bridge Too Far 等已確認任務攻略', href: '/quests', img: '/hero-first-five-minutes.webp' },
 ];
 
 const jsonLd = {
   '@context': 'https://schema.org', '@type': 'WebSite', name: 'Moonlight Peaks 繁體中文攻略維基',
   url: `${SITE.url}/zh-hant`, inLanguage: 'zh-Hant',
-  description: '吸血鬼生活模擬遊戲 Moonlight Peaks 的繁體中文同人攻略站:發售日期、新手攻略、戀愛系統與作弊碼。',
+  description: '吸血鬼生活模擬遊戲 Moonlight Peaks 的繁體中文同人攻略站:發售資訊、新手攻略、戀愛系統與已知問題。',
 };
 ---
 <Base
-  title="Moonlight Peaks 中文攻略 — 發售日期、新手攻略與作弊碼"
-  description="哥特風吸血鬼生活模擬遊戲 Moonlight Peaks 的繁體中文同人攻略站。發售日期、新手技巧、戀愛系統與作弊碼。"
+  title="Moonlight Peaks 中文攻略 — 發售資訊、新手攻略與已知問題"
+  description="哥特風吸血鬼生活模擬遊戲 Moonlight Peaks 的繁體中文同人攻略站,7月7日發售,現已上線。新手技巧、戀愛系統與已知問題。"
   path="/zh-hant"
   jsonLd={jsonLd}
   lang="zh-hant"
@@ -40,14 +38,13 @@ const jsonLd = {
   <article class="page">
     <div class="wrap">
       <p class="eyebrow">一本吸血鬼農夫的田野手記</p>
-      <h1><em>Moonlight Peaks</em> 即將開門迎客。</h1>
+      <h1><em>Moonlight Peaks</em> 現已上線。</h1>
       <p class="intro">
-        由 {GAME.developer} 打造的哥特風溫馨吸血鬼生活模擬遊戲,這是它的繁體中文同人攻略站。我們在遊戲正式發售前就已經上線,
-        讓你在第一天就對小鎮瞭如指掌——現在先提供發售資訊,等 {GAME.title} 正式上線,攻略技巧、Nokturna、
-        戀愛系統和作弊碼會第一時間跟上。
+        由 {GAME.developer} 打造的哥特風溫馨吸血鬼生活模擬遊戲,這是它的繁體中文同人攻略站。
+        {GAME.title} 已於 2026 年 7 月 7 日發售,這份攻略持續更新真實確認的遊戲內容。
       </p>
       <p class="callout wip">
-        目前這個繁體中文版本先覆蓋了最重要的幾個入口頁面。其餘內容(文章、角色資料、常見問題)暫時還只有英文版,
+        目前這個繁體中文版本先覆蓋了最重要的幾個入口頁面。其餘內容(文章、部分角色資料)暫時還只有英文版,
         我們會分批翻譯。這個頁面上的連結在對應繁體中文版做好之前,會先帶你去英文原版頁面。
       </p>
 
