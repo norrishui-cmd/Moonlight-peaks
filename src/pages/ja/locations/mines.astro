@@ -1,0 +1,74 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { SITE } from '../../../consts';
+
+const faq = [
+  { q: 'Moonlight PeaksでCave of Echoesを解放するには?', a: '確認済み:Cave of EchoesはMisty Shoresの南西にあります。最初はロックされており、「A Bridge Too Far」クエストを完了すると解放されます。' },
+  { q: 'Moonlight Peaksで銅鉱石はどこで見つかりますか?', a: 'コミュニティ報告:「A Bridge Too Far」完了後、Cave of Echoes内で見つかります。銅の斑点がある普通の岩のように見え、ツルハシで採掘します。' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'ホーム', item: `${SITE.url}/ja` },
+    { '@type': 'ListItem', position: 2, name: 'ロケーション', item: `${SITE.url}/ja/locations` },
+    { '@type': 'ListItem', position: 3, name: 'Cave of Echoes', item: `${SITE.url}/ja/locations/mines` },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks Cave of Echoes — 解放方法と鉱石"
+  description="Moonlight PeaksのCave of Echoesを解放する方法、銅鉱石の見つけ方、鉱山進行でよくある問題について。"
+  path="/ja/locations/mines"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'ロケーション', href: '/ja/locations' }, { label: 'Cave of Echoes' }]}
+  lang="ja"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">エントリー・鉱山</p>
+      <h1>Moonlight Peaksの<em>Cave of Echoes</em></h1>
+
+      <div class="callout">
+        <strong>クイックアンサー:</strong>Cave of Echoesは「A Bridge Too Far」クエストを完了すると解放されます。その後、ツルハシでCave of Echoes内の銅鉱石を採掘できます。
+      </div>
+
+      <h2>解放方法</h2>
+      <p>
+        確認済み:Cave of EchoesはMisty Shores地域の南西に位置し、最初はロックされています。「A Bridge Too Far」クエストを完了すると、Misty Shores地域全体と共に解放されます。
+      </p>
+
+      <h2>なぜまだロックされているのか</h2>
+      <p>
+        まだ到達できない場合、ほとんどの場合はクエストが原因であり、アイテム不足ではありません。コミュニティ報告:この地域は、呪われたとされる橋をめぐるOrlockとFionaの確執によってブロックされています。
+      </p>
+
+      <h2>銅鉱石</h2>
+      <p>
+        <span class="tag-community">コミュニティ報告</span>銅鉱石は銅色の斑点がある普通の岩のように見え、ツルハシで採掘します。大きな鉱脈は1個ではなく最大6個の鉱石を産出することがあります。
+      </p>
+
+      <h2>よくある質問</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        関連: <a href="/ja/locations">ロケーション</a>、<a href="/ja/quests/a-bridge-too-far">A Bridge Too Farクエストガイド</a>、
+        <a href="/locations/mines">完全ガイド（英語）</a>。
+      </div>
+    </div>
+  </article>
+  <style>
+    .tag-community {
+      display: inline-block; font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.02em;
+      color: var(--faint); border: 1px solid var(--line); border-radius: 999px; padding: 2px 8px;
+      margin-right: 6px; vertical-align: middle;
+    }
+  </style>
+</Base>

@@ -15,6 +15,10 @@ const sharedEsJaZhPaths = [
   '/activities',
 ];
 
+// Pages deepened for Japanese specifically, beyond the shared es/ja/zh baseline above (Phase 1
+// of Japanese content deepening — see JAPANESE_DEEPENING_PHASE1.md).
+const jaOnlyPaths = ['/locations/mines', '/quests/a-bridge-too-far'];
+
 const dePaths = [
   '/', '/beginner-guide', '/characters', '/romance', '/platforms', '/release-date', '/demo',
   '/magic', '/locations', '/locations/mines', '/known-issues', '/quests/a-bridge-too-far',
@@ -24,7 +28,7 @@ const dePaths = [
 export const translatedPathsByLocale: Record<Locale, Set<string>> = {
   en: new Set(), // English is the source; not meaningful to check "is English translated".
   es: new Set(sharedEsJaZhPaths),
-  ja: new Set(sharedEsJaZhPaths),
+  ja: new Set([...sharedEsJaZhPaths, ...jaOnlyPaths]),
   zh: new Set(sharedEsJaZhPaths),
   'zh-hant': new Set(sharedEsJaZhPaths), // mirrors the same 21 pages as zh, converted via OpenCC
   de: new Set(dePaths),

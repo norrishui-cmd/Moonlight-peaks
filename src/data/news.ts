@@ -12,6 +12,19 @@ export type NewsItem = {
 
 export const news: NewsItem[] = [
   {
+    slug: 'tool-upgrade-menu-navigation-confirmed',
+    date: '2026-07-10',
+    title: 'How to actually reach the tool upgrade menu at the Howling Hammer',
+    body: 'We already had the cost and material requirements for tool upgrades, but not the exact in-shop navigation — that\u2019s now confirmed: talk to Ridge, select Shop, choose "I want to buy something," then scroll right twice to reach the upgrade tab.',
+    details: [
+      'Confirmed menu path: Ridge \u2192 Shop \u2192 "I want to buy something" \u2192 scroll right twice \u2192 tool upgrade tab.',
+      'Community-reported priority tip: get the Pickaxe to Gold tier first, since it gates how much ore the Cave of Echoes gives you, which in turn gates every other tool\u2019s upgrade materials.',
+      'This matches what we already had confirmed elsewhere on the site: the Howling Hammer is open Monday\u2013Friday only, and the Scythe caps out after two upgrades while other tools can reach a gold tier.',
+    ],
+    sourceLabel: 'GAMES.GG tool upgrade guide',
+    sourceUrl: 'https://games.gg/news/moonlight-peaks-tool-upgrades/',
+  },
+  {
     slug: 'moonlight-peaks-is-out-now',
     date: '2026-07-07',
     title: 'Moonlight Peaks is out now on Steam, Switch, Switch 2 and Android',

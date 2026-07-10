@@ -1,0 +1,73 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { SITE } from '../../../consts';
+
+const faq = [
+  { q: 'Moonlight PeaksでA Bridge Too Farを開始するには?', a: '確認済み:このクエストは「Orlock\u2019s Wine Scheme」の直後に発生します。Orlockに謝罪し、Samaelへの350ゴールドの借金を返済してから、町に戻ってください。' },
+  { q: 'A Bridge Too Farは何を解放しますか?', a: '確認済み:Ambrosia邸宅とMisty Shores地域全体(Cave of Echoesの銅鉱石を含む)が解放されます。' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'ホーム', item: `${SITE.url}/ja` },
+    { '@type': 'ListItem', position: 2, name: 'クエスト', item: `${SITE.url}/ja/quests/a-bridge-too-far` },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks: A Bridge Too Farクエストガイド"
+  description="Moonlight PeaksのA Bridge Too Farクエストの開始方法、OrlockとFionaの確執、そして何が解放されるか(Misty Shores、Cave of Echoes)。"
+  path="/ja/quests/a-bridge-too-far"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'クエスト' }, { label: 'A Bridge Too Far' }]}
+  lang="ja"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">クエストガイド</p>
+      <h1>Moonlight Peaks: <em>A Bridge Too Far</em></h1>
+
+      <div class="callout">
+        <strong>クイックアンサー:</strong>A Bridge Too Farは「Orlock's Wine Scheme」の後に解放されます。町の住人たちと話し、Ambrosia邸宅近くの橋に戻ってください。完了するとMisty ShoresとCave of Echoesが開放されます。
+      </div>
+
+      <h2>クエストの開始方法</h2>
+      <p>
+        確認済み:このクエストは、Orlockのために血のワインを作る<strong>Orlock's Wine Scheme</strong>の直後に発生します。Orlockに謝罪し、Broken LampでSamaelへの350ゴールドの借金を返済すると、次に町を訪れたときに自動的にクエストが発生します。
+      </p>
+
+      <h2>なぜ橋がロックされているのか</h2>
+      <p>
+        <span class="tag-community">コミュニティ報告</span>Orlockは、Fionaが橋を呪ったと信じています。実際には本当の呪いはなく、Orlockが失礼な態度を取ったことによる口論があっただけです。
+      </p>
+
+      <h2>クエストが解放するもの</h2>
+      <p>
+        確認済み:完了するとAmbrosia邸宅とMisty Shores地域全体(Cave of Echoesを含む)が解放されます。
+      </p>
+
+      <h2>よくある質問</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        関連: <a href="/ja/locations/mines">Cave of Echoes</a>、
+        <a href="/quests/a-bridge-too-far">完全ガイド（英語）</a>。
+      </div>
+    </div>
+  </article>
+  <style>
+    .tag-community {
+      display: inline-block; font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.02em;
+      color: var(--faint); border: 1px solid var(--line); border-radius: 999px; padding: 2px 8px;
+      margin-right: 6px; vertical-align: middle;
+    }
+  </style>
+</Base>

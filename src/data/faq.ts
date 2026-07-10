@@ -212,7 +212,7 @@ export const faqs: Faq[] = [
   {
     slug: 'moonlight-peaks-tool-upgrade-materials', cat: 'world',
     q: 'What do you need to upgrade tools in Moonlight Peaks?',
-    a: 'Confirmed: upgrade tools at the Howling Hammer (Ridge\u2019s shop, open Mon\u2013Fri 6 PM to midnight). Upgrades cost gold plus Copper, Silver, or Gold Bars depending on the tier — so you need mine access first. The Scythe upgrades only twice; other tools can reach a gold tier.',
+    a: 'Confirmed: upgrade tools at the Howling Hammer (Ridge\u2019s shop, open Mon\u2013Fri 6 PM to midnight). Talk to Ridge, select Shop, choose "I want to buy something," then scroll right twice to reach the upgrade tab. Upgrades cost gold plus Copper, Silver, or Gold Bars depending on the tier — so you need mine access first. The Scythe upgrades only twice; other tools can reach a gold tier. Community-reported: prioritize the Pickaxe to Gold first, since it gates how much ore the Cave of Echoes gives you for every other tool\u2019s materials.',
     related: [{ label: 'Items & tools', href: '/items/tools' }, { label: 'Quests', href: '/quests' }],
   },
   {
