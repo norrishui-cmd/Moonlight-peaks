@@ -5,6 +5,9 @@ import YouTube from '../components/YouTube.astro';
 import PriorityLinks from '../components/PriorityLinks.astro';
 import { romancePriorityLinks } from '../data/priorityLinks';
 import { characters, typeLabels } from '../data/characters';
+import { seoPages } from '../data/seoGraph';
+
+const publishedPaths = new Set(seoPages.map((p) => p.path));
 
 // Dynamically pull every romanceable resident straight from the character data (23 confirmed at
 // launch), grouped by family, instead of a stale hand-maintained list.
@@ -158,19 +161,29 @@ const jsonLd = [
       </p>
 
       <h2>All 23 romanceable residents, by family</h2>
-      <p>Pulled directly from our character data — each name links to a full profile with what's confirmed so far.</p>
+      <p>Pulled directly from our character data. Each name links to a full profile; where we have
+      enough real data, we also link the character's dedicated romance-status and gift pages.</p>
       {familyGroups.map(([family, members]) => (
         <div class="romance-family-group">
           <h3><a href={famHref(family)}>{family}</a> <span class="rf-count">({members.length})</span></h3>
           <table class="facts">
-            <tr><th>Character</th><th>Type</th><th>Status</th></tr>
-            {members.map((c) => (
-              <tr>
-                <td><a href={`/characters/${c.id}`}>{c.name}</a></td>
-                <td>{typeLabels[c.type] || c.type}</td>
-                <td>{c.status}</td>
-              </tr>
-            ))}
+            <tr><th>Character</th><th>Type</th><th>Status</th><th>More</th></tr>
+            {members.map((c) => {
+              const statusPath = `/characters/${c.id}/romance-status`;
+              const giftsPath = `/characters/${c.id}/gifts`;
+              return (
+                <tr>
+                  <td><a href={`/characters/${c.id}`}>{c.name}</a></td>
+                  <td>{typeLabels[c.type] || c.type}</td>
+                  <td>{c.status}</td>
+                  <td>
+                    {publishedPaths.has(statusPath) && <a href={statusPath}>Romance status</a>}
+                    {publishedPaths.has(statusPath) && publishedPaths.has(giftsPath) && ' · '}
+                    {publishedPaths.has(giftsPath) && <a href={giftsPath}>Gifts</a>}
+                  </td>
+                </tr>
+              );
+            })}
           </table>
         </div>
       ))}

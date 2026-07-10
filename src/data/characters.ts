@@ -97,10 +97,13 @@ export const characters: Character[] = [
       'Confirmed dating progression: dates unlock at Heart Level 4, and you can propose at Heart Level 8; the wedding takes place within a week, attended by the town\u2019s vampires and werewolves.',
       'Confirmed home: a houseboat near the main path to Town Hall (find her there when it\u2019s raining); on dry days she\u2019s often at Coffee & Coffins or wandering near Town Hall.',
     ],
-    // First confirmed gift data on the site, via direct in-game testing (Pocket Tactics).
+    // Gift data from two independent launch-week sources, treated as complementary (not
+    // contradictory — TheGamer's own "Best" tier for Saga was marked TBC, so Pocket Tactics'
+    // top pick doesn't conflict with it): Pocket Tactics (loved gift) + TheGamer (additional
+    // liked/disliked items, published July 7, 2026).
     lovedGifts: ['White Wine'],
-    likedGifts: ['Red Wine', 'Beer', 'Single flowers (not bouquets)'],
-    dislikedGifts: ['Flower bouquets (multiple flowers)'],
+    likedGifts: ['Red Wine', 'Beer', 'Single flowers (not bouquets)', 'Purple Tulip', 'Pink Azalea', 'Blood Grape', 'Strawberry Juice', 'Gazpacho Soup'],
+    dislikedGifts: ['Flower bouquets (multiple flowers)', 'Copper Bar'],
     birthday: 'Summer 27',
     giftStatus: 'confirmed',
   },
@@ -114,6 +117,12 @@ export const characters: Character[] = [
       'Orlock reportedly wanted to shut the caf\u00e9 down after their mother left, but Mina talked him out of it.',
       'Loves baking and stays determinedly bright and cheery.',
     ],
+    // Gift data via TheGamer's launch-week testing (published July 7, 2026); 'TBC' items in their
+    // original table are omitted here rather than guessed at.
+    lovedGifts: ['Pink Azalea'],
+    likedGifts: ['Purple Tulip'],
+    dislikedGifts: ['Copper Ore'],
+    giftStatus: 'reported',
   },
   {
     id: 'evan', name: 'Evan', family: 'Vampire (Ambrosia)', type: 'vampire',
@@ -124,6 +133,11 @@ export const characters: Character[] = [
       'Confirmed at launch as Orlock\u2019s son and Mina\u2019s sibling, co-running the town caf\u00e9.',
       'Prefers counting stars to taking over the family name his father wants him to inherit.',
     ],
+    // Gift data via TheGamer's launch-week testing (published July 7, 2026); 'TBC' items in their
+    // original table are omitted here rather than guessed at.
+    likedGifts: ['Purple Tulip', 'Purple Azalea'],
+    dislikedGifts: ['Copper Bar'],
+    giftStatus: 'reported',
   },
   {
     id: 'luna', name: 'Luna', family: 'Witch (Aranea, distant Webb cousin)', type: 'witch',
@@ -136,6 +150,12 @@ export const characters: Character[] = [
       'Confirmed: sells livestock (waiting outside her house) once players have bought a Barn from Ridge — first animal is typically a Cheeken, which likes petting and hats.',
       'Details to be confirmed against the live game at launch.',
     ],
+    // Gift data via TheGamer's launch-week testing (published July 7, 2026); 'TBC' items in their
+    // original table are omitted here rather than guessed at.
+    lovedGifts: ['Purple Tulip', 'Purple Azalea', 'White Rose'],
+    likedGifts: ['Blood Grape'],
+    dislikedGifts: ['Rusty Bean Can'],
+    giftStatus: 'reported',
   },
   {
     id: 'orlock', name: 'Orlock', family: 'Vampire (Ambrosia)', type: 'vampire',
@@ -148,6 +168,12 @@ export const characters: Character[] = [
       'Haughty and self-pitying on the surface, with a caring side confirmed reviewers found worth pursuing.',
       'Reported: since he\u2019s already a father to Mina and Evan, marrying Orlock is said to make you their step-parent (there are no biological children in the game).',
     ],
+    // Gift data via TheGamer's launch-week testing (published July 7, 2026); 'TBC' items in their
+    // original table are omitted here rather than guessed at.
+    lovedGifts: ['White Wine', 'Red Wine'],
+    likedGifts: ['Purple Tulip', 'Pink Azalea'],
+    dislikedGifts: ['Wood', 'Onion Seeds'],
+    giftStatus: 'reported',
   },
   {
     id: 'logan', name: 'Logan', family: 'Werewolf', type: 'werewolf',
@@ -190,15 +216,35 @@ export const characters: Character[] = [
   { id: 'ridge',   name: 'Ridge',   family: 'Werewolf (Logan)', type: 'werewolf', status: 'confirmed', romanceable: true, img: '/ridge.webp',   c1: '#4a3a2a', c2: '#b08a4a',
     desc: 'The town carpenter and a rugged, dependable pacifist who uses his werewolf hours to scout high-quality wood; deeply cares about family. Mayor Brook\u2019s younger brother.',
     traits: [['Dependability', 85], ['Gentleness', 75]], traitsPlaceholder: true,
-    knownInfo: ['Confirmed as a werewolf carpenter and pacifist.', 'Scouts wood during his werewolf hours and is close with family.', 'Confirmed: sells players their first Barn (4,000 gold + materials, 10x6 space, 1 night to build, holds 4 animals), required before buying livestock from Luna.', 'Confirmed: runs the Howling Hammer tool-upgrade shop, open Monday\u2013Friday, 6 PM to midnight.'] },
+    knownInfo: ['Confirmed as a werewolf carpenter and pacifist.', 'Scouts wood during his werewolf hours and is close with family.', 'Confirmed: sells players their first Barn (4,000 gold + materials, 10x6 space, 1 night to build, holds 4 animals), required before buying livestock from Luna.', 'Confirmed: runs the Howling Hammer tool-upgrade shop, open Monday\u2013Friday, 6 PM to midnight.'],
+    // Gift data via TheGamer's launch-week testing (published July 7, 2026); 'TBC' items in their
+    // original table are omitted here rather than guessed at.
+    likedGifts: ['Purple Tulip', 'Blood Grape'],
+    dislikedGifts: ['Common Mushroom', 'Charcoal', 'Copper Bar', 'Pink Conch Shell', 'Splotch Fish'],
+    giftStatus: 'reported',
+  },
   { id: 'sabrina', name: 'Sabrina', family: 'Witch (Webb)', type: 'witch', status: 'confirmed', romanceable: true, img: '/sabrina.webp', c1: '#3a3a4a', c2: '#8a8ab0',
     desc: 'A gothic witch of the Webb family who runs "Webb of Wonders," selling the Alter Ego Elixir; a rule-breaking free spirit, to her cousin Fiona\u2019s annoyance.',
     traits: [['Rebellion', 80]], traitsPlaceholder: true,
-    knownInfo: ['Confirmed as the witch running the "Webb of Wonders" shop; reported as part of the Webb family and Fiona\u2019s cousin.', 'Sells the Alter Ego Elixir, used to change your character\u2019s look.'] },
+    knownInfo: ['Confirmed as the witch running the "Webb of Wonders" shop; reported as part of the Webb family and Fiona\u2019s cousin.', 'Sells the Alter Ego Elixir, used to change your character\u2019s look.'],
+    // Gift data via TheGamer's launch-week testing (published July 7, 2026); 'TBC' items in their
+    // original table are omitted here rather than guessed at.
+    lovedGifts: ['Purple Tulip', 'Purple Plumeria'],
+    likedGifts: ['Blood Grape', 'Blood Grape Juice'],
+    dislikedGifts: ['Onion Seeds', 'Pink Conch Shell'],
+    giftStatus: 'reported',
+  },
   { id: 'noel',    name: 'Noel',    family: 'Witch (Webb)', type: 'other', status: 'confirmed', romanceable: true, img: '/noel.webp',    c1: '#4a3a3a', c2: '#b08a8a',
     desc: 'The town blacksmith and a dashing flirt of the Webb family, Fiona\u2019s brother, who calls himself "the face of Moonlight Peaks"; underneath the confidence, he struggles with his self-image and wants to be accepted for who he really is.',
     traits: [['Confidence', 90]], traitsPlaceholder: true,
-    knownInfo: ['Confirmed at launch; gives players the fishing rod after a 250-gold fishing bet.', 'Confirmed as Fiona\u2019s brother in the Webb family; the town blacksmith.', 'Confirmed depth: his surface confidence hides real self-image struggles.'] },
+    knownInfo: ['Confirmed at launch; gives players the fishing rod after a 250-gold fishing bet.', 'Confirmed as Fiona\u2019s brother in the Webb family; the town blacksmith.', 'Confirmed depth: his surface confidence hides real self-image struggles.'],
+    // Gift data via TheGamer's launch-week testing (published July 7, 2026); 'TBC' items in their
+    // original table are omitted here rather than guessed at.
+    lovedGifts: ['Golden Egg'],
+    likedGifts: ['Blood Grape', 'Blood Grape Juice', 'Strawberry Juice', 'Glibby Fish'],
+    dislikedGifts: ['Purple Tulip', 'Pink Azalea'],
+    giftStatus: 'reported',
+  },
   { id: 'jada',    name: 'Jada',    family: 'Human (Henderson)', type: 'human', status: 'confirmed', romanceable: true, img: '/jada.webp',    c1: '#5a4a3a', c2: '#c0a07a',
     desc: 'A high-energy supernatural enthusiast and relic collector who happily info-dumps about history — thrilled to be living among werewolves and vampires. Persephone\u2019s niece, Winston\u2019s sister.',
     traits: [], knownInfo: ['Confirmed as part of the Henderson human family, arriving alongside Persephone and Winston.', 'Reported as a relic collector and history enthusiast.'] },
@@ -210,7 +256,13 @@ export const characters: Character[] = [
     traits: [], knownInfo: ['Confirmed as a ghost resident, belonging to no family (like Death).', 'Datamined files also reference a "Jarvis\u2019 House."'] },
   { id: 'dragan',  name: 'Dragan',  family: 'Seer (Khazan)', type: 'seer', status: 'reported', romanceable: true, img: '/dragan.webp',  c1: '#2f5a4a', c2: '#6ac0a0',
     desc: 'The oldest of the Khazan seer siblings — his own predictions are usually wrong, but he\u2019s better known as the in-universe inventor of the town\u2019s popular card game, Nokturna.',
-    traits: [], knownInfo: ['Confirmed as the oldest sibling in the Khazan seer family, ahead of Aras and Alina.', 'Reported as the in-universe inventor of Nokturna (also spelled "Nocturna" in some coverage).', 'Datamined files also list a "Dragan\u2019s House" location.'] },
+    traits: [], knownInfo: ['Confirmed as the oldest sibling in the Khazan seer family, ahead of Aras and Alina.', 'Reported as the in-universe inventor of Nokturna (also spelled "Nocturna" in some coverage).', 'Datamined files also list a "Dragan\u2019s House" location.'],
+    // Gift data via TheGamer's launch-week testing (published July 7, 2026); 'TBC' items in their
+    // original table are omitted here rather than guessed at.
+    likedGifts: ['Purple Tulip', 'Purple Azalea', 'Purple Kthonia', 'Blood Grape', 'Moon Juice'],
+    dislikedGifts: ['Pink Conch Shell'],
+    giftStatus: 'reported',
+  },
 
   // --- Datamined names WITH a second corroborating detail (a matching named location, or notable
   // cross-coverage) —enough for a short, honest standalone page rather than a bare table row.
@@ -227,7 +279,13 @@ export const characters: Character[] = [
       'Reported as part of the Khazan seer family — Dragan\u2019s younger sibling, alongside Aras.',
       'The same files reference an "Alina\u2019s House," suggesting she is a homeowner/resident rather than a passing or event-only figure.',
       'The portrait shown here comes from a pre-launch roster image supplied for this guide; family, species, and relationship status are currently unverified against the live game, not yet independently confirmed post-launch.',
-    ] },
+    ],
+    // Gift data via TheGamer's launch-week testing (published July 7, 2026); 'TBC' items in their
+    // original table are omitted here rather than guessed at.
+    likedGifts: ['Purple Tulip', 'Purple Azalea', 'Blood Grape', 'Moon Juice'],
+    dislikedGifts: ['Fiber', 'Cloth'],
+    giftStatus: 'reported',
+  },
   { id: 'death', name: 'Death', family: 'Unknown', type: 'other',
     status: 'confirmed', romanceable: true, img: '/death.webp', c1: '#2a2a2a', c2: '#8a8a9a',
     desc: 'The literal Grim Reaper, in town on holiday to unwind — dry sense of humor, tends the local cemetery, and collects both flowers and souls. Wears a Hawaiian shirt over his robes.',
@@ -244,7 +302,13 @@ export const characters: Character[] = [
     knownInfo: [
       'Runs "The Broken Lamp," the town bar, and is a member of the Ambrosia family.',
       'Elvira\u2019s brother; described as a true romantic beneath an intense, solitary exterior.',
-    ] },
+    ],
+    // Gift data via TheGamer's launch-week testing (published July 7, 2026); 'TBC' items in their
+    // original table are omitted here rather than guessed at.
+    likedGifts: ['Purple Tulip', 'Purple Azalea'],
+    dislikedGifts: ['Stone', 'Onion Seeds', 'Pink Conch Shell'],
+    giftStatus: 'reported',
+  },
   { id: 'elvira', name: 'Elvira', family: 'Vampire (Ambrosia)', type: 'vampire',
     status: 'confirmed', romanceable: true, img: '/elvira.webp', c1: '#5a2f4a', c2: '#c06a9a',
     desc: 'Samael\u2019s sister \u2014 an artistic, restless vampire who keeps jumping into new side projects, often annoying her uncle Orlock.',
@@ -252,11 +316,23 @@ export const characters: Character[] = [
     knownInfo: [
       'Confirmed as Samael\u2019s sister and Orlock\u2019s niece.',
       'Hides a fragile, artistic side that only Samael is said to fully know.',
-    ] },
+    ],
+    // Gift data via TheGamer's launch-week testing (published July 7, 2026); 'TBC' items in their
+    // original table are omitted here rather than guessed at.
+    likedGifts: ['Purple Tulip', 'Purple Azalea'],
+    dislikedGifts: ['Copper Ore', 'Cloth', 'Pink Conch Shell', 'Blue Willow Tree Seed'],
+    giftStatus: 'reported',
+  },
   { id: 'fiona', name: 'Fiona', family: 'Witch (Webb)', type: 'witch', status: 'confirmed', romanceable: true, img: '/fiona.webp', c1: '#4a2f5a', c2: '#a06ac0',
     desc: 'Head of the Webb family and leader of the local coven \u2014 succeeding her mother Laveau, who left to marry Vlad Dracula \u2014 and the town florist; cold and exacting, with very high expectations of her brother Noel and cousins.',
     traits: [['Discipline', 75], ['Warmth', 55]], traitsPlaceholder: true,
-    knownInfo: ['Confirmed as head of the Webb family and coven, succeeding Laveau (the player character\u2019s mother).', 'Gives players mailbox delivery quests during the early homestead loop.', 'Confirmed quest detail: she cursed the bridge to Orlock\u2019s home after a drunken argument, blocking the Misty Shores area until the "A Bridge Too Far" quest lifts it.'] },
+    knownInfo: ['Confirmed as head of the Webb family and coven, succeeding Laveau (the player character\u2019s mother).', 'Gives players mailbox delivery quests during the early homestead loop.', 'Confirmed quest detail: she cursed the bridge to Orlock\u2019s home after a drunken argument, blocking the Misty Shores area until the "A Bridge Too Far" quest lifts it.'],
+    // Gift data via TheGamer's launch-week testing (published July 7, 2026); 'TBC' items in their
+    // original table are omitted here rather than guessed at.
+    likedGifts: ['Purple Tulip', 'Purple Azalea', 'Purple Lavender', 'Egg', 'Moon Juice'],
+    dislikedGifts: ['Onion Seeds'],
+    giftStatus: 'reported',
+  },
 
   // --- Named in GameWatcher's post-launch confirmed-NPC roundup (July 7, 2026); no further
   // role/family/gift detail sourced yet beyond species where stated. Add detail as verified. ---
@@ -267,7 +343,13 @@ export const characters: Character[] = [
   { id: 'ludo', name: 'Ludo', family: 'Werewolf (Logan)', type: 'werewolf', status: 'confirmed', romanceable: true, img: '', c1: '#3a4a3a', c2: '#7ab08a',
     desc: "Mayor Brook's carefree child (Saga's sibling, Ridge's nephew/niece) who'd rather sleep the night away than learn the family's carpentry craft; writes vampire surf-rock operas and talks to a haiku-spouting toad named Yabbis.",
     traits: [['Chaos', 80], ['Warmth', 60]], traitsPlaceholder: true,
-    knownInfo: ['Confirmed as Brook\u2019s child, Saga\u2019s sibling, and Ridge\u2019s nephew/niece in the Logan werewolf family.', 'Loves pancakes and ghost stories, and keeps a dog.'] },
+    knownInfo: ['Confirmed as Brook\u2019s child, Saga\u2019s sibling, and Ridge\u2019s nephew/niece in the Logan werewolf family.', 'Loves pancakes and ghost stories, and keeps a dog.'],
+    // Gift data via TheGamer's launch-week testing (published July 7, 2026); 'TBC' items in their
+    // original table are omitted here rather than guessed at.
+    likedGifts: ['Purple Tulip', 'Blood Grape', 'Moonfruit'],
+    dislikedGifts: ['Charcoal', 'Orbis Fish'],
+    giftStatus: 'reported',
+  },
   { id: 'tae', name: 'Tae', family: 'Mermaid (Hosu)', type: 'mermaid', status: 'confirmed', romanceable: true, img: '', c1: '#4a3a3a', c2: '#b08a8a',
     desc: 'A stunning, down-to-earth merman of the Hosu family who takes pride in his looks and loves helping others find their confidence.',
     traits: [['Confidence', 85], ['Loyalty', 80]], traitsPlaceholder: true,
@@ -283,11 +365,23 @@ export const characters: Character[] = [
   { id: 'aras', name: 'Aras', family: 'Seer (Khazan)', type: 'seer', status: 'reported', romanceable: true, img: '', c1: '#4a4a3a', c2: '#b0b08a',
     desc: 'The local tailor of the Khazan seer family, running "Third Eye Threads." He avoids using his own seer powers to keep his future a mystery.',
     traits: [['Style', 80], ['Warmth', 65]], traitsPlaceholder: true,
-    knownInfo: ['Reported as a member of the Khazan seer family, running the "Third Eye Threads" tailor shop — Dragan\u2019s younger sibling, alongside Alina.', 'Loves fashion and cozy conversation.'] },
+    knownInfo: ['Reported as a member of the Khazan seer family, running the "Third Eye Threads" tailor shop — Dragan\u2019s younger sibling, alongside Alina.', 'Loves fashion and cozy conversation.'],
+    // Gift data via TheGamer's launch-week testing (published July 7, 2026); 'TBC' items in their
+    // original table are omitted here rather than guessed at.
+    likedGifts: ['Purple Tulip', 'Purple Azalea', 'Blood Grape', 'Raspberry Jam'],
+    dislikedGifts: ['Onion Seeds', 'Pink Conch Shell'],
+    giftStatus: 'reported',
+  },
   { id: 'persephone', name: 'Persephone', family: 'Human (Henderson)', type: 'human', status: 'confirmed', romanceable: true, img: '', c1: '#4a2f4a', c2: '#b06ab0',
     desc: "Free-spirited head of the Henderson family — a human aunt looking after her niece Jada and nephew Winston, newly arrived in town, with a love of astrology and crystals.",
     traits: [['Mysticism', 80]], traitsPlaceholder: true,
-    knownInfo: ['Confirmed as head of the Henderson human family (aunt to Jada and Winston).', 'Interested in astrology, crystals, and mystical topics.'] },
+    knownInfo: ['Confirmed as head of the Henderson human family (aunt to Jada and Winston).', 'Interested in astrology, crystals, and mystical topics.'],
+    // Gift data via TheGamer's launch-week testing (published July 7, 2026); 'TBC' items in their
+    // original table are omitted here rather than guessed at.
+    lovedGifts: ['Handmade Flower Bouquet'],
+    likedGifts: ['Raspberry Jam'],
+    giftStatus: 'reported',
+  },
   { id: 'llemi', name: 'Llemi', family: 'Unknown', type: 'other', status: 'reported', romanceable: true, img: '', c1: '#2f4a4a', c2: '#6ab0b0',
     desc: 'A whimsical love demon who feeds on local drama and chaos, living in the Pink Grove and visiting town mainly during festivals.',
     traits: [['Chaos', 85], ['Charm', 70]], traitsPlaceholder: true,

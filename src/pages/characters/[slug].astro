@@ -2,6 +2,7 @@
 import Base from '../../layouts/Base.astro';
 import { SITE } from '../../consts';
 import { characters, typeLabels, typeIcons } from '../../data/characters';
+import { seoPages } from '../../data/seoGraph';
 
 const profiled = characters;
 
@@ -14,6 +15,11 @@ export function getStaticPaths() {
 }
 
 const { c, prev, next } = Astro.props;
+const publishedPaths = new Set(seoPages.map((p) => p.path));
+const giftsPath = `/characters/${c.id}/gifts`;
+const romanceStatusPath = `/characters/${c.id}/romance-status`;
+const hasGiftPage = publishedPaths.has(giftsPath);
+const hasRomanceStatusPage = publishedPaths.has(romanceStatusPath);
 
 const sameType = profiled.filter((x) => x.id !== c.id && x.type === c.type);
 const fill = profiled.filter((x) => x.id !== c.id && x.type !== c.type);
@@ -104,10 +110,18 @@ const jsonLd = [
 
       <h2>Romance</h2>
       <p>
-        {c.romanceable === true && `${c.name} is a romance option. Gift preferences and heart events are added here once verified against the live game.`}
+        {c.romanceable === true && `${c.name} is a romance option.`}
         {c.romanceable === false && `${c.name} is not a romance option.`}
         {c.romanceable === null && `Whether ${c.name} can be romanced is currently unverified — we update this page as soon as it's confirmed.`}
+        {c.romanceable === true && (c.lovedGifts?.length || c.likedGifts?.length) ? ` Confirmed gift data is available.` : (c.romanceable === true ? ` Gift preferences are added here once verified against the live game.` : '')}
       </p>
+      {(hasGiftPage || hasRomanceStatusPage) && (
+        <p class="cnote">
+          {hasRomanceStatusPage && <a href={romanceStatusPath}>Full romance-status breakdown</a>}
+          {hasRomanceStatusPage && hasGiftPage && ' · '}
+          {hasGiftPage && <a href={giftsPath}>{c.name}'s gift guide</a>}
+        </p>
+      )}
 
       {c.id === 'death' && (
         <>

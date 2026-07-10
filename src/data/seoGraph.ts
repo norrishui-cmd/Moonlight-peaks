@@ -553,7 +553,23 @@ const characterSeoPages: SeoPage[] = characters
       guardianSource,
     ];
 
-    const hasRealGifts = !!(character.lovedGifts && character.lovedGifts.length > 0);
+    const hasRealGifts = !!(
+      (character.lovedGifts && character.lovedGifts.length > 0) ||
+      (character.likedGifts && character.likedGifts.length > 0) ||
+      (character.dislikedGifts && character.dislikedGifts.length > 0)
+    );
+    const hasLoved = !!(character.lovedGifts && character.lovedGifts.length > 0);
+    const hasLiked = !!(character.likedGifts && character.likedGifts.length > 0);
+    const hasDisliked = !!(character.dislikedGifts && character.dislikedGifts.length > 0);
+    // The primary FAQ answer must lead with whatever's actually confirmed — loved gifts if we
+    // have them, otherwise liked, otherwise disliked — never a placeholder for a real character.
+    const primaryGiftAnswer = !hasRealGifts
+      ? ''
+      : hasLoved
+        ? `${character.name} loves ${character.lovedGifts!.join(' and ')}. Log any others you discover with the Gift Tracker.`
+        : hasLiked
+          ? `${character.name}'s favorite gift isn't confirmed yet, but they respond well to: ${character.likedGifts!.join(', ')}. Log any others you discover with the Gift Tracker.`
+          : `${character.name}'s loved and liked gifts aren't confirmed yet, but avoid giving ${character.dislikedGifts!.join(' or ')} — those are confirmed to land poorly.`;
     const giftPage: SeoPage = hasRealGifts
       ? {
           path: `/characters/${character.id}/gifts`,
@@ -565,12 +581,12 @@ const characterSeoPages: SeoPage[] = characters
           h1: `${character.name} gifts`,
           intro: `Confirmed gift data for ${character.name}, sourced from launch-week coverage rather than guessed.`,
           sections: [
-            { title: 'Loved gifts', body: `${character.name}'s confirmed loved gift${character.lovedGifts!.length > 1 ? 's are' : ' is'} ${character.lovedGifts!.join(', ')} — the single most reliable way to raise their relationship level quickly when you give it as a gift.` },
-            { title: 'Liked gifts', body: character.likedGifts && character.likedGifts.length > 0 ? `Beyond their favorite, ${character.name} also responds well to: ${character.likedGifts.join(', ')}. These are solid everyday choices when you don't have their loved gift on hand.` : `No additional liked gifts are confirmed for ${character.name} yet — check back as more launch-week testing comes in.` },
-            { title: 'Disliked gifts', body: character.dislikedGifts && character.dislikedGifts.length > 0 ? `Avoid giving ${character.name}: ${character.dislikedGifts.join(', ')}. These are confirmed to land poorly, so they're worth remembering even if you're just building friendship rather than romance.` : `No disliked gifts are confirmed for ${character.name} yet.` },
+            { title: 'Loved gifts', body: hasLoved ? `${character.name}'s confirmed loved gift${character.lovedGifts!.length > 1 ? 's are' : ' is'} ${character.lovedGifts!.join(', ')} — the single most reliable way to raise their relationship level quickly when you give it as a gift.` : `No single favorite/loved-tier gift is confirmed for ${character.name} yet, though several liked and disliked items already are (below) — check back as more launch-week testing comes in.` },
+            { title: 'Liked gifts', body: hasLiked ? `${hasLoved ? `Beyond their favorite, ${character.name} also responds` : `${character.name} responds`} well to: ${character.likedGifts!.join(', ')}. These are solid everyday choices when you don't have their loved gift on hand.` : `No additional liked gifts are confirmed for ${character.name} yet — check back as more launch-week testing comes in.` },
+            { title: 'Disliked gifts', body: hasDisliked ? `Avoid giving ${character.name}: ${character.dislikedGifts!.join(', ')}. These are confirmed to land poorly, so they're worth remembering even if you're just building friendship rather than romance.` : `No disliked gifts are confirmed for ${character.name} yet.` },
           ],
           faqs: [
-            { q: `What gifts does ${character.name} like?`, a: `${character.name} loves ${character.lovedGifts!.join(' and ')}. Log any others you discover with the Gift Tracker.` },
+            { q: `What gifts does ${character.name} like?`, a: primaryGiftAnswer },
             { q: `Is ${character.name} romanceable?`, a: character.romanceable === true ? `Yes, ${character.name} is a confirmed romance option.` : `${character.name} is not a romance option.` },
           ],
           related: [...baseRelated, { label: 'Gift Tracker', href: '/tools/gift-tracker' }],

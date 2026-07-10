@@ -1,0 +1,96 @@
+---
+import Base from '../layouts/Base.astro';
+import { SITE, GAME } from '../consts';
+
+const faq = [
+  { q: 'How many Vampsters are there in Moonlight Peaks?', a: 'Community-reported: 100 Vampsters total, scattered across the game\u2019s outdoor areas from the woodlands to the beaches.' },
+  { q: 'Where do you take Vampsters in Moonlight Peaks?', a: 'Community-reported: back to their den inside the Cave of Echoes. Alina, who you meet there while mining copper, asks you to help round them all up.' },
+  { q: 'Can you carry more than one Vampster at a time?', a: 'No — community-reported: you can only carry one Vampster at a time. Interacting with someone, or triggering a cutscene, makes you drop the one you\u2019re carrying.' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: SITE.url },
+    { '@type': 'ListItem', position: 2, name: 'Vampsters', item: new URL('/vampsters', SITE.url).href },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks Vampsters: All Locations & How to Collect Them"
+  description="Moonlight Peaks Vampster guide: what they are, where to find all 100, how to carry them, and where their den is — confirmed facts kept separate from community reports."
+  path="/vampsters"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Vampsters' }]}
+  showExport
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Entry · Collectibles</p>
+      <h1>Moonlight Peaks <em>Vampsters</em></h1>
+      <p class="intro">
+        Vampsters are small cave creatures scattered around {GAME.title}'s world that you round up
+        and return to their den. Here's what's confirmed and community-reported about finding and
+        collecting them all.
+      </p>
+
+      <div class="callout">
+        <strong>Quick answer:</strong> Vampsters are lost creatures you find outdoors and carry —
+        one at a time — back to their den in the Cave of Echoes. Community-reported total: 100.
+      </div>
+
+      <h2>How the Vampster quest starts</h2>
+      <p>
+        Community-reported: during your first week or so, a trip to the Cave of Echoes to mine
+        copper introduces a Vampster scurrying away near the entrance. Inside, you meet
+        <a href="/characters/alina">Alina</a>, who explains that the Vampsters are lost and asks
+        for help getting them all home.
+      </p>
+
+      <h2>Where to find them</h2>
+      <p>
+        Community-reported: Vampsters are scattered widely across the game's outdoor areas, from
+        the woodlands to the beaches. Many are easier to spot once you've cleared trees and bushes
+        with your scythe, since some hide in overgrown grass.
+      </p>
+
+      <h2>How to carry and return them</h2>
+      <ul>
+        <li><strong>One at a time:</strong> community-reported — you can't stack multiple Vampsters; you carry a single one until you place it.</li>
+        <li><strong>Their den:</strong> community-reported — inside the Cave of Echoes, in Misty Shores (unlocked via <a href="/quests/a-bridge-too-far">A Bridge Too Far</a>).</li>
+        <li><strong>Watch for interruptions:</strong> community-reported — talking to a resident, or any cutscene triggering, makes you drop the Vampster you're carrying, so clear dialogue-heavy areas before you set off.</li>
+      </ul>
+
+      <h2>Do you need a special form to collect them?</h2>
+      <p>
+        Sources vary slightly here, so we're not presenting this as one settled mechanic: one
+        community source describes accessing the Vampster den more easily once you can
+        <a href="/shapeshifting">shapeshift</a> into Hellkitten form, while our own existing quest
+        notes referenced bat form specifically for carrying them. Both may be true at different
+        points in the questline (e.g. one form for carrying outdoors, another for den access) — we
+        will update this once we can verify the exact mechanic against the live game.
+      </p>
+
+      <h2>Common problems</h2>
+      <ul>
+        <li><strong>Lost track of a Vampster after a cutscene:</strong> expected — cutscenes make you drop whichever one you were carrying; it stays where you dropped it.</li>
+        <li><strong>Can't find any more Vampsters:</strong> try clearing overgrown grass and bushes with your scythe in areas you haven't fully cleared yet.</li>
+      </ul>
+
+      <h2>Frequently asked questions</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        Related: <a href="/locations/mines">Cave of Echoes</a>, <a href="/achievements">achievements</a>
+        (including "Back to the Den"), <a href="/characters/alina">Alina</a>, <a href="/shapeshifting">shapeshifting</a>.
+      </div>
+    </div>
+  </article>
+</Base>

@@ -17,12 +17,19 @@ const quests = [
   { name: 'The Quest for Mana', giver: 'Story (Sabrina\u2019s letter)', unlocks: 'Reward: Mana Essence + Mana Extractor blueprint', status: 'confirmed' },
   { name: 'Building a Mana Extractor', giver: 'Story', unlocks: 'Requires The Quest for Mana + 2 days', status: 'confirmed' },
   { name: 'The Mermaid\u2019s Wish', giver: 'Story (Hosu family)', unlocks: 'Part of the mermaid/wedding chain', status: 'confirmed' },
-  { name: 'The Rehearsal Dinner / Kim\u2019s Invite', giver: 'Story (Hosu family)', unlocks: 'Requires The Mermaid\u2019s Wish + A Touch of Magic', status: 'confirmed' },
+  { name: 'A Touch of Magic', giver: 'Story', unlocks: 'Required alongside The Mermaid\u2019s Wish before The Rehearsal Dinner triggers', status: 'confirmed' },
+  { name: 'The Rehearsal Dinner', giver: 'Story (Hosu family)', unlocks: 'Requires The Mermaid\u2019s Wish + A Touch of Magic, then 1 day, then reading the dinner invitation', status: 'confirmed' },
+  { name: 'Kim\u2019s Invite', giver: 'Story (Hosu family)', unlocks: 'Follows The Rehearsal Dinner', status: 'confirmed' },
+  { name: 'Bride\u2019s Attendant Duty', giver: 'Story (Hosu family)', unlocks: 'Follows Kim\u2019s Invite', status: 'confirmed' },
+  { name: 'Unfinished Business', giver: 'Story (Hosu family)', unlocks: 'Closes out the mermaid wedding chain', status: 'confirmed' },
+  { name: 'Master of the Night', giver: 'Story', unlocks: 'Named in launch-week walkthroughs; exact trigger and reward not yet independently verified here', status: 'reported' },
+  { name: 'A Key to the Deep', giver: 'Story', unlocks: 'Named in launch-week walkthroughs; exact trigger and reward not yet independently verified here', status: 'reported' },
+  { name: 'Cosmic Preparations', giver: 'Story', unlocks: 'Named in launch-week walkthroughs; exact trigger and reward not yet independently verified here', status: 'reported' },
   { name: 'Elections by Moonlight', giver: 'Story', unlocks: 'Town governance storyline', status: 'confirmed' },
   { name: 'Darkness over Moonlight Peaks', giver: 'Story', unlocks: 'Main-story progression quest', status: 'confirmed' },
   { name: "Elvira's treasure hunt", giver: 'Elvira', unlocks: 'Five poetic clues (Samael\u2019s bar → graveyard → mine bell → Cave of Echoes → Khazan Temple); ties to "Raiders of the Lost Art"', status: 'confirmed' },
   { name: 'Building a treehouse with Ridge', giver: 'Ridge', unlocks: 'Tied to the "A Childhood Dream" achievement', status: 'reported' },
-  { name: 'Vampster side-quest', giver: 'Environmental', unlocks: 'Deliver Vampsters to a cave near Orlock\u2019s mansion (carry in bat form only)', status: 'confirmed' },
+  { name: 'Vampster collection quest', giver: 'Alina', unlocks: 'Return 100 scattered Vampsters to their den in the Cave of Echoes, one at a time — see the full Vampsters guide', status: 'reported' },
 ];
 
 const faq = [

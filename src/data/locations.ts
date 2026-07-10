@@ -95,7 +95,7 @@ export const locations: TopicItem[] = [
       { title: 'Common mine progression problems', body: 'If you\u2019re missing copper, check A Bridge Too Far first rather than searching the cave harder. If your Pickaxe can\u2019t break a node, it likely needs a tier upgrade at the Howling Hammer (Ridge\u2019s shop) before it can mine that ore type.' },
       { title: 'Is there combat in the mines?', body: 'No — confirmed there is no combat anywhere in Moonlight Peaks, including the mines, so exploring underground stays peaceful.' },
     ],
-    related: [{ label: 'A Bridge Too Far quest guide', href: '/quests/a-bridge-too-far' }, { label: 'Is there combat?', href: '/faq/is-there-combat-in-moonlight-peaks' }, { label: 'Tools', href: '/items/tools' }, { label: 'The town', href: '/locations/town' }],
+    related: [{ label: 'A Bridge Too Far quest guide', href: '/quests/a-bridge-too-far' }, { label: 'Is there combat?', href: '/faq/is-there-combat-in-moonlight-peaks' }, { label: 'Tools', href: '/items/tools' }, { label: 'The town', href: '/locations/town' }, { label: 'Vampster collection guide', href: '/vampsters' }, { label: 'Crystal Cave', href: '/locations/crystal-cave' }],
     faq: [{ q: 'Is there combat in the mines?', a: 'No — previews confirm there is no combat anywhere in Moonlight Peaks, including the mines.' }],
   },
   {
@@ -171,11 +171,14 @@ export const locations: TopicItem[] = [
   },
   {
     slug: 'crystal-cave', title: 'Crystal Cave & Twilight Catacombs', tag: 'Underground', status: 'confirmed', image: '/hero-loc-mines.webp',
-    dek: 'Additional underground zones beyond the Cave of Echoes.',
+    dek: 'A gem-bearing cave separate from the Cave of Echoes, located beside Fiona\u2019s house.',
     body: [
-      'Confirmed to exist via the game\u2019s official wiki, alongside the Cave of Echoes and Lost Moon Alcove — suggesting the mines are split into several distinct underground zones rather than one cave.',
+      'Confirmed: the Crystal Cave is a distinct underground area from the Cave of Echoes, located to the left of Fiona\u2019s house. A large boulder blocks the entrance until you upgrade your pickaxe to at least Copper level.',
+      'Confirmed: inside, Rose Quartz nodes spawn generously, along with other gemstones. Rose Quartz is ground into a powder using the Enchanted Mortar (unlocked once you start learning magic) and is used in several crafting recipes and quests.',
+      'Confirmed via the game\u2019s official wiki: alongside the Cave of Echoes, the mines also include a further zone called the Twilight Catacombs \u2014 suggesting the underground areas are split into multiple distinct zones rather than one cave. Twilight Catacombs\u2019 own contents are not yet independently verified here.',
+      'Reaching the Crystal Cave itself requires Misty Shores to already be unlocked (via the "A Bridge Too Far" quest), since that\u2019s the area the Cave of Echoes and its pickaxe upgrades are found in.',
     ],
-    related: [{ label: 'The mines', href: '/locations/mines' }, { label: 'Tools', href: '/items/tools' }],
+    related: [{ label: 'The mines', href: '/locations/mines' }, { label: 'A Bridge Too Far', href: '/quests/a-bridge-too-far' }, { label: 'Tools', href: '/items/tools' }],
   },
 ];
 
