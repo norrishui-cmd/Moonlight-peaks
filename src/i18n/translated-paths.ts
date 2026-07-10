@@ -17,7 +17,12 @@ const sharedEsJaZhPaths = [
 
 // Pages deepened for Japanese specifically, beyond the shared es/ja/zh baseline above (Phase 1
 // of Japanese content deepening — see JAPANESE_DEEPENING_PHASE1.md).
-const jaOnlyPaths = ['/locations/mines', '/quests/a-bridge-too-far', '/known-issues', '/quests'];
+const jaOnlyPaths = [
+  '/locations/mines', '/quests/a-bridge-too-far', '/known-issues', '/quests',
+  '/faq/is-moonlight-peaks-on-ps5-or-xbox', '/faq/is-moonlight-peaks-multiplayer',
+  '/characters/saga/gifts', '/characters/luna/gifts', '/characters/orlock/gifts',
+  '/characters/sabrina/gifts', '/characters/noel/gifts', '/characters/fiona/gifts',
+];
 
 const dePaths = [
   '/', '/beginner-guide', '/characters', '/romance', '/platforms', '/release-date', '/demo',

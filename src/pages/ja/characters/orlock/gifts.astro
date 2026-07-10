@@ -1,0 +1,48 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import { SITE } from '../../../../consts';
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: [{
+    '@type': 'Question', name: 'オーロックが好きなプレゼントは?',
+    acceptedAnswer: { '@type': 'Answer', text: 'オーロックはWhite Wine、Red Wineが大好きです。' },
+  }] },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'ホーム', item: `${SITE.url}/ja` },
+    { '@type': 'ListItem', position: 2, name: 'キャラクター', item: `${SITE.url}/ja/characters` },
+    { '@type': 'ListItem', position: 3, name: 'オーロック', item: `${SITE.url}/ja/characters/orlock` },
+  ] },
+];
+---
+<Base
+  title="オーロックが好きなプレゼント | ムーンライト・ピークス キャラクターガイド"
+  description="ムーンライト・ピークスのオーロックが確認済みで好む・苦手とするプレゼント一覧。"
+  path="/ja/characters/orlock/gifts"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'キャラクター', href: '/ja/characters' }, { label: 'オーロック', href: '/ja/characters/orlock' }, { label: 'プレゼント' }]}
+  lang="ja"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">キャラクター・プレゼント</p>
+      <h1>オーロックが好きな<em>プレゼント</em></h1>
+      <p class="intro">
+        発売週の海外メディア調査(TheGamer、2026年7月7日公開)に基づく、オーロックの確認済みプレゼント情報です。
+      </p>
+
+      <h2>大好きなプレゼント</h2>
+      <p>オーロックが確認済みで大好きなプレゼント: White Wine、Red Wine。関係を早く深めたいときに最も効果的な選択肢です。</p>
+
+      <h2>好きなプレゼント</h2>
+      <p>大好きなプレゼントに次いで、オーロックは次のプレゼントも好みます: Purple Tulip、Pink Azalea。</p>
+
+      <h2>苦手なプレゼント</h2>
+      <p>オーロックに次のプレゼントは避けましょう: Wood、Onion Seeds。好感度を下げてしまうことが確認されています。</p>
+
+      <div class="callout wip">
+        関連ページ: <a href="/ja/characters/orlock">オーロックのプロフィール</a>、
+        <a href="/ja/characters">キャラクター一覧</a>、<a href="/characters/orlock/gifts">英語版(詳細)</a>。
+      </div>
+    </div>
+  </article>
+</Base>
