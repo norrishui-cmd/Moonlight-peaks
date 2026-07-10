@@ -412,8 +412,14 @@ export const faqs: Faq[] = [
   {
     slug: 'is-there-a-shop-in-moonlight-peaks', cat: 'world',
     q: 'Is there a shop in Moonlight Peaks?',
-    a: 'Pre-launch datamined files name several shops in town (see our shops page), and one player\u2019s own demo account described a traveling merchant selling seeds and decor items. Whether that merchant also buys your goods, or whether selling happens elsewhere, is not yet confirmed.',
+    a: 'Yes, confirmed \u2014 several named shops exist in town, including Webb of Wonders (Sabrina, potions and clothing), Howling Hammer (Ridge, tool upgrades), Third Eye Threads (Aras, clothing), and Coffee & Coffins (a caf\u00e9 run by Mina and Evan). Selling your own goods happens separately, through Chester rather than a shopkeeper.',
     related: [{ label: 'Town shops', href: '/locations/shops' }, { label: 'How to make money guide', href: '/previews/how-does-money-work-in-moonlight-peaks' }],
+  },
+  {
+    slug: 'how-to-get-dark-wood-in-moonlight-peaks', cat: 'world',
+    q: 'How do you get Dark Wood in Moonlight Peaks?',
+    a: 'Confirmed: chop the oversized logs found lying around the farm area using a Copper Axe (an upgraded axe tier \u2014 the starting Rusty Axe isn\u2019t enough). Dark Wood is used in several decoration recipes, including a Fur Chair (with hardwood planks and cloth) and a Coffin Bookcase (with planks).',
+    related: [{ label: 'Items & tools', href: '/items/tools' }, { label: 'Crafting', href: '/items/crafting' }],
   },
   {
     slug: 'can-you-romance-death-in-moonlight-peaks', cat: 'romance',
