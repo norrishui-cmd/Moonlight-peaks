@@ -4,7 +4,8 @@ import { SITE, GAME } from '../../consts';
 import YouTube from '../../components/YouTube.astro';
 
 const faq = [
-  { q: 'Moonlight Peaksはいつ発売されましたか?', a: `Moonlight Peaksは${GAME.releaseLabel}に、Steam、Nintendo Switch、Nintendo Switch 2、Google Play経由のAndroidで発売され、現在配信中です。` },
+  { q: 'ムーンライト・ピークスのCERO年齢区分は?', a: '確認済み(価格.com掲載の公式情報より):CERO「B」(12歳以上対象)。' },
+  { q: 'ムーンライト・ピークスの日本国内での発売日は?', a: '確認済み:日本国内ではSteam版が2026年7月8日、Nintendo Switch/Switch 2版が7月9日に発売され、現在配信中です。パブリッシャーはクラウディッドレパードエンタテインメント(欧米ではXSEED Games/Marvelous Europe)。' },
   { q: 'Moonlight Peaksの価格はいくらですか?', a: `Steam(PC/Mac)、Switch、Androidでは${GAME.price}、Switch 2版は$39.99で、${GAME.launchDiscount}が適用されます。` },
   { q: 'Moonlight Peaksに体験版はありますか?', a: 'はい。Steam(PC/Mac)とNintendo Switch eショップ(Switch 2でもプレイ可能)で無料体験版が配信されています。キャラクター作成、釣り、フラワーアレンジメント、刺繍が含まれています。' },
   { q: 'Moonlight Peaksはコンソールでも遊べますか?', a: 'はい——PCおよびAndroidに加え、Nintendo SwitchとSwitch 2でも発売されます。Switch版の体験版はSwitch 2でもプレイ可能です。' },
@@ -20,8 +21,8 @@ const jsonLd = [
 ];
 ---
 <Base
-  title="「ムーンライト・ピークス」発売日 — Steam・Switch情報"
-  description="Moonlight PeaksのSteam、Switch、Switch 2、Android向け発売日ガイド。体験版、価格、動作環境、対応言語について。"
+  title="「ムーンライト・ピークス -ヴァンパイアのゴシックライフ-」発売日 — Steam・Switch情報"
+  description="ムーンライト・ピークス 日本国内での発売日:Steam版7月8日、Switch/Switch 2版7月9日。価格、体験版、対応言語について。"
   path="/ja/release-date"
   jsonLd={jsonLd}
   crumbs={[{ label: '発売日' }]}
@@ -31,10 +32,12 @@ const jsonLd = [
   <article class="page">
     <div class="wrap">
       <p class="eyebrow">エントリー・発売情報</p>
-      <h1>Moonlight Peaks <em>発売日</em> — Switch・Switch 2・PC</h1>
+      <h1>「ムーンライト・ピークス -ヴァンパイアのゴシックライフ-」<em>発売日</em></h1>
       <p class="intro">
-        {GAME.title}の発売について確認されている情報をまとめました——発売日、プレイ可能な場所、価格、
-        そして今すぐ試せる無料体験版について。最終更新:{SITE.updated}。
+        {GAME.title}の発売について確認されている情報をまとめました。日本国内ではSteam版が
+        2026年7月8日、Nintendo Switch/Switch 2版が7月9日に発売され、現在配信中です
+        (欧米向けSteam版は7月7日発売)。プレイ可能な場所、価格、そして今すぐ試せる無料体験版
+        について。最終更新:{SITE.updated}。
       </p>
 
       <YouTube id="VL_15TiRRAM" title="Moonlight Peaks release date trailer" />
