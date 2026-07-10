@@ -2,16 +2,27 @@
 import Base from '../layouts/Base.astro';
 import { SITE, GAME } from '../consts';
 
-const systems: { name: string; note: string }[] = [
-  { name: 'Weather', note: 'Day-to-day conditions that likely affect farming, foraging, or what you can do outdoors.' },
-  { name: 'Seasons', note: 'A season or calendar system to structure crops and events —exact names and length unconfirmed.' },
-  { name: 'Festivals', note: 'Town-wide celebrations. A theatrical event host has already been shown livening up gatherings.' },
+const systems: { name: string; note: string; status: string }[] = [
+  { name: 'Seasons', note: 'Confirmed via the official wiki\u2019s own structure: the year is divided into Spring, Summer, Autumn, and Winter, each with its own numbered days (festival dates are given as e.g. "Spring 20").', status: 'Confirmed' },
+  { name: 'Weather', note: 'A weather system exists per pre-launch datamined files; exactly how it affects farming or activities is not yet independently confirmed here.', status: 'Datamined' },
+  { name: 'Festivals', note: 'Confirmed: town-wide seasonal celebrations, including the Loveage Festival and the Moonlight Ball, with more likely across the year.', status: 'Confirmed' },
+];
+
+const festivals: { name: string; when: string; note: string; status: string }[] = [
+  { name: 'Loveage Festival', when: 'Spring 20\u201321 (2 days)', note: 'Confirmed via the official wiki: hosted by Llemi, the "Love Demon." Elvira and Mina run stalls (Mina lays out a communal buffet you can contribute a dish to); Luna runs a limited-time flower-arranging stall with season-exclusive flowers that also double as good gifts. A secret-admirer gift exchange runs alongside it \u2014 you pick up to 3 NPCs on the Saturday, then the exchange happens the Sunday.', status: 'Confirmed' },
+  { name: 'Moonlight Ball', when: 'Summer 20', note: 'Confirmed to exist via the official wiki\u2019s festival list. Specific activities are not yet independently detailed here.', status: 'Confirmed (name & date only)' },
+  { name: 'Master Soup (cooking contest)', when: 'Season not yet confirmed', note: 'Community-reported across multiple launch-week previews as a cooking competition. Not yet cross-checked against the official wiki.', status: 'Community-reported' },
+  { name: 'A fashion show', when: 'Season not yet confirmed', note: 'Community-reported. Details not yet documented.', status: 'Community-reported' },
+  { name: 'Evernight Festival', when: 'Autumn (exact day not yet confirmed)', note: 'Community-reported as an autumn festival with mini-games.', status: 'Community-reported' },
+  { name: 'Pumpkin-Head Halloween season', when: 'Season not yet confirmed', note: 'Community-reported, and consistent with the confirmed NPC Pumpkin Head being a "theatrical event host" who livens up town gatherings.', status: 'Community-reported' },
 ];
 
 const faq = [
-  { q: 'Does Moonlight Peaks have seasons?', a: 'Pre-launch datamined game files list a "Seasons" system, suggesting the game structures its calendar around them, similar to other farming sims. Specific season names and lengths are not yet developer-confirmed.' },
-  { q: 'Does Moonlight Peaks have weather?', a: 'Yes, based on datamined files, which list a "Weather" system. How weather affects farming or activities is confirmed at launch.' },
-  { q: 'Are there festivals in Moonlight Peaks?', a: 'Datamined files list a "Festivals" system, and a theatrical event host has already been shown livening up town gatherings in coverage —consistent with seasonal celebrations being part of town life.' },
+  { q: 'Does Moonlight Peaks have seasons?', a: 'Yes, confirmed: the year is divided into Spring, Summer, Autumn, and Winter, each with numbered days used to schedule festivals and other events.' },
+  { q: 'Does Moonlight Peaks have weather?', a: 'A weather system is referenced in pre-launch datamined files. Exactly how it affects farming or activities is not yet independently confirmed here.' },
+  { q: 'What is the Loveage Festival in Moonlight Peaks?', a: 'Confirmed: a 2-day Spring festival (Spring 20\u201321) hosted by Llemi, the Love Demon. Elvira and Mina run stalls, Luna runs a flower-arranging stall, and there\u2019s a secret-admirer gift exchange where you pick up to 3 NPCs on the Saturday and the exchange happens the following Sunday.' },
+  { q: 'Are there other festivals besides Loveage?', a: 'Yes \u2014 the Moonlight Ball (Summer 20) is confirmed by name and date via the official wiki. Several launch-week previews also name a Master Soup cooking contest, a fashion show, an autumn Evernight Festival, and a Pumpkin-Head-hosted Halloween season, though we\u2019re treating those as community-reported until independently confirmed.' },
+  { q: 'Are the festivals in Moonlight Peaks good?', a: 'Mixed so far: some launch-week reviewers enjoyed Loveage\u2019s vendors and gift exchange, but at least one found festival frequency and variety thin compared to genre peers like Stardew Valley\u2019s seasonal events \u2014 we\u2019re noting this honestly rather than only reporting the positive take.' },
 ];
 
 const jsonLd = [
@@ -23,8 +34,8 @@ const jsonLd = [
 ];
 ---
 <Base
-  title="Moonlight Peaks Environment —Weather, Seasons & Festivals"
-  description="Moonlight Peaks weather, seasons, and festivals — confirmed details post-launch, kept separate from what's still unverified."
+  title="Moonlight Peaks Environment & Festivals — Loveage, Moonlight Ball & More"
+  description="Moonlight Peaks seasons and festivals: the confirmed Loveage Festival and Moonlight Ball, plus community-reported events like Master Soup and Evernight — kept separate from what's still unverified."
   path="/environment"
   jsonLd={jsonLd}
   crumbs={[{ label: 'Environment' }]}
@@ -32,37 +43,49 @@ const jsonLd = [
   <article class="page">
     <div class="wrap">
       <p class="eyebrow">Hub 路 Environment</p>
-      <h1>Moonlight Peaks <em>environment</em></h1>
+      <h1>Moonlight Peaks <em>environment</em> & festivals</h1>
       <p class="intro">
-        How the world of {GAME.title} changes over time —weather, seasons, and town festivals.
-        The systems below are named in pre-launch datamined game files and treated as launch-pending:
-        useful for tracking likely systems, but not enough to confirm exact rules. Updated {SITE.updated}.
+        How the world of {GAME.title} changes over time — seasons, weather, and town festivals.
+        Confirmed details are kept separate from what's still community-reported or unverified.
+        Updated {SITE.updated}.
       </p>
 
-      <h2>Systems referenced in pre-launch sources</h2>
+      <h2>Seasons & weather</h2>
       <div class="envg">
         {systems.map((s) => (
           <div class="envcard">
             <h3>{s.name}</h3>
             <p>{s.note}</p>
-            <span class="envbadge">Datamined</span>
+            <span class="envbadge">{s.status}</span>
           </div>
         ))}
       </div>
+
+      <h2>Festivals</h2>
+      <table class="facts">
+        <tr><th>Festival</th><th>When</th><th>Details</th></tr>
+        {festivals.map((f) => (
+          <tr>
+            <td>{f.name} <span class="envbadge envbadge-inline">{f.status}</span></td>
+            <td>{f.when}</td>
+            <td>{f.note}</td>
+          </tr>
+        ))}
+      </table>
 
       <h2>The night-first twist</h2>
       <p>
         Whatever the season or weather, one rule stays constant: you live and farm at night and head
         back to your coffin before sunrise. See <a href="/farming">farming</a> for how the night cycle
-        shapes the core gameplay loop, and <a href="/locations/town-square">town square</a> for what's
-        known about where festivals might happen.
+        shapes the core gameplay loop.
       </p>
 
       <h2>Still being verified</h2>
       <ul>
-        <li>The actual <strong>season names</strong> and how long each one lasts.</li>
-        <li><strong>Weather types</strong> and their effect on farming or activities.</li>
-        <li>Which <strong>festivals</strong> happen, and when.</li>
+        <li>Exact <strong>Moonlight Ball</strong> activities beyond its name and date.</li>
+        <li>Whether <strong>Master Soup, the fashion show, Evernight, and the Pumpkin-Head Halloween
+          season</strong> are officially confirmed under those names.</li>
+        <li>How <strong>weather</strong> specifically affects farming or activities.</li>
       </ul>
 
       <h2>FAQ</h2>
@@ -76,8 +99,9 @@ const jsonLd = [
       </div>
 
       <div class="callout wip">
-        Pre-launch entry —season, weather, and festival specifics land at launch. Related:
-        <a href="/farming">farming</a>, <a href="/items">items</a>, <a href="/locations">locations</a>.
+        Post-launch entry, updated as more festival and weather detail is verified. Related:
+        <a href="/farming">farming</a>, <a href="/items">items</a>, <a href="/locations">locations</a>,
+        <a href="/characters/llemi">Llemi</a>, <a href="/romance">romance</a>.
       </div>
     </div>
   </article>
@@ -89,6 +113,7 @@ const jsonLd = [
     .envcard h3 { font-family: var(--display); font-weight: 600; font-size: 1rem; margin: 0 0 6px; }
     .envcard p { color: #ded3e6; font-size: 0.84rem; margin: 0 0 8px; }
     .envbadge { font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.04em; text-transform: uppercase; color: #9ac6e0; border: 1px solid #2f5a70; border-radius: 5px; padding: 2px 6px; }
+    .envbadge-inline { margin-left: 6px; vertical-align: middle; }
   </style>
 </Base>
 

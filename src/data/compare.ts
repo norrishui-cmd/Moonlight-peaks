@@ -24,12 +24,12 @@ export type Comparison = {
 };
 
 const MP = {
-  status: 'Releases July 7, 2026 (free demo out now)',
+  status: 'Out now (released July 7, 2026; free demo also available)',
   setting: 'Cozy-gothic mountain town of seven supernatural families',
   play: 'A young vampire — Count Dracula\u2019s child',
   farming: 'Farm by night, back in the coffin by sunrise; enchanted crops and Draculamb livestock',
   magic: 'Wand-based spells, potion-brewing, and shapeshifting into a bat',
-  romance: 'Around two dozen, gender-neutral; marriage yes, no children',
+  romance: '23 confirmed romance options, gender-neutral; marriage yes, no children',
   combat: 'None — fully cozy',
   mp_multi: 'Single-player',
   platforms: 'Steam, Steam Deck, Switch, Switch 2, Android',
@@ -129,11 +129,11 @@ export const comparisons: Comparison[] = [
     ],
     verdict: [
       'Pick Fae Farm if you want bright fairy-tale magic with friends — it has up to four-player co-op, light combat in the caves, marriage, and is out now on every major platform.',
-      'Pick Moonlight Peaks for a darker, solo take: a single-player, combat-free gothic vampire farm with night-time farming and shapeshifting. Both are magic-cozy sims, but Fae Farm is brighter and multiplayer while Moonlight Peaks is calmer, gothic and arriving July 7, 2026.',
+      'Pick Moonlight Peaks for a darker, solo take: a single-player, combat-free gothic vampire farm with night-time farming and shapeshifting. Both are magic-cozy sims, but Fae Farm is brighter and multiplayer while Moonlight Peaks is calmer and gothic. Multiple launch-week reviewers independently drew the same comparison — several described Moonlight Peaks as reminiscent of Fae Farm\u2019s magic-farming feel, but with a fuller commitment to its supernatural theme rather than magic as a light addition.',
     ],
     related: [{ label: 'Is there multiplayer?', href: '/faq/is-moonlight-peaks-multiplayer' }, { label: 'Magic', href: '/magic' }, { label: 'All comparisons', href: '/compare' }],
     faq: [
-      { q: 'Is Moonlight Peaks like Fae Farm?', a: 'Both are cozy magic farm sims, but Fae Farm is a brighter fairy island with co-op, light combat and marriage, while Moonlight Peaks is a darker, solo, combat-free vampire farm.' },
+      { q: 'Is Moonlight Peaks like Fae Farm?', a: 'Both are cozy magic farm sims, and several launch-week reviewers independently compared the two — but Fae Farm is a brighter fairy island with co-op, light combat and marriage, while Moonlight Peaks is a darker, solo, combat-free vampire farm with a more fully supernatural theme throughout.' },
       { q: 'Does Moonlight Peaks have co-op like Fae Farm?', a: 'No. Fae Farm has up to four-player co-op; Moonlight Peaks is single-player.' },
     ],
   },

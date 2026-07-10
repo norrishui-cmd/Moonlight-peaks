@@ -135,7 +135,7 @@ export const faqs: Faq[] = [
     slug: 'moonlight-peaks-age-rating', cat: 'general',
     q: 'What is the age rating for Moonlight Peaks?',
     a: 'Confirmed at launch: PEGI 12 in the UK/Europe and ESRB Teen (T) in the US, due to references to alcohol (you can craft and drink beer and wine) and mildly suggestive romantic language.',
-    related: [{ label: 'Review roundup', href: '/reviews' }],
+    related: [{ label: 'Review roundup', href: '/reviews' }, { label: 'Is there combat?', href: '/faq/is-there-combat-in-moonlight-peaks' }],
   },
   {
     slug: 'moonlight-peaks-crashing-freezing', cat: 'general',
@@ -394,8 +394,8 @@ export const faqs: Faq[] = [
   {
     slug: 'what-age-rating-is-moonlight-peaks', cat: 'general',
     q: 'What age rating does Moonlight Peaks have?',
-    a: 'As of our last check, Moonlight Peaks had not yet been rated by the ESRB. Given the game has no combat and a cozy, gentle gothic tone, it is likely to land in a low age bracket, but we will update this once an official rating is published.',
-    related: [{ label: 'Is there combat?', href: '/faq/is-there-combat-in-moonlight-peaks' }, { label: 'Is it cozy?', href: '/faq/is-moonlight-peaks-cozy' }],
+    a: 'Confirmed: PEGI 12 in Europe and ESRB Teen (T) in the US — despite the cozy, combat-free tone, the rating is driven by alcohol references (you can craft and drink beer and wine) and mildly suggestive romantic language, not violence.',
+    related: [{ label: 'Full age rating breakdown', href: '/faq/moonlight-peaks-age-rating' }, { label: 'Is there combat?', href: '/faq/is-there-combat-in-moonlight-peaks' }],
   },
   {
     slug: 'how-do-you-make-money-in-moonlight-peaks', cat: 'farming',
