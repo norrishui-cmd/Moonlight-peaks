@@ -1,29 +1,49 @@
 ---
 import Base from '../../../layouts/Base.astro';
 import { SITE, GAME } from '../../../consts';
-import { characters } from '../../../data/characters';
+import { characters, typeLabels, type CharType } from '../../../data/characters';
 import { charTranslations } from '../../../i18n/characters-data';
 
-const translatedSlugs = ['count-dracula', 'saga', 'luna', 'orlock', 'brook', 'the-warlock'] as const;
-const translations = charTranslations.ja;
-const list = translatedSlugs.map((slug) => ({
-  slug,
-  base: characters.find((c) => c.id === slug)!,
-  tr: translations[slug],
-}));
+const translatedSlugs = new Set(['count-dracula', 'saga', 'luna', 'orlock', 'brook', 'the-warlock']);
+const jaTranslations = charTranslations.ja;
+
+// Japanese labels for character type/family — not claimed as official localization (no verified
+// official Japanese UI terminology exists for these), just natural Japanese for this guide.
+const typeLabelsJa: Record<CharType, string> = {
+  vampire: '吸血鬼', werewolf: '狼男', witch: '魔女', mermaid: '人魚',
+  seer: '預言者', ghost: '幽霊', human: '人間', other: 'その他',
+};
+const familyLabelJa = (family: string): string => {
+  if (family.includes('Vampire')) return '吸血鬼一族(アンブロシア)';
+  if (family.includes('Werewolf')) return '狼男一族(ローガン)';
+  if (family.includes('Witch')) return '魔女一族(ウェッブ)';
+  if (family.includes('Mermaid')) return '人魚一族(ホス)';
+  if (family.includes('Seer')) return '預言者一族(カザン)';
+  if (family.includes('Human')) return '人間一族(ヘンダーソン)';
+  return '家族に属さない';
+};
+
+const isMainCast = (c: (typeof characters)[number]) => c.romanceable === true || c.id === 'count-dracula';
+const mainCast = characters.filter(isMainCast);
+const npcs = characters.filter((c) => !isMainCast(c));
+
+function cardHref(id: string): string {
+  return translatedSlugs.has(id) ? `/ja/characters/${id}` : `/characters/${id}`;
+}
+function displayName(c: (typeof characters)[number]): string {
+  return translatedSlugs.has(c.id) ? jaTranslations[c.id].name : c.name;
+}
 
 const jsonLd = {
-  '@context': 'https://schema.org',
-  '@type': 'BreadcrumbList',
-  itemListElement: [
+  '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
     { '@type': 'ListItem', position: 1, name: 'ホーム', item: `${SITE.url}/ja` },
     { '@type': 'ListItem', position: 2, name: 'キャラクター', item: `${SITE.url}/ja/characters` },
   ],
 };
 ---
 <Base
-  title="ムーンライト・ピークス キャラクター一覧 -ヴァンパイアのゴシックライフ-"
-  description="Moonlight Peaksの主要キャラクター、家族、恋愛対象、発売前に確認できる情報をまとめた日本語ガイド。"
+  title="ムーンライト・ピークス キャラクター一覧(全員) -ヴァンパイアのゴシックライフ-"
+  description="ムーンライト・ピークスの全住民一覧を日本語で。恋愛対象23名と、その他のNPC。プロフィール翻訳済みのキャラクターは日本語ページへ、未翻訳は英語ページへリンクします。"
   path="/ja/characters"
   jsonLd={jsonLd}
   crumbs={[{ label: 'キャラクター' }]}
@@ -32,29 +52,47 @@ const jsonLd = {
   <article class="page">
     <div class="wrap">
       <p class="eyebrow">エントリー / キャラクター</p>
-      <h1><em>Moonlight Peaks</em> キャラクター</h1>
+      <h1>{GAME.title} <em>キャラクター</em>(全住民)</h1>
       <p class="intro">
-        {GAME.title}で検索需要の高い住民を日本語でまとめています。確定情報と、
-        正式版で確認が必要な情報を分けて掲載します。
+        確認済みの全住民を、恋愛対象とその他のNPCに分けて掲載しています。プロフィールを日本語に
+        翻訳済みのキャラクター(6名)は日本語ページへ、それ以外は現時点で最も情報が充実している
+        英語版プロフィールへリンクしています。
       </p>
 
+      <h2>恋愛対象・主要キャラクター({mainCast.length})</h2>
       <div class="cx-grid">
-        {list.map(({ slug, base, tr }) => (
-          <a class="cx-card" href={`/ja/characters/${slug}`}>
+        {mainCast.map((c) => (
+          <a class="cx-card" href={cardHref(c.id)}>
             <span class="cx-thumb">
-              {base.img ? <img src={base.img} alt="" loading="lazy" width="72" height="72" /> : <span class="cx-letter" style={`background: linear-gradient(135deg, ${base.c1}, ${base.c2})`}>{tr.name.charAt(0)}</span>}
+              {c.img ? <img src={c.img} alt="" loading="lazy" width="72" height="72" /> : <span class="cx-letter" style={`background: linear-gradient(135deg, ${c.c1}, ${c.c2})`}>{displayName(c).charAt(0)}</span>}
             </span>
             <span>
-              <strong>{tr.name}</strong>
-              <em>{tr.familyLabel}</em>
+              <strong>{displayName(c)}</strong>
+              <em>{familyLabelJa(c.family)} ・ {typeLabelsJa[c.type]}</em>
+            </span>
+          </a>
+        ))}
+      </div>
+
+      <h2>その他のNPC({npcs.length})</h2>
+      <div class="cx-grid">
+        {npcs.map((c) => (
+          <a class="cx-card" href={cardHref(c.id)}>
+            <span class="cx-thumb">
+              {c.img ? <img src={c.img} alt="" loading="lazy" width="72" height="72" /> : <span class="cx-letter" style={`background: linear-gradient(135deg, ${c.c1}, ${c.c2})`}>{displayName(c).charAt(0)}</span>}
+            </span>
+            <span>
+              <strong>{displayName(c)}</strong>
+              <em>{familyLabelJa(c.family)} ・ {typeLabelsJa[c.type]}</em>
             </span>
           </a>
         ))}
       </div>
 
       <div class="callout wip">
-        この段階では6名のプロフィールを翻訳しています。全住民の一覧は
-        <a href="/characters">英語版キャラクターページ</a>で確認できます。
+        現在6名(ドラキュラ伯爵、Saga、Luna、Orlock、Brook、謎の術士)のプロフィールを日本語に
+        翻訳済みです。それ以外のキャラクターをクリックすると、確認済み情報がより充実している
+        <a href="/characters">英語版キャラクターページ</a>の該当プロフィールに移動します。
       </div>
     </div>
   </article>
