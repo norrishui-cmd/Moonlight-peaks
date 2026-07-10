@@ -1,0 +1,61 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE } from '../../consts';
+
+const quests = [
+  { name: '町役場での登録', giver: 'ストーリー(序盤)', unlocks: 'Brookとの出会い、Chesterの入手', status: '確認済み' },
+  { name: '町の人々に会う', giver: 'ストーリー(序盤)', unlocks: '町の初期ルートが開放される', status: '確認済み' },
+  { name: "Orlock's Wine Scheme(血のワイン)", giver: 'Orlock', unlocks: '血のワインを作る;Orlockに謝罪し、Samaelへの350ゴールドの借金を返済;A Bridge Too Farへつながる', status: '確認済み' },
+  { name: 'A Bridge Too Far', giver: 'ストーリー(OrlockとFionaの確執)', unlocks: 'Ambrosia邸宅を再開放;Misty ShoresとCave of Echoes(銅)を解放', status: '確認済み' },
+  { name: 'Tension in the Crest Garden', giver: 'ストーリー', unlocks: 'A Bridge Too Far完了+1日で発生;A Croak and a Crestへつながる', status: '確認済み' },
+  { name: 'A Croak and a Crest', giver: 'ストーリー', unlocks: 'Hellkitten変身チェーンの一部', status: '確認済み' },
+  { name: 'The Dinner Party', giver: 'ストーリー', unlocks: '報酬:猫(Hellkitten)形態;Lunaを通じたAquaflux呪文ルート', status: '確認済み' },
+  { name: 'The Magic of Crops', giver: 'ストーリー', unlocks: 'マナクエストラインへつながる', status: '確認済み' },
+  { name: "A Mayor's Burden", giver: 'ストーリー(Brook)', unlocks: 'The Magic of Crops後に町に入ると発生', status: '確認済み' },
+  { name: 'The Quest for Mana', giver: 'ストーリー(Sabrinaの手紙)', unlocks: '報酬:マナエッセンス+マナ抽出機の設計図', status: '確認済み' },
+  { name: 'Building a Mana Extractor', giver: 'ストーリー', unlocks: 'The Quest for Mana完了+2日必要', status: '確認済み' },
+  { name: "Elvira's treasure hunt", giver: 'Elvira', unlocks: '5つの詩的な手がかり(Samaelのバー→墓地→鉱山の鐘→Cave of Echoes→Khazan神殿);「Raiders of the Lost Art」実績につながる', status: '確認済み' },
+  { name: 'Elections by Moonlight', giver: 'ストーリー', unlocks: '町の統治に関するストーリーライン', status: '確認済み' },
+  { name: 'Darkness over Moonlight Peaks', giver: 'ストーリー', unlocks: 'メインストーリー進行クエスト', status: '確認済み' },
+];
+
+const jsonLd = {
+  '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'ホーム', item: `${SITE.url}/ja` },
+    { '@type': 'ListItem', position: 2, name: 'クエスト', item: `${SITE.url}/ja/quests` },
+  ],
+};
+---
+<Base
+  title="Moonlight Peaks クエスト一覧 — 確認済みクエストガイド"
+  description="Moonlight Peaksの確認済みクエスト一覧を日本語で。依頼者、解放される内容、進行状況を掲載。"
+  path="/ja/quests"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'クエスト' }]}
+  lang="ja"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">ハブ・クエスト</p>
+      <h1>Moonlight Peaks <em>クエスト</em></h1>
+      <p class="intro">
+        確認済みのクエスト一覧です。依頼者、解放される内容、進行状況をまとめています。
+      </p>
+
+      <table class="facts">
+        <tr><th>クエスト名</th><th>依頼者</th><th>解放される内容</th></tr>
+        {quests.map((q) => (<tr><td>{q.name}</td><td>{q.giver}</td><td>{q.unlocks}</td></tr>))}
+      </table>
+
+      <h2>おすすめの深掘りガイド</h2>
+      <p>
+        <a href="/ja/quests/a-bridge-too-far">A Bridge Too Farの完全ガイド</a>では、開始条件からMisty Shores解放までを詳しく解説しています。
+      </p>
+
+      <div class="callout wip">
+        関連: <a href="/ja/locations/mines">Cave of Echoes</a>、<a href="/ja/beginner-guide">初心者ガイド</a>、
+        <a href="/quests">完全なクエスト一覧（英語）</a>。
+      </div>
+    </div>
+  </article>
+</Base>

@@ -1,0 +1,68 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE } from '../../consts';
+
+const issueRows = [
+  ['起動時のクラッシュ(Steam Deck)', 'プレイヤー報告・回避策あり', '複数のプレイヤーが起動時のクラッシュを報告。報告された対処法:互換ツールをProton 9.0-4に変更する。'],
+  ['数秒ごとのマイクロフリーズ', 'プレイヤー報告・確認済み対処法なし', 'ハイエンドPCでも発生しており、純粋なハードウェア問題ではないようです。'],
+  ['コントローラーが反応しなくなる', 'プレイヤー報告・回避策あり', 'キャラクター作成中は動作しますが、その後反応しなくなります。対処法:コントローラーの再接続、またはキーボード/マウスへの切り替え。'],
+];
+
+const faq = [
+  { q: 'Moonlight PeaksがSteam Deckでクラッシュする場合は?', a: 'プレイヤー報告:Steamのゲームプロパティの互換性設定で、Protonツールを9.0-4に変更してください。' },
+  { q: 'コントローラーが反応しなくなった場合は?', a: 'プレイヤー報告、未解決:コントローラーを再接続するか、一時的にキーボード/マウスに切り替えてください。' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'ホーム', item: `${SITE.url}/ja` },
+    { '@type': 'ListItem', position: 2, name: '既知の不具合', item: `${SITE.url}/ja/known-issues` },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks 既知の不具合 — クラッシュとコントローラー問題"
+  description="Moonlight Peaksの既知の不具合を日本語でまとめました:Steam Deckのクラッシュ、コントローラーの問題、確認済みの対処法を、確認済みとプレイヤー報告に分けて掲載。"
+  path="/ja/known-issues"
+  jsonLd={jsonLd}
+  crumbs={[{ label: '既知の不具合' }]}
+  lang="ja"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">エントリー・不具合</p>
+      <h1>Moonlight Peaks <em>既知の不具合</em></h1>
+      <p class="intro">
+        確認済みの不具合、クラッシュ、コントローラーの問題をまとめたトラッカーです。確認済みの情報とプレイヤー報告を明確に区別しています。
+      </p>
+
+      <table class="facts">
+        <tr><th>問題</th><th>状態</th><th>詳細</th></tr>
+        {issueRows.map((r) => (<tr><td>{r[0]}</td><td>{r[1]}</td><td>{r[2]}</td></tr>))}
+      </table>
+
+      <h2>セーブデータの場所</h2>
+      <p>
+        確認済み:Windowsではセーブデータは
+        <code>%USERPROFILE%/AppData/LocalLow/Little Chicken Game Company/Moonlight Peaks/</code>
+        にあります。
+      </p>
+
+      <h2>よくある質問</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        関連: <a href="/ja/platforms">対応機種ガイド</a>、
+        <a href="/known-issues">完全ガイド（英語）</a>。
+      </div>
+    </div>
+  </article>
+</Base>

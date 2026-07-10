@@ -354,7 +354,7 @@ export const characters: Character[] = [
     desc: 'A stunning, down-to-earth merman of the Hosu family who takes pride in his looks and loves helping others find their confidence.',
     traits: [['Confidence', 85], ['Loyalty', 80]], traitsPlaceholder: true,
     knownInfo: ['Confirmed as a member of the Hosu mermaid family, siblings with Kim and Rei. (Correction: an earlier version of this entry used the display name "Tay" based on a single source; multiple post-launch sources confirm "Tae" instead.)', 'Described as loyal and encouraging.'] },
-  { id: 'winston', name: 'Winston', family: 'Human (Henderson)', type: 'human', status: 'confirmed', romanceable: true, img: '', c1: '#3a3a4a', c2: '#8a8ab0',
+  { id: 'winston', name: 'Winston', family: 'Human (Henderson)', type: 'human', status: 'confirmed', romanceable: true, img: '/winston.webp', c1: '#3a3a4a', c2: '#8a8ab0',
     desc: 'The town skeptic — reluctant to live in a supernatural town and easily spooked, but a lot of fun once he lets his guard down. Persephone\u2019s nephew, Jada\u2019s brother.',
     traits: [['Skepticism', 75]], traitsPlaceholder: true,
     knownInfo: ['Confirmed as part of the Henderson human family, arriving alongside Persephone and Jada.'] },
