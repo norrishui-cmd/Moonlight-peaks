@@ -8,7 +8,7 @@ const types = [...new Set(cards.map((c) => c.type).filter(Boolean))] as string[]
 const faq = [
   { q: 'What is Nokturna in Moonlight Peaks?', a: "Nokturna is the town's favourite collectible card game. You collect cards and challenge the residents of Moonlight Peaks to matches, and it also doubles as a way to build friendships." },
   { q: 'How do you play Nokturna?', a: 'Confirmed: matches are best-of-three, with 3 cards played per round; a tie means both sides win that round. Cards use a "Persist" keyword mechanic, and decks lean into archetypes like Werewolf, Vampire, Plant, and Aquatic, or mixed builds.' },
-  { q: 'Where do you get Nokturna cards?', a: 'Not fully mapped yet — we have one confirmed card so far (Alpha Wolf, a Werewolf-archetype card that buffs other Werewolf cards). We add each card here only once its source is verified rather than guessing at a full list.' },
+  { q: 'Where do you get Nokturna cards?', a: 'Confirmed: winning a match against a resident adds a card to your collection — this is the main confirmed source. Community-reported: cards can also appear as dig-spot rewards once that feature is active. Collecting every card earns the "Nokturna Master" Steam achievement.' },
 ];
 
 const jsonLd = [
@@ -50,6 +50,18 @@ const jsonLd = [
       <p>
         The full card pool is confirmed at over 67 cards across multiple deck archetypes — confirmed
         so far: Werewolf, Vampire, Plant, and Aquatic decks, plus mixed decks.
+      </p>
+
+      <h2>How to get new cards</h2>
+      <p>
+        Confirmed: winning a match against a resident adds a card to your personal collection.
+        <span class="tag-community">Community-reported</span> cards can also turn up as dig-spot
+        rewards while digging around town, once that feature is active — so playing matches isn't
+        the only source, though it remains the main one confirmed so far.
+      </p>
+      <p>
+        Confirmed: collecting every Nokturna card earns the <strong>"Nokturna Master"</strong> Steam
+        achievement — see our <a href="/achievements">achievements guide</a> for the rest of the list.
       </p>
 
       <h2>Why new Nokturna cards don't appear</h2>
@@ -164,6 +176,11 @@ const jsonLd = [
   </article>
 
   <style>
+    .tag-community {
+      display: inline-block; font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.02em;
+      color: var(--faint); border: 1px solid var(--line); border-radius: 999px; padding: 2px 8px;
+      margin-right: 6px; vertical-align: middle;
+    }
     .nok-empty { border: 1px dashed var(--line); border-radius: 12px; background: var(--ink-2); padding: 18px; color: var(--muted); }
     .nok-controls { display: flex; flex-direction: column; gap: 12px; margin: 8px 0 14px; }
     .nok-search { width: 100%; padding: 12px 14px; border-radius: 10px; border: 1px solid var(--line); background: var(--surface); color: var(--mist); font-size: 0.95rem; font-family: var(--body); }
