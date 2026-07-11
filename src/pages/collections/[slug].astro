@@ -17,6 +17,7 @@ export function getStaticPaths() {
 
 const { entry, prev, next } = Astro.props as { entry: CollectionEntry; prev: CollectionEntry; next: CollectionEntry };
 const pageUrl = new URL(`/collections/${entry.slug}`, SITE.url).href;
+const isImageCell = (cell: string) => cell.startsWith('/images/');
 const faq = [
   {
     q: `What is the ${entry.title} collection in Moonlight Peaks?`,
@@ -89,7 +90,13 @@ const jsonLd = [
           <tbody>
             {entry.tableRows.map((row) => (
               <tr>
-                {row.map((cell) => <td>{cell}</td>)}
+                {row.map((cell) => (
+                  <td>
+                    {isImageCell(cell) ? (
+                      <img class="collection-cell-icon" src={cell} alt={row[1] || entry.title} loading="lazy" />
+                    ) : cell}
+                  </td>
+                ))}
               </tr>
             ))}
           </tbody>
@@ -193,6 +200,14 @@ const jsonLd = [
       vertical-align: top;
     }
     .collection-table th { color: var(--candle); font-family: var(--mono); font-size: 0.68rem; text-transform: uppercase; }
+    .collection-cell-icon {
+      width: 56px;
+      height: 56px;
+      display: block;
+      object-fit: contain;
+      border-radius: 12px;
+      background: rgba(15, 9, 24, 0.45);
+    }
     .collection-grid-two { display: grid; grid-template-columns: 1fr; gap: 12px; margin: 18px 0; }
     @media (min-width: 780px) { .collection-grid-two { grid-template-columns: 1fr 1fr; } }
     .collection-grid-two section {
