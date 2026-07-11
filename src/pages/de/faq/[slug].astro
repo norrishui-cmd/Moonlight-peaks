@@ -1,0 +1,75 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { SITE, GAME } from '../../../consts';
+import { faqs, faqCatLabels } from '../../../data/faq';
+import { faqDe } from '../../../i18n/faq-de';
+
+export function getStaticPaths() {
+  const translated = faqs.filter((f) => faqDe[f.slug]);
+  return translated.map((f, i) => ({
+    params: { slug: f.slug },
+    props: { f, tr: faqDe[f.slug], prev: translated[(i - 1 + translated.length) % translated.length], next: translated[(i + 1) % translated.length] },
+  }));
+}
+
+const { f, tr, prev, next } = Astro.props as {
+  f: (typeof faqs)[number]; tr: { q: string; a: string; more?: string[] };
+  prev: (typeof faqs)[number]; next: (typeof faqs)[number];
+};
+const url = new URL(`/de/faq/${f.slug}`, SITE.url).href;
+const plain = [tr.a, ...(tr.more || [])].join(' ');
+
+const catLabelDe: Record<string, string> = {
+  platforms: 'Plattformen, Preis & Demo', romance: 'Romanze & Ehe', characters: 'Charaktere',
+  world: 'Welt & Gameplay', farming: 'Landwirtschaft & Wirtschaft', general: 'Allgemein',
+};
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Startseite', item: `${SITE.url}/de` },
+    { '@type': 'ListItem', position: 2, name: 'Häufige Fragen', item: `${SITE.url}/de/faq` },
+    { '@type': 'ListItem', position: 3, name: tr.q, item: url },
+  ] },
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: [{
+    '@type': 'Question', name: tr.q, acceptedAnswer: { '@type': 'Answer', text: plain },
+  }] },
+];
+---
+<Base
+  title={`${tr.q} · Moonlight Peaks`}
+  description={plain.length > 155 ? plain.slice(0, 152) + '…' : plain}
+  path={`/de/faq/${f.slug}`}
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Häufige Fragen', href: '/de/faq' }, { label: tr.q }]}
+  lang="de"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">FAQ · {catLabelDe[f.cat] ?? faqCatLabels[f.cat]}</p>
+      <h1>{tr.q}</h1>
+      <p class="intro">{tr.a}</p>
+      {tr.more && tr.more.map((m) => (<p>{m}</p>))}
+
+      {f.related && f.related.length > 0 && (
+        <div class="callout">
+          <strong>Verwandt:</strong>{' '}
+          {f.related.map((r, i) => (<>{i > 0 ? ' · ' : ''}<a href={r.href}>{r.label}</a></>))}
+        </div>
+      )}
+
+      <p class="cnote">Wir beantworten nur, was zu {GAME.title} bestätigt oder gemeldet ist; alles noch Unbekannte wird markiert und laufend aktualisiert.</p>
+
+      <nav class="prevnext" aria-label="FAQ-Navigation">
+        <a href={`/de/faq/${prev.slug}`}>← Zurück</a>
+        <a href="/de/faq">Alle FAQs</a>
+        <a href={`/de/faq/${next.slug}`}>Weiter →</a>
+      </nav>
+    </div>
+  </article>
+
+  <style>
+    .cnote { font-size: 0.74rem; color: var(--faint); margin: 14px 0 0; }
+    .prevnext { display: flex; justify-content: space-between; gap: 10px; margin: 18px 0 0; font-family: var(--mono); font-size: 0.8rem; }
+    .prevnext a { color: var(--candle); }
+  </style>
+</Base>

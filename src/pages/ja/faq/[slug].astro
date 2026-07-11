@@ -1,0 +1,75 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { SITE, GAME } from '../../../consts';
+import { faqs, faqCatLabels } from '../../../data/faq';
+import { faqJa } from '../../../i18n/faq-ja';
+
+export function getStaticPaths() {
+  const translated = faqs.filter((f) => faqJa[f.slug]);
+  return translated.map((f, i) => ({
+    params: { slug: f.slug },
+    props: { f, tr: faqJa[f.slug], prev: translated[(i - 1 + translated.length) % translated.length], next: translated[(i + 1) % translated.length] },
+  }));
+}
+
+const { f, tr, prev, next } = Astro.props as {
+  f: (typeof faqs)[number]; tr: { q: string; a: string; more?: string[] };
+  prev: (typeof faqs)[number]; next: (typeof faqs)[number];
+};
+const url = new URL(`/ja/faq/${f.slug}`, SITE.url).href;
+const plain = [tr.a, ...(tr.more || [])].join(' ');
+
+const catLabelJa: Record<string, string> = {
+  platforms: 'プラットフォーム・価格・体験版', romance: '恋愛・結婚', characters: 'キャラクター',
+  world: '世界・ゲームプレイ', farming: '農業・経済', general: '一般',
+};
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'ホーム', item: `${SITE.url}/ja` },
+    { '@type': 'ListItem', position: 2, name: 'よくある質問', item: `${SITE.url}/ja/faq` },
+    { '@type': 'ListItem', position: 3, name: tr.q, item: url },
+  ] },
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: [{
+    '@type': 'Question', name: tr.q, acceptedAnswer: { '@type': 'Answer', text: plain },
+  }] },
+];
+---
+<Base
+  title={`${tr.q} · Moonlight Peaks`}
+  description={plain.length > 155 ? plain.slice(0, 152) + '…' : plain}
+  path={`/ja/faq/${f.slug}`}
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'よくある質問', href: '/ja/faq' }, { label: tr.q }]}
+  lang="ja"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">FAQ · {catLabelJa[f.cat] ?? faqCatLabels[f.cat]}</p>
+      <h1>{tr.q}</h1>
+      <p class="intro">{tr.a}</p>
+      {tr.more && tr.more.map((m) => (<p>{m}</p>))}
+
+      {f.related && f.related.length > 0 && (
+        <div class="callout">
+          <strong>関連ページ:</strong>{' '}
+          {f.related.map((r, i) => (<>{i > 0 ? ' · ' : ''}<a href={r.href}>{r.label}</a></>))}
+        </div>
+      )}
+
+      <p class="cnote">{GAME.title}について確認済み・報告済みの情報のみをお答えしています。まだ判明していない事項は明記した上で、随時更新します。</p>
+
+      <nav class="prevnext" aria-label="FAQナビゲーション">
+        <a href={`/ja/faq/${prev.slug}`}>← 前へ</a>
+        <a href="/ja/faq">FAQ一覧</a>
+        <a href={`/ja/faq/${next.slug}`}>次へ →</a>
+      </nav>
+    </div>
+  </article>
+
+  <style>
+    .cnote { font-size: 0.74rem; color: var(--faint); margin: 14px 0 0; }
+    .prevnext { display: flex; justify-content: space-between; gap: 10px; margin: 18px 0 0; font-family: var(--mono); font-size: 0.8rem; }
+    .prevnext a { color: var(--candle); }
+  </style>
+</Base>

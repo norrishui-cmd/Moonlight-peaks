@@ -1,50 +1,86 @@
 ---
 import Base from '../../../layouts/Base.astro';
 import { SITE, GAME } from '../../../consts';
+import { faqs } from '../../../data/faq';
+import { faqDe } from '../../../i18n/faq-de';
 
-const faqLinks = [
-  { q: 'Ist Moonlight Peaks auf PS5 oder Xbox erhältlich?', href: '/de/faq/is-moonlight-peaks-on-ps5-or-xbox' },
-  { q: 'Ist Moonlight Peaks Multiplayer?', href: '/de/faq/is-moonlight-peaks-multiplayer' },
-];
-
-const jsonLd = {
-  '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'Startseite', item: `${SITE.url}/de` },
-    { '@type': 'ListItem', position: 2, name: 'FAQ', item: `${SITE.url}/de/faq` },
-  ],
+const catLabelDe: Record<string, string> = {
+  platforms: 'Plattformen, Preis & Demo', romance: 'Romanze & Ehe', characters: 'Charaktere',
+  world: 'Welt & Gameplay', farming: 'Landwirtschaft & Wirtschaft', general: 'Allgemein',
 };
+const cats = ['platforms', 'romance', 'characters', 'world', 'farming', 'general'] as const;
+const translated = faqs.filter((f) => faqDe[f.slug]);
+const plain = (slug: string) => {
+  const tr = faqDe[slug];
+  return [tr.a, ...(tr.more || [])].join(' ');
+};
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Startseite', item: `${SITE.url}/de` },
+    { '@type': 'ListItem', position: 2, name: 'Häufige Fragen', item: `${SITE.url}/de/faq` },
+  ] },
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: translated.map((f) => ({
+    '@type': 'Question', name: faqDe[f.slug].q, acceptedAnswer: { '@type': 'Answer', text: plain(f.slug) },
+  })) },
+];
 ---
 <Base
-  title="Moonlight Peaks FAQ — Häufige Fragen (Deutsch)"
-  description="Schnelle, bestätigte Antworten auf die häufigsten Fragen zu Moonlight Peaks — auf Deutsch."
+  title="Moonlight Peaks FAQ — Release, Romanze, Demo & mehr"
+  description="Antworten auf die häufigsten Fragen zu Moonlight Peaks: Erscheinungsdatum, Preis, Plattformen, Multiplayer, Kampf, Ehe, Romanze-Optionen, die Demo und Gameplay."
   path="/de/faq"
   jsonLd={jsonLd}
-  crumbs={[{ label: 'FAQ' }]}
+  crumbs={[{ label: 'Häufige Fragen' }]}
   lang="de"
 >
   <article class="page">
     <div class="wrap">
-      <p class="eyebrow">Hub / FAQ</p>
-      <h1>Moonlight Peaks <em>FAQ</em></h1>
+      <p class="eyebrow">Hub · FAQ</p>
+      <h1>{GAME.title} <em>FAQ</em></h1>
       <p class="intro">
-        Schnelle, bestätigte Antworten auf die häufigsten Fragen zu {GAME.title}, das seit dem
-        7. Juli 2026 erhältlich ist. Wir beantworten nur, was bestätigt oder berichtet ist.
+        Schnelle, quellenbasierte Antworten auf die Fragen, die Spieler am häufigsten zu
+        {GAME.title} stellen, seit dem Release am 7. Juli 2026. Jede Frage hat ihre eigene Seite.
+        Wir beantworten nur, was bestätigt oder gemeldet ist, und markieren alles noch Unbekannte,
+        statt zu raten. Zuletzt aktualisiert: {SITE.updated}.
       </p>
 
-      <h2>Häufigste Fragen</h2>
-      <ul class="link-list">
-        {faqLinks.map((f) => (<li><a href={f.href}>{f.q}</a></li>))}
-      </ul>
+      <h2>So nutzt du diese FAQ</h2>
+      <p>
+        Nutze diese Seite, wenn du eine direkte Antwort brauchst, und öffne dann den verlinkten
+        Guide für mehr Details. Fragen zu Plattform und Demo führen meist zu den Release-Seiten,
+        während Fragen zu Romanze und Charakteren zu Geschenk-, Zeitplan-, Herz-Event- und
+        Familienseiten führen.
+      </p>
+
+      {cats.map((cat) => {
+        const items = translated.filter((f) => f.cat === cat);
+        if (items.length === 0) return null;
+        return (
+          <section class="grp">
+            <div class="grp-head"><h2>{catLabelDe[cat]}</h2><span class="note">{items.length} Fragen</span></div>
+            <ul class="q-list">
+              {items.map((f) => (
+                <li><a href={`/de/faq/${f.slug}`}>{faqDe[f.slug].q}</a></li>
+              ))}
+            </ul>
+          </section>
+        );
+      })}
 
       <div class="callout wip">
-        Weiterführend: <a href="/faq">vollständige FAQ (Englisch)</a>.
+        Aktuell sind {translated.length} FAQ-Einträge ins Deutsche übersetzt. Die englische Version
+        bietet alle {faqs.length} Einträge — <a href="/faq">englische FAQ-Seite</a>.
       </div>
     </div>
   </article>
+
   <style>
-    .link-list { list-style: none; padding: 0; margin: 12px 0; }
-    .link-list li { border-bottom: 1px solid var(--line); padding: 10px 0; }
-    .link-list a { color: var(--mist); text-decoration: none; }
-    .link-list a:hover { color: var(--candle); }
+    .grp { margin: 28px 0; }
+    .grp-head { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; border-bottom: 1px solid var(--line); padding-bottom: 6px; margin-bottom: 10px; }
+    .grp-head h2 { margin: 0; }
+    .note { font-family: var(--mono); font-size: 0.72rem; color: var(--faint); white-space: nowrap; }
+    .q-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 6px; }
+    .q-list a { display: block; padding: 8px 0; color: var(--mist); text-decoration: none; border-bottom: 1px dashed var(--line); }
+    .q-list a:hover { color: var(--candle); }
   </style>
 </Base>
