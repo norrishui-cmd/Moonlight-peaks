@@ -24,7 +24,7 @@ const jaOnlyPaths = [
   '/characters/sabrina/gifts', '/characters/noel/gifts', '/characters/fiona/gifts',
   '/items/tools', '/items/fertilizer', '/items/clothing', '/items/fish', '/items/critters',
   '/items/vampster', '/items/soul-blobs', '/items/cooking', '/items/crafting',
-  '/items/artifacts', '/items/farm-helpers', '/items/livestock', '/items/potions',
+  '/items/artifacts', '/items/livestock', '/items/potions',
   '/items/mineables', '/items/decorations',
 ];
 

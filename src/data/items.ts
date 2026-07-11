@@ -134,17 +134,6 @@ export const itemCategories: ItemCategory[] = [
     related: [{ label: 'Locations', href: '/locations' }, { label: 'Map', href: '/map' }, { label: 'Environment', href: '/environment' }],
   },
   {
-    slug: 'farm-helpers',
-    name: 'Farm Helpers',
-    group: 'Creatures',
-    status: 'confirmed',
-    dek: 'Confirmed automation comes from spells, not machines: an auto-watering wand, a tree-moving wand, and some magical crops that water their neighbors.',
-    summary: 'Confirmed: the main "farm helper" systems are magical rather than mechanical. The Aquaflux wand waters a specific area automatically \u2014 cast it and walk away to cook or run other errands while it works, unlike the pickaxe which requires you to stay put. The Arborescent wand lets you relocate trees on your property instead of cutting them down, which matters because tree seeds are a rare drop worth preserving. Community-reported: some magical crops act like natural sprinklers, watering the crops planted around them, while a few others have the opposite effect and dry out nearby soil \u2014 worth checking before planting a new magical crop next to existing ones.',
-    examples: ['Aquaflux wand (auto-watering)', 'Arborescent wand (tree relocation)', 'Magical crops with a sprinkler-like neighbor effect', 'Pickaxe wand (mining automation)'],
-    verify: ['Full list of wand-type spells beyond Aquaflux/Arborescent', 'Which specific magical crops act as neighbor-sprinklers', 'Whether any non-magical/mechanical helpers also exist'],
-    related: [{ label: 'Farming', href: '/farming' }, { label: 'Tools', href: '/items/tools' }, { label: 'Beginner guide', href: '/beginner-guide' }],
-  },
-  {
     slug: 'livestock',
     name: 'Livestock',
     group: 'Creatures',

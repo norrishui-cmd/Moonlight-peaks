@@ -1,0 +1,88 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE } from '../../consts';
+
+const animals = ['Cheeken', 'Piggoat', 'Draculamb', 'Cowcula', 'Stoney', 'Rabbicula'];
+
+const faq = [
+  { q: 'What animals can you raise in Moonlight Peaks?', a: 'Confirmed so far: Cheeken, Piggoat, Draculamb, Cowcula, Stoney, and Rabbicula. Cheeken is the earliest available. More may unlock across the year.' },
+  { q: 'How do you get animals in Moonlight Peaks?', a: 'Confirmed: build a Barn first (4,000 coins from Ridge), then visit Luna\u2019s farm, where a small paddock shows 3 animals available each day on a rotating basis. Interact with one to adopt it, so long as you have coins and Barn space.' },
+  { q: 'What do you feed animals in Moonlight Peaks?', a: 'Confirmed: Fodder (made from Fiber at a Refiner) or the better Premium Fodder (50 Fodder + 1 Mana Essence). Keep it stocked in the trough so animals can eat overnight.' },
+  { q: 'What do animals produce in Moonlight Peaks?', a: 'Confirmed: milk, wool, eggs, and fertilizer depending on the animal \u2014 fertilizer specifically increases crop quality, making animal care worthwhile even before counting the direct produce income.' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: SITE.url },
+    { '@type': 'ListItem', position: 2, name: 'Farm', item: new URL('/farm', SITE.url).href },
+    { '@type': 'ListItem', position: 3, name: 'Animals', item: new URL('/farm/animals', SITE.url).href },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks Animals — Full List, Feeding & Produce"
+  description="Confirmed Moonlight Peaks farm animals: Cheeken, Piggoat, Draculamb, Cowcula, Stoney, Rabbicula. How to get them, feeding with Fodder, and what they produce."
+  path="/farm/animals"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Farm', href: '/farm' }, { label: 'Animals' }]}
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Farm · Animals</p>
+      <h1>Farm <em>animals</em></h1>
+      <p class="intro">
+        Confirmed animal roster and care basics, cross-checked across multiple launch-week sources.
+        See <a href="/farm/barn">the Barn</a> for how to unlock animal ownership in the first place.
+      </p>
+
+      <h2>Confirmed animals</h2>
+      <ul>
+        {animals.map((a) => (<li>{a}</li>))}
+      </ul>
+      <p>
+        Cheeken is the common first animal — confirmed to like being petted and given hats. New
+        animal types are reported to unlock further across the year; this list will grow as more
+        are confirmed.
+      </p>
+
+      <h2>Getting animals</h2>
+      <p>
+        Confirmed: once your Barn is built, visit Luna's farm — a small paddock next to her house
+        shows 3 animals available each day, rotating daily, including different color variants.
+        Interact with one to adopt it (you'll need enough coins and free Barn space), and you'll be
+        asked to name it yourself.
+      </p>
+
+      <h2>Feeding</h2>
+      <p>
+        Confirmed: animals eat Fodder, made at a Refiner from Fiber (1 Fiber → 2 Fodder). A better
+        tier, Premium Fodder, requires 50 Fodder plus 1 Mana Essence. Keep feed stocked in the
+        trough so animals are fed overnight — you can stack several days' worth at once.
+      </p>
+
+      <h2>What they produce</h2>
+      <p>
+        Confirmed: animals produce milk, wool, eggs, or fertilizer depending on the type. Fertilizer
+        specifically raises crop quality, which makes animal care worth the effort even before
+        counting direct produce income. Higher-quality produce (from well-cared-for, happy animals)
+        sells for more and makes better cooking ingredients.
+      </p>
+
+      <h2>FAQ</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        Related: <a href="/farm">Farm hub</a>, <a href="/farm/barn">the Barn</a>,
+        <a href="/items/fertilizer">fertilizer</a>, <a href="/characters/luna">Luna</a>.
+      </div>
+    </div>
+  </article>
+</Base>

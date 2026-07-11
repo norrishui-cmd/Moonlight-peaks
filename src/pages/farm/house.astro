@@ -1,0 +1,75 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE } from '../../consts';
+
+const faq = [
+  { q: 'How many times can you upgrade your house in Moonlight Peaks?', a: 'Confirmed via the official wiki: four times. Each upgrade adds a new expansion to the house.' },
+  { q: 'How do you unlock house upgrades in Moonlight Peaks?', a: 'Confirmed: upgrades only become available after completing the "Fix the Roof" quest, given by Ridge early in the game.' },
+  { q: 'Where do you buy house upgrades in Moonlight Peaks?', a: 'Confirmed: upgrades are purchased from the Howling Hammer using coins and wood. Each upgrade takes one in-game night to complete.' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: SITE.url },
+    { '@type': 'ListItem', position: 2, name: 'Farm', item: new URL('/farm', SITE.url).href },
+    { '@type': 'ListItem', position: 3, name: 'House', item: new URL('/farm/house', SITE.url).href },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks House — Upgrades, Cost & Fix the Roof Quest"
+  description="Confirmed: Moonlight Peaks' house upgrades 4 times via the Howling Hammer, unlocked by the Fix the Roof quest from Ridge. Cost, timing, and starting furniture."
+  path="/farm/house"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Farm', href: '/farm' }, { label: 'House' }]}
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Farm · House</p>
+      <h1>Your <em>house</em></h1>
+      <p class="intro">
+        Confirmed via the official wiki: your permanent home is a small stone house that can be
+        upgraded four times, with each upgrade adding a new expansion.
+      </p>
+
+      <h2>Unlocking upgrades</h2>
+      <p>
+        Confirmed: house upgrades only become available after completing the <strong>"Fix the
+        Roof"</strong> quest, given by Ridge early in the game. Once unlocked, upgrades are
+        purchased from the <strong>Howling Hammer</strong> using coins and wood, and each one takes
+        a single in-game night to complete.
+      </p>
+
+      <h2>Starting furniture and clutter</h2>
+      <p>
+        Confirmed: the first house stage already includes several basic decorations and
+        functional items — a wooden coffin, a cooking station, a workbench, a house plant, and a
+        crate. When you first get the house, the interior and surrounding area also have clutter
+        (trash, leaf piles, stones) that can be cleared away.
+      </p>
+
+      <h2>Exterior customization</h2>
+      <p>
+        Confirmed: exterior customization is also available through the Howling Hammer. Some
+        customization options only unlock once you've reached the final (fourth) house stage.
+      </p>
+
+      <h2>FAQ</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        Sourced from the official Moonlight Peaks Wiki (moonlightpeaks.wiki.gg). Related:
+        <a href="/farm">Farm hub</a>, <a href="/characters/ridge">Ridge</a>,
+        <a href="/items/decorations">decorations</a>.
+      </div>
+    </div>
+  </article>
+</Base>

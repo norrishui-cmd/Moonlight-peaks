@@ -1,0 +1,91 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE } from '../../consts';
+import { farmlandCrops, herbCrops, treeCrops } from '../../data/farm-crops';
+
+const faq = [
+  { q: 'How many crops are in Moonlight Peaks?', a: `Confirmed via the official wiki: ${farmlandCrops.length} farmland crops, ${herbCrops.length} herb garden crops, and ${treeCrops.length} tree crops — split into three planting categories based on where each one grows.` },
+  { q: 'What are the three crop categories in Moonlight Peaks?', a: 'Confirmed: Farmland crops (planted on tilled farmland), Herb Garden crops (need a dedicated Herb Garden structure), and Tree crops (planted directly on grass, no tilling needed).' },
+  { q: 'Which crops in Moonlight Peaks are magical?', a: 'Confirmed: magical crops can only be watered with Aquaflux (magical water), not a regular watering can. Several also have unique quirks — Gobbler needs to be fed fish or critters, Drikker needs its cup filled with water, Mandrake produces an Angry or Happy version depending on nearby mandrakes, and Weeping Wicca cries to auto-water a 3x3 patch around it.' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: SITE.url },
+    { '@type': 'ListItem', position: 2, name: 'Farm', item: new URL('/farm', SITE.url).href },
+    { '@type': 'ListItem', position: 3, name: 'Crops', item: new URL('/farm/crops', SITE.url).href },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks Crops — Full Database (Farmland, Herb Garden & Tree)"
+  description="The complete Moonlight Peaks crop database: 30+ farmland crops, herb garden crops, and tree crops, sourced from the official wiki — seasons, magical status, and special mechanics."
+  path="/farm/crops"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Farm', href: '/farm' }, { label: 'Crops' }]}
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Farm · Database</p>
+      <h1>Moonlight Peaks <em>crops</em></h1>
+      <p class="intro">
+        The full crop database, sourced from the official Moonlight Peaks Wiki. Crops split into
+        three categories based on where they're planted — farmland, herb garden, or tree — and some
+        are magical, meaning they can only be watered with Aquaflux rather than a regular can.
+        Sourced facts only; exact sell prices and grow times are filled in only where confirmed.
+      </p>
+
+      <h2>Farmland crops ({farmlandCrops.length})</h2>
+      <table class="facts">
+        <tr><th>Crop</th><th>Seasons</th><th>Magical?</th><th>Notes</th></tr>
+        {farmlandCrops.map((c) => (
+          <tr>
+            <td>{c.name}</td>
+            <td>{c.seasons.length ? c.seasons.join(', ') : '—'}</td>
+            <td>{c.magical ? 'Yes' : 'No'}</td>
+            <td>
+              {c.harvestDays && <>{c.harvestDays}-day harvest{c.regrowDays ? `, regrows in ${c.regrowDays}` : ''}{c.yieldPerHarvest ? `, ${c.yieldPerHarvest}/harvest` : ''}{c.sellPrice ? `, sells ${c.sellPrice}g` : ''}{c.seedPrice ? ` (seeds ${c.seedPrice}g)` : ''}. </>}
+              {c.note}
+            </td>
+          </tr>
+        ))}
+      </table>
+
+      <h2>Herb Garden crops ({herbCrops.length})</h2>
+      <p>Confirmed: herb garden crops need a dedicated Herb Garden structure and can't be planted directly on regular farmland.</p>
+      <table class="facts">
+        <tr><th>Herb</th><th>Magical?</th><th>Has dried form?</th></tr>
+        {herbCrops.map((h) => (
+          <tr><td>{h.name}</td><td>{h.magical ? 'Yes' : 'No'}</td><td>{h.hasDriedForm ? 'Yes' : 'No'}</td></tr>
+        ))}
+      </table>
+
+      <h2>Tree crops ({treeCrops.length})</h2>
+      <p>Confirmed: tree crops are planted directly on grass land, no tilling required.</p>
+      <table class="facts">
+        <tr><th>Tree</th><th>Seasons</th><th>Magical?</th><th>Notes</th></tr>
+        {treeCrops.map((t) => (
+          <tr><td>{t.name}</td><td>{t.seasons.join(', ')}</td><td>{t.magical ? 'Yes' : 'No'}</td><td>{t.note || '—'}</td></tr>
+        ))}
+      </table>
+
+      <h2>FAQ</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        Sourced from the official Moonlight Peaks Wiki (moonlightpeaks.wiki.gg). Exact sell prices,
+        grow times, and yields are filled in only where the source confirms them. Related:
+        <a href="/farm">Farm hub</a>, <a href="/farm/farm-helpers">farm helpers</a>,
+        <a href="/farming">farming guide</a>.
+      </div>
+    </div>
+  </article>
+</Base>

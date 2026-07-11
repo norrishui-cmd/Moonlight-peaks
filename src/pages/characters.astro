@@ -4,7 +4,6 @@ import { SITE, GAME } from '../consts';
 import PriorityLinks from '../components/PriorityLinks.astro';
 import { characters, typeLabels, typeIcons } from '../data/characters';
 import { characterPriorityLinks } from '../data/priorityLinks';
-import { dataminedNpcs, dataminedPetNames } from '../data/npc-datamine';
 import News from '../components/News.astro';
 
 const types = [...new Set(characters.map((c) => c.type))];
@@ -145,27 +144,6 @@ const jsonLd = [
         Trait reads on profiles are illustrative (personality-style, not combat stats) — Moonlight Peaks
         is a cozy life sim with no combat. "Unconfirmed" entries show art only; names and details are
         verified and updated as the live game is checked.
-      </p>
-
-      <h2>More residents named in pre-launch datamined files</h2>
-      <p class="cdm-intro">
-        Beyond the profiled residents above, pre-launch game-file datamines list more names we don't
-        have art or other details for yet — so rather than invent a backstory, here's the honest list.
-        Treat every name below as unverified until the developers confirm it or the live game can be
-        checked directly.
-      </p>
-      <div class="cdm-grid">
-        {dataminedNpcs.map((n) => (
-          <div class="cdm-item">
-            <span class="cdm-name">{n.name}</span>
-            {n.note && <span class="cdm-note">{n.note}</span>}
-          </div>
-        ))}
-      </div>
-      <p class="cdm-pets">
-        A few other names in the same files (Vampster and Hellkitten icons) look like example pet
-        names rather than people — {dataminedPetNames.join(', ')}. See <a href="/farming">farming &
-        livestock</a> for what's confirmed about magical pets and animals.
       </p>
 
       <PriorityLinks
