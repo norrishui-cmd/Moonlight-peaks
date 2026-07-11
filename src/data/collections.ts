@@ -20,6 +20,7 @@ export type CollectionEntry = {
 };
 
 const tbc = 'To be filled from official source';
+const fishIcon = (slug: string) => `/images/fish/${slug}.png`;
 const critterIcon = (slug: string) => `/images/critters/${slug}.png`;
 
 export const collections: CollectionEntry[] = [
@@ -40,11 +41,30 @@ export const collections: CollectionEntry[] = [
       { label: 'Data model', value: 'Species, location, season, weather, time, quality, sell value, use' },
       { label: 'Source rule', value: 'Official wiki and live-game verification before adding exact values' },
     ],
-    tableColumns: ['Fish', 'Location', 'Season', 'Weather', 'Time', 'Value', 'Use'],
+    tableColumns: ['Icon', 'Fish', 'Location', 'Rarity', 'Spawns During', 'Size', 'Consumption Value', 'Sell Price', 'Use'],
     tableRows: [
-      [tbc, tbc, tbc, tbc, tbc, tbc, 'Collection / cooking / selling'],
-      [tbc, tbc, tbc, tbc, tbc, tbc, 'Collection / cooking / selling'],
-      [tbc, tbc, tbc, tbc, tbc, tbc, 'Collection / cooking / selling'],
+      [fishIcon('amour'), 'Amour', 'Pink Grove', 'Rare', '-', '-', '8 Energy', '280 Coins', 'Collection / cooking / selling'],
+      [fishIcon('brickle'), 'Brickle', 'Howling Marshes', 'Uncommon', 'Spring', '-', '8 Energy', '80 Coins', 'Collection / cooking / selling'],
+      [fishIcon('daybreaker'), 'Daybreaker', 'Moonlit Pines', 'Uncommon', 'Morning', 'Large', '-', '-', 'Collection / cooking / selling'],
+      [fishIcon('fortipod'), 'Fortipod', 'Silverveil Lake', 'Rare', 'Winter', '-', '-', '-', 'Collection / cooking / selling'],
+      [fishIcon('furybud'), 'Furybud', 'Luna Bay', 'Rare', '-', 'Large', '-', '-', 'Collection / cooking / selling'],
+      [fishIcon('glammer'), 'Glammer', 'Pink Grove', 'Uncommon', '-', '-', '-', '-', 'Collection / cooking / selling'],
+      [fishIcon('glibby'), 'Glibby', 'Rivers that flow into Silverveil Lake', 'Uncommon', 'Spring / Summer', '-', '8 Energy / Gold-star 10 Energy', '65 Coins / Gold-star 80 Coins', 'Collection / cooking / selling'],
+      [fishIcon('gloy-gloy'), 'Gloy Gloy', 'Howling Marshes', 'Rare', '-', 'Large', '-', '-', 'Collection / cooking / selling'],
+      [fishIcon('gnasher'), 'Gnasher', 'Rivers that flow into Silverveil Lake', 'Uncommon', '-', 'Large', '-', '-', 'Collection / cooking / selling'],
+      ['-', 'Goldy', 'Rivers that flow into Silverveil Lake', 'Uncommon', 'Summer / Spring', '-', '8 Energy', '50 Coins', 'Collection / cooking / selling'],
+      [fishIcon('goliath'), 'Goliath', 'River in Moonlit Pines', 'Super Rare', '-', 'Very Large', '-', '-', 'Collection / cooking / selling'],
+      [fishIcon('leftsee'), 'Leftsee', 'Cave of Echoes, Crystal Cave', 'Uncommon', 'Summer', 'Small', '8 Energy', '140 Coins', 'Collection / cooking / selling'],
+      [fishIcon('missing'), 'Missing', 'Cave of Echoes', 'Rare', 'Spring / Summer', '-', '15 Energy / Gold-star 19 Energy', '750 Coins / Gold-star 940 Coins', 'Collection / cooking / selling'],
+      [fishIcon('moonflutter'), 'Moonflutter', 'Luna Bay', 'Uncommon', 'Full Moon', 'Large', '-', '-', 'Collection / cooking / selling'],
+      [fishIcon('mouthout'), 'Mouthout', 'Silverveil Lake', 'Uncommon', 'While Raining', '-', '8 Energy', '100 Coins', 'Collection / cooking / selling'],
+      [fishIcon('orbis'), 'Orbis', 'Silverveil Lake', 'Uncommon', '-', '-', '8 Energy / Gold-star 10 Energy', '75 Coins / Gold-star 95 Coins', 'Collection / cooking / selling'],
+      [fishIcon('skullfin'), 'Skullfin', 'Underground Waters', 'Rare', '-', '-', '10 Energy', '350 Coins', 'Collection / cooking / selling'],
+      [fishIcon('snuffy'), 'Snuffy', 'Luna Bay', 'Uncommon', '-', '-', '-', '-', 'Collection / cooking / selling'],
+      [fishIcon('splotch'), 'Splotch', 'Silverveil Lake', 'Common', '-', '-', '6 Energy', '55 Coins', 'Collection / cooking / selling'],
+      [fishIcon('twilight'), 'Twilight', 'Luna Bay', 'Uncommon', 'Early Evening', '-', '-', '-', 'Collection / cooking / selling'],
+      [fishIcon('violet'), 'Violet', 'River in Moonlit Pines', 'Uncommon', '-', '-', '8 Energy', '65 Coins', 'Collection / cooking / selling'],
+      [fishIcon('whisper'), 'Whisper', 'Found in most waters except Silverveil Lake', 'Common', 'Spring / Summer', '-', '6 Energy / Gold-star 8 Energy / Double-star 9 Energy', '40 Coins / Gold-star 50 Coins / Double-star 60 Coins', 'Collection / cooking / selling'],
     ],
     verify: ['Exact fish names', 'Catch locations', 'Season and weather rules', 'Quality-tier values', 'Cooking and gift uses'],
     related: [{ label: 'Fishing activity', href: '/activities/fishing' }, { label: 'The lake', href: '/locations/lake' }, { label: 'Map', href: '/map' }],
