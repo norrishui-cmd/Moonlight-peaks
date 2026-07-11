@@ -84,7 +84,7 @@ export const itemCategories: ItemCategory[] = [
     group: 'Creatures',
     status: 'confirmed',
     dek: 'Small black creatures hidden around your land, tied to a confirmed side-quest.',
-    summary: 'Confirmed at launch: Vampsters are small black creatures hiding around your homestead. You can only carry one at a time, and only while in your bat/vampire form — they don\u2019t go in your regular inventory. The quest is to bring each one you find to a cave near Orlock\u2019s mansion.',
+    summary: 'Confirmed at launch: Vampsters are small black creatures hiding around your homestead. You can only carry one at a time, and only while in your bat/vampire form — they don\u2019t go in your regular inventory. The quest is to bring each one you find to a cave near Orlock\u2019s mansion. Community-reported: a fan-made location map tracks 14 Vampster spots within the Moonlit Pines area alone, suggesting the full town-wide total is considerably higher.',
     examples: ['Small black creatures found around your farm/land'],
     verify: ['Total number of Vampsters', 'Reward for completing the quest', 'Whether more appear over time'],
     related: [{ label: 'Farming', href: '/farming' }, { label: 'Orlock', href: '/characters/orlock' }, { label: 'Shapeshifting', href: '/shapeshifting' }],

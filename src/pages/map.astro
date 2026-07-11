@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import { SITE, GAME } from '../consts';
 import { markers, categories, markersConfirmed } from '../data/map-locations';
+import GuideImage from '../components/GuideImage.astro';
 
 const colorOf = Object.fromEntries(categories.map((c) => [c.id, c.color]));
 const labelOf = Object.fromEntries(categories.map((c) => [c.id, c.label]));
@@ -43,6 +44,12 @@ const jsonLd = [
           image. We'll switch to pixel-accurate coordinates once we can source them from the live game.
         </div>
       )}
+
+      <GuideImage
+        imageId="world-map-screenshot"
+        contextAlt="In-game overworld map screenshot showing Moonlit Pines, Moonlight Peaks town, Misty Shores, and Silverveil Lake"
+        caption="A real in-game map screenshot, for reference alongside our schematic version below. Named regions match what we have confirmed: Moonlit Pines, Moonlight Peaks (the town), Misty Shores, and Silverveil Lake."
+      />
 
       <h2>Confirmed named areas</h2>
       <p>
@@ -119,6 +126,12 @@ const jsonLd = [
         the <a href="/locations/crystal-cave">catacombs</a>, and Soul Blobs are netted around town once
         that feature unlocks.
       </p>
+
+      <GuideImage
+        imageId="moonlit-pines-vampster-map"
+        contextAlt="Community-made map showing 14 numbered Vampster locations within Moonlit Pines"
+        caption="A community-made Vampster location map for the Moonlit Pines area, showing 14 tracked spots. Treat exact numbering as community-reported rather than developer-confirmed, but it's a useful starting point if you're hunting Vampsters in this region specifically."
+      />
 
       <h2>Still being verified</h2>
       <ul>

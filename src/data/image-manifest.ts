@@ -41,6 +41,22 @@ const PRESS_KIT_SOURCE_REF = 'Moonlight Peaks official press kit';
 
 export const imageManifest: ImageAsset[] = [
   {
+    id: 'world-map-screenshot', file: '/images/moonlight-peaks/official/world-map-screenshot.webp',
+    sourceType: 'user-gameplay', sourceRef: 'User-submitted in-game map screenshot', rightsNote: 'In-game screenshot, used for reference/commentary purposes.',
+    originalFilename: 'Moonlight-Peaks-Map-840x473.jpg', width: 840, height: 473,
+    entities: [], locations: ['town', 'misty-shores'], items: [], quests: [], topics: ['map', 'overworld'],
+    exactRoutes: ['/map'], candidateRoutes: [],
+    altBase: 'In-game overworld map showing Moonlit Pines, Moonlight Peaks town, Misty Shores, and Silverveil Lake', confidence: 0.85, matchBasis: ['user-submitted'],
+  },
+  {
+    id: 'moonlit-pines-vampster-map', file: '/images/moonlight-peaks/official/moonlit-pines-vampster-map.webp',
+    sourceType: 'other', sourceRef: 'Community-made Vampster location map (Moonlit Pines)', rightsNote: 'Community-annotated reference image, used for guidance purposes.',
+    originalFilename: '800px-Moonlit_Pines_Vampster_Map.webp', width: 800, height: 538,
+    entities: [], locations: [], items: ['vampster'], quests: [], topics: ['map', 'vampster', 'collectibles'],
+    exactRoutes: ['/map'], candidateRoutes: ['/items/vampster'],
+    altBase: 'Community-annotated map showing 14 numbered Vampster locations within the Moonlit Pines area', confidence: 0.7, matchBasis: ['user-submitted'],
+  },
+  {
     id: 'town-hall-garden-01', file: '/images/moonlight-peaks/official/town-hall-garden-01.webp',
     sourceType: 'official-press-kit', sourceRef: PRESS_KIT_SOURCE_REF, rightsNote: PRESS_KIT_RIGHTS_NOTE,
     originalFilename: 'MoonLightPeaks_TownHallGarden01_QHD.jpg', width: 1920, height: 1080,
