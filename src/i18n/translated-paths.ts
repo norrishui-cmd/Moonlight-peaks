@@ -32,6 +32,11 @@ const dePaths = [
   '/', '/beginner-guide', '/characters', '/romance', '/platforms', '/release-date', '/demo',
   '/magic', '/locations', '/locations/mines', '/known-issues', '/quests/a-bridge-too-far',
   '/faq', '/faq/is-moonlight-peaks-on-ps5-or-xbox', '/faq/is-moonlight-peaks-multiplayer',
+  '/items', '/items/tools', '/items/fertilizer', '/items/clothing', '/items/fish', '/items/cooking',
+  '/items/crafting', '/items/artifacts', '/items/livestock', '/items/potions', '/items/mineables',
+  '/items/decorations', '/farming', '/activities', '/families', '/character-creator', '/shapeshifting',
+  '/characters/saga/gifts', '/characters/luna/gifts', '/characters/orlock/gifts',
+  '/characters/sabrina/gifts', '/characters/noel/gifts', '/characters/fiona/gifts',
 ];
 
 export const translatedPathsByLocale: Record<Locale, Set<string>> = {

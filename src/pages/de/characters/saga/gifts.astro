@@ -1,0 +1,49 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import { SITE } from '../../../../consts';
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: [{
+    '@type': 'Question', name: 'Was schenkt man Saga am liebsten?',
+    acceptedAnswer: { '@type': 'Answer', text: 'Saga liebt Weißwein (White Wine) über alles.' },
+  }] },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Startseite', item: `${SITE.url}/de` },
+    { '@type': 'ListItem', position: 2, name: 'Charaktere', item: `${SITE.url}/de/characters` },
+    { '@type': 'ListItem', position: 3, name: 'Saga', item: `${SITE.url}/de/characters/saga` },
+  ] },
+];
+---
+<Base
+  title="Sagas Lieblingsgeschenke | Moonlight Peaks Charakterguide"
+  description="Bestätigte Geschenkvorlieben von Saga in Moonlight Peaks — was sie liebt, mag und ablehnt."
+  path="/de/characters/saga/gifts"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Charaktere', href: '/de/characters' }, { label: 'Saga', href: '/de/characters/saga' }, { label: 'Geschenke' }]}
+  lang="de"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Charaktere · Geschenke</p>
+      <h1>Sagas Lieblings<em>geschenke</em></h1>
+      <p class="intro">
+        Bestätigte Geschenkdaten für Saga, basierend auf Launch-Week-Tests internationaler Medien
+        (TheGamer, veröffentlicht am 7. Juli 2026).
+      </p>
+
+      <h2>Liebt sie besonders</h2>
+      <p>Bestätigt liebt Saga: Weißwein (White Wine). Die effektivste Wahl, um die Beziehung schnell zu vertiefen.</p>
+
+      <h2>Mag sie</h2>
+      <p>Über das Lieblingsgeschenk hinaus mag Saga auch: Rotwein (Red Wine), Bier, einzelne Blumen (keine Sträuße), Purple Tulip, Pink Azalea, Blood Grape, Erdbeersaft und Gazpacho-Suppe.</p>
+
+      <h2>Mag sie nicht</h2>
+      <p>Vermeide bei Saga: Blumensträuße (mehrere Blumen zusammen) und Copper Bar. Bestätigt senken diese die Zuneigung.</p>
+
+      <div class="callout wip">
+        Verwandte Seiten: <a href="/de/characters/saga">Sagas Profil</a>,
+        <a href="/de/characters">Charakterübersicht</a>, <a href="/characters/saga/gifts">ausführliche Version auf Englisch</a>.
+      </div>
+    </div>
+  </article>
+</Base>

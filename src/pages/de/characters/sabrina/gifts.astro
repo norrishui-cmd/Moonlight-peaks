@@ -1,0 +1,49 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import { SITE } from '../../../../consts';
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: [{
+    '@type': 'Question', name: 'Was schenkt man Sabrina am liebsten?',
+    acceptedAnswer: { '@type': 'Answer', text: 'Sabrina liebt Purple Tulip und Purple Plumeria.' },
+  }] },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Startseite', item: `${SITE.url}/de` },
+    { '@type': 'ListItem', position: 2, name: 'Charaktere', item: `${SITE.url}/de/characters` },
+    { '@type': 'ListItem', position: 3, name: 'Sabrina', item: `${SITE.url}/de/characters/sabrina` },
+  ] },
+];
+---
+<Base
+  title="Sabrinas Lieblingsgeschenke | Moonlight Peaks Charakterguide"
+  description="Bestätigte Geschenkvorlieben von Sabrina in Moonlight Peaks — was sie liebt, mag und ablehnt."
+  path="/de/characters/sabrina/gifts"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Charaktere', href: '/de/characters' }, { label: 'Sabrina', href: '/de/characters/sabrina' }, { label: 'Geschenke' }]}
+  lang="de"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Charaktere · Geschenke</p>
+      <h1>Sabrinas Lieblings<em>geschenke</em></h1>
+      <p class="intro">
+        Bestätigte Geschenkdaten für Sabrina, basierend auf Launch-Week-Tests internationaler Medien
+        (TheGamer, veröffentlicht am 7. Juli 2026).
+      </p>
+
+      <h2>Liebt sie besonders</h2>
+      <p>Bestätigt liebt Sabrina: Purple Tulip und Purple Plumeria.</p>
+
+      <h2>Mag sie</h2>
+      <p>Darüber hinaus mag Sabrina auch: Blood Grape und Blood Grape Juice.</p>
+
+      <h2>Mag sie nicht</h2>
+      <p>Vermeide bei Sabrina: Onion Seeds und Pink Conch Shell. Bestätigt senken diese die Zuneigung.</p>
+
+      <div class="callout wip">
+        Verwandte Seiten: <a href="/de/characters/sabrina">Sabrinas Profil</a>,
+        <a href="/de/characters">Charakterübersicht</a>, <a href="/characters/sabrina/gifts">ausführliche Version auf Englisch</a>.
+      </div>
+    </div>
+  </article>
+</Base>

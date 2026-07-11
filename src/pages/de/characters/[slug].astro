@@ -20,7 +20,7 @@ const statusLabel =
   : base.status === 'datamined' ? 'Datamining'
   : 'Unbestätigt';
 const romanceText = base.romanceable === true ? tr.romanceYes : base.romanceable === false ? tr.romanceNo : tr.romanceTbc;
-const hasGiftPage = ['saga'].includes(slug as string);
+const hasGiftPage = ['saga', 'luna', 'orlock', 'sabrina', 'noel', 'fiona'].includes(slug as string);
 
 const jsonLd = [
   { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [

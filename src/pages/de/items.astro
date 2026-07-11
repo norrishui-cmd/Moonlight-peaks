@@ -1,0 +1,70 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE } from '../../consts';
+import { itemCategories } from '../../data/items';
+import { itemsDe } from '../../i18n/items-de';
+
+const statusLabelDe: Record<string, string> = {
+  confirmed: 'Bestätigt', datamined: 'Datamining', expected: 'Erwartet',
+};
+const groupLabelDe: Record<string, string> = {
+  Equipment: 'Ausrüstung', Resources: 'Ressourcen', Crafting: 'Handwerk', Creatures: 'Kreaturen', Home: 'Zuhause',
+};
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Startseite', item: `${SITE.url}/de` },
+    { '@type': 'ListItem', position: 2, name: 'Gegenstände', item: `${SITE.url}/de/items` },
+  ] },
+  { '@context': 'https://schema.org', '@type': 'ItemList', name: 'Moonlight Peaks Gegenstandskategorien',
+    itemListElement: itemCategories.map((c, i) => ({ '@type': 'ListItem', position: i + 1, name: itemsDe[c.slug].name, url: `${SITE.url}/de/items/${c.slug}` })) },
+];
+---
+<Base
+  title="Moonlight Peaks Gegenstände — Alle Kategorien"
+  description="Moonlight Peaks Gegenstandskategorien auf Deutsch: Werkzeuge, Nutztiere, Tränke und mehr — bestätigte Daten getrennt von noch unbestätigten Informationen."
+  path="/de/items"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Gegenstände' }]}
+  lang="de"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Datenbank · Gegenstände</p>
+      <h1>Moonlight Peaks <em>Gegenstände</em></h1>
+      <p class="intro">
+        Alle Gegenstandskategorien auf Deutsch. Bestätigte Daten werden klar von noch
+        unbestätigten Informationen getrennt — hier wird nichts geraten.
+      </p>
+
+      <div class="ix-grid">
+        {itemCategories.map((c) => {
+          const tr = itemsDe[c.slug];
+          return (
+            <a class="ix-card" href={`/de/items/${c.slug}`}>
+              <div class="ix-meta">
+                <span>{groupLabelDe[c.group] ?? c.group}</span>
+                <span>{statusLabelDe[c.status] ?? c.status}</span>
+              </div>
+              <h3>{tr.name}</h3>
+              <p>{tr.dek}</p>
+              <strong>Details ansehen →</strong>
+            </a>
+          );
+        })}
+      </div>
+    </div>
+  </article>
+
+  <style>
+    .ix-grid { display: grid; grid-template-columns: 1fr; gap: 14px; margin: 20px 0 40px; }
+    @media (min-width: 720px) { .ix-grid { grid-template-columns: 1fr 1fr; } }
+    @media (min-width: 1080px) { .ix-grid { grid-template-columns: 1fr 1fr 1fr; } }
+    .ix-card { display: flex; flex-direction: column; gap: 10px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); padding: 18px; text-decoration: none; color: inherit; transition: border-color .15s ease, transform .15s ease; }
+    .ix-card:hover { border-color: color-mix(in srgb, var(--candle) 50%, var(--line)); transform: translateY(-2px); }
+    .ix-meta { display: flex; gap: 8px; font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.04em; text-transform: uppercase; color: var(--faint); }
+    .ix-card h3 { margin: 0; font-family: var(--display); font-size: 1.15rem; color: var(--mist); }
+    .ix-card p { margin: 0; color: var(--muted); font-size: 0.88rem; line-height: 1.5; flex: 1; }
+    .ix-card strong { color: var(--candle); font-family: var(--mono); font-size: 0.82rem; }
+  </style>
+</Base>

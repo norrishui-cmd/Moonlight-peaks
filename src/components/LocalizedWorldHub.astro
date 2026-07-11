@@ -24,7 +24,7 @@ interface Props {
 const { lang, kind, copy, items } = Astro.props;
 const path = `/${lang}/${kind}`;
 const englishBase = `/${kind}`;
-const homeLabel = lang === 'es' ? 'Inicio' : 'Home';
+const homeLabel = lang === 'es' ? 'Inicio' : lang === 'de' ? 'Startseite' : 'Home';
 const displayTitle = (item: HubItem) => copy.labels[item.slug] ?? item.title;
 const displayDek = (item: HubItem) => item.dek ?? item.summary ?? '';
 const jsonLd = [

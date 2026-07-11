@@ -1,0 +1,101 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+
+const faq = [
+  { q: 'Kann man seinen Charakter in Moonlight Peaks anpassen?', a: 'Ja. Es gibt eine vollständige Charaktererstellung — bereits in der kostenlosen Demo spielbar —, in der du Hautton, Augen, Frisur, Make-up und Outfits festlegst. Die Optionen sind für jeden Stil ausgelegt, mit übernatürlichem Twist.' },
+  { q: 'Ist die Charaktererstellung in Moonlight Peaks geschlechtsneutral?', a: 'Ja. Die Charaktermodelle sind bewusst geschlechtsneutral gestaltet, und auch das Beziehungssystem ist nicht geschlechtsgebunden — du kannst deinen Wunsch-Vampir erstellen und trotzdem jeden passenden Bewohner unabhängig vom Aussehen romantisch kennenlernen.' },
+  { q: 'Kann man das Aussehen nach der Charaktererstellung noch ändern?', a: 'Ja, über zwei bestätigte Wege. Ein Spiegel im Haus lässt dich Kleidung und weitere Anpassungen jederzeit kostenlos ändern. Der Alter-Ego-Elixier (ein einmaliger 1.300-Gold-Trank von Sabrina) ändert Frisur, Haarfarbe, Hautton, Augenfarbe, Augenbrauen und Make-up, aber nicht die Kleidung. Nur der Charaktername lässt sich später nicht mehr ändern.' },
+  { q: 'Wie wechselt man in Moonlight Peaks die Kleidung?', a: 'Bestätigt: Nutze den Spiegel im Haus, um Kleidung (Outfit-Sets, Oberteile, Hosen/Röcke, Schuhe) und Accessoires (Arme, Gesicht) jederzeit kostenlos zu wechseln. Das ist getrennt vom Alter-Ego-Elixier, der die Kleidung nicht beeinflusst. Neue Kleidung kaufst du bei Aras (Third Eye Threads). Was du bei der Charaktererstellung trägst, ist bereits dauerhaft im Kleiderschrank freigeschaltet.' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Startseite', item: `${SITE.url}/de` },
+    { '@type': 'ListItem', position: 2, name: 'Charaktererstellung', item: `${SITE.url}/de/character-creator` },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks Charaktererstellung — Anpassung, Kleidung & Aussehen ändern"
+  description="Wie die Charaktererstellung in Moonlight Peaks funktioniert: Hautton, Augen, Frisur, Make-up, Outfits, geschlechtsneutral gestaltet, plus wie man das Aussehen später ändert."
+  path="/de/character-creator"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Charaktererstellung' }]}
+  lang="de"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Einstieg · Charaktererstellung</p>
+      <h1>{GAME.title} <em>Charaktererstellung</em></h1>
+      <p class="intro">
+        Bevor du deine ersten mondbeschienenen Feldfrüchte anbaust, gestaltest du deinen Vampir.
+        Hier steht, was die Charaktererstellung in {GAME.title} bestätigt bietet.
+        Zuletzt aktualisiert: {SITE.updated}.
+      </p>
+
+      <h2>Bereits in der Demo spielbar</h2>
+      <p>
+        Die Charaktererstellung ist eines der Highlights der kostenlosen Demo auf Steam und im
+        Nintendo eShop — du kannst deinen Vampir gestalten und mit Looks experimentieren. Siehe
+        unseren <a href="/demo">Demo-Guide</a> für alles Weitere, was enthalten ist.
+      </p>
+
+      <h2>Was du anpassen kannst</h2>
+      <p>
+        Du gestaltest das Aussehen deines Vampirs über Hautton, Augen (bestätigt: jedes Auge kann
+        eine andere Farbe haben), Frisur und -farbe, Gesichtsdetails und Outfit — mit einer breiten
+        Garderobe von Anfang an und mehr zum Kaufen im Spielverlauf. Das Studio beschreibt die
+        Optionen als für jeden Stil geeignet, mit übernatürlichem Flair — ob leger, verspielt oder
+        passenderweise atemberaubend schön.
+      </p>
+
+      <h2>Geschlechtsneutral von Grund auf</h2>
+      <p>
+        Die Charaktermodelle sind bewusst geschlechtsneutral gestaltet, und auch das
+        Beziehungssystem ist nicht geschlechtsgebunden. Das heißt: Du kannst deinen Wunsch-Vampir
+        erstellen und trotzdem jeden passenden Bewohner unabhängig vom Aussehen
+        <a href="/romance">romantisch kennenlernen</a>.
+      </p>
+
+      <h2>Kleidung und Outfits, bestätigte Details</h2>
+      <p>
+        Bestätigt: Kleidung ist unterteilt in Outfit-Sets, Oberteile, Hosen/Röcke und Schuhe, plus
+        eine separate Accessoire-Kategorie (Arme, Gesicht). Was du bei der Charaktererstellung
+        trägst, wird <strong>dauerhaft in deinem Kleiderschrank freigeschaltet</strong> — du musst
+        deinen Start-Look nie neu kaufen. Neue Kleidung danach kaufst du bei
+        <a href="/characters/aras">Aras</a> in Third Eye Threads. Mehrfach bestätigt: allein
+        <strong>35 Frisuren</strong>, dazu <strong>30 eigene Bart- und Schnurrbart-Optionen</strong>,
+        wobei Haar-, Augenbrauen- und Bartfarbe jeweils separat wählbar sind. Auch zwei komplette
+        Porträtstile stehen zur Wahl — der Standard-Malstil und ein umschaltbarer Anime-Stil.
+      </p>
+
+      <h2>Aussehen später ändern: Spiegel vs. Elixier</h2>
+      <p>
+        Bestätigt: Das sind zwei getrennte Systeme. Ein <strong>Spiegel im Haus</strong> lässt dich
+        Kleidung und weitere Anpassungen jederzeit kostenlos ändern. Der
+        <strong>Alter-Ego-Elixier</strong> — ein einmaliger 1.300-Gold-Trank von Sabrina bei Webb
+        of Wonders — ändert Frisur, Haarfarbe, Hautton, Augenfarbe, Augenbrauen und Make-up,
+        beeinflusst aber ausdrücklich <strong>nicht</strong> Kleidung oder Accessoires. Der
+        Charaktername ist die einzige Wahl, die sich später mit keiner der beiden Methoden
+        ändern lässt.
+      </p>
+
+      <h2>Häufige Fragen</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        Verwandte Seiten: <a href="/shapeshifting">Gestaltwandlung</a>,
+        <a href="/characters">Charaktere</a>, <a href="/demo">Demo</a>.
+      </div>
+    </div>
+  </article>
+</Base>

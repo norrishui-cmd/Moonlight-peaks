@@ -1,0 +1,106 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+
+const faq = [
+  { q: 'Baut man in Moonlight Peaks nachts an?', a: 'Ja. Als Vampir pflanzt und pflegst du deine Ernte nach Sonnenuntergang — vergiss nicht, vor Sonnenaufgang zurück in den Sarg zu gehen. Nächtliches Bewirtschaften ist der besondere Dreh dieses gemütlichen Farming-Loops.' },
+  { q: 'Was ist ein Draculamb?', a: 'Eine bestätigte Nutztierart. Weitere sind Cheeken, Piggoat und Cowcula. Auch eine Verwandlung in die Hellkitten-Form ist möglich.' },
+  { q: 'Welche Feldfrüchte kann man anbauen?', a: 'Das erste bestätigte Feld ist Blood Grapes (Startsamen von Orlock, bestätigt 5 Tage Wachstumszeit), nach der Ernte am Fass zu Rotwein verarbeitbar. Weitere bestätigte Sorten: Cruelcumber, Kürbis und Nightshade — genaue Preise stehen noch aus.' },
+  { q: 'Wie kauft man Hoftiere?', a: 'Bestätigt: Zuerst kaufst du für 4.000 Gold plus Materialien eine Scheune von Ridge, danach Tiere von Luna (nur die, die gerade vor ihrem Haus stehen).' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Startseite', item: `${SITE.url}/de` },
+    { '@type': 'ListItem', position: 2, name: 'Landwirtschaft', item: `${SITE.url}/de/farming` },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks Landwirtschaft — Anbau, Feldfrüchte & Hoftiere"
+  description="Landwirtschaft in Moonlight Peaks auf Deutsch: nächtlicher Anbau, verzauberte Feldfrüchte, Werkzeuge und der bestätigte Kaufablauf für Hoftiere."
+  path="/de/farming"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Landwirtschaft' }]}
+  lang="de"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Gameplay · Landwirtschaft</p>
+      <h1>Landwirtschaft in <em>{GAME.title}</em></h1>
+      <p class="intro">
+        Landwirtschaft ist der Kern von {GAME.title} — mit einem vampirischen Twist. Hier steht,
+        wie nächtlicher Anbau, verzauberte Feldfrüchte und magische Hoftiere funktionieren.
+        Zuletzt aktualisiert: {SITE.updated}.
+      </p>
+
+      <h2>Anbau bei Mondlicht</h2>
+      <p>
+        Als Nachtwesen säst und pflegst du nach Sonnenuntergang — und vergisst nicht, vor
+        Sonnenaufgang in den Sarg zurückzukehren. Der vertraute Pflanzen-Pflegen-Ernten-Rhythmus
+        gemütlicher Farming-Sims, einfach auf den Kopf gestellt und in die Nacht verlegt.
+      </p>
+
+      <h2>Verzauberte Feldfrüchte und leuchtende Blumen</h2>
+      <p>
+        Übernatürliche Landwirtschaft bringt interessante Ergebnisse: statt gewöhnlicher Ernte
+        baust du verzauberte, leuchtende Feldfrüchte und Blumen an. Bestätigt als erste Feldfrucht:
+        <strong>Blood Grapes</strong> (Startsamen von Orlock, 5 Tage Wachstumszeit), die sich nach
+        der Ernte an einem Fass zu "Rotwein" verarbeiten lassen — roh verkauft bringen sie kaum
+        etwas, Verarbeitung ist der eigentliche Weg zum Gewinn. Weitere bestätigte Sorten:
+        Cruelcumber, Kürbis und Nightshade, genaue Preise stehen noch aus.
+      </p>
+
+      <h2>Start-Werkzeuge</h2>
+      <p>
+        Bestätigtes Startset (über das Werkzeugrad, auf der Switch rechte Schultertaste gedrückt
+        halten): Schaufel (keine separate Hacke — die Schaufel übernimmt diese Aufgabe), Gießkanne
+        (3-stufiges Upgrade: 1.000 / 2.000 / 3.500 Gold, jede Stufe senkt den Wasserverbrauch pro
+        Feld), Axt, Spitzhacke, Sense und ein anfangs kaputter Zauberstab. Bestätigt als höchste
+        Upgrade-Priorität: die <strong>Spitzhacke</strong> — Upgrades erlauben das Zerkleinern
+        größerer Felsen rund um dein Grundstück und schaffen Platz für Gebäude wie die Scheune.
+      </p>
+
+      <h2>Nutztiere — bestätigter Kaufablauf</h2>
+      <p>
+        Bestätigt: Du kannst nicht sofort Tiere kaufen. Zuerst kaufst du bei <strong>Ridge</strong>
+        für 4.000 Gold plus Materialien eine Scheune, danach Tiere bei <strong>Luna</strong> (nur
+        die, die gerade vor ihrem Haus stehen). Bestätigte Tierarten:
+        <strong>Cheeken</strong> (ein häufiges erstes Tier, mag Streicheln und Hüte),
+        <strong>Piggoat</strong>, <strong>Draculamb</strong> und <strong>Cowcula</strong>. Futter
+        kommt als Fodder (an einem Veredler hergestellt), später auch als besseres Premium-Futter.
+      </p>
+
+      <h2>Magie und Werkzeuge</h2>
+      <p>
+        Landwirtschaft und Magie sind eng verknüpft — der bestätigte erste Zauber ist
+        <strong>Aquaflux</strong> (automatisches Gießen), freigeschaltet über Luna. Im Spielverlauf
+        erhältst du weitere Werkzeuge und baust dein Grundstück aus, um mehr anzubauen.
+      </p>
+
+      <h2>Noch in Prüfung</h2>
+      <ul>
+        <li>Die vollständige <strong>Feldfrucht-Datenbank</strong>: genaue Preise, Jahreszeiten.</li>
+        <li><strong>Empfohlene Feldfrüchte</strong> nach Jahreszeit und Gewinn.</li>
+        <li>Farmplätze auf der <a href="/map">interaktiven Karte</a>.</li>
+      </ul>
+
+      <h2>Häufige Fragen</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        Post-Launch-Eintrag, wird laufend mit echten Spieldaten aktualisiert. Verwandte Seiten:
+        <a href="/magic">Magie</a>, <a href="/items">Gegenstände</a>, <a href="/environment">Umgebung</a>,
+        <a href="/map">Interaktive Karte</a>, <a href="/de/beginner-guide">Einsteiger-Guide</a> (Deutsch).
+      </div>
+    </div>
+  </article>
+</Base>
