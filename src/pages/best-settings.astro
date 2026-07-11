@@ -3,37 +3,37 @@ import Base from '../layouts/Base.astro';
 import { SITE, GAME } from '../consts';
 
 const settingsRows = [
-  ['PC', 'Start with native resolution, comfortable UI scale, and controller or keyboard testing in the demo. Add exact graphics recommendations after launch testing.'],
-  ['Mac', 'Confirm the current Steam Mac requirements first, then test resolution, readability, and input comfort on your own hardware.'],
-  ['Steam Deck', 'Check the final compatibility rating, text size, controller prompts, battery comfort, and whether any launch-week settings are repeatedly recommended.'],
-  ['Nintendo Switch', 'Focus on readability, handheld comfort, load times, and whether any platform-specific issues appear at launch.'],
-  ['Nintendo Switch 2', 'Compare the native version with original Switch notes, especially load times, resolution, and upgrade-pass wording.'],
+  ['PC', 'Confirmed accessibility/graphics options: vsync toggle, controller vibration toggle, on-screen interaction labels, text animation toggle, rebindable keys, framerate lock, and render scale. One real reported quirk: graphics settings (including resolution) save into your cloud save file, so switching between a Steam Deck and a desktop monitor means readjusting each time.'],
+  ['Mac', 'Runs via the same Steam build as Windows; check current Steam system requirements for your specific Mac hardware.'],
+  ['Steam Deck', 'Confirmed Verified on Steam with a Gold rating on ProtonDB. One in-depth review reported the game can struggle to hold 60FPS with TDP uncapped, and recommends locking the refresh rate to 50Hz for a smoother, more battery-friendly experience.'],
+  ['Nintendo Switch / Switch 2', 'Full controller support out of the box; reviewers found the Switch 2 version ran exceptionally well in portable mode. See our Switch guide for edition-specific differences.'],
+  ['Camera & UI comfort (any platform)', 'Real player-reported quirk: the default camera sits quite close/zoomed-in, which some PC players on a large monitor found uncomfortable (motion-sickness-adjacent) compared to Steam Deck or Switch, where the same zoom level feels natural on a smaller screen.'],
 ];
 
 const testingSteps = [
-  'Test character creation and menus first, because text size and UI comfort show up immediately.',
-  'Play one early activity such as fishing, flower arranging, or embroidery to check controls.',
-  'Try both handheld and docked modes if you are on Switch or Steam Deck.',
-  'Wait for repeated reports before recommending a hard setting as the best option.',
-  'Keep exact FPS, battery, and graphics claims out until they are measured or well sourced.',
+  'Check your accessibility needs first: confirmed options are vibration, interaction labels, text animation, and rebindable keys \u2014 there is no confirmed colorblind mode.',
+  'On Steam Deck, try locking the refresh rate to 50Hz if you\u2019re seeing framerate dips with TDP uncapped.',
+  'If playing on a PC monitor and the default camera zoom feels too close, try windowed mode, which several players found more comfortable.',
+  'Expect to redo your graphics settings after switching devices \u2014 they\u2019re saved in the cloud save file, not per-device.',
+  'Test controller vs. keyboard+mouse early: multiple players reported the game leans controller-first, with mouse input underused in the default keyboard scheme.',
 ];
 
 const faq = [
   {
     q: 'What are the best Moonlight Peaks settings?',
-    a: 'Before launch, the safest advice is to test readability, controls, resolution, and comfort in the demo. Exact best settings should be added after launch testing.',
+    a: 'On Steam Deck, try a locked 50Hz refresh rate if you see framerate dips. On a PC monitor, windowed mode can help if the default camera zoom feels too close. Note that graphics settings save into your cloud save, so expect to readjust after switching devices.',
   },
   {
     q: 'What are the best Steam Deck settings for Moonlight Peaks?',
-    a: 'Check the final Steam Deck compatibility rating first, then verify text size, controls, battery comfort, and launch-week player reports before publishing a fixed setup.',
+    a: 'Confirmed: the game is Steam Deck Verified with a ProtonDB Gold rating and has full controller support out of the box. One in-depth review found it can struggle to hit 60FPS with TDP uncapped, and recommends a locked 50Hz refresh rate for smoother, more battery-friendly play.',
   },
   {
     q: 'Should I use controller or keyboard?',
-    a: 'Try both if you can. Moonlight Peaks is a cozy life sim, so comfort in menus, movement, fishing, and decorating matters more than competitive precision.',
+    a: 'Controller is the more natural fit \u2014 multiple players reported the default keyboard+mouse scheme leaves the mouse mostly unused, requiring the keyboard hand to do most of the work. Full controller support works well on PC, Steam Deck, and Switch alike.',
   },
   {
-    q: 'Will this page change after launch?',
-    a: 'Yes. It is designed to be updated with measured PC, Mac, Steam Deck, Switch, and Switch 2 settings once reliable data exists.',
+    q: 'Does Moonlight Peaks have accessibility settings?',
+    a: 'Some: confirmed options are vsync, controller vibration, on-screen interaction labels, text animation, rebindable keys, a framerate lock, and render scale. Not confirmed: no colorblind mode or dyslexia-friendly text option has been reported.',
   },
 ];
 
@@ -73,9 +73,8 @@ const jsonLd = [
       <p class="eyebrow">Launch / Best settings</p>
       <h1>Moonlight Peaks <em>best settings</em></h1>
       <p class="intro">
-        A safe launch settings page for {GAME.title}. Use it before release to test comfort in the
-        demo, then update it with real PC, Mac, Steam Deck, Switch, and Switch 2 settings once the
-        live build confirms them.
+        Real, confirmed settings and accessibility options for {GAME.title} across PC, Mac, Steam
+        Deck, and Switch/Switch 2, plus a few platform quirks reported by players since launch.
       </p>
 
       <div class="callout">

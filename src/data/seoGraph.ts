@@ -781,7 +781,7 @@ const locationSeoPages: SeoPage[] = locations.map((location) => ({
   sections: [
     { title: 'Location summary', body: sanitizePublicText(location.dek) },
     { title: 'What we know', body: sanitizePublicText(location.body.join(' ')) },
-    { title: 'What to verify', body: 'After launch, this page should add exact map position, shops or NPCs nearby, resource spawns, events, and quest connections if confirmed.' },
+    { title: 'What to verify', body: 'Still being verified: exact map position, shops or NPCs nearby, resource spawns, events, and quest connections not yet listed above.' },
   ],
   faqs: location.faq || [{ q: `What is ${location.title}?`, a: location.dek }],
   related: [{ label: location.title, href: `/locations/${location.slug}` }, { label: 'Locations', href: '/locations' }, ...(location.related || [])],

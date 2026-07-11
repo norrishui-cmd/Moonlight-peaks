@@ -8,6 +8,7 @@ const labelOf = Object.fromEntries(categories.map((c) => [c.id, c.label]));
 
 const faq = [
   { q: 'Is there an interactive map for Moonlight Peaks?', a: 'Yes — this fan-made map plots real, confirmed location and shop names (Silverveil Lake, Cave of Echoes, Town Hall, Webb of Wonders, Howling Hammer). Positions are schematic approximations based on descriptive clues in guides, not measured from an official map image, so treat placement as directional rather than exact.' },
+  { q: 'Does Moonlight Peaks have a minimap?', a: 'No, confirmed: there\u2019s no minimap or quest-marker system, and the camera is fixed rather than free-following. The in-game map is the main navigation aid, and marks buildings with an exclamation point or a sparkling aura when entering will trigger a cutscene.' },
   { q: 'Where can you fish in Moonlight Peaks?', a: 'Confirmed: Silverveil Lake supports fishing and is home to the Hosu mermaid family. Exact fish species and specific casting spots within the lake are not yet sourced — see the fishing guide for what is confirmed so far.' },
 ];
 
@@ -101,6 +102,23 @@ const jsonLd = [
       <div class="mapinfo" id="mapinfo">
         <p class="mapinfo-empty">Tap any marker to see what's there.</p>
       </div>
+
+      <h2>Navigating without a minimap</h2>
+      <p>
+        Confirmed across multiple sources: Moonlight Peaks has <strong>no minimap and no quest
+        markers</strong>, and uses a fixed camera rather than one that follows you freely — the
+        in-game map (opened from the pause menu) is your main navigation aid. On that map,
+        <strong>exclamation-point icons</strong> mark buildings where entering triggers a cutscene,
+        and a <strong>sparkling aura</strong> around a building means going inside will trigger one —
+        both are worth checking whenever you're hunting for a heart event that hasn't fired yet.
+      </p>
+      <p>
+        For getting around quickly: the <strong>Witches' Circle</strong> offers a fast-travel option
+        once unlocked, and <a href="/shapeshifting">bat form</a> covers ground fast too. Two
+        collectibles are also tied to specific underground areas — Vampsters get carried to a hole in
+        the <a href="/locations/crystal-cave">catacombs</a>, and Soul Blobs are netted around town once
+        that feature unlocks.
+      </p>
 
       <h2>Still being verified</h2>
       <ul>

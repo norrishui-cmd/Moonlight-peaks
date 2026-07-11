@@ -20,7 +20,10 @@ export const locations: TopicItem[] = [
       'The town blends cozy village life with the supernatural —your neighbours are werewolves, witches, mermaids and more, and getting to know them is a big part of the game.',
     ],
     related: [{ label: 'The seven families', href: '/families' }, { label: 'Characters', href: '/characters' }, { label: 'Your farm', href: '/locations/your-farm' }],
-    faq: [{ q: 'Where is Moonlight Peaks set?', a: 'In a small magical mountain town that is home to seven supernatural families.' }],
+    faq: [
+      { q: 'Where is Moonlight Peaks set?', a: 'In a small magical mountain town that is home to seven supernatural families.' },
+      { q: 'Who are the neighbours in Moonlight Peaks?', a: 'Confirmed: werewolves, witches, mermaids, and other supernatural residents across seven families \u2014 getting to know them is a core part of the game.' },
+    ],
   },
   {
     slug: 'town-square', title: 'Town Square', tag: 'Town', status: 'expected', image: '/hero-loc-town-square.webp',
@@ -96,7 +99,10 @@ export const locations: TopicItem[] = [
       { title: 'Is there combat in the mines?', body: 'No — confirmed there is no combat anywhere in Moonlight Peaks, including the mines, so exploring underground stays peaceful.' },
     ],
     related: [{ label: 'A Bridge Too Far quest guide', href: '/quests/a-bridge-too-far' }, { label: 'Is there combat?', href: '/faq/is-there-combat-in-moonlight-peaks' }, { label: 'Tools', href: '/items/tools' }, { label: 'The town', href: '/locations/town' }, { label: 'Vampster collection guide', href: '/vampsters' }, { label: 'Crystal Cave', href: '/locations/crystal-cave' }],
-    faq: [{ q: 'Is there combat in the mines?', a: 'No — previews confirm there is no combat anywhere in Moonlight Peaks, including the mines.' }],
+    faq: [
+      { q: 'Is there combat in the mines?', a: 'No — previews confirm there is no combat anywhere in Moonlight Peaks, including the mines.' },
+      { q: 'Why can\u2019t I find Copper Ore in the mines?', a: 'Confirmed: Copper Ore is inside the Cave of Echoes, which only opens after completing the "A Bridge Too Far" quest — check your quest progress before assuming you\u2019ve missed a mining spot.' },
+    ],
   },
   {
     slug: 'graveyard', title: 'The Graveyard', tag: 'Wilds', status: 'confirmed', image: '/hero-loc-graveyard.webp',
@@ -107,6 +113,10 @@ export const locations: TopicItem[] = [
       'Pre-launch datamined game files name this location "Ambrosia Graveyard," paired with a matching "Ambrosia Mansion" — likely the vampire family\u2019s ancestral estate.',
     ],
     related: [{ label: 'Death', href: '/characters/death' }, { label: 'Fiona', href: '/characters/fiona' }, { label: 'Vampires', href: '/families/vampires' }],
+    faq: [
+      { q: 'How do you unlock the graveyard in Moonlight Peaks?', a: 'Confirmed: complete the "A Bridge Too Far" quest, which lifts a curse Fiona placed on the bridge into Misty Shores after an argument with Orlock.' },
+      { q: 'Where do you meet Death in Moonlight Peaks?', a: 'Confirmed: inside the Ambrosia Graveyard, once "A Bridge Too Far" unlocks Misty Shores. Death\u2019s confirmed home, "Death\u2019s Shack," is nearby.' },
+    ],
   },
   {
     slug: 'shops', title: 'Town Shops', tag: 'Town', status: 'confirmed', image: '/hero-loc-shops.webp',
@@ -116,6 +126,10 @@ export const locations: TopicItem[] = [
       'Pre-launch datamined game files additionally named a Midnight Market and Bloom Boutique — not yet confirmed against the live game.',
     ],
     related: [{ label: 'The town', href: '/locations/town' }, { label: 'Landmarks', href: '/locations/landmarks' }, { label: 'Characters', href: '/characters' }],
+    faq: [
+      { q: 'What shops are in Moonlight Peaks?', a: 'Confirmed: the Howling Hammer (tool upgrades, Ridge), The Broken Lamp (bar, Samael), Coffee & Coffins (caf\u00e9, Mina and Evan), Third Eye Threads (clothing, Aras), and Webb of Wonders (potions and clothing, Sabrina).' },
+      { q: 'Is there a Midnight Market or Bloom Boutique in Moonlight Peaks?', a: 'Not yet confirmed \u2014 these names appear in pre-launch datamined files but haven\u2019t been verified against the live game.' },
+    ],
   },
   {
     slug: 'landmarks', title: 'Landmarks & Notable Places', tag: 'Wilds', status: 'confirmed', image: '/hero-loc-landmarks.webp',
@@ -136,6 +150,10 @@ export const locations: TopicItem[] = [
       'The town\u2019s bulletin board — Albertus\u2019 Jobs, run by an owl named Albertus — is also based here, listing available quests.',
     ],
     related: [{ label: 'Brook', href: '/characters/brook' }, { label: 'Albertus', href: '/characters/albertus' }, { label: 'The town', href: '/locations/town' }],
+    faq: [
+      { q: 'Who runs Town Hall in Moonlight Peaks?', a: 'Confirmed: Mayor Brook, patriarch of the Logan werewolf family, who gifts you Chester (a living storage chest) when you register as a new resident.' },
+      { q: 'Where is the quest board in Moonlight Peaks?', a: 'Confirmed: Albertus\u2019 Jobs, a bulletin board run by an owl named Albertus, is based at Town Hall and lists available quests.' },
+    ],
   },
   {
     slug: 'ambrosia-mansion', title: 'Ambrosia Mansion', tag: 'Homestead', status: 'confirmed', image: '/hero-loc-landmarks.webp',
@@ -144,14 +162,25 @@ export const locations: TopicItem[] = [
       'Confirmed via the game\u2019s official wiki: Ambrosia Mansion is the vampire Ambrosia family\u2019s home, paired with the nearby Ambrosia Graveyard where Death can be found.',
     ],
     related: [{ label: 'Orlock', href: '/characters/orlock' }, { label: 'Vampires', href: '/families/vampires' }, { label: 'The graveyard', href: '/locations/graveyard' }],
+    faq: [
+      { q: 'Who lives in Ambrosia Mansion?', a: 'Confirmed via the game\u2019s official wiki: the vampire Ambrosia family, whose ancestral home this is.' },
+      { q: 'Is Ambrosia Mansion near the graveyard?', a: 'Yes, confirmed: Ambrosia Mansion is paired with the nearby Ambrosia Graveyard, where Death can be found.' },
+    ],
   },
   {
     slug: 'silverveil-museum', title: 'The Museum', tag: 'Town', status: 'confirmed', image: '/images/moonlight-peaks/official/museum-02.webp',
-    dek: 'A confirmed collection/donation building in town.',
+    dek: 'A donation-based collection building that opens partway into year one, once Persephone, Jada, and Winston move to town.',
     body: [
-      'Confirmed to exist via the game\u2019s official wiki. What you can donate and what it rewards are not yet sourced — many cozy sims use a museum for turning in fish, minerals, or artifacts.',
+      'Confirmed: the museum doesn\u2019t exist from day one \u2014 it opens once a story thread involving Persephone, Jada, and Winston moving into town (the abandoned house on the pier) plays out. Community-reported: for many players this lands around the start of Autumn in year one, though it depends on your own pace through early quests.',
+      'Confirmed: donating works differently from talking to a shopkeeper. The museum has several themed collection rooms, reached via a portal in the main room, and you donate by walking up to the relevant collection and interacting with an exclamation-point sign next to it \u2014 the same icon style used elsewhere for pending story content.',
+      'Confirmed: items you\u2019re still missing from a collection show a small museum icon in your inventory, so you don\u2019t accidentally sell or use something you still need. Quality requirements vary by collection \u2014 the farming-related collection specifically calls for higher-quality (not just any-quality) crops and growables, so it\u2019s worth holding onto your best harvests rather than selling them all.',
+      'Not yet independently confirmed here: the exact number of collection rooms, full donation lists per room, and what specific rewards each collection unlocks.',
     ],
-    related: [{ label: 'Items', href: '/items' }, { label: 'Fishing', href: '/fishing' }],
+    related: [{ label: 'Items', href: '/items' }, { label: 'Fishing', href: '/fishing' }, { label: 'Characters', href: '/characters' }],
+    faq: [
+      { q: 'When does the museum open in Moonlight Peaks?', a: 'Confirmed: not from day one \u2014 it opens once Persephone, Jada, and Winston move to town, a story thread that lands around the start of Autumn in year one for many players.' },
+      { q: 'How do you donate to the museum?', a: 'Confirmed: walk up to the relevant collection room (reached via a portal in the main room) and interact with an exclamation-point sign next to it, rather than talking to a shopkeeper.' },
+    ],
   },
   {
     slug: 'yoga-shack', title: 'Yoga Shack', tag: 'Town', status: 'confirmed', image: '/hero-loc-town.webp',
@@ -175,10 +204,14 @@ export const locations: TopicItem[] = [
     body: [
       'Confirmed: the Crystal Cave is a distinct underground area from the Cave of Echoes, located to the left of Fiona\u2019s house. A large boulder blocks the entrance until you upgrade your pickaxe to at least Copper level.',
       'Confirmed: inside, Rose Quartz nodes spawn generously, along with other gemstones. Rose Quartz is ground into a powder using the Enchanted Mortar (unlocked once you start learning magic) and is used in several crafting recipes and quests.',
-      'Confirmed via the game\u2019s official wiki: alongside the Cave of Echoes, the mines also include a further zone called the Twilight Catacombs \u2014 suggesting the underground areas are split into multiple distinct zones rather than one cave. Twilight Catacombs\u2019 own contents are not yet independently verified here.',
+      'Confirmed via the game\u2019s official wiki: alongside the Cave of Echoes, the mines also include a further zone called the Twilight Catacombs \u2014 suggesting the underground areas are split into multiple distinct zones rather than one cave. Confirmed elsewhere: this is also where Vampsters (small creatures found hiding around town and inside most houses) get carried through a hole to complete their collection questline, once early story quests unlock catacomb access.',
       'Reaching the Crystal Cave itself requires Misty Shores to already be unlocked (via the "A Bridge Too Far" quest), since that\u2019s the area the Cave of Echoes and its pickaxe upgrades are found in.',
     ],
     related: [{ label: 'The mines', href: '/locations/mines' }, { label: 'A Bridge Too Far', href: '/quests/a-bridge-too-far' }, { label: 'Tools', href: '/items/tools' }],
+    faq: [
+      { q: 'Where is the Crystal Cave in Moonlight Peaks?', a: 'Confirmed: it\u2019s a distinct underground area to the left of Fiona\u2019s house, separate from the Cave of Echoes. A boulder blocks the entrance until your pickaxe reaches Copper tier.' },
+      { q: 'What do you get from the Crystal Cave?', a: 'Confirmed: Rose Quartz nodes spawn generously alongside other gemstones. Rose Quartz is ground into powder with the Enchanted Mortar and used in several crafting recipes and quests.' },
+    ],
   },
 ];
 

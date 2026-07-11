@@ -120,6 +120,12 @@ export const faqs: Faq[] = [
     related: [{ label: 'Shapeshifting', href: '/shapeshifting' }],
   },
   {
+    slug: 'is-there-fast-travel-in-moonlight-peaks', cat: 'world',
+    q: 'Is there fast travel in Moonlight Peaks?',
+    a: 'Yes, confirmed via multiple sources: the Witches\u2019 Circle offers a fast-travel option around town, and bat form covers ground quickly once shapeshifting is unlocked. There is no minimap or quest-marker system, so the in-game map (with its exclamation-point and sparkle icons for pending cutscenes) is the main navigation aid.',
+    related: [{ label: 'Interactive map', href: '/map' }, { label: 'Shapeshifting', href: '/shapeshifting' }, { label: 'Magic & potions', href: '/magic' }],
+  },
+  {
     slug: 'how-to-find-quests-heart-events', cat: 'world',
     q: 'How do you find quests and heart events in Moonlight Peaks?',
     a: 'Confirmed at launch: check the map for markers — an exclamation point means entering that area triggers a cutscene, and a sparkling aura around a building means going inside triggers one. The bulletin board in town (run by Albertus, an owl) also lists available jobs/quests.',
@@ -428,6 +434,18 @@ export const faqs: Faq[] = [
     related: [{ label: 'Items & tools', href: '/items/tools' }, { label: 'Crafting', href: '/items/crafting' }],
   },
   {
+    slug: 'how-does-the-museum-work-in-moonlight-peaks', cat: 'world',
+    q: 'How does the museum work in Moonlight Peaks?',
+    a: 'Confirmed: the museum opens partway into year one, once a story thread involving Persephone, Jada, and Winston moving to town plays out \u2014 not from day one. You donate by walking up to a themed collection room and interacting with an exclamation-point sign, rather than talking to a curator. Items you still need for a collection are flagged with a museum icon in your inventory. Quality requirements vary by collection; the farming-related one specifically wants higher-quality crops.',
+    related: [{ label: 'The Museum', href: '/locations/silverveil-museum' }, { label: 'Achievements', href: '/achievements' }],
+  },
+  {
+    slug: 'does-moonlight-peaks-have-accessibility-options', cat: 'general',
+    q: 'Does Moonlight Peaks have accessibility options?',
+    a: 'Some, but not extensive: confirmed options include toggling vsync, controller vibration, on-screen interaction labels, and text animation, plus rebindable keys, a framerate lock, and render scale. Not confirmed: no colorblind mode or dyslexia-friendly text options have been reported so far.',
+    related: [{ label: 'System requirements', href: '/system-requirements' }, { label: 'Best settings', href: '/best-settings' }],
+  },
+  {
     slug: 'can-you-romance-death-in-moonlight-peaks', cat: 'romance',
     q: 'Can you romance Death in Moonlight Peaks?',
     a: 'Unconfirmed. Death is a real name in pre-launch datamined game files, with his own home ("Death\u2019s Shack"), and some pre-launch chatter has floated him as a possible romance option — but this is speculation, not a developer confirmation. We\u2019ll update this the moment the full game settles it.',
@@ -529,7 +547,7 @@ export const faqs: Faq[] = [
 // Do NOT publish these until the live game confirms the answer. Suggested slugs:
 //   romance:  best-romance-character, luna-gifts, saga-gifts, how-to-increase-friendship, can-you-divorce, how-to-get-married (mechanics)
 //   farming:  best-crop-for-money, do-crops-die, full-crops-list, how-to-water-crops (exact), best-season-crops
-//   world:    full-spell-list, all-potions, how-to-fast-travel (confirm Witches' Circle), festival-dates, all-fish-list
+//   world:    full-spell-list, all-potions, festival-dates, all-fish-list
 //   cheats:   does-moonlight-peaks-have-cheats, money-cheat (only if a real console exists)
 // Template:
 // { slug: 'luna-gifts', cat: 'romance', q: 'What gifts does Luna like in Moonlight Peaks?',
