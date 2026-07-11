@@ -3,6 +3,9 @@ import Base from '../layouts/Base.astro';
 import { SITE, GAME } from '../consts';
 import { itemCategories, itemLaunchNote } from '../data/items';
 
+const collectionSlugs = new Set(['fish', 'critters', 'vampster', 'soul-blobs']);
+const itemHubCategories = itemCategories.filter((cat) => !collectionSlugs.has(cat.slug));
+
 const faq = [
   { q: 'What items are in Moonlight Peaks?', a: 'Pre-launch structure lists item categories including tools, fertilizer, clothing, fish, critters, Vampster, Soul Blobs, cooking, crafting, artifacts, farm helpers, potions, mineables, and decorations. Specific names, effects, prices, and sources still need launch verification.' },
   { q: 'Are there potions in Moonlight Peaks?', a: 'Yes. Potion-making is a confirmed activity, and the Alter Ego Elixir, which changes your appearance, is a confirmed example. The full potion list will be verified after launch.' },
@@ -15,7 +18,7 @@ const jsonLd = [
     { '@type': 'ListItem', position: 1, name: 'Home', item: SITE.url },
     { '@type': 'ListItem', position: 2, name: 'Items', item: new URL('/items', SITE.url).href },
   ] },
-  { '@context': 'https://schema.org', '@type': 'ItemList', name: 'Moonlight Peaks item categories', itemListElement: itemCategories.map((item, index) => ({
+  { '@context': 'https://schema.org', '@type': 'ItemList', name: 'Moonlight Peaks item categories', itemListElement: itemHubCategories.map((item, index) => ({
     '@type': 'ListItem',
     position: index + 1,
     name: item.name,
@@ -45,9 +48,15 @@ const jsonLd = [
         without changing URLs after launch.
       </div>
 
+      <div class="item-note collection-move">
+        <strong>Collections moved:</strong> Fish, Critters, Vampsters, and Soul Blobs now live under
+        <a href="/collections">World / Collections</a>. The old item URLs remain available for compatibility,
+        but the new collection pages are the main place for sourced tables and launch tracking.
+      </div>
+
       <h2>Item categories</h2>
       <div class="itg">
-        {itemCategories.map((cat) => (
+        {itemHubCategories.map((cat) => (
           <a class="itcard" href={`/items/${cat.slug}`}>
             <span class="itgroup">{cat.group}</span>
             <h3>{cat.name}</h3>
@@ -93,6 +102,7 @@ const jsonLd = [
       font-size: 0.9rem;
       margin: 12px 0 22px;
     }
+    .collection-move a { color: var(--candle); font-weight: 700; }
     .itg { display: grid; grid-template-columns: 1fr; gap: 12px; margin: 6px 0 18px; }
     @media (min-width: 640px) { .itg { grid-template-columns: 1fr 1fr; } }
     @media (min-width: 980px) { .itg { grid-template-columns: 1fr 1fr 1fr; } }

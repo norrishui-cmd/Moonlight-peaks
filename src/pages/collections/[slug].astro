@@ -1,0 +1,206 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE } from '../../consts';
+import { collections } from '../../data/collections';
+import type { CollectionEntry } from '../../data/collections';
+
+export function getStaticPaths() {
+  return collections.map((entry, index) => ({
+    params: { slug: entry.slug },
+    props: {
+      entry,
+      prev: collections[(index - 1 + collections.length) % collections.length],
+      next: collections[(index + 1) % collections.length],
+    },
+  }));
+}
+
+const { entry, prev, next } = Astro.props as { entry: CollectionEntry; prev: CollectionEntry; next: CollectionEntry };
+const pageUrl = new URL(`/collections/${entry.slug}`, SITE.url).href;
+const faq = [
+  {
+    q: `What is the ${entry.title} collection in Moonlight Peaks?`,
+    a: entry.summary,
+  },
+  {
+    q: `Where does the ${entry.title} data come from?`,
+    a: `This page links to ${entry.officialSource.label} as the official source and rewrites the information into this site's own guide format.`,
+  },
+  {
+    q: `Why are some ${entry.title} table values still blank?`,
+    a: 'Exact names, numbers, locations, and rewards should be added only after they are verified from the official source or live-game screenshots.',
+  },
+];
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: SITE.url },
+    { '@type': 'ListItem', position: 2, name: 'Collections', item: new URL('/collections', SITE.url).href },
+    { '@type': 'ListItem', position: 3, name: entry.title, item: pageUrl },
+  ] },
+  { '@context': 'https://schema.org', '@type': 'CollectionPage', name: `Moonlight Peaks ${entry.title}`, description: entry.dek, url: pageUrl },
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+];
+---
+<Base
+  title={`Moonlight Peaks ${entry.title} - Collection Guide`}
+  description={`${entry.title} in Moonlight Peaks: ${entry.dek} Includes official source link, tracking fields, and launch-safe verification notes.`}
+  path={`/collections/${entry.slug}`}
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Collections', href: '/collections' }, { label: entry.title }]}
+  ogImage={entry.image}
+>
+  <article class="page collection-detail">
+    <div class="wrap">
+      <p class="eyebrow">World / Collection</p>
+      <img class="collection-hero" src={entry.image} alt={`${entry.title} - Moonlight Peaks`} width="1200" height="675" />
+      <h1>Moonlight Peaks <em>{entry.title}</em></h1>
+      <p class="intro">{entry.dek}</p>
+
+      <div class="source-card">
+        <span>Official source</span>
+        <a href={entry.officialSource.url} rel="nofollow noopener" target="_blank">{entry.officialSource.label}</a>
+      </div>
+
+      <h2>Overview</h2>
+      <p>{entry.summary}</p>
+
+      <h2>Quick facts</h2>
+      <div class="fact-grid">
+        {entry.quickFacts.map((fact) => (
+          <div class="fact-card">
+            <span>{fact.label}</span>
+            <strong>{fact.value}</strong>
+          </div>
+        ))}
+      </div>
+
+      <h2>{entry.title} tracking table</h2>
+      <p>
+        This table is the new format for collection pages. It is intentionally conservative: values stay marked
+        as source-fill fields until the official source or live-game screenshots confirm the exact data.
+      </p>
+      <div class="collection-table-wrap">
+        <table class="collection-table">
+          <thead>
+            <tr>
+              {entry.tableColumns.map((column) => <th>{column}</th>)}
+            </tr>
+          </thead>
+          <tbody>
+            {entry.tableRows.map((row) => (
+              <tr>
+                {row.map((cell) => <td>{cell}</td>)}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <div class="collection-grid-two">
+        <section>
+          <h2>What to verify</h2>
+          <ul>
+            {entry.verify.map((item) => <li>{item}</li>)}
+          </ul>
+        </section>
+        <section>
+          <h2>Related pages</h2>
+          <div class="link-row">
+            {entry.related.map((link) => <a href={link.href}>{link.label}</a>)}
+          </div>
+        </section>
+      </div>
+
+      <h2>FAQ</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <nav class="prevnext" aria-label="Collection navigation">
+        <a href={`/collections/${prev.slug}`}>{prev.title}</a>
+        <a href="/collections">All collections</a>
+        <a href={`/collections/${next.slug}`}>{next.title}</a>
+      </nav>
+    </div>
+  </article>
+
+  <style>
+    .collection-hero {
+      width: 100%;
+      height: auto;
+      display: block;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      margin: 6px 0 16px;
+      background: var(--surface);
+    }
+    .source-card {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: var(--surface);
+      padding: 12px 14px;
+      margin: 14px 0 24px;
+    }
+    .source-card span {
+      color: var(--candle);
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .source-card a { color: #f0e9f6; text-decoration: underline; text-underline-offset: 3px; }
+    .fact-grid { display: grid; grid-template-columns: 1fr; gap: 10px; margin: 12px 0 22px; }
+    @media (min-width: 760px) { .fact-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+    .fact-card {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: var(--surface);
+      padding: 12px;
+    }
+    .fact-card span {
+      display: block;
+      color: var(--faint);
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    .fact-card strong { color: #f0e9f6; font-size: 0.9rem; line-height: 1.45; }
+    .collection-table-wrap {
+      overflow-x: auto;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: var(--surface);
+      margin: 12px 0 20px;
+    }
+    .collection-table { width: 100%; min-width: 760px; border-collapse: collapse; font-size: 0.84rem; }
+    .collection-table th,
+    .collection-table td {
+      border-bottom: 1px solid var(--line);
+      padding: 10px 12px;
+      text-align: left;
+      vertical-align: top;
+    }
+    .collection-table th { color: var(--candle); font-family: var(--mono); font-size: 0.68rem; text-transform: uppercase; }
+    .collection-grid-two { display: grid; grid-template-columns: 1fr; gap: 12px; margin: 18px 0; }
+    @media (min-width: 780px) { .collection-grid-two { grid-template-columns: 1fr 1fr; } }
+    .collection-grid-two section {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: var(--surface);
+      padding: 14px;
+    }
+    .collection-grid-two h2 { margin-top: 0; font-size: 1.08rem; }
+  </style>
+</Base>

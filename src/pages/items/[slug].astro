@@ -18,6 +18,13 @@ export function getStaticPaths() {
 const { item, prev, next } = Astro.props as { item: ItemCategory; prev: ItemCategory; next: ItemCategory };
 const url = new URL(`/items/${item.slug}`, SITE.url).href;
 const framework = getItemFramework(item.slug);
+const collectionRedirects: Record<string, string> = {
+  fish: '/collections/fish',
+  critters: '/collections/critters',
+  vampster: '/collections/vampsters',
+  'soul-blobs': '/collections/soul-blobs',
+};
+const collectionHref = collectionRedirects[item.slug];
 const relatedCategories = itemCategories
   .filter((entry) => entry.slug !== item.slug && (entry.group === item.group || item.related.some((link) => link.href === `/items/${entry.slug}`)))
   .slice(0, 3);
@@ -66,6 +73,14 @@ const jsonLd = [
         <span class={`itbadge is-${item.status}`}>{item.status}</span>
         <span>{itemLaunchNote}</span>
       </div>
+
+      {collectionHref && (
+        <div class="item-status collection-move">
+          <strong>Moved to World / Collections:</strong>
+          <a href={collectionHref}>Open the new {item.name} collection page</a>.
+          This old item URL remains available for compatibility.
+        </div>
+      )}
 
       <h2>Overview</h2>
       <p>{item.summary}</p>
@@ -165,6 +180,7 @@ const jsonLd = [
       margin: 12px 0 22px;
       font-size: 0.88rem;
     }
+    .collection-move a { color: var(--candle); font-weight: 700; }
     .itbadge { font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.04em; text-transform: uppercase; border-radius: 5px; padding: 2px 6px; }
     .itbadge.is-confirmed { color: #9be6b4; border: 1px solid #2f6a45; }
     .itbadge.is-expected { color: var(--candle); border: 1px solid var(--candle-dim); }
