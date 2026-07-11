@@ -27,6 +27,97 @@ export const charTranslations: Record<'es' | 'ja' | 'zh' | 'zh-hant' | 'de', Rec
       romanceYes: 'Saga ist eine bestätigte Romanze-Option. Dates werden ab Herzstufe 4 freigeschaltet, ein Heiratsantrag ab Herzstufe 8.',
       romanceNo: '', romanceTbc: '',
     },
+    luna: {
+      name: 'Luna', familyLabel: 'Hexe', typeLabel: 'Hexe',
+      desc: 'Als landwirtschaftlich orientierte Hexe berichtet — eine mögliche Quelle für frühe Zaubersprüche und Gartenwissen.',
+      knownInfo: [
+        'In Hands-on-Berichten als landwirtschaftlich orientierte Hexe vorgestellt.',
+        'Wahrscheinlich eine Quelle für frühe Zaubersprüche und Gartenwissen.',
+        'Details werden zum Release in der Live-Version bestätigt.',
+      ],
+      romanceYes: 'Luna wird als Romanze-Option gemeldet. Bevorzugte Geschenke und Herz-Events werden nach Bestätigung in der Live-Version ergänzt.',
+      romanceNo: '', romanceTbc: '',
+    },
+    orlock: {
+      name: 'Orlock', familyLabel: 'Vampir', typeLabel: 'Vampir',
+      desc: 'Als Oberhaupt einer Vampirfamilie gemeldet — eine altweltliche Präsenz in der Stadt.',
+      knownInfo: [
+        'Als Oberhaupt einer Vampirfamilie gemeldet.',
+        'In Hands-on-Berichten als komische Figur dargestellt.',
+        'Eine altweltliche Präsenz unter den Vampiren der Stadt.',
+      ],
+      romanceYes: 'Orlock wird als Romanze-Option gemeldet. Bevorzugte Geschenke und Herz-Events werden nach Bestätigung in der Live-Version ergänzt.',
+      romanceNo: '', romanceTbc: '',
+    },
+    brook: {
+      name: 'Brook', familyLabel: 'Werwolf', typeLabel: 'Werwolf',
+      desc: 'Bürgermeister von Moonlight Peaks und Oberhaupt der Werwolf-Familie Logan. Keine Romanze-Option.',
+      knownInfo: [
+        'Bestätigt als Bürgermeister — zuständig für die Anmeldung im Rathaus und die Übergabe von Chester.',
+        'Oberhaupt der Familie Logan. Vater von Saga und Ludo, Bruder von Ridge.',
+        'Betreibt den Howling Hammer (Werkzeug-Upgrade-Laden), geöffnet Montag bis Freitag von 18 Uhr bis Mitternacht.',
+      ],
+      romanceYes: '', romanceNo: 'Brook ist keine bestätigte Romanze-Option.', romanceTbc: '',
+    },
+    'the-warlock': {
+      name: 'Der Hexenmeister', familyLabel: 'Hexe', typeLabel: 'Hexe',
+      desc: 'Ein selbstverliebter Hexenmeister aus dem Hands-on-Vorschau-Material, der durch die Stadt streift. Der richtige Name ist noch nicht bestätigt.',
+      knownInfo: [
+        'Ein selbstverliebter Hexenmeister aus dem Hands-on-Vorschau-Material.',
+        'In dieser Vorschau unterbricht er ständig und macht der Spielfigur Komplimente.',
+        'Der richtige Name im Spiel ist noch nicht bestätigt.',
+      ],
+      romanceYes: '', romanceNo: '', romanceTbc: 'Ob dieser Hexenmeister eine Romanze-Option ist, ist noch nicht bestätigt — wird zum Release aktualisiert.',
+    },
+    mina: {
+      name: 'Mina', familyLabel: 'Vampirfamilie (Ambrosia)', typeLabel: 'Vampir',
+      desc: 'Eine fröhliche Vampirin, Tochter von Orlock. Betreibt zusammen mit ihrem Bruder Evan das Café "Coffee & Coffins" in der Stadt.',
+      knownInfo: [
+        'Bestätigt: Tochter von Orlock und Schwester von Evan. Gemeinsam betreiben sie "Coffee & Coffins".',
+        'Berichten zufolge wollte Orlock das Café nach dem Weggang der Mutter schließen, doch Mina überzeugte ihn weiterzumachen.',
+        'Backt gerne und tritt stets fröhlich auf.',
+      ],
+      romanceYes: 'Mina ist eine bestätigte Romanze-Option.', romanceNo: '', romanceTbc: '',
+    },
+    sabrina: {
+      name: 'Sabrina', familyLabel: 'Hexenfamilie (Webb)', typeLabel: 'Hexe',
+      desc: 'Eine gotisch angehauchte Hexe der Familie Webb. Betreibt "Webb of Wonders" und verkauft den Alter-Ego-Elixier. Freigeistig und ärgert gerne ihre Cousine Fiona.',
+      knownInfo: [
+        'Bestätigt: betreibt "Webb of Wonders". Mitglied der Familie Webb, berichtet als Fionas Cousine.',
+        'Verkauft den Alter-Ego-Elixier, mit dem sich das Aussehen der Spielfigur verändern lässt.',
+      ],
+      romanceYes: 'Sabrina ist eine bestätigte Romanze-Option.', romanceNo: '', romanceTbc: '',
+    },
+    noel: {
+      name: 'Noel', familyLabel: 'Hexenfamilie (Webb)', typeLabel: 'Sonstiges',
+      desc: 'Der Schmied der Stadt und der Dandy der Familie Webb. Bruder von Fiona, nennt sich selbst "das Gesicht von Moonlight Peaks". Wirkt selbstbewusst, kämpft aber innerlich mit seinem Selbstbild.',
+      knownInfo: [
+        'Bestätigt: schenkt der Spielfigur nach einem Angel-Wettkampf um 250 Gold die erste Angelrute.',
+        'Bestätigt: Bruder von Fiona aus der Familie Webb. Der Schmied der Stadt.',
+        'Bestätigte Tiefe: hinter der selbstbewussten Fassade kämpft er mit echten Selbstbild-Problemen.',
+      ],
+      romanceYes: 'Noel ist eine bestätigte Romanze-Option.', romanceNo: '', romanceTbc: '',
+    },
+    fiona: {
+      name: 'Fiona', familyLabel: 'Hexenfamilie (Webb)', typeLabel: 'Hexe',
+      desc: 'Oberhaupt der Familie Webb und Anführerin des örtlichen Hexenzirkels (Nachfolgerin ihrer Mutter Laveau, die auszog, um Vlad Dracula zu heiraten). Auch die Blumenhändlerin der Stadt. Kühl, streng und mit hohen Erwartungen an ihren Bruder Noel und ihre Cousinen.',
+      knownInfo: [
+        'Bestätigt: Oberhaupt der Familie Webb und des Hexenzirkels, Nachfolgerin von Laveau (der Mutter der Spielfigur).',
+        'Gibt der Spielfigur früh im Farmleben eine Postboten-Quest.',
+        'Bestätigte Quest-Details: Nach einem betrunkenen Streit soll sie die Brücke zu Orlocks Haus verflucht haben, die erst mit der Quest "A Bridge Too Far" wieder freigegeben wird und bis dahin die Region Misty Shores absperrt.',
+      ],
+      romanceYes: 'Fiona ist eine bestätigte Romanze-Option.', romanceNo: '', romanceTbc: '',
+    },
+    'count-dracula': {
+      name: 'Graf Dracula', familyLabel: 'Vampir', typeLabel: 'Vampir',
+      desc: 'Dein Vater und die Legende der Stadt. Aus seinem Schatten herauszutreten ist der Ausgangspunkt der Geschichte — keine Romanze-Option, sondern eine zentrale Erzählfigur.',
+      knownInfo: [
+        'Dein Vater — der Umzug nach Moonlight Peaks wird als Schritt aus seinem langen Schatten dargestellt.',
+        'Keine Romanze-Option, sondern eine zentrale Erzählfigur.',
+        'Die Spielfigur beweist im Laufe der Geschichte, dass ein sanfteres, ruhigeres unsterbliches Leben möglich ist — etwas, das er bezweifelt.',
+      ],
+      romanceYes: '', romanceNo: 'Graf Dracula ist keine Romanze-Option.', romanceTbc: '',
+    },
   },
   es: {
     'count-dracula': {

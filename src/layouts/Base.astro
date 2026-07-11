@@ -108,7 +108,11 @@ const translatedPaths = new Set<string>([
   '/locations',
   '/activities',
 ]);
-const translatedCharSlugs = new Set<string>(Object.keys(charTranslations.es)); // same slugs across es/ja/zh
+// Each locale can have a different set of translated character profiles — check the current
+// locale's own set rather than assuming they all match (they don't: de/ja have more than es/zh).
+const translatedCharSlugs = new Set<string>(
+  lang in charTranslations ? Object.keys(charTranslations[lang as keyof typeof charTranslations]) : []
+);
 const localizedHref = (href: string): string => {
   if (lang === 'en') return href;
   const charMatch = href.match(/^\/characters\/([a-z0-9-]+)$/);

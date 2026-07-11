@@ -1,0 +1,113 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { SITE, GAME } from '../../../consts';
+import { characters, type CharType } from '../../../data/characters';
+import { charTranslations } from '../../../i18n/characters-data';
+
+const translatedSlugs = new Set(['count-dracula', 'saga', 'luna', 'orlock', 'brook', 'the-warlock', 'mina', 'sabrina', 'noel', 'fiona']);
+const deTranslations = charTranslations.de;
+
+// German labels for character type/family — not claimed as official localization, just natural
+// German for this guide.
+const typeLabelsDe: Record<CharType, string> = {
+  vampire: 'Vampir', werewolf: 'Werwolf', witch: 'Hexe', mermaid: 'Meerjungfrau',
+  seer: 'Seherin', ghost: 'Geist', human: 'Mensch', other: 'Sonstiges',
+};
+const familyLabelDe = (family: string): string => {
+  if (family.includes('Vampire')) return 'Vampirfamilie (Ambrosia)';
+  if (family.includes('Werewolf')) return 'Werwolffamilie (Logan)';
+  if (family.includes('Witch')) return 'Hexenfamilie (Webb)';
+  if (family.includes('Mermaid')) return 'Meerjungfrauenfamilie (Hosu)';
+  if (family.includes('Seer')) return 'Seherfamilie (Khazan)';
+  if (family.includes('Human')) return 'Menschenfamilie (Henderson)';
+  return 'Keiner Familie zugehörig';
+};
+
+const isMainCast = (c: (typeof characters)[number]) => c.romanceable === true || c.id === 'count-dracula';
+const mainCast = characters.filter(isMainCast);
+const npcs = characters.filter((c) => !isMainCast(c));
+
+function cardHref(id: string): string {
+  return translatedSlugs.has(id) ? `/de/characters/${id}` : `/characters/${id}`;
+}
+function displayName(c: (typeof characters)[number]): string {
+  return translatedSlugs.has(c.id) ? deTranslations[c.id].name : c.name;
+}
+
+const jsonLd = {
+  '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Startseite', item: `${SITE.url}/de` },
+    { '@type': 'ListItem', position: 2, name: 'Charaktere', item: `${SITE.url}/de/characters` },
+  ],
+};
+---
+<Base
+  title="Moonlight Peaks Charaktere (Alle Bewohner) - Gothic-Leben als Vampir"
+  description="Alle bestätigten Bewohner von Moonlight Peaks auf Deutsch: 23 Romanze-Optionen und weitere NPCs. Übersetzte Profile verlinken auf Deutsch, der Rest auf die ausführliche englische Version."
+  path="/de/characters"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Charaktere' }]}
+  lang="de"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Einstieg / Charaktere</p>
+      <h1>{GAME.title} <em>Charaktere</em> (alle Bewohner)</h1>
+      <p class="intro">
+        Alle bestätigten Bewohner, aufgeteilt in Romanze-Optionen und weitere NPCs. Zehn Charaktere
+        haben ein vollständig übersetztes deutsches Profil; der Rest verlinkt auf die ausführlichste
+        verfügbare Version — die englische Profilseite.
+      </p>
+
+      <h2>Romanze-Optionen & Hauptbesetzung ({mainCast.length})</h2>
+      <div class="cx-grid">
+        {mainCast.map((c) => (
+          <a class="cx-card" href={cardHref(c.id)}>
+            <span class="cx-thumb">
+              {c.img ? <img src={c.img} alt="" loading="lazy" width="72" height="72" /> : <span class="cx-letter" style={`background: linear-gradient(135deg, ${c.c1}, ${c.c2})`}>{displayName(c).charAt(0)}</span>}
+            </span>
+            <span>
+              <strong>{displayName(c)}</strong>
+              <em>{familyLabelDe(c.family)} · {typeLabelsDe[c.type]}</em>
+            </span>
+          </a>
+        ))}
+      </div>
+
+      <h2>Weitere NPCs ({npcs.length})</h2>
+      <div class="cx-grid">
+        {npcs.map((c) => (
+          <a class="cx-card" href={cardHref(c.id)}>
+            <span class="cx-thumb">
+              {c.img ? <img src={c.img} alt="" loading="lazy" width="72" height="72" /> : <span class="cx-letter" style={`background: linear-gradient(135deg, ${c.c1}, ${c.c2})`}>{displayName(c).charAt(0)}</span>}
+            </span>
+            <span>
+              <strong>{displayName(c)}</strong>
+              <em>{familyLabelDe(c.family)} · {typeLabelsDe[c.type]}</em>
+            </span>
+          </a>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        Aktuell sind 10 Profile ins Deutsche übersetzt (Graf Dracula, Saga, Luna, Orlock, Brook,
+        der Hexenmeister, Mina, Sabrina, Noel, Fiona). Alle anderen Charaktere führen zur
+        <a href="/characters">englischen Charakterseite</a>, wo die bestätigten Informationen am
+        ausführlichsten sind.
+      </div>
+    </div>
+  </article>
+
+  <style>
+    .cx-grid { display: grid; grid-template-columns: 1fr; gap: 10px; margin: 8px 0 24px; }
+    @media (min-width: 640px) { .cx-grid { grid-template-columns: 1fr 1fr; } }
+    .cx-card { display: flex; align-items: center; gap: 12px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); padding: 12px; transition: border-color .15s ease; }
+    .cx-card:hover { border-color: color-mix(in srgb, var(--candle) 50%, var(--line)); }
+    .cx-thumb { flex: 0 0 auto; width: 72px; height: 72px; border-radius: 10px; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+    .cx-thumb img { width: 100%; height: 100%; object-fit: cover; }
+    .cx-letter { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-family: var(--display); font-weight: 700; font-size: 1.6rem; color: rgba(255,255,255,0.9); }
+    .cx-card span:not(.cx-thumb) { display: flex; flex-direction: column; }
+    .cx-card strong { font-family: var(--display); font-weight: 600; font-size: 0.96rem; color: var(--mist); }
+    .cx-card em { font-style: normal; font-size: 0.78rem; color: var(--faint); margin-top: 2px; }
+  </style>
+</Base>

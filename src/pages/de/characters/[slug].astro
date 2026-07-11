@@ -1,0 +1,97 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { SITE } from '../../../consts';
+import { characters } from '../../../data/characters';
+import { charTranslations } from '../../../i18n/characters-data';
+
+export function getStaticPaths() {
+  return Object.keys(charTranslations.de).map((slug) => ({ params: { slug } }));
+}
+
+const { slug } = Astro.params;
+const base = characters.find((c) => c.id === slug)!;
+const tr = charTranslations.de[slug as keyof typeof charTranslations.de];
+
+const url = new URL(`/de/characters/${slug}`, SITE.url).href;
+const imgAbs = base.img ? new URL(base.img, SITE.url).href : undefined;
+const statusLabel =
+  base.status === 'confirmed' ? 'Bestätigt'
+  : base.status === 'reported' ? 'Gemeldet'
+  : base.status === 'datamined' ? 'Datamining'
+  : 'Unbestätigt';
+const romanceText = base.romanceable === true ? tr.romanceYes : base.romanceable === false ? tr.romanceNo : tr.romanceTbc;
+const hasGiftPage = ['saga'].includes(slug as string);
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Startseite', item: `${SITE.url}/de` },
+    { '@type': 'ListItem', position: 2, name: 'Charaktere', item: `${SITE.url}/de/characters` },
+    { '@type': 'ListItem', position: 3, name: tr.name, item: url },
+  ] },
+  { '@context': 'https://schema.org', '@type': 'Person', name: tr.name, description: tr.desc, ...(imgAbs ? { image: imgAbs } : {}) },
+];
+---
+<Base
+  title={`${tr.name} - Moonlight Peaks Charakterguide`}
+  description={`Moonlight Peaks ${tr.name}: ${tr.desc} Familie, Romanze-Status und der aktuelle Kenntnisstand.`}
+  path={`/de/characters/${slug}`}
+  jsonLd={jsonLd}
+  ogImage={base.img}
+  crumbs={[{ label: 'Charaktere', href: '/de/characters' }, { label: tr.name }]}
+  lang="de"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Charaktere · {tr.typeLabel}</p>
+
+      <div class="chead">
+        <div class="cavatar">
+          {base.img ? (
+            <img src={base.img} alt={`${tr.name} Porträt`} width="160" height="160" />
+          ) : (
+            <span class="fallback-avatar" style={`background: linear-gradient(135deg, ${base.c1}, ${base.c2})`}>{tr.name.charAt(0)}</span>
+          )}
+        </div>
+        <div class="cmeta">
+          <h1>{tr.name}</h1>
+          <div class="ctags">
+            <span class={`cbadge ${base.status === 'confirmed' ? 'is-conf' : base.status === 'reported' ? 'is-rep' : base.status === 'datamined' ? 'is-dm' : 'is-unc'}`}>{statusLabel}</span>
+            <span class="ctag fam">{tr.familyLabel}</span>
+            {base.romanceable === true && <span class="ctag heart">Romanze-Option</span>}
+            {base.romanceable === false && <span class="ctag">Keine Romanze</span>}
+            {base.romanceable === null && <span class="ctag">Romanze: unbestätigt</span>}
+          </div>
+          <p class="cdesc">{tr.desc}</p>
+        </div>
+      </div>
+
+      <h2>Was bekannt ist</h2>
+      <ul>{tr.knownInfo.map((k) => (<li>{k}</li>))}</ul>
+
+      <h2>Zur Romanze</h2>
+      <p>{romanceText}</p>
+
+      {(base.lovedGifts?.length || base.likedGifts?.length || base.dislikedGifts?.length) && (
+        <>
+          <h2>Geschenkvorlieben</h2>
+          {base.lovedGifts && base.lovedGifts.length > 0 && (
+            <p><strong>Liebt:</strong> {base.lovedGifts.join(', ')}</p>
+          )}
+          {base.likedGifts && base.likedGifts.length > 0 && (
+            <p><strong>Mag:</strong> {base.likedGifts.join(', ')}</p>
+          )}
+          {base.dislikedGifts && base.dislikedGifts.length > 0 && (
+            <p><strong>Mag nicht:</strong> {base.dislikedGifts.join(', ')}</p>
+          )}
+          <p class="cnote">Bestätigte Daten basierend auf Launch-Week-Tests internationaler Medien (TheGamer, veröffentlicht am 7. Juli 2026).</p>
+          {hasGiftPage && <p><a href={`/de/characters/${slug}/gifts`}>Vollständigen Geschenkguide für {tr.name} ansehen →</a></p>}
+        </>
+      )}
+
+      <div class="callout">
+        Verwandte Seiten: <a href="/de/characters">Charakterübersicht</a>, <a href="/romance">Romanze-Guide</a>,
+        <a href="/families">Familien</a>, <a href="/characters">ausführliche Version auf Englisch</a>.
+      </div>
+    </div>
+  </article>
+</Base>
