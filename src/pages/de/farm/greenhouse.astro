@@ -1,0 +1,61 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { SITE } from '../../../consts';
+
+const faq = [
+  { q: 'Was macht das Gewächshaus in Moonlight Peaks?', a: 'Community-berichtet: Es bietet zusätzlichen geschützten Anbauplatz, nützlich sobald deine Außenflächen voll sind oder du mehr Platz für magische Feldfrüchte brauchst. Genaue Baukosten, Freischalt-Bedingungen und ob es Wachstumsregeln ändert, sind hier noch nicht unabhängig bestätigt.' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Startseite', item: `${SITE.url}/de` },
+    { '@type': 'ListItem', position: 2, name: 'Hof', item: `${SITE.url}/de/farm` },
+    { '@type': 'ListItem', position: 3, name: 'Gewächshaus', item: `${SITE.url}/de/farm/greenhouse` },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks Gewächshaus — Was bislang bestätigt ist"
+  description="Was über das Moonlight Peaks Gewächshaus bestätigt ist: zusätzlicher geschützter Anbauplatz, ehrlich dargestellt statt geraten."
+  path="/de/farm/greenhouse"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Hof', href: '/de/farm' }, { label: 'Gewächshaus' }]}
+  lang="de"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Hof · Gewächshaus</p>
+      <h1>Das <em>Gewächshaus</em></h1>
+      <p class="intro">
+        Community-berichtet: Das Gewächshaus ist eine Hoferweiterung, die zusätzlichen geschützten
+        Anbauplatz bietet, nützlich sobald deine bestehenden Flächen voll sind. Darüber hinaus haben
+        wir noch keine unabhängig bestätigten Details zu Baukosten, Freischalt-Bedingungen oder wie
+        genau es die Landwirtschaft verändert — deshalb bleibt diese Seite kurz statt zu raten.
+      </p>
+
+      <h2>Noch in Prüfung</h2>
+      <ul>
+        <li>Baukosten und benötigte Materialien.</li>
+        <li>Welche Quest oder Story-Etappe (falls überhaupt) es freischaltet.</li>
+        <li>Ob es Jahreszeiten ändert oder vor Wetter schützt.</li>
+        <li>Wie viel zusätzliche Anbaufläche es tatsächlich bringt.</li>
+      </ul>
+
+      <h2>Häufige Fragen</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        Diese Seite wird erweitert, sobald echte Gewächshaus-Daten bestätigt sind. Verwandte Seiten:
+        <a href="/de/farm">Hof-Hub</a>, <a href="/de/farm/crops">Feldfrüchte</a>, <a href="/de/farm/house">Haus</a>.
+      </div>
+    </div>
+  </article>
+</Base>

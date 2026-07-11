@@ -1,0 +1,219 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+import { markers, categories, markersConfirmed } from '../../data/map-locations';
+import GuideImage from '../../components/GuideImage.astro';
+
+const colorOf = Object.fromEntries(categories.map((c) => [c.id, c.color]));
+const labelOf = Object.fromEntries(categories.map((c) => [c.id, c.label]));
+
+const faq = [
+  { q: 'Moonlight Peaksにはインタラクティブマップがありますか?', a: 'はい——このファン制作のマップには、実在する確認済みの地名・店名(Silverveil Lake、Cave of Echoes、タウンホール、Webb of Wonders、Howling Hammer)を掲載しています。位置はガイドの説明的な手がかりに基づく模式的な近似であり、公式マップ画像から測定したものではないため、正確な位置ではなく方向性の目安として扱ってください。' },
+  { q: 'Moonlight Peaksにミニマップはありますか?', a: 'いいえ、確認済み:ミニマップやクエストマーカーシステムはなく、カメラは自由追従ではなく固定です。ゲーム内マップ(ポーズメニューから開く)が主な移動手段で、入るとカットシーンが発生する建物には感嘆符または輝くオーラが表示されます。' },
+  { q: 'Moonlight Peaksではどこで釣りができますか?', a: '確認済み:Silverveil Lakeで釣りができ、人魚一族Hosuの故郷でもあります。正確な魚種や湖内の具体的な釣りスポットはまだ情報源が確認できていません——現時点で確認されている内容は釣りガイドをご覧ください。' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'ホーム', item: `${SITE.url}/ja` },
+    { '@type': 'ListItem', position: 2, name: 'マップ', item: new URL('/ja/map', SITE.url).href },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks マップ — 釣り・採集・お店"
+  description="Moonlight Peaksの町のインタラクティブマップを日本語で:釣りスポット、採集エリア、お店、住民の家をフィルターできます。確認済みの場所を掲載しています。"
+  path="/ja/map"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'マップ' }]}
+  lang="ja"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">エントリー・マップ</p>
+      <h1>Moonlight Peaksの<em>インタラクティブマップ</em></h1>
+      <p class="intro">
+        探しているもので町をフィルターし、マーカーをタップして詳細を確認できます。更新日:{SITE.updated}。
+      </p>
+
+      {!markersConfirmed && (
+        <div class="callout wip">
+          <strong>模式的な位置。</strong> 以下のマーカー名(Silverveil Lake、Cave of Echoes、
+          タウンホールなど)は実在し確認済みですが、このマップ上の配置はガイドの説明的な手がかりに
+          基づく近似であり、公式マップ画像から測定したものではありません。ライブ版のゲームから
+          情報が得られ次第、ピクセル単位で正確な座標に切り替えます。
+        </div>
+      )}
+
+      <GuideImage
+        imageId="world-map-screenshot"
+        contextAlt="Moonlit Pines、Moonlight Peaksの町、Misty Shores、Silverveil Lakeを示すゲーム内オーバーワールドマップのスクリーンショット"
+        caption="実際のゲーム内マップのスクリーンショットで、以下の模式版と合わせて参考にしてください。表示されている地名は確認済みの情報と一致しています:Moonlit Pines、Moonlight Peaks(町)、Misty Shores、Silverveil Lake。"
+      />
+
+      <h2>確認済みの地名エリア</h2>
+      <p>
+        以下のマーカー位置はまだ仮のものですが、これらの地区名は発売週の報道から確認済みです:
+        <strong>Misty Shores</strong>(Ambrosia一族の縄張りで、「A Bridge Too Far」クエストで
+        到達可能、Deathに出会える墓地がある)、<strong>Moonlit Pines</strong>(魔女団の拠点)、
+        <strong>Pink Grove</strong>(愛の悪魔Llemiの住処で、主に祭りの時期に訪れる)、そして
+        <strong>タウンホール</strong>(町長に登録する場所)。正確な座標が検証され次第、正確に配置します。
+      </p>
+
+      <div class="maplegend" id="maplegend">
+        {categories.map((c) => (
+          <button class="lg" data-cat={c.id} style={`--mk:${c.color}`} type="button" aria-pressed="true">
+            <span class="lg-dot"></span>{c.label}
+          </button>
+        ))}
+      </div>
+
+      <div class="mapwrap">
+        <svg viewBox="0 0 800 500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="様式化された町のマップ">
+          <rect width="800" height="500" rx="16" fill="#1b1526"/>
+          <path d="M0 170 Q220 120 380 210 T800 240 L800 130 Q500 70 250 110 T0 90 Z" fill="#20283f" opacity="0.5"/>
+          <path d="M120 470 Q260 360 480 380 T760 300" stroke="#3a567a" stroke-width="20" fill="none" opacity="0.7" stroke-linecap="round"/>
+          <ellipse cx="190" cy="330" rx="70" ry="42" fill="#2c4666" opacity="0.85"/>
+          <g fill="#33503e" opacity="0.9">
+            <polygon points="600,360 628,310 656,360"/><polygon points="636,372 664,322 692,372"/>
+            <polygon points="672,360 700,310 728,360"/><polygon points="300,410 324,368 348,410"/>
+            <polygon points="336,420 360,378 384,420"/>
+          </g>
+          <g fill="#3a2f50" opacity="0.9">
+            <rect x="150" y="120" width="60" height="44" rx="3"/><rect x="220" y="130" width="44" height="34" rx="3"/>
+          </g>
+          <g fill="#2f2440" stroke="#4a3a63" stroke-width="2">
+            <rect x="372" y="232" width="40" height="34" rx="3"/><rect x="420" y="240" width="34" height="30" rx="3"/>
+            <rect x="492" y="248" width="40" height="30" rx="3"/>
+          </g>
+          <text x="150" y="108" fill="#7c6e90" font-family="monospace" font-size="15">あなたの農場</text>
+          <text x="150" y="392" fill="#7c6e90" font-family="monospace" font-size="15">池</text>
+          <text x="600" y="300" fill="#7c6e90" font-family="monospace" font-size="15">森</text>
+          <text x="430" y="226" fill="#7c6e90" font-family="monospace" font-size="15">町の広場</text>
+        </svg>
+        {markers.map((m) => (
+          <button
+            class={`mk mk-${m.category}`}
+            data-cat={m.category}
+            data-name={m.name}
+            data-note={m.note || ''}
+            data-label={labelOf[m.category]}
+            style={`left:${m.x}%;top:${m.y}%;--mk:${colorOf[m.category]}`}
+            aria-label={m.name}
+            type="button"
+          ></button>
+        ))}
+      </div>
+
+      <div class="mapinfo" id="mapinfo">
+        <p class="mapinfo-empty">マーカーをタップすると詳細が表示されます。</p>
+      </div>
+
+      <h2>ミニマップなしでの移動</h2>
+      <p>
+        複数の情報源で確認済み:Moonlight Peaksには<strong>ミニマップもクエストマーカーもなく</strong>、
+        自由追従ではなく固定カメラを使用しています——ゲーム内マップ(ポーズメニューから開く)が
+        主な移動手段です。このマップでは<strong>感嘆符アイコン</strong>が入るとカットシーンが
+        発生する建物を示し、建物周りの<strong>輝くオーラ</strong>は中に入るとカットシーンが
+        発生することを意味します——まだ発生していないハートイベントを探している時は、どちらも
+        確認する価値があります。
+      </p>
+      <p>
+        素早く移動するには:解放後は<strong>魔女の輪</strong>で早く移動でき、
+        <a href="/shapeshifting">コウモリの姿</a>も速く移動できます。2つの収集要素も特定の地下
+        エリアに紐づいています——Vampsterは<a href="/locations/crystal-cave">カタコンベ</a>の穴に
+        運ばれ、Soul Blobsはその機能が解放されると町中で捕獲できます。
+      </p>
+
+      <GuideImage
+        imageId="moonlit-pines-vampster-map"
+        contextAlt="Moonlit Pines内の14ヶ所の番号付きVampster出現場所を示すコミュニティ制作マップ"
+        caption="Moonlit Pinesエリア向けのコミュニティ制作Vampster出現場所マップで、14ヶ所が記録されています。正確な番号付けは開発元確認済みではなくコミュニティ報告として扱ってください。ただし、このエリアで特にVampsterを探す際の出発点として役立ちます。"
+      />
+
+      <h2>現在確認中の情報</h2>
+      <ul>
+        <li>各<strong>釣りスポット</strong>の魚種、季節、時間帯。</li>
+        <li><strong>採集</strong>エリアと出現するもの。</li>
+        <li><strong>お店</strong>とそれぞれの販売品。</li>
+        <li>恋愛・贈り物ページと紐づいた<strong>住民の家</strong>。</li>
+      </ul>
+
+      <h2>よくある質問</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout">
+        関連ページ: <a href="/nokturna">Nokturnaカードゲーム</a>、<a href="/ja/romance">恋愛＆家族</a>、
+        <a href="/ja/beginner-guide">初心者ガイド</a>。
+      </div>
+    </div>
+  </article>
+
+  <style>
+    .maplegend { display: flex; gap: 8px; flex-wrap: wrap; margin: 6px 0 14px; }
+    .lg { display: inline-flex; align-items: center; gap: 7px; font-size: 0.84rem; color: var(--mist); background: var(--surface); border: 1px solid var(--line); border-radius: 999px; padding: 6px 13px; cursor: pointer; }
+    .lg-dot { width: 11px; height: 11px; border-radius: 50%; background: var(--mk); }
+    .lg[aria-pressed="false"] { opacity: 0.4; text-decoration: line-through; }
+    .mapwrap { position: relative; width: 100%; border: 1px solid var(--line); border-radius: 14px; overflow: hidden; background: #15101d; }
+    .mapwrap svg { display: block; width: 100%; height: auto; }
+    .mk { position: absolute; transform: translate(-50%, -50%); width: 22px; height: 22px; border-radius: 50%; background: var(--mk); border: 2px solid #15101d; box-shadow: 0 0 0 2px var(--mk), 0 2px 6px rgba(0,0,0,0.4); cursor: pointer; padding: 0; transition: transform .12s ease; }
+    .mk:hover, .mk.is-sel { transform: translate(-50%, -50%) scale(1.35); z-index: 3; }
+    .mk.is-sel { box-shadow: 0 0 0 3px #fff, 0 2px 8px rgba(0,0,0,0.5); }
+    .mk.hide { display: none; }
+    @media (max-width: 520px) { .mk { width: 26px; height: 26px; } }
+    .mapinfo { margin-top: 14px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); padding: 14px 16px; min-height: 64px; }
+    .mapinfo-empty { color: var(--faint); margin: 0; }
+    .mapinfo h3 { font-family: var(--display); font-weight: 600; font-size: 1.1rem; margin: 0 0 4px; }
+    .mapinfo .cat { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--candle); }
+    .mapinfo p.note { color: #ded3e6; margin: 6px 0 0; font-size: 0.92rem; }
+  </style>
+
+  <script>
+    const legend = document.getElementById('maplegend');
+    const info = document.getElementById('mapinfo');
+    const off = new Set();
+    const markerEls = Array.from(document.querySelectorAll('.mk'));
+
+    const refresh = () => {
+      markerEls.forEach((m) => {
+        const cat = m.getAttribute('data-cat') || '';
+        m.classList.toggle('hide', off.has(cat));
+      });
+    };
+
+    if (legend) {
+      legend.addEventListener('click', (e) => {
+        const btn = e.target.closest('.lg');
+        if (!btn) return;
+        const cat = btn.getAttribute('data-cat') || '';
+        if (off.has(cat)) { off.delete(cat); btn.setAttribute('aria-pressed', 'true'); }
+        else { off.add(cat); btn.setAttribute('aria-pressed', 'false'); }
+        refresh();
+      });
+    }
+
+    markerEls.forEach((m) => {
+      m.addEventListener('click', () => {
+        markerEls.forEach((x) => x.classList.remove('is-sel'));
+        m.classList.add('is-sel');
+        if (info) {
+          const name = m.getAttribute('data-name') || '';
+          const label = m.getAttribute('data-label') || '';
+          const note = m.getAttribute('data-note') || '';
+          info.innerHTML = '<span class="cat"></span><h3></h3>' + (note ? '<p class="note"></p>' : '');
+          info.querySelector('.cat').textContent = label;
+          info.querySelector('h3').textContent = name;
+          if (note) info.querySelector('p.note').textContent = note;
+        }
+      });
+    });
+  </script>
+</Base>

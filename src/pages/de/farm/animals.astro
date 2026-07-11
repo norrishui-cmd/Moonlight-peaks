@@ -1,0 +1,89 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { SITE } from '../../../consts';
+
+const animals = ['Cheeken', 'Piggoat', 'Draculamb', 'Cowcula', 'Stoney', 'Rabbicula'];
+
+const faq = [
+  { q: 'Welche Tiere kann man in Moonlight Peaks halten?', a: 'Bestätigt bisher: Cheeken, Piggoat, Draculamb, Cowcula, Stoney und Rabbicula. Cheeken ist am frühesten verfügbar. Weitere könnten im Jahresverlauf freigeschaltet werden.' },
+  { q: 'Wie bekommt man Tiere in Moonlight Peaks?', a: 'Bestätigt: Baue zuerst eine Scheune (4.000 Gold bei Ridge), besuche dann Lunas Hof, wo ein kleines Gehege täglich rotierend 3 verfügbare Tiere zeigt. Interagiere mit einem, um es zu adoptieren, solange du Gold und Scheunenplatz hast.' },
+  { q: 'Was füttert man Tieren in Moonlight Peaks?', a: 'Bestätigt: Futter (aus Fiber an einem Veredler hergestellt) oder das bessere Premium-Futter (50 Futter + 1 Mana-Essenz). Halte den Trog gefüllt, damit die Tiere über Nacht fressen können.' },
+  { q: 'Was produzieren Tiere in Moonlight Peaks?', a: 'Bestätigt: Milch, Wolle, Eier und Dünger, je nach Tierart — Dünger steigert die Erntequalität, was die Tierpflege schon vor dem direkten Produkt-Einkommen lohnenswert macht.' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Startseite', item: `${SITE.url}/de` },
+    { '@type': 'ListItem', position: 2, name: 'Hof', item: `${SITE.url}/de/farm` },
+    { '@type': 'ListItem', position: 3, name: 'Tiere', item: `${SITE.url}/de/farm/animals` },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks Tiere — Vollständige Liste, Fütterung & Produkte"
+  description="Bestätigte Moonlight Peaks Hoftiere: Cheeken, Piggoat, Draculamb, Cowcula, Stoney, Rabbicula. Wie man sie bekommt, Fütterung mit Futter, und was sie produzieren."
+  path="/de/farm/animals"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Hof', href: '/de/farm' }, { label: 'Tiere' }]}
+  lang="de"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Hof · Tiere</p>
+      <h1>Hof<em>tiere</em></h1>
+      <p class="intro">
+        Bestätigte Tierliste und Pflege-Grundlagen, abgeglichen über mehrere Launch-Week-Quellen.
+        Siehe <a href="/de/farm/barn">die Scheune</a>, um zu erfahren, wie man Tierbesitz überhaupt freischaltet.
+      </p>
+
+      <h2>Bestätigte Tiere</h2>
+      <ul>
+        {animals.map((a) => (<li>{a}</li>))}
+      </ul>
+      <p>
+        Cheeken ist das übliche erste Tier — bestätigt mag es Streicheln und Hüte. Weitere Tierarten
+        sollen im Jahresverlauf freigeschaltet werden; diese Liste wächst, sobald mehr bestätigt sind.
+      </p>
+
+      <h2>Tiere bekommen</h2>
+      <p>
+        Bestätigt: Sobald deine Scheune gebaut ist, besuche Lunas Hof — ein kleines Gehege neben
+        ihrem Haus zeigt täglich rotierend 3 verfügbare Tiere, auch mit unterschiedlichen
+        Farbvarianten. Interagiere mit einem, um es zu adoptieren (du brauchst genug Gold und freien
+        Scheunenplatz), und wirst gebeten, es selbst zu benennen.
+      </p>
+
+      <h2>Fütterung</h2>
+      <p>
+        Bestätigt: Tiere fressen Futter, hergestellt an einem Veredler aus Fiber (1 Fiber → 2
+        Futter). Eine bessere Stufe, Premium-Futter, braucht 50 Futter plus 1 Mana-Essenz. Halte
+        den Trog gefüllt, damit die Tiere über Nacht gefüttert werden — du kannst mehrere Tage
+        Vorrat auf einmal anlegen.
+      </p>
+
+      <h2>Was sie produzieren</h2>
+      <p>
+        Bestätigt: Tiere produzieren je nach Art Milch, Wolle, Eier oder Dünger. Dünger steigert
+        speziell die Erntequalität, was die Tierpflege schon vor dem direkten Produkt-Einkommen
+        lohnenswert macht. Höherwertige Produkte (von gut gepflegten, zufriedenen Tieren) verkaufen
+        sich besser und ergeben bessere Kochzutaten.
+      </p>
+
+      <h2>Häufige Fragen</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        Verwandte Seiten: <a href="/de/farm">Hof-Hub</a>, <a href="/de/farm/barn">Die Scheune</a>,
+        <a href="/de/items/fertilizer">Dünger</a>, <a href="/de/characters/luna">Luna</a>.
+      </div>
+    </div>
+  </article>
+</Base>

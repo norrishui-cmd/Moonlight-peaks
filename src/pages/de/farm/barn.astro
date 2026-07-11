@@ -1,0 +1,81 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { SITE } from '../../../consts';
+
+const faq = [
+  { q: 'Was kostet die Scheune in Moonlight Peaks?', a: 'Bestätigt über das offizielle Wiki: 4.000 Gold bei Ridge im Howling Hammer, nachdem Luna dich mit Hoftieren bekannt gemacht hat.' },
+  { q: 'Wie groß ist die Scheune in Moonlight Peaks?', a: 'Bestätigt: Die Scheune braucht eine 10×6-Fläche und dauert eine Nacht zum Bauen. Sie fasst 4 Tiere.' },
+  { q: 'Kann man in Moonlight Peaks mehr als eine Scheune bauen?', a: 'Ja, bestätigt: Du kannst mehrere Scheunen bauen, jede mit Platz für 4 Tiere, solange du für jede die nötige 10×6-Fläche frei hast.' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Startseite', item: `${SITE.url}/de` },
+    { '@type': 'ListItem', position: 2, name: 'Hof', item: `${SITE.url}/de/farm` },
+    { '@type': 'ListItem', position: 3, name: 'Scheune', item: `${SITE.url}/de/farm/barn` },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks Scheune — Kosten, Größe & Freischaltung"
+  description="Bestätigt: Die Moonlight Peaks Scheune kostet 4.000 Gold bei Ridge, braucht 10×6 Fläche, dauert eine Nacht zum Bauen und fasst 4 Tiere."
+  path="/de/farm/barn"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Hof', href: '/de/farm' }, { label: 'Scheune' }]}
+  lang="de"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Hof · Scheune</p>
+      <h1>Die <em>Scheune</em></h1>
+      <p class="intro">
+        Bestätigt über das offizielle Wiki und abgeglichen mit Launch-Week-Berichten: Die Scheune
+        kostet im Howling Hammer <strong>4.000 Gold</strong>, sobald Luna dich mit Hoftieren bekannt
+        gemacht hat.
+      </p>
+
+      <h2>Wie man sie freischaltet</h2>
+      <p>
+        Bestätigt: Früh im Frühling des ersten Jahres taucht Ridge vor deiner Tür auf und
+        kommentiert dein Dach, während du separat einen Brief von Luna zur Quest "Farm Animals for
+        Sale" erhältst — ein Besuch bei Luna zeigt dir das erste verfügbare Tier (ein Cheeken).
+        Sobald dein Dach repariert ist, findest du Ridge im Howling Hammer (geöffnet 18–24 Uhr);
+        wähle Shop, dann den zweiten Reiter, um die Scheune zu kaufen.
+      </p>
+
+      <h2>Größe, Kosten und Kapazität</h2>
+      <table class="facts">
+        <tr><th>Kosten</th><td>4.000 Gold</td></tr>
+        <tr><th>Benötigte Fläche</th><td>10×6</td></tr>
+        <tr><th>Bauzeit</th><td>1 Nacht</td></tr>
+        <tr><th>Tierkapazität</th><td>4 pro Scheune</td></tr>
+        <tr><th>Mehrere Scheunen?</th><td>Ja — baue weitere, um mehr als 4 Tiere zu halten</td></tr>
+      </table>
+
+      <h2>Danach</h2>
+      <p>
+        Bestätigt: Sobald die Scheune gebaut ist, kehre zu Lunas Hof zurück, um dein erstes Tier zu
+        adoptieren. Verfügbare Tiere rotieren täglich in einem kleinen Gehege neben ihrem Haus, und
+        du musst jedes selbst benennen — das Spiel schlägt keinen Namen vor.
+      </p>
+
+      <h2>Häufige Fragen</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        Aus dem offiziellen Moonlight Peaks Wiki, abgeglichen mit Berichten von Bonus Action und
+        Prima Games. Verwandte Seiten: <a href="/de/farm">Hof-Hub</a>,
+        <a href="/de/farm/animals">Tiere</a>, <a href="/characters/ridge">Ridge</a>,
+        <a href="/de/characters/luna">Luna</a>.
+      </div>
+    </div>
+  </article>
+</Base>

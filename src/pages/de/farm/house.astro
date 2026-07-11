@@ -1,0 +1,76 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { SITE } from '../../../consts';
+
+const faq = [
+  { q: 'Wie oft kann man sein Haus in Moonlight Peaks ausbauen?', a: 'Bestätigt über das offizielle Wiki: viermal. Jeder Ausbau fügt eine neue Erweiterung zum Haus hinzu.' },
+  { q: 'Wie schaltet man Hausausbauten in Moonlight Peaks frei?', a: 'Bestätigt: Ausbauten werden erst nach Abschluss der Quest "Fix the Roof" verfügbar, die Ridge früh im Spiel gibt.' },
+  { q: 'Wo kauft man Hausausbauten in Moonlight Peaks?', a: 'Bestätigt: Ausbauten werden beim Howling Hammer mit Gold und Holz gekauft. Jeder Ausbau dauert eine Spielnacht.' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Startseite', item: `${SITE.url}/de` },
+    { '@type': 'ListItem', position: 2, name: 'Hof', item: `${SITE.url}/de/farm` },
+    { '@type': 'ListItem', position: 3, name: 'Haus', item: `${SITE.url}/de/farm/house` },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks Haus — Ausbauten, Kosten & die Fix-the-Roof-Quest"
+  description="Bestätigt: Das Moonlight Peaks Haus lässt sich 4-mal über den Howling Hammer ausbauen, freigeschaltet durch die Quest Fix the Roof. Kosten, Zeitaufwand und Startmöbel."
+  path="/de/farm/house"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Hof', href: '/de/farm' }, { label: 'Haus' }]}
+  lang="de"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Hof · Haus</p>
+      <h1>Dein <em>Haus</em></h1>
+      <p class="intro">
+        Bestätigt über das offizielle Wiki: Dein dauerhaftes Zuhause ist ein kleines Steinhaus, das
+        sich viermal ausbauen lässt, wobei jeder Ausbau eine neue Erweiterung hinzufügt.
+      </p>
+
+      <h2>Ausbauten freischalten</h2>
+      <p>
+        Bestätigt: Hausausbauten werden erst nach Abschluss der Quest <strong>"Fix the Roof"</strong>
+        verfügbar, die Ridge früh im Spiel gibt. Danach werden Ausbauten beim
+        <strong>Howling Hammer</strong> mit Gold und Holz gekauft, und jeder dauert eine einzelne
+        Spielnacht.
+      </p>
+
+      <h2>Startmöbel und Gerümpel</h2>
+      <p>
+        Bestätigt: Die erste Hausstufe enthält bereits mehrere grundlegende Deko- und
+        Funktionsgegenstände — einen Holzsarg, eine Kochstation, eine Werkbank, eine Zimmerpflanze
+        und eine Kiste. Beim ersten Erhalt des Hauses gibt es zudem Gerümpel im Inneren und drumherum
+        (Müll, Laubhaufen, Steine), das entfernt werden kann.
+      </p>
+
+      <h2>Äußere Anpassung</h2>
+      <p>
+        Bestätigt: Auch die äußere Anpassung läuft über den Howling Hammer. Manche
+        Anpassungsoptionen schalten erst frei, sobald du die letzte (vierte) Hausstufe erreicht hast.
+      </p>
+
+      <h2>Häufige Fragen</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        Aus dem offiziellen Moonlight Peaks Wiki. Verwandte Seiten:
+        <a href="/de/farm">Hof-Hub</a>, <a href="/characters/ridge">Ridge</a>,
+        <a href="/de/items/decorations">Dekoration</a>.
+      </div>
+    </div>
+  </article>
+</Base>

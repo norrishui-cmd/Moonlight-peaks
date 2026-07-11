@@ -1,0 +1,70 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { SITE, GAME } from '../../../consts';
+
+const entries = [
+  { group: 'Datenbank', title: 'Feldfrüchte', desc: 'Die vollständige Feldfrucht-Datenbank — über 30 Feldfrüchte, Kräutergarten-Pflanzen und Baumfrüchte, mit Jahreszeiten und magischem Status.', href: '/de/farm/crops' },
+  { group: 'Zuhause', title: 'Haus', desc: 'Wie sich dein Haus 4-mal über den Howling Hammer ausbauen lässt, freigeschaltet durch die Quest "Fix the Roof".', href: '/de/farm/house' },
+  { group: 'Gebäude', title: 'Scheune', desc: 'Kosten, Größe und wie man die Scheune freischaltet — 4.000 Gold, 10×6 Fläche, Platz für 4 Tiere.', href: '/de/farm/barn' },
+  { group: 'Gebäude', title: 'Gewächshaus', desc: 'Was über die Gewächshaus-Erweiterung bislang bestätigt ist.', href: '/de/farm/greenhouse' },
+  { group: 'Kreaturen', title: 'Tiere', desc: 'Die bestätigte Tierliste, wie man sie adoptiert, füttert und was sie produzieren.', href: '/de/farm/animals' },
+  { group: 'Maschinen', title: 'Hofhelfer', desc: 'Alle 16 bestätigten Verarbeitungsmaschinen — Ofen, Fass, Veredler und mehr, mit Rezepten.', href: '/de/farm/farm-helpers' },
+];
+
+const jsonLd = {
+  '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Startseite', item: `${SITE.url}/de` },
+    { '@type': 'ListItem', position: 2, name: 'Hof', item: `${SITE.url}/de/farm` },
+  ],
+};
+---
+<Base
+  title="Moonlight Peaks Hof — Feldfrüchte, Haus, Scheune, Gewächshaus & Tiere"
+  description="Der Moonlight Peaks Hof-Bereich auf Deutsch: Feldfrüchte, Hausausbau, die Scheune, das Gewächshaus, Hoftiere und Hofhelfer-Maschinen — alles aus dem offiziellen Wiki."
+  path="/de/farm"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Hof' }]}
+  lang="de"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Hub · Hof</p>
+      <h1>Dein {GAME.title} <em>Hof</em></h1>
+      <p class="intro">
+        Alles rund um den Ausbau deines Hofs — was man anbaut, wie Haus und Scheune wachsen, und
+        welche Tiere und Maschinen den Hof am Laufen halten. Die meisten Inhalte stammen direkt
+        aus dem offiziellen Moonlight Peaks Wiki.
+      </p>
+
+      <div class="itg">
+        {entries.map((e) => (
+          <a class="itcard" href={e.href}>
+            <span class="itgroup">{e.group}</span>
+            <h3>{e.title}</h3>
+            <p>{e.desc}</p>
+          </a>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        Verwandte Seiten: <a href="/de/farming">Landwirtschaft-Guide</a>, <a href="/de/locations">Orte</a>,
+        <a href="/de/items">Gegenstände</a>, <a href="/farm">ausführliche Version auf Englisch</a>.
+      </div>
+    </div>
+  </article>
+
+  <style>
+    .itg { display: grid; grid-template-columns: 1fr; gap: 12px; margin: 6px 0 18px; }
+    @media (min-width: 640px) { .itg { grid-template-columns: 1fr 1fr; } }
+    @media (min-width: 980px) { .itg { grid-template-columns: 1fr 1fr 1fr; } }
+    .itcard {
+      display: block; border: 1px solid var(--line); border-radius: 14px;
+      background: var(--surface); padding: 14px; color: inherit; text-decoration: none;
+      transition: border-color .15s ease, transform .15s ease;
+    }
+    .itcard:hover { border-color: color-mix(in srgb, var(--candle) 50%, var(--line)); transform: translateY(-2px); }
+    .itgroup { font-family: var(--mono); color: var(--faint); text-transform: uppercase; letter-spacing: 0.04em; font-size: 0.62rem; }
+    .itcard h3 { font-family: var(--display); font-weight: 600; font-size: 1rem; margin: 4px 0 6px; }
+    .itcard p { color: #ded3e6; font-size: 0.84rem; margin: 0 0 10px; }
+  </style>
+</Base>

@@ -1,0 +1,88 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { SITE } from '../../../consts';
+
+const faq = [
+  { q: 'Moonlight PeaksにVampsterは何匹いますか?', a: '公式wikiで確認済み:合計53匹で、ゲームの屋外エリア全体に散らばっています。' },
+  { q: 'Moonlight PeaksでVampsterはどこに連れて行けばいいですか?', a: '確認済み:Misty Shoresにある彼らの家(「A Bridge Too Far」クエストで解放)に連れ帰ります。' },
+  { q: '一度に複数のVampsterを運べますか?', a: 'いいえ——一度に運べるVampsterは1匹だけです。誰かと話したり、カットシーンが発生したりすると、運んでいたVampsterを落としてしまいます。' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'ホーム', item: `${SITE.url}/ja` },
+    { '@type': 'ListItem', position: 2, name: 'コレクション', item: `${SITE.url}/ja/collection` },
+    { '@type': 'ListItem', position: 3, name: 'Vampster', item: `${SITE.url}/ja/collection/vampsters` },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks Vampster:全53匹と集め方"
+  description="Moonlight Peaks Vampsterガイド:Vampsterとは何か、確認済みの合計53匹、運び方、家がどこにあるか——公式wikiに基づいています。"
+  path="/ja/collection/vampsters"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'コレクション', href: '/ja/collection' }, { label: 'Vampster' }]}
+  lang="ja"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">コレクション・Vampster</p>
+      <h1>Moonlight Peaksの<em>Vampster</em></h1>
+      <p class="intro">
+        Vampsterはいたずら好きな小さな生き物で、Moonlight Peaks中に隠れて悪さをしますが、長い間
+        一人にすると悲しんでしまいます。公式wikiで確認済み:全部で53匹おり、1匹ずつ捕まえて
+        家に連れ帰ります。
+      </p>
+
+      <div class="callout">
+        <strong>簡単に言うと:</strong> Vampsterは屋外で見つけて、1匹ずつ——Misty Shoresにある
+        彼らの家まで運ぶ、迷子になった生き物です。確認済みの合計数:53匹。
+      </div>
+
+      <h2>Vampsterクエストの始まり方</h2>
+      <p>
+        コミュニティ報告:最初の1週間ほどの間に、銅を採掘しにCave of Echoesへ行くと、入り口付近で
+        Vampsterが逃げていくのを見かけます。中では<a href="/characters/alina">Alina</a>に出会い、
+        Vampsterたちが迷子になっていることを説明され、全員を家に連れ帰る手伝いを頼まれます。
+      </p>
+
+      <h2>見つけ方</h2>
+      <p>
+        公式wikiで確認済み:Vampsterはムーンライト・ピークス中に散らばっており、常にちょこまか
+        動き回って、意外な場所に隠れています。確認済みの例:1匹はMoonlit PinesにあるLunaの家の中、
+        らせん階段を上ったベッド脇(頭にろうそくを乗せている)、もう1匹はMisty ShoresのMoonlit
+        Towerの中、ベージュ色の葉っぱ模様のアームチェアの後ろに隠れています。
+      </p>
+
+      <h2>運び方・連れ帰り方</h2>
+      <ul>
+        <li><strong>一度に1匹だけ:</strong> 確認済み——複数のVampsterを重ねて運ぶことはできず、1匹を置くまでずっと持ち続けます。</li>
+        <li><strong>彼らの家:</strong> 確認済み——Misty Shoresにある洞窟(<a href="/quests/a-bridge-too-far">A Bridge Too Far</a>で解放)。</li>
+        <li><strong>中断に注意:</strong> コミュニティ報告——住民と話したり、カットシーンが発生したりすると運んでいたVampsterを落としてしまうため、出発前に会話の多いエリアを片付けておきましょう。</li>
+      </ul>
+
+      <h2>よくある問題</h2>
+      <ul>
+        <li><strong>カットシーン後にVampsterを見失った:</strong> 想定内です——カットシーンは運んでいたVampsterを落とさせます。落とした場所にそのまま残っています。</li>
+        <li><strong>これ以上Vampsterが見つからない:</strong> まだ完全に片付けていないエリアで、鎌を使って伸びた草や茂みを刈ってみてください。</li>
+      </ul>
+
+      <h2>よくある質問</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        公式Moonlight Peaks Wiki(moonlightpeaks.wiki.gg)より。関連ページ:
+        <a href="/ja/collection">コレクションハブ</a>、<a href="/locations/mines">Cave of Echoes</a>、
+        <a href="/achievements">実績</a>、<a href="/characters/alina">Alina</a>。
+      </div>
+    </div>
+  </article>
+</Base>

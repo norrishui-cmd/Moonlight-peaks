@@ -1,0 +1,80 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { SITE } from '../../../consts';
+
+const faq = [
+  { q: 'Moonlight Peaksで最初の釣竿はどうやって手に入れますか?', a: '確認済み:ゲーム開始から数日以内に川辺でNoelに出会います。彼から3種類の異なる魚を彼より先に釣る勝負を挑まれます——時間制限がないので簡単に勝てます——勝つと釣竿とゴールドの報酬がもらえます。' },
+  { q: 'Moonlight Peaksには魚が何種類いますか?', a: '確認済み:約22種類。それぞれ基本売却価格と回復エネルギー量があり、どちらも1つ星・2つ星の品質で上昇します。' },
+  { q: 'Moonlight Peaksで釣れる魚に影響する要素は?', a: '確認済み:場所、季節、天候、時間帯が全て、その時釣れる魚に影響します。' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'ホーム', item: `${SITE.url}/ja` },
+    { '@type': 'ListItem', position: 2, name: 'コレクション', item: `${SITE.url}/ja/collection` },
+    { '@type': 'ListItem', position: 3, name: '魚', item: `${SITE.url}/ja/collection/fish` },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks 魚 — 約22種と最初の釣竿の入手方法"
+  description="確認済みのMoonlight Peaks釣り情報:Noelから最初の釣竿をもらう方法、約22種類の魚、品質段階、釣れる魚に影響する要素。"
+  path="/ja/collection/fish"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'コレクション', href: '/ja/collection' }, { label: '魚' }]}
+  lang="ja"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">コレクション・魚</p>
+      <h1>Moonlight Peaksの<em>魚</em></h1>
+      <p class="intro">
+        2つの独立した発売週の情報源で確認済み:釣りは約22種の実在するコレクションに基づいており、
+        場所・時間帯・天候によって釣れる魚が変わります。
+      </p>
+
+      <h2>最初の釣竿を手に入れる</h2>
+      <p>
+        確認済み:ゲーム開始から数日以内に、<a href="/characters/noel">Noel</a>に川辺で出会います。
+        彼から3種類の異なる魚を彼より先に釣る勝負を挑まれます——時間制限がないので簡単に勝てます
+        ——そして最初の釣竿とゴールドのボーナスがもらえます。
+      </p>
+
+      <h2>魚の種類と変化する要素</h2>
+      <p>
+        確認済み:コレクションは約22種類に及びます。どれが釣れるかは場所・季節・天候・時間帯に
+        よって変わるため、ある夜に見つからない魚も、単に条件が揃うのを待っているだけかもしれず、
+        ゲームに存在しないわけではありません。
+      </p>
+
+      <h2>品質段階</h2>
+      <p>
+        確認済み:各魚には基本売却価格と食べた時の基本エネルギー値があり、どちらも1つ星・2つ星
+        品質で上昇します——同じ種類でもより高品質な釣果を積極的に狙う価値があります。
+      </p>
+
+      <h2>現在確認中の情報</h2>
+      <ul>
+        <li>各魚種の正確な釣り場所。</li>
+        <li>魚ごとの完全な季節・天候・時間ルール。</li>
+        <li>全品質段階を含む完全な売却価格表。</li>
+      </ul>
+
+      <h2>よくある質問</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        関連ページ: <a href="/ja/collection">コレクションハブ</a>、<a href="/ja/activities">釣りアクティビティ</a>、
+        <a href="/characters/noel">Noel</a>、<a href="/ja/items/cooking">料理</a>。
+      </div>
+    </div>
+  </article>
+</Base>

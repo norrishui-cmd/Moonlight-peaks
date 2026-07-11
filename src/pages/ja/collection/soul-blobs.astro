@@ -1,0 +1,80 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { SITE } from '../../../consts';
+
+const faq = [
+  { q: 'Moonlight PeaksにSoul Blobsは何体いますか?', a: '発売時に確認済み:世界中に散らばる100体のSoul Blobs。' },
+  { q: 'Moonlight PeaksでSoul Blobsはどうやって捕まえますか?', a: '確認済み:虫取りに使うのと同じ道具、Netを使います——手では捕まえられません。' },
+  { q: 'Soul Blobsを全て集めると何がもらえますか?', a: '確認済み:アンティーク時計がもらえ、夜の長さがデフォルトの15分から25分に延長されます。' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'ホーム', item: `${SITE.url}/ja` },
+    { '@type': 'ListItem', position: 2, name: 'コレクション', item: `${SITE.url}/ja/collection` },
+    { '@type': 'ListItem', position: 3, name: 'Soul Blobs', item: `${SITE.url}/ja/collection/soul-blobs` },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks Soul Blobs:全100体とアンティーク時計の報酬"
+  description="確認済み:Moonlight Peaksには100体のSoul Blobsが世界中に散らばっており、Netで捕まえます。全て集めるとアンティーク時計がもらえ、夜が25分に延長されます。"
+  path="/ja/collection/soul-blobs"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'コレクション', href: '/ja/collection' }, { label: 'Soul Blobs' }]}
+  lang="ja"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">コレクション・Soul Blobs</p>
+      <h1>Moonlight Peaksの<em>Soul Blobs</em></h1>
+      <p class="intro">
+        Soul Blobsは世界中に散らばる小さな彷徨える髑髏の魂で——発売時に確認済み:合計100体おり、
+        コンプリート勢にとって本当に嬉しい報酬があります。
+      </p>
+
+      <div class="callout">
+        <strong>簡単に言うと:</strong> Deathとの2回目の出会いの後、Soul Blobsが紹介され、Netで
+        捕まえるよう頼まれます。合計100体あり、全て集めるとアンティーク時計がもらえます。
+      </div>
+
+      <h2>Soul Blobsが紹介される流れ</h2>
+      <p>
+        確認済み:<a href="/characters/death">Death</a>との町での2回目の出会いの後、彼がSoul
+        Blobsを紹介し、Net(虫取りに使うのと同じ道具で、別のものではありません)で捕まえるよう
+        頼んできます。
+      </p>
+
+      <h2>他のコレクションとの違い</h2>
+      <p>
+        コミュニティ報告:Soul Blobsは、ゲームの2つの生き物収集サブクエストの中でも、より物語性が
+        強い方です(もう一つは<a href="/ja/collection/vampsters">Vampster</a>)。Soul Blobを捕まえる
+        と、その魂がどう死んだかについての短いビネットが語られます——単なるチェックリストの
+        チェックではなく、1匹ごとに小さな物語的な報酬があります。
+      </p>
+
+      <h2>コンプリート報酬</h2>
+      <p>
+        確認済み:100体のSoul Blobsを全て集めると<strong>アンティーク時計</strong>がもらえ、夜の
+        長さがデフォルトの15分から25分に延長されます——単なる見た目だけの報酬ではなく、本当に
+        便利で恒久的な快適性の向上です。
+      </p>
+
+      <h2>よくある質問</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        関連ページ: <a href="/ja/collection">コレクションハブ</a>、<a href="/ja/collection/vampsters">Vampster</a>、
+        <a href="/characters/death">Death</a>、<a href="/ja/activities">釣り＆虫取り</a>。
+      </div>
+    </div>
+  </article>
+</Base>

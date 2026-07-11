@@ -1,0 +1,70 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { SITE } from '../../../consts';
+import { farmHelpers } from '../../../data/farm-helpers';
+import { farmHelperDescJa } from '../../../data/farm-helpers-ja';
+
+const faq = [
+  { q: 'Moonlight Peaksのファームヘルパーとは?', a: `公式wikiで確認済み:ファームヘルパーは農業を自動化したり、農産物を加工したりする設備です。これまでに${farmHelpers.length}種類確認されています——炉、樽、精製機、ハーブ園、ハーブ乾燥ラック、乳鉢、養蜂箱、機織り機、チーズプレス、マナ抽出機、製粉機、ジャムメーカー、ホタルの聖域、ホタル授粉機、チョコレート職人、種子シーケンサーなど。` },
+  { q: 'Moonlight Peaksで精製機はどうやって解放しますか?', a: '確認済み:作業台で木材20個+石20個で作れます。木材、石、繊維、Dark Woodなどの原材料を、板材、精製された石、飼料、硬材の板に変換します。' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'ホーム', item: `${SITE.url}/ja` },
+    { '@type': 'ListItem', position: 2, name: '農場', item: `${SITE.url}/ja/farm` },
+    { '@type': 'ListItem', position: 3, name: 'ファームヘルパー', item: `${SITE.url}/ja/farm/farm-helpers` },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks ファームヘルパー — 全16種の設備とレシピ"
+  description="確認済みのMoonlight Peaksファームヘルパー設備全種:炉、樽、精製機、養蜂箱、製粉機、ジャムメーカーなど。建設レシピと生産物つき、公式wikiに基づいています。"
+  path="/ja/farm/farm-helpers"
+  jsonLd={jsonLd}
+  crumbs={[{ label: '農場', href: '/ja/farm' }, { label: 'ファームヘルパー' }]}
+  lang="ja"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">農場・設備</p>
+      <h1>ファーム<em>ヘルパー</em></h1>
+      <p class="intro">
+        公式Moonlight Peaks Wikiで確認済み:ファームヘルパーは農業を自動化したり農産物を加工したり
+        する設備です。これまでに{farmHelpers.length}種類確認されています。
+      </p>
+
+      {farmHelpers.map((h) => (
+        <>
+          <h2>{h.name}</h2>
+          <p>
+            {farmHelperDescJa[h.name] ?? h.desc}
+            {h.buildRecipe && <> <strong>建設:</strong> {h.buildRecipe}{h.buildSource ? `(${h.buildSource}にて)` : ''}。</>}
+          </p>
+          {h.outputs && h.outputs.length > 0 && (
+            <ul>
+              {h.outputs.map((o) => (<li><strong>{o.name}:</strong> {o.recipe}</li>))}
+            </ul>
+          )}
+        </>
+      ))}
+
+      <h2>よくある質問</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        公式Moonlight Peaks Wikiより。関連ページ:
+        <a href="/ja/farm">農場ハブ</a>、<a href="/ja/farm/crops">作物</a>、
+        <a href="/ja/items/mineables">鉱物資源</a>、<a href="/ja/items/cooking">料理</a>。
+      </div>
+    </div>
+  </article>
+</Base>

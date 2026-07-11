@@ -26,6 +26,12 @@ const jaOnlyPaths = [
   '/items/cooking', '/items/crafting',
   '/items/artifacts', '/items/livestock', '/items/potions',
   '/items/mineables', '/items/decorations',
+  '/farm', '/farm/crops', '/farm/house', '/farm/barn', '/farm/greenhouse', '/farm/animals',
+  '/farm/farm-helpers', '/farm/crops/blood-grapes', '/farm/crops/rice', '/farm/crops/drikker',
+  '/farm/crops/gobbler', '/farm/crops/hold-me-close', '/farm/crops/mandrake',
+  '/farm/crops/weeping-wicca', '/farm/crops/instant-growth-mushrooms',
+  '/collection', '/collection/fish', '/collection/jobs', '/collection/critters',
+  '/collection/vampsters', '/collection/soul-blobs', '/map',
 ];
 
 const dePaths = [
@@ -37,6 +43,12 @@ const dePaths = [
   '/items/decorations', '/farming', '/activities', '/families', '/character-creator', '/shapeshifting',
   '/characters/saga/gifts', '/characters/luna/gifts', '/characters/orlock/gifts',
   '/characters/sabrina/gifts', '/characters/noel/gifts', '/characters/fiona/gifts',
+  '/farm', '/farm/crops', '/farm/house', '/farm/barn', '/farm/greenhouse', '/farm/animals',
+  '/farm/farm-helpers', '/farm/crops/blood-grapes', '/farm/crops/rice', '/farm/crops/drikker',
+  '/farm/crops/gobbler', '/farm/crops/hold-me-close', '/farm/crops/mandrake',
+  '/farm/crops/weeping-wicca', '/farm/crops/instant-growth-mushrooms',
+  '/collection', '/collection/fish', '/collection/jobs', '/collection/critters',
+  '/collection/vampsters', '/collection/soul-blobs', '/map',
 ];
 
 export const translatedPathsByLocale: Record<Locale, Set<string>> = {

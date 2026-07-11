@@ -1,0 +1,87 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { SITE } from '../../../consts';
+
+const animals = ['Cheeken', 'Piggoat', 'Draculamb', 'Cowcula', 'Stoney', 'Rabbicula'];
+
+const faq = [
+  { q: 'Moonlight Peaksでどんな動物を飼えますか?', a: 'これまで確認済み:Cheeken、Piggoat、Draculamb、Cowcula、Stoney、Rabbicula。Cheekenが最も早く手に入ります。年間を通してさらに解放される可能性があります。' },
+  { q: 'Moonlight Peaksで動物はどうやって手に入れますか?', a: '確認済み:まず納屋を建て(Ridgeから4,000ゴールド)、次にLunaの農場を訪れると、小さな囲いに毎日入れ替わりで3匹の動物が表示されます。ゴールドと納屋のスペースがあれば、動物に話しかけて引き取れます。' },
+  { q: 'Moonlight Peaksで動物には何を与えますか?', a: '確認済み:飼料(精製機でFiberから作成)、またはより良いプレミアム飼料(飼料50個+マナエッセンス1個)。餌箱に補充しておけば、夜の間に動物が食べられます。' },
+  { q: 'Moonlight Peaksで動物は何を生産しますか?', a: '確認済み:種類によってミルク、羊毛、卵、肥料を生産します。肥料は特に作物の品質を上げるため、直接の生産物収入を数える前から動物の世話をする価値があります。' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'ホーム', item: `${SITE.url}/ja` },
+    { '@type': 'ListItem', position: 2, name: '農場', item: `${SITE.url}/ja/farm` },
+    { '@type': 'ListItem', position: 3, name: '動物', item: `${SITE.url}/ja/farm/animals` },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks 動物 — 完全一覧、餌やり、生産物"
+  description="確認済みのMoonlight Peaks家畜:Cheeken、Piggoat、Draculamb、Cowcula、Stoney、Rabbicula。入手方法、飼料での餌やり、生産物について。"
+  path="/ja/farm/animals"
+  jsonLd={jsonLd}
+  crumbs={[{ label: '農場', href: '/ja/farm' }, { label: '動物' }]}
+  lang="ja"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">農場・動物</p>
+      <h1>農場の<em>動物</em></h1>
+      <p class="intro">
+        確認済みの動物一覧と飼育の基本、複数の発売週の情報源で照合済みです。動物の飼育をそもそも
+        どう解放するかは<a href="/ja/farm/barn">納屋</a>のページをご覧ください。
+      </p>
+
+      <h2>確認済みの動物</h2>
+      <ul>
+        {animals.map((a) => (<li>{a}</li>))}
+      </ul>
+      <p>
+        Cheekenが最も一般的な最初の動物です——確認済みで撫でられたり帽子をかぶせられたりするのを
+        好みます。新しい動物の種類は年間を通してさらに解放されると報告されており、確認が進むに
+        つれこの一覧は増えていきます。
+      </p>
+
+      <h2>動物の入手</h2>
+      <p>
+        確認済み:納屋が建ったら、Lunaの農場を訪れましょう——彼女の家の隣の小さな囲いに、毎日
+        入れ替わりで3匹の動物(色違いも含む)が表示されます。動物に話しかけて引き取れます
+        (ゴールドと納屋の空きスペースが必要)、そして自分で名前をつけるよう求められます。
+      </p>
+
+      <h2>餌やり</h2>
+      <p>
+        確認済み:動物は飼料を食べます。飼料は精製機でFiberから作られます(Fiber1個→飼料2個)。
+        より良い段階のプレミアム飼料は、飼料50個+マナエッセンス1個が必要です。餌箱を補充して
+        おけば夜間に給餌され——数日分をまとめてストックすることもできます。
+      </p>
+
+      <h2>生産物</h2>
+      <p>
+        確認済み:動物は種類によってミルク、羊毛、卵、肥料を生産します。肥料は特に作物の品質を
+        上げるため、直接の生産物収入を数える前から動物の世話をする価値があります。よく世話された
+        幸せな動物からの高品質な生産物は、より高く売れ、より良い料理の材料にもなります。
+      </p>
+
+      <h2>よくある質問</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        関連ページ: <a href="/ja/farm">農場ハブ</a>、<a href="/ja/farm/barn">納屋</a>、
+        <a href="/ja/items/fertilizer">肥料</a>、<a href="/ja/characters/luna">Luna</a>。
+      </div>
+    </div>
+  </article>
+</Base>

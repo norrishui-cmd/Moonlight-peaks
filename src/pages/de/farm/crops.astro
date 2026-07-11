@@ -1,0 +1,99 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { SITE } from '../../../consts';
+import { farmlandCrops, herbCrops, treeCrops } from '../../../data/farm-crops';
+
+const cropDetailSlugs: Record<string, string> = {
+  'Blood Grapes': 'blood-grapes', 'Rice': 'rice', 'Drikker': 'drikker', 'Gobbler': 'gobbler',
+  'Hold Me Close': 'hold-me-close', 'Mandrake': 'mandrake', 'Weeping Wicca': 'weeping-wicca',
+  'Common Mushroom': 'instant-growth-mushrooms', 'Frosteria': 'instant-growth-mushrooms',
+  'Glowglammer': 'instant-growth-mushrooms', 'Yellow Glowglammer': 'instant-growth-mushrooms',
+  'Volacio Mushroom': 'instant-growth-mushrooms', 'Amanita': 'instant-growth-mushrooms',
+};
+
+const faq = [
+  { q: 'Wie viele Feldfrüchte gibt es in Moonlight Peaks?', a: `Bestätigt über das offizielle Wiki: ${farmlandCrops.length} Feldfrüchte, ${herbCrops.length} Kräutergarten-Pflanzen und ${treeCrops.length} Baumfrüchte — unterteilt in drei Pflanzkategorien je nach Anbauort.` },
+  { q: 'Was sind die drei Feldfrucht-Kategorien in Moonlight Peaks?', a: 'Bestätigt: Feldfrüchte (auf umgegrabenem Ackerland gepflanzt), Kräutergarten-Pflanzen (brauchen eine eigene Kräutergarten-Struktur) und Baumfrüchte (direkt auf Gras gepflanzt, kein Umgraben nötig).' },
+  { q: 'Welche Feldfrüchte in Moonlight Peaks sind magisch?', a: 'Bestätigt: Magische Feldfrüchte können nur mit Aquaflux (magischem Wasser) gegossen werden, nicht mit einer normalen Gießkanne. Mehrere haben zudem einzigartige Besonderheiten — Gobbler muss mit Fisch oder Kleintieren gefüttert werden, Drikkers Becher muss mit Wasser gefüllt werden, Mandrake bringt je nach Nachbarschaft eine wütende oder glückliche Variante hervor, und Weeping Wicca weint und bewässert dabei automatisch ein 3×3-Feld um sich herum.' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Startseite', item: `${SITE.url}/de` },
+    { '@type': 'ListItem', position: 2, name: 'Hof', item: `${SITE.url}/de/farm` },
+    { '@type': 'ListItem', position: 3, name: 'Feldfrüchte', item: `${SITE.url}/de/farm/crops` },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks Feldfrüchte — Vollständige Datenbank"
+  description="Die vollständige Moonlight Peaks Feldfrucht-Datenbank auf Deutsch: über 30 Feldfrüchte, Kräutergarten-Pflanzen und Baumfrüchte, sourced aus dem offiziellen Wiki."
+  path="/de/farm/crops"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Hof', href: '/de/farm' }, { label: 'Feldfrüchte' }]}
+  lang="de"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Hof · Datenbank</p>
+      <h1>Moonlight Peaks <em>Feldfrüchte</em></h1>
+      <p class="intro">
+        Die vollständige Feldfrucht-Datenbank, aus dem offiziellen Moonlight Peaks Wiki. Feldfrüchte
+        teilen sich in drei Kategorien je nach Anbauort auf — Ackerland, Kräutergarten oder Baum —
+        und manche sind magisch, das heißt sie können nur mit Aquaflux statt einer normalen
+        Gießkanne bewässert werden.
+      </p>
+
+      <h2>Feldfrüchte ({farmlandCrops.length})</h2>
+      <table class="facts">
+        <tr><th>Feldfrucht</th><th>Jahreszeiten</th><th>Magisch?</th><th>Anmerkungen</th></tr>
+        {farmlandCrops.map((c) => (
+          <tr>
+            <td>{cropDetailSlugs[c.name] ? <a href={`/de/farm/crops/${cropDetailSlugs[c.name]}`}>{c.name}</a> : c.name}</td>
+            <td>{c.seasons.length ? c.seasons.join(', ') : '—'}</td>
+            <td>{c.magical ? 'Ja' : 'Nein'}</td>
+            <td>
+              {c.harvestDays && <>{c.harvestDays} Tage Wachstum{c.regrowDays ? `, wächst nach ${c.regrowDays} Tagen nach` : ''}{c.yieldPerHarvest ? `, ${c.yieldPerHarvest}/Ernte` : ''}{c.sellPrice ? `, verkauft für ${c.sellPrice}g` : ''}{c.seedPrice ? ` (Samen ${c.seedPrice}g)` : ''}. </>}
+              {c.note}
+            </td>
+          </tr>
+        ))}
+      </table>
+
+      <h2>Kräutergarten-Pflanzen ({herbCrops.length})</h2>
+      <p>Bestätigt: Kräutergarten-Pflanzen brauchen eine eigene Kräutergarten-Struktur und können nicht direkt auf normalem Ackerland gepflanzt werden.</p>
+      <table class="facts">
+        <tr><th>Kraut</th><th>Magisch?</th><th>Getrocknete Form?</th></tr>
+        {herbCrops.map((h) => (
+          <tr><td>{h.name}</td><td>{h.magical ? 'Ja' : 'Nein'}</td><td>{h.hasDriedForm ? 'Ja' : 'Nein'}</td></tr>
+        ))}
+      </table>
+
+      <h2>Baumfrüchte ({treeCrops.length})</h2>
+      <p>Bestätigt: Baumfrüchte werden direkt auf Grasland gepflanzt, kein Umgraben nötig.</p>
+      <table class="facts">
+        <tr><th>Baum</th><th>Jahreszeiten</th><th>Magisch?</th><th>Anmerkungen</th></tr>
+        {treeCrops.map((t) => (
+          <tr><td>{t.name}</td><td>{t.seasons.join(', ')}</td><td>{t.magical ? 'Ja' : 'Nein'}</td><td>{t.note || '—'}</td></tr>
+        ))}
+      </table>
+
+      <h2>Häufige Fragen</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        Aus dem offiziellen Moonlight Peaks Wiki (moonlightpeaks.wiki.gg). Verwandte Seiten:
+        <a href="/de/farm">Hof-Hub</a>, <a href="/de/farm/farm-helpers">Hofhelfer</a>,
+        <a href="/de/farming">Landwirtschaft-Guide</a>.
+      </div>
+    </div>
+  </article>
+</Base>

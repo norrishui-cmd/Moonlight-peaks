@@ -1,0 +1,98 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { SITE } from '../../../consts';
+import { farmlandCrops, herbCrops, treeCrops } from '../../../data/farm-crops';
+
+const cropDetailSlugs: Record<string, string> = {
+  'Blood Grapes': 'blood-grapes', 'Rice': 'rice', 'Drikker': 'drikker', 'Gobbler': 'gobbler',
+  'Hold Me Close': 'hold-me-close', 'Mandrake': 'mandrake', 'Weeping Wicca': 'weeping-wicca',
+  'Common Mushroom': 'instant-growth-mushrooms', 'Frosteria': 'instant-growth-mushrooms',
+  'Glowglammer': 'instant-growth-mushrooms', 'Yellow Glowglammer': 'instant-growth-mushrooms',
+  'Volacio Mushroom': 'instant-growth-mushrooms', 'Amanita': 'instant-growth-mushrooms',
+};
+
+const faq = [
+  { q: 'Moonlight Peaksには作物が何種類ありますか?', a: `公式wikiで確認済み:農地作物${farmlandCrops.length}種、ハーブ園の植物${herbCrops.length}種、樹木作物${treeCrops.length}種——栽培場所によって3つのカテゴリに分かれています。` },
+  { q: 'Moonlight Peaksの3つの作物カテゴリとは?', a: '確認済み:農地作物(耕した畑に植える)、ハーブ園の植物(専用のハーブ園設備が必要)、樹木作物(草地に直接植える、耕す必要なし)。' },
+  { q: 'Moonlight Peaksでどの作物が魔法作物ですか?', a: '確認済み:魔法作物は通常のじょうろではなくAquaflux(魔法の水)でしか水やりできません。いくつかは独自の特殊な仕組みも持っています——Gobblerは魚か小動物を与える必要があり、Drikkerはカップに水を満たす必要があり、Mandrakeは近くのMandrakeの有無でAngryかHappyになり、Weeping Wiccaは泣いて周囲3x3に自動で水をやります。' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'ホーム', item: `${SITE.url}/ja` },
+    { '@type': 'ListItem', position: 2, name: '農場', item: `${SITE.url}/ja/farm` },
+    { '@type': 'ListItem', position: 3, name: '作物', item: `${SITE.url}/ja/farm/crops` },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks 作物 — 完全データベース"
+  description="Moonlight Peaksの完全な作物データベースを日本語で:30種類以上の農地作物、ハーブ園の植物、樹木作物。公式wikiに基づいています。"
+  path="/ja/farm/crops"
+  jsonLd={jsonLd}
+  crumbs={[{ label: '農場', href: '/ja/farm' }, { label: '作物' }]}
+  lang="ja"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">農場・データベース</p>
+      <h1>Moonlight Peaksの<em>作物</em></h1>
+      <p class="intro">
+        公式Moonlight Peaks Wikiに基づく完全な作物データベースです。作物は栽培場所によって農地・
+        ハーブ園・樹木の3カテゴリに分かれ、一部は魔法作物で、通常のじょうろではなくAquafluxでしか
+        水やりできません。
+      </p>
+
+      <h2>農地作物({farmlandCrops.length})</h2>
+      <table class="facts">
+        <tr><th>作物</th><th>季節</th><th>魔法</th><th>メモ</th></tr>
+        {farmlandCrops.map((c) => (
+          <tr>
+            <td>{cropDetailSlugs[c.name] ? <a href={`/ja/farm/crops/${cropDetailSlugs[c.name]}`}>{c.name}</a> : c.name}</td>
+            <td>{c.seasons.length ? c.seasons.join('、') : '—'}</td>
+            <td>{c.magical ? 'あり' : 'なし'}</td>
+            <td>
+              {c.harvestDays && <>収穫まで{c.harvestDays}日{c.regrowDays ? `、${c.regrowDays}日ごとに再収穫` : ''}{c.yieldPerHarvest ? `、1回${c.yieldPerHarvest}個` : ''}{c.sellPrice ? `、${c.sellPrice}ゴールドで売却` : ''}{c.seedPrice ? `(種${c.seedPrice}ゴールド)` : ''}。 </>}
+              {c.note}
+            </td>
+          </tr>
+        ))}
+      </table>
+
+      <h2>ハーブ園の植物({herbCrops.length})</h2>
+      <p>確認済み:ハーブ園の植物には専用のハーブ園設備が必要で、通常の農地には直接植えられません。</p>
+      <table class="facts">
+        <tr><th>ハーブ</th><th>魔法</th><th>乾燥形態あり</th></tr>
+        {herbCrops.map((h) => (
+          <tr><td>{h.name}</td><td>{h.magical ? 'あり' : 'なし'}</td><td>{h.hasDriedForm ? 'あり' : 'なし'}</td></tr>
+        ))}
+      </table>
+
+      <h2>樹木作物({treeCrops.length})</h2>
+      <p>確認済み:樹木作物は草地に直接植えられ、耕す必要はありません。</p>
+      <table class="facts">
+        <tr><th>樹木</th><th>季節</th><th>魔法</th><th>メモ</th></tr>
+        {treeCrops.map((t) => (
+          <tr><td>{t.name}</td><td>{t.seasons.join('、')}</td><td>{t.magical ? 'あり' : 'なし'}</td><td>{t.note || '—'}</td></tr>
+        ))}
+      </table>
+
+      <h2>よくある質問</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        公式Moonlight Peaks Wiki(moonlightpeaks.wiki.gg)より。関連ページ:
+        <a href="/ja/farm">農場ハブ</a>、<a href="/ja/farm/farm-helpers">ファームヘルパー</a>、
+        <a href="/ja/farming">農業ガイド</a>。
+      </div>
+    </div>
+  </article>
+</Base>

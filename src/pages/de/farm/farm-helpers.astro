@@ -1,0 +1,71 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { SITE } from '../../../consts';
+import { farmHelpers } from '../../../data/farm-helpers';
+import { farmHelperDescDe } from '../../../data/farm-helpers-de';
+
+const faq = [
+  { q: 'Was sind Hofhelfer in Moonlight Peaks?', a: `Bestätigt über das offizielle Wiki: Hofhelfer sind Maschinen, die Landwirtschaft automatisieren oder Hoferzeugnisse verarbeiten. ${farmHelpers.length} sind bislang bestätigt, darunter Ofen, Fass, Veredler, Kräutergarten, Kräutertrockner, Mörser, Bienenhaus, Webstuhl, Käsepresse, Mana-Extraktor, Mühle, Marmeladenmaschine, Glühwürmchen-Zufluchtsort, Glühwürmchen-Bestäuber, Chocolatier und Samen-Sequenzer.` },
+  { q: 'Wie schaltet man den Veredler in Moonlight Peaks frei?', a: 'Bestätigt: An der Werkbank für 20 Holz + 20 Stein gebaut. Er verwandelt Rohmaterialien wie Holz, Stein, Fiber und Dunkelholz in Bretter, Veredelten Stein, Futter und Hartholzbretter.' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Startseite', item: `${SITE.url}/de` },
+    { '@type': 'ListItem', position: 2, name: 'Hof', item: `${SITE.url}/de/farm` },
+    { '@type': 'ListItem', position: 3, name: 'Hofhelfer', item: `${SITE.url}/de/farm/farm-helpers` },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks Hofhelfer — Alle 16 Maschinen & Rezepte"
+  description="Jede bestätigte Moonlight Peaks Hofhelfer-Maschine: Ofen, Fass, Veredler, Bienenhaus, Mühle, Marmeladenmaschine und mehr, mit Baurezepten und Erträgen, aus dem offiziellen Wiki."
+  path="/de/farm/farm-helpers"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Hof', href: '/de/farm' }, { label: 'Hofhelfer' }]}
+  lang="de"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Hof · Maschinen</p>
+      <h1>Hof<em>helfer</em></h1>
+      <p class="intro">
+        Bestätigt über das offizielle Moonlight Peaks Wiki: Hofhelfer sind Maschinen, die
+        Landwirtschaft automatisieren oder Hoferzeugnisse verarbeiten. {farmHelpers.length} sind
+        bislang bestätigt.
+      </p>
+
+      {farmHelpers.map((h) => (
+        <>
+          <h2>{h.name}</h2>
+          <p>
+            {farmHelperDescDe[h.name] ?? h.desc}
+            {h.buildRecipe && <> <strong>Bau:</strong> {h.buildRecipe}{h.buildSource ? ` (von ${h.buildSource})` : ''}.</>}
+          </p>
+          {h.outputs && h.outputs.length > 0 && (
+            <ul>
+              {h.outputs.map((o) => (<li><strong>{o.name}:</strong> {o.recipe}</li>))}
+            </ul>
+          )}
+        </>
+      ))}
+
+      <h2>Häufige Fragen</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        Aus dem offiziellen Moonlight Peaks Wiki. Verwandte Seiten:
+        <a href="/de/farm">Hof-Hub</a>, <a href="/de/farm/crops">Feldfrüchte</a>,
+        <a href="/de/items/mineables">Abbaubare Rohstoffe</a>, <a href="/de/items/cooking">Kochen</a>.
+      </div>
+    </div>
+  </article>
+</Base>

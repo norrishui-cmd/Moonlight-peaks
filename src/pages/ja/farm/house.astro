@@ -1,0 +1,74 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { SITE } from '../../../consts';
+
+const faq = [
+  { q: 'Moonlight Peaksで家は何回アップグレードできますか?', a: '公式wikiで確認済み:4回です。アップグレードごとに家に新しい増築部分が追加されます。' },
+  { q: 'Moonlight Peaksで家のアップグレードはどうやって解放しますか?', a: '確認済み:Ridgeが序盤にくれる「Fix the Roof」クエストを完了して初めてアップグレードが可能になります。' },
+  { q: 'Moonlight Peaksで家のアップグレードはどこで買えますか?', a: '確認済み:Howling Hammerでゴールドと木材を使って購入します。アップグレードには1晩かかります。' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'ホーム', item: `${SITE.url}/ja` },
+    { '@type': 'ListItem', position: 2, name: '農場', item: `${SITE.url}/ja/farm` },
+    { '@type': 'ListItem', position: 3, name: '家', item: `${SITE.url}/ja/farm/house` },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks 家 — アップグレード、費用、Fix the Roofクエスト"
+  description="確認済み:Moonlight Peaksの家はHowling Hammerで4回アップグレードでき、Fix the Roofクエストで解放されます。費用、所要時間、初期家具について。"
+  path="/ja/farm/house"
+  jsonLd={jsonLd}
+  crumbs={[{ label: '農場', href: '/ja/farm' }, { label: '家' }]}
+  lang="ja"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">農場・家</p>
+      <h1>あなたの<em>家</em></h1>
+      <p class="intro">
+        公式wikiで確認済み:あなたの永続的な自宅は小さな石造りの家で、4回アップグレードでき、
+        アップグレードごとに新しい増築部分が追加されます。
+      </p>
+
+      <h2>アップグレードの解放</h2>
+      <p>
+        確認済み:家のアップグレードは、Ridgeが序盤にくれる<strong>「Fix the Roof」</strong>クエストを
+        完了して初めて可能になります。解放後は<strong>Howling Hammer</strong>でゴールドと木材を
+        使って購入し、それぞれ1ゲーム内の夜がかかります。
+      </p>
+
+      <h2>初期家具とガラクタ</h2>
+      <p>
+        確認済み:最初の家の段階には、木製の棺、調理台、作業台、観葉植物、木箱といった基本的な
+        装飾品・機能アイテムが既に揃っています。家を最初にもらった時点で、内部と周辺にはガラクタ
+        (ゴミ、落ち葉の山、石)があり、片付けることができます。
+      </p>
+
+      <h2>外観のカスタマイズ</h2>
+      <p>
+        確認済み:外観のカスタマイズもHowling Hammerで行えます。一部のカスタマイズオプションは
+        最終(4段階目)の家に到達して初めて解放されます。
+      </p>
+
+      <h2>よくある質問</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        公式Moonlight Peaks Wikiより。関連ページ:
+        <a href="/ja/farm">農場ハブ</a>、<a href="/characters/ridge">Ridge</a>、
+        <a href="/ja/items/decorations">装飾</a>。
+      </div>
+    </div>
+  </article>
+</Base>

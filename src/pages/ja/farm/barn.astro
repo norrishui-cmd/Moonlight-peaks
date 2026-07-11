@@ -1,0 +1,78 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { SITE } from '../../../consts';
+
+const faq = [
+  { q: 'Moonlight Peaksで納屋はいくらですか?', a: '公式wikiで確認済み:Lunaに家畜を紹介された後、Howling HammerのRidgeから4,000ゴールドで購入できます。' },
+  { q: 'Moonlight Peaksで納屋の広さは?', a: '確認済み:納屋には10x6マスのスペースが必要で、建設に1晩かかります。動物4匹を収容できます。' },
+  { q: 'Moonlight Peaksで納屋を複数建てられますか?', a: 'はい、確認済み:各納屋に必要な10x6マスのスペースがある限り、複数の納屋を建てられ、それぞれ動物4匹を収容できます。' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'ホーム', item: `${SITE.url}/ja` },
+    { '@type': 'ListItem', position: 2, name: '農場', item: `${SITE.url}/ja/farm` },
+    { '@type': 'ListItem', position: 3, name: '納屋', item: `${SITE.url}/ja/farm/barn` },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks 納屋 — 費用、広さ、解放方法"
+  description="確認済み:Moonlight Peaksの納屋はRidgeから4,000ゴールド、10x6マスのスペース、建設に1晩、動物4匹まで収容可能です。"
+  path="/ja/farm/barn"
+  jsonLd={jsonLd}
+  crumbs={[{ label: '農場', href: '/ja/farm' }, { label: '納屋' }]}
+  lang="ja"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">農場・納屋</p>
+      <h1><em>納屋</em></h1>
+      <p class="intro">
+        公式wikiと発売週の報道で確認済み:納屋はLunaに家畜を紹介された後、Howling Hammerで
+        <strong>4,000ゴールド</strong>で購入できます。
+      </p>
+
+      <h2>解放方法</h2>
+      <p>
+        確認済み:1年目の春の序盤、Ridgeが屋根について話しかけてきて、同時にLunaから「Farm Animals
+        for Sale」クエストの手紙が届きます——Lunaの農場を訪れると最初に利用可能な動物(Cheeken)が
+        見られます。屋根を修理した後、Howling Hammer(18時〜深夜営業)でRidgeを見つけ、Shopを選び、
+        2番目のタブで納屋を購入できます。
+      </p>
+
+      <h2>広さ・費用・収容数</h2>
+      <table class="facts">
+        <tr><th>費用</th><td>4,000ゴールド</td></tr>
+        <tr><th>必要なスペース</th><td>10x6マス</td></tr>
+        <tr><th>建設時間</th><td>1晩</td></tr>
+        <tr><th>動物の収容数</th><td>納屋1棟につき4匹</td></tr>
+        <tr><th>複数建設可能?</th><td>はい——4匹以上飼うにはさらに建てます</td></tr>
+      </table>
+
+      <h2>建設後</h2>
+      <p>
+        確認済み:納屋が建った後、Lunaの農場に戻って最初の動物を引き取ります。利用可能な動物は
+        彼女の家の隣の小さな囲いで毎日入れ替わり、名前は自分でつける必要があります——ゲームは
+        名前を提案してくれません。
+      </p>
+
+      <h2>よくある質問</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        公式Moonlight Peaks Wiki、Bonus ActionとPrima Gamesの発売週の報道と照合済み。関連ページ:
+        <a href="/ja/farm">農場ハブ</a>、<a href="/ja/farm/animals">動物</a>、
+        <a href="/characters/ridge">Ridge</a>、<a href="/ja/characters/luna">Luna</a>。
+      </div>
+    </div>
+  </article>
+</Base>
