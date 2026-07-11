@@ -1,0 +1,71 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE } from '../../consts';
+
+const faq = [
+  { q: 'What is Albertus\u2019 Jobs in Moonlight Peaks?', a: 'Confirmed: a bulletin board run by Albertus, an owl, where players check available jobs — short requests that reward coins, occasional item gifts, and relationship points with whoever posted the request.' },
+  { q: 'Where do you find the job board in Moonlight Peaks?', a: 'Confirmed: at Town Hall, run by Albertus. It\u2019s one of the first things introduced when you register as a new resident.' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: SITE.url },
+    { '@type': 'ListItem', position: 2, name: 'Collection', item: new URL('/collection', SITE.url).href },
+    { '@type': 'ListItem', position: 3, name: 'Jobs', item: new URL('/collection/jobs', SITE.url).href },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks Albertus' Jobs — The Job Board Explained"
+  description="Confirmed: Albertus' Jobs is the Moonlight Peaks bulletin board where short requests reward coins, item gifts, and relationship points with the resident who posted them."
+  path="/collection/jobs"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Collection', href: '/collection' }, { label: 'Jobs' }]}
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Collection · Jobs</p>
+      <h1>Albertus' <em>Jobs</em></h1>
+      <p class="intro">
+        Confirmed: Albertus' Jobs is the town's bulletin board, run by <a href="/characters/albertus">Albertus</a>,
+        an owl, at Town Hall — one of the first systems introduced when you register as a new resident.
+      </p>
+
+      <h2>How jobs work</h2>
+      <p>
+        Confirmed: jobs are short requests posted on the board. Completing one earns coins, and
+        sometimes an item gift, plus a boost to your relationship with whoever posted the request —
+        making the board useful both for early income and for building friendships passively.
+      </p>
+
+      <h2>Where to find it</h2>
+      <p>
+        Confirmed: the board is located at Town Hall, alongside Mayor Brook's registration desk —
+        it's one of the very first things new residents are introduced to in town.
+      </p>
+
+      <h2>Still being verified</h2>
+      <ul>
+        <li>Exact job pool and how often it refreshes.</li>
+        <li>Whether job difficulty or rewards scale over time.</li>
+        <li>Full list of which residents' requests can appear.</li>
+      </ul>
+
+      <h2>FAQ</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        Related: <a href="/collection">Collection hub</a>, <a href="/characters/albertus">Albertus</a>,
+        <a href="/locations/town-hall">Town Hall</a>, <a href="/characters/brook">Brook</a>.
+      </div>
+    </div>
+  </article>
+</Base>

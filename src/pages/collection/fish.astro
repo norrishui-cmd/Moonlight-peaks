@@ -1,0 +1,80 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE } from '../../consts';
+
+const faq = [
+  { q: 'How do you get your first fishing rod in Moonlight Peaks?', a: 'Confirmed: meet Noel by a river within your first few in-game nights. He challenges you to catch 3 different fish types before he does — win (it\u2019s untimed, so easy) and he gives you a fishing rod plus a coin reward.' },
+  { q: 'How many fish are in Moonlight Peaks?', a: 'Confirmed: roughly 22 fish species, each with its own base sell value and energy restored, both of which increase at 1-Star and 2-Star quality.' },
+  { q: 'What affects which fish you catch in Moonlight Peaks?', a: 'Confirmed: location, season, weather, and time of day all affect which fish are available to catch at any given moment.' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: SITE.url },
+    { '@type': 'ListItem', position: 2, name: 'Collection', item: new URL('/collection', SITE.url).href },
+    { '@type': 'ListItem', position: 3, name: 'Fish', item: new URL('/collection/fish', SITE.url).href },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks Fish — All ~22 Species & How to Get Your Rod"
+  description="Confirmed Moonlight Peaks fishing: how to get your first rod from Noel, roughly 22 fish species, quality tiers, and what affects which fish you catch."
+  path="/collection/fish"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Collection', href: '/collection' }, { label: 'Fish' }]}
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Collection · Fish</p>
+      <h1>Moonlight Peaks <em>fish</em></h1>
+      <p class="intro">
+        Confirmed via two independent launch-week sources: fishing runs on a real collection of
+        roughly 22 species, each affected by where, when, and in what weather you cast your line.
+      </p>
+
+      <h2>Getting your first rod</h2>
+      <p>
+        Confirmed: you meet <a href="/characters/noel">Noel</a> by a river within your first few
+        in-game nights. He challenges you to catch 3 different fish types before he does — it's
+        untimed, so easy to win — and rewards you with your first fishing rod plus a coin bonus.
+      </p>
+
+      <h2>How many fish, and what changes</h2>
+      <p>
+        Confirmed: the collection runs to roughly 22 species. Which ones are available to catch
+        depends on location, season, weather, and time of day, so a fish you can't find one night
+        may simply be waiting on the right conditions rather than missing from the game entirely.
+      </p>
+
+      <h2>Quality tiers</h2>
+      <p>
+        Confirmed: each fish has a base sell value and a base energy value when eaten, and both
+        increase at 1-Star and 2-Star quality — so a higher-quality catch of the same species is
+        worth actively seeking out rather than settling for the first bite.
+      </p>
+
+      <h2>Still being verified</h2>
+      <ul>
+        <li>Exact catch locations per species.</li>
+        <li>Full season/weather/time rules per fish.</li>
+        <li>Complete sell price table across all quality tiers.</li>
+      </ul>
+
+      <h2>FAQ</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        Related: <a href="/collection">Collection hub</a>, <a href="/activities/fishing">fishing activity</a>,
+        <a href="/characters/noel">Noel</a>, <a href="/items/cooking">cooking</a>.
+      </div>
+    </div>
+  </article>
+</Base>

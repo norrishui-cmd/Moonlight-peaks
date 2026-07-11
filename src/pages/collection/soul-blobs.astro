@@ -1,0 +1,80 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE } from '../../consts';
+
+const faq = [
+  { q: 'How many Soul Blobs are there in Moonlight Peaks?', a: 'Confirmed at launch: 100 Soul Blobs scattered around the world.' },
+  { q: 'How do you catch Soul Blobs in Moonlight Peaks?', a: 'Confirmed: with the Net, the same tool used for bug-catching — not by hand.' },
+  { q: 'What do you get for collecting all the Soul Blobs?', a: 'Confirmed: the Antique Clock, which extends the night from its default 15 minutes to 25 minutes.' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: SITE.url },
+    { '@type': 'ListItem', position: 2, name: 'Collection', item: new URL('/collection', SITE.url).href },
+    { '@type': 'ListItem', position: 3, name: 'Soul Blobs', item: new URL('/collection/soul-blobs', SITE.url).href },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks Soul Blobs: All 100 & the Antique Clock Reward"
+  description="Confirmed: 100 Soul Blobs are scattered around Moonlight Peaks, caught with the Net. Collecting all of them rewards the Antique Clock, extending your night to 25 minutes."
+  path="/collection/soul-blobs"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Collection', href: '/collection' }, { label: 'Soul Blobs' }]}
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Collection · Soul Blobs</p>
+      <h1>Moonlight Peaks <em>Soul Blobs</em></h1>
+      <p class="intro">
+        Soul Blobs are little wandering skull-souls dotted around the world — confirmed at launch:
+        100 of them in total, with a genuinely useful reward for completionists.
+      </p>
+
+      <div class="callout">
+        <strong>Quick answer:</strong> Death introduces Soul Blobs after your second meeting with
+        him in town, and asks you to round them up with the Net. There are 100 total; collecting
+        every one rewards the Antique Clock.
+      </div>
+
+      <h2>How Soul Blobs are introduced</h2>
+      <p>
+        Confirmed: <a href="/characters/death">Death</a> introduces Soul Blobs after your second
+        meeting with him in town, and asks you to round them up using the Net — the same tool used
+        for bug-catching, not something separate.
+      </p>
+
+      <h2>What makes them different from other collectibles</h2>
+      <p>
+        Community-reported: Soul Blobs are the more story-driven of the game's two creature-collecting
+        side hunts (the other being <a href="/collection/vampsters">Vampsters</a>). When you catch a
+        Soul Blob, the game tells you a small vignette about how that soul died — a little narrative
+        payoff for each one you find, rather than just a checklist tick.
+      </p>
+
+      <h2>The reward for completing the set</h2>
+      <p>
+        Confirmed: collecting all 100 Soul Blobs rewards the <strong>Antique Clock</strong>, which
+        extends the length of the night from its default 15 minutes to 25 minutes — a genuinely
+        useful, permanent quality-of-life reward rather than a purely cosmetic one.
+      </p>
+
+      <h2>FAQ</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        Related: <a href="/collection">Collection hub</a>, <a href="/collection/vampsters">Vampsters</a>,
+        <a href="/characters/death">Death</a>, <a href="/activities/fishing">Fishing &amp; bug-catching</a>.
+      </div>
+    </div>
+  </article>
+</Base>

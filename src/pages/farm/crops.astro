@@ -3,6 +3,14 @@ import Base from '../../layouts/Base.astro';
 import { SITE } from '../../consts';
 import { farmlandCrops, herbCrops, treeCrops } from '../../data/farm-crops';
 
+const cropDetailSlugs: Record<string, string> = {
+  'Blood Grapes': 'blood-grapes', 'Rice': 'rice', 'Drikker': 'drikker', 'Gobbler': 'gobbler',
+  'Hold Me Close': 'hold-me-close', 'Mandrake': 'mandrake', 'Weeping Wicca': 'weeping-wicca',
+  'Common Mushroom': 'instant-growth-mushrooms', 'Frosteria': 'instant-growth-mushrooms',
+  'Glowglammer': 'instant-growth-mushrooms', 'Yellow Glowglammer': 'instant-growth-mushrooms',
+  'Volacio Mushroom': 'instant-growth-mushrooms', 'Amanita': 'instant-growth-mushrooms',
+};
+
 const faq = [
   { q: 'How many crops are in Moonlight Peaks?', a: `Confirmed via the official wiki: ${farmlandCrops.length} farmland crops, ${herbCrops.length} herb garden crops, and ${treeCrops.length} tree crops — split into three planting categories based on where each one grows.` },
   { q: 'What are the three crop categories in Moonlight Peaks?', a: 'Confirmed: Farmland crops (planted on tilled farmland), Herb Garden crops (need a dedicated Herb Garden structure), and Tree crops (planted directly on grass, no tilling needed).' },
@@ -41,7 +49,7 @@ const jsonLd = [
         <tr><th>Crop</th><th>Seasons</th><th>Magical?</th><th>Notes</th></tr>
         {farmlandCrops.map((c) => (
           <tr>
-            <td>{c.name}</td>
+            <td>{cropDetailSlugs[c.name] ? <a href={`/farm/crops/${cropDetailSlugs[c.name]}`}>{c.name}</a> : c.name}</td>
             <td>{c.seasons.length ? c.seasons.join(', ') : '—'}</td>
             <td>{c.magical ? 'Yes' : 'No'}</td>
             <td>

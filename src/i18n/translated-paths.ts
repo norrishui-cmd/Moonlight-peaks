@@ -22,8 +22,8 @@ const jaOnlyPaths = [
   '/faq/is-moonlight-peaks-on-ps5-or-xbox', '/faq/is-moonlight-peaks-multiplayer',
   '/characters/saga/gifts', '/characters/luna/gifts', '/characters/orlock/gifts',
   '/characters/sabrina/gifts', '/characters/noel/gifts', '/characters/fiona/gifts',
-  '/items/tools', '/items/fertilizer', '/items/clothing', '/items/fish', '/items/critters',
-  '/items/vampster', '/items/soul-blobs', '/items/cooking', '/items/crafting',
+  '/items/tools', '/items/fertilizer', '/items/clothing', '/items/fish',
+  '/items/cooking', '/items/crafting',
   '/items/artifacts', '/items/livestock', '/items/potions',
   '/items/mineables', '/items/decorations',
 ];

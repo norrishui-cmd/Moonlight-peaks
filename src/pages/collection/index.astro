@@ -1,0 +1,73 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+
+const entries = [
+  { group: 'Fishing', title: 'Fish', desc: 'Roughly 22 fish species, how to get your first rod from Noel, and what affects which fish you catch.', href: '/collection/fish' },
+  { group: 'Economy', title: 'Jobs', desc: 'Albertus\u2019 Jobs board — short requests for coins, item gifts, and relationship points.', href: '/collection/jobs' },
+  { group: 'Creatures', title: 'Critters', desc: 'Catchable bugs that change by season and weather, and double as home decoration.', href: '/collection/critters' },
+  { group: 'Creatures', title: 'Vampsters', desc: 'All 53 confirmed Vampsters, where to find them, and how to carry them home.', href: '/collection/vampsters' },
+  { group: 'Creatures', title: 'Soul Blobs', desc: 'All 100 Soul Blobs and the Antique Clock reward for collecting every one.', href: '/collection/soul-blobs' },
+];
+
+const jsonLd = {
+  '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: SITE.url },
+    { '@type': 'ListItem', position: 2, name: 'Collection', item: new URL('/collection', SITE.url).href },
+  ],
+};
+---
+<Base
+  title="Moonlight Peaks Collection — Fish, Jobs, Critters, Vampsters & Soul Blobs"
+  description="The Moonlight Peaks collection hub: fish, Albertus' job board, critters, Vampsters, and Soul Blobs — sourced from the official wiki and cross-checked launch-week coverage."
+  path="/collection"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Collection' }]}
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Hub · Collection</p>
+      <h1>{GAME.title} <em>collection</em></h1>
+      <p class="intro">
+        Everything about the game's collectible and gatherable systems — what to catch, what to
+        turn in, and what it's worth. Most of what's below is sourced directly from the official
+        Moonlight Peaks Wiki, cross-checked against launch-week coverage.
+      </p>
+
+      <div class="itg">
+        {entries.map((e) => (
+          <a class="itcard" href={e.href}>
+            <span class="itgroup">{e.group}</span>
+            <h3>{e.title}</h3>
+            <p>{e.desc}</p>
+          </a>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        Related: <a href="/farm">farm</a>, <a href="/items">items</a>,
+        <a href="/activities">activities</a>, <a href="/achievements">achievements</a>.
+      </div>
+    </div>
+  </article>
+
+  <style>
+    .itg { display: grid; grid-template-columns: 1fr; gap: 12px; margin: 6px 0 18px; }
+    @media (min-width: 640px) { .itg { grid-template-columns: 1fr 1fr; } }
+    @media (min-width: 980px) { .itg { grid-template-columns: 1fr 1fr 1fr; } }
+    .itcard {
+      display: block;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: var(--surface);
+      padding: 14px;
+      color: inherit;
+      text-decoration: none;
+      transition: border-color .15s ease, transform .15s ease;
+    }
+    .itcard:hover { border-color: color-mix(in srgb, var(--candle) 50%, var(--line)); transform: translateY(-2px); }
+    .itgroup { font-family: var(--mono); color: var(--faint); text-transform: uppercase; letter-spacing: 0.04em; font-size: 0.62rem; }
+    .itcard h3 { font-family: var(--display); font-weight: 600; font-size: 1rem; margin: 4px 0 6px; }
+    .itcard p { color: #ded3e6; font-size: 0.84rem; margin: 0 0 10px; }
+  </style>
+</Base>

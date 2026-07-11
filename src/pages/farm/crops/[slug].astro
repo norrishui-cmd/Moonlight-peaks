@@ -1,0 +1,58 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { SITE } from '../../../consts';
+import { cropDetails } from '../../../data/farm-crop-details';
+
+// Only crops with genuinely distinctive, real mechanics get individual pages — not every crop in
+// the database, since most currently have only a name/season/magical-flag and nothing else
+// substantial enough for a standalone page.
+
+export function getStaticPaths() {
+  return Object.entries(cropDetails).map(([slug, data]) => ({ params: { slug }, props: { slug, data } }));
+}
+
+const { slug, data } = Astro.props as { slug: string; data: (typeof cropDetails)[string] };
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: data.faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: SITE.url },
+    { '@type': 'ListItem', position: 2, name: 'Farm', item: new URL('/farm', SITE.url).href },
+    { '@type': 'ListItem', position: 3, name: 'Crops', item: new URL('/farm/crops', SITE.url).href },
+    { '@type': 'ListItem', position: 4, name: data.name, item: new URL(`/farm/crops/${slug}`, SITE.url).href },
+  ] },
+];
+---
+<Base
+  title={`${data.name} — Moonlight Peaks Crop Guide`}
+  description={data.dek}
+  path={`/farm/crops/${slug}`}
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Farm', href: '/farm' }, { label: 'Crops', href: '/farm/crops' }, { label: data.name }]}
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Farm · {data.category}</p>
+      <h1><em>{data.name}</em></h1>
+      <p class="intro">{data.dek}</p>
+
+      {data.body.map((p) => (<p>{p}</p>))}
+
+      <h2>FAQ</h2>
+      <div class="faq">
+        {data.faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        Sourced from the official Moonlight Peaks Wiki. Related:
+        <a href="/farm/crops">all crops</a>, <a href="/farm">Farm hub</a>,
+        <a href="/farm/farm-helpers">farm helpers</a>.
+      </div>
+    </div>
+  </article>
+</Base>
