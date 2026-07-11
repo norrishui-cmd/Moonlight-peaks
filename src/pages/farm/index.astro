@@ -3,12 +3,12 @@ import Base from '../../layouts/Base.astro';
 import { SITE, GAME } from '../../consts';
 
 const entries = [
-  { title: 'Crops', desc: 'The full crop database — 30+ farmland crops, herb garden crops, and tree crops, with seasons and magical status.', href: '/farm/crops' },
-  { title: 'House', desc: 'How your house upgrades 4 times via the Howling Hammer, unlocked by the Fix the Roof quest.', href: '/farm/house' },
-  { title: 'Barn', desc: 'Cost, size, and how to unlock the Barn — 4,000 coins, 10x6 space, holds 4 animals.', href: '/farm/barn' },
-  { title: 'Greenhouse', desc: 'What\u2019s confirmed so far about the Greenhouse farm expansion.', href: '/farm/greenhouse' },
-  { title: 'Animals', desc: 'The confirmed animal roster, how to adopt them, feeding, and what they produce.', href: '/farm/animals' },
-  { title: 'Farm Helpers', desc: 'All 16 confirmed processing machines — Furnace, Keg, Refiner, Bee House, and more, with recipes.', href: '/farm/farm-helpers' },
+  { group: 'Database', title: 'Crops', desc: 'The full crop database — 30+ farmland crops, herb garden crops, and tree crops, with seasons and magical status.', href: '/farm/crops' },
+  { group: 'Home', title: 'House', desc: 'How your house upgrades 4 times via the Howling Hammer, unlocked by the Fix the Roof quest.', href: '/farm/house' },
+  { group: 'Buildings', title: 'Barn', desc: 'Cost, size, and how to unlock the Barn — 4,000 coins, 10x6 space, holds 4 animals.', href: '/farm/barn' },
+  { group: 'Buildings', title: 'Greenhouse', desc: 'What\u2019s confirmed so far about the Greenhouse farm expansion.', href: '/farm/greenhouse' },
+  { group: 'Creatures', title: 'Animals', desc: 'The confirmed animal roster, how to adopt them, feeding, and what they produce.', href: '/farm/animals' },
+  { group: 'Machines', title: 'Farm Helpers', desc: 'All 16 confirmed processing machines — Furnace, Keg, Refiner, Bee House, and more, with recipes.', href: '/farm/farm-helpers' },
 ];
 
 const jsonLd = {
@@ -35,13 +35,12 @@ const jsonLd = {
         sourced directly from the official Moonlight Peaks Wiki.
       </p>
 
-      <div class="es-grid">
+      <div class="itg">
         {entries.map((e) => (
-          <a class="es-card" href={e.href}>
-            <span>
-              <strong>{e.title}</strong>
-              <em>{e.desc}</em>
-            </span>
+          <a class="itcard" href={e.href}>
+            <span class="itgroup">{e.group}</span>
+            <h3>{e.title}</h3>
+            <p>{e.desc}</p>
           </a>
         ))}
       </div>
@@ -52,4 +51,24 @@ const jsonLd = {
       </div>
     </div>
   </article>
+
+  <style>
+    .itg { display: grid; grid-template-columns: 1fr; gap: 12px; margin: 6px 0 18px; }
+    @media (min-width: 640px) { .itg { grid-template-columns: 1fr 1fr; } }
+    @media (min-width: 980px) { .itg { grid-template-columns: 1fr 1fr 1fr; } }
+    .itcard {
+      display: block;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: var(--surface);
+      padding: 14px;
+      color: inherit;
+      text-decoration: none;
+      transition: border-color .15s ease, transform .15s ease;
+    }
+    .itcard:hover { border-color: color-mix(in srgb, var(--candle) 50%, var(--line)); transform: translateY(-2px); }
+    .itgroup { font-family: var(--mono); color: var(--faint); text-transform: uppercase; letter-spacing: 0.04em; font-size: 0.62rem; }
+    .itcard h3 { font-family: var(--display); font-weight: 600; font-size: 1rem; margin: 4px 0 6px; }
+    .itcard p { color: #ded3e6; font-size: 0.84rem; margin: 0 0 10px; }
+  </style>
 </Base>

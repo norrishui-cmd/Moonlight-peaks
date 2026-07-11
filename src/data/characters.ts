@@ -57,6 +57,7 @@ export type Character = {
   traits: [string, number][];
   traitsPlaceholder?: boolean;
   knownInfo?: string[];
+  quote?: string; // A real in-character line, sourced from official or reliable fan coverage — not invented.
   // --- Gift data (fill at launch) ---
   // Item NAMES this resident loves / likes / dislikes. Omit or leave [] until verified in-game.
   lovedGifts?: string[];
@@ -253,7 +254,19 @@ export const characters: Character[] = [
   },
   { id: 'jada',    name: 'Jada',    family: 'Human (Henderson)', type: 'human', status: 'confirmed', romanceable: true, img: '/jada.webp',    c1: '#5a4a3a', c2: '#c0a07a',
     desc: 'A high-energy supernatural enthusiast and relic collector who happily info-dumps about history — thrilled to be living among werewolves and vampires. Persephone\u2019s niece, Winston\u2019s sister.',
-    traits: [], knownInfo: ['Confirmed as part of the Henderson human family, arriving alongside Persephone and Winston.', 'Reported as a relic collector and history enthusiast.'] },
+    traits: [],
+    quote: '"Wait \u2014 you have to hear about the relic I just found!"',
+    knownInfo: [
+      'Confirmed as part of the Henderson human family, arriving alongside Persephone and Winston.',
+      'Reported as a relic collector and history enthusiast, in sharp contrast to her skeptic brother Winston.',
+      'Confirmed pronouns: She/Her.',
+      'Community-reported: her breathless, whirlwind conversational style has made her a little notorious around town, and it takes someone genuinely special to get her to slow down.',
+    ],
+    // Gift data via moonlightpeaks.wiki's community-sourced gift table (launch week).
+    likedGifts: ['White Rose', 'Gazpacho Soup', 'Purple Tulips'],
+    dislikedGifts: ['Handmade Vase'],
+    giftStatus: 'reported',
+  },
   { id: 'brook',   name: 'Brook',   family: 'Werewolf (Logan)', type: 'werewolf', status: 'confirmed', romanceable: false, img: '/brook.webp',   c1: '#4a3a2a', c2: '#a08a5a',
     desc: 'The mayor of Moonlight Peaks and patriarch of the werewolf Logan family. You register with him at Town Hall as one of your first tasks — he\u2019s described as not a very friendly character.',
     traits: [], knownInfo: ['Confirmed as the town mayor; players register with him at Town Hall early on.', 'Confirmed: during that registration he gifts players Chester, the living storage chest used to sell goods overnight.', 'Confirmed: patriarch of the Logan werewolf family — younger brother Ridge is the town carpenter, and his children Saga and Ludo are both romanceable.', 'Not a romance option himself; resolves earlier "werewolf mayor Logan" naming confusion (see the Logan entry).'] },
@@ -374,7 +387,17 @@ export const characters: Character[] = [
   { id: 'winston', name: 'Winston', family: 'Human (Henderson)', type: 'human', status: 'confirmed', romanceable: true, img: '/winston.webp', c1: '#3a3a4a', c2: '#8a8ab0',
     desc: 'The town skeptic — reluctant to live in a supernatural town and easily spooked, but a lot of fun once he lets his guard down. Persephone\u2019s nephew, Jada\u2019s brother.',
     traits: [['Skepticism', 75]], traitsPlaceholder: true,
-    knownInfo: ['Confirmed as part of the Henderson human family, arriving alongside Persephone and Jada.'] },
+    quote: '"I\'m just a regular guy in a town full of\u2026 whatever you all are."',
+    knownInfo: [
+      'Confirmed as part of the Henderson human family, arriving alongside Persephone and Jada.',
+      'It was his family\u2019s decision to move to Moonlight Peaks, not his own \u2014 he doesn\u2019t buy into the supernatural side of town and would rather pretend it isn\u2019t there, in contrast to his supernatural-obsessed sister Jada and aunt Persephone.',
+      'His overactive imagination works against him: left unchecked, he tends to suspect the worst of every supernatural neighbor.',
+      'Confirmed pronouns: He/Him.',
+    ],
+    // Gift data via moonlightpeaks.wiki's community-sourced gift table (launch week).
+    lovedGifts: ['Diamond', 'Golden Egg', 'Blue Azalea', 'Shakshuka'],
+    giftStatus: 'reported',
+  },
   { id: 'rei', name: 'Rei', family: 'Mermaid (Hosu)', type: 'mermaid', status: 'confirmed', romanceable: true, img: '/rei.webp', c1: '#5a3a4a', c2: '#c08a9a',
     desc: 'A quiet, shy mermaid of the Hosu family obsessed with the environment, spending her days cleaning the shores.',
     traits: [['Gentleness', 80], ['Environmentalism', 85]], traitsPlaceholder: true,
@@ -385,7 +408,7 @@ export const characters: Character[] = [
     knownInfo: ['Reported as a member of the Khazan seer family, running the "Third Eye Threads" tailor shop — Dragan\u2019s younger sibling, alongside Alina.', 'Loves fashion and cozy conversation.'],
     // Gift data via TheGamer's launch-week testing (published July 7, 2026); 'TBC' items in their
     // original table are omitted here rather than guessed at.
-    likedGifts: ['Purple Tulip', 'Purple Azalea', 'Blood Grape', 'Raspberry Jam'],
+    likedGifts: ['Purple Tulip', 'Purple Azalea', 'Red Azaleas', 'Blood Grape', 'Raspberry Jam'],
     dislikedGifts: ['Onion Seeds', 'Pink Conch Shell'],
     giftStatus: 'reported',
     birthday: 'Autumn 8',
@@ -393,11 +416,17 @@ export const characters: Character[] = [
   { id: 'persephone', name: 'Persephone', family: 'Human (Henderson)', type: 'human', status: 'confirmed', romanceable: true, img: '/persephone.webp', c1: '#4a2f4a', c2: '#b06ab0',
     desc: "Free-spirited head of the Henderson family — a human aunt looking after her niece Jada and nephew Winston, newly arrived in town, with a love of astrology and crystals.",
     traits: [['Mysticism', 80]], traitsPlaceholder: true,
-    knownInfo: ['Confirmed as head of the Henderson human family (aunt to Jada and Winston).', 'Interested in astrology, crystals, and mystical topics.'],
+    quote: '"The stars brought me here \u2014 maybe they brought me to you, too."',
+    knownInfo: [
+      'Confirmed as head of the Henderson human family (aunt to Jada and Winston).',
+      'Interested in astrology, chakras, auras, and mystical topics \u2014 a recent arrival to town looking for a fresh start.',
+      'Confirmed pronouns: She/Her.',
+      'Naming history: pre-launch footage introduced this character under the name "Paris Vaughn" \u2014 the launch build settled on "Persephone" instead.',
+    ],
     // Gift data via TheGamer's launch-week testing (published July 7, 2026); 'TBC' items in their
     // original table are omitted here rather than guessed at.
-    lovedGifts: ['Handmade Flower Bouquet', 'Red Azaleas'],
-    likedGifts: ['Raspberry Jam'],
+    lovedGifts: ['Handmade Flower Bouquet'],
+    likedGifts: ['Raspberry Jam', 'Mushroom Stew'],
     giftStatus: 'reported',
   },
   { id: 'llemi', name: 'Llemi', family: 'Unknown', type: 'other', status: 'reported', romanceable: true, img: '/llemi.webp', c1: '#2f4a4a', c2: '#6ab0b0',

@@ -98,6 +98,7 @@ const jsonLd = [
             {c.romanceable === null && <span class="ctag">Romance: TBC</span>}
           </div>
           <p class="cdesc">{c.desc}</p>
+          {c.quote && <p class="cquote">{c.quote}</p>}
         </div>
       </div>
 
@@ -257,6 +258,7 @@ const jsonLd = [
     .ctag.fam { color: #cbb4f0; border-color: #5a4a7a; }
     .ctag.heart { color: var(--wine); border-color: #7a2f45; }
     .cdesc { color: #ded3e6; margin: 0; }
+    .cquote { color: var(--candle); font-style: italic; margin: 8px 0 0; font-size: 0.92rem; }
     .cnote { font-size: 0.74rem; color: var(--faint); margin: 0 0 8px; }
     .ctraits { display: grid; gap: 6px; max-width: 420px; }
     .ctrait { display: grid; grid-template-columns: 90px 1fr; align-items: center; gap: 8px; font-size: 0.78rem; color: var(--muted); }
