@@ -261,7 +261,7 @@ export const collections: CollectionEntry[] = [
       [tbc, tbc, tbc, tbc, 'Unchecked', 'Completion reward pending source fill'],
     ],
     verify: ['Total count', 'Exact region list', 'Capture method', 'Quest unlock', 'Reward'],
-    related: [{ label: 'Death', href: '/characters/death' }, { label: 'Map', href: '/map' }, { label: 'Critters', href: '/collections/critters' }],
+    related: [{ label: 'Death', href: '/characters/death' }, { label: 'Map', href: '/map' }, { label: 'Critters', href: '/collection/critters' }],
   },
 ];
 

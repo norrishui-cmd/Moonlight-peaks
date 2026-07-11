@@ -1,6 +1,10 @@
 ---
 import Base from '../../layouts/Base.astro';
 import { SITE } from '../../consts';
+import { collectionBySlug } from '../../data/collections';
+
+const collection = collectionBySlug.get('fish');
+const isImageCell = (cell: string) => cell.startsWith('/images/');
 
 const faq = [
   { q: 'How do you get your first fishing rod in Moonlight Peaks?', a: 'Confirmed: meet Noel by a river within your first few in-game nights. He challenges you to catch 3 different fish types before he does — win (it\u2019s untimed, so easy) and he gives you a fishing rod plus a coin reward.' },
@@ -54,6 +58,38 @@ const jsonLd = [
         worth actively seeking out rather than settling for the first bite.
       </p>
 
+      {collection && (
+        <>
+          <h2>Fish name table</h2>
+          <p>
+            The table below uses the fish names, icons, and visible parameters from the screenshots supplied for this site.
+            Values that are not visible in the supplied screenshots remain marked as <strong>-</strong>.
+          </p>
+          <div class="collection-table-wrap">
+            <table class="collection-table">
+              <thead>
+                <tr>
+                  {collection.tableColumns.map((column) => <th>{column}</th>)}
+                </tr>
+              </thead>
+              <tbody>
+                {collection.tableRows.map((row) => (
+                  <tr>
+                    {row.map((cell) => (
+                      <td>
+                        {isImageCell(cell) ? (
+                          <img class="collection-cell-icon" src={cell} alt={row[1] || 'Fish icon'} loading="lazy" />
+                        ) : cell}
+                      </td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </>
+      )}
+
       <h2>Still being verified</h2>
       <ul>
         <li>Exact catch locations per species.</li>
@@ -77,4 +113,41 @@ const jsonLd = [
       </div>
     </div>
   </article>
+  <style>
+    .collection-table-wrap {
+      overflow-x: auto;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: var(--surface);
+      margin: 12px 0 22px;
+    }
+    .collection-table {
+      width: 100%;
+      min-width: 960px;
+      border-collapse: collapse;
+      font-size: 0.84rem;
+    }
+    .collection-table th,
+    .collection-table td {
+      border-bottom: 1px solid var(--line);
+      padding: 10px 12px;
+      text-align: left;
+      vertical-align: middle;
+    }
+    .collection-table th {
+      color: var(--candle);
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+    .collection-cell-icon {
+      width: 56px;
+      height: 56px;
+      display: block;
+      object-fit: contain;
+      border-radius: 12px;
+      background: rgba(15, 9, 24, 0.45);
+    }
+  </style>
 </Base>
