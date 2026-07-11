@@ -119,10 +119,11 @@ export const characters: Character[] = [
     ],
     // Gift data via TheGamer's launch-week testing (published July 7, 2026); 'TBC' items in their
     // original table are omitted here rather than guessed at.
-    lovedGifts: ['Pink Azalea'],
+    lovedGifts: ['Pink Azalea', 'Pink Tulips'],
     likedGifts: ['Purple Tulip'],
     dislikedGifts: ['Copper Ore'],
     giftStatus: 'reported',
+    birthday: 'Summer 16',
   },
   {
     id: 'evan', name: 'Evan', family: 'Vampire (Ambrosia)', type: 'vampire',
@@ -135,9 +136,11 @@ export const characters: Character[] = [
     ],
     // Gift data via TheGamer's launch-week testing (published July 7, 2026); 'TBC' items in their
     // original table are omitted here rather than guessed at.
+    lovedGifts: ['Black Tulips', 'Cappuccino'],
     likedGifts: ['Purple Tulip', 'Purple Azalea'],
     dislikedGifts: ['Copper Bar'],
     giftStatus: 'reported',
+    birthday: 'Autumn 25',
   },
   {
     id: 'luna', name: 'Luna', family: 'Witch (Aranea, distant Webb cousin)', type: 'witch',
@@ -219,9 +222,11 @@ export const characters: Character[] = [
     knownInfo: ['Confirmed as a werewolf carpenter and pacifist.', 'Scouts wood during his werewolf hours and is close with family.', 'Confirmed: sells players their first Barn (4,000 gold + materials, 10x6 space, 1 night to build, holds 4 animals), required before buying livestock from Luna.', 'Confirmed: runs the Howling Hammer tool-upgrade shop, open Monday\u2013Friday, 6 PM to midnight.'],
     // Gift data via TheGamer's launch-week testing (published July 7, 2026); 'TBC' items in their
     // original table are omitted here rather than guessed at.
+    lovedGifts: ['Beer'],
     likedGifts: ['Purple Tulip', 'Blood Grape'],
     dislikedGifts: ['Common Mushroom', 'Charcoal', 'Copper Bar', 'Pink Conch Shell', 'Splotch Fish'],
     giftStatus: 'reported',
+    birthday: 'Autumn 18',
   },
   { id: 'sabrina', name: 'Sabrina', family: 'Witch (Webb)', type: 'witch', status: 'confirmed', romanceable: true, img: '/sabrina.webp', c1: '#3a3a4a', c2: '#8a8ab0',
     desc: 'A gothic witch of the Webb family who runs "Webb of Wonders," selling the Alter Ego Elixir; a rule-breaking free spirit, to her cousin Fiona\u2019s annoyance.',
@@ -233,6 +238,7 @@ export const characters: Character[] = [
     likedGifts: ['Blood Grape', 'Blood Grape Juice'],
     dislikedGifts: ['Onion Seeds', 'Pink Conch Shell'],
     giftStatus: 'reported',
+    birthday: 'Winter 23',
   },
   { id: 'noel',    name: 'Noel',    family: 'Witch (Webb)', type: 'other', status: 'confirmed', romanceable: true, img: '/noel.webp',    c1: '#4a3a3a', c2: '#b08a8a',
     desc: 'The town blacksmith and a dashing flirt of the Webb family, Fiona\u2019s brother, who calls himself "the face of Moonlight Peaks"; underneath the confidence, he struggles with his self-image and wants to be accepted for who he really is.',
@@ -259,9 +265,11 @@ export const characters: Character[] = [
     traits: [], knownInfo: ['Confirmed as the oldest sibling in the Khazan seer family, ahead of Aras and Alina.', 'Reported as the in-universe inventor of Nokturna (also spelled "Nocturna" in some coverage).', 'Datamined files also list a "Dragan\u2019s House" location.'],
     // Gift data via TheGamer's launch-week testing (published July 7, 2026); 'TBC' items in their
     // original table are omitted here rather than guessed at.
+    lovedGifts: ['Moon Crystals'],
     likedGifts: ['Purple Tulip', 'Purple Azalea', 'Purple Kthonia', 'Blood Grape', 'Moon Juice'],
     dislikedGifts: ['Pink Conch Shell'],
     giftStatus: 'reported',
+    birthday: 'Spring 28',
   },
 
   // --- Datamined names WITH a second corroborating detail (a matching named location, or notable
@@ -282,9 +290,11 @@ export const characters: Character[] = [
     ],
     // Gift data via TheGamer's launch-week testing (published July 7, 2026); 'TBC' items in their
     // original table are omitted here rather than guessed at.
+    lovedGifts: ['Black Roses', 'Black Tulips'],
     likedGifts: ['Purple Tulip', 'Purple Azalea', 'Blood Grape', 'Moon Juice'],
     dislikedGifts: ['Fiber', 'Cloth'],
     giftStatus: 'reported',
+    birthday: 'Spring 10',
   },
   { id: 'death', name: 'Death', family: 'Unknown', type: 'other',
     status: 'confirmed', romanceable: true, img: '/death.webp', c1: '#2a2a2a', c2: '#8a8a9a',
@@ -294,7 +304,11 @@ export const characters: Character[] = [
       'Confirmed personality: dry humor, tends the cemetery, collects flowers and souls, and is dressed in a Hawaiian shirt over his Grim Reaper robes.',
       'Resides at "Death\u2019s Shack", found in the Misty Shores graveyard area.',
       'Confirmed unlock chain: players meet him twice after unlocking Misty Shores/the Ambrosia Graveyard (via the "A Bridge Too Far" quest) before he gives the bug net.',
-    ] },
+    ],
+    // Gift data via Nintendo Everything's character showcase coverage (launch week).
+    lovedGifts: ['Trash Bottles', 'Rusty Fish Cans'],
+    giftStatus: 'reported',
+  },
   { id: 'samael', name: 'Samael', family: 'Vampire (Ambrosia)', type: 'vampire',
     status: 'confirmed', romanceable: true, img: '/samael.webp', c1: '#4a2a2a', c2: '#b06a6a',
     desc: 'A mysterious, brooding vampire of the Ambrosia family who has run the town bar, "The Broken Lamp," for centuries. Elvira\u2019s brother.',
@@ -308,6 +322,7 @@ export const characters: Character[] = [
     likedGifts: ['Purple Tulip', 'Purple Azalea'],
     dislikedGifts: ['Stone', 'Onion Seeds', 'Pink Conch Shell'],
     giftStatus: 'reported',
+    birthday: 'Winter 19',
   },
   { id: 'elvira', name: 'Elvira', family: 'Vampire (Ambrosia)', type: 'vampire',
     status: 'confirmed', romanceable: true, img: '/elvira.webp', c1: '#5a2f4a', c2: '#c06a9a',
@@ -346,9 +361,11 @@ export const characters: Character[] = [
     knownInfo: ['Confirmed as Brook\u2019s child, Saga\u2019s sibling, and Ridge\u2019s nephew/niece in the Logan werewolf family.', 'Loves pancakes and ghost stories, and keeps a dog.'],
     // Gift data via TheGamer's launch-week testing (published July 7, 2026); 'TBC' items in their
     // original table are omitted here rather than guessed at.
+    lovedGifts: ['Strawberries'],
     likedGifts: ['Purple Tulip', 'Blood Grape', 'Moonfruit'],
     dislikedGifts: ['Charcoal', 'Orbis Fish'],
     giftStatus: 'reported',
+    birthday: 'Autumn 20',
   },
   { id: 'tae', name: 'Tae', family: 'Mermaid (Hosu)', type: 'mermaid', status: 'confirmed', romanceable: true, img: '/tae.webp', c1: '#4a3a3a', c2: '#b08a8a',
     desc: 'A stunning, down-to-earth merman of the Hosu family who takes pride in his looks and loves helping others find their confidence.',
@@ -371,6 +388,7 @@ export const characters: Character[] = [
     likedGifts: ['Purple Tulip', 'Purple Azalea', 'Blood Grape', 'Raspberry Jam'],
     dislikedGifts: ['Onion Seeds', 'Pink Conch Shell'],
     giftStatus: 'reported',
+    birthday: 'Autumn 8',
   },
   { id: 'persephone', name: 'Persephone', family: 'Human (Henderson)', type: 'human', status: 'confirmed', romanceable: true, img: '/persephone.webp', c1: '#4a2f4a', c2: '#b06ab0',
     desc: "Free-spirited head of the Henderson family — a human aunt looking after her niece Jada and nephew Winston, newly arrived in town, with a love of astrology and crystals.",
@@ -378,14 +396,19 @@ export const characters: Character[] = [
     knownInfo: ['Confirmed as head of the Henderson human family (aunt to Jada and Winston).', 'Interested in astrology, crystals, and mystical topics.'],
     // Gift data via TheGamer's launch-week testing (published July 7, 2026); 'TBC' items in their
     // original table are omitted here rather than guessed at.
-    lovedGifts: ['Handmade Flower Bouquet'],
+    lovedGifts: ['Handmade Flower Bouquet', 'Red Azaleas'],
     likedGifts: ['Raspberry Jam'],
     giftStatus: 'reported',
   },
   { id: 'llemi', name: 'Llemi', family: 'Unknown', type: 'other', status: 'reported', romanceable: true, img: '/llemi.webp', c1: '#2f4a4a', c2: '#6ab0b0',
     desc: 'A whimsical love demon who feeds on local drama and chaos, living in the Pink Grove and visiting town mainly during festivals.',
     traits: [['Chaos', 85], ['Charm', 70]], traitsPlaceholder: true,
-    knownInfo: ['Reported as a demon resident of the Pink Grove.', 'Said to only be seen in town during festivals; winning his heart is described as taking real effort.'] },
+    knownInfo: ['Reported as a demon resident of the Pink Grove.', 'Said to only be seen in town during festivals; winning his heart is described as taking real effort.'],
+    // Gift data via Nintendo Everything's character showcase coverage (launch week).
+    lovedGifts: ['Diamonds', 'Flower Bouquets', 'Moon Crystals'],
+    birthday: 'Summer 8',
+    giftStatus: 'reported',
+  },
 
   // --- Non-romanceable creature/side characters confirmed via launch-week hands-on coverage ---
   { id: 'viktor-dracula', name: 'Viktor', family: 'Vampire (Ambrosia)', type: 'other', status: 'confirmed', romanceable: false, img: '/viktor-dracula.webp', c1: '#3a2a3a', c2: '#8a6a8a',
@@ -406,7 +429,7 @@ export const characters: Character[] = [
   { id: 'chester', name: 'Chester', family: 'Unknown', type: 'other', status: 'confirmed', romanceable: false, img: '/chester.webp', c1: '#4a3a2a', c2: '#a08a5a',
     desc: 'A living storage chest, gifted by Mayor Brook during your Town Hall registration — drop goods in overnight and wake up to the sale money.',
     traits: [], knownInfo: ['Confirmed: obtained from Brook during your first Town Hall visit.', 'Functions as your overnight selling storage.'] },
-  { id: 'laveau', name: 'Laveau', family: 'Witch (Webb)', type: 'witch', status: 'confirmed', romanceable: false, img: '', c1: '#4a2f5a', c2: '#a06ac0',
+  { id: 'laveau', name: 'Laveau', family: 'Witch (Webb)', type: 'witch', status: 'confirmed', romanceable: false, img: '/laveau.webp', c1: '#4a2f5a', c2: '#a06ac0',
     desc: 'Your character\u2019s mother — a witch who led the Webb coven before leaving it to start a life with Vlad Dracula. Story-central; not a romance option.',
     traits: [], knownInfo: ['Confirmed as the player character\u2019s mother and former Webb coven leader, succeeded by Fiona.', 'Her marriage to Vlad Dracula is why your character has mixed vampire/witch heritage.'] },
   { id: 'yabbis', name: 'Yabbis', family: 'Unknown', type: 'other', status: 'reported', romanceable: false, img: '/yabbis.webp', c1: '#3a4a3a', c2: '#7ab08a',
