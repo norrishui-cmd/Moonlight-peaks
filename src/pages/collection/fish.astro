@@ -2,6 +2,7 @@
 import Base from '../../layouts/Base.astro';
 import { SITE } from '../../consts';
 import { collectionBySlug } from '../../data/collections';
+import { fishDetailPages } from '../../data/collectionDetailPages';
 
 const collection = collectionBySlug.get('fish');
 const isImageCell = (cell: string) => cell.startsWith('/images/');
@@ -90,6 +91,20 @@ const jsonLd = [
         </>
       )}
 
+      <h2>Fish detail pages</h2>
+      <p>
+        These focused fish URLs are generated from the verified table data above so each species can
+        be indexed, linked, and expanded when more launch data is confirmed.
+      </p>
+      <div class="detail-link-grid">
+        {fishDetailPages.map((entry) => (
+          <a class="detail-link-card" href={`/collection/fish/${entry.slug}`}>
+            {isImageCell(entry.icon) ? <img src={entry.icon} alt={`${entry.name} fish icon`} loading="lazy" /> : <span />}
+            <strong>{entry.name}</strong>
+          </a>
+        ))}
+      </div>
+
       <h2>Still being verified</h2>
       <ul>
         <li>Exact catch locations per species.</li>
@@ -148,6 +163,36 @@ const jsonLd = [
       object-fit: contain;
       border-radius: 12px;
       background: rgba(15, 9, 24, 0.45);
+    }
+    .detail-link-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+      gap: 12px;
+      margin: 14px 0 28px;
+    }
+    .detail-link-card {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-height: 72px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: var(--surface);
+      padding: 10px 12px;
+      color: var(--text);
+      text-decoration: none;
+    }
+    .detail-link-card img,
+    .detail-link-card span {
+      width: 44px;
+      height: 44px;
+      flex: 0 0 44px;
+      object-fit: contain;
+      border-radius: 10px;
+      background: rgba(15, 9, 24, 0.45);
+    }
+    .detail-link-card strong {
+      font-size: 0.95rem;
     }
   </style>
 </Base>

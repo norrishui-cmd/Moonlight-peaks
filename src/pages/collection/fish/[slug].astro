@@ -1,0 +1,197 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { SITE } from '../../../consts';
+import { fishDetailPages } from '../../../data/collectionDetailPages';
+
+export function getStaticPaths() {
+  return fishDetailPages.map((entry, index) => ({
+    params: { slug: entry.slug },
+    props: {
+      entry,
+      previous: fishDetailPages[index - 1],
+      next: fishDetailPages[index + 1],
+    },
+  }));
+}
+
+const { entry, previous, next } = Astro.props;
+const fact = (label: string) => entry.facts.find((item) => item.label === label)?.value || '-';
+const hasIcon = entry.icon.startsWith('/images/');
+const pagePath = `/collection/fish/${entry.slug}`;
+const title = `Moonlight Peaks ${entry.name} Fish - Location, Rarity & Value`;
+const description = `Moonlight Peaks ${entry.name} fish guide: location ${fact('Location')}, rarity ${fact('Rarity')}, spawn timing ${fact('Spawns during')}, size ${fact('Size')}, and sell value ${fact('Sell price')}.`;
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: SITE.url },
+      { '@type': 'ListItem', position: 2, name: 'Collection', item: new URL('/collection', SITE.url).href },
+      { '@type': 'ListItem', position: 3, name: 'Fish', item: new URL('/collection/fish', SITE.url).href },
+      { '@type': 'ListItem', position: 4, name: entry.name, item: new URL(pagePath, SITE.url).href },
+    ],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: [
+      {
+        '@type': 'Question',
+        name: `Where can you catch ${entry.name} in Moonlight Peaks?`,
+        acceptedAnswer: { '@type': 'Answer', text: `Current visible data lists the location as ${fact('Location')}. Fields shown as - still need live-game verification.` },
+      },
+      {
+        '@type': 'Question',
+        name: `What is the value of ${entry.name}?`,
+        acceptedAnswer: { '@type': 'Answer', text: `Current visible data lists the sell price as ${fact('Sell price')} and consumption value as ${fact('Consumption value')}.` },
+      },
+    ],
+  },
+];
+---
+<Base
+  title={title}
+  description={description}
+  path={pagePath}
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Collection', href: '/collection' }, { label: 'Fish', href: '/collection/fish' }, { label: entry.name }]}
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Collection - Fish</p>
+      <section class="detail-hero">
+        <div>
+          <h1>{entry.name} <em>fish</em></h1>
+          <p class="intro">
+            A Moonlight Peaks fish detail page built from the visible collection table data. Unknown
+            values remain marked as <strong>-</strong> until they can be verified in the live game.
+          </p>
+        </div>
+        <div class="detail-icon" aria-hidden={!hasIcon}>
+          {hasIcon ? <img src={entry.icon} alt={`${entry.name} fish icon`} loading="eager" /> : <span>No icon yet</span>}
+        </div>
+      </section>
+
+      <section class="fact-grid" aria-label={`${entry.name} fish facts`}>
+        {entry.facts.map((item) => (
+          <div class="fact-card">
+            <span>{item.label}</span>
+            <strong>{item.value}</strong>
+          </div>
+        ))}
+      </section>
+
+      <h2>{entry.name} guide notes</h2>
+      <p>
+        {entry.name} is listed in the current Moonlight Peaks fish collection data. This page keeps
+        the important parameters in one place so players can quickly check location, rarity, spawn
+        timing, size, energy value, and coin value without scanning the full table.
+      </p>
+      <p>
+        Current use note: <strong>{entry.use}</strong>. If a field is still <strong>-</strong>, it
+        means the supplied source screenshot did not show a confirmed value yet.
+      </p>
+      <p class="source-note">
+        Source note: this page uses the current collection table prepared from visible Moonlight
+        Peaks fish data and should be expanded only when new official or live-game values are verified.
+      </p>
+
+      <h2>Related collection routes</h2>
+      <div class="related-grid">
+        <a href="/collection/fish">All fish</a>
+        <a href="/fishing">Fishing guide</a>
+        <a href="/activities/fishing">Fishing activity</a>
+        <a href="/collection">Collection hub</a>
+      </div>
+
+      <nav class="detail-nav" aria-label="Fish detail navigation">
+        {previous ? <a href={`/collection/fish/${previous.slug}`}>Previous: {previous.name}</a> : <span />}
+        {next ? <a href={`/collection/fish/${next.slug}`}>Next: {next.name}</a> : <span />}
+      </nav>
+    </div>
+  </article>
+  <style>
+    .detail-hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 24px;
+      align-items: center;
+      margin-bottom: 22px;
+    }
+    .detail-icon {
+      width: 132px;
+      height: 132px;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: var(--surface);
+    }
+    .detail-icon img {
+      width: 104px;
+      height: 104px;
+      object-fit: contain;
+    }
+    .detail-icon span {
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      text-transform: uppercase;
+    }
+    .fact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px;
+      margin: 18px 0 28px;
+    }
+    .fact-card {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: var(--surface);
+      padding: 14px;
+    }
+    .fact-card span {
+      display: block;
+      color: var(--candle);
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    .fact-card strong {
+      color: var(--text);
+      font-size: 1rem;
+    }
+    .related-grid,
+    .detail-nav {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 10px;
+      margin-top: 12px;
+    }
+    .source-note {
+      border-left: 3px solid var(--candle);
+      padding-left: 14px;
+      color: var(--muted);
+    }
+    .related-grid a,
+    .detail-nav a {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 12px 14px;
+      background: var(--surface);
+      color: var(--candle);
+      font-family: var(--mono);
+      text-decoration: none;
+    }
+    @media (max-width: 640px) {
+      .detail-hero {
+        grid-template-columns: 1fr;
+      }
+      .detail-icon {
+        width: 112px;
+        height: 112px;
+      }
+    }
+  </style>
+</Base>
