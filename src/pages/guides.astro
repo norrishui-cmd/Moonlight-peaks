@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import { SITE, GAME } from '../consts';
 import PriorityLinks from '../components/PriorityLinks.astro';
+import News from '../components/News.astro';
 import {
   releasePriorityLinks,
   characterPriorityLinks,
@@ -78,6 +79,9 @@ const jsonLd = [
       <PriorityLinks title="Launch status & safety" note="bugs, settings, cheats" links={launchStatusPriorityLinks} />
 
       <PriorityLinks title="Comparisons" note="vs. other cozy sims" links={comparisonPriorityLinks} />
+
+      <h2>Latest guide updates</h2>
+      <News category="guides" limit={5} />
 
       <h2>FAQ</h2>
       <div class="faq">

@@ -1,5 +1,12 @@
 ---
 import TopicHub from '../../components/TopicHub.astro';
 import { locationsSection, locations } from '../../data/locations';
+import News from '../../components/News.astro';
 ---
 <TopicHub section={locationsSection} items={locations} />
+<article class="page">
+  <div class="wrap">
+    <h2>Latest world updates</h2>
+    <News category="world" limit={5} />
+  </div>
+</article>

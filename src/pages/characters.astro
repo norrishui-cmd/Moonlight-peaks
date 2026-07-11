@@ -5,6 +5,7 @@ import PriorityLinks from '../components/PriorityLinks.astro';
 import { characters, typeLabels, typeIcons } from '../data/characters';
 import { characterPriorityLinks } from '../data/priorityLinks';
 import { dataminedNpcs, dataminedPetNames } from '../data/npc-datamine';
+import News from '../components/News.astro';
 
 const types = [...new Set(characters.map((c) => c.type))];
 const hasProfile = (_c: (typeof characters)[number]) => true;
@@ -177,6 +178,9 @@ const jsonLd = [
         Related: <a href="/families">the seven families</a>, <a href="/locations">locations</a>,
         <a href="/activities">activities</a>, <a href="/romance">romance</a>, <a href="/beginner-guide">beginner guide</a>.
       </div>
+
+      <h2>Latest character updates</h2>
+      <News category="characters" limit={5} />
     </div>
   </article>
 

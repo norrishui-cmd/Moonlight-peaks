@@ -6,6 +6,7 @@ import PriorityLinks from '../components/PriorityLinks.astro';
 import { romancePriorityLinks } from '../data/priorityLinks';
 import { characters, typeLabels } from '../data/characters';
 import { seoPages } from '../data/seoGraph';
+import News from '../components/News.astro';
 
 const publishedPaths = new Set(seoPages.map((p) => p.path));
 
@@ -211,6 +212,9 @@ const jsonLd = [
         note="gifts and heart events"
         links={romancePriorityLinks}
       />
+
+      <h2>Latest romance updates</h2>
+      <News category="romance" limit={5} />
 
       <h2>FAQ</h2>
       <div class="faq">
