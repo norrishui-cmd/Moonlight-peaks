@@ -29,7 +29,7 @@ export const collections: CollectionEntry[] = [
     title: 'Fish',
     tag: 'Fishing Collection',
     status: 'official-source',
-    image: '/hero-loc-lake.webp',
+    image: '/images/moonlight-peaks/collections/fish.webp',
     dek: 'Fish collection hub for species, locations, seasons, weather, time windows, quality, sell value, and cooking use.',
     summary: 'Fish are now treated as a World collection instead of a generic item category. This page is structured to hold the official fish list in a cleaner format: species cards, catch conditions, values, quality tiers, uses, and related fishing guides. Values should be filled from the official wiki and live-game checks, not guessed.',
     officialSource: {
@@ -74,7 +74,7 @@ export const collections: CollectionEntry[] = [
     title: "Albertus' Jobs",
     tag: 'Jobs Collection',
     status: 'official-source',
-    image: '/albertus.webp',
+    image: '/images/moonlight-peaks/collections/albertus-jobs.webp',
     dek: "Confirmed: a bulletin board run by Albertus (an owl) at Town Hall, offering short requests for coins, item rewards, and relationship points.",
     summary: "Confirmed via launch-week coverage: Albertus' Jobs is the town's job board, run by Albertus, an owl, located at Town Hall alongside Mayor Brook's registration desk — one of the first systems new residents are introduced to. Completing a posted job earns coins, sometimes an item reward, and a relationship boost with whichever resident posted the request, making it useful both for early income and for building friendships passively. The exact job pool, how often it refreshes, and which residents' requests can appear are not yet confirmed here.",
     officialSource: {
@@ -100,7 +100,7 @@ export const collections: CollectionEntry[] = [
     title: 'Critters',
     tag: 'Creature Collection',
     status: 'official-source',
-    image: '/hero-loc-forest.webp',
+    image: '/images/moonlight-peaks/collections/critters.webp',
     dek: 'Catchable critters collection moved from Items into World collections, with spawn rules and display/use fields.',
     summary: 'Critters are no longer presented as a simple item category. They are a collection system: catchable creatures with locations, seasonal/weather rules, and possible display or use notes. This page keeps the old item-page concept but upgrades the format into a collection-first guide.',
     officialSource: {
@@ -216,7 +216,7 @@ export const collections: CollectionEntry[] = [
     title: 'Vampsters',
     tag: 'Hidden Creature Collection',
     status: 'official-source',
-    image: '/hero-act-shapeshifting.webp',
+    image: '/images/moonlight-peaks/collections/vampsters.webp',
     dek: 'Confirmed: 53 mischievous Vampsters hidden around town, carried one at a time back to their home in a Misty Shores cave.',
     summary: 'Confirmed via the official wiki: there are 53 Vampsters total, mischievous little creatures that love to hide and cause trouble, but get sad if left alone too long. You round them up one at a time (you cannot carry more than one) and bring them home to a cave in Misty Shores, unlocked via the "A Bridge Too Far" quest. Community-reported: talking to a resident or triggering any cutscene makes you drop whichever Vampster you were carrying. Exact locations for most of the 53 are still being mapped; two are confirmed below as a starting reference.',
     officialSource: {
@@ -242,7 +242,7 @@ export const collections: CollectionEntry[] = [
     title: 'Soul Blobs',
     tag: 'Spectral Collection',
     status: 'official-source',
-    image: '/hero-loc-graveyard.webp',
+    image: '/images/moonlight-peaks/collections/soul-blobs.webp',
     dek: 'Confirmed: 100 wandering skull-souls, caught with the Net, with a genuinely useful reward for full completion.',
     summary: 'Confirmed: Death introduces Soul Blobs after your second meeting with him in town, and asks you to round them up using the Net (the same tool used for bug-catching, not a separate item). There are 100 Soul Blobs total. Community-reported: catching one triggers a small vignette about how that soul died, making this the more story-driven of the game\u2019s two creature-collecting side hunts (the other being Vampsters). Confirmed: collecting all 100 rewards the Antique Clock, which extends the night from its default 15 minutes to 25 minutes \u2014 a permanent quality-of-life reward rather than a cosmetic one. Exact regional distribution of the 100 is not yet independently mapped.',
     officialSource: {
