@@ -1,10 +1,11 @@
 ---
 import Base from '../../../layouts/Base.astro';
 import { SITE } from '../../../consts';
+import { fishDetailPages } from '../../../data/collectionDetailPages';
 
 const faq = [
   { q: 'Moonlight Peaksで最初の釣竿はどうやって手に入れますか?', a: '確認済み:ゲーム開始から数日以内に川辺でNoelに出会います。彼から3種類の異なる魚を彼より先に釣る勝負を挑まれます——時間制限がないので簡単に勝てます——勝つと釣竿とゴールドの報酬がもらえます。' },
-  { q: 'Moonlight Peaksには魚が何種類いますか?', a: '確認済み:約22種類。それぞれ基本売却価格と回復エネルギー量があり、どちらも1つ星・2つ星の品質で上昇します。' },
+  { q: 'Moonlight Peaksには魚が何種類いますか?', a: '確認済み:22種類。それぞれ基本売却価格と回復エネルギー量があり、どちらも1つ星・2つ星の品質で上昇します。下の一覧から各魚の詳細ページをご覧いただけます。' },
   { q: 'Moonlight Peaksで釣れる魚に影響する要素は?', a: '確認済み:場所、季節、天候、時間帯が全て、その時釣れる魚に影響します。' },
 ];
 
@@ -54,11 +55,12 @@ const jsonLd = [
         品質で上昇します——同じ種類でもより高品質な釣果を積極的に狙う価値があります。
       </p>
 
-      <h2>現在確認中の情報</h2>
-      <ul>
-        <li>各魚種の正確な釣り場所。</li>
-        <li>魚ごとの完全な季節・天候・時間ルール。</li>
-        <li>全品質段階を含む完全な売却価格表。</li>
+      <h2>魚図鑑一覧(全22種)</h2>
+      <p>各魚をクリックすると、生息地・レア度・出現時間帯・サイズ・売却価格の詳細ページに移動します。</p>
+      <ul class="fish-link-list">
+        {fishDetailPages.map((f) => (
+          <li><a href={`/ja/collections/fish/${f.slug}`}>{f.name}</a></li>
+        ))}
       </ul>
 
       <h2>よくある質問</h2>
@@ -77,4 +79,16 @@ const jsonLd = [
       </div>
     </div>
   </article>
+
+  <style>
+    .fish-link-list {
+      list-style: none; padding: 0; margin: 12px 0 24px;
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 8px;
+    }
+    .fish-link-list a {
+      display: block; border: 1px solid var(--line); border-radius: 10px; padding: 8px 12px;
+      background: var(--surface); color: var(--candle); text-decoration: none; font-size: 0.88rem;
+    }
+    .fish-link-list a:hover { border-color: color-mix(in srgb, var(--candle) 54%, var(--line)); }
+  </style>
 </Base>

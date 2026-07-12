@@ -1,10 +1,11 @@
 ---
 import Base from '../../../layouts/Base.astro';
 import { SITE } from '../../../consts';
+import { fishDetailPages } from '../../../data/collectionDetailPages';
 
 const faq = [
   { q: 'Wie bekommt man seine erste Angelrute in Moonlight Peaks?', a: 'Bestätigt: Triff Noel innerhalb deiner ersten Spielabende an einem Fluss. Er fordert dich heraus, 3 verschiedene Fischarten vor ihm zu fangen — gewinne (es ist zeitlos, also leicht) und er gibt dir eine Angelrute plus Gold-Belohnung.' },
-  { q: 'Wie viele Fische gibt es in Moonlight Peaks?', a: 'Bestätigt: rund 22 Fischarten, jede mit eigenem Grundverkaufswert und Energiewert, beide steigen bei 1-Stern- und 2-Stern-Qualität.' },
+  { q: 'Wie viele Fische gibt es in Moonlight Peaks?', a: 'Bestätigt: 22 Fischarten, jede mit eigenem Grundverkaufswert und Energiewert, beide steigen bei 1-Stern- und 2-Stern-Qualität. Die vollständige Liste mit Detailseite pro Fisch findest du unten.' },
   { q: 'Was beeinflusst, welche Fische man in Moonlight Peaks fängt?', a: 'Bestätigt: Ort, Jahreszeit, Wetter und Tageszeit beeinflussen alle, welche Fische gerade verfügbar sind.' },
 ];
 
@@ -56,11 +57,12 @@ const jsonLd = [
         sich also aktiv zu suchen, statt sich mit dem ersten Biss zufriedenzugeben.
       </p>
 
-      <h2>Noch in Prüfung</h2>
-      <ul>
-        <li>Genaue Fundorte pro Art.</li>
-        <li>Vollständige Jahreszeit-/Wetter-/Zeit-Regeln pro Fisch.</li>
-        <li>Vollständige Verkaufspreis-Tabelle über alle Qualitätsstufen.</li>
+      <h2>Fisch-Verzeichnis (alle 22 Arten)</h2>
+      <p>Klicke auf einen Fisch für die Detailseite mit Fundort, Seltenheit, Erscheinungszeit, Größe und Verkaufspreis.</p>
+      <ul class="fish-link-list">
+        {fishDetailPages.map((f) => (
+          <li><a href={`/de/collections/fish/${f.slug}`}>{f.name}</a></li>
+        ))}
       </ul>
 
       <h2>Häufige Fragen</h2>
@@ -79,4 +81,16 @@ const jsonLd = [
       </div>
     </div>
   </article>
+
+  <style>
+    .fish-link-list {
+      list-style: none; padding: 0; margin: 12px 0 24px;
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 8px;
+    }
+    .fish-link-list a {
+      display: block; border: 1px solid var(--line); border-radius: 10px; padding: 8px 12px;
+      background: var(--surface); color: var(--candle); text-decoration: none; font-size: 0.88rem;
+    }
+    .fish-link-list a:hover { border-color: color-mix(in srgb, var(--candle) 54%, var(--line)); }
+  </style>
 </Base>

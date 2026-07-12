@@ -31,15 +31,15 @@ export const collections: CollectionEntry[] = [
     status: 'official-source',
     image: '/images/moonlight-peaks/collections/fish.webp',
     dek: 'Fish collection hub for species, locations, seasons, weather, time windows, quality, sell value, and cooking use.',
-    summary: 'Fish are now treated as a World collection instead of a generic item category. This page is structured to hold the official fish list in a cleaner format: species cards, catch conditions, values, quality tiers, uses, and related fishing guides. Values should be filled from the official wiki and live-game checks, not guessed.',
+    summary: 'Confirmed via cross-verified launch-week sources: fishing runs on a real collection of 22 species, each with its own catch location, rarity tier, and (where confirmed) season/weather/time window, size, energy value, and sell price. Every species below links to its own detail page with the full breakdown. Blank cells (\u2013) mean that specific field hasn\u2019t been independently confirmed for that fish yet, not that the fish itself is unconfirmed.',
     officialSource: {
       label: 'Fish - Official Moonlight Peaks Wiki',
       url: 'https://moonlightpeaks.wiki.gg/wiki/Fish',
     },
     quickFacts: [
-      { label: 'Primary activity', value: 'Fishing' },
-      { label: 'Data model', value: 'Species, location, season, weather, time, quality, sell value, use' },
-      { label: 'Source rule', value: 'Official wiki and live-game verification before adding exact values' },
+      { label: 'Total species', value: '22 (confirmed)' },
+      { label: 'What varies per catch', value: 'Location, rarity, season/weather/time, size, energy, sell price' },
+      { label: 'Individual pages', value: 'Each of the 22 species has its own detail page \u2014 see the table below' },
     ],
     tableColumns: ['Icon', 'Fish', 'Location', 'Rarity', 'Spawns During', 'Size', 'Consumption Value', 'Sell Price', 'Use'],
     tableRows: [
@@ -66,7 +66,7 @@ export const collections: CollectionEntry[] = [
       [fishIcon('violet'), 'Violet', 'River in Moonlit Pines', 'Uncommon', '-', '-', '8 Energy', '65 Coins', 'Collection / cooking / selling'],
       [fishIcon('whisper'), 'Whisper', 'Found in most waters except Silverveil Lake', 'Common', 'Spring / Summer', '-', '6 Energy / Gold-star 8 Energy / Double-star 9 Energy', '40 Coins / Gold-star 50 Coins / Double-star 60 Coins', 'Collection / cooking / selling'],
     ],
-    verify: ['Exact fish names', 'Catch locations', 'Season and weather rules', 'Quality-tier values', 'Cooking and gift uses'],
+    verify: ['Season/weather/time windows for species still showing "-"', 'Size for species still showing "-"', 'Full quality-tier (1-star/2-star) values for species that only show a base price'],
     related: [{ label: 'Fishing activity', href: '/activities/fishing' }, { label: 'The lake', href: '/locations/lake' }, { label: 'Map', href: '/map' }],
   },
   {

@@ -1,6 +1,7 @@
 ---
 import Base from '../../../layouts/Base.astro';
 import { SITE } from '../../../consts';
+import { critterDetailPages } from '../../../data/collectionDetailPages';
 
 const faq = [
   { q: 'Was kann man in Moonlight Peaks mit Kleintieren machen?', a: 'Bestätigt: Jedes gefangene Kleintier (oder Fisch) kann in deinem Haus als Deko ausgestellt werden — es lohnt sich, etwas Seltenes oder Niedliches zu behalten statt es zu verkaufen.' },
@@ -50,10 +51,17 @@ const jsonLd = [
         Siehe <a href="/de/farm/house">dein Haus</a> für mehr zum Dekorieren.
       </p>
 
+      <h2>Kreaturen-Verzeichnis</h2>
+      <p>Klicke auf einen Eintrag für die Detailseite mit Jahreszeit, Fundort, Art und Verkaufspreis. Felder mit "-" sind noch unbestätigt.</p>
+      <ul class="fish-link-list">
+        {critterDetailPages.map((c) => (
+          <li><a href={`/de/collections/critters/${c.slug}`}>{c.name}</a></li>
+        ))}
+      </ul>
+
       <h2>Noch in Prüfung</h2>
       <ul>
-        <li>Vollständige Fundort-Liste pro Kleintier.</li>
-        <li>Vollständige Jahreszeit-/Wetter-Regeln pro Art.</li>
+        <li>Fundort, Jahreszeit und Wetter, wo die Detailseiten noch "-" zeigen.</li>
         <li>Ob Kleintiere verschenkt oder verkauft werden können, über die Ausstellung hinaus.</li>
       </ul>
 
@@ -73,4 +81,16 @@ const jsonLd = [
       </div>
     </div>
   </article>
+
+  <style>
+    .fish-link-list {
+      list-style: none; padding: 0; margin: 12px 0 24px;
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 8px;
+    }
+    .fish-link-list a {
+      display: block; border: 1px solid var(--line); border-radius: 10px; padding: 8px 12px;
+      background: var(--surface); color: var(--candle); text-decoration: none; font-size: 0.88rem;
+    }
+    .fish-link-list a:hover { border-color: color-mix(in srgb, var(--candle) 54%, var(--line)); }
+  </style>
 </Base>

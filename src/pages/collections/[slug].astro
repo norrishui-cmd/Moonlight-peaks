@@ -18,6 +18,8 @@ export function getStaticPaths() {
 const { entry, prev, next } = Astro.props as { entry: CollectionEntry; prev: CollectionEntry; next: CollectionEntry };
 const pageUrl = new URL(`/collections/${entry.slug}`, SITE.url).href;
 const isImageCell = (cell: string) => cell.startsWith('/images/');
+const hasDetailPages = entry.slug === 'fish' || entry.slug === 'critters';
+const slugify = (value: string) => value.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 const faq = [
   {
     q: `What is the ${entry.title} collection in Moonlight Peaks?`,
@@ -90,10 +92,12 @@ const jsonLd = [
           <tbody>
             {entry.tableRows.map((row) => (
               <tr>
-                {row.map((cell) => (
+                {row.map((cell, i) => (
                   <td>
                     {isImageCell(cell) ? (
                       <img class="collection-cell-icon" src={cell} alt={row[1] || entry.title} loading="lazy" />
+                    ) : hasDetailPages && i === 1 && cell !== '-' ? (
+                      <a href={`/collections/${entry.slug}/${slugify(cell)}`}>{cell}</a>
                     ) : cell}
                   </td>
                 ))}
