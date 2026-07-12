@@ -48,6 +48,7 @@ const faq = [
 
 const steps = [
   {
+    image: '/images/moonlight-peaks/romance-steps/step-1.webp',
     title: 'Meet the town and shortlist who catches your eye',
     body: "You'll cross paths with residents naturally as you farm, shop, and explore, but with 23 romance options across six families, a shortlist beats trying to court everyone at once. Take the quick match quiz, or browse the full roster by family below, and save 2-3 names before you start spending gifts and evenings on anyone in particular.",
     links: [
@@ -56,6 +57,7 @@ const steps = [
     ],
   },
   {
+    image: '/images/moonlight-peaks/romance-steps/step-2.webp',
     title: 'Talk daily and give gifts to build friendship',
     body: "Confirmed at launch: talking and giving gifts raises your relationship level, tracked in a relationship menu that shows the gifts you've recently given and how each one landed. Community testing points to Purple Tulip as a safe, widely-liked gift and Onion Seeds as widely disliked — while Saga specifically loves white wine and single flowers but dislikes bouquets. Most individual preferences are still being catalogued, so log your own findings.",
     links: [
@@ -64,26 +66,31 @@ const steps = [
     ],
   },
   {
+    image: '/images/moonlight-peaks/romance-steps/step-3.webp',
     title: 'Reach Heart Level 4 to unlock dating',
     body: 'Once a relationship hits Heart Level 4, you can invite that resident on a date. Dates aren\u2019t passive cutscenes — they play out as short minigames, like assembling a flower bouquet in the colors your date asks for. Show up late or fumble a date and you\u2019ll lose relationship points rather than ending things outright, so treat invites like real appointments.',
     links: [],
   },
   {
+    image: '/images/moonlight-peaks/romance-steps/step-4.webp',
     title: 'Decide whether to date one person or several',
     body: "Confirmed at launch: you're free to date multiple residents at the same time. They'll notice and comment on it \u2014 expect some good-natured jealousy \u2014 but it's not a hard rivalry system that locks anyone out. What is strict: rejecting a partner's date invites too often leads to a breakup, followed by a cooldown where they're distant before forgiving you. If you know who you want, this is a good point to narrow down to one.",
     links: [{ href: '/tools/romance-planner', label: 'Track your shortlist privately' }],
   },
   {
+    image: '/images/moonlight-peaks/romance-steps/step-5.webp',
     title: 'Reach Heart Level 8 to propose',
     body: 'Keep talking, gifting, and dating, and a relationship can climb to Heart Level 8 \u2014 the point where you can propose marriage. Marriage itself is strictly monogamous from here, even if you were casually dating more than one person earlier.',
     links: [{ href: '/faq/can-you-get-married-in-moonlight-peaks', label: 'Marriage FAQ' }],
   },
   {
+    image: '/images/moonlight-peaks/romance-steps/step-6.webp',
     title: 'The wedding happens within a week',
     body: "Confirmed at launch: once you propose, the wedding takes place within a week of in-game time, and it's a town event \u2014 the vampires and werewolves of Moonlight Peaks show up to celebrate, regardless of who you're marrying.",
     links: [],
   },
   {
+    image: '/images/moonlight-peaks/romance-steps/step-7.webp',
     title: 'What changes after the wedding',
     body: "Your spouse moves onto your farm and a further heart event unlocks just for married couples. You can also turn a non-vampire spouse into a vampire afterward. One honest limit: there are no children in Moonlight Peaks, confirmed by multiple sources with no announced plans to add it \u2014 marrying an older character who already has kids, like Orlock (father to Mina and Evan), is reported to make you a step-parent instead. Building relationships with everyone (not just your spouse) also keeps unlocking blueprints and crafting materials, so courting the town stays worthwhile after you've settled down.",
     links: [{ href: '/characters/orlock', label: "See Orlock's family" }, { href: '/faq/can-you-have-children-in-moonlight-peaks', label: 'Children FAQ' }],
@@ -139,7 +146,10 @@ const jsonLd = [
       <ol class="romance-steps">
         {steps.map((s, i) => (
           <li class="romance-step">
-            <span class="romance-step-num">{i + 1}</span>
+            <div class="romance-step-thumb">
+              <img class="romance-step-img" src={s.image} alt={s.title} width="480" height="480" loading="lazy" />
+              <span class="romance-step-num">{i + 1}</span>
+            </div>
             <div class="romance-step-body">
               <h3>{s.title}</h3>
               <p>{s.body}</p>
@@ -236,13 +246,20 @@ const jsonLd = [
   <style>
     .romance-steps { list-style: none; margin: 20px 0 32px; padding: 0; display: grid; gap: 14px; }
     .romance-step {
-      display: grid; grid-template-columns: 44px 1fr; gap: 16px; align-items: start;
+      display: grid; grid-template-columns: 132px 1fr; gap: 18px; align-items: start;
       border: 1px solid var(--line); border-radius: 16px; background: var(--surface); padding: 18px 20px;
     }
+    .romance-step-thumb { position: relative; width: 132px; height: 132px; flex-shrink: 0; }
+    .romance-step-img {
+      width: 132px; height: 132px; border-radius: 12px; object-fit: cover;
+      border: 1px solid var(--line); display: block;
+    }
     .romance-step-num {
-      width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
-      font-family: var(--display); font-weight: 700; font-size: 1.05rem; color: #fff;
+      position: absolute; top: -8px; left: -8px;
+      width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      font-family: var(--display); font-weight: 700; font-size: 0.95rem; color: #fff;
       background: linear-gradient(135deg, var(--candle), color-mix(in srgb, var(--candle) 60%, #7a2f3f));
+      box-shadow: 0 2px 6px rgba(0,0,0,0.4);
     }
     .romance-step-body h3 { margin: 2px 0 8px; font-size: 1.05rem; }
     .romance-step-body p { margin: 0; color: var(--mist); }
@@ -251,7 +268,8 @@ const jsonLd = [
     .romance-step-links a:hover { text-decoration: underline; }
     @media (max-width: 560px) {
       .romance-step { grid-template-columns: 1fr; }
-      .romance-step-num { margin-bottom: 4px; }
+      .romance-step-thumb { width: 100%; height: auto; aspect-ratio: 1 / 1; margin-bottom: 4px; }
+      .romance-step-img { width: 100%; height: 100%; }
     }
 
     .romance-family-group { margin: 20px 0; }
