@@ -2,7 +2,7 @@ export const SITE = {
   name: 'Moonlight Peaks Wiki & Guide',
   brand: 'Moonlight Peaks Wiki & Guide',
   url: 'https://moonlightpeakswiki.com',
-  updated: 'June 2026',
+  updated: 'July 2026',
   contact: 'norris.hui@gmail.com',
 };
 
