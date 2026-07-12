@@ -93,37 +93,4 @@ export const activities: TopicItem[] = [
     ],
     related: [{ label: 'Pumpkin Head', href: '/characters/pumpkin-head' }, { label: 'Town square', href: '/locations/town-square' }],
   },
-  {
-    slug: 'pottery', title: 'Pottery', tag: 'Craft', status: 'reported', image: '/hero-act-embroidery.webp',
-    dek: 'A cozy craft named alongside flower arranging and embroidery.',
-    body: [
-      'Reported: pottery is named as one of Moonlight Peaks\u2019 "dark diversions" hobbies, alongside flower arranging, embroidery, and cooking. Exact mechanics, materials, and where it\u2019s unlocked are not yet independently confirmed here.',
-    ],
-    related: [{ label: 'Flower Arranging', href: '/activities/flower-arranging' }, { label: 'Embroidery', href: '/activities/embroidery' }],
-  },
-  {
-    slug: 'marshmallow-roasting', title: 'Marshmallow Roasting', tag: 'Activity', status: 'reported', image: '/hero-act-seasonal-events.webp',
-    dek: 'A cozy fireside activity, also confirmed as a date minigame.',
-    body: [
-      'Reported: roasting marshmallows to a date\u2019s preferred doneness is confirmed as one of the minigames used during in-game dates. It\u2019s also named separately as a standalone hobby among Moonlight Peaks\u2019 "dark diversions."',
-    ],
-    related: [{ label: 'Romance', href: '/romance' }, { label: 'Stargazing', href: '/activities/stargazing' }],
-  },
-  {
-    slug: 'stargazing', title: 'Stargazing', tag: 'Activity', status: 'reported', image: '/hero-loc-forest.webp',
-    dek: 'A quiet nighttime hobby named among the game\u2019s cozy diversions.',
-    body: [
-      'Reported: stargazing is named as one of Moonlight Peaks\u2019 "dark diversions" hobbies. Exact mechanics — whether it\u2019s a passive scene, a minigame, or tied to a specific location — are not yet independently confirmed here.',
-    ],
-    related: [{ label: 'Marshmallow Roasting', href: '/activities/marshmallow-roasting' }, { label: 'Yoga', href: '/activities/yoga' }],
-  },
-  {
-    slug: 'yoga', title: 'Yoga', tag: 'Activity', status: 'confirmed', image: '/hero-act-decorating.webp',
-    dek: 'A confirmed activity tied to its own achievement, "Moonlit Stretching."',
-    body: [
-      'Confirmed: yoga is a real activity in Moonlight Peaks, tied to the achievement "Moonlit Stretching" (awarded for attending your first yoga session). It\u2019s also listed among the game\u2019s "dark diversions" hobbies alongside cooking, fishing, and the Nokturna card game.',
-      'Community-reported: a location referred to as the "yoga shack" is associated with this activity. Exact session mechanics, schedule, and any instructor NPC are not yet independently confirmed here.',
-    ],
-    related: [{ label: 'Achievements', href: '/achievements' }],
-  },
 ];
