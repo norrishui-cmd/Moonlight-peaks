@@ -1,0 +1,62 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import { SITE, GAME } from '../../../../consts';
+import { sideQuests } from '../../../../data/quests-side';
+import { sideQuestsJa } from '../../../../i18n/quests-side-ja';
+
+const jsonLd = {
+  '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'ホーム', item: `${SITE.url}/ja` },
+    { '@type': 'ListItem', position: 2, name: 'クエストガイド', item: `${SITE.url}/ja/quests` },
+    { '@type': 'ListItem', position: 3, name: 'サブクエスト', item: `${SITE.url}/ja/quests/side` },
+  ],
+};
+---
+<Base
+  title="ムーンライト・ピークス サブクエスト — 全NPCクエストとサブシステム"
+  description="ムーンライト・ピークスの確認済みサブクエストとNPC固有の依頼を全て掲載——釣り大会、住宅アップグレード、仕事掲示板、町の生き物収集サイドハント。"
+  path="/ja/quests/side"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'クエストガイド', href: '/ja/quests' }, { label: 'サブクエスト' }]}
+  lang="ja"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">クエスト・サブクエスト</p>
+      <h1>サブ<em>クエスト</em></h1>
+      <p class="intro">
+        {sideQuests.length}個の確認済みサブクエストとNPC固有の依頼を、<a href="/ja/quests/story">メインストーリーの流れ</a>
+        とは別に掲載しています。特定の住民に紐づく一度きりのクエストから、仕事掲示板のような常駐システムまで様々です。
+      </p>
+
+      <div class="sq-grid">
+        {sideQuests.map((q) => (
+          <a class="sq-card" href={`/ja/quests/side/${q.slug}`}>
+            <span class="sq-tag">{q.npc ? q.npc.charAt(0).toUpperCase() + q.npc.slice(1) : 'サブシステム'}</span>
+            <h3>{sideQuestsJa[q.slug].title}</h3>
+            <p>{sideQuestsJa[q.slug].summary.length > 90 ? sideQuestsJa[q.slug].summary.slice(0, 87) + '…' : sideQuestsJa[q.slug].summary}</p>
+          </a>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        関連ページ: <a href="/ja/quests">クエストハブ</a>, <a href="/ja/quests/story">メインストーリー</a>,
+        <a href="/collections">コレクション</a>, <a href="/ja/characters">キャラクター</a>。
+      </div>
+    </div>
+  </article>
+
+  <style>
+    .sq-grid { display: grid; grid-template-columns: 1fr; gap: 12px; margin: 22px 0 30px; }
+    @media (min-width: 640px) { .sq-grid { grid-template-columns: 1fr 1fr; } }
+    .sq-card {
+      display: block; border: 1px solid var(--line); border-radius: 14px; background: var(--surface);
+      padding: 16px; text-decoration: none; color: inherit;
+      transition: border-color .15s ease, transform .15s ease;
+    }
+    .sq-card:hover { border-color: color-mix(in srgb, var(--candle) 54%, var(--line)); transform: translateY(-2px); }
+    .sq-tag { font-family: var(--mono); font-size: 0.66rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--candle); }
+    .sq-card h3 { margin: 6px 0 6px; font-size: 1.05rem; }
+    .sq-card p { margin: 0; color: #ded3e6; font-size: 0.86rem; }
+  </style>
+</Base>

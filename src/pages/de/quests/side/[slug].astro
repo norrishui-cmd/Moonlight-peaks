@@ -1,0 +1,84 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import { SITE, GAME } from '../../../../consts';
+import { sideQuests } from '../../../../data/quests-side';
+import { sideQuestsDe } from '../../../../i18n/quests-side-de';
+
+export function getStaticPaths() {
+  const translated = sideQuests.filter((q) => sideQuestsDe[q.slug]);
+  return translated.map((q, i) => ({
+    params: { slug: q.slug },
+    props: { q, prev: translated[(i - 1 + translated.length) % translated.length], next: translated[(i + 1) % translated.length] },
+  }));
+}
+
+const { q, prev, next } = Astro.props as { q: (typeof sideQuests)[number]; prev: (typeof sideQuests)[number]; next: (typeof sideQuests)[number] };
+const tr = sideQuestsDe[q.slug];
+const statusLabel = q.status === 'confirmed' ? 'Bestätigt' : 'Gemeldet';
+
+const faq = [
+  { q: `Wie startet man "${tr.title}" in Moonlight Peaks?`, a: tr.summary },
+  { q: `Was belohnt "${tr.title}"?`, a: tr.reward || 'Für diese Quest wurde noch keine bestätigte direkte Gegenstandsbelohnung dokumentiert.' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Startseite', item: `${SITE.url}/de` },
+    { '@type': 'ListItem', position: 2, name: 'Quest-Guide', item: `${SITE.url}/de/quests` },
+    { '@type': 'ListItem', position: 3, name: 'Nebenquests', item: `${SITE.url}/de/quests/side` },
+    { '@type': 'ListItem', position: 4, name: tr.title, item: `${SITE.url}/de/quests/side/${q.slug}` },
+  ] },
+];
+---
+<Base
+  title={`${tr.title} — Moonlight Peaks Nebenquest-Guide`}
+  description={`${GAME.title} "${tr.title}" Nebenquest: ${tr.summary.slice(0, 130)}`}
+  path={`/de/quests/side/${q.slug}`}
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Quest-Guide', href: '/de/quests' }, { label: 'Nebenquests', href: '/de/quests/side' }, { label: tr.title }]}
+  lang="de"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Nebenquests · <span class="tag-community">{statusLabel}</span></p>
+      <h1>{tr.title}</h1>
+
+      <h2>Was passiert</h2>
+      <p>{tr.summary}</p>
+
+      {tr.reward && (
+        <>
+          <h2>Belohnung</h2>
+          <p>{tr.reward}</p>
+        </>
+      )}
+
+      <h2>FAQ</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <nav class="prevnext" aria-label="Nebenquest-Navigation">
+        <a href={`/de/quests/side/${prev.slug}`}>← {sideQuestsDe[prev.slug].title}</a>
+        <a href="/de/quests/side">Alle Nebenquests</a>
+        <a href={`/de/quests/side/${next.slug}`}>{sideQuestsDe[next.slug].title} →</a>
+      </nav>
+    </div>
+  </article>
+
+  <style>
+    .tag-community {
+      display: inline-block; font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.02em;
+      color: var(--faint); border: 1px solid var(--line); border-radius: 999px; padding: 2px 7px;
+      vertical-align: middle;
+    }
+    .prevnext { display: flex; justify-content: space-between; gap: 10px; margin: 22px 0; font-family: var(--mono); font-size: 0.82rem; }
+    .prevnext a { color: var(--candle); }
+  </style>
+</Base>

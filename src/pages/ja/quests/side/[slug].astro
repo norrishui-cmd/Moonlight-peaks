@@ -1,0 +1,84 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import { SITE, GAME } from '../../../../consts';
+import { sideQuests } from '../../../../data/quests-side';
+import { sideQuestsJa } from '../../../../i18n/quests-side-ja';
+
+export function getStaticPaths() {
+  const translated = sideQuests.filter((q) => sideQuestsJa[q.slug]);
+  return translated.map((q, i) => ({
+    params: { slug: q.slug },
+    props: { q, prev: translated[(i - 1 + translated.length) % translated.length], next: translated[(i + 1) % translated.length] },
+  }));
+}
+
+const { q, prev, next } = Astro.props as { q: (typeof sideQuests)[number]; prev: (typeof sideQuests)[number]; next: (typeof sideQuests)[number] };
+const tr = sideQuestsJa[q.slug];
+const statusLabel = q.status === 'confirmed' ? '確認済み' : '報告済み';
+
+const faq = [
+  { q: `ムーンライト・ピークスで「${tr.title}」を始めるには?`, a: tr.summary },
+  { q: `「${tr.title}」の報酬は?`, a: tr.reward || 'このクエストの直接的なアイテム報酬はまだ確認されていません。' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'ホーム', item: `${SITE.url}/ja` },
+    { '@type': 'ListItem', position: 2, name: 'クエストガイド', item: `${SITE.url}/ja/quests` },
+    { '@type': 'ListItem', position: 3, name: 'サブクエスト', item: `${SITE.url}/ja/quests/side` },
+    { '@type': 'ListItem', position: 4, name: tr.title, item: `${SITE.url}/ja/quests/side/${q.slug}` },
+  ] },
+];
+---
+<Base
+  title={`${tr.title} — ムーンライト・ピークス サブクエストガイド`}
+  description={`${GAME.title}「${tr.title}」サブクエスト: ${tr.summary.slice(0, 100)}`}
+  path={`/ja/quests/side/${q.slug}`}
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'クエストガイド', href: '/ja/quests' }, { label: 'サブクエスト', href: '/ja/quests/side' }, { label: tr.title }]}
+  lang="ja"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">サブクエスト · <span class="tag-community">{statusLabel}</span></p>
+      <h1>{tr.title}</h1>
+
+      <h2>何が起こるか</h2>
+      <p>{tr.summary}</p>
+
+      {tr.reward && (
+        <>
+          <h2>報酬</h2>
+          <p>{tr.reward}</p>
+        </>
+      )}
+
+      <h2>FAQ</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <nav class="prevnext" aria-label="サブクエストナビゲーション">
+        <a href={`/ja/quests/side/${prev.slug}`}>← {sideQuestsJa[prev.slug].title}</a>
+        <a href="/ja/quests/side">全てのサブクエスト</a>
+        <a href={`/ja/quests/side/${next.slug}`}>{sideQuestsJa[next.slug].title} →</a>
+      </nav>
+    </div>
+  </article>
+
+  <style>
+    .tag-community {
+      display: inline-block; font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.02em;
+      color: var(--faint); border: 1px solid var(--line); border-radius: 999px; padding: 2px 7px;
+      vertical-align: middle;
+    }
+    .prevnext { display: flex; justify-content: space-between; gap: 10px; margin: 22px 0; font-family: var(--mono); font-size: 0.82rem; }
+    .prevnext a { color: var(--candle); }
+  </style>
+</Base>

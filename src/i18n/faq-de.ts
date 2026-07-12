@@ -357,4 +357,29 @@ export const faqDe: Record<string, FaqTranslationDe> = {
     q: 'Wie findet man Quests und Herz-Events in Moonlight Peaks?',
     a: 'Bestätigt zum Release: Prüfe die Karte auf Markierungen — ein Ausrufezeichen bedeutet, dass das Betreten dieses Bereichs eine Zwischensequenz auslöst, und eine funkelnde Aura um ein Gebäude bedeutet, dass das Hineingehen eine auslöst. Das Schwarze Brett in der Stadt (verwaltet von Albertus, einer Eule) listet ebenfalls verfügbare Jobs/Quests auf.',
   },
+  'how-many-quests-are-in-moonlight-peaks': {
+    q: 'Wie viele Quests gibt es in Moonlight Peaks?',
+    a: 'Bestätigt über eine cross-verifizierte Quest-Log-Transkription: Die Hauptgeschichte umfasst mindestens 20+ benannte Quests von der Ankunft in der Stadt bis zu einem Hochzeits-Handlungsbogen, plus mehrere bestätigte Nebenquests und laufende Systeme wie das Job-Brett. Es könnte mehr Story-Inhalt existieren als bisher dokumentiert.',
+    more: ['Den vollständigen Quest-Guide findest du unter /quests (derzeit nur auf Englisch).'],
+  },
+  'what-does-a-bridge-too-far-quest-unlock': {
+    q: 'Was schaltet die Quest "A Bridge Too Far" in Moonlight Peaks frei?',
+    a: 'Bestätigt: Der Abschluss hebt den Fluch auf der Brücke nach Misty Shores auf und schaltet diesen Bereich frei (einschließlich der Höhle des Echos, deiner ersten Kupfererz-Quelle) sowie den Friedhof, und löst den nächsten Handlungsbogen am Crest Garden aus.',
+  },
+  'what-quest-unlocks-hellkitten-form': {
+    q: 'Welche Quest schaltet die Hellkitten-Form (Katze) in Moonlight Peaks frei?',
+    a: 'Bestätigt über ein cross-verifiziertes Quest-Log: Die Quest "The Dinner Party" belohnt die Cat Form (Hellkitten-Gestaltwandlung). Sie liegt einige Story-Beats nach "A Bridge Too Far", im Anschluss an die Mana-Extraktor-Quest-Kette.',
+  },
+  'why-is-my-quest-not-starting-in-moonlight-peaks': {
+    q: 'Warum startet eine Quest in Moonlight Peaks nicht?',
+    a: 'Community-berichtet: Viele Quests werden einfach durch das Betreten eines neuen Bereichs, das Warten einer festgelegten Anzahl von Spieltagen oder das Lesen eines Briefs/einer Einladung ausgelöst, statt durch eine offensichtliche Bildschirm-Aufforderung. Wenn eine Quest festzuhängen scheint, prüfe, ob die vorherige Quest in der Kette wirklich abgeschlossen ist, ob genug Tage vergangen sind, und ob du den Bereich oder das Gebäude betreten hast, an das der nächste Schritt gebunden ist.',
+  },
+  'how-does-the-job-board-work-in-moonlight-peaks': {
+    q: 'Wie funktioniert das Job-Brett in Moonlight Peaks?',
+    a: 'Bestätigt: Albertus\u2019 Jobs ist ein laufendes, wiederholbares Brett am Rathaus, verwaltet von Albertus, einer Eule. Das Abschließen eines ausgeschriebenen Jobs bringt Münzen, manchmal einen Gegenstand, und einen Beziehungsschub mit der Person, die die Anfrage gestellt hat — ein fortlaufendes System statt einer einmaligen Quest.',
+  },
+  'what-are-the-main-story-quests-in-moonlight-peaks': {
+    q: 'Was sind die Hauptgeschichte-Quests in Moonlight Peaks, in der Reihenfolge?',
+    a: 'Bestätigt über ein cross-verifiziertes Quest-Log: Die Kette verläuft etwa von der Registrierung am Rathaus und dem Treffen mit Orlock über "A Bridge Too Far" (der Fiona/Orlock-Brückenfluch), ein Crest-Garden-Mysterium, das Freischalten deiner ersten Magie und des Mana-Extraktors, "The Dinner Party" (schaltet die Cat Form frei), bis hin zu einer Hochzeits-Handlungsbogen-Geschichte. Die vollständige Kapitel-für-Kapitel-Aufschlüsselung mit genauer Reihenfolge und Freischaltbedingungen findest du auf der Übersichtsseite.',
+  },
 };

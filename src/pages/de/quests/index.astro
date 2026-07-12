@@ -1,0 +1,80 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { SITE, GAME } from '../../../consts';
+import { storyQuests } from '../../../data/quests-story';
+import { sideQuests } from '../../../data/quests-side';
+
+const jsonLd = {
+  '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Startseite', item: `${SITE.url}/de` },
+    { '@type': 'ListItem', position: 2, name: 'Quest-Guide', item: `${SITE.url}/de/quests` },
+  ],
+};
+---
+<Base
+  title="Moonlight Peaks Quest-Guide — Hauptgeschichte & Nebenquests"
+  description="Der komplette Moonlight-Peaks-Quest-Guide: die Hauptgeschichte Kapitel für Kapitel, jede bestätigte Nebenquest, und Antworten, wenn du feststeckst — aus cross-verifizierten Launch-Week-Walkthroughs."
+  path="/de/quests"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Quest-Guide' }]}
+  lang="de"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Hub · Quests</p>
+      <h1>{GAME.title} <em>Quest-Guide</em></h1>
+      <p class="intro">
+        Egal ob du der Hauptgeschichte der Reihe nach folgen willst oder bei einer bestimmten Quest
+        feststeckst — das ist der richtige Ort. Alles hier ist über mehrere unabhängige
+        Launch-Week-Quellen abgeglichen statt aus einem einzigen Walkthrough übernommen — Quests
+        werden als <strong>bestätigt</strong> markiert, wenn zwei oder mehr Quellen übereinstimmen,
+        und als <strong>gemeldet</strong>, wenn nur eine Quelle es bisher dokumentiert hat. Nichts
+        hier ist erfunden, um eine Lücke zu füllen.
+      </p>
+
+      <div class="q-split">
+        <a class="q-card" href="/de/quests/story">
+          <span class="q-tag">Hauptgeschichte</span>
+          <h2>Der Geschichte Kapitel für Kapitel folgen</h2>
+          <p>{storyQuests.length} Hauptgeschichte-Quests, organisiert in 5 Kapitel von der Ankunft in der Stadt bis zum Hochzeits-Handlungsbogen. Wähle das Kapitel, das zu dir passt, und mach direkt dort weiter.</p>
+          <strong>Kapitel durchsuchen →</strong>
+        </a>
+        <a class="q-card" href="/de/quests/side">
+          <span class="q-tag">Nebenquests</span>
+          <h2>NPC-Quests & Nebensysteme</h2>
+          <p>{sideQuests.length} bestätigte Nebenquests und laufende Systeme — Angelwettbewerbe, Hausupgrades, das Job-Brett, und die zwei kreaturensammelnden Nebensysteme der Stadt.</p>
+          <strong>Nebenquests durchsuchen →</strong>
+        </a>
+      </div>
+
+      <h2>Bei etwas Bestimmtem festgefahren?</h2>
+      <p>
+        Wenn du bei einem bestimmten Story-Beat feststeckst: <a href="/quests/a-bridge-too-far">A Bridge Too Far</a>
+        ist die meistgesuchte frühe Quest (derzeit nur auf Englisch) — dort findest du den
+        vollständigen Orlock/Fiona-Brücken-Walkthrough. Für Quest-bezogene Fragen im Allgemeinen
+        siehe die <a href="/faq">FAQ</a>, die einen eigenen Quest-Bereich hat.
+      </p>
+
+      <div class="callout wip">
+        Verwandt: <a href="/de/beginner-guide">Einsteiger-Guide</a>, <a href="/de/characters">Charaktere</a>,
+        <a href="/map">Karte</a>, <a href="/known-issues">Bekannte Probleme</a>.
+      </div>
+    </div>
+  </article>
+
+  <style>
+    .q-split { display: grid; grid-template-columns: 1fr; gap: 14px; margin: 24px 0 30px; }
+    @media (min-width: 720px) { .q-split { grid-template-columns: 1fr 1fr; } }
+    .q-card {
+      display: flex; flex-direction: column; gap: 8px;
+      border: 1px solid var(--line); border-radius: 16px; background: var(--surface);
+      padding: 20px; text-decoration: none; color: inherit;
+      transition: border-color .15s ease, transform .15s ease;
+    }
+    .q-card:hover { border-color: color-mix(in srgb, var(--candle) 54%, var(--line)); transform: translateY(-2px); }
+    .q-tag { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--candle); }
+    .q-card h2 { margin: 4px 0 6px; font-size: 1.2rem; }
+    .q-card p { margin: 0 0 8px; color: #ded3e6; font-size: 0.9rem; }
+    .q-card strong { font-family: var(--mono); font-size: 0.82rem; color: var(--candle); }
+  </style>
+</Base>
