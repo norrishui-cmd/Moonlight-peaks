@@ -95,6 +95,8 @@ export const GET: APIRoute = () => {
     ...topic('/platforms', platforms),
     ...topic('/items', itemCategories),
     ...collectionDetailPages.map((p) => ({ path: `/collections/${p.collection}/${p.slug}`, images: p.icon.startsWith('/images/') ? [p.icon] : [] })),
+    ...collectionDetailPages.map((p) => ({ path: `/ja/collections/${p.collection}/${p.slug}`, images: p.icon.startsWith('/images/') ? [p.icon] : [] })),
+    ...collectionDetailPages.map((p) => ({ path: `/de/collections/${p.collection}/${p.slug}`, images: p.icon.startsWith('/images/') ? [p.icon] : [] })),
     ...topic('/compare', comparisons),
     ...topic('/demo', demo),
     ...news.map((n) => ({ path: `/news/${n.slug}` })),
