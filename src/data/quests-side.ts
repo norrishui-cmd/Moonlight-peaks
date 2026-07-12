@@ -1,7 +1,10 @@
 // src/data/quests-side.ts
-// Side quests and NPC-specific quests, kept separate from the main story chain in quests-story.ts.
-// Only real, sourced quest names are listed; anything not yet independently confirmed is labeled
-// 'reported' rather than presented as fact.
+// Side quests and unlock-gated systems, restructured around the actual search intent players
+// have when they hit these: "why don't I have X yet." Each entry leads with troubleshooting
+// (stuck-point Q&A) rather than a narrative summary, per the site's core quest-hub design goal.
+// Only real, sourced quest names/mechanics are listed; anything not yet independently confirmed
+// is labeled 'reported' rather than presented as fact.
+export type Troubleshoot = { q: string; a: string };
 export type SideQuest = {
   slug: string;
   title: string;
@@ -9,54 +12,95 @@ export type SideQuest = {
   status: 'confirmed' | 'reported';
   summary: string;
   reward?: string;
+  troubleshooting: Troubleshoot[]; // the core content — what to check when stuck
   related?: { label: string; href: string }[];
 };
 
 export const sideQuests: SideQuest[] = [
   {
-    slug: 'noels-fishing-contest', title: 'Noel\u2019s Fishing Contest', npc: 'noel', status: 'confirmed',
+    slug: 'noels-fishing-contest', title: 'Noel\u2019s Fishing Contest (First Fishing Rod)', npc: 'noel', status: 'confirmed',
     summary: 'Confirmed: within your first few in-game nights, Noel challenges you to a fishing contest by the river \u2014 catch 3 different fish types before he does. It\u2019s untimed, so it\u2019s an easy win.',
     reward: 'Your first fishing rod, plus a coin bonus',
+    troubleshooting: [
+      { q: 'I don\u2019t have a fishing rod yet \u2014 where do I get one?', a: 'Confirmed (cross-referenced against whisperofthehouse.com\u2019s unlock-gate guide): the fishing rod is not sold in any shop \u2014 it\u2019s a quest reward from Noel\u2019s fishing contest. If you haven\u2019t met Noel by the river yet, that\u2019s the actual blocker, not a missing purchase.' },
+      { q: 'I can\u2019t find Noel to start the contest \u2014 what do I do?', a: 'Community-reported: Noel is typically found by the river in the early game. If several in-game nights have passed with no sign of him, check that you\u2019ve completed the earliest setup quests (Register at Town Hall, Meet the Townsfolk) first, since some early NPCs only appear once those are done.' },
+    ],
     related: [{ label: 'Noel', href: '/characters/noel' }, { label: 'Fish collection', href: '/collections/fish' }],
   },
   {
-    slug: 'fix-the-roof', title: 'Fix the Roof', npc: 'ridge', status: 'confirmed',
-    summary: 'Confirmed: a quest from Ridge that unlocks house upgrades, purchased afterward at the Howling Hammer.',
-    reward: 'House upgrade access',
+    slug: 'fix-the-roof', title: 'Fix the Roof (House Upgrades Locked)', npc: 'ridge', status: 'confirmed',
+    summary: 'Confirmed: a quest from Ridge that unlocks house upgrades, purchased afterward at the Howling Hammer. It also unlocks the Refiner blueprint.',
+    reward: 'House upgrade access, Refiner blueprint',
+    troubleshooting: [
+      { q: 'The Howling Hammer won\u2019t sell me house upgrades \u2014 why?', a: 'Confirmed: house upgrades are gated behind completing "Fix the Roof" with Ridge first. If the upgrade options aren\u2019t showing at the Howling Hammer, this quest is the missing step, not a shop bug.' },
+      { q: 'I don\u2019t have a Refiner and can\u2019t make Fodder or Planks \u2014 what\u2019s blocking it?', a: 'Confirmed: the Refiner blueprint is a reward tied to this same roof-repair quest chain, not something bought separately. Complete "Fix the Roof" first.' },
+    ],
     related: [{ label: 'Ridge', href: '/characters/ridge' }, { label: 'The House', href: '/farm/house' }],
   },
   {
-    slug: 'the-magic-of-crops', title: 'The Magic of Crops', npc: 'luna', status: 'confirmed',
-    summary: 'Confirmed: a letter-triggered quest from Luna that unlocks the Aquaflux spell (magical, automatic watering), a prerequisite in the chain leading to "The Quest for Mana."',
+    slug: 'the-magic-of-crops', title: 'The Magic of Crops (Aquaflux / Broken Wand)', npc: 'luna', status: 'confirmed',
+    summary: 'Confirmed: a letter-triggered quest from Luna that unlocks the Aquaflux spell (magical, automatic watering) \u2014 a prerequisite in the chain leading to "The Quest for Mana" and, eventually, wand repair and spellcasting in general.',
     reward: 'Aquaflux spell unlocked',
+    troubleshooting: [
+      { q: 'My wand is still broken \u2014 how do I fix it?', a: 'Community-reported (whisperofthehouse.com): wand repair is not a shop purchase \u2014 it comes through this story chain (Luna \u2192 Sabrina \u2192 Fiona \u2192 Mana Extractor \u2192 Aquaflux). If you haven\u2019t triggered "The Magic of Crops" from Luna yet, that\u2019s the actual starting point.' },
+      { q: 'I don\u2019t have Aquaflux and I\u2019m stuck hand-watering \u2014 what\u2019s the trigger?', a: 'Confirmed: this quest is letter-triggered from Luna. If it hasn\u2019t started, make sure you\u2019ve progressed the earlier story beats (through "A Bridge Too Far") first, since later letters are typically gated behind earlier quests.' },
+    ],
     related: [{ label: 'Luna', href: '/characters/luna' }, { label: 'Magic & potions', href: '/magic' }],
   },
   {
-    slug: 'the-need-for-herbs', title: 'The Need for Herbs', status: 'reported',
-    summary: 'Reported as a follow-up quest after "The Magic of Crops," leading to the Herb Garden blueprint.',
-    reward: 'Herb Garden blueprint',
-    related: [{ label: 'Farm helpers', href: '/farm/farm-helpers' }],
-  },
-  {
-    slug: 'the-familys-heirloom-artifact', title: 'Dragan\u2019s Artifact (Nokturna win)', npc: 'dragan', status: 'reported',
-    summary: 'Reported: winning a Nokturna match against Dragan is tied to obtaining an artifact from him, connected to setting up the museum.',
-    related: [{ label: 'Dragan', href: '/characters/dragan' }, { label: 'Nokturna', href: '/nokturna' }],
+    slug: 'the-net-and-death', title: 'Unlocking the Bug Net (Death & Soul Blobs)', npc: 'death', status: 'confirmed',
+    summary: 'Confirmed (cross-referenced against whisperofthehouse.com): the bug net comes through Death, gated behind progress on Orlock\u2019s Wine Scheme, A Bridge Too Far, and Misty Shores access \u2014 not a shop item. After your second meeting with Death in town, he introduces the 100 Soul Blobs and asks you to round them up with the net.',
+    reward: 'The Net (bug/Soul Blob catching); Antique Clock upon collecting all 100 Soul Blobs (extends the night from 15 to 25 minutes)',
+    troubleshooting: [
+      { q: 'I can\u2019t catch bugs or Soul Blobs \u2014 where\u2019s the net?', a: 'Confirmed: the net isn\u2019t sold anywhere \u2014 it\u2019s unlocked through Death, gated behind earlier story progress (Orlock\u2019s Wine Scheme, A Bridge Too Far, and Misty Shores access). If you haven\u2019t met Death twice yet, that\u2019s the blocker.' },
+      { q: 'Where do I find Death in Moonlight Peaks?', a: 'Confirmed: in town, tied to the Ambrosia Graveyard area that opens up after "A Bridge Too Far" unlocks Misty Shores.' },
+    ],
+    related: [{ label: 'Death', href: '/characters/death' }, { label: 'Soul Blobs collection', href: '/collections/soul-blobs' }],
   },
   {
     slug: 'vampster-collection-quest', title: 'Vampster Round-Up', npc: 'alina', status: 'confirmed',
     summary: 'Confirmed: Alina, found inside the Cave of Echoes, explains that the 53 Vampsters scattered around town are lost and asks you to carry them home one at a time to a cave in Misty Shores.',
+    troubleshooting: [
+      { q: 'I keep losing track of a Vampster I was carrying \u2014 why?', a: 'Community-reported: talking to any resident, or triggering any cutscene, makes you drop whichever Vampster you\u2019re currently carrying. It stays wherever you dropped it, so clear dialogue-heavy areas before setting off with one.' },
+      { q: 'I can\u2019t start this quest \u2014 where\u2019s Alina?', a: 'Confirmed: inside the Cave of Echoes, which only opens after "A Bridge Too Far" unlocks Misty Shores. If you haven\u2019t reached the Cave of Echoes yet, that\u2019s the prerequisite.' },
+    ],
     related: [{ label: 'Alina', href: '/characters/alina' }, { label: 'Vampsters collection', href: '/collections/vampsters' }],
   },
   {
-    slug: 'soul-blobs-favor', title: "Death's Favor (Soul Blobs)", npc: 'death', status: 'confirmed',
-    summary: 'Confirmed: after your second meeting with Death in town, he introduces the 100 Soul Blobs and asks you to round them up with the Net.',
-    reward: 'Antique Clock upon collecting all 100 (extends the night from 15 to 25 minutes)',
-    related: [{ label: 'Death', href: '/characters/death' }, { label: 'Soul Blobs collection', href: '/collections/soul-blobs' }],
+    slug: 'albertus-job-board', title: "Albertus' Jobs Not Showing Up", npc: 'albertus', status: 'confirmed',
+    summary: 'Confirmed: an ongoing, repeatable side-system rather than a one-time quest \u2014 short requests posted on Albertus\u2019 board at Town Hall, each rewarding coins, sometimes an item, and relationship points with whoever posted it.',
+    troubleshooting: [
+      { q: 'The job board at Town Hall looks empty \u2014 is that a bug?', a: 'Community-reported: the board is gated behind reaching Town Hall via "Register at Town Hall" first. If you\u2019ve completed that and still see nothing, jobs may simply refresh on a schedule rather than always having something posted \u2014 check back after sleeping.' },
+    ],
+    related: [{ label: 'Albertus', href: '/characters/albertus' }, { label: "Albertus' Jobs", href: '/collections/albertus-jobs' }],
   },
   {
-    slug: 'albertus-job-board', title: "Albertus' Jobs (ongoing)", npc: 'albertus', status: 'confirmed',
-    summary: 'Confirmed: an ongoing, repeatable side-system rather than a one-time quest \u2014 short requests posted on Albertus\u2019 board at Town Hall, each rewarding coins, sometimes an item, and relationship points with whoever posted it.',
-    related: [{ label: 'Albertus', href: '/characters/albertus' }, { label: "Albertus' Jobs", href: '/collections/albertus-jobs' }],
+    slug: 'npc-stuck-cant-interact', title: 'An NPC Is Stuck / Frozen and Won\u2019t Talk', status: 'reported',
+    summary: 'Confirmed via the game\u2019s official Known Issues tracking and Steam Community bug reports: some players find a specific NPC (notably Orlock) stuck in place and unresponsive to interaction. This is a known, unresolved bug rather than a quest-gating issue.',
+    troubleshooting: [
+      { q: 'An NPC won\u2019t respond when I try to talk to them \u2014 is this a bug or am I missing something?', a: 'Confirmed via official Known Issues tracking: this has been reported, notably with Orlock getting stuck in place. Reloading the area and sleeping to the next day have not fixed it for affected players so far, and there\u2019s no confirmed fix yet. This is a genuine bug, not a quest requirement you\u2019re missing.' },
+      { q: 'What should I do if this happens to me?', a: 'Confirmed: report it to support@xseedgames.com with your platform and a description of what happened, since there\u2019s no player-side workaround confirmed yet.' },
+    ],
+    related: [{ label: 'Known issues', href: '/known-issues' }, { label: 'Orlock', href: '/characters/orlock' }],
+  },
+  {
+    slug: 'form-wheel-softlock', title: 'Stuck on the Form Wheel / Can\u2019t Move', status: 'reported',
+    summary: 'Confirmed via an official developer bug-tracking thread on Steam: some keyboard/mouse players have gotten stuck holding the shapeshifting form wheel open (notably when exiting the Ambrosia Manor), with no way to close it or regain control.',
+    troubleshooting: [
+      { q: 'I\u2019m stuck holding the form wheel open and can\u2019t move \u2014 help?', a: 'Confirmed via an official XSEED Games developer thread: this has affected keyboard/mouse players, often when exiting the Ambrosia Manor. One reported cause was having no key actually bound to the form wheel action \u2014 check your keybinds under Settings for an "open form wheel" binding (default is reported as R on some setups) and assign one if it\u2019s empty.' },
+      { q: 'I\u2019m locked in this state and can\u2019t reach the settings menu \u2014 what now?', a: 'Confirmed via the same developer thread: affected players have had to force-close the game (Alt+F4 on PC) as a last resort. Since the game only saves when you sleep, you may lose progress since your last save \u2014 report the issue to XSEED Games via the official bug thread or support@xseedgames.com so they can prioritize a fix.' },
+    ],
+    related: [{ label: 'Shapeshifting', href: '/shapeshifting' }, { label: 'Known issues', href: '/known-issues' }],
+  },
+  {
+    slug: 'elviras-treasure-hunt', title: 'Elvira\u2019s Treasure Hunt (Raiders of the Lost Art)', npc: 'elvira', status: 'confirmed',
+    summary: 'Confirmed: Elvira sends you on a 5-clue treasure hunt across town \u2014 reported route: Samael\u2019s bar \u2192 the graveyard \u2192 a bell at the mines \u2192 the Cave of Echoes \u2192 the Khazan Temple. Completing it ties to the "Raiders of the Lost Art" achievement.',
+    reward: '"Raiders of the Lost Art" achievement',
+    troubleshooting: [
+      { q: 'I\u2019m stuck on one of Elvira\u2019s treasure hunt clues \u2014 what\u2019s the route?', a: 'Community-reported: the confirmed order of locations is Samael\u2019s bar (The Broken Lamp), then the graveyard, then a bell at the mines, then the Cave of Echoes, and finally the Khazan Temple. If you\u2019re stuck at one clue, double-check you\u2019ve fully explored the previous location first \u2014 clues are reported to be tied to specific spots within each area, not just entering the general vicinity.' },
+      { q: 'Where do I start this quest?', a: 'Confirmed: it\u2019s given by Elvira. If you haven\u2019t met her yet or she has no quest to offer, her clue chain may be gated behind earlier story progress, since the Khazan Temple leg requires areas that open up later.' },
+    ],
+    related: [{ label: 'Elvira', href: '/characters/elvira' }, { label: 'Achievements', href: '/achievements' }],
   },
 ];
 

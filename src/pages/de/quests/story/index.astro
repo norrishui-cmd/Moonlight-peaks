@@ -31,7 +31,7 @@ const jsonLd = {
       </p>
 
       {storyChaptersDe.map((ch) => {
-        const quests = storyQuests.filter((q) => q.chapter === ch.number);
+        const quests = storyQuests.filter((q) => q.chapter === ch.number && storyQuestsDe[q.slug]);
         return (
           <section class="chapter">
             <div class="chapter-head">
@@ -55,7 +55,7 @@ const jsonLd = {
         Sourced from cross-verified launch-week walkthroughs (Neoseekers Quest-Log, Bonus Action,
         Output Lag, Into Indie Games). Die Kapiteleinteilung ist unsere eigene Organisationsform,
         keine offiziellen In-Game-Labels. Verwandt: <a href="/de/quests">Quest-Hub</a>,
-        <a href="/de/quests/side">Nebenquests</a>, <a href="/quests/a-bridge-too-far">A Bridge Too Far (voller Walkthrough, Englisch)</a>.
+        <a href="/de/quests/side">Nebenquests</a>, <a href="/quests/story/a-bridge-too-far">A Bridge Too Far (voller Walkthrough, Englisch)</a>.
       </div>
     </div>
   </article>

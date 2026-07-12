@@ -30,7 +30,7 @@ const jsonLd = {
       </p>
 
       {storyChaptersJa.map((ch) => {
-        const quests = storyQuests.filter((q) => q.chapter === ch.number);
+        const quests = storyQuests.filter((q) => q.chapter === ch.number && storyQuestsJa[q.slug]);
         return (
           <section class="chapter">
             <div class="chapter-head">
@@ -54,7 +54,7 @@ const jsonLd = {
         相互検証済みの発売週攻略(Neoseekerのクエストログ、Bonus Action、Output Lag、Into Indie Games)
         を出典としています。章の分け方は独自の整理方法であり、ゲーム内の公式ラベルではありません。
         関連ページ: <a href="/ja/quests">クエストハブ</a>, <a href="/ja/quests/side">サブクエスト</a>,
-        <a href="/quests/a-bridge-too-far">A Bridge Too Far(完全攻略、英語)</a>。
+        <a href="/quests/story/a-bridge-too-far">A Bridge Too Far(完全攻略、英語)</a>。
       </div>
     </div>
   </article>

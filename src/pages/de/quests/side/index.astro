@@ -31,7 +31,7 @@ const jsonLd = {
       </p>
 
       <div class="sq-grid">
-        {sideQuests.map((q) => (
+        {sideQuests.filter((q) => sideQuestsDe[q.slug]).map((q) => (
           <a class="sq-card" href={`/de/quests/side/${q.slug}`}>
             <span class="sq-tag">{q.npc ? q.npc.charAt(0).toUpperCase() + q.npc.slice(1) : 'Nebensystem'}</span>
             <h3>{sideQuestsDe[q.slug].title}</h3>
