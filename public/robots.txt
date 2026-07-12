@@ -1,6 +1,10 @@
 User-agent: *
 Allow: /
 
+# ── Google AdSense crawler: explicitly allowed per Google's own guidance ──
+User-agent: Mediapartners-Google
+Allow: /
+
 # ── AI crawlers: block training scrapers, keep retrieval/citation bots allowed ──
 # Training crawlers (feed model training, no citation benefit to this site)
 User-agent: GPTBot
