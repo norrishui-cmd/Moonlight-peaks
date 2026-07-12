@@ -15,14 +15,11 @@ export function getStaticPaths() {
 const { q, prev, next } = Astro.props as { q: (typeof sideQuests)[number]; prev: (typeof sideQuests)[number]; next: (typeof sideQuests)[number] };
 const tr = sideQuestsJa[q.slug];
 const statusLabel = q.status === 'confirmed' ? '確認済み' : '報告済み';
-
-const faq = [
-  { q: `ムーンライト・ピークスで「${tr.title}」を始めるには?`, a: tr.summary },
-  { q: `「${tr.title}」の報酬は?`, a: tr.reward || 'このクエストの直接的なアイテム報酬はまだ確認されていません。' },
-];
+const troubleshooting = tr.troubleshooting || [];
+const allFaq = [...troubleshooting, { q: `ムーンライト・ピークスで「${tr.title}」とは?`, a: tr.summary }];
 
 const jsonLd = [
-  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: allFaq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
   { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
     { '@type': 'ListItem', position: 1, name: 'ホーム', item: `${SITE.url}/ja` },
     { '@type': 'ListItem', position: 2, name: 'クエストガイド', item: `${SITE.url}/ja/quests` },
@@ -32,8 +29,8 @@ const jsonLd = [
 ];
 ---
 <Base
-  title={`${tr.title} — ムーンライト・ピークス サブクエストガイド`}
-  description={`${GAME.title}「${tr.title}」サブクエスト: ${tr.summary.slice(0, 100)}`}
+  title={`${tr.title} — ムーンライト・ピークス 攻略`}
+  description={`${GAME.title}「${tr.title}」: ${(troubleshooting[0]?.q || tr.summary).slice(0, 90)}`}
   path={`/ja/quests/side/${q.slug}`}
   jsonLd={jsonLd}
   crumbs={[{ label: 'クエストガイド', href: '/ja/quests' }, { label: 'サブクエスト', href: '/ja/quests/side' }, { label: tr.title }]}
@@ -43,26 +40,27 @@ const jsonLd = [
     <div class="wrap">
       <p class="eyebrow">サブクエスト · <span class="tag-community">{statusLabel}</span></p>
       <h1>{tr.title}</h1>
-
-      <h2>何が起こるか</h2>
-      <p>{tr.summary}</p>
+      <p class="intro">{tr.summary}</p>
 
       {tr.reward && (
-        <>
-          <h2>報酬</h2>
-          <p>{tr.reward}</p>
-        </>
+        <div class="callout">
+          <strong>報酬:</strong> {tr.reward}
+        </div>
       )}
 
-      <h2>FAQ</h2>
-      <div class="faq">
-        {faq.map((f) => (
-          <details>
-            <summary>{f.q}</summary>
-            <p>{f.a}</p>
-          </details>
-        ))}
-      </div>
+      {troubleshooting.length > 0 && (
+        <>
+          <h2>詰まっていますか?確認すべきこと</h2>
+          <div class="faq">
+            {troubleshooting.map((f) => (
+              <details open>
+                <summary>{f.q}</summary>
+                <p>{f.a}</p>
+              </details>
+            ))}
+          </div>
+        </>
+      )}
 
       <nav class="prevnext" aria-label="サブクエストナビゲーション">
         <a href={`/ja/quests/side/${prev.slug}`}>← {sideQuestsJa[prev.slug].title}</a>

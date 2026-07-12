@@ -57,7 +57,7 @@ export const storyQuestsJa: Record<string, StoryQuestTrJa> = {
   'the-dinner-party': {
     title: 'ディナーパーティー (The Dinner Party)',
     summary: 'Neoseekerのクエストログで確認済み:町の社交イベントクエストです。',
-    reward: '猫形態(ヘルキトゥンへの変身)が解放される',
+    reward: '猫形態(ヘルキティへの変身)が解放される',
   },
   'mend-it-with-magic': {
     title: '魔法で繕う / 魔法の心得',
@@ -97,5 +97,25 @@ export const storyQuestsJa: Record<string, StoryQuestTrJa> = {
   'unfinished-business': {
     title: '未解決の出来事',
     summary: 'Neoseekerのクエストログで確認済み:現時点で記録されている結婚式編の最後の展開です。この先のストーリー内容が確認され次第、更新します。',
+  },
+  'orlocks-wine-scheme': {
+    title: 'Orlockのワイン計画(ブラッドワイン)',
+    summary: 'Bonus Actionで確認済み、Into Indie Gamesとも照合済み:到着してすぐ、二日酔いのOrlockが自宅の芝生で寝ているのを見つけます——水をかけるよりつついて起こす方が良い会話につながります。彼はブラッドグレープの種をくれて、赤ワイン(ブラッドワイン)を作るよう頼んできます。作って、Fionaに謝るよう詰め寄ると、The Broken LampのSamaelへの350ゴールドのツケを払うよう言われます。',
+    reward: 'ブラッドワインを作る;Orlockに謝罪させ、Samaelへの350ゴールドの借金を払う;「架け橋の彼方」につながる',
+  },
+  'a-croak-and-a-crest': {
+    title: '蛙鳴と紋章 (A Croak and a Crest)',
+    unlock: '「クレスト・ガーデンの緊張」を完了する',
+    summary: 'Neoseekerのクエストログ転記により確認済み:クレスト・ガーデンの謎の直接の後続クエストです。',
+    reward: 'クレスト・ガーデンにLoganの紋章を設置し、紋章系実績にカウントされる',
+  },
+  'a-missing-moon': {
+    title: '失われた月 (A Missing Moon)',
+    summary: 'Neoseekerのクエストログ転記により確認済み:マナ・エクストラクターのクエストチェーンに続く中盤のストーリー展開で、Ambrosia家の危機へとつながります。',
+  },
+  'the-ambrosia-crisis': {
+    title: 'Ambrosiaの危機',
+    unlock: '「深夜の支配者」を完了し、2日待ってAmbrosia邸の手紙を読む',
+    summary: 'Neoseekerのクエストログ転記により確認済み:吸血鬼Ambrosia家の家族危機に関する展開で、「深夜の支配者」の完了と招待状を待つことが前提条件です。',
   },
 };

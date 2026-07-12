@@ -99,7 +99,7 @@ export const faqs: Faq[] = [
   {
     slug: 'how-to-get-married-in-moonlight-peaks', cat: 'romance',
     q: 'How do you get married in Moonlight Peaks?',
-    a: 'Confirmed at launch: dating unlocks at Heart Level 4, and you can propose at Heart Level 8. Dates play out as minigames (like assembling a bouquet in requested colours) — it\u2019s possible to fail one, e.g. by showing up late, which costs friendship points rather than ending things outright. The wedding happens within a week of proposing and is attended by the town\u2019s vampires and werewolves. Marriage itself is monogamous, and your spouse moves onto your farm afterward.',
+    a: 'Confirmed at launch: dating unlocks at Heart Level 4, and you can propose at Heart Level 8. Dates play out as minigames (like assembling a bouquet in requested colours) — it\u2019s possible to fail one, e.g. by showing up late, which costs friendship points rather than ending things outright. Once you propose, you set the wedding date yourself, at least 2 days out with no reported upper limit — setting it unlocks new wedding attire at Third Eye Threads. The wedding is attended by the town\u2019s vampires and werewolves. Marriage itself is monogamous, and your spouse moves onto your farm afterward.',
     related: [{ label: 'Romance guide', href: '/romance' }, { label: 'Gift Tracker', href: '/tools/gift-tracker' }],
   },
   {
@@ -111,7 +111,7 @@ export const faqs: Faq[] = [
   {
     slug: 'moonlight-peaks-step-parent-children', cat: 'romance',
     q: 'Can you have children or become a step-parent in Moonlight Peaks?',
-    a: 'You cannot have biological children — confirmed by multiple sources with no announced plans to add the mechanic. Reported detail: marrying an older character who already has children, such as Orlock (father to Mina and Evan), is said to make you their step-parent instead.',
+    a: 'You cannot have biological children — confirmed by multiple sources with no announced plans to add the mechanic. Reported detail: marrying an older character who already has children — Orlock (father to Mina and Evan) or Ridge, both cited across sources — is said to make you their step-parent instead.',
     related: [{ label: 'Orlock', href: '/characters/orlock' }, { label: 'Romance guide', href: '/romance' }],
   },
   {
@@ -171,7 +171,7 @@ export const faqs: Faq[] = [
   {
     slug: 'moonlight-peaks-night-length-cycle', cat: 'world',
     q: 'How long is a night in Moonlight Peaks?',
-    a: 'Confirmed: your night runs from 6 PM to 6 AM in-game, lasting about 15 real-world minutes by default (similar to a Stardew Valley day). Collecting all 100 Soul Blobs for Death rewards the Antique Clock, which extends this to 25 minutes.',
+    a: 'Confirmed: your night runs from 6 PM to 6 AM in-game, lasting about 15 real-world minutes by default (similar to a Stardew Valley day). Collecting all 100 Soul Blobs for Death rewards the Antique Clock, which extends this to 25 minutes. Separately, a settings option unlocked early on also lets you manually shorten a night to 10 minutes or stretch it to 25, if you\u2019d rather adjust the pace yourself.',
     related: [{ label: 'Beginner guide', href: '/beginner-guide' }],
   },
   {
@@ -279,7 +279,7 @@ export const faqs: Faq[] = [
   {
     slug: 'can-you-get-married-in-moonlight-peaks', cat: 'romance',
     q: 'Can you get married in Moonlight Peaks?',
-    a: 'Yes — confirmed at launch. Propose at Heart Level 8, and the wedding takes place within a week, attended by the town\u2019s vampires and werewolves. Your spouse then moves onto your farm and unlocks a further heart event. There are no children in the game.',
+    a: 'Yes — confirmed at launch. Propose at Heart Level 8, then set a wedding date yourself, at least 2 days out with no reported upper limit; setting it unlocks new wedding attire at Third Eye Threads. The wedding is attended by the town\u2019s vampires and werewolves. Your spouse then moves onto your farm and unlocks a further heart event. There are no children in the game.',
     related: [{ label: 'Romance & families', href: '/romance' }, { label: 'Can you have children?', href: '/faq/can-you-have-children-in-moonlight-peaks' }],
   },
   {
@@ -577,6 +577,24 @@ export const faqs: Faq[] = [
     q: 'What are the main story quests in Moonlight Peaks, in order?',
     a: 'Confirmed via a cross-verified quest log: the chain runs roughly from registering at Town Hall and meeting Orlock, through "A Bridge Too Far" (the Fiona/Orlock bridge curse), a Crest Garden mystery, unlocking your first magic and the Mana Extractor, "The Dinner Party" (which unlocks Cat form), and into a wedding-arc storyline. See the full chapter-by-chapter breakdown for exact order and unlock conditions.',
     related: [{ label: 'Main story chapters', href: '/quests/story' }, { label: 'Quest guide', href: '/quests' }],
+  },
+  {
+    slug: 'how-many-save-files-can-you-have-in-moonlight-peaks', cat: 'world',
+    q: 'How many save files can you have in Moonlight Peaks, and can you go back to an earlier point?',
+    a: 'Confirmed: you can keep multiple save files for different characters/playthroughs, but you cannot branch off an existing save to create an earlier checkpoint of the same character. Progression is permanent within a single save \u2014 there\u2019s no way to roll back and make different choices later on that same file. Combined with the fact that Moonlight Peaks only saves when you sleep (no manual save), this makes it worth thinking through big decisions rather than assuming you can undo them.',
+    related: [{ label: 'How to save FAQ', href: '/faq/moonlight-peaks-how-to-save' }, { label: 'Known issues', href: '/known-issues' }],
+  },
+  {
+    slug: 'is-moonlight-peaks-lgbtq-friendly', cat: 'romance',
+    q: 'Is Moonlight Peaks LGBTQ+ friendly?',
+    a: 'Yes, confirmed: the game features an inclusive character creator with no gendered restrictions, and dating is fully gender-neutral \u2014 every romanceable resident can be dated regardless of the player character\u2019s identity or appearance. Reviewers have specifically praised the queer romance content and character writing as a standout strength.',
+    related: [{ label: 'Romance guide', href: '/romance' }, { label: 'Character creator', href: '/character-creator' }],
+  },
+  {
+    slug: 'how-does-aquaflux-mana-limit-work', cat: 'farming',
+    q: 'Does Aquaflux water crops for free, or does it still cost something?',
+    a: 'Confirmed: Aquaflux is not an unlimited automatic watering solution \u2014 it still draws from your Mana bar, the same resource pool used for other spells. A single cast is reported to cover up to 16 crop tiles, but if you plan a large magical-crop field without enough Mana capacity to support it, you\u2019ll run out partway through and need to wait for Mana to regenerate (via sleep or Mana-restoring food/potions) before finishing. Treat it as a watering tool with real limits, not a free pass to ignore your Mana bar entirely.',
+    related: [{ label: 'Magic & potions', href: '/magic' }, { label: 'Farming guide', href: '/farming' }],
   },
 ];
 

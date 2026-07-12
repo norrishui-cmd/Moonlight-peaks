@@ -72,8 +72,9 @@ export const storyQuests: StoryQuest[] = [
   },
   {
     slug: 'a-croak-and-a-crest', chapter: 3, title: 'A Croak and a Crest', giver: 'Story', status: 'confirmed',
-    summary: 'Confirmed via Neoseeker\u2019s quest log transcription as the direct follow-up to the Crest Garden mystery. Community-reported as part of the broader chain that eventually leads to the Hellkitten (Cat) form.',
-    reward: 'Part of the Hellkitten form chain',
+    unlock: 'Complete "Tension in the Crest Garden"',
+    summary: 'Confirmed via Neoseeker\u2019s quest log transcription as the direct follow-up to the Crest Garden mystery.',
+    reward: 'Places the Logan Crest in the Crest Garden and counts toward Crest achievements',
     leadsTo: 'the-quest-for-mana',
   },
   {
@@ -99,7 +100,7 @@ export const storyQuests: StoryQuest[] = [
   },
   {
     slug: 'the-ambrosia-crisis', chapter: 3, title: 'The Ambrosia Crisis', giver: 'Story', status: 'confirmed',
-    unlock: 'Complete "Master of the Night", wait 2 days, and read the Ambrosia invitation',
+    unlock: 'Complete "Master of the Night", wait 2 days, and read the Ambrosia Mansion letter',
     summary: 'Confirmed via Neoseeker\u2019s quest log transcription: a family-crisis story beat for the vampire Ambrosia family, gated behind completing "Master of the Night" and a short wait for an invitation letter.',
     leadsTo: 'the-dinner-party',
   },
@@ -136,7 +137,8 @@ export const storyQuests: StoryQuest[] = [
   },
   {
     slug: 'the-mermaids-wish', chapter: 5, title: 'The Mermaid\u2019s Wish', giver: 'Story', status: 'confirmed',
-    summary: 'Confirmed via Neoseeker\u2019s quest log: completing this quest alongside "A Touch of Magic" is a prerequisite for "The Rehearsal Dinner." Community-reported elsewhere as connected to unlocking a Mermaid/Aqua shapeshifting form, though we haven\u2019t independently confirmed that reward link ourselves.',
+    summary: 'Confirmed via Neoseeker\u2019s quest log: completing this quest alongside "A Touch of Magic" is a prerequisite for "The Rehearsal Dinner."',
+    reward: 'Aqua form (Mermaid shapeshifting unlocked)',
     leadsTo: 'the-rehearsal-dinner',
   },
   {

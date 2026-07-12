@@ -3,7 +3,7 @@ import Base from '../layouts/Base.astro';
 import { SITE, GAME } from '../consts';
 
 const systems: { name: string; note: string; status: string }[] = [
-  { name: 'Seasons', note: 'Confirmed via the official wiki\u2019s own structure: the year is divided into Spring, Summer, Autumn, and Winter, each with its own numbered days (festival dates are given as e.g. "Spring 20").', status: 'Confirmed' },
+  { name: 'Seasons', note: 'Confirmed via the official wiki\u2019s own structure and cross-checked against launch-week guides: the year is divided into Spring, Summer, Autumn, and Winter, each lasting one month \u2014 a four-month calendar in total. You start the game in Spring. Festival dates are given as e.g. "Spring 20".', status: 'Confirmed' },
   { name: 'Weather', note: 'A weather system exists per pre-launch datamined files; exactly how it affects farming or activities is not yet independently confirmed here.', status: 'Datamined' },
   { name: 'Festivals', note: 'Confirmed: town-wide seasonal celebrations, including the Loveage Festival and the Moonlight Ball, with more likely across the year.', status: 'Confirmed' },
 ];
@@ -18,7 +18,8 @@ const festivals: { name: string; when: string; note: string; status: string }[] 
 ];
 
 const faq = [
-  { q: 'Does Moonlight Peaks have seasons?', a: 'Yes, confirmed: the year is divided into Spring, Summer, Autumn, and Winter, each with numbered days used to schedule festivals and other events.' },
+  { q: 'Does Moonlight Peaks have seasons?', a: 'Yes, confirmed: the year is divided into Spring, Summer, Autumn, and Winter, each lasting one month, used to schedule festivals and other events.' },
+  { q: 'How long is a year in Moonlight Peaks?', a: 'Confirmed: a four-month calendar \u2014 one month per season (Spring, Summer, Autumn, Winter). You start the game in Spring.' },
   { q: 'Does Moonlight Peaks have weather?', a: 'A weather system is referenced in pre-launch datamined files. Exactly how it affects farming or activities is not yet independently confirmed here.' },
   { q: 'What is the Loveage Festival in Moonlight Peaks?', a: 'Confirmed: a 2-day Spring festival (Spring 20\u201321) hosted by Llemi, the Love Demon. Elvira and Mina run stalls, Luna runs a flower-arranging stall, and there\u2019s a secret-admirer gift exchange where you pick up to 3 NPCs on the Saturday and the exchange happens the following Sunday.' },
   { q: 'Are there other festivals besides Loveage?', a: 'Yes \u2014 the Moonlight Ball (Summer 20) is confirmed by name and date via the official wiki. Several launch-week previews also name a Master Soup cooking contest, a fashion show, an autumn Evernight Festival, and a Pumpkin-Head-hosted Halloween season, though we\u2019re treating those as community-reported until independently confirmed.' },

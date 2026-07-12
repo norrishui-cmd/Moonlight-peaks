@@ -79,7 +79,8 @@ export const storyQuestsDe: Record<string, StoryQuestTrDe> = {
   },
   'the-mermaids-wish': {
     title: 'The Mermaid\u2019s Wish',
-    summary: 'Bestätigt über Neoseekers Quest-Log: der Abschluss dieser Quest zusammen mit "A Touch of Magic" ist Voraussetzung für "The Rehearsal Dinner". Community-berichtet an anderer Stelle als verbunden mit dem Freischalten einer Meerjungfrauen-/Aqua-Gestaltwandlungsform, wobei wir diese Belohnungsverbindung nicht selbst unabhängig bestätigt haben.',
+    summary: 'Bestätigt über Neoseekers Quest-Log: der Abschluss dieser Quest zusammen mit "A Touch of Magic" ist Voraussetzung für "The Rehearsal Dinner".',
+    reward: 'Aqua-Form (Meerjungfrauen-Gestaltwandlung freigeschaltet)',
   },
   'the-rehearsal-dinner': {
     title: 'The Rehearsal Dinner',
@@ -97,5 +98,25 @@ export const storyQuestsDe: Record<string, StoryQuestTrDe> = {
   'unfinished-business': {
     title: 'Unfinished Business',
     summary: 'Bestätigt über Neoseekers Quest-Log als derzeit letzter dokumentierter Beat des Hochzeits-Handlungsbogens. Spätere Story-Inhalte könnten darüber hinausgehen \u2014 wir aktualisieren dies, sobald bestätigt.',
+  },
+  'orlocks-wine-scheme': {
+    title: 'Orlocks Weinplan (Blood Wine)',
+    summary: 'Bestätigt über Bonus Action, abgeglichen mit Into Indie Games: Gleich nach der Ankunft findest du Orlock, einen verkaterten Vampir, schlafend auf deinem Rasen \u2014 stupse ihn an statt Wasser über ihn zu gießen, für die bessere Dialogoption. Er gibt dir Blood-Grapes-Samen und bittet dich, ihm Rot-/Blutwein zu machen. Sobald du ihn gemacht hast und ihn zur Entschuldigung bei Fiona drängst, schickt er dich los, um seine 350-Gold-Zeche bei Samael zu begleichen.',
+    reward: 'Blutwein herstellen; Orlock zur Entschuldigung bewegen, 350-Gold-Schuld bei Samael begleichen; führt zu "A Bridge Too Far"',
+  },
+  'a-croak-and-a-crest': {
+    title: 'A Croak and a Crest',
+    unlock: 'Schließe "Tension in the Crest Garden" ab',
+    summary: 'Bestätigt über Neoseekers Quest-Log-Transkription als direkte Folgequest des Crest-Garden-Mysteriums.',
+    reward: 'Platziert das Logan-Wappen im Crest Garden und zählt zu Wappen-Errungenschaften',
+  },
+  'a-missing-moon': {
+    title: 'A Missing Moon',
+    summary: 'Bestätigt über Neoseekers Quest-Log-Transkription als mittlerer Story-Beat, der auf die Mana-Extraktor-Kette folgt und zur Ambrosia-Familienkrise führt.',
+  },
+  'the-ambrosia-crisis': {
+    title: 'The Ambrosia Crisis',
+    unlock: 'Schließe "Master of the Night" ab, warte 2 Tage und lies den Ambrosia-Anwesen-Brief',
+    summary: 'Bestätigt über Neoseekers Quest-Log-Transkription: ein Familienkrisen-Story-Beat für die Vampirfamilie Ambrosia, freigeschaltet nach Abschluss von "Master of the Night" und einer kurzen Wartezeit auf einen Brief.',
   },
 };

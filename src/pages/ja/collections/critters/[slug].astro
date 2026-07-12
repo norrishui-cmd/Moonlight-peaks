@@ -1,0 +1,176 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import { SITE } from '../../../../consts';
+import { critterDetailPages } from '../../../../data/collectionDetailPages';
+
+export function getStaticPaths() {
+  return critterDetailPages.map((entry, index) => ({
+    params: { slug: entry.slug },
+    props: {
+      entry,
+      previous: critterDetailPages[index - 1],
+      next: critterDetailPages[index + 1],
+    },
+  }));
+}
+
+const { entry, previous, next } = Astro.props;
+const labelJa: Record<string, string> = {
+  'Season': '季節', 'Location': '生息地', 'Type': '種類', 'Sells for': '売却価格',
+};
+const fact = (label: string) => entry.facts.find((item: any) => item.label === label)?.value || '-';
+const hasIcon = entry.icon.startsWith('/images/');
+const pagePath = `/ja/collections/critters/${entry.slug}`;
+const title = `${entry.name} — ムーンライト・ピークス 小動物図鑑`;
+const description = `ムーンライト・ピークス「${entry.name}」の季節・生息地・種類・売却価格をまとめています。`;
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'ホーム', item: `${SITE.url}/ja` },
+      { '@type': 'ListItem', position: 2, name: 'コレクション', item: `${SITE.url}/ja/collections` },
+      { '@type': 'ListItem', position: 3, name: '小動物', item: `${SITE.url}/ja/collections/critters` },
+      { '@type': 'ListItem', position: 4, name: entry.name, item: `${SITE.url}${pagePath}` },
+    ],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: [
+      {
+        '@type': 'Question',
+        name: `ムーンライト・ピークスで${entry.name}はどこにいますか?`,
+        acceptedAnswer: { '@type': 'Answer', text: `現在確認できているデータでは生息地は${fact('Location')}です。「-」の項目はまだライブ版での確認待ちです。` },
+      },
+      {
+        '@type': 'Question',
+        name: `${entry.name}はどんな種類の小動物ですか?`,
+        acceptedAnswer: { '@type': 'Answer', text: `現在${fact('Type')}に分類されており、売却価格は${fact('Sells for')}です。` },
+      },
+    ],
+  },
+];
+---
+<Base
+  title={title}
+  description={description}
+  path={pagePath}
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'コレクション', href: '/ja/collections' }, { label: '小動物', href: '/ja/collections/critters' }, { label: entry.name }]}
+  lang="ja"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">コレクション · 小動物</p>
+      <section class="detail-hero">
+        <div>
+          <h1>{entry.name} <em>(小動物)</em></h1>
+          <p class="intro">
+            確認できているコレクションテーブルのデータを基にしたムーンライト・ピークスの小動物詳細ページです。
+            未確認の値は、ライブ版で確認できるまで<strong>-</strong>と表示しています。
+          </p>
+        </div>
+        <div class="detail-icon" aria-hidden={!hasIcon}>
+          {hasIcon ? <img src={entry.icon} alt={`${entry.name}のアイコン`} loading="eager" /> : <span>アイコン未登録</span>}
+        </div>
+      </section>
+
+      <section class="fact-grid" aria-label={`${entry.name}のデータ`}>
+        {entry.facts.map((item: any) => (
+          <div class="fact-card">
+            <span>{labelJa[item.label] ?? item.label}</span>
+            <strong>{item.value}</strong>
+          </div>
+        ))}
+      </section>
+
+      <h2>{entry.name}のメモ</h2>
+      <p>
+        {entry.name}はムーンライト・ピークスの現在の小動物コレクションデータに掲載されています。季節、生息地、
+        種類、売却価格をこのページ一つで確認できます。
+      </p>
+      <p>
+        用途メモ: <strong>{entry.use}</strong>。「-」の項目は、提供されたスクリーンショットではまだ確認済みの値が
+        示されていないことを意味します。
+      </p>
+      <p class="source-note">
+        出典メモ:このページは確認できているムーンライト・ピークスの小動物データを基にしたコレクションテーブルを
+        使用しており、新しい公式または実機データが確認され次第、拡張していきます。
+      </p>
+
+      <h2>関連ページ</h2>
+      <div class="related-grid">
+        <a href="/ja/collections/critters">小動物一覧</a>
+        <a href="/ja/collections">コレクションハブ</a>
+      </div>
+
+      <nav class="detail-nav" aria-label="小動物詳細ナビゲーション">
+        {previous ? <a href={`/ja/collections/critters/${previous.slug}`}>← {previous.name}</a> : <span />}
+        {next ? <a href={`/ja/collections/critters/${next.slug}`}>{next.name} →</a> : <span />}
+      </nav>
+    </div>
+  </article>
+  <style>
+    .detail-hero {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 20px;
+      align-items: start;
+    }
+    .detail-icon {
+      width: 140px;
+      height: 140px;
+      border-radius: 16px;
+      border: 1px solid var(--line);
+      background: var(--surface);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .detail-icon img { width: 100%; height: 100%; object-fit: contain; }
+    .detail-icon span { color: var(--faint); font-size: 0.7rem; text-transform: uppercase; }
+    .fact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px;
+      margin: 18px 0 28px;
+    }
+    .fact-card {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: var(--surface);
+      padding: 14px;
+    }
+    .fact-card span {
+      display: block;
+      color: var(--candle);
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    .fact-card strong { color: var(--text); font-size: 1rem; }
+    .related-grid, .detail-nav {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 10px;
+      margin-top: 12px;
+    }
+    .source-note { border-left: 3px solid var(--candle); padding-left: 14px; color: var(--muted); }
+    .related-grid a, .detail-nav a {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 12px 14px;
+      background: var(--surface);
+      color: var(--candle);
+      font-family: var(--mono);
+      text-decoration: none;
+    }
+    @media (max-width: 640px) {
+      .detail-hero { grid-template-columns: 1fr; }
+      .detail-icon { width: 112px; height: 112px; }
+    }
+  </style>
+</Base>

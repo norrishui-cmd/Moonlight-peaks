@@ -63,7 +63,7 @@ export const itemsJa: Record<string, ItemTranslationJa> = {
     name: '家畜',
     dek: '確認済みの農場動物、Barnの購入方法、餌の段階。',
     summary: '確認済み:動物を飼うには先にBarnが必要です——Ridgeから4,000ゴールド+素材で購入します。建設後は、Lunaから家畜を購入できます(彼女の家の外で待機している動物のみ)。餌はFodder(精製機で作成)と、後に解放されるより良いPremium Fodderで管理します。',
-    examples: ['Cheeken(定番の最初の動物;撫でられるのと帽子が好き)', 'Piggoat', 'Draculamb', 'Cowcula'],
+    examples: ['Cheeken(定番の最初の動物;撫でられるのと帽子が好き)', 'Piggoat', 'ドラキュラム(Draculamb)', 'Cowcula'],
   },
   potions: {
     name: 'ポーション',

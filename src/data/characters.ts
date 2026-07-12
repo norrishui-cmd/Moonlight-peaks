@@ -88,7 +88,7 @@ export const characters: Character[] = [
   {
     id: 'saga', name: 'Saga', family: 'Werewolf (Logan)', type: 'werewolf',
     status: 'confirmed', romanceable: true, img: '/saga.webp', c1: '#5a4a2a', c2: '#caa24a',
-    desc: 'A prickly-but-devoted werewolf who keeps the town running — fixing potholes and chasing down missing pumpkins — with little time left for romance until it sneaks up on her.',
+    desc: 'A prickly-but-devoted werewolf who keeps the town running — fixing potholes and chasing down missing pumpkins — with little time left for romance until it sneaks up on her. Community-reported: she\u2019s noticeably more on edge during full moons.',
     traits: [['Energy', 85], ['Loyalty', 80], ['Calm', 40]], traitsPlaceholder: true,
     knownInfo: [
       'Confirmed as the town\u2019s go-to problem-solver, handling community issues like potholes and missing pumpkins.',

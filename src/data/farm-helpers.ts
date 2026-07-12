@@ -55,7 +55,7 @@ export const farmHelpers: FarmHelper[] = [
   },
   {
     name: 'Herb Garden',
-    desc: 'A dedicated planting area for herbs that cannot be grown on regular farmland.',
+    desc: 'A dedicated planting area for herbs that cannot be grown on regular farmland. Confirmed: each Herb Garden has 4 sow spots, and the blueprint comes from Luna via letter alongside the Herb Drying Rack and Mortar. Community-reported tip: don\u2019t place Herb Gardens flush against each other \u2014 doing so blocks access to some of the 4 spots.',
   },
   {
     name: 'Herb Drying Rack',

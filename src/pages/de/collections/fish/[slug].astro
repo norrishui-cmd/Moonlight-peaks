@@ -1,0 +1,178 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import { SITE } from '../../../../consts';
+import { fishDetailPages } from '../../../../data/collectionDetailPages';
+
+export function getStaticPaths() {
+  return fishDetailPages.map((entry, index) => ({
+    params: { slug: entry.slug },
+    props: {
+      entry,
+      previous: fishDetailPages[index - 1],
+      next: fishDetailPages[index + 1],
+    },
+  }));
+}
+
+const { entry, previous, next } = Astro.props;
+const labelDe: Record<string, string> = {
+  'Location': 'Fundort', 'Rarity': 'Seltenheit', 'Spawns during': 'Erscheint während',
+  'Size': 'Größe', 'Consumption value': 'Nährwert', 'Sell price': 'Verkaufspreis',
+};
+const fact = (label: string) => entry.facts.find((item: any) => item.label === label)?.value || '-';
+const hasIcon = entry.icon.startsWith('/images/');
+const pagePath = `/de/collections/fish/${entry.slug}`;
+const title = `${entry.name} — Moonlight Peaks Fisch-Guide`;
+const description = `Moonlight Peaks ${entry.name}: Fundort, Seltenheit, Erscheinungszeit, Größe und Verkaufspreis im Überblick.`;
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Startseite', item: `${SITE.url}/de` },
+      { '@type': 'ListItem', position: 2, name: 'Sammlung', item: `${SITE.url}/de/collections` },
+      { '@type': 'ListItem', position: 3, name: 'Fische', item: `${SITE.url}/de/collections/fish` },
+      { '@type': 'ListItem', position: 4, name: entry.name, item: `${SITE.url}${pagePath}` },
+    ],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: [
+      {
+        '@type': 'Question',
+        name: `Wo fängt man ${entry.name} in Moonlight Peaks?`,
+        acceptedAnswer: { '@type': 'Answer', text: `Aktuell sichtbare Daten listen den Fundort als ${fact('Location')}. Felder mit - warten noch auf Bestätigung im Live-Spiel.` },
+      },
+      {
+        '@type': 'Question',
+        name: `Was ist der Wert von ${entry.name}?`,
+        acceptedAnswer: { '@type': 'Answer', text: `Aktuell sichtbare Daten listen den Verkaufspreis als ${fact('Sell price')} und den Nährwert als ${fact('Consumption value')}.` },
+      },
+    ],
+  },
+];
+---
+<Base
+  title={title}
+  description={description}
+  path={pagePath}
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Sammlung', href: '/de/collections' }, { label: 'Fische', href: '/de/collections/fish' }, { label: entry.name }]}
+  lang="de"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Sammlung · Fische</p>
+      <section class="detail-hero">
+        <div>
+          <h1>{entry.name} <em>(Fisch)</em></h1>
+          <p class="intro">
+            Eine Moonlight-Peaks-Fisch-Detailseite, erstellt aus den sichtbaren Sammlungstabellendaten.
+            Unbekannte Werte bleiben als <strong>-</strong> markiert, bis sie im Live-Spiel bestätigt werden können.
+          </p>
+        </div>
+        <div class="detail-icon" aria-hidden={!hasIcon}>
+          {hasIcon ? <img src={entry.icon} alt={`${entry.name} Fisch-Symbol`} loading="eager" /> : <span>Noch kein Symbol</span>}
+        </div>
+      </section>
+
+      <section class="fact-grid" aria-label={`${entry.name} Fakten`}>
+        {entry.facts.map((item: any) => (
+          <div class="fact-card">
+            <span>{labelDe[item.label] ?? item.label}</span>
+            <strong>{item.value}</strong>
+          </div>
+        ))}
+      </section>
+
+      <h2>{entry.name} — Hinweise</h2>
+      <p>
+        {entry.name} ist in den aktuellen Moonlight-Peaks-Fischsammlungsdaten gelistet. Diese Seite
+        bündelt die wichtigen Parameter an einem Ort, damit Spieler schnell Fundort, Seltenheit,
+        Erscheinungszeit, Größe, Energiewert und Münzwert prüfen können, ohne die gesamte Tabelle zu durchsuchen.
+      </p>
+      <p>
+        Verwendungshinweis: <strong>{entry.use}</strong>. Wenn ein Feld noch <strong>-</strong> zeigt,
+        bedeutet das, dass der bereitgestellte Quellen-Screenshot noch keinen bestätigten Wert zeigte.
+      </p>
+      <p class="source-note">
+        Quellenhinweis: Diese Seite verwendet die aktuelle, aus sichtbaren Moonlight-Peaks-Fischdaten
+        erstellte Sammlungstabelle und wird nur erweitert, wenn neue offizielle oder Live-Spiel-Werte bestätigt werden.
+      </p>
+
+      <h2>Verwandte Seiten</h2>
+      <div class="related-grid">
+        <a href="/de/collections/fish">Alle Fische</a>
+        <a href="/de/collections">Sammlungs-Hub</a>
+      </div>
+
+      <nav class="detail-nav" aria-label="Fisch-Detail-Navigation">
+        {previous ? <a href={`/de/collections/fish/${previous.slug}`}>← {previous.name}</a> : <span />}
+        {next ? <a href={`/de/collections/fish/${next.slug}`}>{next.name} →</a> : <span />}
+      </nav>
+    </div>
+  </article>
+  <style>
+    .detail-hero {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 20px;
+      align-items: start;
+    }
+    .detail-icon {
+      width: 140px;
+      height: 140px;
+      border-radius: 16px;
+      border: 1px solid var(--line);
+      background: var(--surface);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .detail-icon img { width: 100%; height: 100%; object-fit: contain; }
+    .detail-icon span { color: var(--faint); font-size: 0.7rem; text-transform: uppercase; }
+    .fact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px;
+      margin: 18px 0 28px;
+    }
+    .fact-card {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: var(--surface);
+      padding: 14px;
+    }
+    .fact-card span {
+      display: block;
+      color: var(--candle);
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    .fact-card strong { color: var(--text); font-size: 1rem; }
+    .related-grid, .detail-nav {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 10px;
+      margin-top: 12px;
+    }
+    .source-note { border-left: 3px solid var(--candle); padding-left: 14px; color: var(--muted); }
+    .related-grid a, .detail-nav a {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 12px 14px;
+      background: var(--surface);
+      color: var(--candle);
+      font-family: var(--mono);
+      text-decoration: none;
+    }
+    @media (max-width: 640px) {
+      .detail-hero { grid-template-columns: 1fr; }
+      .detail-icon { width: 112px; height: 112px; }
+    }
+  </style>
+</Base>

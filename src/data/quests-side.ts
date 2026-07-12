@@ -102,6 +102,27 @@ export const sideQuests: SideQuest[] = [
     ],
     related: [{ label: 'Elvira', href: '/characters/elvira' }, { label: 'Achievements', href: '/achievements' }],
   },
+  {
+    slug: 'ui-softlock-after-shop', title: 'UI Frozen / Softlocked After Leaving a Shop', status: 'reported',
+    summary: 'Confirmed via official Steam Community bug reports: some players have had all UI elements disable after exiting a shop or a quest cutscene, unable to open any menu or enter other locations \u2014 typically reported after roughly 2 hours of continuous play, sometimes preceded by stuttering.',
+    troubleshooting: [
+      { q: 'I left a shop or cutscene and now nothing responds \u2014 is this a known bug?', a: 'Confirmed via multiple official Steam Community reports: yes, this is a known softlock, most often reported after about 2 hours of continuous play, sometimes with stuttering right before it happens. It is not something you\u2019re doing wrong.' },
+      { q: 'Is there a fix or workaround?', a: 'No confirmed player-side fix yet. Affected players have had to force-close the game. Since Moonlight Peaks only saves when you sleep, you may lose progress since your last save \u2014 report the issue to support@xseedgames.com with your platform details so the developers can prioritize a patch.' },
+      { q: 'Can I prevent this from happening?', a: 'Not confirmed, but as a precaution: sleep to save more often than you might in other farming sims, since there\u2019s no manual save, and consider taking a short break every couple of hours if you notice stuttering start.' },
+    ],
+    related: [{ label: 'Known issues', href: '/known-issues' }, { label: 'Form wheel softlock', href: '/quests/side/form-wheel-softlock' }],
+  },
+  {
+    slug: 'lost-save-data', title: 'Lost Save Data / Progress Disappeared', status: 'reported',
+    summary: 'Confirmed via official Steam Community reports: players have lost multiple nights of progress after a crash or unexpected shutdown (e.g. a power outage), since Moonlight Peaks only saves when you sleep, with no manual save option.',
+    troubleshooting: [
+      { q: 'My save disappeared after a crash or power outage \u2014 can I get it back?', a: 'Confirmed via official Steam Community reports: this has happened to other players too, and there\u2019s no confirmed recovery method \u2014 the game only writes a save when you sleep in your coffin, so anything since your last sleep is lost if the game closes unexpectedly.' },
+      { q: 'Where are my save files, in case I want to back them up myself?', a: 'Confirmed via an official XSEED Games developer post \u2014 Windows: %USERPROFILE%/AppData/LocalLow/Little Chicken Game Company/Moonlight Peaks/. Mac: ~/Library/Application Support/Little Chicken Game Company/Moonlight Peaks/. Manually copying this folder after a good play session is a reasonable precaution until manual/mini-saves are added, if they are.' },
+      { q: 'How do I report this to the developers?', a: 'Confirmed: email support@xseedgames.com. If the loss followed a crash, also check %LOCALAPPDATA%\\CrashDumps for a "Moonlight Peaks.exe" crash dump and mention it \u2014 the developers have asked for these details in their official bug-tracking thread.' },
+      { q: 'Is there a manual save option?', a: 'Not currently \u2014 confirmed absent at launch. Sleeping in your coffin is the only way to save, and it\u2019s a frequently requested feature in the game\u2019s official Steam Community bug thread.' },
+    ],
+    related: [{ label: 'Known issues', href: '/known-issues' }, { label: 'How to save FAQ', href: '/faq/moonlight-peaks-how-to-save' }],
+  },
 ];
 
 export const sideQuestBySlug = new Map(sideQuests.map((q) => [q.slug, q]));

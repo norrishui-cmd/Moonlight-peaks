@@ -74,5 +74,8 @@ export function isPathTranslated(locale: Locale, barePath: string): boolean {
   if (translatedPathsByLocale[locale].has(barePath)) return true;
   const charMatch = barePath.match(/^\/characters\/([a-z0-9-]+)$/);
   if (charMatch && translatedCharSlugsByLocale[locale].has(charMatch[1])) return true;
+  // Fish/critters detail pages are fully translated for ja and de (auto-generated from the same
+  // collectionDetailPages data source as English), so any slug under these two collections counts.
+  if ((locale === 'ja' || locale === 'de') && /^\/collections\/(fish|critters)\/[a-z0-9-]+$/.test(barePath)) return true;
   return false;
 }

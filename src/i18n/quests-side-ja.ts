@@ -1,7 +1,7 @@
 // src/i18n/quests-side-ja.ts
 // Japanese translations for side quests (title/summary/reward text only).
 // slug/npc/status/related are shared from data/quests-side.ts.
-export type SideQuestTrJa = { title: string; summary: string; reward?: string };
+export type SideQuestTrJa = { title: string; summary: string; reward?: string; troubleshooting?: { q: string; a: string }[] };
 
 export const sideQuestsJa: Record<string, SideQuestTrJa> = {
   'noels-fishing-contest': {
@@ -19,26 +19,65 @@ export const sideQuestsJa: Record<string, SideQuestTrJa> = {
     summary: '確認済み:Lunaからの手紙で始まるクエストで、Aquaflux(魔法による自動水やり)の呪文が解放されます。「マナを求めて」に至るクエストチェーンの前提条件の一つです。',
     reward: 'Aquaflux呪文の解放',
   },
-  'the-need-for-herbs': {
-    title: 'ハーブの必要性',
-    summary: '報告済み:「作物の魔法」の後に続くクエストとされ、ハーブガーデンの設計図につながります。',
-    reward: 'ハーブガーデンの設計図',
+  'albertus-job-board': {
+    title: 'Albertusの仕事掲示板(常駐)',
+    summary: '確認済み:一度きりのクエストではなく、常駐の繰り返し可能なサイドシステムです——タウンホールにあるAlbertusの掲示板に貼られた短い依頼をこなすと、コイン、時にはアイテム、そして依頼者との好感度が得られます。',
   },
-  'the-familys-heirloom-artifact': {
-    title: 'Draganの秘宝(ノクターナ対戦)',
-    summary: '報告済み:Draganとのノクターナ対戦に勝利すると、彼から神器を入手できるとされ、博物館の設立と関連しています。',
+  'the-net-and-death': {
+    title: '虫網の解放 (Deathとソウルブロブ)',
+    summary: 'whisperofthehouse.comと照合して確認済み:虫網はOrlockのワイン計画、架け橋の彼方、Misty Shoresへのアクセスといった進行度に応じてDeathから解放されるもので、店では買えません。町でDeathと2回目に会った後、彼が100個のSoul Blobsについて説明し、虫網で集めるよう頼んできます。',
+    reward: '虫網(虫捕り/Soul Blob捕獲用);Soul Blob100個すべて集めるとAntique Clock(夜の長さが15分から25分に延長)',
+    troubleshooting: [
+      { q: '虫や Soul Blobsが捕まえられません——虫網はどこにありますか?', a: '確認済み:虫網はどこにも売っていません——Deathを通じて解放されるもので、以前のストーリー進行(Orlockのワイン計画、架け橋の彼方、Misty Shoresへのアクセス)が前提条件です。まだDeathに2回会っていない場合、それが原因です。' },
+      { q: 'ムーンライト・ピークスでDeathはどこにいますか?', a: '確認済み:町にいます。「架け橋の彼方」でMisty Shoresが解放された後にアクセスできるAmbrosia墓地エリアと関連しています。' },
+    ],
   },
   'vampster-collection-quest': {
     title: 'Vampster集め',
     summary: '確認済み:Cave of Echoesの中にいるAlinaが、町中に散らばる53匹のVampsterが迷子になっていることを説明し、一匹ずつMisty Shoresにある洞窟へ連れて帰るよう頼んできます。',
   },
-  'soul-blobs-favor': {
-    title: 'Deathの頼み事(Soul Blobs)',
-    summary: '確認済み:町でDeathと2回目に会った後、彼が100個のSoul Blobsについて説明し、虫網で集めるよう頼んできます。',
-    reward: '100個すべて集めるとAntique Clockがもらえる(夜の長さが15分から25分に延長)',
+  'npc-stuck-cant-interact': {
+    title: 'NPCが固まって話しかけられない',
+    summary: 'ゲーム公式の既知の問題トラッキングとSteamコミュニティのバグ報告により確認済み:特定のNPC(特にOrlock)がその場で固まって操作に反応しなくなる現象が一部プレイヤーから報告されています。これはクエストの前提条件不足ではなく、既知の未解決バグです。',
+    troubleshooting: [
+      { q: 'NPCに話しかけようとしても反応しません——バグですか、それとも何か見落としていますか?', a: '公式の既知の問題トラッキングで確認済み:これは報告済みの問題です、特にOrlockが固まる事例が目立ちます。エリアの再読み込みや翌日まで眠っても影響を受けたプレイヤーには効果がなく、確認済みの修正はまだありません。これはクエストの見落としではなく、本物のバグです。' },
+      { q: 'この現象が起きたらどうすればいいですか?', a: '確認済み:support@xseedgames.comに、プラットフォームと状況の説明を添えて報告してください。プレイヤー側でできる回避策はまだ確認されていません。' },
+    ],
   },
-  'albertus-job-board': {
-    title: 'Albertusの仕事掲示板(常駐)',
-    summary: '確認済み:一度きりのクエストではなく、常駐の繰り返し可能なサイドシステムです——タウンホールにあるAlbertusの掲示板に貼られた短い依頼をこなすと、コイン、時にはアイテム、そして依頼者との好感度が得られます。',
+  'form-wheel-softlock': {
+    title: '変身ホイールで固まって動けない',
+    summary: 'Steam上の公式開発者バグ追跡スレッドにより確認済み:一部のキーボード/マウスプレイヤーが、変身ホイールを開いたまま固まってしまう現象(特にAmbrosia邸を出る際)を報告しており、閉じる方法も操作を取り戻す方法もありません。',
+    troubleshooting: [
+      { q: '変身ホイールを開いたまま固まって動けません——助けてください', a: '公式のXSEED Games開発者スレッドで確認済み:これはキーボード/マウスプレイヤーに影響しており、多くの場合Ambrosia邸を出る際に発生します。報告されている原因の一つは、変身ホイールの操作に何もキーが割り当てられていないことです——設定の中で「変身ホイールを開く」の割り当てを確認し(一部の環境ではデフォルトがRキーと報告されています)、空欄なら割り当ててください。' },
+      { q: 'この状態で固まって設定メニューにも入れません——どうすればいいですか?', a: '同じ開発者スレッドで確認済み:影響を受けたプレイヤーは最終手段としてゲームを強制終了(PCではAlt+F4)せざるを得ませんでした。ムーンライト・ピークスは眠った時にしかセーブされないため、最後のセーブ以降の進行状況を失う可能性があります——修正を優先してもらうため、公式バグスレッドまたはsupport@xseedgames.comに報告してください。' },
+    ],
+  },
+  'elviras-treasure-hunt': {
+    title: 'Elviraの宝探し (Raiders of the Lost Art)',
+    summary: '確認済み:Elviraが町中を巡る5つの手がかりの宝探しに送り出してくれます——報告されているルート:SamaelのバーB墓地B鉱山の鐘BCave of EchoesBKhazan神殿。完了すると「Raiders of the Lost Art」の実績につながります。',
+    reward: '「Raiders of the Lost Art」実績',
+    troubleshooting: [
+      { q: 'Elviraの宝探しの手がかりで詰まっています——ルートは?', a: 'コミュニティ報告:確認されている場所の順番は、Samaelのバー(The Broken Lamp)→墓地→鉱山の鐘→Cave of Echoes→最後にKhazan神殿です。一つの手がかりで詰まったら、前の場所をしっかり探索したか確認してください——手がかりはエリア内の特定の場所に紐づいていると報告されており、単にそのエリアに入るだけでは不十分です。' },
+      { q: 'このクエストはどこで始まりますか?', a: '確認済み:Elviraから与えられます。まだ彼女に会っていない、またはクエストを提示されない場合、Khazan神殿の区間が後半で解放されるエリアを必要とするため、以前のストーリー進行が前提条件になっている可能性があります。' },
+    ],
+  },
+  'ui-softlock-after-shop': {
+    title: '店を出た後にUIが固まる/操作不能になる',
+    summary: '公式Steamコミュニティのバグ報告により確認済み:一部のプレイヤーが、店やクエストのカットシーンを出た後にすべてのUI要素が無効化され、メニューを開けなくなったり他の場所に入れなくなったりする現象を報告しています——多くの場合、連続プレイ約2時間の時点で発生し、直前にカクつきが起きることもあります。',
+    troubleshooting: [
+      { q: '店やカットシーンを出たら何も反応しなくなりました——既知のバグですか?', a: '複数の公式Steamコミュニティ報告で確認済み:はい、これは既知のソフトロックで、連続プレイ約2時間前後で報告されることが最も多く、発生直前にカクつきが起きることもあります。あなたの操作ミスではありません。' },
+      { q: '修正方法や回避策はありますか?', a: 'プレイヤー側での確定した修正方法はまだありません。影響を受けたプレイヤーはゲームを強制終了せざるを得ませんでした。ムーンライト・ピークスは眠った時にしかセーブされないため、最後のセーブ以降の進行状況を失う可能性があります——開発チームが修正を優先できるよう、プラットフォームの詳細を添えてsupport@xseedgames.comに報告してください。' },
+      { q: 'これが起きるのを防ぐことはできますか?', a: '確認されていませんが、予防策として:手動セーブがないため、他の農業シムより頻繁に眠ってセーブすることと、カクつきに気づいたら数時間ごとに短い休憩を挟むことを検討してください。' },
+    ],
+  },
+  'lost-save-data': {
+    title: 'セーブデータの消失/進行状況が消えた',
+    summary: '公式Steamコミュニティ報告により確認済み:クラッシュや予期しないシャットダウン(停電など)の後、複数晩分の進行状況を失ったプレイヤーがいます。ムーンライト・ピークスは眠った時にしかセーブされず、手動セーブオプションはありません。',
+    troubleshooting: [
+      { q: 'クラッシュや停電の後にセーブが消えました——復元できますか?', a: '公式Steamコミュニティ報告により確認済み:これは他のプレイヤーにも起きています。確認済みの復元方法はまだありません——このゲームは棺で眠った時にしかセーブを書き込まないため、最後に眠って以降のものはゲームが予期せず終了すると失われます。' },
+      { q: '自分でバックアップを取りたいのですが、セーブファイルはどこにありますか?', a: 'XSEED Games公式開発者投稿により確認済み——Windows: %USERPROFILE%/AppData/LocalLow/Little Chicken Game Company/Moonlight Peaks/。Mac: ~/Library/Application Support/Little Chicken Game Company/Moonlight Peaks/。手動/ミニセーブが追加されるかどうかに関わらず、良いプレイセッションの後にこのフォルダを手動でコピーしておくのは妥当な予防策です。' },
+      { q: '開発者にこれを報告するには?', a: '確認済み:support@xseedgames.comにメールしてください。クラッシュの後に起きた場合は、%LOCALAPPDATA%\\CrashDumps内の「Moonlight Peaks.exe」のクラッシュダンプも確認し、報告に含めてください——開発者は公式バグ追跡スレッドでこの詳細を求めています。' },
+      { q: '手動セーブ機能はありますか?', a: '現時点ではありません——発売時点で確認済みです。棺で眠ることが唯一のセーブ方法で、ゲーム公式のSteamコミュニティバグスレッドでも頻繁に要望が上がっている機能です。' },
+    ],
   },
 };
