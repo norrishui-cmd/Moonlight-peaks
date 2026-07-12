@@ -540,7 +540,7 @@ export const faqs: Faq[] = [
     slug: 'is-moonlight-peaks-family-friendly', cat: 'general',
     q: 'Is Moonlight Peaks appropriate for kids?',
     a: 'Likely yes for most ages given the cozy tone and lack of combat, but we can\u2019t give a firm answer \u2014 the game has not been ESRB-rated as of this writing (some outlets have reported a T for Teen rating on consoles/mobile, which we haven\u2019t been able to independently verify). Check the official rating once it\u2019s confirmed, especially given the game\u2019s adult-oriented romance and marriage systems.',
-    related: [{ label: 'What age rating does Moonlight Peaks have?', href: '/faq/what-age-rating-is-moonlight-peaks' }, { label: 'How old are the romanceable characters?', href: '/faq/how-old-are-the-romanceable-characters' }],
+    related: [{ label: 'What age rating does Moonlight Peaks have?', href: '/faq/what-age-rating-is-moonlight-peaks' }],
   },
   {
     slug: 'how-many-quests-are-in-moonlight-peaks', cat: 'quests',
@@ -552,7 +552,7 @@ export const faqs: Faq[] = [
     slug: 'what-does-a-bridge-too-far-quest-unlock', cat: 'quests',
     q: 'What does the "A Bridge Too Far" quest unlock in Moonlight Peaks?',
     a: 'Confirmed: completing it lifts the curse on the bridge to Misty Shores, unlocking that area (including the Cave of Echoes, your first source of Copper Ore) and the graveyard, and triggers the next story arc at the Crest Garden.',
-    related: [{ label: 'A Bridge Too Far walkthrough', href: '/quests/a-bridge-too-far' }, { label: 'Main story chapters', href: '/quests/story' }],
+    related: [{ label: 'A Bridge Too Far walkthrough', href: '/quests/story/a-bridge-too-far' }, { label: 'Main story chapters', href: '/quests/story' }],
   },
   {
     slug: 'what-quest-unlocks-hellkitten-form', cat: 'quests',

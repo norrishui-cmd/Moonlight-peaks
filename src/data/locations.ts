@@ -98,7 +98,7 @@ export const locations: TopicItem[] = [
       { title: 'Common mine progression problems', body: 'If you\u2019re missing copper, check A Bridge Too Far first rather than searching the cave harder. If your Pickaxe can\u2019t break a node, it likely needs a tier upgrade at the Howling Hammer (Ridge\u2019s shop) before it can mine that ore type.' },
       { title: 'Is there combat in the mines?', body: 'No — confirmed there is no combat anywhere in Moonlight Peaks, including the mines, so exploring underground stays peaceful.' },
     ],
-    related: [{ label: 'A Bridge Too Far quest guide', href: '/quests/a-bridge-too-far' }, { label: 'Is there combat?', href: '/faq/is-there-combat-in-moonlight-peaks' }, { label: 'Tools', href: '/items/tools' }, { label: 'The town', href: '/locations/town' }, { label: 'Vampster collection guide', href: '/vampsters' }, { label: 'Crystal Cave', href: '/locations/crystal-cave' }],
+    related: [{ label: 'A Bridge Too Far quest guide', href: '/quests/story/a-bridge-too-far' }, { label: 'Is there combat?', href: '/faq/is-there-combat-in-moonlight-peaks' }, { label: 'Tools', href: '/items/tools' }, { label: 'The town', href: '/locations/town' }, { label: 'Vampster collection guide', href: '/collections/vampsters' }, { label: 'Crystal Cave', href: '/locations/crystal-cave' }],
     faq: [
       { q: 'Is there combat in the mines?', a: 'No — previews confirm there is no combat anywhere in Moonlight Peaks, including the mines.' },
       { q: 'Why can\u2019t I find Copper Ore in the mines?', a: 'Confirmed: Copper Ore is inside the Cave of Echoes, which only opens after completing the "A Bridge Too Far" quest — check your quest progress before assuming you\u2019ve missed a mining spot.' },
@@ -207,7 +207,7 @@ export const locations: TopicItem[] = [
       'Confirmed via the game\u2019s official wiki: alongside the Cave of Echoes, the mines also include a further zone called the Twilight Catacombs \u2014 suggesting the underground areas are split into multiple distinct zones rather than one cave. Confirmed elsewhere: this is also where Vampsters (small creatures found hiding around town and inside most houses) get carried through a hole to complete their collection questline, once early story quests unlock catacomb access.',
       'Reaching the Crystal Cave itself requires Misty Shores to already be unlocked (via the "A Bridge Too Far" quest), since that\u2019s the area the Cave of Echoes and its pickaxe upgrades are found in.',
     ],
-    related: [{ label: 'The mines', href: '/locations/mines' }, { label: 'A Bridge Too Far', href: '/quests/a-bridge-too-far' }, { label: 'Tools', href: '/items/tools' }],
+    related: [{ label: 'The mines', href: '/locations/mines' }, { label: 'A Bridge Too Far', href: '/quests/story/a-bridge-too-far' }, { label: 'Tools', href: '/items/tools' }],
     faq: [
       { q: 'Where is the Crystal Cave in Moonlight Peaks?', a: 'Confirmed: it\u2019s a distinct underground area to the left of Fiona\u2019s house, separate from the Cave of Echoes. A boulder blocks the entrance until your pickaxe reaches Copper tier.' },
       { q: 'What do you get from the Crystal Cave?', a: 'Confirmed: Rose Quartz nodes spawn generously alongside other gemstones. Rose Quartz is ground into powder with the Enchanted Mortar and used in several crafting recipes and quests.' },
