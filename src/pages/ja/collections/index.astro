@@ -1,0 +1,68 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { SITE, GAME } from '../../../consts';
+
+const entries = [
+  { group: '釣り', title: '魚', desc: '約22種類の魚、Noelから最初の釣竿をもらう方法、釣れる魚に影響する要素について。', href: '/ja/collections/fish' },
+  { group: '経済', title: 'ジョブ', desc: 'Albertusのジョブ掲示板——ゴールドや贈り物、好感度がもらえる短い依頼。', href: '/ja/collections/jobs' },
+  { group: '生物', title: '小動物', desc: '季節と天候で変わる捕獲可能な虫、家の装飾としても使えます。', href: '/ja/collections/critters' },
+  { group: '生物', title: 'Vampster', desc: '確認済みの53匹のVampsterと、見つけ方、家への連れ帰り方。', href: '/ja/collections/vampsters' },
+  { group: '生物', title: 'Soul Blobs', desc: '100体のSoul Blobs全て集めるともらえるアンティーク時計の報酬について。', href: '/ja/collections/soul-blobs' },
+];
+
+const jsonLd = {
+  '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'ホーム', item: `${SITE.url}/ja` },
+    { '@type': 'ListItem', position: 2, name: 'コレクション', item: `${SITE.url}/ja/collections` },
+  ],
+};
+---
+<Base
+  title="Moonlight Peaks コレクション — 魚・ジョブ・小動物・Vampster・Soul Blobs"
+  description="Moonlight Peaksのコレクションセクションを日本語で:魚、Albertusのジョブ掲示板、小動物、Vampster、Soul Blobs——公式wikiと発売週の報道に基づいています。"
+  path="/ja/collections"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'コレクション' }]}
+  lang="ja"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">ハブ・コレクション</p>
+      <h1>{GAME.title}の<em>コレクション</em></h1>
+      <p class="intro">
+        ゲームの収集・捕獲システムについて——何を捕まえ、何を提出し、それが何の役に立つのか。
+        以下の内容の多くは公式Moonlight Peaks Wikiから直接引用しています。
+      </p>
+
+      <div class="itg">
+        {entries.map((e) => (
+          <a class="itcard" href={e.href}>
+            <span class="itgroup">{e.group}</span>
+            <h3>{e.title}</h3>
+            <p>{e.desc}</p>
+          </a>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        関連ページ: <a href="/ja/farm">農場</a>、<a href="/ja/items">アイテム</a>、
+        <a href="/ja/activities">アクティビティ</a>、<a href="/achievements">実績</a>。
+      </div>
+    </div>
+  </article>
+
+  <style>
+    .itg { display: grid; grid-template-columns: 1fr; gap: 12px; margin: 6px 0 18px; }
+    @media (min-width: 640px) { .itg { grid-template-columns: 1fr 1fr; } }
+    @media (min-width: 980px) { .itg { grid-template-columns: 1fr 1fr 1fr; } }
+    .itcard {
+      display: block; border: 1px solid var(--line); border-radius: 14px;
+      background: var(--surface); padding: 14px; color: inherit; text-decoration: none;
+      transition: border-color .15s ease, transform .15s ease;
+    }
+    .itcard:hover { border-color: color-mix(in srgb, var(--candle) 50%, var(--line)); transform: translateY(-2px); }
+    .itgroup { font-family: var(--mono); color: var(--faint); text-transform: uppercase; letter-spacing: 0.04em; font-size: 0.62rem; }
+    .itcard h3 { font-family: var(--display); font-weight: 600; font-size: 1rem; margin: 4px 0 6px; }
+    .itcard p { color: #ded3e6; font-size: 0.84rem; margin: 0 0 10px; }
+  </style>
+</Base>

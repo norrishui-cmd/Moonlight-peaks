@@ -1,0 +1,78 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { SITE, GAME } from '../../../consts';
+import { storyQuests, storyChapters } from '../../../data/quests-story';
+
+const jsonLd = {
+  '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: SITE.url },
+    { '@type': 'ListItem', position: 2, name: 'Quests', item: new URL('/quests', SITE.url).href },
+    { '@type': 'ListItem', position: 3, name: 'Main Story', item: new URL('/quests/story', SITE.url).href },
+  ],
+};
+---
+<Base
+  title="Moonlight Peaks Main Story Quests — Chapter by Chapter"
+  description="Every confirmed Moonlight Peaks main story quest, organized into 5 chapters from arriving in town to the wedding arc, cross-verified across multiple launch-week sources."
+  path="/quests/story"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Quests', href: '/quests' }, { label: 'Main Story' }]}
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Quests · Main Story</p>
+      <h1>Main story <em>quests</em></h1>
+      <p class="intro">
+        {storyQuests.length} main-story quests, grouped into {storyChapters.length} chapters. Pick
+        the chapter that matches where you are — quests within each chapter are listed in
+        confirmed order.
+      </p>
+
+      {storyChapters.map((ch) => {
+        const quests = storyQuests.filter((q) => q.chapter === ch.number);
+        return (
+          <section class="chapter">
+            <div class="chapter-head">
+              <span class="chapter-num">Chapter {ch.number}</span>
+              <h2>{ch.title}</h2>
+            </div>
+            <p class="chapter-dek">{ch.dek}</p>
+            <ol class="quest-list">
+              {quests.map((q) => (
+                <li>
+                  <a href={`/quests/story/${q.slug}`}>{q.title}</a>
+                  {q.status === 'reported' && <span class="tag-community">Reported</span>}
+                </li>
+              ))}
+            </ol>
+          </section>
+        );
+      })}
+
+      <div class="callout wip">
+        Sourced from cross-verified launch-week walkthroughs (Neoseeker's quest log, Bonus Action,
+        Output Lag, Into Indie Games). Chapter groupings are our own organizing device, not
+        official in-game labels. Related: <a href="/quests">Quests hub</a>,
+        <a href="/quests/side">side quests</a>, <a href="/quests/a-bridge-too-far">A Bridge Too Far (full walkthrough)</a>.
+      </div>
+    </div>
+  </article>
+
+  <style>
+    .chapter { margin: 26px 0; padding-top: 18px; border-top: 1px solid var(--line); }
+    .chapter:first-of-type { border-top: none; padding-top: 0; }
+    .chapter-head { display: flex; align-items: baseline; gap: 10px; }
+    .chapter-num { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--candle); white-space: nowrap; }
+    .chapter-head h2 { margin: 0; }
+    .chapter-dek { color: var(--muted); font-size: 0.92rem; margin: 4px 0 12px; }
+    .quest-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 6px; counter-reset: qnum; }
+    .quest-list li { counter-increment: qnum; padding: 8px 0; border-bottom: 1px dashed var(--line); display: flex; align-items: center; gap: 8px; }
+    .quest-list li::before { content: counter(qnum) "."; color: var(--faint); font-family: var(--mono); font-size: 0.8rem; }
+    .quest-list a { color: var(--mist); text-decoration: none; flex: 1; }
+    .quest-list a:hover { color: var(--candle); }
+    .tag-community {
+      display: inline-block; font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.02em;
+      color: var(--faint); border: 1px solid var(--line); border-radius: 999px; padding: 2px 7px;
+    }
+  </style>
+</Base>

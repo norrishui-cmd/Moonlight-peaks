@@ -1,0 +1,197 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { SITE } from '../../../consts';
+import { critterDetailPages } from '../../../data/collectionDetailPages';
+
+export function getStaticPaths() {
+  return critterDetailPages.map((entry, index) => ({
+    params: { slug: entry.slug },
+    props: {
+      entry,
+      previous: critterDetailPages[index - 1],
+      next: critterDetailPages[index + 1],
+    },
+  }));
+}
+
+const { entry, previous, next } = Astro.props;
+const fact = (label: string) => entry.facts.find((item) => item.label === label)?.value || '-';
+const hasIcon = entry.icon.startsWith('/images/');
+const pagePath = `/collections/critters/${entry.slug}`;
+const title = `Moonlight Peaks ${entry.name} Critter - Season, Location & Sell Value`;
+const description = `Moonlight Peaks ${entry.name} critter guide: season ${fact('Season')}, location ${fact('Location')}, type ${fact('Type')}, and sell value ${fact('Sells for')}.`;
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: SITE.url },
+      { '@type': 'ListItem', position: 2, name: 'Collection', item: new URL('/collections', SITE.url).href },
+      { '@type': 'ListItem', position: 3, name: 'Critters', item: new URL('/collections/critters', SITE.url).href },
+      { '@type': 'ListItem', position: 4, name: entry.name, item: new URL(pagePath, SITE.url).href },
+    ],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: [
+      {
+        '@type': 'Question',
+        name: `Where can you find ${entry.name} in Moonlight Peaks?`,
+        acceptedAnswer: { '@type': 'Answer', text: `Current visible data lists the location as ${fact('Location')}. Fields shown as - still need live-game verification.` },
+      },
+      {
+        '@type': 'Question',
+        name: `What type of critter is ${entry.name}?`,
+        acceptedAnswer: { '@type': 'Answer', text: `${entry.name} is currently listed as ${fact('Type')}, with sell value ${fact('Sells for')}.` },
+      },
+    ],
+  },
+];
+---
+<Base
+  title={title}
+  description={description}
+  path={pagePath}
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Collection', href: '/collections' }, { label: 'Critters', href: '/collections/critters' }, { label: entry.name }]}
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Collection - Critters</p>
+      <section class="detail-hero">
+        <div>
+          <h1>{entry.name} <em>critter</em></h1>
+          <p class="intro">
+            A Moonlight Peaks critter detail page built from the visible collection table data.
+            Unknown values remain marked as <strong>-</strong> until live-game verification catches up.
+          </p>
+        </div>
+        <div class="detail-icon" aria-hidden={!hasIcon}>
+          {hasIcon ? <img src={entry.icon} alt={`${entry.name} critter icon`} loading="eager" /> : <span>No icon yet</span>}
+        </div>
+      </section>
+
+      <section class="fact-grid" aria-label={`${entry.name} critter facts`}>
+        {entry.facts.map((item) => (
+          <div class="fact-card">
+            <span>{item.label}</span>
+            <strong>{item.value}</strong>
+          </div>
+        ))}
+      </section>
+
+      <h2>{entry.name} guide notes</h2>
+      <p>
+        {entry.name} is listed in the current Moonlight Peaks critter collection data. This page
+        pulls the useful fields into a focused URL for players checking season, location, critter
+        type, and coin value.
+      </p>
+      <p>
+        Current use note: <strong>{entry.use}</strong>. If a field is still <strong>-</strong>, it
+        means the supplied source screenshot did not show a confirmed value yet.
+      </p>
+      <p class="source-note">
+        Source note: this page uses the current collection table prepared from visible Moonlight
+        Peaks critter data and should be expanded only when new official or live-game values are verified.
+      </p>
+
+      <h2>Related collection routes</h2>
+      <div class="related-grid">
+        <a href="/collections/critters">All critters</a>
+        <a href="/activities">Activities</a>
+        <a href="/environment">Environment</a>
+        <a href="/collections">Collection hub</a>
+      </div>
+
+      <nav class="detail-nav" aria-label="Critter detail navigation">
+        {previous ? <a href={`/collections/critters/${previous.slug}`}>Previous: {previous.name}</a> : <span />}
+        {next ? <a href={`/collections/critters/${next.slug}`}>Next: {next.name}</a> : <span />}
+      </nav>
+    </div>
+  </article>
+  <style>
+    .detail-hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 24px;
+      align-items: center;
+      margin-bottom: 22px;
+    }
+    .detail-icon {
+      width: 132px;
+      height: 132px;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: var(--surface);
+    }
+    .detail-icon img {
+      width: 104px;
+      height: 104px;
+      object-fit: contain;
+    }
+    .detail-icon span {
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      text-transform: uppercase;
+    }
+    .fact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px;
+      margin: 18px 0 28px;
+    }
+    .fact-card {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: var(--surface);
+      padding: 14px;
+    }
+    .fact-card span {
+      display: block;
+      color: var(--candle);
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    .fact-card strong {
+      color: var(--text);
+      font-size: 1rem;
+    }
+    .related-grid,
+    .detail-nav {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 10px;
+      margin-top: 12px;
+    }
+    .source-note {
+      border-left: 3px solid var(--candle);
+      padding-left: 14px;
+      color: var(--muted);
+    }
+    .related-grid a,
+    .detail-nav a {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 12px 14px;
+      background: var(--surface);
+      color: var(--candle);
+      font-family: var(--mono);
+      text-decoration: none;
+    }
+    @media (max-width: 640px) {
+      .detail-hero {
+        grid-template-columns: 1fr;
+      }
+      .detail-icon {
+        width: 112px;
+        height: 112px;
+      }
+    }
+  </style>
+</Base>

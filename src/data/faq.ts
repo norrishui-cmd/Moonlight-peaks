@@ -3,7 +3,7 @@
 // or data that the game has not revealed. Pending questions are kept as commented templates at the
 // bottom — fill them (or I will) once the July 7, 2026 build confirms the answer.
 
-export type FaqCat = 'platforms' | 'romance' | 'characters' | 'world' | 'farming' | 'general';
+export type FaqCat = 'platforms' | 'romance' | 'characters' | 'world' | 'farming' | 'general' | 'quests';
 
 export const faqCatLabels: Record<FaqCat, string> = {
   platforms: 'Platforms, price & demo',
@@ -12,6 +12,7 @@ export const faqCatLabels: Record<FaqCat, string> = {
   world: 'World & gameplay',
   farming: 'Farming & economy',
   general: 'General',
+  quests: 'Quests & progression',
 };
 
 export type Related = { label: string; href: string };
@@ -540,6 +541,42 @@ export const faqs: Faq[] = [
     q: 'Is Moonlight Peaks appropriate for kids?',
     a: 'Likely yes for most ages given the cozy tone and lack of combat, but we can\u2019t give a firm answer \u2014 the game has not been ESRB-rated as of this writing (some outlets have reported a T for Teen rating on consoles/mobile, which we haven\u2019t been able to independently verify). Check the official rating once it\u2019s confirmed, especially given the game\u2019s adult-oriented romance and marriage systems.',
     related: [{ label: 'What age rating does Moonlight Peaks have?', href: '/faq/what-age-rating-is-moonlight-peaks' }, { label: 'How old are the romanceable characters?', href: '/faq/how-old-are-the-romanceable-characters' }],
+  },
+  {
+    slug: 'how-many-quests-are-in-moonlight-peaks', cat: 'quests',
+    q: 'How many quests are in Moonlight Peaks?',
+    a: 'Confirmed via a cross-verified quest log transcription: the main story runs to at least 20+ named quests from arriving in town through a wedding arc, plus several confirmed side quests and ongoing systems like the job board. More story content may exist beyond what\u2019s been documented so far.',
+    related: [{ label: 'Quest guide', href: '/quests' }, { label: 'Main story chapters', href: '/quests/story' }],
+  },
+  {
+    slug: 'what-does-a-bridge-too-far-quest-unlock', cat: 'quests',
+    q: 'What does the "A Bridge Too Far" quest unlock in Moonlight Peaks?',
+    a: 'Confirmed: completing it lifts the curse on the bridge to Misty Shores, unlocking that area (including the Cave of Echoes, your first source of Copper Ore) and the graveyard, and triggers the next story arc at the Crest Garden.',
+    related: [{ label: 'A Bridge Too Far walkthrough', href: '/quests/a-bridge-too-far' }, { label: 'Main story chapters', href: '/quests/story' }],
+  },
+  {
+    slug: 'what-quest-unlocks-hellkitten-form', cat: 'quests',
+    q: 'What quest unlocks the Hellkitten (cat) form in Moonlight Peaks?',
+    a: 'Confirmed via a cross-verified quest log: "The Dinner Party" quest rewards the Cat form (Hellkitten shapeshifting). It falls a few story beats after "A Bridge Too Far," following the Mana Extractor quest chain.',
+    related: [{ label: 'Shapeshifting', href: '/shapeshifting' }, { label: 'Main story chapters', href: '/quests/story' }],
+  },
+  {
+    slug: 'why-is-my-quest-not-starting-in-moonlight-peaks', cat: 'quests',
+    q: 'Why won\u2019t a quest start in Moonlight Peaks?',
+    a: 'Community-reported: many quests are triggered by simply walking into a new area, waiting a set number of in-game days, or reading a letter/invitation rather than an obvious on-screen prompt. If a quest seems stuck, check whether the previous quest in the chain is actually complete, whether the required number of days has passed, and whether you\u2019ve entered the area or building the next beat is tied to.',
+    related: [{ label: 'Quest guide', href: '/quests' }, { label: 'Known issues', href: '/known-issues' }],
+  },
+  {
+    slug: 'how-does-the-job-board-work-in-moonlight-peaks', cat: 'quests',
+    q: 'How does the job board work in Moonlight Peaks?',
+    a: 'Confirmed: Albertus\u2019 Jobs is an ongoing, repeatable board at Town Hall run by Albertus, an owl. Completing a posted job earns coins, sometimes an item, and a relationship boost with whoever posted the request \u2014 it\u2019s a side system rather than a one-time quest.',
+    related: [{ label: "Albertus' Jobs", href: '/collections/albertus-jobs' }, { label: 'Side quests', href: '/quests/side' }],
+  },
+  {
+    slug: 'what-are-the-main-story-quests-in-moonlight-peaks', cat: 'quests',
+    q: 'What are the main story quests in Moonlight Peaks, in order?',
+    a: 'Confirmed via a cross-verified quest log: the chain runs roughly from registering at Town Hall and meeting Orlock, through "A Bridge Too Far" (the Fiona/Orlock bridge curse), a Crest Garden mystery, unlocking your first magic and the Mana Extractor, "The Dinner Party" (which unlocks Cat form), and into a wedding-arc storyline. See the full chapter-by-chapter breakdown for exact order and unlock conditions.',
+    related: [{ label: 'Main story chapters', href: '/quests/story' }, { label: 'Quest guide', href: '/quests' }],
   },
 ];
 

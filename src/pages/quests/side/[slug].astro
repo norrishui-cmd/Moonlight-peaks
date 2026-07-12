@@ -1,0 +1,87 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { SITE, GAME } from '../../../consts';
+import { sideQuests } from '../../../data/quests-side';
+
+export function getStaticPaths() {
+  return sideQuests.map((q, i) => ({
+    params: { slug: q.slug },
+    props: { q, prev: sideQuests[(i - 1 + sideQuests.length) % sideQuests.length], next: sideQuests[(i + 1) % sideQuests.length] },
+  }));
+}
+
+const { q, prev, next } = Astro.props as { q: (typeof sideQuests)[number]; prev: (typeof sideQuests)[number]; next: (typeof sideQuests)[number] };
+const statusLabel = q.status === 'confirmed' ? 'Confirmed' : 'Reported';
+
+const faq = [
+  { q: `How do you start "${q.title}" in Moonlight Peaks?`, a: q.summary },
+  { q: `What does "${q.title}" reward?`, a: q.reward || 'No confirmed direct item reward has been documented for this one yet.' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: SITE.url },
+    { '@type': 'ListItem', position: 2, name: 'Quests', item: new URL('/quests', SITE.url).href },
+    { '@type': 'ListItem', position: 3, name: 'Side Quests', item: new URL('/quests/side', SITE.url).href },
+    { '@type': 'ListItem', position: 4, name: q.title, item: new URL(`/quests/side/${q.slug}`, SITE.url).href },
+  ] },
+];
+---
+<Base
+  title={`${q.title} — Moonlight Peaks Side Quest Guide`}
+  description={`${GAME.title} "${q.title}" side quest: ${q.summary.slice(0, 140)}`}
+  path={`/quests/side/${q.slug}`}
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Quests', href: '/quests' }, { label: 'Side Quests', href: '/quests/side' }, { label: q.title }]}
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Side Quests · <span class="tag-community">{statusLabel}</span></p>
+      <h1>{q.title}</h1>
+
+      <h2>What happens</h2>
+      <p>{q.summary}</p>
+
+      {q.reward && (
+        <>
+          <h2>Reward</h2>
+          <p>{q.reward}</p>
+        </>
+      )}
+
+      {q.related && q.related.length > 0 && (
+        <div class="callout">
+          <strong>Related:</strong>{' '}
+          {q.related.map((r, i) => (<>{i > 0 ? ' · ' : ''}<a href={r.href}>{r.label}</a></>))}
+        </div>
+      )}
+
+      <h2>FAQ</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <nav class="prevnext" aria-label="Side quest navigation">
+        <a href={`/quests/side/${prev.slug}`}>← {prev.title}</a>
+        <a href="/quests/side">All side quests</a>
+        <a href={`/quests/side/${next.slug}`}>{next.title} →</a>
+      </nav>
+    </div>
+  </article>
+
+  <style>
+    .tag-community {
+      display: inline-block; font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.02em;
+      color: var(--faint); border: 1px solid var(--line); border-radius: 999px; padding: 2px 7px;
+      vertical-align: middle;
+    }
+    .prevnext { display: flex; justify-content: space-between; gap: 10px; margin: 22px 0; font-family: var(--mono); font-size: 0.82rem; }
+    .prevnext a { color: var(--candle); }
+  </style>
+</Base>

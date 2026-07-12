@@ -1,0 +1,82 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { SITE } from '../../../consts';
+
+const faq = [
+  { q: 'Wie bekommt man seine erste Angelrute in Moonlight Peaks?', a: 'Bestätigt: Triff Noel innerhalb deiner ersten Spielabende an einem Fluss. Er fordert dich heraus, 3 verschiedene Fischarten vor ihm zu fangen — gewinne (es ist zeitlos, also leicht) und er gibt dir eine Angelrute plus Gold-Belohnung.' },
+  { q: 'Wie viele Fische gibt es in Moonlight Peaks?', a: 'Bestätigt: rund 22 Fischarten, jede mit eigenem Grundverkaufswert und Energiewert, beide steigen bei 1-Stern- und 2-Stern-Qualität.' },
+  { q: 'Was beeinflusst, welche Fische man in Moonlight Peaks fängt?', a: 'Bestätigt: Ort, Jahreszeit, Wetter und Tageszeit beeinflussen alle, welche Fische gerade verfügbar sind.' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Startseite', item: `${SITE.url}/de` },
+    { '@type': 'ListItem', position: 2, name: 'Sammlung', item: `${SITE.url}/de/collections` },
+    { '@type': 'ListItem', position: 3, name: 'Fische', item: `${SITE.url}/de/collections/fish` },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks Fische — Alle ~22 Arten & die erste Angelrute"
+  description="Bestätigtes Moonlight Peaks Angeln: wie man seine erste Angelrute von Noel bekommt, rund 22 Fischarten, Qualitätsstufen und was beeinflusst, welche Fische man fängt."
+  path="/de/collections/fish"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Sammlung', href: '/de/collections' }, { label: 'Fische' }]}
+  lang="de"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Sammlung · Fische</p>
+      <h1>Moonlight Peaks <em>Fische</em></h1>
+      <p class="intro">
+        Bestätigt über zwei unabhängige Launch-Week-Quellen: Angeln basiert auf einer echten
+        Sammlung von rund 22 Arten, jeweils beeinflusst von Ort, Zeitpunkt und Wetter beim Auswerfen.
+      </p>
+
+      <h2>Die erste Angelrute bekommen</h2>
+      <p>
+        Bestätigt: Du triffst <a href="/characters/noel">Noel</a> innerhalb deiner ersten
+        Spielabende an einem Fluss. Er fordert dich heraus, 3 verschiedene Fischarten vor ihm zu
+        fangen — leicht zu gewinnen, da zeitlos — und belohnt dich mit deiner ersten Angelrute plus
+        einem Gold-Bonus.
+      </p>
+
+      <h2>Wie viele Fische, und was sich ändert</h2>
+      <p>
+        Bestätigt: Die Sammlung umfasst rund 22 Arten. Welche verfügbar sind, hängt von Ort,
+        Jahreszeit, Wetter und Tageszeit ab — ein Fisch, den du in einer Nacht nicht findest, wartet
+        möglicherweise nur auf die richtigen Bedingungen statt komplett zu fehlen.
+      </p>
+
+      <h2>Qualitätsstufen</h2>
+      <p>
+        Bestätigt: Jeder Fisch hat einen Grundverkaufswert und einen Grund-Energiewert beim Essen,
+        beide steigen bei 1-Stern- und 2-Stern-Qualität — ein höherwertiger Fang derselben Art lohnt
+        sich also aktiv zu suchen, statt sich mit dem ersten Biss zufriedenzugeben.
+      </p>
+
+      <h2>Noch in Prüfung</h2>
+      <ul>
+        <li>Genaue Fundorte pro Art.</li>
+        <li>Vollständige Jahreszeit-/Wetter-/Zeit-Regeln pro Fisch.</li>
+        <li>Vollständige Verkaufspreis-Tabelle über alle Qualitätsstufen.</li>
+      </ul>
+
+      <h2>Häufige Fragen</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        Verwandte Seiten: <a href="/de/collections">Sammlungs-Hub</a>, <a href="/de/activities">Angeln als Aktivität</a>,
+        <a href="/characters/noel">Noel</a>, <a href="/de/items/cooking">Kochen</a>.
+      </div>
+    </div>
+  </article>
+</Base>

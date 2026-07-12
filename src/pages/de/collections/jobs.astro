@@ -1,0 +1,73 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { SITE } from '../../../consts';
+
+const faq = [
+  { q: "Was ist Albertus' Jobs in Moonlight Peaks?", a: 'Bestätigt: ein Schwarzes Brett, betrieben von Albertus, einer Eule, an dem Spieler verfügbare Aufträge einsehen — kurze Aufgaben, die Gold, gelegentlich Gegenstände und Beziehungspunkte mit dem Auftraggeber belohnen.' },
+  { q: 'Wo findet man das Jobbrett in Moonlight Peaks?', a: 'Bestätigt: im Rathaus, betrieben von Albertus. Es gehört zu den ersten Dingen, die neuen Bewohnern gezeigt werden.' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Startseite', item: `${SITE.url}/de` },
+    { '@type': 'ListItem', position: 2, name: 'Sammlung', item: `${SITE.url}/de/collections` },
+    { '@type': 'ListItem', position: 3, name: 'Jobs', item: `${SITE.url}/de/collections/jobs` },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks Albertus' Jobs — Das Jobbrett erklärt"
+  description="Bestätigt: Albertus' Jobs ist das Moonlight Peaks Schwarze Brett, an dem kurze Aufträge Gold, Gegenstände und Beziehungspunkte mit dem Auftraggeber belohnen."
+  path="/de/collections/jobs"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Sammlung', href: '/de/collections' }, { label: 'Jobs' }]}
+  lang="de"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Sammlung · Jobs</p>
+      <h1>Albertus' <em>Jobs</em></h1>
+      <p class="intro">
+        Bestätigt: Albertus' Jobs ist das Schwarze Brett der Stadt, betrieben von
+        <a href="/characters/albertus">Albertus</a>, einer Eule, im Rathaus — eines der ersten
+        Systeme, das neuen Bewohnern gezeigt wird.
+      </p>
+
+      <h2>Wie Jobs funktionieren</h2>
+      <p>
+        Bestätigt: Jobs sind kurze Aufträge, die am Brett ausgehängt werden. Das Abschließen eines
+        Jobs bringt Gold, manchmal auch einen Gegenstand, plus einen Anstieg der Beziehung zum
+        Auftraggeber — nützlich sowohl für frühes Einkommen als auch für passiven Beziehungsaufbau.
+      </p>
+
+      <h2>Wo man es findet</h2>
+      <p>
+        Bestätigt: Das Brett befindet sich im Rathaus, neben Bürgermeister Brooks Anmeldeschalter —
+        eines der allerersten Dinge, die neuen Bewohnern in der Stadt gezeigt werden.
+      </p>
+
+      <h2>Noch in Prüfung</h2>
+      <ul>
+        <li>Genauer Job-Pool und wie oft er sich aktualisiert.</li>
+        <li>Ob Schwierigkeit oder Belohnungen mit der Zeit skalieren.</li>
+        <li>Vollständige Liste, welche Bewohner-Aufträge erscheinen können.</li>
+      </ul>
+
+      <h2>Häufige Fragen</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        Verwandte Seiten: <a href="/de/collections">Sammlungs-Hub</a>, <a href="/characters/albertus">Albertus</a>,
+        <a href="/locations/town-hall">Rathaus</a>, <a href="/de/characters/brook">Brook</a>.
+      </div>
+    </div>
+  </article>
+</Base>

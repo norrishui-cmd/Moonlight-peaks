@@ -30,8 +30,8 @@ const jaOnlyPaths = [
   '/farm/farm-helpers', '/farm/crops/blood-grapes', '/farm/crops/rice', '/farm/crops/drikker',
   '/farm/crops/gobbler', '/farm/crops/hold-me-close', '/farm/crops/mandrake',
   '/farm/crops/weeping-wicca', '/farm/crops/instant-growth-mushrooms',
-  '/collection', '/collection/fish', '/collection/jobs', '/collection/critters',
-  '/collection/vampsters', '/collection/soul-blobs', '/map',
+  '/collections', '/collections/fish', '/collections/jobs', '/collections/critters',
+  '/collections/vampsters', '/collections/soul-blobs', '/map',
 ];
 
 const dePaths = [
@@ -47,8 +47,8 @@ const dePaths = [
   '/farm/farm-helpers', '/farm/crops/blood-grapes', '/farm/crops/rice', '/farm/crops/drikker',
   '/farm/crops/gobbler', '/farm/crops/hold-me-close', '/farm/crops/mandrake',
   '/farm/crops/weeping-wicca', '/farm/crops/instant-growth-mushrooms',
-  '/collection', '/collection/fish', '/collection/jobs', '/collection/critters',
-  '/collection/vampsters', '/collection/soul-blobs', '/map',
+  '/collections', '/collections/fish', '/collections/jobs', '/collections/critters',
+  '/collections/vampsters', '/collections/soul-blobs', '/map',
 ];
 
 export const translatedPathsByLocale: Record<Locale, Set<string>> = {

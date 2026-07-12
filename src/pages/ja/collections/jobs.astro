@@ -1,0 +1,73 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { SITE } from '../../../consts';
+
+const faq = [
+  { q: 'Moonlight PeaksのAlbertusのジョブとは?', a: '確認済み:フクロウのAlbertusが運営する掲示板で、プレイヤーが利用可能なジョブを確認できます——短い依頼をこなすとゴールド、時々アイテムの贈り物、依頼者との好感度が得られます。' },
+  { q: 'Moonlight Peaksでジョブ掲示板はどこにありますか?', a: '確認済み:タウンホールにあり、Albertusが運営しています。新しい住民として登録する際に最初に紹介されるものの一つです。' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'ホーム', item: `${SITE.url}/ja` },
+    { '@type': 'ListItem', position: 2, name: 'コレクション', item: `${SITE.url}/ja/collections` },
+    { '@type': 'ListItem', position: 3, name: 'ジョブ', item: `${SITE.url}/ja/collections/jobs` },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks Albertusのジョブ — 掲示板の仕組み解説"
+  description="確認済み:Albertusのジョブ掲示板では、短い依頼をこなすとゴールド・アイテムの贈り物・依頼者との好感度がもらえます。"
+  path="/ja/collections/jobs"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'コレクション', href: '/ja/collections' }, { label: 'ジョブ' }]}
+  lang="ja"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">コレクション・ジョブ</p>
+      <h1>Albertusの<em>ジョブ</em></h1>
+      <p class="intro">
+        確認済み:Albertusのジョブは、フクロウの<a href="/characters/albertus">Albertus</a>が
+        タウンホールで運営する町の掲示板です——新しい住民として登録する際に最初に紹介される
+        システムの一つです。
+      </p>
+
+      <h2>ジョブの仕組み</h2>
+      <p>
+        確認済み:ジョブは掲示板に貼り出される短い依頼です。ジョブを完了するとゴールド、時には
+        アイテムの贈り物、そして依頼者との好感度アップが得られます——序盤の収入と、受動的な
+        友好関係構築の両方に役立ちます。
+      </p>
+
+      <h2>場所</h2>
+      <p>
+        確認済み:掲示板はタウンホールにあり、Brook町長の登録デスクの隣に位置しています——新しい
+        住民が町で最初に紹介されるものの一つです。
+      </p>
+
+      <h2>現在確認中の情報</h2>
+      <ul>
+        <li>正確なジョブのプールと更新頻度。</li>
+        <li>難易度や報酬が時間とともに変化するか。</li>
+        <li>どの住民の依頼が登場しうるかの完全な一覧。</li>
+      </ul>
+
+      <h2>よくある質問</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        関連ページ: <a href="/ja/collections">コレクションハブ</a>、<a href="/characters/albertus">Albertus</a>、
+        <a href="/locations/town-hall">タウンホール</a>、<a href="/ja/characters/brook">Brook</a>。
+      </div>
+    </div>
+  </article>
+</Base>

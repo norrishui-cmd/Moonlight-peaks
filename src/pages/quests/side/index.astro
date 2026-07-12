@@ -1,0 +1,61 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { SITE, GAME } from '../../../consts';
+import { sideQuests } from '../../../data/quests-side';
+
+const jsonLd = {
+  '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: SITE.url },
+    { '@type': 'ListItem', position: 2, name: 'Quests', item: new URL('/quests', SITE.url).href },
+    { '@type': 'ListItem', position: 3, name: 'Side Quests', item: new URL('/quests/side', SITE.url).href },
+  ],
+};
+---
+<Base
+  title="Moonlight Peaks Side Quests — Every NPC Quest & Side System"
+  description="Every confirmed Moonlight Peaks side quest and NPC-specific request — fishing contests, house upgrades, the job board, and the town's creature-collecting side hunts."
+  path="/quests/side"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Quests', href: '/quests' }, { label: 'Side Quests' }]}
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Quests · Side Quests</p>
+      <h1>Side <em>quests</em></h1>
+      <p class="intro">
+        {sideQuests.length} confirmed side quests and NPC-specific requests, separate from the
+        <a href="/quests/story">main story chain</a>. These range from one-time quests tied to a
+        specific resident to ongoing side systems like the job board.
+      </p>
+
+      <div class="sq-grid">
+        {sideQuests.map((q) => (
+          <a class="sq-card" href={`/quests/side/${q.slug}`}>
+            <span class="sq-tag">{q.npc ? q.npc.charAt(0).toUpperCase() + q.npc.slice(1) : 'Side system'}</span>
+            <h3>{q.title}</h3>
+            <p>{q.summary.length > 130 ? q.summary.slice(0, 127) + '…' : q.summary}</p>
+          </a>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        Related: <a href="/quests">Quests hub</a>, <a href="/quests/story">main story</a>,
+        <a href="/collections">collections</a>, <a href="/characters">characters</a>.
+      </div>
+    </div>
+  </article>
+
+  <style>
+    .sq-grid { display: grid; grid-template-columns: 1fr; gap: 12px; margin: 22px 0 30px; }
+    @media (min-width: 640px) { .sq-grid { grid-template-columns: 1fr 1fr; } }
+    .sq-card {
+      display: block; border: 1px solid var(--line); border-radius: 14px; background: var(--surface);
+      padding: 16px; text-decoration: none; color: inherit;
+      transition: border-color .15s ease, transform .15s ease;
+    }
+    .sq-card:hover { border-color: color-mix(in srgb, var(--candle) 54%, var(--line)); transform: translateY(-2px); }
+    .sq-tag { font-family: var(--mono); font-size: 0.66rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--candle); }
+    .sq-card h3 { margin: 6px 0 6px; font-size: 1.05rem; }
+    .sq-card p { margin: 0; color: #ded3e6; font-size: 0.86rem; }
+  </style>
+</Base>
