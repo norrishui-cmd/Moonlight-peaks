@@ -1,0 +1,117 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+
+const systems: { name: string; note: string; status: string }[] = [
+  { name: '季節', note: '公式wikiの構造自体と発売週の攻略情報で相互確認済み:1年はSpring(春)・Summer(夏)・Autumn(秋)・Winter(冬)に分かれ、それぞれ1ヶ月ずつ——合計4ヶ月のカレンダーです。ゲームはSpringから始まります。祭りの日付は「Spring 20」のように表記されます。', status: '確認済み' },
+  { name: '天候', note: '発売前のデータマイニングファイルによると天候システムは存在します。農業やアクティビティに具体的にどう影響するかはまだ独自に確認できていません。', status: 'データマイニング' },
+  { name: '祭り', note: '確認済み:Loveage FestivalやMoonlight Ballを含む、町全体での季節の祝祭があり、年間を通してさらにあると見られます。', status: '確認済み' },
+];
+
+const festivals: { name: string; when: string; note: string; status: string }[] = [
+  { name: 'Loveage Festival', when: 'Spring 20〜21(2日間)', note: '公式wikiで確認済み:「恋の悪魔」Llemiが主催。ElviraとMinaが屋台を出し(Minaは共同ビュッフェを用意し、料理を持ち寄ることができます)、Lunaは季節限定の花を扱う期間限定の生け花屋台を出します(その花は良いプレゼントにもなります)。「秘密の想い人」ギフト交換も同時開催され、土曜日に最大3人のNPCを選び、翌日曜日に交換が行われます。', status: '確認済み' },
+  { name: 'Moonlight Ball', when: 'Summer 20', note: '公式wikiの祭りリストで存在が確認済み。具体的な内容はまだ独自に詳細確認できていません。', status: '確認済み(名前と日付のみ)' },
+  { name: 'Master Soup(料理コンテスト)', when: 'シーズン未確認', note: '複数の発売週プレビューでコミュニティ報告あり、料理コンテストとされています。公式wikiとの照合はまだです。', status: 'コミュニティ報告' },
+  { name: 'ファッションショー', when: 'シーズン未確認', note: 'コミュニティ報告。詳細はまだ記録されていません。', status: 'コミュニティ報告' },
+  { name: 'Evernight Festival', when: '秋(正確な日はまだ未確認)', note: 'ミニゲームのある秋の祭りとしてコミュニティ報告あり。', status: 'コミュニティ報告' },
+  { name: 'Pumpkin-Head ハロウィンシーズン', when: 'シーズン未確認', note: 'コミュニティ報告。確認済みのNPC Pumpkin Headが「町の集まりを盛り上げる演劇風イベント司会者」であることとも整合します。', status: 'コミュニティ報告' },
+];
+
+const faq = [
+  { q: 'ムーンライト・ピークスに季節はありますか?', a: 'はい、確認済みです:1年はSpring・Summer・Autumn・Winterに分かれ、それぞれ1ヶ月ずつで、祭りなどのイベントのスケジュールに使われます。' },
+  { q: 'ムーンライト・ピークスの1年の長さは?', a: '確認済み:4ヶ月のカレンダーです——Spring・Summer・Autumn・Winterの各季節が1ヶ月ずつ。ゲームはSpringから始まります。' },
+  { q: 'ムーンライト・ピークスに天候はありますか?', a: '発売前のデータマイニングファイルで天候システムへの言及があります。農業やアクティビティに具体的にどう影響するかはまだ独自に確認できていません。' },
+  { q: 'ムーンライト・ピークスのLoveage Festivalとは?', a: '確認済み:Llemi(Love Demon)が主催する2日間の春の祭り(Spring 20〜21)。ElviraとMinaが屋台を出し、Lunaは生け花屋台を出し、土曜日に最大3人のNPCを選んで翌日曜日に交換が行われる「秘密の想い人」ギフト交換もあります。' },
+  { q: 'Loveage以外にも祭りはありますか?', a: 'はい——Moonlight Ball(Summer 20)は公式wikiで名前と日付が確認済みです。複数の発売週プレビューでは、Master Soup料理コンテスト、ファッションショー、秋のEvernight Festival、Pumpkin-Head主催のハロウィンシーズンも挙げられていますが、独自に確認できるまではコミュニティ報告として扱っています。' },
+  { q: 'ムーンライト・ピークスの祭りは良いですか?', a: 'これまでのところ賛否両論です:発売週のレビュアーの中にはLoveageの屋台やギフト交換を楽しんだという声もありますが、少なくとも1人はStardew Valleyのような同ジャンルの季節イベントと比べて祭りの頻度や種類が薄いと感じています——良い面だけでなく正直にお伝えしています。' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'ホーム', item: `${SITE.url}/ja` },
+    { '@type': 'ListItem', position: 2, name: '環境', item: `${SITE.url}/ja/environment` },
+  ] },
+];
+---
+<Base
+  title="ムーンライト・ピークス 環境と祭り — Loveage、Moonlight Ballほか"
+  description="ムーンライト・ピークスの季節と祭り:確認済みのLoveage FestivalとMoonlight Ball、Master SoupやEvernightなどコミュニティ報告のイベントを、未確認情報と分けて掲載。"
+  path="/ja/environment"
+  jsonLd={jsonLd}
+  crumbs={[{ label: '環境' }]}
+  lang="ja"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">ハブ・環境</p>
+      <h1>ムーンライト・ピークスの<em>環境</em>と祭り</h1>
+      <p class="intro">
+        {GAME.title}の世界が時間とともにどう変化するか——季節、天候、町の祭りについて。確認済みの詳細は、
+        まだコミュニティ報告や未確認の情報とはっきり分けて掲載しています。
+      </p>
+
+      <h2>季節と天候</h2>
+      <div class="envg">
+        {systems.map((s) => (
+          <div class="envcard">
+            <h3>{s.name}</h3>
+            <p>{s.note}</p>
+            <span class="envbadge">{s.status}</span>
+          </div>
+        ))}
+      </div>
+
+      <h2>祭り</h2>
+      <table class="facts">
+        <tr><th>祭り</th><th>時期</th><th>詳細</th></tr>
+        {festivals.map((f) => (
+          <tr>
+            <td>{f.name} <span class="envbadge envbadge-inline">{f.status}</span></td>
+            <td>{f.when}</td>
+            <td>{f.note}</td>
+          </tr>
+        ))}
+      </table>
+
+      <h2>夜が基本というひねり</h2>
+      <p>
+        季節や天候が何であれ、一つのルールは変わりません:夜に生活し農業を営み、日の出前に棺へ戻ります。
+        夜のサイクルがコアゲームプレイループにどう影響するかは<a href="/ja/farming">農業</a>をご覧ください。
+      </p>
+
+      <h2>現在確認中の情報</h2>
+      <ul>
+        <li><strong>Moonlight Ball</strong>の名前と日付以外の具体的な内容。</li>
+        <li><strong>Master Soup、ファッションショー、Evernight、Pumpkin-Headのハロウィンシーズン</strong>がその名称で公式に確認されているかどうか。</li>
+        <li><strong>天候</strong>が農業やアクティビティに具体的にどう影響するか。</li>
+      </ul>
+
+      <h2>FAQ</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        発売後に追加されたエントリーで、祭りや天候の詳細が確認され次第更新します。関連ページ:
+        <a href="/ja/farming">農業</a>、<a href="/ja/items">アイテム</a>、<a href="/ja/locations">ロケーション</a>、
+        <a href="/characters/llemi">Llemi</a>、<a href="/ja/romance">恋愛</a>。
+      </div>
+    </div>
+  </article>
+
+  <style>
+    .envg { display: grid; grid-template-columns: 1fr; gap: 12px; margin: 6px 0 18px; }
+    @media (min-width: 640px) { .envg { grid-template-columns: 1fr 1fr 1fr; } }
+    .envcard { border: 1px solid var(--line); border-radius: 14px; background: var(--surface); padding: 14px; }
+    .envcard h3 { font-family: var(--display); font-weight: 600; font-size: 1rem; margin: 0 0 6px; }
+    .envcard p { color: #ded3e6; font-size: 0.84rem; margin: 0 0 8px; }
+    .envbadge { font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.04em; text-transform: uppercase; color: #9ac6e0; border: 1px solid #2f5a70; border-radius: 5px; padding: 2px 6px; }
+    .envbadge-inline { margin-left: 6px; vertical-align: middle; }
+  </style>
+</Base>

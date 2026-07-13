@@ -1,0 +1,115 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+
+const achievements = [
+  { name: 'Discover all locations', desc: 'Entdecke jeden Ort in Moonlight Peaks.' },
+  { name: 'A Farming Monopoly', desc: 'Verdiene 1.000.000 Münzen.' },
+  { name: 'Skulls in a Net', desc: 'Sammle alle Soul Blobs.' },
+  { name: 'Back to the Den', desc: 'Bring alle Vampster zurück zu ihrer Höhle.' },
+  { name: 'Making Mina Proud', desc: 'Koche 25 verschiedene Rezepte.' },
+  { name: "Albertus' Helper", desc: 'Schließe 25 Jobs vom Job-Brett ab.' },
+  { name: 'Magic at Max Capacity', desc: 'Erreiche maximales Mana.' },
+  { name: 'Fully Energized', desc: 'Erreiche maximale Energie.' },
+  { name: 'Moonlit Stretching', desc: 'Nimm an deiner ersten Yoga-Session teil.' },
+  { name: 'Back in Place', desc: 'Bring alle Plastikstühle zurück.' },
+  { name: 'Tree Hugger', desc: 'Verlieb dich in einen Baum.' },
+  { name: 'The Pumpking', desc: 'Triff einen eigenartigen Kürbis.' },
+  { name: 'Raiders of the Lost Art', desc: 'Schließe Elviras Schatzsuche ab.' },
+  { name: 'A Childhood Dream', desc: 'Baue mit Ridge ein Baumhaus.' },
+  { name: 'Nokturna Master', desc: 'Sammle jede Nokturna-Karte.' },
+  { name: 'Awooooo!', desc: 'Sprich während eines Vollmonds mit einem Werwolf-Charakter (community-berichtet).' },
+  { name: 'AFKitten', desc: 'Streichle dein Hellkitten 5 Minuten am Stück (community-berichtet).' },
+  { name: 'Cartographer', desc: 'Entdecke jeden Ort in Moonlight Peaks, einschließlich Bereichen, die erst nach Freischalten einer Gestaltwandlungsform erreichbar sind (community-berichtet).' },
+  { name: 'Rightful Ritualist', desc: 'Aktiviere jeden Hexenzirkel in der Stadt (community-berichtet).' },
+  { name: 'Call of the Current', desc: 'Schalte die Meerjungfrauen-/Aqua-Form frei \u2014 bestätigt, dass sie später im Spiel freigeschaltet wird, wobei die genaue Freischaltbedingung für diese dritte Form noch unbestätigt ist.' },
+  { name: 'Perpetual Bloom', desc: 'Baue ein Gewächshaus.' },
+  { name: 'Dracula Estate', desc: 'Rüste dein Haus vollständig auf.' },
+  { name: 'Vampire with a Wand', desc: 'Schalte Magie frei und wirke einmal einen Zauber.' },
+  { name: 'Master of Witchcraft', desc: 'Rüste jeden Zauber vollständig auf.' },
+  { name: 'A Magical Toolbelt', desc: 'Rüste ein Werkzeug zu seiner verzauberten Version auf.' },
+  { name: 'A Magical Cocktail', desc: 'Habe jeden Trank-Effekt gleichzeitig aktiv.' },
+  { name: 'New Beginnings', desc: 'Pflanze deine erste Feldfrucht \u2014 meist deine allererste Aktion im Spiel.' },
+  { name: 'Purrgatory', desc: 'Schalte die Hellkitten-Form frei.' },
+  { name: 'Wings of the Night', desc: 'Schalte die Fledermaus-Form frei.' },
+  { name: 'Out of the Mist', desc: 'Hebe den Fluch über Misty Shores durch die Hauptgeschichte auf.' },
+  { name: 'To the Depths', desc: 'Öffne den Eingang zu den Katakomben.' },
+  { name: 'Happy New Year!', desc: 'Schließe ein volles Spieljahr über alle vier Jahreszeiten ab.' },
+  { name: 'A Generous Donor', desc: 'Verschenke insgesamt 299 Geschenke.' },
+  { name: 'Serial Gifter', desc: 'Verschenke 25 geliebte Geschenke in einer einzigen Nacht.' },
+  { name: 'Social Butterfly', desc: 'Erreiche mit jedem Charakter 4 Herzen.' },
+  { name: 'Tied the Knot', desc: 'Maximiere eine Romanze und mache einen Antrag.' },
+  { name: 'Buddies for Afterlife', desc: 'Baue Freundschaft mit Death auf, genau wie mit jedem anderen Bewohner.' },
+];
+
+const faq = [
+  { q: 'Wie viele Errungenschaften hat Moonlight Peaks?', a: 'Bestätigt zum Release: insgesamt etwa 59-60 Steam-Errungenschaften (Quellen nennen beide Zahlen). 37 benannte Errungenschaften wurden bisher öffentlich bekannt \u2014 siehe obige Tabelle für das Bestätigte.' },
+  { q: 'Hat Moonlight Peaks Steam-Sammelkarten?', a: 'Ja — die Steam-Store-Seite listet Steam-Errungenschaften, Steam-Sammelkarten, Steam-Cloud-Speicherstände und vollen Controller-Support.' },
+  { q: 'Was ist die schwierigste oder unbekannteste Errungenschaft?', a: 'Mehrere bestätigte Namen deuten auf eigenartige, leicht zu übersehende Errungenschaften statt reinem Grinding hin \u2014 "Tree Hugger" (sich in einen Baum verlieben) und "The Pumpking" (einen eigenartigen Kürbis treffen) klingen beide nach spezifischen einmaligen Interaktionen statt wiederholten Aktionen.' },
+  { q: 'Gibt es Errungenschaften für Romanze oder Beziehungen?', a: 'Ja, bestätigt: "Social Butterfly" (4 Herzen mit jedem Charakter), "Tied the Knot" (eine Romanze maximieren und einen Antrag machen), "A Generous Donor" (299 Geschenke insgesamt verschenken), "Serial Gifter" (25 geliebte Geschenke in einer Nacht) und "Buddies for Afterlife" (Freundschaft mit Death aufbauen) sind alle romanze-/beziehungsbezogen. "A Childhood Dream" (Baumhaus mit Ridge bauen) und "Raiders of the Lost Art" (Elviras Schatzsuche) sind ebenfalls an bestimmte namentliche Bewohner gebunden.' },
+  { q: 'Gibt es eine Errungenschaft fürs Bauen eines Gewächshauses?', a: 'Ja, bestätigt: "Perpetual Bloom" wird fürs Bauen eines Gewächshauses vergeben.' },
+  { q: 'Welche Errungenschaften sind an Gestaltwandlungsformen gebunden?', a: 'Bestätigt: "Purrgatory" (Hellkitten-Form), "Wings of the Night" (Fledermaus-Form) und "Call of the Current" (Meerjungfrauen-/Aqua-Form, später im Spiel freigeschaltet).' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Startseite', item: `${SITE.url}/de` },
+    { '@type': 'ListItem', position: 2, name: 'Errungenschaften', item: `${SITE.url}/de/achievements` },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks Errungenschaften — Vollständiger Trophäen- & Steam-Errungenschaften-Guide"
+  description="Moonlight Peaks hat 59 bestätigte Errungenschaften. Sieh dir die bisher bekannten benannten Errungenschaften an, vom Sammeln der Soul Blobs bis zum Verdienen von 1.000.000 Münzen."
+  path="/de/achievements"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Errungenschaften' }]}
+  lang="de"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Eintrag · Errungenschaften</p>
+      <h1>Moonlight Peaks <em>Errungenschaften</em></h1>
+      <p class="intro">
+        Bestätigt zum Release: {GAME.title} hat <strong>59 Steam-Errungenschaften</strong>, dazu
+        Steam-Sammelkarten, Cloud-Speicherstände und vollen Controller-Support. Bisher sind nur
+        einige Errungenschaftsnamen öffentlich bekannt — diese Seite listet genau das, was
+        bestätigt ist, und wächst, sobald mehr bekannt werden.
+      </p>
+
+      <h2>Bestätigte Errungenschaften ({achievements.length} von 59)</h2>
+      <table class="facts">
+        <tr><th>Errungenschaft</th><th>Wie man sie freischaltet</th></tr>
+        {achievements.map((a) => (
+          <tr>
+            <td>{a.name}</td>
+            <td>{a.desc}</td>
+          </tr>
+        ))}
+      </table>
+
+      <div class="callout">
+        45 Errungenschaften sind hier noch unbenannt — wir listen nur, was aus echten
+        Steam-Errungenschaftsdaten bestätigt wurde, nicht geraten. Schau später wieder vorbei,
+        sobald mehr bestätigt sind.
+      </div>
+
+      <h2>FAQ</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        Verwandt: <a href="/de/items">Gegenstände</a>, <a href="/de/farming">Landwirtschaft</a>,
+        <a href="/characters/albertus">Albertus (Job-Brett)</a>, <a href="/characters/ridge">Ridge</a>,
+        <a href="/characters/elvira">Elvira</a>, <a href="/nokturna">Nokturna-Kartenspiel</a>.
+      </div>
+    </div>
+  </article>
+</Base>

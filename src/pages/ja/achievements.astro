@@ -1,0 +1,115 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+
+// Confirmed named achievements, sourced from Exophase's Steam achievement listing (launch week).
+// 59 total achievements are confirmed to exist; only some names have been sourced so far.
+const achievements = [
+  { name: 'Discover all locations', desc: 'ムーンライト・ピークスの全ロケーションを発見する。' },
+  { name: 'A Farming Monopoly', desc: '100万コインを稼ぐ。' },
+  { name: 'Skulls in a Net', desc: 'Soul Blobsを全て集める。' },
+  { name: 'Back to the Den', desc: 'Vampsterを全て巣に送り届ける。' },
+  { name: 'Making Mina Proud', desc: '異なるレシピを25種類調理する。' },
+  { name: "Albertus' Helper", desc: '仕事掲示板の依頼を25件完了する。' },
+  { name: 'Magic at Max Capacity', desc: 'マナを最大値まで到達させる。' },
+  { name: 'Fully Energized', desc: 'エネルギーを最大値まで到達させる。' },
+  { name: 'Moonlit Stretching', desc: '初めてのヨガセッションに参加する。' },
+  { name: 'Back in Place', desc: 'プラスチックの椅子を全て返却する。' },
+  { name: 'Tree Hugger', desc: '木に恋をする。' },
+  { name: 'The Pumpking', desc: '奇妙なカボチャに出会う。' },
+  { name: 'Raiders of the Lost Art', desc: 'Elviraの宝探しを完了する。' },
+  { name: 'A Childhood Dream', desc: 'Ridgeと一緒にツリーハウスを建てる。' },
+  { name: 'Nokturna Master', desc: 'Nokturnaのカードを全て集める。' },
+  { name: 'Awooooo!', desc: '満月の夜に狼男キャラクターに話しかける(コミュニティ報告)。' },
+  { name: 'AFKitten', desc: 'ヘルキティを5分間連続で撫でる(コミュニティ報告)。' },
+  { name: 'Cartographer', desc: '変身フォームを解放しないと辿り着けないエリアも含め、ムーンライト・ピークスの全ロケーションを発見する(コミュニティ報告)。' },
+  { name: 'Rightful Ritualist', desc: '町にある全ての魔女の輪(Witches\u2019 Circle)を起動する(コミュニティ報告)。' },
+  { name: 'Call of the Current', desc: '人魚/Aquaフォームを解放する——ゲーム後半で解放されることは確認済みだが、この第3の変身フォームの正確な解放条件はまだ未確認。' },
+  { name: 'Perpetual Bloom', desc: '温室(Greenhouse)を建てる。' },
+  { name: 'Dracula Estate', desc: '家を完全にアップグレードする。' },
+  { name: 'Vampire with a Wand', desc: '魔法を解放し、いずれかの呪文を1回唱える。' },
+  { name: 'Master of Witchcraft', desc: '全ての呪文を完全にアップグレードする。' },
+  { name: 'A Magical Toolbelt', desc: 'いずれかの道具を「魔法強化」版にアップグレードする。' },
+  { name: 'A Magical Cocktail', desc: '全てのポーション効果を同時に発動させる。' },
+  { name: 'New Beginnings', desc: '最初の作物を植える——通常はゲーム内で最初に行う行動。' },
+  { name: 'Purrgatory', desc: 'ヘルキティフォームを解放する。' },
+  { name: 'Wings of the Night', desc: 'コウモリフォームを解放する。' },
+  { name: 'Out of the Mist', desc: 'メインクエストを通してMisty Shoresの呪いを解く。' },
+  { name: 'To the Depths', desc: 'カタコンベの入り口を開放する。' },
+  { name: 'Happy New Year!', desc: 'ゲーム内で四季を通して1年を完走する。' },
+  { name: 'A Generous Donor', desc: '合計299個のプレゼントを贈る。' },
+  { name: 'Serial Gifter', desc: '一晩で25個の「大好物」プレゼントを贈る。' },
+  { name: 'Social Butterfly', desc: '全キャラクターとハートレベル4に到達する。' },
+  { name: 'Tied the Knot', desc: '恋愛関係を最大まで高めてプロポーズする。' },
+  { name: 'Buddies for Afterlife', desc: '他の住民と同じようにDeathと友情を築く。' },
+];
+
+const faq = [
+  { q: 'ムーンライト・ピークスの実績はいくつありますか?', a: '発売時に確認済み:合計約59~60個のSteam実績があります(情報源によって数値が異なります)。これまでに公表されている実績名は37個——上の表で確認できるものが全てです。' },
+  { q: 'ムーンライト・ピークスにSteamトレーディングカードはありますか?', a: 'はい——Steamストアページには実績、トレーディングカード、クラウドセーブ、フルコントローラー対応が記載されています。' },
+  { q: '最も難しい、または見逃しやすい実績は?', a: '確認済みの実績名の中には、単純な繰り返し作業ではなく、見逃しやすい特定の一度きりの行動に紐づいていそうなものがいくつかあります——「Tree Hugger」(木に恋をする)や「The Pumpking」(奇妙なカボチャに出会う)はどちらもそのタイプに見えます。' },
+  { q: '恋愛や人間関係に関する実績はありますか?', a: 'はい、確認済みです:「Social Butterfly」(全キャラクターとハートレベル4)、「Tied the Knot」(恋愛関係を最大にしてプロポーズ)、「A Generous Donor」(合計299個の贈り物)、「Serial Gifter」(一晩で25個の大好物)、「Buddies for Afterlife」(Deathとの友情)は全て恋愛・人間関係タグ付きです。「A Childhood Dream」(Ridgeとのツリーハウス)と「Raiders of the Lost Art」(Elviraの宝探し)も特定の住民に紐づいています。' },
+  { q: '温室を建てる実績はありますか?', a: 'はい、確認済みです:「Perpetual Bloom」は温室を建てると獲得できます。' },
+  { q: '変身フォームに関する実績は?', a: '確認済み:「Purrgatory」(ヘルキティフォーム)、「Wings of the Night」(コウモリフォーム)、「Call of the Current」(人魚/Aquaフォーム、ゲーム後半で解放)。' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'ホーム', item: `${SITE.url}/ja` },
+    { '@type': 'ListItem', position: 2, name: '実績', item: `${SITE.url}/ja/achievements` },
+  ] },
+];
+---
+<Base
+  title="ムーンライト・ピークス 実績一覧 — トロフィー&Steam実績ガイド"
+  description="ムーンライト・ピークスには確認済みの実績が59個あります。Soul Blobs収集から100万コイン稼得まで、これまでに判明している実績名を掲載。"
+  path="/ja/achievements"
+  jsonLd={jsonLd}
+  crumbs={[{ label: '実績' }]}
+  lang="ja"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">エントリー・実績</p>
+      <h1>ムーンライト・ピークス <em>実績</em></h1>
+      <p class="intro">
+        発売時に確認済み:{GAME.title}には<strong>59個のSteam実績</strong>があり、Steamトレーディングカード、
+        クラウドセーブ、フルコントローラー対応も備えています。これまでに公表されている実績名は一部のみです
+        ——このページは実際に判明しているものだけを掲載し、新しく確認され次第追加していきます。
+      </p>
+
+      <h2>確認済みの実績(59個中{achievements.length}個)</h2>
+      <table class="facts">
+        <tr><th>実績名</th><th>解放条件</th></tr>
+        {achievements.map((a) => (
+          <tr>
+            <td>{a.name}</td>
+            <td>{a.desc}</td>
+          </tr>
+        ))}
+      </table>
+
+      <div class="callout">
+        残り45個の実績はまだ名前が判明していません——実際のSteam実績データから確認できたものだけを掲載しており、
+        推測では書いていません。新しい情報が確認され次第更新します。
+      </div>
+
+      <h2>FAQ</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        関連ページ: <a href="/ja/items">アイテム</a>、<a href="/ja/farming">農業</a>、
+        <a href="/characters/albertus">Albertus(仕事掲示板)</a>、<a href="/characters/ridge">Ridge</a>、
+        <a href="/characters/elvira">Elvira</a>、<a href="/nokturna">Nokturnaカードゲーム</a>。
+      </div>
+    </div>
+  </article>
+</Base>

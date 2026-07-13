@@ -1,0 +1,120 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+
+const systems: { name: string; note: string; status: string }[] = [
+  { name: 'Jahreszeiten', note: 'Bestätigt über die Struktur des offiziellen Wikis selbst und abgeglichen mit Launch-Week-Guides: das Jahr ist in Frühling, Sommer, Herbst und Winter unterteilt, jede dauert einen Monat \u2014 ein Vier-Monats-Kalender insgesamt. Du startest das Spiel im Frühling. Festival-Daten werden z. B. als "Frühling 20" angegeben.', status: 'Bestätigt' },
+  { name: 'Wetter', note: 'Ein Wettersystem existiert laut vorab durchgesickerten Dateien; wie genau es Landwirtschaft oder Aktivitäten beeinflusst, ist hier noch nicht unabhängig bestätigt.', status: 'Datamined' },
+  { name: 'Feste', note: 'Bestätigt: stadtweite saisonale Feiern, darunter das Loveage-Fest und der Moonlight Ball, mit wahrscheinlich weiteren im Jahresverlauf.', status: 'Bestätigt' },
+];
+
+const festivals: { name: string; when: string; note: string; status: string }[] = [
+  { name: 'Loveage-Fest', when: 'Frühling 20\u201321 (2 Tage)', note: 'Bestätigt über das offizielle Wiki: veranstaltet von Llemi, dem "Liebesdämon." Elvira und Mina betreiben Stände (Mina richtet ein Gemeinschaftsbuffet ein, zu dem du ein Gericht beisteuern kannst); Luna betreibt einen zeitlich begrenzten Blumenarrangement-Stand mit saisonalen Blumen, die auch gute Geschenke sind. Parallel läuft ein Geheimer-Verehrer-Geschenkaustausch \u2014 du wählst am Samstag bis zu 3 NPCs, der Austausch findet dann am Sonntag statt.', status: 'Bestätigt' },
+  { name: 'Moonlight Ball', when: 'Sommer 20', note: 'Über die Festivalliste des offiziellen Wikis als existent bestätigt. Konkrete Aktivitäten sind hier noch nicht unabhängig im Detail bestätigt.', status: 'Bestätigt (nur Name & Datum)' },
+  { name: 'Master Soup (Kochwettbewerb)', when: 'Jahreszeit noch nicht bestätigt', note: 'Community-berichtet über mehrere Launch-Week-Vorschauen hinweg als Kochwettbewerb. Noch nicht mit dem offiziellen Wiki abgeglichen.', status: 'Community-berichtet' },
+  { name: 'Eine Modenschau', when: 'Jahreszeit noch nicht bestätigt', note: 'Community-berichtet. Details noch nicht dokumentiert.', status: 'Community-berichtet' },
+  { name: 'Evernight-Fest', when: 'Herbst (genauer Tag noch nicht bestätigt)', note: 'Community-berichtet als Herbstfest mit Minispielen.', status: 'Community-berichtet' },
+  { name: 'Pumpkin-Head-Halloween-Saison', when: 'Jahreszeit noch nicht bestätigt', note: 'Community-berichtet, und stimmt mit dem bestätigten NPC Pumpkin Head überein, der ein "theatralischer Event-Gastgeber" ist, der Stadtversammlungen belebt.', status: 'Community-berichtet' },
+];
+
+const faq = [
+  { q: 'Hat Moonlight Peaks Jahreszeiten?', a: 'Ja, bestätigt: das Jahr ist in Frühling, Sommer, Herbst und Winter unterteilt, jede dauert einen Monat, verwendet zur Terminierung von Festen und anderen Events.' },
+  { q: 'Wie lang ist ein Jahr in Moonlight Peaks?', a: 'Bestätigt: ein Vier-Monats-Kalender \u2014 ein Monat pro Jahreszeit (Frühling, Sommer, Herbst, Winter). Du startest das Spiel im Frühling.' },
+  { q: 'Hat Moonlight Peaks Wetter?', a: 'Ein Wettersystem wird in vorab durchgesickerten Dateien erwähnt. Wie genau es Landwirtschaft oder Aktivitäten beeinflusst, ist hier noch nicht unabhängig bestätigt.' },
+  { q: 'Was ist das Loveage-Fest in Moonlight Peaks?', a: 'Bestätigt: ein zweitägiges Frühlingsfest (Frühling 20\u201321), veranstaltet von Llemi, dem Liebesdämon. Elvira und Mina betreiben Stände, Luna betreibt einen Blumenarrangement-Stand, und es gibt einen Geheimer-Verehrer-Geschenkaustausch, bei dem du am Samstag bis zu 3 NPCs wählst und der Austausch am folgenden Sonntag stattfindet.' },
+  { q: 'Gibt es außer Loveage noch andere Feste?', a: 'Ja \u2014 der Moonlight Ball (Sommer 20) ist über das offizielle Wiki mit Name und Datum bestätigt. Mehrere Launch-Week-Vorschauen nennen auch einen Master-Soup-Kochwettbewerb, eine Modenschau, ein herbstliches Evernight-Fest und eine von Pumpkin Head veranstaltete Halloween-Saison, die wir aber als community-berichtet behandeln, bis sie unabhängig bestätigt sind.' },
+  { q: 'Sind die Feste in Moonlight Peaks gut?', a: 'Bisher gemischt: manche Launch-Week-Rezensenten genossen Loveages Stände und Geschenkaustausch, aber mindestens einer fand Häufigkeit und Vielfalt der Feste dünn im Vergleich zu Genre-Vergleichstiteln wie Stardew Valleys saisonalen Events \u2014 wir berichten das ehrlich, statt nur die positive Seite zu zeigen.' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Startseite', item: `${SITE.url}/de` },
+    { '@type': 'ListItem', position: 2, name: 'Umgebung', item: `${SITE.url}/de/environment` },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks Umgebung & Feste — Loveage, Moonlight Ball & mehr"
+  description="Moonlight Peaks Jahreszeiten und Feste: das bestätigte Loveage-Fest und der Moonlight Ball, plus community-berichtete Events wie Master Soup und Evernight — getrennt von noch Unbestätigtem."
+  path="/de/environment"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Umgebung' }]}
+  lang="de"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Hub · Umgebung</p>
+      <h1>Moonlight Peaks <em>Umgebung</em> & Feste</h1>
+      <p class="intro">
+        Wie sich die Welt von {GAME.title} über die Zeit verändert — Jahreszeiten, Wetter und
+        Stadtfeste. Bestätigte Details werden klar getrennt von dem, was noch community-berichtet
+        oder unbestätigt ist.
+      </p>
+
+      <h2>Jahreszeiten & Wetter</h2>
+      <div class="envg">
+        {systems.map((s) => (
+          <div class="envcard">
+            <h3>{s.name}</h3>
+            <p>{s.note}</p>
+            <span class="envbadge">{s.status}</span>
+          </div>
+        ))}
+      </div>
+
+      <h2>Feste</h2>
+      <table class="facts">
+        <tr><th>Fest</th><th>Wann</th><th>Details</th></tr>
+        {festivals.map((f) => (
+          <tr>
+            <td>{f.name} <span class="envbadge envbadge-inline">{f.status}</span></td>
+            <td>{f.when}</td>
+            <td>{f.note}</td>
+          </tr>
+        ))}
+      </table>
+
+      <h2>Der Nacht-zuerst-Twist</h2>
+      <p>
+        Egal welche Jahreszeit oder welches Wetter — eine Regel bleibt konstant: Du lebst und
+        bewirtschaftest den Hof nachts und kehrst vor Sonnenaufgang in deinen Sarg zurück. Siehe
+        <a href="/de/farming">Landwirtschaft</a> dafür, wie der Nachtzyklus den Kern-Gameplay-Loop prägt.
+      </p>
+
+      <h2>Noch in Prüfung</h2>
+      <ul>
+        <li>Genaue <strong>Moonlight-Ball</strong>-Aktivitäten über Name und Datum hinaus.</li>
+        <li>Ob <strong>Master Soup, die Modenschau, Evernight und die Pumpkin-Head-Halloween-Saison</strong>
+          offiziell unter diesen Namen bestätigt sind.</li>
+        <li>Wie genau <strong>Wetter</strong> Landwirtschaft oder Aktivitäten beeinflusst.</li>
+      </ul>
+
+      <h2>FAQ</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        Post-Launch-Eintrag, wird aktualisiert, sobald mehr Fest- und Wetterdetails bestätigt sind.
+        Verwandt: <a href="/de/farming">Landwirtschaft</a>, <a href="/de/items">Gegenstände</a>,
+        <a href="/de/locations">Orte</a>, <a href="/characters/llemi">Llemi</a>, <a href="/de/romance">Romanze</a>.
+      </div>
+    </div>
+  </article>
+
+  <style>
+    .envg { display: grid; grid-template-columns: 1fr; gap: 12px; margin: 6px 0 18px; }
+    @media (min-width: 640px) { .envg { grid-template-columns: 1fr 1fr 1fr; } }
+    .envcard { border: 1px solid var(--line); border-radius: 14px; background: var(--surface); padding: 14px; }
+    .envcard h3 { font-family: var(--display); font-weight: 600; font-size: 1rem; margin: 0 0 6px; }
+    .envcard p { color: #ded3e6; font-size: 0.84rem; margin: 0 0 8px; }
+    .envbadge { font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.04em; text-transform: uppercase; color: #9ac6e0; border: 1px solid #2f5a70; border-radius: 5px; padding: 2px 6px; }
+    .envbadge-inline { margin-left: 6px; vertical-align: middle; }
+  </style>
+</Base>
