@@ -13,6 +13,15 @@ const entries = [
   { title: 'Bekannte Probleme', desc: 'Abstürze, Controller-Probleme und bestätigte Workarounds.', href: '/de/known-issues', img: '/card-guide.webp' },
 ];
 
+const explore = [
+  { k: 'Romanze-System', d: 'Herzstufen, Verabredungen und Ehe', href: '/de/romance', img: '/card-romance.webp' },
+  { k: 'Familien', d: 'Die sieben übernatürlichen Familien der Stadt', href: '/de/families', img: '/hero-fam-vampires.webp' },
+  { k: 'Farm & Anbau', d: 'Feldfrüchte, Scheune, magisches Vieh', href: '/de/farm', img: '/card-crops.webp' },
+  { k: 'Quest-Guide', d: 'Hauptgeschichte Kapitel für Kapitel, plus Nebenquests', href: '/de/quests', img: '/hero-first-five-minutes.webp' },
+  { k: 'Sammlung', d: 'Fische, Kreaturen, Vampster und Soul Blobs', href: '/de/collections', img: null, c1: '#3a4a2f', c2: '#8ab06a' },
+  { k: 'Items', d: 'Werkzeuge, Tränke, Dekoration und mehr', href: '/de/items', img: '/card-guide.webp' },
+];
+
 const jsonLd = {
   '@context': 'https://schema.org', '@type': 'WebSite', name: 'Moonlight Peaks Wiki (Deutsch)',
   url: `${SITE.url}/de`, inLanguage: 'de',
@@ -53,6 +62,32 @@ const jsonLd = {
           </a>
         ))}
       </div>
+
+      <h2>Die Welt erkunden</h2>
+      <div class="es-grid">
+        {explore.map((x) => (
+          <a class="es-card" href={x.href}>
+            <span class="es-thumb" style={!x.img ? `background: linear-gradient(135deg, ${x.c1}, ${x.c2})` : undefined}>
+              {x.img ? <img src={x.img} alt="" loading="lazy" width="64" height="64" /> : <span class="es-thumb-letter">{x.k[0]}</span>}
+            </span>
+            <span>
+              <strong>{x.k}</strong>
+              <em>{x.d}</em>
+            </span>
+          </a>
+        ))}
+      </div>
+
+      <h2>Womit die meisten gerade feststecken</h2>
+      <p class="trending-note">Was gerade am häufigsten gesucht wird</p>
+      <ul class="trending-list">
+        <li><a href="/de/magic">Den kaputten Zauberstab reparieren</a></li>
+        <li><a href="/de/locations/mines">Die Höhle des Echos freischalten</a></li>
+        <li><a href="/de/quests/side/ui-softlock-after-shop">UI eingefroren nach Ladenbesuch</a></li>
+        <li><a href="/de/quests/side/lost-save-data">Speicherdaten verloren — was tun?</a></li>
+        <li><a href="/de/quests/side/npc-stuck-cant-interact">Ein NPC reagiert nicht</a></li>
+        <li><a href="/de/quests/story/a-bridge-too-far">A Bridge Too Far Quest-Guide</a></li>
+      </ul>
     </div>
   </article>
 
@@ -72,5 +107,16 @@ const jsonLd = {
     .es-card span:not(.es-thumb) { display: flex; flex-direction: column; min-width: 0; }
     .es-card strong { font-family: var(--display); font-weight: 600; font-size: 0.96rem; color: var(--mist); }
     .es-card em { font-style: normal; font-size: 0.8rem; color: var(--faint); margin-top: 2px; }
+    .es-thumb { flex: 0 0 auto; width: 64px; height: 64px; border-radius: 10px; display: flex; align-items: center; justify-content: center; border: 1px solid var(--line); }
+    .es-thumb-letter { font-family: var(--display); font-weight: 700; font-size: 1.4rem; color: rgba(255,255,255,0.9); }
+    .trending-note { font-size: 0.82rem; color: var(--faint); margin: 4px 0 0; }
+    .trending-list { list-style: none; margin: 12px 0 0; padding: 0; display: grid; grid-template-columns: 1fr; gap: 8px; }
+    @media (min-width: 640px) { .trending-list { grid-template-columns: 1fr 1fr; } }
+    .trending-list a {
+      display: block; padding: 10px 14px; border: 1px solid var(--line); border-radius: 10px;
+      color: var(--mist); text-decoration: none; font-size: 0.9rem; background: var(--surface);
+      transition: border-color .15s ease;
+    }
+    .trending-list a:hover { border-color: color-mix(in srgb, var(--candle) 45%, var(--line)); color: var(--candle); }
   </style>
 </Base>

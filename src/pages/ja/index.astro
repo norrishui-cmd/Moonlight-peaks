@@ -77,6 +77,17 @@ const jsonLd = {
           </a>
         ))}
       </div>
+
+      <h2>今、詰まっている人が多い問題</h2>
+      <p class="trending-note">みんなが今まさに検索している内容</p>
+      <ul class="trending-list">
+        <li><a href="/ja/magic">壊れた杖の直し方</a></li>
+        <li><a href="/ja/locations/mines">Cave of Echoesの解放方法</a></li>
+        <li><a href="/ja/quests/side/ui-softlock-after-shop">店を出た後にUIが固まる問題</a></li>
+        <li><a href="/ja/quests/side/lost-save-data">セーブデータが消えた時の対処法</a></li>
+        <li><a href="/ja/quests/side/npc-stuck-cant-interact">NPCが固まって話しかけられない</a></li>
+        <li><a href="/ja/quests/story/a-bridge-too-far">A Bridge Too Farクエスト攻略</a></li>
+      </ul>
     </div>
   </article>
 
@@ -98,5 +109,14 @@ const jsonLd = {
     .es-card span:not(.es-thumb) { display: flex; flex-direction: column; min-width: 0; }
     .es-card strong { font-family: var(--display); font-weight: 600; font-size: 0.96rem; color: var(--mist); }
     .es-card em { font-style: normal; font-size: 0.8rem; color: var(--faint); margin-top: 2px; }
+    .trending-note { font-size: 0.82rem; color: var(--faint); margin: 4px 0 0; }
+    .trending-list { list-style: none; margin: 12px 0 0; padding: 0; display: grid; grid-template-columns: 1fr; gap: 8px; }
+    @media (min-width: 640px) { .trending-list { grid-template-columns: 1fr 1fr; } }
+    .trending-list a {
+      display: block; padding: 10px 14px; border: 1px solid var(--line); border-radius: 10px;
+      color: var(--mist); text-decoration: none; font-size: 0.9rem; background: var(--surface);
+      transition: border-color .15s ease;
+    }
+    .trending-list a:hover { border-color: color-mix(in srgb, var(--candle) 45%, var(--line)); color: var(--candle); }
   </style>
 </Base>
