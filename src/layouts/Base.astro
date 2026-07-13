@@ -208,7 +208,12 @@ const ld = rawLd.map(enrichStructuredData);
             <span class="mark-sub">Wiki &amp; Guide</span>
           </span>
         </a>
-        <nav class="nav" aria-label="Primary">
+        <button type="button" class="nav-toggle" id="nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="primary-nav">
+          <span class="nav-toggle-bar"></span>
+          <span class="nav-toggle-bar"></span>
+          <span class="nav-toggle-bar"></span>
+        </button>
+        <nav class="nav" id="primary-nav" aria-label="Primary">
           <details class="nav-dd" name="primary-nav">
             <summary aria-current={isGuideGroupActive ? 'page' : undefined}>{guideGroup.label}</summary>
             <div class="nav-dd-menu">
@@ -311,6 +316,28 @@ const ld = rawLd.map(enrichStructuredData);
       document.querySelectorAll('[data-print-date]').forEach((el) => {
         el.textContent = 'Exported ' + new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
       });
+    </script>
+    <script is:inline>
+      (function () {
+        var toggle = document.getElementById('nav-toggle');
+        var nav = document.getElementById('primary-nav');
+        if (!toggle || !nav) return;
+        function closeMenu() {
+          nav.classList.remove('nav-open');
+          toggle.setAttribute('aria-expanded', 'false');
+        }
+        function openMenu() {
+          nav.classList.add('nav-open');
+          toggle.setAttribute('aria-expanded', 'true');
+        }
+        toggle.addEventListener('click', function () {
+          if (nav.classList.contains('nav-open')) { closeMenu(); } else { openMenu(); }
+        });
+        // Close the mobile menu after navigating to a plain link (not a dropdown summary toggle).
+        nav.querySelectorAll('a').forEach(function (a) {
+          a.addEventListener('click', closeMenu);
+        });
+      })();
     </script>
     <script is:inline>
       (function () {
