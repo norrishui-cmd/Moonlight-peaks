@@ -4,6 +4,10 @@ import { previews } from '../data/previews';
 import { characters } from '../data/characters';
 import { faqs } from '../data/faq';
 import { locations } from '../data/locations';
+import { locationsJa } from '../i18n/locations-ja';
+import { locationsDe } from '../i18n/locations-de';
+import { activitiesJa } from '../i18n/activities-ja';
+import { activitiesDe } from '../i18n/activities-de';
 import { families } from '../data/families';
 import { activities } from '../data/activities';
 import { comparisons } from '../data/compare';
@@ -92,6 +96,10 @@ export const GET: APIRoute = () => {
     ...topic('/locations', locations),
     ...topic('/families', families),
     ...topic('/activities', activities),
+    ...topic('/ja/locations', locations.filter((it) => locationsJa[it.slug])),
+    ...topic('/de/locations', locations.filter((it) => locationsDe[it.slug])),
+    ...topic('/ja/activities', activities.filter((it) => activitiesJa[it.slug])),
+    ...topic('/de/activities', activities.filter((it) => activitiesDe[it.slug])),
     ...topic('/platforms', platforms),
     ...topic('/items', itemCategories),
     ...collectionDetailPages.map((p) => ({ path: `/collections/${p.collection}/${p.slug}`, images: p.icon.startsWith('/images/') ? [p.icon] : [] })),

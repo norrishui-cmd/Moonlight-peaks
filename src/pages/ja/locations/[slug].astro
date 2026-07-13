@@ -1,0 +1,24 @@
+---
+import TopicPage from '../../../components/TopicPage.astro';
+import { locationsSection, locations } from '../../../data/locations';
+import { locationsJa } from '../../../i18n/locations-ja';
+
+export function getStaticPaths() {
+  const translated = locations.filter((it) => locationsJa[it.slug]);
+  return translated.map((it, i) => {
+    const tr = locationsJa[it.slug];
+    const merged = { ...it, ...tr };
+    return {
+      params: { slug: it.slug },
+      props: {
+        item: merged,
+        prev: { ...translated[(i - 1 + translated.length) % translated.length], ...locationsJa[translated[(i - 1 + translated.length) % translated.length].slug] },
+        next: { ...translated[(i + 1) % translated.length], ...locationsJa[translated[(i + 1) % translated.length].slug] },
+      },
+    };
+  });
+}
+const { item, prev, next } = Astro.props;
+const jaSection = { ...locationsSection, base: '/ja/locations', label: 'ロケーション', eyebrow: '世界' };
+---
+<TopicPage section={jaSection} item={item} prev={prev} next={next} lang="ja" basePath="/ja/locations" />

@@ -3,20 +3,53 @@ import Base from '../layouts/Base.astro';
 import { SITE } from '../consts';
 import type { TopicSection, TopicItem } from '../data/topic';
 
-interface Props { section: TopicSection; item: TopicItem; prev: TopicItem; next: TopicItem; }
-const { section, item, prev, next } = Astro.props;
+interface Props { section: TopicSection; item: TopicItem; prev: TopicItem; next: TopicItem; lang?: 'en' | 'ja' | 'de'; basePath?: string; }
+const { section, item, prev, next, lang = 'en', basePath } = Astro.props;
+const base = basePath ?? section.base;
 
-const url = new URL(`${section.base}/${item.slug}`, SITE.url).href;
-const statusLabel =
-  item.status === 'confirmed' ? 'Developer-confirmed'
-  : item.status === 'expected' ? 'Expected - not yet confirmed'
-  : item.status === 'datamined' ? 'Datamined - from pre-launch game files, cross-referenced against pre-launch references; verify at launch'
-  : 'Reported - verify at launch';
+const ui = {
+  en: {
+    whatWeKnow: 'What we know', status: 'Status:', related: 'Related:', faq: 'FAQ',
+    prev: 'Prev:', next: 'Next:', all: (l: string) => `All ${l.toLowerCase()}`,
+    statusLabels: {
+      confirmed: 'Developer-confirmed',
+      expected: 'Expected - not yet confirmed',
+      datamined: 'Datamined - from pre-launch game files, cross-referenced against pre-launch references; verify at launch',
+      reported: 'Reported - verify at launch',
+    },
+    statusNote: 'We keep developer-confirmed facts separate from reported or expected details and never invent data — this page is updated as real post-launch information is verified.',
+  },
+  ja: {
+    whatWeKnow: '判明している情報', status: 'ステータス:', related: '関連ページ:', faq: 'FAQ',
+    prev: '前へ:', next: '次へ:', all: (l: string) => `${l}一覧`,
+    statusLabels: {
+      confirmed: '開発元確認済み',
+      expected: '予想 - まだ未確認',
+      datamined: 'データマイニング - 発売前のゲームファイルから、発売前資料と照合済み;発売時に検証予定',
+      reported: '報告済み - 発売時に検証予定',
+    },
+    statusNote: '開発元確認済みの事実と、報告済み・予想情報を明確に分けて掲載し、データを創作することはありません——実機での情報が確認され次第、このページを更新します。',
+  },
+  de: {
+    whatWeKnow: 'Was wir wissen', status: 'Status:', related: 'Verwandt:', faq: 'FAQ',
+    prev: 'Zurück:', next: 'Weiter:', all: (l: string) => `Alle ${l}`,
+    statusLabels: {
+      confirmed: 'Vom Entwickler bestätigt',
+      expected: 'Erwartet - noch nicht bestätigt',
+      datamined: 'Datamined - aus vorab durchgesickerten Spieldateien, mit Vorab-Referenzen abgeglichen; Verifizierung beim Release',
+      reported: 'Gemeldet - Verifizierung beim Release',
+    },
+    statusNote: 'Wir halten vom Entwickler bestätigte Fakten getrennt von gemeldeten oder erwarteten Details und erfinden niemals Daten — diese Seite wird aktualisiert, sobald echte Post-Release-Informationen verifiziert sind.',
+  },
+}[lang];
+
+const url = new URL(`${base}/${item.slug}`, SITE.url).href;
+const statusLabel = ui.statusLabels[item.status as keyof typeof ui.statusLabels] ?? ui.statusLabels.reported;
 
 const ld: object[] = [
   { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'Home', item: SITE.url },
-    { '@type': 'ListItem', position: 2, name: section.label, item: new URL(section.base, SITE.url).href },
+    { '@type': 'ListItem', position: 1, name: lang === 'ja' ? 'ホーム' : lang === 'de' ? 'Startseite' : 'Home', item: lang === 'en' ? SITE.url : `${SITE.url}/${lang}` },
+    { '@type': 'ListItem', position: 2, name: section.label, item: new URL(base, SITE.url).href },
     { '@type': 'ListItem', position: 3, name: item.title, item: url },
   ] },
   { '@context': 'https://schema.org', '@type': section.schemaType, name: item.title, description: item.dek,
@@ -31,10 +64,11 @@ if (item.faq && item.faq.length > 0) {
 <Base
   title={item.title.includes('Moonlight Peaks') ? `${item.title} - ${section.label}` : `${item.title} - Moonlight Peaks ${section.label}`}
   description={item.dek}
-  path={`${section.base}/${item.slug}`}
+  path={`${base}/${item.slug}`}
   jsonLd={ld}
   ogImage={item.image}
-  crumbs={[{ label: section.label, href: section.base }, { label: item.title }]}
+  crumbs={[{ label: section.label, href: base }, { label: item.title }]}
+  lang={lang}
 >
   <article class="page">
     <div class="wrap">
@@ -52,33 +86,33 @@ if (item.faq && item.faq.length > 0) {
         ))
       ) : (
         <>
-          <h2>What we know</h2>
+          <h2>{ui.whatWeKnow}</h2>
           {item.body.map((p) => (<p>{p}</p>))}
         </>
       )}
 
       <div class="callout">
-        <strong>Status:</strong> {statusLabel}. We keep developer-confirmed facts separate from reported or expected details and never invent data — this page is updated as real post-launch information is verified.
+        <strong>{ui.status}</strong> {statusLabel}. {ui.statusNote}
       </div>
 
       {item.faq && item.faq.length > 0 && (
         <>
-          <h2>FAQ</h2>
+          <h2>{ui.faq}</h2>
           {item.faq.map((f) => (<div class="tp-faq"><p class="tp-q">{f.q}</p><p class="tp-a">{f.a}</p></div>))}
         </>
       )}
 
       {item.related && item.related.length > 0 && (
         <div class="callout">
-          <strong>Related:</strong>{' '}
+          <strong>{ui.related}</strong>{' '}
           {item.related.map((r, i) => (<>{i > 0 ? ' - ' : ''}<a href={r.href}>{r.label}</a></>))}
         </div>
       )}
 
       <nav class="prevnext" aria-label={`${section.label} navigation`}>
-        <a href={`${section.base}/${prev.slug}`}>Prev: {prev.title}</a>
-        <a href={section.base}>All {section.label.toLowerCase()}</a>
-        <a href={`${section.base}/${next.slug}`}>Next: {next.title}</a>
+        <a href={`${base}/${prev.slug}`}>{ui.prev} {prev.title}</a>
+        <a href={base}>{ui.all(section.label)}</a>
+        <a href={`${base}/${next.slug}`}>{ui.next} {next.title}</a>
       </nav>
     </div>
   </article>

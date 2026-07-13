@@ -1,0 +1,24 @@
+---
+import TopicPage from '../../../components/TopicPage.astro';
+import { activitiesSection, activities } from '../../../data/activities';
+import { activitiesJa } from '../../../i18n/activities-ja';
+
+export function getStaticPaths() {
+  const translated = activities.filter((it) => activitiesJa[it.slug]);
+  return translated.map((it, i) => {
+    const tr = activitiesJa[it.slug];
+    const merged = { ...it, ...tr };
+    return {
+      params: { slug: it.slug },
+      props: {
+        item: merged,
+        prev: { ...translated[(i - 1 + translated.length) % translated.length], ...activitiesJa[translated[(i - 1 + translated.length) % translated.length].slug] },
+        next: { ...translated[(i + 1) % translated.length], ...activitiesJa[translated[(i + 1) % translated.length].slug] },
+      },
+    };
+  });
+}
+const { item, prev, next } = Astro.props;
+const jaSection = { ...activitiesSection, base: '/ja/activities', label: 'アクティビティ', eyebrow: 'ゲームプレイ' };
+---
+<TopicPage section={jaSection} item={item} prev={prev} next={next} lang="ja" basePath="/ja/activities" />
