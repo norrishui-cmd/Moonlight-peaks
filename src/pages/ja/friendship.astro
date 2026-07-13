@@ -1,0 +1,69 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE } from '../../consts';
+
+const faq = [
+  { q: 'ムーンライト・ピークスで友情は恋愛と違いますか?', a: 'はい——恋愛対象かどうかに関わらず、全ての住民には会話やプレゼントを通して築ける関係があり、関係メニューで記録されます。恋愛と結婚は任意のより深いルートで、確認済みの23人の恋愛対象にのみ利用可能です。それ以外の住民とも友達になれます。' },
+  { q: '友情を築くと何が得られますか?', a: '発売時に確認済み:関係を深めると特別な設計図やクラフト素材、個々のキャラクターのストーリーが解放されます——町全体と友達になることは、恋愛ルート以外にも意味があります。' },
+  { q: '友達とNokturnaで遊べますか?', a: 'はい——住民とのNokturna対戦は、会話やプレゼントと並んでその住民の友情メニューに記録されるため、関係を築く手段としても機能します。' },
+  { q: 'プレゼントは友情と恋愛で同じ仕組みですか?', a: '仕組みは同じです——プレゼントを贈って関係レベルを上げます——ただし、大好き/好き/嫌いという反応は、恋愛を狙っているかどうかに関わらず、人によって異なると見られます。' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'ホーム', item: `${SITE.url}/ja` },
+    { '@type': 'ListItem', position: 2, name: '友情', item: `${SITE.url}/ja/friendship` },
+  ] },
+];
+---
+<Base
+  title="ムーンライト・ピークス 友情 — 関係メニューと報酬"
+  description="ムーンライト・ピークスの友情システム、恋愛とは別の仕組み:関係メニュー、プレゼントの反応、友情を築くと何が解放されるか。"
+  path="/ja/friendship"
+  jsonLd={jsonLd}
+  crumbs={[{ label: '友情' }]}
+  lang="ja"
+  showExport
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">エントリー・友情</p>
+      <h1>ムーンライト・ピークスの<em>友情</em></h1>
+      <p class="intro">
+        全ての住民が恋愛対象というわけではありませんが、誰とでも関係は築けます。このページは
+        <a href="/ja/romance">恋愛ガイド</a>とは別の、プラトニックな側面を扱います。
+        最終更新:{SITE.updated}。
+      </p>
+
+      <h2>友情の仕組み</h2>
+      <p>
+        発売時に確認済み:住民に話しかけたりプレゼントを贈ったりすると関係レベルが上がり、
+        最近贈ったプレゼントとその反応が表示される関係メニューで記録されます。これは23人の
+        恋愛対象だけでなく、それ以外の幅広いNPCにも当てはまります。
+      </p>
+
+      <h2>友情で解放されるもの</h2>
+      <p>
+        確認済み:関係を深めると、その相手と恋愛関係にあるかどうかに関わらず、設計図やクラフト
+        素材、個々のキャラクターのストーリーが解放されます。住民とNokturnaで遊ぶことも、
+        その住民の友情メニューに記録されます。
+      </p>
+
+      <h2>FAQ</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        関連ページ: <a href="/ja/romance">恋愛</a>、<a href="/ja/characters">キャラクター</a>、
+        <a href="/tools/gift-tracker">プレゼントトラッカー</a>、<a href="/ja/nokturna">Nokturna</a>。
+      </div>
+    </div>
+  </article>
+</Base>

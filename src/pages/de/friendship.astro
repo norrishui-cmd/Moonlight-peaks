@@ -1,0 +1,71 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE } from '../../consts';
+
+const faq = [
+  { q: 'Ist Freundschaft anders als Romanze in Moonlight Peaks?', a: 'Ja — jeder Bewohner (romantisch verfügbar oder nicht) hat eine Beziehung, die du durch Reden und Schenken aufbauen kannst, erfasst in einem Beziehungsmenü. Romanze und Ehe sind ein optionaler, tieferer Pfad, nur mit den 23 bestätigten Romanze-Optionen verfügbar; alle anderen können trotzdem Freunde werden.' },
+  { q: 'Was bekommt man vom Aufbau von Freundschaften?', a: 'Bestätigt zum Release: Beziehungen schalten spezielle Baupläne und Crafting-Materialien frei, plus persönliche Charaktergeschichten — Freundschaft mit der ganzen Stadt lohnt sich also über jeden romantischen Pfad hinaus.' },
+  { q: 'Kann man Nokturna mit Freunden spielen?', a: 'Ja — Nokturna-Matches mit einem Bewohner werden zusammen mit Gesprächen und Geschenken in dessen Freundschaftsmenü erfasst, was gleichzeitig eine Möglichkeit ist, die Beziehung aufzubauen.' },
+  { q: 'Funktionieren Geschenke bei Freundschaft und Romanze gleich?', a: 'Der Mechanismus ist derselbe — schenke Geschenke, um das Beziehungslevel zu erhöhen — wobei geliebte/gemochte/ungeliebte Reaktionen wahrscheinlich pro Person unterschiedlich sind, unabhängig davon, ob du Romanze verfolgst.' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Startseite', item: `${SITE.url}/de` },
+    { '@type': 'ListItem', position: 2, name: 'Freundschaft', item: `${SITE.url}/de/friendship` },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks Freundschaft — Beziehungsmenü & Belohnungen"
+  description="Wie Freundschaft in Moonlight Peaks funktioniert, getrennt von Romanze: das Beziehungsmenü, Geschenkreaktionen und was der Aufbau von Freundschaften freischaltet."
+  path="/de/friendship"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Freundschaft' }]}
+  lang="de"
+  showExport
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Eintrag · Freundschaft</p>
+      <h1>Moonlight Peaks <em>Freundschaft</em></h1>
+      <p class="intro">
+        Nicht jeder Bewohner ist eine Romanze-Option, aber mit jedem kannst du eine Beziehung
+        aufbauen. Diese Seite behandelt die platonische Seite, getrennt vom
+        <a href="/de/romance">Romanze-Guide</a>. Zuletzt aktualisiert: {SITE.updated}.
+      </p>
+
+      <h2>Wie Freundschaft funktioniert</h2>
+      <p>
+        Bestätigt zum Release: Mit Bewohnern zu reden und ihnen Geschenke zu machen erhöht dein
+        Beziehungslevel, erfasst in einem Beziehungsmenü, das kürzliche Geschenke und deren Wirkung
+        zeigt. Dies gilt für jeden namentlichen Bewohner — die 23 Romanze-Optionen ebenso wie die
+        breitere NPC-Besetzung.
+      </p>
+
+      <h2>Was Freundschaft freischaltet</h2>
+      <p>
+        Bestätigt: Tiefere Beziehungen schalten Baupläne und Crafting-Materialien frei, plus
+        persönliche Charaktergeschichten, unabhängig davon, ob du mit dieser Person Romanze
+        verfolgst. Nokturna mit einem Bewohner zu spielen wird ebenfalls in dessen
+        Freundschaftsmenü erfasst.
+      </p>
+
+      <h2>FAQ</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        Verwandt: <a href="/de/romance">Romanze</a>, <a href="/de/characters">Charaktere</a>,
+        <a href="/tools/gift-tracker">Geschenke-Tracker</a>, <a href="/de/nokturna">Nokturna</a>.
+      </div>
+    </div>
+  </article>
+</Base>

@@ -1,0 +1,68 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+
+const faq = [
+  { q: 'ムーンライト・ピークスのインベントリはどう機能しますか?', a: '発売時に確認済み:このゲームは共通の家保管システムを採用しています——キッチンや大釜などのクラフト施設は、個人インベントリで全てを持ち運ばせる代わりに、自宅の保管庫から自動的に材料を取り出します。' },
+  { q: 'インベントリの容量は増やせますか?', a: 'まだ確認されていません。共通保管システムという設計上、容量アップグレード(あれば)は従来の持ち運びスロット式インベントリよりも、自宅の保管庫に適用される可能性が高いです。' },
+  { q: 'アイテムはどうやって売りますか?', a: 'タウンホールでの登録時にBrookからもらえる生きた保管箱、Chesterに商品を入れてください——眠っている間に一晩で売れます。' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'ホーム', item: `${SITE.url}/ja` },
+    { '@type': 'ListItem', position: 2, name: 'インベントリ', item: `${SITE.url}/ja/inventory` },
+  ] },
+];
+---
+<Base
+  title="ムーンライト・ピークス インベントリ — 共通保管システム解説"
+  description="ムーンライト・ピークスのインベントリの仕組み:クラフト施設に自動で材料を供給する共通の家保管システムと、Chesterを通した販売の仕組み。"
+  path="/ja/inventory"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'インベントリ' }]}
+  lang="ja"
+  showExport
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">エントリー・インベントリ</p>
+      <h1>ムーンライト・ピークスの<em>インベントリ</em>と保管</h1>
+      <p class="intro">
+        {GAME.title}は一般的な持ち運びスロット式とは異なる方法でインベントリを扱います。
+        確認済みの内容をまとめました。最終更新:{SITE.updated}。
+      </p>
+
+      <h2>共通の家保管システム</h2>
+      <p>
+        発売時に確認済み:クラフトのために個人インベントリをやりくりする代わりに、ムーンライト・
+        ピークスは共通の家保管システムを採用しています——自宅の保管庫に材料を入れておけば、
+        キッチンや大釜などのクラフト施設が必要なものを自動的に取り出します。これは早期プレイヤーから、
+        ゲーム内で最も便利な生活の質向上システムの一つと評されています。
+      </p>
+
+      <h2>Chesterを通した販売</h2>
+      <p>
+        確認済み:商品は<a href="/characters/chester">Chester</a>——タウンホールでの登録時に
+        Brookからもらえる生きた保管箱——に入れることで売却します。眠っている間に一晩で売れるため、
+        基本的な販売には店に行く別のステップは必要ありません。
+      </p>
+
+      <h2>FAQ</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        関連ページ: <a href="/ja/farming">農業</a>、<a href="/ja/items">アイテム</a>、
+        <a href="/characters/chester">Chester</a>、<a href="/ja/beginner-guide">初心者ガイド</a>。
+      </div>
+    </div>
+  </article>
+</Base>

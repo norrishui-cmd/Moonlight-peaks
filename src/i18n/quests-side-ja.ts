@@ -34,7 +34,7 @@ export const sideQuestsJa: Record<string, SideQuestTrJa> = {
   },
   'vampster-collection-quest': {
     title: 'Vampster集め',
-    summary: '確認済み:Cave of Echoesの中にいるAlinaが、町中に散らばる53匹のVampsterが迷子になっていることを説明し、一匹ずつMisty Shoresにある洞窟へ連れて帰るよう頼んできます。',
+    summary: '確認済み:Cave of Echoesの中にいるAlinaが、町中に散らばる100匹のVampsterが迷子になっていることを説明し、一匹ずつMisty Shoresにある洞窟へ連れて帰るよう頼んできます。なお、LarryというVampsterはAlinaの家に住み着いており、収集されずにそこに留まることを選んでいます。',
   },
   'npc-stuck-cant-interact': {
     title: 'NPCが固まって話しかけられない',

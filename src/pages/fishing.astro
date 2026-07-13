@@ -1,12 +1,11 @@
 ---
 import Base from '../layouts/Base.astro';
 import { SITE, GAME } from '../consts';
-import { fish, fishByValue } from '../data/fishing';
-import GuideImage from '../components/GuideImage.astro';
 
 const faq = [
-  { q: 'Is fishing in Moonlight Peaks?', a: 'Yes — fishing is one of the activities available beyond the farm, alongside foraging and potion-crafting.' },
-  { q: 'What fish can you catch?', a: 'The full fish list, locations, and prices will be added here at launch once verified in the live game.' },
+  { q: 'Is there fishing in Moonlight Peaks?', a: 'Yes — fishing is one of the activities available beyond the farm, alongside foraging and potion-crafting.' },
+  { q: 'How do you get a fishing rod?', a: 'Confirmed: the rod isn\u2019t available from the start \u2014 you unlock it by winning a bet against Noel (catch 3 different fish before he does).' },
+  { q: 'Where\u2019s the full fish list, locations, and prices?', a: 'That full database now lives on our dedicated Collections page \u2014 22 confirmed species, each with its own detail page for location, rarity, season/time, size, and sell price.' },
 ];
 
 const jsonLd = [
@@ -19,7 +18,7 @@ const jsonLd = [
 ---
 <Base
   title="Moonlight Peaks Fishing Guide — Fish List & Locations"
-  description="Where and when to fish in Moonlight Peaks: fish list, locations, best times, and sell prices."
+  description="Where and when to fish in Moonlight Peaks: how to get the fishing rod, and where to find the full 22-species fish database."
   path="/fishing"
   jsonLd={jsonLd}
   crumbs={[{ label: 'Fishing' }]}
@@ -33,34 +32,20 @@ const jsonLd = [
         Beyond the farm, {GAME.title} lets you fish, forage, and craft potions. Updated {SITE.updated}.
       </p>
 
-      <GuideImage imageId="pier-01" priority />
+      <h2>Getting your first fishing rod</h2>
+      <p>
+        Confirmed: within your first few in-game nights, Noel challenges you to a fishing contest
+        by the river — catch 3 different fish types before he does. It's untimed, so it's an easy
+        win, and beating him rewards your first fishing rod plus a coin bonus.
+      </p>
 
-      <h2>Fish database</h2>
-      {fish.length > 0 && fish[0].id !== 'example-fish' ? (
-        <table class="facts compact">
-          <tr><th>Fish</th><th>Location</th><th>Season</th><th>Time</th><th>Sell</th><th>Rarity</th><th>Status</th></tr>
-          {fish.map((f) => (
-            <tr>
-              <td>{f.name}</td>
-              <td>{f.location || '—'}</td>
-              <td>{f.season.length ? f.season.join(', ') : '—'}</td>
-              <td>{f.timeOfDay || '—'}</td>
-              <td>{f.sellPrice ?? '—'}</td>
-              <td>{f.rarity ?? '—'}</td>
-              <td>{f.status}</td>
-            </tr>
-          ))}
-        </table>
-      ) : (
-        <p>Fish data will be added as it is verified in the live game.</p>
-      )}
-
-      {fishByValue.length > 0 && (
-        <>
-          <h2>Most valuable fish</h2>
-          <ol>{fishByValue.map((f) => (<li>{f.name} — {f.sellPrice}g</li>))}</ol>
-        </>
-      )}
+      <h2>The full fish database</h2>
+      <p>
+        The complete, confirmed fish list — 22 species, each with its own page covering location,
+        rarity, season/weather/time window, size, and sell price — now lives on our
+        <a href="/collections/fish">Collections: Fish</a> page rather than here. That's the page
+        to bookmark for species-by-species detail.
+      </p>
 
       <h2>FAQ</h2>
       <div class="faq">
@@ -70,6 +55,11 @@ const jsonLd = [
             <p>{f.a}</p>
           </details>
         ))}
+      </div>
+
+      <div class="callout wip">
+        Related: <a href="/collections/fish">Fish collection</a>, <a href="/collections">Collections hub</a>,
+        <a href="/characters/noel">Noel</a>, <a href="/beginner-guide">beginner guide</a>.
       </div>
     </div>
   </article>

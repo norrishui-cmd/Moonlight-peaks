@@ -1,0 +1,76 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE } from '../../consts';
+
+const faq = [
+  { q: 'ムーンライト・ピークスで自宅を装飾できますか?', a: 'はい——報告済み:自宅の内装や敷地をカスタマイズでき、家具の配置や回転、小道や妖精ライトなどの装飾を作ることができます。' },
+  { q: 'ムーンライト・ピークスに温室はありますか?', a: 'はい、確認済みです:温室を建てることは「Perpetual Bloom」という専用の実績に結びついています。建設コストと効果について現在判明していることは<a href="/farm/greenhouse">温室ページ</a>をご覧ください。' },
+  { q: '自宅はアップグレードできますか?', a: '確認済み:「Dracula Estate」は自宅を完全にアップグレードすると獲得できる実績なので、見た目の装飾以外にも本物のアップグレードルートが存在します——正確な段階やコストはまだ情報源がありません。Barn(4,000ゴールド、Ridgeから購入)と井戸(1,500ゴールド)も確認済みの建物購入です。' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'ホーム', item: `${SITE.url}/ja` },
+    { '@type': 'ListItem', position: 2, name: '自宅と装飾', item: `${SITE.url}/ja/house` },
+  ] },
+];
+---
+<Base
+  title="ムーンライト・ピークス 自宅・装飾・温室"
+  description="ムーンライト・ピークスで自宅を装飾する方法:これまでに確認済みの家具・小道・妖精ライトと、温室や自宅アップグレードについてまだ未確認の点。"
+  path="/ja/house"
+  jsonLd={jsonLd}
+  crumbs={[{ label: '自宅と装飾' }]}
+  lang="ja"
+  showExport
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">エントリー・自宅</p>
+      <h1>ムーンライト・ピークスの<em>自宅</em>と装飾</h1>
+      <p class="intro">
+        農業以外の、自宅と敷地について——確認済みの装飾内容と、まだ未確認の点を分けて掲載しています。
+        最終更新:{SITE.updated}。
+      </p>
+
+      <h2>自宅の装飾</h2>
+      <p>
+        報告済み:ムーンライト・ピークスの装飾は、家具の配置と回転、自宅内装のカスタマイズ、
+        小道や妖精ライトなど敷地の装飾作成をカバーしています。
+      </p>
+
+      <h2>温室——存在が確認済み</h2>
+      <p>
+        確認済み:温室を建てることは「Perpetual Bloom」という専用のSteam実績に結びついています。
+        コミュニティ報告:温室があると他のいくつかの農業関連目標にも役立つとされているため、
+        優先して建てる価値があります。建設コストと広さの詳細は、確認され次第
+        <a href="/farm/greenhouse">温室ページ</a>に追加していきます。
+      </p>
+
+      <h2>これまでに確認済みの建物アップグレード</h2>
+      <p>
+        確認済み:「Dracula Estate」は自宅を完全にアップグレードすると獲得できる実績なので、
+        見た目の装飾以外にも本当のアップグレードルートが存在します——正確な段階とコストはまだ
+        情報源がありません。他に確認済みの建物購入は2つ:<strong>Barn</strong>(4,000ゴールド+
+        素材、Ridgeから購入、家畜を買う前に必要)と<strong>井戸</strong>(1,500ゴールドと報告、
+        水やりに役立つ)です。
+      </p>
+
+      <h2>FAQ</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        関連ページ: <a href="/ja/farming">農業</a>、<a href="/ja/character-creator">キャラクターメーカー</a>、
+        <a href="/ja/beginner-guide">初心者ガイド</a>。
+      </div>
+    </div>
+  </article>
+</Base>

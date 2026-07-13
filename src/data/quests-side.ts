@@ -59,7 +59,7 @@ export const sideQuests: SideQuest[] = [
   },
   {
     slug: 'vampster-collection-quest', title: 'Vampster Round-Up', npc: 'alina', status: 'confirmed',
-    summary: 'Confirmed: Alina, found inside the Cave of Echoes, explains that the 53 Vampsters scattered around town are lost and asks you to carry them home one at a time to a cave in Misty Shores.',
+    summary: 'Confirmed: Alina, found inside the Cave of Echoes, explains that the 100 Vampsters scattered around town are lost and asks you to carry them home one at a time to a cave in Misty Shores. One, Larry, is confirmed to live in Alina\u2019s own home and chooses to stay rather than be collected.',
     troubleshooting: [
       { q: 'I keep losing track of a Vampster I was carrying \u2014 why?', a: 'Community-reported: talking to any resident, or triggering any cutscene, makes you drop whichever Vampster you\u2019re currently carrying. It stays wherever you dropped it, so clear dialogue-heavy areas before setting off with one.' },
       { q: 'I can\u2019t start this quest \u2014 where\u2019s Alina?', a: 'Confirmed: inside the Cave of Echoes, which only opens after "A Bridge Too Far" unlocks Misty Shores. If you haven\u2019t reached the Cave of Echoes yet, that\u2019s the prerequisite.' },

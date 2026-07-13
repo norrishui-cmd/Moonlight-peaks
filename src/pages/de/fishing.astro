@@ -1,0 +1,69 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+
+const faq = [
+  { q: 'Gibt es Angeln in Moonlight Peaks?', a: 'Ja — Angeln ist eine der Aktivitäten neben dem Hof, zusammen mit Sammeln und Trankbrauen.' },
+  { q: 'Wie bekommt man eine Angelrute?', a: 'Bestätigt: Die Rute ist nicht von Anfang an verfügbar — du schaltest sie frei, indem du eine Wette gegen Noel gewinnst (fang 3 verschiedene Fische vor ihm).' },
+  { q: 'Wo ist die vollständige Fischliste, Fundorte und Preise?', a: 'Diese vollständige Datenbank lebt jetzt auf unserer dedizierten Sammlungsseite — 22 bestätigte Arten, jede mit eigener Detailseite für Fundort, Seltenheit, Jahreszeit/Zeit, Größe und Verkaufspreis.' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Startseite', item: `${SITE.url}/de` },
+    { '@type': 'ListItem', position: 2, name: 'Angeln', item: `${SITE.url}/de/fishing` },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks Angel-Guide — Fischliste & Fundorte"
+  description="Wo und wann man in Moonlight Peaks angelt: wie man die Angelrute bekommt, und wo die vollständige Datenbank mit 22 Fischarten zu finden ist."
+  path="/de/fishing"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Angeln' }]}
+  lang="de"
+  showExport
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Eintrag · Angeln</p>
+      <h1>Moonlight Peaks <em>Angel</em>-Guide</h1>
+      <p class="intro">
+        Neben dem Hof lässt dich {GAME.title} angeln, sammeln und Tränke brauen. Zuletzt
+        aktualisiert: {SITE.updated}.
+      </p>
+
+      <h2>Deine erste Angelrute bekommen</h2>
+      <p>
+        Bestätigt: Innerhalb deiner ersten paar Spielnächte fordert dich Noel am Fluss zu einem
+        Angelwettbewerb heraus — fang 3 verschiedene Fischarten, bevor er es tut. Es ist zeitlos,
+        also ein leichter Sieg, und der Sieg über ihn belohnt dich mit deiner ersten Angelrute plus
+        einem Münzbonus.
+      </p>
+
+      <h2>Die vollständige Fischdatenbank</h2>
+      <p>
+        Die vollständige, bestätigte Fischliste — 22 Arten, jede mit eigener Seite für Fundort,
+        Seltenheit, Jahreszeit-/Wetter-/Zeitfenster, Größe und Verkaufspreis — lebt jetzt auf
+        unserer <a href="/de/collections/fish">Sammlung: Fische</a>-Seite statt hier. Das ist die
+        Seite, die du für art-spezifische Details bookmarken solltest.
+      </p>
+
+      <h2>FAQ</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        Verwandt: <a href="/de/collections/fish">Fisch-Sammlung</a>, <a href="/de/collections">Sammlungs-Hub</a>,
+        <a href="/characters/noel">Noel</a>, <a href="/de/beginner-guide">Einsteiger-Guide</a>.
+      </div>
+    </div>
+  </article>
+</Base>

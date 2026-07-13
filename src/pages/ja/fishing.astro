@@ -1,0 +1,67 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+
+const faq = [
+  { q: 'ムーンライト・ピークスに釣りはありますか?', a: 'はい——釣りは農業以外で楽しめるアクティビティの一つで、採集やポーション作りと並んで存在します。' },
+  { q: '釣竿はどうやって手に入れますか?', a: '確認済み:釣竿は最初から持っているわけではありません——Noelとの勝負(彼より先に3種類の異なる魚を釣る)に勝つことで解放されます。' },
+  { q: '完全な魚リスト、生息地、価格はどこにありますか?', a: 'そのデータベースは現在、専用のコレクションページに移動しています——確認済みの22種、それぞれ生息地・レア度・季節/時間帯・サイズ・売却価格の詳細ページ付きです。' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'ホーム', item: `${SITE.url}/ja` },
+    { '@type': 'ListItem', position: 2, name: '釣り', item: `${SITE.url}/ja/fishing` },
+  ] },
+];
+---
+<Base
+  title="ムーンライト・ピークス 釣りガイド — 魚一覧と生息地"
+  description="ムーンライト・ピークスでいつどこで釣りをするか:釣竿の入手方法と、22種の魚データベース全体の場所。"
+  path="/ja/fishing"
+  jsonLd={jsonLd}
+  crumbs={[{ label: '釣り' }]}
+  lang="ja"
+  showExport
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">エントリー・釣り</p>
+      <h1>ムーンライト・ピークス <em>釣り</em>ガイド</h1>
+      <p class="intro">
+        農業以外にも、{GAME.title}では釣り、採集、ポーション作りが楽しめます。
+        最終更新:{SITE.updated}。
+      </p>
+
+      <h2>最初の釣竿を手に入れる</h2>
+      <p>
+        確認済み:ゲーム開始から数日以内に、Noelに川辺で出会います。彼から3種類の異なる魚を
+        彼より先に釣る勝負を挑まれます——時間制限がないので簡単に勝てます——そして最初の釣竿と
+        ゴールドのボーナスがもらえます。
+      </p>
+
+      <h2>完全な魚データベース</h2>
+      <p>
+        確認済みの魚一覧全体——22種、それぞれ生息地・レア度・出現時間帯・サイズ・売却価格の
+        詳細ページ付き——は、このページではなく<a href="/ja/collections/fish">コレクション:魚</a>
+        ページに移動しています。魚種ごとの詳細を見るにはこちらをブックマークしてください。
+      </p>
+
+      <h2>FAQ</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        関連ページ: <a href="/ja/collections/fish">魚コレクション</a>、<a href="/ja/collections">コレクションハブ</a>、
+        <a href="/characters/noel">Noel</a>、<a href="/ja/beginner-guide">初心者ガイド</a>。
+      </div>
+    </div>
+  </article>
+</Base>

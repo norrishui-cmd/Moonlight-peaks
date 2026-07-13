@@ -42,7 +42,7 @@ export const sideQuestsDe: Record<string, SideQuestTrDe> = {
   },
   'vampster-collection-quest': {
     title: 'Vampster-Sammlung',
-    summary: 'Bestätigt: Alina, gefunden in der Höhle des Echos, erklärt, dass die 53 in der Stadt verstreuten Vampster verloren sind, und bittet dich, sie einzeln zu einer Höhle in Misty Shores nach Hause zu bringen.',
+    summary: 'Bestätigt: Alina, gefunden in der Höhle des Echos, erklärt, dass die 100 in der Stadt verstreuten Vampster verloren sind, und bittet dich, sie einzeln zu einer Höhle in Misty Shores nach Hause zu bringen. Ein Vampster namens Larry lebt in Alinas eigenem Haus und bleibt lieber dort, statt eingesammelt zu werden.',
     troubleshooting: [
       { q: 'Ich verliere immer wieder den Überblick über einen Vampster, den ich getragen habe \u2014 warum?', a: 'Community-berichtet: Das Ansprechen eines Bewohners oder das Auslösen einer Zwischensequenz lässt dich den gerade getragenen Vampster fallen. Er bleibt dort liegen, wo du ihn fallen gelassen hast \u2014 räume also dialoglastige Bereiche, bevor du mit einem losziehst.' },
       { q: 'Ich kann diese Quest nicht starten \u2014 wo ist Alina?', a: 'Bestätigt: in der Höhle des Echos, die erst öffnet, nachdem "A Bridge Too Far" Misty Shores freischaltet. Wenn du die Höhle des Echos noch nicht erreicht hast, ist das die Voraussetzung.' },
