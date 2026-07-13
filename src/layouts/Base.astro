@@ -341,20 +341,23 @@ const ld = rawLd.map(enrichStructuredData);
     </script>
     <script is:inline>
       (function () {
-        // Mobile nav dropdowns use position:fixed with a --header-height offset, since the
-        // hardcoded fallback (104px) can drift on devices/languages where the header wraps to a
-        // different height. Measure the real header and keep it updated on resize/orientation change.
+        // --header-height caps the open mobile nav panel's max-height (100vh - header-height) so
+        // it never overflows the viewport. IMPORTANT: only measure while the nav is CLOSED —
+        // .nav lives inside .site-header, so the header's own height grows once the nav panel
+        // opens. Watching the header continuously (e.g. with ResizeObserver) would measure that
+        // taller open state, feed a bigger --header-height back into the nav's own max-height
+        // calc, which changes the nav's size, which changes the header's size again — an
+        // infinite feedback loop that looks like the page jittering/shaking.
         var header = document.querySelector('.site-header');
+        var nav = document.getElementById('primary-nav');
         if (!header) return;
         function setHeaderHeight() {
+          if (nav && nav.classList.contains('nav-open')) return; // never measure while open
           document.documentElement.style.setProperty('--header-height', header.offsetHeight + 'px');
         }
         setHeaderHeight();
         window.addEventListener('resize', setHeaderHeight);
         window.addEventListener('orientationchange', setHeaderHeight);
-        if (window.ResizeObserver) {
-          new ResizeObserver(setHeaderHeight).observe(header);
-        }
       })();
     </script>
     {GA_MEASUREMENT_ID && (
