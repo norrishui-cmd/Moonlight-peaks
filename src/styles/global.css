@@ -167,11 +167,11 @@ button, input, select, textarea { font: inherit; }
     background: var(--candle);
   }
   /* .nav scrolls horizontally on mobile (overflow-x: auto), which would clip an absolutely-
-     positioned menu. Fixed positioning escapes that clipping; the top offset is an estimate of
-     the mobile header's rendered height (brand row + nav row), not a precise measurement. */
+     positioned menu. Fixed positioning escapes that clipping; --header-height is measured by a
+     small script in Base.astro, with 104px as a fallback before that script runs. */
   .nav-dd-menu {
     position: fixed;
-    top: 104px;
+    top: var(--header-height, 104px);
     left: 16px;
     right: 16px;
     min-width: 0;
