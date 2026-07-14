@@ -15,6 +15,221 @@ export type NewsItem = {
 
 export const news: NewsItem[] = [
   {
+    slug: 'moonlight-peaks-runs-a-four-month-calendar',
+    date: '2026-07-14',
+    title: 'Confirmed: the year is four months, one per season',
+    body: 'Cross-verified across two independent launch-week guides: Moonlight Peaks runs a four-month calendar, with Spring, Summer, Autumn, and Winter each lasting exactly one month. You start the game in Spring.',
+    details: [
+      'This resolves a question we had flagged as unconfirmed for a while \u2014 we now have two separate sources agreeing on the same four-month structure.',
+      'A day/night settings option, unlocked early, also lets you manually adjust a night\u2019s length to 10 or 25 minutes, separate from the Antique Clock unlock from Soul Blobs.',
+    ],
+    category: 'guides',
+  },
+  {
+    slug: 'ludo-sells-stamina-saving-wand-tools',
+    date: '2026-07-14',
+    title: 'Ludo runs a shop selling wand-type tools to save stamina',
+    body: 'Confirmed: beyond the story-unlocked spells, Ludo\u2019s shop separately sells wand tools \u2014 a pickaxe wand, the Aquaflux watering wand, and a tree-moving wand \u2014 aimed at cutting stamina costs on repetitive chores.',
+    details: [
+      'A single Aquaflux cast is also confirmed to cover up to 16 crop tiles, useful for planning a magical-crop layout efficiently.',
+      'Community-reported: many early-game dishes only restore 2-3 stamina; dishes built around Blood Grapes or Blood Tomatoes restore noticeably more.',
+    ],
+    category: 'guides',
+  },
+  {
+    slug: 'launch-week-task-cluster-page-added',
+    date: '2026-07-13',
+    title: 'New: a single page covering the whole first week',
+    body: 'We\u2019ve added a Launch Week Task Cluster page that pulls together the first-week story order, the specific quests players search for by name, known blocking bugs, and where the fish/gift reference tools actually live.',
+    details: [
+      'Built around real search intent rather than duplicating existing guides \u2014 it links out to dedicated pages instead of repeating their content.',
+      'Covers the fallen-tree/Arborascend quest, the Cave of Echoes unlock, and Samael\u2019s romance chain, since those come up constantly in search.',
+    ],
+    category: 'guides',
+  },
+  {
+    slug: 'twelve-spells-cross-verified',
+    date: '2026-07-13',
+    title: 'The 12-spell total is now cross-verified, not just one source',
+    body: 'We previously flagged the "12 total spells" figure as coming from a single source. A second independent guide now confirms the same number, so we\u2019ve dropped the hedge.',
+    details: [
+      'Confirmed spell names now include Aquaflux I, crop maturation, rock clearing, rain, Arborascend (for lifting fallen trees), and a Witches\u2019 Circle teleport.',
+      'The repaired wand is confirmed to be called the Fixed Wand, with a later Witch\u2019s Wand upgrade reported but not fully detailed yet.',
+    ],
+    category: 'guides',
+  },
+  {
+    slug: 'official-steam-bug-thread-workarounds',
+    date: '2026-07-12',
+    title: 'Official Steam bug thread yields two real workarounds',
+    body: 'XSEED\u2019s official Steam bug-tracking thread has produced two genuinely useful player-side details: a workaround for stuck NPCs, and a performance fix for laptop/multi-GPU setups.',
+    details: [
+      'For a stuck NPC (notably Orlock), one player found that repeatedly interacting from the NPC\u2019s southeast side eventually triggered the prompt.',
+      'For stuttering or crashes: check your system\u2019s Graphics settings and make sure Moonlight Peaks is set to your dedicated/high-performance GPU, not an integrated one.',
+    ],
+    category: 'guides',
+  },
+  {
+    slug: 'samael-romance-chain-fully-mapped',
+    date: '2026-07-14',
+    title: "Samael's full precursor-quest chain is now mapped out",
+    body: "Cross-verified via PC Gamer's launch-week coverage: Samael's romance is gated behind reaching Luna Bay, with two precursor quests involving a fallen tree, a bridge repair with Ludo, and a wedding that falls through at the altar.",
+    details: [
+      'The fallen tree is cleared with the Arborascend spell (bought from Sabrina, 3 Mana), not a tool \u2014 and it isn\u2019t in Howling Marshes, despite that being the obvious guess.',
+      'After the wedding falls through, Samael is undatable for a week; Orlock then reopens the route by asking for help.',
+    ],
+    category: 'romance',
+  },
+  {
+    slug: 'wedding-date-must-be-two-days-out',
+    date: '2026-07-13',
+    title: 'Wedding timing confirmed: at least 2 days after proposing',
+    body: 'More precise than our earlier "within a week" note: the wedding date must be set at least 2 days after you propose, with no reported upper limit. Setting it unlocks new wedding attire at Third Eye Threads.',
+    details: [
+      'Your cat reminds you to change into wedding attire on the day itself, regardless of what you\u2019re currently wearing.',
+      'Ridge is also confirmed (alongside Orlock) as an example of an older character whose kids make you a step-parent rather than a biological parent.',
+    ],
+    category: 'romance',
+  },
+  {
+    slug: 'lgbtq-friendly-confirmed',
+    date: '2026-07-13',
+    title: 'Confirmed: fully gender-neutral dating, praised by reviewers',
+    body: 'The character creator has no gendered restrictions, and every romanceable resident can be dated regardless of the player character\u2019s identity or appearance. Multiple reviewers have specifically praised the queer romance writing.',
+    details: [
+      'This applies across all 23 confirmed romance options, not a subset.',
+      'Marriage remains monogamous once you propose, even if you were casually dating more than one person earlier.',
+    ],
+    category: 'romance',
+  },
+  {
+    slug: 'saga-harder-during-full-moon',
+    date: '2026-07-12',
+    title: 'Saga is noticeably more on edge during full moons',
+    body: 'A small but real personality detail: Saga, already established as prickly-but-devoted, is community-reported to be harder to deal with specifically during full moons.',
+    details: [
+      'This ties into her established characterization as someone who keeps the town running (fixing potholes, chasing missing pumpkins) with little time for romance until it sneaks up on her.',
+    ],
+    category: 'romance',
+  },
+  {
+    slug: 'twenty-three-romance-options-final-tally',
+    date: '2026-07-11',
+    title: 'The romance roster holds steady at 23, cross-checked again',
+    body: 'Another round of launch-week coverage re-confirms the same 23 romance options across the seven families, with no additions or removals since our last tally.',
+    details: [
+      'Family breakdown remains: Ambrosia (vampires), Logan (werewolves), Webb (witches), Hosu (mermaids), Khazan (seers), Henderson (humans), plus Death and Llemi as unaffiliated options.',
+    ],
+    category: 'romance',
+  },
+  {
+    slug: 'greenhouse-tied-to-perpetual-bloom-achievement',
+    date: '2026-07-14',
+    title: 'The Greenhouse finally has a confirmed detail: an achievement',
+    body: 'After being one of our thinnest pages, the Greenhouse now has its first solid confirmed fact: building one is tied to the "Perpetual Bloom" Steam achievement.',
+    details: [
+      'Community-reported: having a Greenhouse also helps toward several other farming-related goals, worth prioritizing rather than leaving for late-game.',
+      'Build cost, unlock requirements, and exact space added are still unconfirmed \u2014 we\u2019re not guessing at those.',
+    ],
+    category: 'world',
+  },
+  {
+    slug: 'achievement-list-grows-to-37',
+    date: '2026-07-13',
+    title: 'Confirmed achievement list nearly doubles to 37 (of ~59 total)',
+    body: 'Cross-verified via Exophase\u2019s Steam achievement listing: we\u2019ve gone from 20 to 37 confirmed named achievements, including several tied to shapeshifting forms, romance milestones, and farming goals.',
+    details: [
+      'New romance-tagged achievements include Social Butterfly (4 hearts with everyone), Tied the Knot (max a romance and propose), and Buddies for Afterlife (friendship with Death).',
+      'Shapeshifting achievements: Purrgatory (Hellkitten), Wings of the Night (Bat), and Call of the Current (Mermaid/Aqua, unlocked later).',
+    ],
+    category: 'world',
+  },
+  {
+    slug: 'fish-finder-tool-launched',
+    date: '2026-07-13',
+    title: 'New tool: Fish Finder lets you filter all 22 species',
+    body: 'We\u2019ve added an interactive Fish Finder tool that filters the full confirmed fish roster by location or rarity, linking through to each species\u2019 detail page.',
+    details: [
+      'Built from the same data source as the Collections: Fish pages, so it stays in sync automatically as new species get confirmed.',
+      'Part of a broader shift toward interactive reference tools over duplicating text pages.',
+    ],
+    category: 'world',
+  },
+  {
+    slug: 'ui-softlock-and-save-loss-documented',
+    date: '2026-07-12',
+    title: 'Two real bugs now documented: UI softlock and save data loss',
+    body: 'Based on official Steam Community reports: a UI softlock after leaving shops (usually after ~2 hours of play) and cases of lost save data after a crash are both now documented with what to do.',
+    details: [
+      'Save files are confirmed at: Windows %USERPROFILE%/AppData/LocalLow/Little Chicken Game Company/Moonlight Peaks/, Mac ~/Library/Application Support/Little Chicken Game Company/Moonlight Peaks/.',
+      'Neither has a confirmed fix yet \u2014 both should be reported to support@xseedgames.com to help prioritize a patch.',
+    ],
+    category: 'world',
+  },
+  {
+    slug: 'moonlight-ball-and-loveage-festival-detailed',
+    date: '2026-07-11',
+    title: 'Loveage Festival mechanics confirmed in detail',
+    body: 'The official wiki confirms Loveage runs Spring 20-21, hosted by Llemi, with stalls from Elvira and Mina, a flower-arranging stall from Luna, and a secret-admirer gift exchange (pick up to 3 NPCs Saturday, exchange happens Sunday).',
+    details: [
+      'The Moonlight Ball (Summer 20) is confirmed by name and date via the official wiki, though its specific activities aren\u2019t detailed yet.',
+      'Other festivals (Master Soup contest, a fashion show, Evernight, Pumpkin-Head\u2019s Halloween season) remain community-reported until independently confirmed.',
+    ],
+    category: 'world',
+  },
+  {
+    slug: 'grim-hellkitten-name-vs-shapeshifting-clarified',
+    date: '2026-07-14',
+    title: 'Clarified: "Grim" is your pet\u2019s likely name, not the shapeshifting form',
+    body: 'A recurring point of confusion: "Grim" refers to your three-eyed Hellkitten companion pet (present from the start, nameable), which is separate from later unlocking Hellkitten shapeshifting for yourself.',
+    details: [
+      'The shapeshifting Hellkitten form is tied to the "Purrgatory" achievement and unlocks through story progress, well after you already have the Grim companion.',
+    ],
+    category: 'characters',
+  },
+  {
+    slug: 'nokturna-card-game-hub-added',
+    date: '2026-07-13',
+    title: 'New Nokturna page covers rules, deck archetypes, and open questions',
+    body: 'We\u2019ve built out a dedicated Nokturna page: confirmed best-of-three rules, the 67+ card pool across Werewolf/Vampire/Plant/Aquatic archetypes, and an honest list of deck-building questions we can\u2019t answer yet.',
+    details: [
+      'Includes a searchable card database placeholder \u2014 individual card names and effects aren\u2019t public yet, so nothing is invented to fill the gap.',
+      'Dragan is confirmed as the in-universe inventor of the game.',
+    ],
+    category: 'characters',
+  },
+  {
+    slug: 'german-spanish-character-pages-deepened',
+    date: '2026-07-14',
+    title: 'German and Spanish character coverage nearly matches English',
+    body: 'We\u2019ve expanded German and Spanish character profiles from a handful up to 48 residents each, covering all 23 romance options plus most named side characters.',
+    details: [
+      'Only two characters remain untranslated: Kai and Celine, both still fully unconfirmed placeholders in the English data with no real content to translate yet.',
+    ],
+    category: 'characters',
+  },
+  {
+    slug: 'logan-family-name-correction',
+    date: '2026-07-12',
+    title: 'Correction: "Logan" is the werewolf family name, not a person',
+    body: 'Multiple post-launch sources confirm "Logan" is the surname of the werewolf family (Brook, Ridge, Saga, Ludo), resolving earlier pre-launch confusion that treated it as a standalone mayor character.',
+    details: [
+      'The actual mayor is Brook; Ridge is her younger brother; Saga and Ludo are her children.',
+      'We\u2019ve kept a redirect-style page at the old URL since other pages still link to it.',
+    ],
+    category: 'characters',
+  },
+  {
+    slug: 'death-friendship-achievement-confirmed',
+    date: '2026-07-11',
+    title: 'Building friendship with Death has its own achievement',
+    body: 'Confirmed: "Buddies for Afterlife" rewards building friendship with Death the same way you would with any other resident, reinforcing that he\u2019s treated as a full character rather than a novelty.',
+    details: [
+      'Death is confirmed romanceable, resides at "Death\u2019s Shack" in the Misty Shores graveyard, and is unlocked after two meetings post-"A Bridge Too Far."',
+    ],
+    category: 'characters',
+  },
+  {
     slug: 'sixteen-characters-now-have-confirmed-gift-data',
     date: '2026-07-11',
     title: 'Confirmed gift data now covers 16 residents, up from just one',
