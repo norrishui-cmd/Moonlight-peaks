@@ -1,0 +1,110 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+
+const faq = [
+  { q: 'Cultive-t-on la nuit dans Moonlight Peaks ?', a: 'Oui. Tu incarnes un vampire, donc cultiver et entretenir la ferme se fait au clair de lune — souviens-toi juste de retourner dans ton cercueil avant l\u2019aube. L\u2019agriculture nocturne est la particularité caractéristique de la boucle cozy de culture.' },
+  { q: 'Qu\u2019est-ce qu\u2019un Draculamb ?', a: 'C\u2019est l\u2019une des espèces de bétail confirmées, avec Cheeken (poule), Piggoat et Cowcula. Tu peux aussi te transformer en Hellkitten à trois yeux.' },
+  { q: 'Quel type de cultures peut-on planter ?', a: 'Ta première culture confirmée est le Blood Grape (graines de départ d\u2019Orlock, 5 jours pour pousser), que tu peux transformer en "vin de sang" dans un tonneau. Sont aussi confirmés : les "cruelcumbers", les citrouilles et la belladone, bien que les prix exacts ne soient pas encore publics.' },
+  { q: 'Comment achète-t-on des animaux de ferme ?', a: 'Confirmé : achète d\u2019abord un Granero à Ridge pour 4 000 pièces d\u2019or plus des matériaux, puis achète des animaux à Luna (seulement ceux disponibles devant sa maison à ce moment-là).' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Accueil', item: `${SITE.url}/fr` },
+    { '@type': 'ListItem', position: 2, name: 'Agriculture', item: `${SITE.url}/fr/farming` },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks — Agriculture, Cultures et Bétail Magique"
+  description="Comment fonctionne l'agriculture dans Moonlight Peaks : cultures enchantées et fleurs lumineuses au clair de lune, bétail magique comme les Draculambs, et magie qui aide à travailler la terre."
+  path="/fr/farming"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Agriculture' }]}
+  lang="fr"
+  showExport
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Entrée · Ferme</p>
+      <h1>Moonlight Peaks — <em>agriculture</em> et cultures enchantées</h1>
+      <p class="intro">
+        La ferme est le cœur de {GAME.title} — avec une touche vampirique. Voici comment
+        fonctionnent la culture au clair de lune, les plantes enchantées et le bétail magique. Mis
+        à jour {SITE.updated}.
+      </p>
+
+      <h2>Cultiver au clair de lune</h2>
+      <p>
+        En tant que créature de la nuit, tu plantes et entretiens tes cultures après la tombée de
+        la nuit — souviens-toi juste de retourner dans ton cercueil avant le lever du soleil.
+        C\u2019est le rythme familier planter-entretenir-récolter d\u2019un cozy farming sim, mais
+        inversé vers la nuit.
+      </p>
+
+      <h2>Cultures enchantées et fleurs lumineuses</h2>
+      <p>
+        Les techniques de culture paranormales donnent des résultats intéressants : au lieu de
+        produits ordinaires, tu cultives des plantes et fleurs enchantées et lumineuses. Ta
+        première culture confirmée est le <strong>Blood Grape</strong> (graines d\u2019Orlock la
+        première nuit, 5 jours pour pousser), transformé dans un tonneau en "vin de sang" — vendre
+        les raisins crus rapporte très peu d\u2019argent. Aussi confirmés : les "cruelcumbers", les
+        citrouilles et la belladone, sans prix exacts pour l\u2019instant.
+      </p>
+
+      <h2>Outils de départ</h2>
+      <p>
+        Confirmés (accessibles depuis la roue d\u2019outils, maintiens R sur Switch) : pelle (pas de
+        houe séparée — la pelle remplit ce rôle), arrosoir (3 niveaux : 1 000 / 2 000 / 3 500
+        pièces, chaque niveau réduit l\u2019eau utilisée par case), hache, pioche, faucille, et une
+        baguette cassée au départ. Confirmé : améliorer la <strong>pioche en premier</strong> est
+        prioritaire — elle casse les gros rochers près de chez toi et libère de l\u2019espace pour
+        plus de granges.
+      </p>
+
+      <h2>Bétail — flux d\u2019achat confirmé</h2>
+      <p>
+        Confirmé : tu ne peux pas acheter d\u2019animaux immédiatement. Achète d\u2019abord un
+        <strong>Granero</strong> à <strong>Ridge</strong> pour 4 000 pièces plus des matériaux,
+        puis achète du bétail à <strong>Luna</strong> (seulement ce qui est disponible à ce
+        moment-là devant sa maison). Espèces confirmées : <strong>Cheeken</strong> (premier achat
+        habituel, aime être caressé et les chapeaux), <strong>Piggoat</strong>,
+        <strong>Draculamb</strong>, <strong>Cowcula</strong>. Ils se nourrissent de Forraje (fait
+        dans un raffineur), et plus tard de Forraje Premium.
+      </p>
+
+      <h2>Magie et outils</h2>
+      <p>
+        L\u2019agriculture et la sorcellerie vont de pair — le premier sort confirmé est
+        <strong>Aquaflux</strong> (arrosage automatique), débloqué avec Luna. Au fur et à mesure
+        de ta progression, tu obtiens de nouveaux outils et développes ta propriété pour cultiver
+        encore plus.
+      </p>
+
+      <h2>Ce que nous vérifions encore</h2>
+      <ul>
+        <li>Base de données complète des <strong>cultures</strong> : prix exacts, saisons.</li>
+        <li><strong>Meilleures cultures</strong> par saison et profit.</li>
+        <li>Points de ferme indiqués sur la <a href="/map">carte interactive</a>.</li>
+      </ul>
+
+      <h2>FAQ</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        Entrée post-sortie, mise à jour avec des données réelles du jeu.
+        Relié : <a href="/magic">magie</a>, <a href="/items">objets</a>,
+        <a href="/environment">environnement</a>, <a href="/map">carte interactive</a>.
+      </div>
+    </div>
+  </article>
+</Base>

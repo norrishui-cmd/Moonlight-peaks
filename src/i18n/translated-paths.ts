@@ -54,8 +54,8 @@ const dePaths = [
 // Pages deepened for Spanish specifically, beyond the shared es/ja/zh baseline above.
 const esOnlyPaths = ['/quests', '/farm', '/collections', '/map'];
 
-// French is a brand-new locale, starting with just the homepage — grows independently from here.
-const frPaths = ['/'];
+// French pages built so far — grows independently from here.
+const frPaths = ['/', '/release-date', '/beginner-guide', '/characters', '/romance', '/farming', '/magic', '/platforms', '/demo'];
 
 export const translatedPathsByLocale: Record<Locale, Set<string>> = {
   en: new Set(), // English is the source; not meaningful to check "is English translated".

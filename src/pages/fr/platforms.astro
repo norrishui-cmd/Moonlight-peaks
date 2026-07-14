@@ -1,0 +1,67 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+
+const facts = [
+  ['Date de sortie', GAME.releaseLabel],
+  ['Prix', `${GAME.price} (édition Nintendo Switch 2 : 39,99 $)`],
+  ['Plateformes', GAME.platforms.join(', ')],
+  ['Démo gratuite', GAME.demo],
+  ['Configuration requise', 'Consulte Steam pour la configuration officielle PC/Mac ; utilise la démo pour tester en pratique'],
+  ['Langues', GAME.languages.join(', ')],
+  ['PS5 / Xbox / iOS', 'Non annoncé'],
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Accueil', item: `${SITE.url}/fr` },
+    { '@type': 'ListItem', position: 2, name: 'Plateformes', item: `${SITE.url}/fr/platforms` },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks — Plateformes : Switch, Switch 2, Steam et Prix"
+  description="Où jouer à Moonlight Peaks : Switch, Switch 2, Steam (PC et Mac), Steam Deck et Android — prix, la démo gratuite et le statut PS5/Xbox/iOS."
+  path="/fr/platforms"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Plateformes' }]}
+  lang="fr"
+  showExport
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Entrée · Plateformes</p>
+      <h1>Moonlight Peaks — <em>plateformes</em> et prix</h1>
+      <p class="intro">
+        Moonlight Peaks est sorti le {GAME.releaseLabel} et est déjà disponible. Voici où y jouer,
+        combien ça coûte, et comment fonctionne la démo gratuite.
+      </p>
+
+      <h2>En un coup d'œil</h2>
+      <table class="facts">
+        {facts.map((f) => (<tr><th>{f[0]}</th><td>{f[1]}</td></tr>))}
+      </table>
+
+      <h2>Où y jouer</h2>
+      <p>
+        Moonlight Peaks est confirmé sur Steam (PC et Mac), Steam Deck, Nintendo Switch, Nintendo
+        Switch 2, et Android via Google Play. Chaque plateforme a son propre guide détaillé — pour
+        l'instant disponible en anglais — avec des notes spécifiques sur les performances, les
+        contrôles et le prix.
+      </p>
+
+      <h2>Moonlight Peaks est-il sur PlayStation, Xbox ou iOS ?</h2>
+      <p>
+        Aucune version PlayStation, Xbox ou iOS n'a été annoncée. Les plateformes confirmées sont
+        Steam (PC et Mac), Steam Deck, Nintendo Switch, Nintendo Switch 2, et Android via Google
+        Play. Si cela change, nous mettrons cette page à jour.
+      </p>
+
+      <div class="callout wip">
+        Relié : <a href="/release-date">date de sortie</a>, <a href="/demo">la démo</a>,
+        <a href="/system-requirements">configuration requise</a>, <a href="/languages">langues</a>,
+        <a href="/compare">comparer avec d'autres cozy sims</a>, <a href="/faq">FAQ complète</a> (en anglais).
+      </div>
+    </div>
+  </article>
+</Base>

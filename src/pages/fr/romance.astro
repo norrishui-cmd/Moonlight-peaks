@@ -1,0 +1,188 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+import YouTube from '../../components/YouTube.astro';
+import { characters, typeLabels } from '../../data/characters';
+
+const familyNameFr: Record<string, string> = {
+  'Vampire (Ambrosia)': 'Vampire · Famille Ambrosia',
+  'Vampire (Dracula)': 'Vampire · Famille Dracula',
+  'Witch (Webb)': 'Sorcière · Famille Webb',
+  'Werewolf (Logan)': 'Loup-garou · Famille Logan',
+  'Mermaid (Hosu)': 'Sirène · Famille Hosu',
+  'Seer (Khazan)': 'Voyant · Famille Khazan',
+  'Human (Henderson)': 'Humain · Famille Henderson',
+  'Unknown': 'Sans famille',
+};
+const typeFr: Record<string, string> = {
+  vampire: 'Vampire', werewolf: 'Loup-garou', witch: 'Sorcière', mermaid: 'Sirène',
+  seer: 'Voyant', ghost: 'Fantôme', human: 'Humain', other: 'Autre',
+};
+const statusFr: Record<string, string> = { confirmed: 'Confirmé', reported: 'Rapporté', datamined: 'Extrait des données', unconfirmed: 'Non confirmé' };
+
+const romanceable = characters.filter((c) => c.romanceable === true);
+const groups = new Map<string, typeof romanceable>();
+for (const c of romanceable) {
+  const key = c.family || 'Unknown';
+  if (!groups.has(key)) groups.set(key, []);
+  groups.get(key)!.push(c);
+}
+const familyGroups = [...groups.entries()].sort((a, b) => b[1].length - a[1].length);
+
+const faq = [
+  { q: 'Combien de personnages romançables y a-t-il dans Moonlight Peaks ?', a: 'Confirmé à la sortie : 23, selon la présentation officielle de la romance — auparavant on citait environ 15. Ils se répartissent en six familles (Ambrosia, Webb, Logan, Hosu, Khazan, Henderson) plus deux options sans famille : Death et le démon de l\u2019amour Llemi.' },
+  { q: 'Quel niveau de cœur faut-il pour les rendez-vous et pour se marier ?', a: 'Confirmé : les rendez-vous se débloquent au Niveau de Cœur 4. Tu peux faire ta demande en mariage au Niveau de Cœur 8. Le mariage a lieu dans la semaine suivant la demande, avec les vampires et loups-garous du village qui y assistent.' },
+  { q: 'Peut-on sortir avec plusieurs personnes en même temps ?', a: 'Oui, confirmé. Tes partenaires le remarqueront et en parleront, mais c\u2019est de la jalousie légère, pas un système de rivalité strict. Le mariage lui-même est strictement monogame.' },
+  { q: 'Que se passe-t-il si tu refuses trop de rendez-vous ?', a: 'Confirmé : refuser trop souvent les invitations d\u2019un partenaire provoque une rupture ; il/elle se montrera ensuite distant(e) pendant quelques jours avant de te pardonner.' },
+  { q: 'Peut-on se marier dans Moonlight Peaks ? Peut-on avoir des enfants ?', a: 'Oui, tu peux te marier — ton/ta conjoint(e) emménage dans ta ferme et débloque un nouvel événement de cœur, et tu peux le/la transformer en vampire. Il n\u2019y a pas d\u2019enfants, confirmé par plusieurs sources sans projet annoncé d\u2019en ajouter. Se marier avec un personnage plus âgé comme Orlock, qui a déjà des enfants, ferait de toi un beau-parent selon les rapports.' },
+  { q: 'La romance est-elle limitée par genre ?', a: 'Non. Les rendez-vous sont entièrement neutres en termes de genre, donc tu peux romancer n\u2019importe quel résident romançable quelle que soit la façon dont tu construis ton propre vampire.' },
+  { q: 'Un vampire peut-il avoir une relation avec un loup-garou ?', a: 'Oui. Les vampires et loups-garous du village s\u2019entendent rarement bien et se disputent souvent, donc romancer un loup-garou comme Saga signifie franchir cette fracture — ça fait partie du charme.' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Accueil', item: `${SITE.url}/fr` },
+    { '@type': 'ListItem', position: 2, name: 'Romance', item: `${SITE.url}/fr/romance` },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks Romance — 23 Personnages Romançables et Mariage"
+  description="Guide de romance de Moonlight Peaks : 23 personnages romançables confirmés, rendez-vous neutres en genre, Niveau de Cœur 4 pour les rendez-vous / 8 pour la demande, et les sept familles."
+  path="/fr/romance"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Romance et familles' }]}
+  lang="fr"
+  showExport
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Entrée · Cœurs</p>
+      <h1>La <em>romance</em> de Moonlight Peaks et les sept familles</h1>
+      <p class="intro">
+        La romance est une caractéristique phare de {GAME.title} : 23 résidents romançables
+        confirmés, rendez-vous neutres en genre, et mariage (sans enfants toutefois). Cette page
+        est générée directement depuis notre base de données de personnages. Mis à jour {SITE.updated}.
+      </p>
+
+      <div class="romance-video">
+        <YouTube id="YFb9capELQw" title="Moonlight Peaks romance video" />
+      </div>
+
+      <h2>Comment la romance fonctionne réellement</h2>
+      <p>
+        Confirmé à la sortie : parle aux résidents et offre-leur des cadeaux pour augmenter ta
+        relation, enregistrée dans un menu qui affiche tes cadeaux récents et leurs réactions. Le
+        <strong>Niveau de Cœur 4</strong> débloque les rendez-vous — ils se déroulent comme des
+        mini-jeux (comme assembler un bouquet dans les couleurs demandées par ton rendez-vous) plutôt
+        que des scènes passives. Le <strong>Niveau de Cœur 8</strong> débloque la demande en
+        mariage ; le mariage a lieu dans la semaine, avec les vampires et loups-garous du village
+        qui y assistent.
+      </p>
+      <p>
+        Tu peux sortir avec plusieurs personnes à la fois — elles le remarqueront et en parleront,
+        mais c\u2019est de la jalousie légère, pas une rivalité stricte. Le mariage lui-même est
+        strictement monogame, et refuser trop souvent les rendez-vous provoque une rupture (avec
+        une période de froid). Après le mariage, ton/ta conjoint(e) emménage dans ta ferme et peut
+        se transformer en vampire. Construire des relations débloque aussi des plans et des
+        matériaux d\u2019artisanat.
+      </p>
+
+      <h2>Commence ici : planifie ta route de romance</h2>
+      <p>Avec 23 options et sans base de données complète de cadeaux/événements pour l\u2019instant, une liste restreinte vaut mieux que de tout tenter :</p>
+      <div class="rp-steps">
+        <a class="rp-step" href="/tools/romance-match-quiz">
+          <span class="rp-step-num">1</span>
+          <strong>Fais le quiz</strong>
+          <span>Un match amusant basé sur de vrais indices pour affiner ton choix.</span>
+        </a>
+        <a class="rp-step" href="/tools/families-explorer">
+          <span class="rp-step-num">2</span>
+          <strong>Explore par famille</strong>
+          <span>Vois les 23 personnages romançables regroupés par leur vraie famille.</span>
+        </a>
+        <a class="rp-step" href="/tools/romance-planner">
+          <span class="rp-step-num">3</span>
+          <strong>Établis ta liste restreinte</strong>
+          <span>Sauvegarde tes choix et notes en privé dans ton navigateur.</span>
+        </a>
+        <a class="rp-step" href="/tools/gift-tracker">
+          <span class="rp-step-num">4</span>
+          <strong>Note tes cadeaux</strong>
+          <span>Consigne tes propres découvertes en attendant un guide complet.</span>
+        </a>
+      </div>
+
+      <h2>L\u2019essentiel</h2>
+      <p>
+        23 résidents sont romançables, répartis en six familles — vampires (Ambrosia), loups-garous
+        (Logan), sorcières (Webb), sirènes (Hosu), voyants (Khazan) et humains (Henderson) — plus
+        deux options sans famille : Death et le démon de l\u2019amour Llemi.
+      </p>
+
+      <h2>Les 23 personnages romançables, par famille</h2>
+      <p>Données extraites directement de notre base de personnages — chaque nom renvoie vers son profil complet (en anglais pour l\u2019instant).</p>
+      {familyGroups.map(([family, members]) => (
+        <div class="romance-family-group">
+          <h3>{familyNameFr[family] || family} <span class="rf-count">({members.length})</span></h3>
+          <table class="facts">
+            <tr><th>Personnage</th><th>Type</th><th>Statut</th></tr>
+            {members.map((c) => (
+              <tr>
+                <td><a href={`/characters/${c.id}`}>{c.name}</a></td>
+                <td>{typeFr[c.type] || typeLabels[c.type] || c.type}</td>
+                <td>{statusFr[c.status] || c.status}</td>
+              </tr>
+            ))}
+          </table>
+        </div>
+      ))}
+
+      <h2>Guide des cadeaux</h2>
+      <p>
+        La plupart des listes de cadeaux ne sont pas encore publiques — <strong>Saga</strong> est
+        la première confirmée (elle adore le vin blanc). Consulte son
+        <a href="/characters/saga">profil</a> et utilise le <a href="/tools/gift-tracker">traqueur de cadeaux</a>
+        pour noter tes propres découvertes.
+      </p>
+
+      <h2>Questions fréquentes</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        Entrée post-sortie, générée depuis la base de données de personnages. Relié :
+        <a href="/characters">tous les personnages</a>, <a href="/families">les sept familles</a>,
+        <a href="/fr/beginner-guide">guide du débutant en français</a>.
+      </div>
+    </div>
+  </article>
+  <style>
+    .romance-family-group { margin: 20px 0; }
+    .romance-family-group h3 { margin: 0 0 8px; }
+    .rf-count { color: var(--muted); font-weight: 400; font-size: 0.85rem; }
+    .rp-steps { display: grid; grid-template-columns: 1fr; gap: 10px; margin: 14px 0 24px; }
+    @media (min-width: 640px) { .rp-steps { grid-template-columns: 1fr 1fr; } }
+    .rp-step {
+      display: flex; flex-direction: column; gap: 4px; border: 1px solid var(--line); border-radius: 14px;
+      background: var(--surface); padding: 14px 16px; text-decoration: none; position: relative;
+      transition: border-color .15s ease;
+    }
+    .rp-step:hover { border-color: color-mix(in srgb, var(--candle) 45%, var(--line)); }
+    .rp-step-num {
+      position: absolute; top: 12px; right: 14px; font-family: var(--mono); font-size: 0.7rem; color: var(--candle);
+      border: 1px solid color-mix(in srgb, var(--candle) 40%, var(--line)); border-radius: 999px; width: 20px; height: 20px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .rp-step strong { font-family: var(--display); font-weight: 600; font-size: 0.94rem; color: var(--mist); padding-right: 26px; }
+    .rp-step span:last-child { font-size: 0.8rem; color: var(--faint); line-height: 1.4; }
+    .romance-video { margin: clamp(1.6rem, 4vw, 2.6rem) 0 clamp(2rem, 5vw, 3rem); }
+  </style>
+</Base>

@@ -1,0 +1,88 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+import YouTube from '../../components/YouTube.astro';
+
+const facts = [
+  ['Prix', 'Gratuit'],
+  ['Où y jouer', 'Steam et Nintendo eShop, compatible Switch 2'],
+  ['Progression transférable', 'Non confirmé ; considère la démo comme un aperçu séparé'],
+  ['Activités incluses', 'Création de personnage, pêche, arrangements floraux, broderie et premières interactions avec le village'],
+  ['Sortie complète', GAME.releaseLabel],
+];
+
+const faq = [
+  { q: 'La démo de Moonlight Peaks est-elle gratuite ?', a: 'Oui. La démo est gratuite sur Steam et Nintendo eShop.' },
+  { q: 'La progression de la démo se transfère-t-elle ?', a: 'Aucun transfert confirmé n\u2019a été annoncé, donc commence le jeu complet à zéro sauf indication contraire dans les notes officielles de sortie.' },
+  { q: 'Que peut-on faire dans la démo ?', a: 'La démo montre le créateur de personnage, un aperçu d\u2019activités cozy comme la pêche, les arrangements floraux et la broderie, ainsi que les premières interactions avec les résidents.' },
+  { q: 'La démo est-elle sur Switch 2 ?', a: 'La démo Nintendo eShop est jouable sur Switch et Switch 2.' },
+  { q: 'Devrais-je essayer la démo avant d\u2019acheter ?', a: 'Oui, si tu veux tester le ton, les contrôles et la boucle de départ avant l\u2019achat.' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Accueil', item: `${SITE.url}/fr` },
+    { '@type': 'ListItem', position: 2, name: 'Démo', item: `${SITE.url}/fr/demo` },
+  ] },
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+];
+---
+<Base
+  title="Moonlight Peaks — Guide de la Démo : Téléchargement, Contenu et FAQ"
+  description="Guide de la démo Moonlight Peaks : où la télécharger, ce qu'elle inclut, si la progression se transfère, l'accès sur Switch et Steam, conseils et limitations connues."
+  path="/fr/demo"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Démo' }]}
+  lang="fr"
+  showExport
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Hub · Démo</p>
+      <h1>Guide de la <em>démo</em> de Moonlight Peaks</h1>
+      <p class="intro">
+        La démo gratuite de Moonlight Peaks reste une bonne façon d'essayer ce cozy life-sim de
+        vampires avant d'acheter le jeu complet, disponible depuis le 7 juillet 2026. Voici où la
+        télécharger, ce qu'elle inclut et ce qui ne se transfère pas.
+      </p>
+
+      <div class="demo-video">
+        <YouTube id="BvfEwKHmMfg" title="Moonlight Peaks demo video" />
+      </div>
+
+      <h2>En bref</h2>
+      <table class="facts">
+        {facts.map((row) => (<tr><th>{row[0]}</th><td>{row[1]}</td></tr>))}
+      </table>
+
+      <h2>À quoi sert le mieux la démo</h2>
+      <p>
+        Utilise la démo pour décider si le ton, les contrôles, la caméra et les activités cozy plus
+        lentes te conviennent. Elle n'est pas conçue pour révéler tous les systèmes. Les valeurs
+        exactes des cultures, les tableaux complets de cadeaux, les quêtes tardives et les listes
+        de collection complètes appartiennent au jeu complet.
+      </p>
+      <ul>
+        <li><strong>Teste l'ambiance :</strong> la démo est surtout utile pour vérifier le ton et les contrôles.</li>
+        <li><strong>Essaie les activités précoces :</strong> pêche, arrangements floraux, broderie et présentations des résidents donnent un aperçu utile.</li>
+        <li><strong>Ne sur-optimise pas :</strong> comme la progression n'est pas confirmée transférable, considère la démo comme un entraînement.</li>
+        <li><strong>Compare les plateformes :</strong> les joueurs Steam, Switch et Switch 2 devraient vérifier séparément contrôles et performances.</li>
+      </ul>
+
+      <h2>FAQ</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        Relié : <a href="/fr/release-date">date de sortie</a>,
+        <a href="/fr/platforms">plateformes</a>, <a href="/demo">guides détaillés de la démo</a> (en anglais).
+      </div>
+    </div>
+  </article>
+</Base>

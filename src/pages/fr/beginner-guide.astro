@@ -1,0 +1,97 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE } from '../../consts';
+
+const jsonLd = {
+  '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Accueil', item: `${SITE.url}/fr` },
+    { '@type': 'ListItem', position: 2, name: 'Guide du débutant', item: `${SITE.url}/fr/beginner-guide` },
+  ],
+};
+---
+<Base
+  title="Moonlight Peaks — Guide du Débutant : Première Semaine"
+  description="Guide du débutant pour Moonlight Peaks : ce qui compte vraiment lors de ta première semaine — confirmé à partir du jeu réel, pas de spéculation d'avant-sortie."
+  path="/fr/beginner-guide"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Guide du débutant' }]}
+  lang="fr"
+  showExport
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Entrée · Guide</p>
+      <h1>Guide du <em>débutant</em> pour Moonlight Peaks</h1>
+      <p class="intro">
+        Confirmé : ta première nuit commence avec Orlock qui te donne des graines de Blood Grapes,
+        ton inscription à la mairie (où Brook te donne Chester, ton coffre vivant), et une baguette
+        cassée que tu répareras plus tard dans l'histoire. Voici ce qui compte vraiment lors de ta
+        première semaine. Mis à jour {SITE.updated}.
+      </p>
+
+      <div class="callout">
+        <strong>Réponse rapide :</strong> plante tes Blood Grapes tout de suite (5 jours pour
+        pousser), inscris-toi à la mairie pour obtenir Chester et le tableau des petits boulots, et
+        ne plante pas trop au début — tu arroses à la main jusqu'à ce que la magie débloque Aquaflux.
+      </div>
+
+      <h2>Liste de la première semaine</h2>
+      <ol class="steps">
+        <li><strong>Plante tes Blood Grapes.</strong> Confirmé : 5 jours pour pousser — creuse avec la pelle (pas de houe séparée) et arrose chaque nuit.</li>
+        <li><strong>Inscris-toi à la mairie.</strong> Rencontre Brook, reçois Chester et consulte le tableau des petits boulots d'Albertus.</li>
+        <li><strong>Ne plante pas trop au début.</strong> Tu arroses à la main jusqu'à débloquer Aquaflux — un petit terrain est plus facile à gérer.</li>
+        <li><strong>Choisis une première priorité.</strong> Romance, magie et Nokturna se connectent chacun à leur propre groupe de guides.</li>
+      </ol>
+
+      <h2>La boucle principale</h2>
+      <p>
+        Tu hérites d'une propriété familiale en ruine et la reconstruis en une ferme cozy-gothique.
+        Les journées tournent autour de l'entretien de <strong>cultures mystiques</strong>, de
+        l'élevage de <strong>bétail magique</strong>, et de l'utilisation de la magie pour travailler
+        la terre. Contrairement à d'autres jeux du genre, on cultive ici la nuit, ce qui correspond
+        à ton style de vie de vampire.
+      </p>
+
+      <h2>Être un vampire</h2>
+      <p>
+        Ta lignée est un outil, pas juste une esthétique. Confirmé : tu peux te
+        <strong>transformer</strong> en chauve-souris ou en ton Hellkitten à trois yeux pour
+        traverser le village rapidement. Il y a une zone de mines à explorer (Cave of Echoes), mais
+        <strong>il n'y a de combat nulle part</strong>, donc tout reste paisible.
+      </p>
+
+      <h2>Le village et ses habitants</h2>
+      <p>
+        Moonlight Peaks est le foyer de sept familles d'humains et de créatures de la nuit — loups-
+        garous, sorcières, sirènes et plus encore, avec la Mort elle-même parmi les personnages
+        marquants. Se lier d'amitié avec eux et les romancer est un pilier central ; notre
+        <a href="/romance">entrée romance et familles</a> couvre déjà les 23 options de romance
+        confirmées et leurs données de cadeaux.
+      </p>
+
+      <h2>Ce que nous vérifions encore</h2>
+      <p>
+        La plupart des systèmes centraux sont déjà confirmés et documentés sur ce site — la culture
+        nocturne, les déblocages de magie, les quêtes et les sept familles sont des données réelles
+        du jeu déjà sorti. Ce qui reste à compléter : la liste complète des cadeaux pour la plupart
+        des résidents (seuls quelques-uns sont entièrement confirmés), la liste complète des cartes
+        Nokturna, et les prix exacts des cultures. Nous le signalons clairement plutôt que de deviner.
+      </p>
+
+      <h2>Meilleures pages suivantes selon ton objectif</h2>
+      <table class="facts">
+        <tr><th>Si tu débutes</th><td><a href="/quests">quêtes</a>, <a href="/known-issues">problèmes connus</a> et <a href="/platforms">guide des plateformes</a></td></tr>
+        <tr><th>Si tu veux la romance</th><td><a href="/romance">Guide de romance</a>, <a href="/characters">personnages</a> et <a href="/characters/saga">Saga</a></td></tr>
+        <tr><th>Si tu veux l'agriculture</th><td><a href="/farming">Guide d'agriculture</a>, <a href="/magic">magie</a> et <a href="/activities">activités</a></td></tr>
+      </table>
+
+      <div class="callout wip">
+        Entrée post-sortie, mise à jour avec des données réelles du jeu. Une partie du contenu
+        (liste complète des cadeaux, liste complète des cartes Nokturna) est encore en cours de
+        vérification — nous le signalons clairement plutôt que de deviner. Les liens de cette page
+        mènent vers les versions anglaises de ces guides jusqu'à ce qu'elles soient disponibles en
+        français. Tu as trouvé quelque chose à ajouter ? Écris-nous à {SITE.contact}.
+      </div>
+    </div>
+  </article>
+</Base>

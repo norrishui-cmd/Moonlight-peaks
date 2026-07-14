@@ -1,0 +1,103 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+import YouTube from '../../components/YouTube.astro';
+
+const faq = [
+  { q: 'Quand Moonlight Peaks est-il sorti ?', a: `Moonlight Peaks est sorti le ${GAME.releaseLabel} sur Steam, Nintendo Switch, Nintendo Switch 2 et Android via Google Play, et est déjà disponible.` },
+  { q: 'Combien coûte Moonlight Peaks ?', a: `Il coûte ${GAME.price} sur Steam (PC/Mac), Switch et Android, et 39,99 $ sur Switch 2, avec ${GAME.launchDiscount}.` },
+  { q: 'Y a-t-il une démo de Moonlight Peaks ?', a: 'Oui. Une démo gratuite est disponible sur Steam (PC/Mac) et sur l\u2019eShop Nintendo Switch (également jouable sur Switch 2). Elle inclut la création de personnage, la pêche, les arrangements floraux et la broderie.' },
+  { q: 'Moonlight Peaks est-il disponible sur console ?', a: 'Oui — il est disponible sur Nintendo Switch et Switch 2 en plus du PC et d\u2019Android. La démo Switch est aussi jouable sur Switch 2.' },
+  { q: 'Moonlight Peaks est-il multijoueur ?', a: 'Moonlight Peaks est un cozy life-sim solo, centré sur l\u2019agriculture, les relations et les mystères du village. Aucun mode coopératif n\u2019a été annoncé.' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Accueil', item: `${SITE.url}/fr` },
+    { '@type': 'ListItem', position: 2, name: 'Date de sortie', item: `${SITE.url}/fr/release-date` },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks — Date de Sortie : Steam, Switch et PC"
+  description="Guide de la date de sortie de Moonlight Peaks pour Steam, Switch, Switch 2 et Android : accès à la démo, prix, configuration requise et langues."
+  path="/fr/release-date"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Date de sortie' }]}
+  lang="fr"
+  showExport
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Entrée · Sortie</p>
+      <h1>Date de <em>sortie</em> de Moonlight Peaks — Switch, Switch 2 et PC</h1>
+      <p class="intro">
+        Tout ce qui est confirmé sur la sortie de {GAME.title} — la date, où y jouer, le prix,
+        et la démo gratuite que tu peux essayer dès maintenant. Dernière mise à jour : {SITE.updated}.
+      </p>
+
+      <YouTube id="VL_15TiRRAM" title="Moonlight Peaks release date trailer" />
+
+      <h2>Les faits</h2>
+      <table class="facts">
+        <tr><th>Date de sortie</th><td>{GAME.releaseLabel}</td></tr>
+        <tr><th>Plateformes</th><td>{GAME.platforms.join(' · ')}</td></tr>
+        <tr><th>Prix</th><td>{GAME.price} (Switch 2 : 39,99 $) · {GAME.launchDiscount}</td></tr>
+        <tr><th>Démo</th><td>{GAME.demo}</td></tr>
+        <tr><th>Développeur</th><td>{GAME.developer}</td></tr>
+        <tr><th>Éditeur</th><td>{GAME.publisher} (Amérique) · Marvelous Europe (Europe)</td></tr>
+        <tr><th>Joueurs</th><td>Cozy life-sim solo</td></tr>
+      </table>
+
+      <h2>Qu'est-ce que Moonlight Peaks ?</h2>
+      <p>
+        Moonlight Peaks est un cozy life-sim gothique dans lequel tu incarnes un vampire — fils ou
+        fille du Comte Dracula — qui s'installe dans la propriété familiale abandonnée d'un village
+        peuplé de loups-garous, sorcières, sirènes et autres créatures de la nuit. Tu cultives des
+        plantes mystiques, élèves du bétail magique, apprends la sorcellerie et l'alchimie des
+        potions, et te lies d'amitié — ou romances — les habitants, tout en prouvant à ton père
+        sceptique qu'une vie de mort-vivant plus douce est possible.
+      </p>
+
+      <h2>Essaie la démo avant l'achat</h2>
+      <p>
+        La démo gratuite est la meilleure façon de savoir si {GAME.title} est fait pour toi. Elle te
+        permet d'essayer la création de personnage et une poignée d'activités cozy — pêche,
+        arrangements floraux et broderie entre autres — ainsi que les premières interactions avec
+        les habitants du village. La progression de la démo ne se transfère pas dans le jeu complet,
+        mais elle donne un aperçu fidèle de la boucle quotidienne.
+      </p>
+
+      <h2>Avant d'acheter : ce qu'il faut vérifier</h2>
+      <p>
+        Les vérifications les plus utiles avant l'achat concernent la plateforme, la configuration
+        requise, le support des langues, et si la démo fonctionne bien sur ton appareil. Ces pages
+        restent prudentes et renvoient vers les données officielles du magasin plutôt que d'inventer
+        des détails de sortie.
+      </p>
+      <ul>
+        <li><a href="/system-requirements">Configuration requise</a> pour PC, Mac et Steam Deck.</li>
+        <li><a href="/languages">Langues</a> prises en charge : anglais, allemand, japonais, coréen, chinois simplifié et chinois traditionnel.</li>
+        <li><a href="/platforms">Plateformes</a> : Steam, Switch, Switch 2, Steam Deck et Android.</li>
+      </ul>
+
+      <h2>FAQ</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        Cette page couvre les informations de sortie en français. Les articles d'impressions de la
+        démo, les critiques de presse et les guides plus détaillés sont encore uniquement en
+        anglais — visite <a href="/previews">notre section d'articles</a> (en anglais) en
+        attendant que nous traduisions davantage de contenu progressivement.
+      </div>
+    </div>
+  </article>
+</Base>

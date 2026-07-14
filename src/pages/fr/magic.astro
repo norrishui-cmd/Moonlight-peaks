@@ -1,0 +1,104 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+
+const faq = [
+  { q: 'Comment réparer la baguette dans Moonlight Peaks ?', a: "Confirmé à la sortie : ta baguette commence cassée et inutilisable. La réparation se fait automatiquement dans le cadre de la quête \"La magie des cultures\" — Luna t'envoie voir Sabrina à Webb of Wonders, mais c'est en fait Noel qui finit par la réparer, avec du ruban adhésif. Il n'y a pas d'objet séparé à acheter ni de mission annexe ; terminer la chaîne de quêtes la répare." },
+  { q: "Pourquoi ma quête de la baguette ne s'est-elle pas encore déclenchée ?", a: 'Confirmé : "La magie des cultures" est bloquée derrière la fin de la quête "La cena" (Dinner Party), puis une attente de 2 jours et la lecture d\'une lettre de Luna. Rapporté par la communauté sur plusieurs guides : ce point de déclenchement est souvent appelé la période de la "Nuit 18" du jeu. Si ta lettre n\'est pas arrivée, la cause la plus probable est simplement que la Dinner Party ou sa période d\'attente ne sont pas encore terminées, pas un objet manqué ou un achat en boutique.' },
+  { q: 'Quels sorts sont confirmés ?', a: "Confirmé à la sortie : Aquaflux I (un sort d'arrosage automatique, requis pour les cultures magiques), faire mûrir les cultures plus vite, dégager les rochers, invoquer la pluie, un sort Arborascend pour soulever les arbres/bûches tombés, et un sort de téléportation du Cercle des Sorcières. Tu lances un sort en dessinant un motif avec la baguette équipée, et les sorts coûtent du Mana — les notes de lancement sont stockées dans le Grimoire, le dernier onglet de ton menu. Vérifié de manière croisée par deux sources indépendantes : la liste complète des sorts totalise 12." },
+  { q: "Que fait l'Élixir Alter Ego ?", a: "L'Élixir Alter Ego est une potion, vendue par Sabrina à Webb of Wonders, qui change ton apparence. C'est un exemple parmi les nombreuses potions que tu peux préparer grâce à la préparation de potions." },
+  { q: 'La magie est-elle obligatoire pour jouer ?', a: "La sorcellerie est un pilier central du jeu et facilite l'agriculture et la cueillette, mais Moonlight Peaks est un cozy life-sim — tu peux jouer à ton propre rythme." },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Accueil', item: `${SITE.url}/fr` },
+    { '@type': 'ListItem', position: 2, name: 'Magie', item: `${SITE.url}/fr/magic` },
+  ] },
+];
+---
+<Base
+  title="Guide de Magie Moonlight Peaks : Réparer la Baguette, Moon Fruit et Progression du Mana"
+  description="Comment réparer la baguette dans Moonlight Peaks, pourquoi la quête La magie des cultures ne s'est pas déclenchée, Moon Fruit, et comment fonctionne l'Extracteur de Mana — faits confirmés séparés des rapports communautaires."
+  path="/fr/magic"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Magie' }]}
+  lang="fr"
+  showExport
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Entrée · Magie</p>
+      <h1>Moonlight Peaks — <em>magie</em>, sorts et potions</h1>
+      <p class="intro">
+        La sorcellerie est l'un des piliers centraux de {GAME.title}. Voici comment fonctionnent
+        les sorts et la préparation de potions, et comment ils aident dans ta cozy vie de vampire.
+        Mis à jour {SITE.updated}.
+      </p>
+
+      <h2>Comment réparer la baguette cassée</h2>
+      <p>
+        Confirmé à la sortie : ta baguette est héritée et cassée depuis le début, inutilisable
+        jusqu'à ce qu'une quête spécifique la résolve. Luna t'envoie une lettre tôt en été, et
+        après lui avoir rendu visite, tu es dirigé(e) vers Sabrina à Webb of Wonders pour faire
+        réparer la baguette. Rebondissement comique confirmé : c'est en fait <strong>Noel</strong>
+        qui finit par la réparer, avec du ruban adhésif, pas Sabrina elle-même. Il n'y a pas
+        d'objet à acheter ni d'étape supplémentaire à chercher — terminer "La magie des cultures"
+        (ci-dessous) la répare dans le cadre de l'histoire, et ta baguette réparée est confirmée
+        s'appeler la <strong>Fixed Wand</strong>.
+      </p>
+
+      <h2>Liste de sorts confirmée</h2>
+      <p>
+        Sorts confirmés enseignés par les sorcières du village : <strong>Aquaflux I</strong>, un
+        sort d'arrosage automatique débloqué via "La magie des cultures" (les arrosoirs normaux ne
+        fonctionnent pas sur les cultures magiques — elles ont besoin d'Aquaflux) ; ainsi que faire
+        <strong>mûrir les cultures</strong> plus vite, <strong>dégager les rochers</strong>,
+        <strong>invoquer la pluie</strong>, un sort <strong>Arborascend</strong> pour soulever les
+        arbres/bûches tombés, et une <strong>téléportation du Cercle des Sorcières</strong>. Au fur
+        et à mesure que tu apprends, tu élargis ton répertoire. Vérifié de manière croisée par deux
+        sources indépendantes : la liste complète totalise 12 sorts.
+      </p>
+
+      <h2>Potions et l'Élixir Alter Ego</h2>
+      <p>
+        En plus des sorts, tu prépares des potions pour débloquer toutes sortes d'effets. L'exemple
+        vedette est l'<strong>Élixir Alter Ego</strong>, qui change ton apparence, vendu par
+        Sabrina à Webb of Wonders. La préparation de potions est décrite comme une compétence clé,
+        donc attends-toi à une variété de préparations avec différents usages tout au long du jeu.
+      </p>
+
+      <h2>Sorcellerie et tes pouvoirs de vampire</h2>
+      <p>
+        La magie coexiste avec tes capacités de vampire — des sens améliorés jusqu'à te
+        <a href="/shapeshifting">transformer en chauve-souris pour te déplacer dans le village la
+        nuit, avec d'autres formes suggérées</a>. Consulte le <a href="/beginner-guide">guide du
+        débutant</a> pour voir comment le côté surnaturel s'intègre.
+      </p>
+
+      <h2>Ce que nous vérifions encore</h2>
+      <ul>
+        <li>Chaque <strong>recette de potion</strong>, ses ingrédients et son effet.</li>
+        <li>Les exigences exactes de la mise à niveau <strong>Witch's Wand</strong>.</li>
+        <li>Quelles sorcières enseignent quoi, et les meilleurs sorts précoces à prioriser.</li>
+      </ul>
+
+      <h2>FAQ</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        Relié : <a href="/farming">agriculture et cultures</a>, <a href="/character-creator">créateur de personnage</a>,
+        <a href="/shapeshifting">métamorphose</a>, <a href="/items">objets</a>,
+        <a href="/fr/beginner-guide">guide du débutant</a> (en français).
+      </div>
+    </div>
+  </article>
+</Base>
