@@ -51,9 +51,12 @@ const dePaths = [
   '/collections/vampsters', '/collections/soul-blobs', '/map', '/quests', '/quests/story', '/quests/story/register-at-town-hall', '/quests/story/meet-the-townsfolk', '/quests/story/orlocks-wine-scheme', '/quests/story/a-bridge-too-far', '/quests/story/tension-in-the-crest-garden', '/quests/story/a-croak-and-a-crest', '/quests/story/the-quest-for-mana', '/quests/story/building-a-mana-extractor', '/quests/story/a-missing-moon', '/quests/story/the-ambrosia-crisis', '/quests/story/the-dinner-party', '/quests/story/mend-it-with-magic', '/quests/story/town-hall-drama', '/quests/story/the-plastic-chairs', '/quests/story/a-family-reunion', '/quests/story/the-mermaids-wish', '/quests/story/the-rehearsal-dinner', '/quests/story/kims-invite', '/quests/story/brides-attendant-duty', '/quests/story/unfinished-business', '/quests/side', '/quests/side/noels-fishing-contest', '/quests/side/fix-the-roof', '/quests/side/the-magic-of-crops', '/quests/side/the-net-and-death', '/quests/side/vampster-collection-quest', '/quests/side/albertus-job-board', '/quests/side/npc-stuck-cant-interact', '/quests/side/form-wheel-softlock', '/quests/side/elviras-treasure-hunt', '/quests/side/ui-softlock-after-shop', '/quests/side/lost-save-data', '/achievements', '/environment', '/nokturna', '/friendship', '/house', '/inventory', '/fishing', 
 ];
 
+// Pages deepened for Spanish specifically, beyond the shared es/ja/zh baseline above.
+const esOnlyPaths = ['/quests', '/farm', '/collections', '/map'];
+
 export const translatedPathsByLocale: Record<Locale, Set<string>> = {
   en: new Set(), // English is the source; not meaningful to check "is English translated".
-  es: new Set(sharedEsJaZhPaths),
+  es: new Set([...sharedEsJaZhPaths, ...esOnlyPaths]),
   ja: new Set([...sharedEsJaZhPaths, ...jaOnlyPaths]),
   zh: new Set(sharedEsJaZhPaths),
   'zh-hant': new Set(sharedEsJaZhPaths), // mirrors the same 21 pages as zh, converted via OpenCC
@@ -77,5 +80,7 @@ export function isPathTranslated(locale: Locale, barePath: string): boolean {
   // Fish/critters detail pages are fully translated for ja and de (auto-generated from the same
   // collectionDetailPages data source as English), so any slug under these two collections counts.
   if ((locale === 'ja' || locale === 'de') && /^\/collections\/(fish|critters)\/[a-z0-9-]+$/.test(barePath)) return true;
+  // Quest story/side detail pages are fully translated for es (all 20 story + 12 side quests).
+  if (locale === 'es' && /^\/quests\/(story|side)(\/[a-z0-9-]+)?$/.test(barePath)) return true;
   return false;
 }

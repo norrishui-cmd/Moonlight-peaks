@@ -1,0 +1,92 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE } from '../../consts';
+import { collections } from '../../data/collections';
+
+const faq = [
+  { q: '¿Qué son las colecciones de Moonlight Peaks?', a: 'Las colecciones son listas rastreables del mundo como peces, trabajos, criaturas, Vampsters y Soul Blobs. Pertenecen a la sección Mundo porque los jugadores suelen buscar ubicaciones, condiciones y progreso de finalización en lugar de estadísticas genéricas de objetos.' },
+  { q: '¿Estas páginas están copiadas de la wiki oficial?', a: 'No. La wiki oficial se enlaza como fuente. Este sitio usa su propio formato de guía, resúmenes, tablas y notas de verificación en lugar de copiar páginas completas.' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Inicio', item: `${SITE.url}/es` },
+    { '@type': 'ListItem', position: 2, name: 'Colecciones', item: `${SITE.url}/es/collections` },
+  ] },
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+];
+---
+<Base
+  title="Colecciones de Moonlight Peaks - Peces, criaturas, Vampsters, Soul Blobs y trabajos"
+  description="Centro de colecciones de Moonlight Peaks para peces, trabajos de Albertus, criaturas, Vampsters y Soul Blobs, con enlaces a fuentes oficiales."
+  path="/es/collections"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Colecciones' }]}
+  lang="es"
+>
+  <article class="page collections-page">
+    <div class="wrap">
+      <p class="eyebrow">Mundo / Colecciones</p>
+      <h1>Colecciones de <em>Moonlight Peaks</em></h1>
+      <p class="intro">
+        Un centro dedicado del Mundo para listas rastreables: peces, trabajos de Albertus, criaturas,
+        Vampsters y Soul Blobs. Estas páginas usan enlaces de la wiki oficial como fuentes mientras
+        presentan la información en una estructura de guía más clara.
+      </p>
+
+      <div class="collection-grid">
+        {collections.map((entry) => (
+          <a class="collection-card" href={`/collections/${entry.slug}`}>
+            <img src={entry.image} alt={`${entry.title} - colección de Moonlight Peaks`} loading="lazy" />
+            <div class="collection-body">
+              <span>{entry.tag}</span>
+              <h2>{entry.title}</h2>
+              <p>{entry.dek}</p>
+              <strong>Abrir colección -&gt; (en inglés)</strong>
+            </div>
+          </a>
+        ))}
+      </div>
+
+      <h2>FAQ</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </article>
+
+  <style>
+    .collection-grid { display: grid; grid-template-columns: 1fr; gap: 16px; margin: 24px 0 28px; }
+    @media (min-width: 720px) { .collection-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    .collection-card {
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: var(--surface);
+      color: inherit;
+      text-decoration: none;
+      transition: border-color .15s ease, transform .15s ease;
+    }
+    .collection-card:hover { border-color: color-mix(in srgb, var(--candle) 54%, var(--line)); transform: translateY(-2px); }
+    .collection-card img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border-bottom: 1px solid var(--line); }
+    .collection-body { padding: 16px; }
+    .collection-body span {
+      color: var(--candle);
+      font-family: var(--mono);
+      font-size: 0.66rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .collection-body h2 { margin: 6px 0 6px; font-size: 1.38rem; }
+    .collection-body p { margin: 0 0 12px; color: #ded3e6; font-size: 0.94rem; }
+    .collection-body strong { color: var(--candle); font-family: var(--mono); font-size: 0.78rem; }
+  </style>
+</Base>

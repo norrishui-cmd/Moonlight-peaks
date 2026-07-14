@@ -1,0 +1,82 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import { SITE, GAME } from '../../../../consts';
+import { sideQuests } from '../../../../data/quests-side';
+import { sideQuestsEs } from '../../../../i18n/quests-side-es';
+
+export function getStaticPaths() {
+  const translated = sideQuests.filter((q) => sideQuestsEs[q.slug]);
+  return translated.map((q, i) => ({
+    params: { slug: q.slug },
+    props: { q, prev: translated[(i - 1 + translated.length) % translated.length], next: translated[(i + 1) % translated.length] },
+  }));
+}
+
+const { q, prev, next } = Astro.props as { q: (typeof sideQuests)[number]; prev: (typeof sideQuests)[number]; next: (typeof sideQuests)[number] };
+const tr = sideQuestsEs[q.slug];
+const statusLabel = q.status === 'confirmed' ? 'Confirmado' : 'Reportado';
+const troubleshooting = tr.troubleshooting || [];
+const allFaq = [...troubleshooting, { q: `¿Qué es "${tr.title}" en Moonlight Peaks?`, a: tr.summary }];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: allFaq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Inicio', item: `${SITE.url}/es` },
+    { '@type': 'ListItem', position: 2, name: 'Guía de misiones', item: `${SITE.url}/es/quests` },
+    { '@type': 'ListItem', position: 3, name: 'Misiones secundarias', item: `${SITE.url}/es/quests/side` },
+    { '@type': 'ListItem', position: 4, name: tr.title, item: `${SITE.url}/es/quests/side/${q.slug}` },
+  ] },
+];
+---
+<Base
+  title={`${tr.title} — Guía de Moonlight Peaks`}
+  description={`${GAME.title} "${tr.title}": ${(troubleshooting[0]?.q || tr.summary).slice(0, 100)}`}
+  path={`/es/quests/side/${q.slug}`}
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Guía de misiones', href: '/es/quests' }, { label: 'Misiones secundarias', href: '/es/quests/side' }, { label: tr.title }]}
+  lang="es"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Misiones secundarias · <span class="tag-community">{statusLabel}</span></p>
+      <h1>{tr.title}</h1>
+      <p class="intro">{tr.summary}</p>
+
+      {tr.reward && (
+        <div class="callout">
+          <strong>Recompensa:</strong> {tr.reward}
+        </div>
+      )}
+
+      {troubleshooting.length > 0 && (
+        <>
+          <h2>¿Atascado? Qué revisar</h2>
+          <div class="faq">
+            {troubleshooting.map((f) => (
+              <details open>
+                <summary>{f.q}</summary>
+                <p>{f.a}</p>
+              </details>
+            ))}
+          </div>
+        </>
+      )}
+
+      <nav class="prevnext" aria-label="Navegación de misiones secundarias">
+        <a href={`/es/quests/side/${prev.slug}`}>← {sideQuestsEs[prev.slug].title}</a>
+        <a href="/es/quests/side">Todas las misiones secundarias</a>
+        <a href={`/es/quests/side/${next.slug}`}>{sideQuestsEs[next.slug].title} →</a>
+      </nav>
+    </div>
+  </article>
+
+  <style>
+    .tag-community {
+      display: inline-block; font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.02em;
+      color: var(--faint); border: 1px solid var(--line); border-radius: 999px; padding: 2px 7px;
+      vertical-align: middle;
+    }
+    .prevnext { display: flex; justify-content: space-between; gap: 10px; margin: 22px 0; font-family: var(--mono); font-size: 0.82rem; }
+    .prevnext a { color: var(--candle); }
+  </style>
+</Base>

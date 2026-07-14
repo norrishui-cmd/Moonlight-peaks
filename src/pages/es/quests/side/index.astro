@@ -1,0 +1,63 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import { SITE } from '../../../../consts';
+import { sideQuests } from '../../../../data/quests-side';
+import { sideQuestsEs } from '../../../../i18n/quests-side-es';
+
+const jsonLd = {
+  '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Inicio', item: `${SITE.url}/es` },
+    { '@type': 'ListItem', position: 2, name: 'Guía de misiones', item: `${SITE.url}/es/quests` },
+    { '@type': 'ListItem', position: 3, name: 'Misiones secundarias', item: `${SITE.url}/es/quests/side` },
+  ],
+};
+---
+<Base
+  title="Misiones secundarias de Moonlight Peaks — Todas las misiones de NPC y sistemas paralelos"
+  description="Todas las misiones secundarias confirmadas de Moonlight Peaks y solicitudes específicas de NPC — concursos de pesca, mejoras de vivienda, el tablón de trabajos, y cacerías de criaturas coleccionables del pueblo."
+  path="/es/quests/side"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Guía de misiones', href: '/es/quests' }, { label: 'Misiones secundarias' }]}
+  lang="es"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Misiones · Secundarias</p>
+      <h1>Misiones <em>secundarias</em></h1>
+      <p class="intro">
+        {sideQuests.length} misiones secundarias confirmadas y solicitudes específicas de NPC, separadas
+        de <a href="/es/quests/story">el flujo de la historia principal</a>. Van desde misiones únicas
+        vinculadas a residentes específicos hasta sistemas continuos como el tablón de trabajos.
+      </p>
+
+      <div class="sq-grid">
+        {sideQuests.filter((q) => sideQuestsEs[q.slug]).map((q) => (
+          <a class="sq-card" href={`/es/quests/side/${q.slug}`}>
+            <span class="sq-tag">{q.npc ? q.npc.charAt(0).toUpperCase() + q.npc.slice(1) : 'Sistema paralelo'}</span>
+            <h3>{sideQuestsEs[q.slug].title}</h3>
+            <p>{sideQuestsEs[q.slug].summary.length > 90 ? sideQuestsEs[q.slug].summary.slice(0, 87) + '…' : sideQuestsEs[q.slug].summary}</p>
+          </a>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        Relacionado: <a href="/es/quests">Centro de misiones</a>, <a href="/es/quests/story">Historia principal</a>,
+        <a href="/es/collections">Colecciones</a>, <a href="/es/characters">Personajes</a>.
+      </div>
+    </div>
+  </article>
+
+  <style>
+    .sq-grid { display: grid; grid-template-columns: 1fr; gap: 12px; margin: 22px 0 30px; }
+    @media (min-width: 640px) { .sq-grid { grid-template-columns: 1fr 1fr; } }
+    .sq-card {
+      display: block; border: 1px solid var(--line); border-radius: 14px; background: var(--surface);
+      padding: 16px; text-decoration: none; color: inherit;
+      transition: border-color .15s ease, transform .15s ease;
+    }
+    .sq-card:hover { border-color: color-mix(in srgb, var(--candle) 54%, var(--line)); transform: translateY(-2px); }
+    .sq-tag { font-family: var(--mono); font-size: 0.66rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--candle); }
+    .sq-card h3 { margin: 6px 0 6px; font-size: 1.05rem; }
+    .sq-card p { margin: 0; color: #ded3e6; font-size: 0.86rem; }
+  </style>
+</Base>

@@ -1,0 +1,215 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE } from '../../consts';
+import { markers, categories, markersConfirmed } from '../../data/map-locations';
+import GuideImage from '../../components/GuideImage.astro';
+
+const colorOf = Object.fromEntries(categories.map((c) => [c.id, c.color]));
+const labelOf = Object.fromEntries(categories.map((c) => [c.id, c.label]));
+
+const faq = [
+  { q: '¿Hay un mapa interactivo para Moonlight Peaks?', a: 'Sí — este mapa hecho por fans muestra nombres reales y confirmados de ubicaciones y tiendas (Lago Silverveil, Cueva de los Ecos, Ayuntamiento, Webb of Wonders, Howling Hammer). Las posiciones son aproximaciones esquemáticas basadas en pistas descriptivas de guías, no medidas de una imagen de mapa oficial, así que trata la ubicación como direccional en lugar de exacta.' },
+  { q: '¿Moonlight Peaks tiene un minimapa?', a: 'No, confirmado: no hay minimapa ni sistema de marcadores de misión, y la cámara es fija en lugar de seguirte libremente. El mapa dentro del juego es la principal ayuda de navegación, y marca edificios con un signo de exclamación o un aura brillante al entrar activará una escena.' },
+  { q: '¿Dónde se puede pescar en Moonlight Peaks?', a: 'Confirmado: el Lago Silverveil admite la pesca y es el hogar de la familia de sirenas Hosu. Las especies exactas de peces y los puntos de lanzamiento específicos dentro del lago aún no están documentados.' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Inicio', item: `${SITE.url}/es` },
+    { '@type': 'ListItem', position: 2, name: 'Mapa', item: `${SITE.url}/es/map` },
+  ] },
+];
+---
+<Base
+  title="Mapa de Moonlight Peaks — Pesca, recolección y tiendas"
+  description="Un mapa interactivo del pueblo de Moonlight Peaks: filtra puntos de pesca, áreas de recolección, tiendas y hogares de residentes."
+  path="/es/map"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Mapa' }]}
+  lang="es"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Entrada · Mapa</p>
+      <h1>Mapa <em>interactivo</em> de Moonlight Peaks</h1>
+      <p class="intro">
+        Filtra el pueblo por lo que buscas, luego toca un marcador para ver detalles. Actualizado {SITE.updated}.
+      </p>
+
+      {!markersConfirmed && (
+        <div class="callout wip">
+          <strong>Posiciones esquemáticas.</strong> Los nombres de los marcadores abajo (Lago
+          Silverveil, Cueva de los Ecos, Ayuntamiento y más) son reales y confirmados — pero su
+          ubicación en este mapa es una aproximación basada en pistas descriptivas de guías, no
+          medida de una imagen de mapa oficial.
+        </div>
+      )}
+
+      <GuideImage
+        imageId="world-map-screenshot"
+        contextAlt="Captura de pantalla del mapa del mundo dentro del juego mostrando Moonlit Pines, el pueblo de Moonlight Peaks, Misty Shores y el Lago Silverveil"
+        caption="Una captura real del mapa dentro del juego, como referencia junto a nuestra versión esquemática abajo."
+      />
+
+      <h2>Áreas nombradas confirmadas</h2>
+      <p>
+        Las posiciones de los marcadores abajo siguen siendo provisionales, pero estos nombres de
+        distrito están confirmados por la cobertura de la semana de lanzamiento: <strong>Misty
+        Shores</strong> (el territorio de la familia Ambrosia, alcanzado mediante la misión "A
+        Bridge Too Far", con un cementerio donde conoces a Death), <strong>Moonlit Pines</strong>
+        (donde se basa el aquelarre de brujas), el <strong>Pink Grove</strong> (hogar del demonio
+        del amor Llemi, visitado principalmente durante festivales), y el <strong>Ayuntamiento</strong>
+        (donde te registras con la alcaldesa).
+      </p>
+
+      <div class="maplegend" id="maplegend">
+        {categories.map((c) => (
+          <button class="lg" data-cat={c.id} style={`--mk:${c.color}`} type="button" aria-pressed="true">
+            <span class="lg-dot"></span>{c.label}
+          </button>
+        ))}
+      </div>
+
+      <div class="mapwrap">
+        <svg viewBox="0 0 800 500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Mapa estilizado del pueblo">
+          <rect width="800" height="500" rx="16" fill="#1b1526"/>
+          <path d="M0 170 Q220 120 380 210 T800 240 L800 130 Q500 70 250 110 T0 90 Z" fill="#20283f" opacity="0.5"/>
+          <path d="M120 470 Q260 360 480 380 T760 300" stroke="#3a567a" stroke-width="20" fill="none" opacity="0.7" stroke-linecap="round"/>
+          <ellipse cx="190" cy="330" rx="70" ry="42" fill="#2c4666" opacity="0.85"/>
+          <g fill="#33503e" opacity="0.9">
+            <polygon points="600,360 628,310 656,360"/><polygon points="636,372 664,322 692,372"/>
+            <polygon points="672,360 700,310 728,360"/><polygon points="300,410 324,368 348,410"/>
+            <polygon points="336,420 360,378 384,420"/>
+          </g>
+          <g fill="#3a2f50" opacity="0.9">
+            <rect x="150" y="120" width="60" height="44" rx="3"/><rect x="220" y="130" width="44" height="34" rx="3"/>
+          </g>
+          <g fill="#2f2440" stroke="#4a3a63" stroke-width="2">
+            <rect x="372" y="232" width="40" height="34" rx="3"/><rect x="420" y="240" width="34" height="30" rx="3"/>
+            <rect x="492" y="248" width="40" height="30" rx="3"/>
+          </g>
+          <text x="150" y="108" fill="#7c6e90" font-family="monospace" font-size="15">Tu Granja</text>
+          <text x="150" y="392" fill="#7c6e90" font-family="monospace" font-size="15">Estanque</text>
+          <text x="600" y="300" fill="#7c6e90" font-family="monospace" font-size="15">Bosque</text>
+          <text x="430" y="226" fill="#7c6e90" font-family="monospace" font-size="15">Plaza del Pueblo</text>
+        </svg>
+        {markers.map((m) => (
+          <button
+            class={`mk mk-${m.category}`}
+            data-cat={m.category}
+            data-name={m.name}
+            data-note={m.note || ''}
+            data-label={labelOf[m.category]}
+            style={`left:${m.x}%;top:${m.y}%;--mk:${colorOf[m.category]}`}
+            aria-label={m.name}
+            type="button"
+          ></button>
+        ))}
+      </div>
+
+      <div class="mapinfo" id="mapinfo">
+        <p class="mapinfo-empty">Toca cualquier marcador para ver qué hay ahí.</p>
+      </div>
+
+      <h2>Navegar sin un minimapa</h2>
+      <p>
+        Confirmado por múltiples fuentes: Moonlight Peaks <strong>no tiene minimapa ni marcadores
+        de misión</strong>, y usa una cámara fija en lugar de una que te siga libremente — el mapa
+        dentro del juego (abierto desde el menú de pausa) es tu principal ayuda de navegación. En
+        ese mapa, los <strong>iconos de signo de exclamación</strong> marcan edificios donde entrar
+        activa una escena, y un <strong>aura brillante</strong> alrededor de un edificio significa
+        que entrar activará una — ambos vale la pena revisar cuando busques un evento de corazón
+        que aún no se ha activado.
+      </p>
+      <p>
+        Para moverte rápido: el <strong>Círculo de Brujas</strong> ofrece una opción de viaje rápido
+        una vez desbloqueado, y la <a href="/shapeshifting">forma de murciélago</a> también cubre
+        terreno rápidamente.
+      </p>
+
+      <h2>Aún en verificación</h2>
+      <ul>
+        <li>Cada <strong>punto de pesca</strong> con su pez, temporada y horario.</li>
+        <li>Áreas de <strong>recolección</strong> y qué aparece ahí.</li>
+        <li><strong>Tiendas</strong> y qué vende cada una.</li>
+        <li><strong>Hogares de residentes</strong> vinculados a las páginas de romance y regalos.</li>
+      </ul>
+
+      <h2>FAQ</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout">
+        Relacionado: <a href="/nokturna">juego de cartas Nokturna</a>, <a href="/es/romance">romance y familias</a>,
+        <a href="/es/beginner-guide">guía para principiantes</a>.
+      </div>
+    </div>
+  </article>
+
+  <style>
+    .maplegend { display: flex; gap: 8px; flex-wrap: wrap; margin: 6px 0 14px; }
+    .lg { display: inline-flex; align-items: center; gap: 7px; font-size: 0.84rem; color: var(--mist); background: var(--surface); border: 1px solid var(--line); border-radius: 999px; padding: 6px 13px; cursor: pointer; }
+    .lg-dot { width: 11px; height: 11px; border-radius: 50%; background: var(--mk); }
+    .lg[aria-pressed="false"] { opacity: 0.4; text-decoration: line-through; }
+    .mapwrap { position: relative; width: 100%; border: 1px solid var(--line); border-radius: 14px; overflow: hidden; background: #15101d; }
+    .mapwrap svg { display: block; width: 100%; height: auto; }
+    .mk { position: absolute; transform: translate(-50%, -50%); width: 22px; height: 22px; border-radius: 50%; background: var(--mk); border: 2px solid #15101d; box-shadow: 0 0 0 2px var(--mk), 0 2px 6px rgba(0,0,0,0.4); cursor: pointer; padding: 0; transition: transform .12s ease; }
+    .mk:hover, .mk.is-sel { transform: translate(-50%, -50%) scale(1.35); z-index: 3; }
+    .mk.is-sel { box-shadow: 0 0 0 3px #fff, 0 2px 8px rgba(0,0,0,0.5); }
+    .mk.hide { display: none; }
+    @media (max-width: 520px) { .mk { width: 26px; height: 26px; } }
+    .mapinfo { margin-top: 14px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); padding: 14px 16px; min-height: 64px; }
+    .mapinfo-empty { color: var(--faint); margin: 0; }
+    .mapinfo h3 { font-family: var(--display); font-weight: 600; font-size: 1.1rem; margin: 0 0 4px; }
+    .mapinfo .cat { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--candle); }
+    .mapinfo p.note { color: #ded3e6; margin: 6px 0 0; font-size: 0.92rem; }
+  </style>
+
+  <script>
+    const legend = document.getElementById('maplegend');
+    const info = document.getElementById('mapinfo');
+    const off = new Set();
+    const markerEls = Array.from(document.querySelectorAll('.mk'));
+
+    const refresh = () => {
+      markerEls.forEach((m) => {
+        const cat = m.getAttribute('data-cat') || '';
+        m.classList.toggle('hide', off.has(cat));
+      });
+    };
+
+    if (legend) {
+      legend.addEventListener('click', (e) => {
+        const btn = e.target.closest('.lg');
+        if (!btn) return;
+        const cat = btn.getAttribute('data-cat') || '';
+        if (off.has(cat)) { off.delete(cat); btn.setAttribute('aria-pressed', 'true'); }
+        else { off.add(cat); btn.setAttribute('aria-pressed', 'false'); }
+        refresh();
+      });
+    }
+
+    markerEls.forEach((m) => {
+      m.addEventListener('click', () => {
+        markerEls.forEach((x) => x.classList.remove('is-sel'));
+        m.classList.add('is-sel');
+        if (info) {
+          const name = m.getAttribute('data-name') || '';
+          const label = m.getAttribute('data-label') || '';
+          const note = m.getAttribute('data-note') || '';
+          info.innerHTML = '<span class="cat"></span><h3></h3>' + (note ? '<p class="note"></p>' : '');
+          info.querySelector('.cat').textContent = label;
+          info.querySelector('h3').textContent = name;
+          if (note) info.querySelector('p.note').textContent = note;
+        }
+      });
+    });
+  </script>
+</Base>

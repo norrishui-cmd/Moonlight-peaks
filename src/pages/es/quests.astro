@@ -1,0 +1,82 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+import { storyQuests, storyChapters } from '../../data/quests-story';
+import { sideQuests } from '../../data/quests-side';
+
+const jsonLd = {
+  '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Inicio', item: `${SITE.url}/es` },
+    { '@type': 'ListItem', position: 2, name: 'Misiones', item: `${SITE.url}/es/quests` },
+  ],
+};
+---
+<Base
+  title="Guía de misiones de Moonlight Peaks — Historia principal y secundarias, paso a paso"
+  description="El centro completo de misiones de Moonlight Peaks: la cadena de la historia principal capítulo por capítulo, cada misión secundaria confirmada, y respuestas para cuando estés atascado."
+  path="/es/quests"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Misiones' }]}
+  lang="es"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Centro · Misiones</p>
+      <h1>Guía de <em>misiones</em> de {GAME.title}</h1>
+      <p class="intro">
+        Ya sea que quieras seguir la historia principal en orden o estés atascado en una misión
+        específica, este es el centro para eso. Todo aquí está verificado cruzando múltiples
+        fuentes independientes de la semana de lanzamiento en lugar de una sola guía — las misiones
+        se etiquetan como <strong>confirmadas</strong> cuando dos o más fuentes coinciden en los
+        mismos puntos, y <strong>reportadas</strong> cuando solo una fuente lo ha documentado hasta
+        ahora. Nada aquí se inventa para llenar un vacío.
+      </p>
+
+      <div class="q-split">
+        <a class="q-card" href="/es/quests/story">
+          <span class="q-tag">Historia principal</span>
+          <h2>Sigue la historia, capítulo por capítulo</h2>
+          <p>{storyQuests.length} misiones de la historia principal, organizadas en {storyChapters.length} capítulos desde tu llegada al pueblo hasta el arco de la boda. Elige un capítulo y ve directo a donde estás.</p>
+          <strong>Ver capítulos →</strong>
+        </a>
+        <a class="q-card" href="/es/quests/side">
+          <span class="q-tag">Misiones secundarias</span>
+          <h2>Misiones de NPC y sistemas paralelos</h2>
+          <p>{sideQuests.length} misiones secundarias confirmadas y sistemas activos — concursos de pesca, mejoras de la casa, el tablón de trabajos, y las dos cacerías de criaturas coleccionables del pueblo.</p>
+          <strong>Ver misiones secundarias →</strong>
+        </a>
+      </div>
+
+      <h2>¿Atascado en algo específico?</h2>
+      <p>
+        Si estás atascado en un punto concreto de la historia, <a href="/quests/story/a-bridge-too-far">A Bridge Too Far</a>
+        es la misión temprana más buscada — consulta su página dedicada para la guía completa del
+        puente entre Orlock y Fiona. Para una sola página que cubre toda la primera semana —
+        misiones clave, errores conocidos, y dónde vive realmente la información de referencia de
+        peces/regalos — consulta el <a href="/quests/launch-week">Task Cluster de la semana de lanzamiento</a>.
+        Para preguntas generales sobre misiones, consulta las <a href="/es/faq">preguntas frecuentes</a>.
+      </p>
+
+      <div class="callout wip">
+        Relacionado: <a href="/es/beginner-guide">guía para principiantes</a>,
+        <a href="/es/characters">personajes</a>, <a href="/es/map">mapa</a>, <a href="/known-issues">problemas conocidos</a>.
+      </div>
+    </div>
+  </article>
+
+  <style>
+    .q-split { display: grid; grid-template-columns: 1fr; gap: 14px; margin: 24px 0 30px; }
+    @media (min-width: 720px) { .q-split { grid-template-columns: 1fr 1fr; } }
+    .q-card {
+      display: flex; flex-direction: column; gap: 8px;
+      border: 1px solid var(--line); border-radius: 16px; background: var(--surface);
+      padding: 20px; text-decoration: none; color: inherit;
+      transition: border-color .15s ease, transform .15s ease;
+    }
+    .q-card:hover { border-color: color-mix(in srgb, var(--candle) 54%, var(--line)); transform: translateY(-2px); }
+    .q-tag { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--candle); }
+    .q-card h2 { margin: 4px 0 6px; font-size: 1.2rem; }
+    .q-card p { margin: 0 0 8px; color: #ded3e6; font-size: 0.9rem; }
+    .q-card strong { font-family: var(--mono); font-size: 0.82rem; color: var(--candle); }
+  </style>
+</Base>
