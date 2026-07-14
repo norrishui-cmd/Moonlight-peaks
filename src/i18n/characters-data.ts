@@ -108,6 +108,154 @@ export const charTranslations: Record<'es' | 'ja' | 'zh' | 'zh-hant' | 'de', Rec
       ],
       romanceYes: 'Fiona ist eine bestätigte Romanze-Option.', romanceNo: '', romanceTbc: '',
     },
+    evan: {
+      name: 'Evan', familyLabel: 'Vampir (Ambrosia)', typeLabel: 'Vampir',
+      desc: 'Ein ruhiger, distanzierter Vampir, der zusammen mit seiner Schwester Mina "Coffee & Coffins" führt; sein Vater Orlock drängt ihn, den Familiennamen zu übernehmen.',
+      knownInfo: [
+        'Bestätigt als Orlocks Sohn und Minas Bruder, Mitbetreiber des Stadtcafés.',
+        'Zählt lieber Sterne, statt den Familiennamen zu übernehmen, den sein Vater ihm aufzwingen will.',
+      ],
+      romanceYes: 'Ja, bestätigte Romanze-Option.', romanceNo: '', romanceTbc: '',
+    },
+    ridge: {
+      name: 'Ridge', familyLabel: 'Werwolf (Logan)', typeLabel: 'Werwolf',
+      desc: 'Der Zimmermann der Stadt — robust, verlässlich, pazifistisch, nutzt seine Werwolf-Stunden, um hochwertiges Holz zu suchen. Bürgermeisterin Brooks jüngerer Bruder.',
+      knownInfo: [
+        'Bestätigt als werwölfischer Zimmermann und Pazifist.',
+        'Verkauft dir deinen ersten Barn (4.000 Gold + Materialien, 10x6 Fläche, 1 Nacht Bauzeit, Platz für 4 Tiere), erforderlich vor dem Kauf von Vieh bei Luna.',
+        'Betreibt den Howling Hammer Werkzeug-Upgrade-Laden, geöffnet Montag–Freitag, 18–24 Uhr.',
+      ],
+      romanceYes: 'Ja, bestätigte Romanze-Option.', romanceNo: '', romanceTbc: '',
+    },
+    jada: {
+      name: 'Jada', familyLabel: 'Mensch (Henderson)', typeLabel: 'Mensch',
+      desc: 'Eine energiegeladene Übernatürlich-Enthusiastin und Relikt-Sammlerin, die begeistert über Geschichte spricht — Persephones Nichte, Winstons Schwester.',
+      knownInfo: [
+        'Bestätigt als Teil der menschlichen Familie Henderson, zusammen mit Persephone und Winston angekommen.',
+        'Berichtet als Relikt-Sammlerin und Geschichtsenthusiastin, im Gegensatz zu ihrem skeptischen Bruder Winston.',
+        'Ihr atemloser, wirbelnder Gesprächsstil hat sie in der Stadt etwas berüchtigt gemacht.',
+      ],
+      romanceYes: 'Ja, bestätigte Romanze-Option.', romanceNo: '', romanceTbc: '',
+    },
+    dragan: {
+      name: 'Dragan', familyLabel: 'Seher (Khazan)', typeLabel: 'Seher',
+      desc: 'Der älteste der Khazan-Seher-Geschwister — seine eigenen Vorhersagen liegen meist falsch, aber er ist besser bekannt als Erfinder des beliebten Kartenspiels Nokturna.',
+      knownInfo: [
+        'Bestätigt als ältestes Geschwister der Seherfamilie Khazan, vor Aras und Alina.',
+        'Berichtet als Erfinder von Nokturna innerhalb der Spielwelt.',
+      ],
+      romanceYes: 'Ja, bestätigte Romanze-Option.', romanceNo: '', romanceTbc: '',
+    },
+    alina: {
+      name: 'Alina', familyLabel: 'Seherin (Khazan)', typeLabel: 'Seherin',
+      desc: 'Die Rebellin der Familie Khazan — stur, feurig, kann Lügen nicht ausstehen, mit unkonventionellen Sehergaben und einer Vorliebe für den Schatten.',
+      knownInfo: [
+        'Berichtet als Teil der Seherfamilie Khazan — Draguns jüngeres Geschwister, zusammen mit Aras.',
+        'Wohnt in einem eigenen Haus, was auf eine feste Bewohnerin statt einer Nebenfigur hindeutet.',
+      ],
+      romanceYes: 'Ja, bestätigte Romanze-Option.', romanceNo: '', romanceTbc: '',
+    },
+    death: {
+      name: 'Death', familyLabel: 'Ohne Familie', typeLabel: 'Sensenmann',
+      desc: 'Der leibhaftige Sensenmann, im Urlaub in der Stadt, um sich zu entspannen — trockener Humor, pflegt den örtlichen Friedhof, sammelt sowohl Blumen als auch Seelen.',
+      knownInfo: [
+        'Bestätigt als Romanze-Option — kein Vorab-Gerücht mehr, wie es einst war.',
+        'Wohnt in "Death\u2019s Shack" im Friedhofsbereich von Misty Shores.',
+        'Bestätigte Freischaltkette: Spieler treffen ihn zweimal nach Freischaltung von Misty Shores (über die Quest "A Bridge Too Far"), bevor er das Insektennetz gibt.',
+      ],
+      romanceYes: 'Ja, bestätigte Romanze-Option.', romanceNo: '', romanceTbc: '',
+    },
+    samael: {
+      name: 'Samael', familyLabel: 'Vampir (Ambrosia)', typeLabel: 'Vampir',
+      desc: 'Ein geheimnisvoller, grüblerischer Vampir der Familie Ambrosia, der seit Jahrhunderten die Stadtbar "The Broken Lamp" führt. Elviras Bruder, Orlocks Neffe.',
+      knownInfo: [
+        'Führt "The Broken Lamp", die Stadtbar, und ist Mitglied der Familie Ambrosia.',
+        'Seine Romanze ist an den Story-Fortschritt gebunden und schaltet sich frei, sobald du Luna Bay erreichst und die Meerjungfrauenfamilie Hosu triffst.',
+        'Bestätigt: Die Vorläufer-Quests "A Curious Passage" und "The Mysterious Bay" beinhalten das Heben eines umgestürzten Baumes, die Reparatur einer Brücke mit Ludo, und die Vorbereitung auf eine Hochzeit — mit einer Meerjungfrau namens Kim, die jedoch am Altar kalte Füße bekommt.',
+      ],
+      romanceYes: 'Ja, bestätigte Romanze-Option.', romanceNo: '', romanceTbc: '',
+    },
+    elvira: {
+      name: 'Elvira', familyLabel: 'Vampirin (Ambrosia)', typeLabel: 'Vampirin',
+      desc: 'Samaels Schwester — eine künstlerische, ruhelose Vampirin, die ständig neue Nebenprojekte beginnt, sehr zum Ärger ihres Onkels Orlock.',
+      knownInfo: [
+        'Bestätigt als Samaels Schwester und Orlocks Nichte.',
+        'Verbirgt eine zerbrechliche, künstlerische Seite, die angeblich nur Samael vollständig kennt.',
+      ],
+      romanceYes: 'Ja, bestätigte Romanze-Option.', romanceNo: '', romanceTbc: '',
+    },
+    kim: {
+      name: 'Kim', familyLabel: 'Meerjungfrau (Hosu)', typeLabel: 'Meerjungfrau',
+      desc: 'Eine grenzenlos energiegeladene, fröhliche Meerjungfrau der Familie Hosu, die etwa ein Jahr nach Spielbeginn in der Stadt ankommt.',
+      knownInfo: [
+        'Bestätigt als Mitglied der Meerjungfrauenfamilie Hosu, Geschwister von Rei und Tae.',
+        'Die Familie Hosu kommt etwa in der Mitte des ersten Jahres an und braucht Hilfe, um sich wieder in die Stadt einzugliedern, lebt zusammen in Luna Bay.',
+      ],
+      romanceYes: 'Ja, bestätigte Romanze-Option.', romanceNo: '', romanceTbc: '',
+    },
+    ludo: {
+      name: 'Ludo', familyLabel: 'Werwolf (Logan)', typeLabel: 'Werwolf',
+      desc: 'Bürgermeisterin Brooks unbeschwertes Kind (Sagas Geschwister, Ridges Neffe/Nichte), der/die lieber schläft, als sich um irgendetwas zu kümmern.',
+      knownInfo: [
+        'Bestätigt als Kind von Bürgermeisterin Brook, Geschwister von Saga, Neffe/Nichte von Ridge.',
+        'Betreibt einen Laden, der Werkzeug-Zauberstäbe verkauft (Spitzhacke, Aquaflux-Gießkanne, Baumversetzung), um Ausdauer bei Wiederholungsaufgaben zu sparen.',
+      ],
+      romanceYes: 'Ja, bestätigte Romanze-Option.', romanceNo: '', romanceTbc: '',
+    },
+    tae: {
+      name: 'Tae', familyLabel: 'Meermann (Hosu)', typeLabel: 'Meermann',
+      desc: 'Ein umwerfender, bodenständiger Meermann der Familie Hosu, der stolz auf sein Aussehen ist und anderen gerne hilft, ihr Selbstvertrauen zu finden.',
+      knownInfo: [
+        'Bestätigt als Mitglied der Meerjungfrauenfamilie Hosu, Geschwister von Kim und Rei.',
+        'Beschrieben als loyal und ermutigend.',
+      ],
+      romanceYes: 'Ja, bestätigte Romanze-Option.', romanceNo: '', romanceTbc: '',
+    },
+    winston: {
+      name: 'Winston', familyLabel: 'Mensch (Henderson)', typeLabel: 'Mensch',
+      desc: 'Der Skeptiker der Stadt — widerwillig in einer übernatürlichen Stadt lebend und leicht zu erschrecken, aber sehr unterhaltsam, sobald er seine Deckung fallen lässt.',
+      knownInfo: [
+        'Bestätigt als Teil der menschlichen Familie Henderson, zusammen mit Persephone und Jada angekommen.',
+        'Es war die Entscheidung seiner Familie, nach Moonlight Peaks zu ziehen, nicht seine eigene — er glaubt nicht an die übernatürliche Seite der Stadt.',
+      ],
+      romanceYes: 'Ja, bestätigte Romanze-Option.', romanceNo: '', romanceTbc: '',
+    },
+    rei: {
+      name: 'Rei', familyLabel: 'Meerjungfrau (Hosu)', typeLabel: 'Meerjungfrau',
+      desc: 'Eine ruhige, schüchterne Meerjungfrau der Familie Hosu, besessen von der Umwelt, verbringt ihre Tage mit der Reinigung der Küste.',
+      knownInfo: [
+        'Bestätigt als Mitglied der Meerjungfrauenfamilie Hosu, Geschwister von Kim und Tae.',
+        'Konzentriert sich auf Küstenreinigung und lehrt Einheimische, die Natur zu respektieren.',
+      ],
+      romanceYes: 'Ja, bestätigte Romanze-Option.', romanceNo: '', romanceTbc: '',
+    },
+    aras: {
+      name: 'Aras', familyLabel: 'Seher (Khazan)', typeLabel: 'Seher',
+      desc: 'Der örtliche Schneider der Seherfamilie Khazan, betreibt "Third Eye Threads." Vermeidet es, seine eigenen Sehergaben zu nutzen, um seine Zukunft geheim zu halten.',
+      knownInfo: [
+        'Berichtet als Mitglied der Seherfamilie Khazan, betreibt den Schneiderladen "Third Eye Threads" — Draguns jüngeres Geschwister, zusammen mit Alina.',
+        'Liebt Mode und gemütliche Gespräche.',
+      ],
+      romanceYes: 'Ja, bestätigte Romanze-Option.', romanceNo: '', romanceTbc: '',
+    },
+    persephone: {
+      name: 'Persephone', familyLabel: 'Mensch (Henderson)', typeLabel: 'Mensch',
+      desc: 'Freigeistiges Oberhaupt der Familie Henderson — eine menschliche Tante, die sich um ihre Nichte Jada und ihren Neffen Winston kümmert, neu in der Stadt angekommen, mit einer Vorliebe für Astrologie und Kristalle.',
+      knownInfo: [
+        'Bestätigt als Oberhaupt der menschlichen Familie Henderson (Tante von Jada und Winston).',
+        'Interessiert an Astrologie, Chakren, Auren und mystischen Themen — neu in der Stadt auf der Suche nach einem Neuanfang.',
+      ],
+      romanceYes: 'Ja, bestätigte Romanze-Option.', romanceNo: '', romanceTbc: '',
+    },
+    llemi: {
+      name: 'Llemi', familyLabel: 'Liebesdämon', typeLabel: 'Dämon',
+      desc: 'Ein skurriler Liebesdämon, der sich von lokalem Drama und Chaos ernährt, lebt im Pink Grove und besucht die Stadt hauptsächlich während Festen.',
+      knownInfo: [
+        'Berichtet als Dämon-Bewohnerin des Pink Grove.',
+        'Wird angeblich nur während Festen in der Stadt gesehen; ihr Herz zu gewinnen soll echten Aufwand erfordern.',
+      ],
+      romanceYes: 'Ja, bestätigte Romanze-Option.', romanceNo: '', romanceTbc: '',
+    },
     'count-dracula': {
       name: 'Graf Dracula', familyLabel: 'Vampir', typeLabel: 'Vampir',
       desc: 'Dein Vater und die Legende der Stadt. Aus seinem Schatten herauszutreten ist der Ausgangspunkt der Geschichte — keine Romanze-Option, sondern eine zentrale Erzählfigur.',
@@ -182,6 +330,191 @@ export const charTranslations: Record<'es' | 'ja' | 'zh' | 'zh-hant' | 'de', Rec
         'Su nombre real dentro del juego no ha sido confirmado.',
       ],
       romanceYes: '', romanceNo: '', romanceTbc: 'Si se puede conquistar a El Brujo todavía no está confirmado — lo actualizaremos en el lanzamiento.',
+    },
+    mina: {
+      name: 'Mina', familyLabel: 'Vampira (Ambrosia)', typeLabel: 'Vampira',
+      desc: 'Una vampira alegre, hija de Orlock, que dirige junto con su hermano Evan el café del pueblo "Coffee & Coffins".',
+      knownInfo: [
+        'Confirmada como hija de Orlock y hermana de Evan; ambos dirigen "Coffee & Coffins" juntos.',
+        'Se reporta que Orlock quiso cerrar el café después de que su madre se fuera, pero Mina lo convenció de no hacerlo.',
+        'Le encanta hornear y se mantiene determinadamente alegre y positiva.',
+      ],
+      romanceYes: 'Sí, opción de romance confirmada.', romanceNo: '', romanceTbc: '',
+    },
+    evan: {
+      name: 'Evan', familyLabel: 'Vampiro (Ambrosia)', typeLabel: 'Vampiro',
+      desc: 'Un vampiro callado y distante que dirige "Coffee & Coffins" junto con su hermana Mina; su padre Orlock lo presiona para que tome el apellido familiar.',
+      knownInfo: [
+        'Confirmado como hijo de Orlock y hermano de Mina, co-dirige el café del pueblo.',
+        'Prefiere contar estrellas antes que tomar el apellido familiar que su padre quiere que herede.',
+      ],
+      romanceYes: 'Sí, opción de romance confirmada.', romanceNo: '', romanceTbc: '',
+    },
+    ridge: {
+      name: 'Ridge', familyLabel: 'Hombre lobo (Logan)', typeLabel: 'Hombre lobo',
+      desc: 'El carpintero del pueblo, un pacifista robusto y confiable que usa sus horas de hombre lobo para buscar madera de calidad. Hermano menor de la alcaldesa Brook.',
+      knownInfo: [
+        'Confirmado como carpintero hombre lobo y pacifista.',
+        'Te vende tu primer Granero (4,000 monedas + materiales, espacio de 10x6, 1 noche de construcción, alberga 4 animales), requerido antes de comprar ganado con Luna.',
+        'Dirige la tienda de mejoras de herramientas Howling Hammer, abierta de lunes a viernes, 6 PM a medianoche.',
+      ],
+      romanceYes: 'Sí, opción de romance confirmada.', romanceNo: '', romanceTbc: '',
+    },
+    sabrina: {
+      name: 'Sabrina', familyLabel: 'Bruja (Webb)', typeLabel: 'Bruja',
+      desc: 'Dirige "Webb of Wonders", vendiendo pociones y hechizos — incluido el Elixir de Alter Ego que cambia tu apariencia.',
+      knownInfo: [
+        'Confirmada como dueña de la tienda Webb of Wonders, que vende pociones y hechizos.',
+        'Repara tu varita rota durante "La magia de los cultivos" (aunque en realidad es Noel quien la arregla con cinta adhesiva).',
+      ],
+      romanceYes: 'Sí, opción de romance confirmada.', romanceNo: '', romanceTbc: '',
+    },
+    noel: {
+      name: 'Noel', familyLabel: 'Bruja (Webb)', typeLabel: 'Bruja',
+      desc: 'Un residente del pueblo que te reta a un concurso de pesca cerca del río — te da tu primera caña de pescar.',
+      knownInfo: [
+        'Confirmado como quien te da la primera caña de pescar tras ganar su concurso de pesca.',
+        'Es en realidad quien repara tu varita rota con cinta adhesiva, un giro cómico confirmado de la historia.',
+      ],
+      romanceYes: 'Sí, opción de romance confirmada.', romanceNo: '', romanceTbc: '',
+    },
+    jada: {
+      name: 'Jada', familyLabel: 'Humana (Henderson)', typeLabel: 'Humana',
+      desc: 'Una entusiasta de lo sobrenatural llena de energía y coleccionista de reliquias que habla emocionada sobre historia — sobrina de Perséfone, hermana de Winston.',
+      knownInfo: [
+        'Confirmada como parte de la familia humana Henderson, llegando junto con Perséfone y Winston.',
+        'Reportada como coleccionista de reliquias y entusiasta de la historia, en fuerte contraste con su hermano escéptico Winston.',
+        'Su estilo de conversación acelerado y sin aliento la ha hecho un poco famosa en el pueblo.',
+      ],
+      romanceYes: 'Sí, opción de romance confirmada.', romanceNo: '', romanceTbc: '',
+    },
+    dragan: {
+      name: 'Dragan', familyLabel: 'Vidente (Khazan)', typeLabel: 'Vidente',
+      desc: 'El mayor de los hermanos videntes Khazan — sus propias predicciones suelen ser erróneas, pero es más conocido como el inventor dentro del universo del popular juego de cartas Nokturna.',
+      knownInfo: [
+        'Confirmado como el hermano mayor de la familia vidente Khazan, antes de Aras y Alina.',
+        'Reportado como el inventor dentro del universo de Nokturna.',
+      ],
+      romanceYes: 'Sí, opción de romance confirmada.', romanceNo: '', romanceTbc: '',
+    },
+    alina: {
+      name: 'Alina', familyLabel: 'Vidente (Khazan)', typeLabel: 'Vidente',
+      desc: 'La rebelde de la familia Khazan — terca, fogosa, no soporta las mentiras, con poderes videntes poco convencionales y preferencia por las sombras.',
+      knownInfo: [
+        'Reportada como parte de la familia vidente Khazan — hermana menor de Dragan, junto con Aras.',
+        'Vive en su propia casa, lo que sugiere que es una residente establecida en lugar de una figura secundaria.',
+      ],
+      romanceYes: 'Sí, opción de romance confirmada.', romanceNo: '', romanceTbc: '',
+    },
+    death: {
+      name: 'Death', familyLabel: 'Sin familia', typeLabel: 'La Muerte',
+      desc: 'La Parca en persona, de vacaciones en el pueblo para relajarse — humor seco, cuida el cementerio local, y colecciona tanto flores como almas.',
+      knownInfo: [
+        'Confirmado como opción de romance — ya no es un rumor previo al lanzamiento.',
+        'Reside en "la choza de Death", en el área del cementerio de Misty Shores.',
+        'Cadena de desbloqueo confirmada: los jugadores lo conocen dos veces después de desbloquear Misty Shores (vía la misión "A Bridge Too Far") antes de que dé la red de insectos.',
+      ],
+      romanceYes: 'Sí, opción de romance confirmada.', romanceNo: '', romanceTbc: '',
+    },
+    samael: {
+      name: 'Samael', familyLabel: 'Vampiro (Ambrosia)', typeLabel: 'Vampiro',
+      desc: 'Un vampiro misterioso y melancólico de la familia Ambrosia que ha dirigido el bar del pueblo, "The Broken Lamp", durante siglos. Hermano de Elvira, sobrino de Orlock.',
+      knownInfo: [
+        'Dirige "The Broken Lamp", el bar del pueblo, y es miembro de la familia Ambrosia.',
+        'Su romance está bloqueado tras el progreso de la historia y se desbloquea al llegar a Luna Bay y conocer a la familia de sirenas Hosu.',
+        'Confirmado: las misiones previas "A Curious Passage" y "The Mysterious Bay" implican levantar un árbol caído, reparar un puente con Ludo, y ayudar a preparar una boda — con una sirena llamada Kim, que se arrepiente en el altar.',
+      ],
+      romanceYes: 'Sí, opción de romance confirmada.', romanceNo: '', romanceTbc: '',
+    },
+    elvira: {
+      name: 'Elvira', familyLabel: 'Vampira (Ambrosia)', typeLabel: 'Vampira',
+      desc: 'La hermana de Samael — una vampira artística e inquieta que siempre se lanza a nuevos proyectos paralelos, a menudo molestando a su tío Orlock.',
+      knownInfo: [
+        'Confirmada como hermana de Samael y sobrina de Orlock.',
+        'Oculta un lado frágil y artístico que se dice que solo Samael conoce completamente.',
+      ],
+      romanceYes: 'Sí, opción de romance confirmada.', romanceNo: '', romanceTbc: '',
+    },
+    fiona: {
+      name: 'Fiona', familyLabel: 'Bruja (Webb)', typeLabel: 'Bruja',
+      desc: 'La líder del aquelarre de brujas Webb, conocida por su mente aguda y terquedad — maldijo el puente después de la broma de Orlock sobre ella.',
+      knownInfo: [
+        'Confirmada como líder del aquelarre de brujas Webb en Moonlit Pines.',
+        'Impuso la maldición sobre el puente tras una pelea de borrachos con Orlock en la misión "A Bridge Too Far".',
+      ],
+      romanceYes: 'Sí, opción de romance confirmada.', romanceNo: '', romanceTbc: '',
+    },
+    kim: {
+      name: 'Kim', familyLabel: 'Sirena (Hosu)', typeLabel: 'Sirena',
+      desc: 'Una sirena de la familia Hosu, sin límites de energía y alegre, que llega al pueblo aproximadamente un año después del inicio de la historia.',
+      knownInfo: [
+        'Confirmada como miembro de la familia de sirenas Hosu, hermana de Rei y Tae.',
+        'La familia Hosu llega a mitad del primer año y necesita ayuda para reincorporarse al pueblo, viviendo juntos en Luna Bay.',
+      ],
+      romanceYes: 'Sí, opción de romance confirmada.', romanceNo: '', romanceTbc: '',
+    },
+    ludo: {
+      name: 'Ludo', familyLabel: 'Hombre lobo (Logan)', typeLabel: 'Hombre lobo',
+      desc: 'El hijo despreocupado de la alcaldesa Brook (hermano de Saga, sobrino/a de Ridge) que prefiere dormir antes que preocuparse por cualquier cosa.',
+      knownInfo: [
+        'Confirmado como hijo de la alcaldesa Brook, hermano de Saga, sobrino/a de Ridge.',
+        'Dirige una tienda que vende varitas-herramienta (pico, regadera Aquaflux, movimiento de árboles) para ahorrar resistencia en tareas repetitivas.',
+      ],
+      romanceYes: 'Sí, opción de romance confirmada.', romanceNo: '', romanceTbc: '',
+    },
+    tae: {
+      name: 'Tae', familyLabel: 'Sireno (Hosu)', typeLabel: 'Sireno',
+      desc: 'Un sireno impresionante y sencillo de la familia Hosu que se enorgullece de su apariencia y ama ayudar a otros a encontrar su confianza.',
+      knownInfo: [
+        'Confirmado como miembro de la familia de sirenas Hosu, hermano de Kim y Rei.',
+        'Descrito como leal y alentador.',
+      ],
+      romanceYes: 'Sí, opción de romance confirmada.', romanceNo: '', romanceTbc: '',
+    },
+    winston: {
+      name: 'Winston', familyLabel: 'Humano (Henderson)', typeLabel: 'Humano',
+      desc: 'El escéptico del pueblo — reacio a vivir en un pueblo sobrenatural y fácil de asustar, pero muy divertido una vez que baja la guardia.',
+      knownInfo: [
+        'Confirmado como parte de la familia humana Henderson, llegando junto con Perséfone y Jada.',
+        'Fue decisión de su familia mudarse a Moonlight Peaks, no la suya propia — no cree en el lado sobrenatural del pueblo.',
+      ],
+      romanceYes: 'Sí, opción de romance confirmada.', romanceNo: '', romanceTbc: '',
+    },
+    rei: {
+      name: 'Rei', familyLabel: 'Sirena (Hosu)', typeLabel: 'Sirena',
+      desc: 'Una sirena callada y tímida de la familia Hosu obsesionada con el medio ambiente, que pasa sus días limpiando la costa.',
+      knownInfo: [
+        'Confirmada como miembro de la familia de sirenas Hosu, hermana de Kim y Tae.',
+        'Enfocada en la limpieza costera y en enseñar a los locales a respetar la naturaleza.',
+      ],
+      romanceYes: 'Sí, opción de romance confirmada.', romanceNo: '', romanceTbc: '',
+    },
+    aras: {
+      name: 'Aras', familyLabel: 'Vidente (Khazan)', typeLabel: 'Vidente',
+      desc: 'El sastre local de la familia vidente Khazan, dirige "Third Eye Threads". Evita usar sus propios poderes videntes para mantener su futuro en misterio.',
+      knownInfo: [
+        'Reportado como miembro de la familia vidente Khazan, dirige la sastrería "Third Eye Threads" — hermano menor de Dragan, junto con Alina.',
+        'Ama la moda y las conversaciones acogedoras.',
+      ],
+      romanceYes: 'Sí, opción de romance confirmada.', romanceNo: '', romanceTbc: '',
+    },
+    persephone: {
+      name: 'Perséfone', familyLabel: 'Humana (Henderson)', typeLabel: 'Humana',
+      desc: 'Cabeza de familia de espíritu libre de los Henderson — una tía humana que cuida a su sobrina Jada y sobrino Winston, recién llegada al pueblo, con amor por la astrología y los cristales.',
+      knownInfo: [
+        'Confirmada como cabeza de la familia humana Henderson (tía de Jada y Winston).',
+        'Interesada en astrología, chakras, auras, y temas místicos — recién llegada al pueblo buscando un nuevo comienzo.',
+      ],
+      romanceYes: 'Sí, opción de romance confirmada.', romanceNo: '', romanceTbc: '',
+    },
+    llemi: {
+      name: 'Llemi', familyLabel: 'Demonio del amor', typeLabel: 'Demonio',
+      desc: 'Un demonio del amor caprichoso que se alimenta del drama y caos local, vive en Pink Grove y visita el pueblo principalmente durante festivales.',
+      knownInfo: [
+        'Reportada como residente demonio de Pink Grove.',
+        'Se dice que solo se le ve en el pueblo durante festivales; ganar su corazón se describe como algo que requiere esfuerzo real.',
+      ],
+      romanceYes: 'Sí, opción de romance confirmada.', romanceNo: '', romanceTbc: '',
     },
   },
   ja: {

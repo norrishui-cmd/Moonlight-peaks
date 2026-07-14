@@ -1,0 +1,64 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { SITE } from '../../../consts';
+
+const faq = [
+  { q: '¿Qué hace el Invernadero en Moonlight Peaks?', a: 'Reportado por la comunidad: añade más espacio de cultivo protegido, útil una vez que tus parcelas al aire libre están llenas o quieres espacio extra para cultivos mágicos. El costo exacto de construcción, requisitos de desbloqueo, y si cambia las reglas de crecimiento de cultivos aún no están confirmados independientemente aquí.' },
+  { q: '¿Hay un logro por construir un Invernadero?', a: 'Sí, confirmado: "Perpetual Bloom" se otorga por construir un Invernadero. Reportado por la comunidad: más allá del logro en sí, tener un Invernadero también se dice que ayuda hacia varios otros objetivos relacionados con la agricultura, así que vale la pena priorizarlo en lugar de dejarlo para el final del juego.' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Inicio', item: `${SITE.url}/es` },
+    { '@type': 'ListItem', position: 2, name: 'Granja', item: `${SITE.url}/es/farm` },
+    { '@type': 'ListItem', position: 3, name: 'Invernadero', item: `${SITE.url}/es/farm/greenhouse` },
+  ] },
+];
+---
+<Base
+  title="Invernadero de Moonlight Peaks — Lo confirmado hasta ahora"
+  description="Lo que se ha confirmado sobre el Invernadero de Moonlight Peaks: espacio extra de cultivo protegido, siendo honestos sobre lo que aún no está verificado en lugar de adivinar."
+  path="/es/farm/greenhouse"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Granja', href: '/es/farm' }, { label: 'Invernadero' }]}
+  lang="es"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Granja · Invernadero</p>
+      <h1>El <em>Invernadero</em></h1>
+      <p class="intro">
+        Reportado por la comunidad: el Invernadero es una expansión de la granja que añade espacio
+        extra de cultivo protegido, útil una vez que tus parcelas existentes están llenas. Más allá
+        de eso, aún no tenemos detalles confirmados independientemente sobre su costo de
+        construcción, requisitos de desbloqueo, o exactamente cómo cambia la agricultura — así que
+        esta página se mantiene corta en lugar de adivinar.
+      </p>
+
+      <h2>Lo que aún se está verificando</h2>
+      <ul>
+        <li>Costo de construcción y materiales requeridos.</li>
+        <li>Qué misión o punto de la historia (si alguno) lo desbloquea.</li>
+        <li>Si cambia las estaciones de crecimiento o protege contra el clima.</li>
+        <li>Cuánto espacio de cultivo realmente añade.</li>
+      </ul>
+
+      <h2>FAQ</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        Esta página se expandirá conforme se confirmen datos reales del Invernadero. Relacionado:
+        <a href="/es/farm">Centro de la granja</a>, <a href="/es/farm/crops">cultivos</a>,
+        <a href="/es/farm/house">casa</a>.
+      </div>
+    </div>
+  </article>
+</Base>

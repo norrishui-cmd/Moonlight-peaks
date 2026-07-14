@@ -82,5 +82,8 @@ export function isPathTranslated(locale: Locale, barePath: string): boolean {
   if ((locale === 'ja' || locale === 'de') && /^\/collections\/(fish|critters)\/[a-z0-9-]+$/.test(barePath)) return true;
   // Quest story/side detail pages are fully translated for es (all 20 story + 12 side quests).
   if (locale === 'es' && /^\/quests\/(story|side)(\/[a-z0-9-]+)?$/.test(barePath)) return true;
+  // Farm sub-pages (crops, house, barn, greenhouse, animals, farm-helpers) and crop detail pages
+  // are fully translated for es.
+  if (locale === 'es' && /^\/farm\/(crops|house|barn|greenhouse|animals|farm-helpers)(\/[a-z0-9-]+)?$/.test(barePath)) return true;
   return false;
 }

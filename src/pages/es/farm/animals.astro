@@ -1,0 +1,91 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { SITE } from '../../../consts';
+
+const animals = ['Cheeken', 'Piggoat', 'Draculamb', 'Cowcula', 'Stoney', 'Rabbicula'];
+
+const faq = [
+  { q: '¿Qué animales se pueden criar en Moonlight Peaks?', a: 'Confirmado hasta ahora: Cheeken, Piggoat, Draculamb, Cowcula, Stoney, y Rabbicula. Cheeken es el disponible más temprano. Más podrían desbloquearse a lo largo del año.' },
+  { q: '¿Cómo se consiguen animales en Moonlight Peaks?', a: 'Confirmado: construye un Granero primero (4,000 monedas de Ridge), luego visita la granja de Luna, donde un pequeño corral muestra 3 animales disponibles cada día en rotación. Interactúa con uno para adoptarlo, siempre que tengas monedas y espacio en el Granero.' },
+  { q: '¿Qué se le da de comer a los animales en Moonlight Peaks?', a: 'Confirmado: Forraje (hecho de Fibra en un Refinador) o el mejor Forraje Premium (50 de Forraje + 1 Esencia de Maná). Mantén el comedero abastecido para que los animales coman durante la noche.' },
+  { q: '¿Qué producen los animales en Moonlight Peaks?', a: 'Confirmado: leche, lana, huevos, y fertilizante dependiendo del animal — el fertilizante específicamente aumenta la calidad de los cultivos, haciendo que el cuidado de animales valga la pena incluso antes de contar el ingreso directo de productos.' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Inicio', item: `${SITE.url}/es` },
+    { '@type': 'ListItem', position: 2, name: 'Granja', item: `${SITE.url}/es/farm` },
+    { '@type': 'ListItem', position: 3, name: 'Animales', item: `${SITE.url}/es/farm/animals` },
+  ] },
+];
+---
+<Base
+  title="Animales de Moonlight Peaks — Lista completa, alimentación y productos"
+  description="Animales de granja confirmados de Moonlight Peaks: Cheeken, Piggoat, Draculamb, Cowcula, Stoney, Rabbicula. Cómo conseguirlos, alimentarlos con Forraje, y qué producen."
+  path="/es/farm/animals"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Granja', href: '/es/farm' }, { label: 'Animales' }]}
+  lang="es"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Granja · Animales</p>
+      <h1>Animales de <em>granja</em></h1>
+      <p class="intro">
+        Lista confirmada de animales y fundamentos de cuidado, verificados con múltiples fuentes de
+        la semana de lanzamiento. Consulta <a href="/es/farm/barn">el Granero</a> para saber cómo
+        desbloquear la propiedad de animales primero.
+      </p>
+
+      <h2>Animales confirmados</h2>
+      <ul>
+        {animals.map((a) => (<li>{a}</li>))}
+      </ul>
+      <p>
+        Cheeken es el primer animal común — confirmado que le gusta ser acariciado y recibir
+        sombreros. Se reporta que nuevos tipos de animales se desbloquean más adelante en el año;
+        esta lista crecerá conforme se confirmen más.
+      </p>
+
+      <h2>Consiguiendo animales</h2>
+      <p>
+        Confirmado: una vez que tu Granero está construido, visita la granja de Luna — un pequeño
+        corral junto a su casa muestra 3 animales disponibles cada día, rotando diariamente,
+        incluyendo diferentes variantes de color. Interactúa con uno para adoptarlo (necesitarás
+        suficientes monedas y espacio libre en el Granero), y se te pedirá que lo nombres tú mismo.
+      </p>
+
+      <h2>Alimentación</h2>
+      <p>
+        Confirmado: los animales comen Forraje, hecho en un Refinador a partir de Fibra (1 Fibra →
+        2 Forraje). Un nivel mejor, Forraje Premium, requiere 50 de Forraje más 1 Esencia de Maná.
+        Mantén el comedero abastecido para que los animales coman durante la noche.
+      </p>
+
+      <h2>Qué producen</h2>
+      <p>
+        Confirmado: los animales producen leche, lana, huevos, o fertilizante dependiendo del tipo.
+        El fertilizante específicamente aumenta la calidad de los cultivos, lo que hace que el
+        cuidado de animales valga el esfuerzo incluso antes de contar el ingreso directo de
+        productos. Los productos de mayor calidad (de animales bien cuidados y felices) se venden
+        por más y son mejores ingredientes de cocina.
+      </p>
+
+      <h2>FAQ</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        Relacionado: <a href="/es/farm">Centro de la granja</a>, <a href="/es/farm/barn">el Granero</a>,
+        <a href="/items/fertilizer">fertilizante</a>, <a href="/characters/luna">Luna</a>.
+      </div>
+    </div>
+  </article>
+</Base>

@@ -1,0 +1,71 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { SITE } from '../../../consts';
+import { farmHelpers } from '../../../data/farm-helpers';
+import { farmHelperDescEs } from '../../../data/farm-helpers-es';
+
+const faq = [
+  { q: '¿Qué son los Ayudantes de Granja en Moonlight Peaks?', a: `Confirmado vía la wiki oficial: los Ayudantes de Granja son máquinas que automatizan la agricultura o procesan productos de granja. Hay ${farmHelpers.length} confirmados hasta ahora, incluyendo el Horno, Barril, Refinador, Jardín de Hierbas, Secadero de Hierbas, Mortero, Casa de Abejas, Telar, Prensa de Queso, Extractor de Maná, Molino, Fabricante de Mermelada, Santuario de Luciérnagas, Polinizador de Luciérnagas, Chocolatero, y Secuenciador de Semillas.` },
+  { q: '¿Cómo se desbloquea el Refinador en Moonlight Peaks?', a: 'Confirmado: se construye en la Mesa de Trabajo por 20 de Madera + 20 de Piedra. Convierte materiales crudos como Madera, Piedra, Fibra, y Madera Oscura en Tablones, Piedra Refinada, Forraje, y Tablones de Madera Dura.' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Inicio', item: `${SITE.url}/es` },
+    { '@type': 'ListItem', position: 2, name: 'Granja', item: `${SITE.url}/es/farm` },
+    { '@type': 'ListItem', position: 3, name: 'Ayudantes de granja', item: `${SITE.url}/es/farm/farm-helpers` },
+  ] },
+];
+---
+<Base
+  title="Ayudantes de granja de Moonlight Peaks — Las 16 máquinas y recetas"
+  description="Cada máquina Ayudante de Granja confirmada de Moonlight Peaks: Horno, Barril, Refinador, Casa de Abejas, Molino, Fabricante de Mermelada y más, con recetas de construcción y productos."
+  path="/es/farm/farm-helpers"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Granja', href: '/es/farm' }, { label: 'Ayudantes de granja' }]}
+  lang="es"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Granja · Máquinas</p>
+      <h1>Ayudantes de <em>granja</em></h1>
+      <p class="intro">
+        Confirmado vía la wiki oficial de Moonlight Peaks: los Ayudantes de Granja son máquinas que
+        automatizan la agricultura o procesan productos de granja. {farmHelpers.length} están
+        confirmados hasta ahora.
+      </p>
+
+      {farmHelpers.map((h) => (
+        <>
+          <h2>{h.name}</h2>
+          <p>
+            {farmHelperDescEs[h.name] || h.desc}
+            {h.buildRecipe && <> <strong>Construcción:</strong> {h.buildRecipe}{h.buildSource ? ` (en ${h.buildSource})` : ''}.</>}
+          </p>
+          {h.outputs && h.outputs.length > 0 && (
+            <ul>
+              {h.outputs.map((o) => (<li><strong>{o.name}:</strong> {o.recipe}</li>))}
+            </ul>
+          )}
+        </>
+      ))}
+
+      <h2>FAQ</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        Obtenido de la wiki oficial de Moonlight Peaks (moonlightpeaks.wiki.gg). Relacionado:
+        <a href="/es/farm">Centro de la granja</a>, <a href="/es/farm/crops">cultivos</a>,
+        <a href="/items/mineables">minerales</a>, <a href="/items/cooking">cocina</a>.
+      </div>
+    </div>
+  </article>
+</Base>
