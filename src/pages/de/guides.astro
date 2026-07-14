@@ -1,0 +1,88 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+
+const rows = [
+  ['Zuerst lesen', 'Einsteiger-Guide, Demo, Release-Datum, unterstützte Plattformen.'],
+  ['Kernsysteme', 'Landwirtschaft, Angeln, Magie, Aktivitäten, Gegenstände, Karte, Nokturna.'],
+  ['Beziehungen', 'Charaktere, Familien, Romanze, Geschenke, Heirat, Freundschaftsrouten.'],
+  ['Sammlungen', 'Fische, Insekten, Rezepte, Tränke, Artefakte, Dekoration, Materialien.'],
+  ['Checkliste vor dem Kauf', 'Steam Deck, Switch, Android, Preis, Demo, Vergleichsseiten.'],
+];
+
+const links = [
+  { href: '/de/beginner-guide', label: 'Einsteiger-Guide' },
+  { href: '/de/release-date', label: 'Release-Datum' },
+  { href: '/de/demo', label: 'Demo' },
+  { href: '/de/platforms', label: 'Plattformen' },
+  { href: '/de/characters', label: 'Charaktere' },
+  { href: '/de/romance', label: 'Romanze' },
+  { href: '/de/farming', label: 'Landwirtschaft' },
+  { href: '/de/magic', label: 'Magie' },
+  { href: '/de/items', label: 'Gegenstände' },
+  { href: '/tools', label: 'Werkzeuge' },
+];
+
+const faq = [
+  { q: 'Welchen Moonlight-Peaks-Guide sollte ich zuerst lesen?', a: 'Lies zuerst den Einsteiger-Guide, dann je nach Ziel Demo, Release-Datum, Plattformen, Charaktere und Romanze-Seiten.' },
+  { q: 'Sind alle Guide-Daten auf dieser Seite bestätigt?', a: 'Nicht alle. Wir trennen bestätigte Fakten, tatsächliche Spielerberichte und noch zu prüfende Inhalte klar voneinander — Vermutungen werden nie als Fakten dargestellt.' },
+  { q: 'Wo finde ich Tabellen zu Geschenken, Fischen und Feldfrüchten?', a: 'Diese werden auf den jeweiligen Seiten zu Romanze, Charakteren, Gegenständen, Landwirtschaft und Aktivitäten ergänzt, sobald verlässliche Daten bestätigt sind.' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Startseite', item: `${SITE.url}/de` },
+    { '@type': 'ListItem', position: 2, name: 'Guides', item: new URL('/de/guides', SITE.url).href },
+  ] },
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+];
+---
+<Base
+  title="Moonlight Peaks Guides - Einsteiger, Landwirtschaft, Romanze"
+  description="Deutsche Guide-Sammlung zu Moonlight Peaks. Übersicht über Einsteiger, Demo, Release-Datum, Plattformen, Landwirtschaft, Magie, Charaktere, Romanze und Gegenstände."
+  path="/de/guides"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Guides' }]}
+  lang="de"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Hub / Guides</p>
+      <h1>Moonlight Peaks <em>Guides</em></h1>
+      <p class="intro">
+        Ein Guide-Hub mit den Seiten, die du vor dem Einstieg in {GAME.title} lesen solltest.
+        Detaildaten, die nach Release bestätigt werden, ergänzen wir laufend auf den jeweiligen
+        Themenseiten.
+      </p>
+
+      <h2>Guide-Übersicht</h2>
+      <table class="facts">
+        {rows.map((row) => (<tr><th>{row[0]}</th><td>{row[1]}</td></tr>))}
+      </table>
+
+      <h2>Wichtige Seiten</h2>
+      <div class="link-grid">
+        {links.map((link) => <a href={link.href}>{link.label}</a>)}
+      </div>
+
+      <h2>Empfohlene Lesereihenfolge</h2>
+      <ol class="steps">
+        <li>Release-Datum, Demo und Plattformen prüfen.</li>
+        <li>Vor der ersten Nacht den Einsteiger-Guide lesen.</li>
+        <li>Ein erstes Ziel wählen: Landwirtschaft, Magie, Romanze, Sammeln oder Erkunden.</li>
+        <li>Für konkrete Antworten die jeweilige Einzelseite nutzen.</li>
+      </ol>
+
+      <h2>FAQ</h2>
+      <div class="faq">
+        {faq.map((f) => <details><summary>{f.q}</summary><p>{f.a}</p></details>)}
+      </div>
+    </div>
+  </article>
+
+  <style>
+    .link-grid { display: grid; grid-template-columns: 1fr; gap: 10px; margin: 12px 0 24px; }
+    @media (min-width: 720px) { .link-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    .link-grid a { border: 1px solid var(--line); border-radius: 10px; background: var(--surface); color: var(--mist); padding: 12px 14px; text-decoration: none; }
+  </style>
+</Base>

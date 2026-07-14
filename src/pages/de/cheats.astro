@@ -1,0 +1,55 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+
+const jsonLd = {
+  '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Startseite', item: `${SITE.url}/de` },
+    { '@type': 'ListItem', position: 2, name: 'Cheats', item: `${SITE.url}/de/cheats` },
+  ],
+};
+---
+<Base
+  title="Moonlight Peaks — Cheats & Konsolenbefehle"
+  description="Moonlight Peaks Cheats und Konsolenbefehle: wie eine Cheat-Konsole funktionieren würde, und die vollständige Befehlsliste für Geld, Fähigkeiten und Gegenstände — sobald zum Release am 7. Juli 2026 veröffentlicht."
+  path="/de/cheats"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Cheats' }]}
+  lang="de"
+  showExport
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Eintrag · Cheats</p>
+      <h1>Moonlight Peaks <em>Cheats</em> und Konsole</h1>
+      <p class="intro">
+        Ob {GAME.title} spielerseitige Cheats hat, ist auch jetzt nach dem Release noch nicht
+        bestätigt. Hier fassen wir zusammen, was du erwarten kannst und wie Cheat-Konsolen
+        typischerweise in cozy Life-Sims funktionieren. Zuletzt aktualisiert: {SITE.updated}.
+      </p>
+
+      <h2>Gibt es eine Cheat-Konsole?</h2>
+      <p>
+        Welche spielerseitigen Cheats {GAME.title} bietet, ist noch nicht bestätigt — das wird
+        sich erst nach der Vollversion zeigen. Bei dieser Art von cozy Life-Sims ist es üblich, die
+        Konsole über eine Tastenkombination zu öffnen und Befehle einzugeben, um Geld hinzuzufügen
+        oder Fähigkeiten zu verstärken. Sobald verfügbar, fassen wir hier die genauen Tastenkombinationen,
+        bestätigte Befehle und Vorbehalte zusammen (z. B. ob Cheats Erfolge deaktivieren).
+      </p>
+
+      <h2>Was wir zum Release ergänzen</h2>
+      <ul>
+        <li><strong>So öffnest du die Konsole</strong> — genaue Tastenkombination für PC und Switch (falls zutreffend).</li>
+        <li><strong>Geld-Befehle</strong> — bestätigte Codes zum Hinzufügen von Währung.</li>
+        <li><strong>Fähigkeiten, Bedürfnisse & Gegenstände</strong> — vollständige Liste nach Kategorie.</li>
+        <li><strong>Vorbehalte</strong> — Hinweise zur Stabilität von Speicherständen und zu Erfolgen.</li>
+      </ul>
+
+      <div class="callout wip">
+        Wir erfinden keine Befehle. Alles, was hier steht, stammt aus der Vollversion oder
+        bestätigten Informationen des Entwicklers — nicht bestätigte Inhalte werden nicht
+        aufgelistet. Wir prüfen weiterhin regelmäßig und aktualisieren diese Seite.
+      </div>
+    </div>
+  </article>
+</Base>

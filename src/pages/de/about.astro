@@ -1,0 +1,82 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+
+const coverage = [
+  ['Release & Plattformen', 'Release-Datum, Demo, Steam, Steam Deck, Switch, Switch 2, Android, Checkliste vor dem Kauf.'],
+  ['Spieler-Guides', 'Einsteiger, Landwirtschaft, Magie, Aktivitäten, Gegenstände, Karte, Vergleiche, Vorgehen in der Anfangsphase.'],
+  ['Charaktere & Romanze', 'Bewohner, Familien, Romanze-Optionen, Geschenke, Heirat, Daten die nach Release bestätigt werden.'],
+  ['Werkzeuge & FAQ', 'Platform Picker, Romanze-Werkzeuge, Item Tracker, Landwirtschafts-Rechner, FAQ, Update-Seite.'],
+];
+
+const principles = [
+  'Bestätigte Fakten, Demo-Beobachtungen, Vorschau-Informationen und unbestätigte Daten werden getrennt behandelt.',
+  'Spielerfragen werden vor Keywords priorisiert.',
+  'Seiten sollen auf dem Handy gut lesbar, schnell und benutzerfreundlich sein.',
+  'Sobald verlässliche Daten bestätigt sind, wird dieselbe URL aktualisiert.',
+];
+
+const faq = [
+  { q: `Ist ${SITE.brand} offiziell?`, a: `Nein. ${SITE.brand} ist ein von Fans erstellter, unabhängiger Guide ohne offizielle Verbindung zu ${GAME.developer} oder ${GAME.publisher}.` },
+  { q: 'Was deckt diese Seite ab?', a: 'Release-Datum, Demo, Plattformen, Charaktere, Familien, Romanze, Geschenke, Landwirtschaft, Magie, Gegenstände, Werkzeuge, FAQ und Vergleichsseiten.' },
+  { q: 'Wie werden unbestätigte Informationen behandelt?', a: 'Sie werden klar als unbestätigt oder noch zu überprüfen gekennzeichnet. Vermutungen werden nicht als endgültige Daten dargestellt.' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'AboutPage', name: `Über ${SITE.brand}`, url: new URL('/de/about', SITE.url).href },
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Startseite', item: `${SITE.url}/de` },
+    { '@type': 'ListItem', position: 2, name: 'Über uns', item: new URL('/de/about', SITE.url).href },
+  ] },
+];
+---
+<Base
+  title={`Über ${SITE.brand} - Unabhängiger Moonlight Peaks Guide`}
+  description={`${SITE.brand} ist ein unabhängiger Guide zu Moonlight Peaks: Release-Datum, Demo, Plattformen, Romanze, Charaktere, Landwirtschaft, Magie, Werkzeuge und FAQ.`}
+  path="/de/about"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Über uns' }]}
+  lang="de"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Unabhängiger Fan-Guide</p>
+      <h1>Über <em>{SITE.brand}</em></h1>
+      <p class="intro">
+        {SITE.brand} ist ein von Fans erstellter Guide zu {GAME.title}. Wir machen es einfach,
+        schnell Informationen zu Release-Datum, Demo, Plattformen, Romanze, Charakteren,
+        Geschenken, Landwirtschaft, Magie, Werkzeugen und Release-Vorbereitung zu finden.
+      </p>
+
+      <h2>Was wir abdecken</h2>
+      <div class="info-grid">
+        {coverage.map((item) => <section><h3>{item[0]}</h3><p>{item[1]}</p></section>)}
+      </div>
+
+      <h2>Redaktionelle Grundsätze</h2>
+      <ul>
+        {principles.map((item) => <li>{item}</li>)}
+      </ul>
+
+      <h2>Zur Unabhängigkeit</h2>
+      <p>
+        Diese Seite ist keine offizielle Seite und weder mit {GAME.developer} noch mit
+        {GAME.publisher} verbunden, von ihnen genehmigt oder mit ihnen assoziiert. Namen und
+        Materialien zu Moonlight Peaks gehören den jeweiligen Rechteinhabern.
+      </p>
+
+      <h2>FAQ</h2>
+      <div class="faq">
+        {faq.map((f) => <details><summary>{f.q}</summary><p>{f.a}</p></details>)}
+      </div>
+    </div>
+  </article>
+
+  <style>
+    .info-grid { display: grid; grid-template-columns: 1fr; gap: 12px; margin: 16px 0 24px; }
+    @media (min-width: 760px) { .info-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    .info-grid section { border: 1px solid var(--line); border-radius: 12px; background: var(--surface); padding: 16px; }
+    .info-grid h3 { margin-top: 0; }
+  </style>
+</Base>
