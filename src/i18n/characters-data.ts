@@ -14,7 +14,7 @@ export type CharTranslation = {
   romanceTbc: string;
 };
 
-export const charTranslations: Record<'es' | 'ja' | 'zh' | 'zh-hant' | 'de', Record<string, CharTranslation>> = {
+export const charTranslations: Record<'es' | 'ja' | 'zh' | 'zh-hant' | 'de' | 'fr', Record<string, CharTranslation>> = {
   de: {
     saga: {
       name: 'Saga', familyLabel: 'Werwolf', typeLabel: 'Werwolf',
@@ -825,6 +825,48 @@ export const charTranslations: Record<'es' | 'ja' | 'zh' | 'zh-hant' | 'de', Rec
       desc: 'Nombre confirmado que existe a través de la navegación de la wiki oficial; rol aún no documentado.',
       knownInfo: ['Listado en la wiki oficial; sin más detalles confirmados todavía.'],
       romanceYes: '', romanceNo: '', romanceTbc: 'Todavía no confirmado.',
+    },
+  },
+  fr: {
+    saga: {
+      name: 'Saga', familyLabel: 'Loup-garou (Logan)', typeLabel: 'Loup-garou',
+      desc: 'Une louve-garou épineuse mais dévouée qui fait tourner la ville — réparant les nids-de-poule et pourchassant des citrouilles disparues — avec peu de temps pour la romance jusqu\u2019à ce qu\u2019elle la surprenne.',
+      knownInfo: [
+        'Confirmée comme faisant partie de la famille loup-garou Logan.',
+        'S\u2019occupe des tâches pratiques de la ville, avec peu de temps libre pour elle-même.',
+        'Rapporté par la communauté : nettement plus sur les nerfs pendant les pleines lunes.',
+      ],
+      romanceYes: 'Oui, option de romance confirmée.', romanceNo: '', romanceTbc: '',
+    },
+    luna: {
+      name: 'Luna', familyLabel: 'Sorcière (Webb)', typeLabel: 'Sorcière',
+      desc: 'Une sorcière-agricultrice qui enseigne au joueur les cultures magiques et le premier sort, Aquaflux — cousine de Fiona et Noel.',
+      knownInfo: [
+        'Confirmée comme membre de la famille de sorcières Webb.',
+        'Déclenche la quête "La magie des cultures" par lettre, qui mène à la réparation de la baguette et au premier sort.',
+      ],
+      romanceYes: 'Oui, option de romance confirmée.', romanceNo: '', romanceTbc: '',
+    },
+    orlock: {
+      name: 'Orlock', familyLabel: 'Vampire (Ambrosia)', typeLabel: 'Vampire',
+      desc: 'Un vampire de la vieille école et oncle du joueur, souvent vu la gueule de bois sur sa pelouse au début du jeu — père de Mina et Evan.',
+      knownInfo: [
+        'Confirmé comme oncle du joueur et père de Mina et Evan.',
+        'Déclenche la quête "Le plan de vin d\u2019Orlock", qui mène à "A Bridge Too Far".',
+        'Décrit comme une figure comique dans les aperçus de presse.',
+      ],
+      romanceYes: 'Rapporté qu\u2019Orlock est romançable. Les préférences de cadeaux et événements de cœur seront ajoutés dès confirmation dans le jeu en direct.',
+      romanceNo: '', romanceTbc: '',
+    },
+    brook: {
+      name: 'Brook', familyLabel: 'Loup-garou', typeLabel: 'Loup-garou',
+      desc: 'La maire de Moonlight Peaks, matriarche de la famille Logan (loups-garous). Pas une option de romance.',
+      knownInfo: [
+        'Confirmée comme maire de la ville, en charge de l\u2019enregistrement à la mairie et de te remettre Chester.',
+        'Matriarche de la famille Logan ; mère de Saga et Ludo, et sœur aînée de Ridge.',
+        'Dirige le Howling Hammer, la boutique d\u2019amélioration d\u2019outils, ouverte du lundi au vendredi de 18h à minuit.',
+      ],
+      romanceYes: '', romanceNo: 'Brook n\u2019est pas une option de romance confirmée.', romanceTbc: '',
     },
   },
   ja: {

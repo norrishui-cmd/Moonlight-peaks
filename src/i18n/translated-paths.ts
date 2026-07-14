@@ -54,6 +54,9 @@ const dePaths = [
 // Pages deepened for Spanish specifically, beyond the shared es/ja/zh baseline above.
 const esOnlyPaths = ['/quests', '/farm', '/collections', '/map'];
 
+// French is a brand-new locale, starting with just the homepage — grows independently from here.
+const frPaths = ['/'];
+
 export const translatedPathsByLocale: Record<Locale, Set<string>> = {
   en: new Set(), // English is the source; not meaningful to check "is English translated".
   es: new Set([...sharedEsJaZhPaths, ...esOnlyPaths]),
@@ -61,6 +64,7 @@ export const translatedPathsByLocale: Record<Locale, Set<string>> = {
   zh: new Set(sharedEsJaZhPaths),
   'zh-hant': new Set(sharedEsJaZhPaths), // mirrors the same 21 pages as zh, converted via OpenCC
   de: new Set(dePaths),
+  fr: new Set(frPaths),
 };
 
 // Character slugs translated per locale (used for /characters/{slug} pages specifically).
@@ -71,6 +75,7 @@ export const translatedCharSlugsByLocale: Record<Locale, Set<string>> = {
   zh: new Set(Object.keys(charTranslations.zh)),
   'zh-hant': new Set(Object.keys(charTranslations['zh-hant'] || {})),
   de: new Set(Object.keys(charTranslations.de || {})),
+  fr: new Set(Object.keys(charTranslations.fr || {})),
 };
 
 export function isPathTranslated(locale: Locale, barePath: string): boolean {

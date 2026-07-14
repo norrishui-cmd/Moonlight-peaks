@@ -1,0 +1,95 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { SITE } from '../../../consts';
+import { characters } from '../../../data/characters';
+import { charTranslations } from '../../../i18n/characters-data';
+
+export function getStaticPaths() {
+  return Object.keys(charTranslations.fr).map((slug) => ({ params: { slug } }));
+}
+
+const { slug } = Astro.params;
+const base = characters.find((c) => c.id === slug)!;
+const tr = charTranslations.fr[slug as keyof typeof charTranslations.fr];
+
+const url = new URL(`/fr/characters/${slug}`, SITE.url).href;
+const imgAbs = base.img ? new URL(base.img, SITE.url).href : undefined;
+const statusLabel =
+  base.status === 'confirmed' ? 'Confirmé'
+  : base.status === 'reported' ? 'Rapporté'
+  : base.status === 'datamined' ? 'Extrait des données'
+  : 'Non confirmé';
+const romanceText = base.romanceable === true ? tr.romanceYes : base.romanceable === false ? tr.romanceNo : tr.romanceTbc;
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Accueil', item: `${SITE.url}/fr` },
+    { '@type': 'ListItem', position: 2, name: 'Personnages', item: `${SITE.url}/fr/characters` },
+    { '@type': 'ListItem', position: 3, name: tr.name, item: url },
+  ] },
+  { '@context': 'https://schema.org', '@type': 'Person', name: tr.name, description: tr.desc, ...(imgAbs ? { image: imgAbs } : {}) },
+];
+---
+<Base
+  title={`${tr.name} - Guide des personnages de Moonlight Peaks`}
+  description={`Moonlight Peaks ${tr.name}: ${tr.desc} Famille, statut de romance et ce que l'on sait actuellement.`}
+  path={`/fr/characters/${slug}`}
+  jsonLd={jsonLd}
+  ogImage={base.img}
+  crumbs={[{ label: 'Personnages', href: '/fr/characters' }, { label: tr.name }]}
+  lang="fr"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Personnages · {tr.typeLabel}</p>
+
+      <div class="chead">
+        <div class="cavatar">
+          {base.img ? (
+            <img src={base.img} alt={`Portrait de ${tr.name}`} width="160" height="160" />
+          ) : (
+            <span class="fallback-avatar" style={`background: linear-gradient(135deg, ${base.c1}, ${base.c2})`}>{tr.name.charAt(0)}</span>
+          )}
+        </div>
+        <div class="cmeta">
+          <h1>{tr.name}</h1>
+          <div class="ctags">
+            <span class={`cbadge ${base.status === 'confirmed' ? 'is-conf' : base.status === 'reported' ? 'is-rep' : base.status === 'datamined' ? 'is-dm' : 'is-unc'}`}>{statusLabel}</span>
+            <span class="ctag fam">{tr.familyLabel}</span>
+            {base.romanceable === true && <span class="ctag heart">Option de romance</span>}
+            {base.romanceable === false && <span class="ctag">Pas de romance</span>}
+            {base.romanceable === null && <span class="ctag">Romance : non confirmée</span>}
+          </div>
+          <p class="cdesc">{tr.desc}</p>
+        </div>
+      </div>
+
+      <h2>Ce que l'on sait</h2>
+      <ul>{tr.knownInfo.map((k) => (<li>{k}</li>))}</ul>
+
+      <h2>À propos de la romance</h2>
+      <p>{romanceText}</p>
+
+      {(base.lovedGifts?.length || base.likedGifts?.length || base.dislikedGifts?.length) && (
+        <>
+          <h2>Préférences de cadeaux</h2>
+          {base.lovedGifts && base.lovedGifts.length > 0 && (
+            <p><strong>Adore :</strong> {base.lovedGifts.join(', ')}</p>
+          )}
+          {base.likedGifts && base.likedGifts.length > 0 && (
+            <p><strong>Aime :</strong> {base.likedGifts.join(', ')}</p>
+          )}
+          {base.dislikedGifts && base.dislikedGifts.length > 0 && (
+            <p><strong>N'aime pas :</strong> {base.dislikedGifts.join(', ')}</p>
+          )}
+          <p class="cnote">Données confirmées basées sur les tests de la semaine de lancement par des médias internationaux (TheGamer, publié le 7 juillet 2026).</p>
+        </>
+      )}
+
+      <div class="callout">
+        Pages liées : <a href="/fr/characters">Aperçu des personnages</a>, <a href="/romance">Guide de romance</a>,
+        <a href="/families">Familles</a>, <a href="/characters">version détaillée en anglais</a>.
+      </div>
+    </div>
+  </article>
+</Base>

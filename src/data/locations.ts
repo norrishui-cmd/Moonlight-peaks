@@ -205,13 +205,15 @@ export const locations: TopicItem[] = [
     body: [
       'Confirmed: the Crystal Cave is a distinct underground area from the Cave of Echoes, located to the left of Fiona\u2019s house. A large boulder blocks the entrance until you upgrade your pickaxe to at least Copper level.',
       'Confirmed: inside, Rose Quartz nodes spawn generously, along with other gemstones. Rose Quartz is ground into a powder using the Enchanted Mortar (unlocked once you start learning magic) and is used in several crafting recipes and quests.',
-      'Confirmed via the game\u2019s official wiki: alongside the Cave of Echoes, the mines also include a further zone called the Twilight Catacombs \u2014 suggesting the underground areas are split into multiple distinct zones rather than one cave. Confirmed elsewhere: this is also where Vampsters (small creatures found hiding around town and inside most houses) get carried through a hole to complete their collection questline, once early story quests unlock catacomb access.',
+      'Confirmed via the game\u2019s official wiki: alongside the Cave of Echoes, the mines also include a further zone called the Twilight Catacombs \u2014 suggesting the underground areas are split into multiple distinct zones rather than one cave. Confirmed elsewhere: this is also where Vampsters (small creatures found hiding around town and inside most houses) get carried through a hole to complete their collection questline.',
+      'Confirmed: the entrance to the Twilight Catacombs is a locked cellar door found near Viktor\u2019s crypt. The key comes from Jada, awarded once you reach 25% completion on your museum collection \u2014 not from a story quest or shop purchase, so catching critters and growing 2-star-quality produce for donation is the actual path to opening it.',
       'Reaching the Crystal Cave itself requires Misty Shores to already be unlocked (via the "A Bridge Too Far" quest), since that\u2019s the area the Cave of Echoes and its pickaxe upgrades are found in.',
     ],
     related: [{ label: 'The mines', href: '/locations/mines' }, { label: 'A Bridge Too Far', href: '/quests/story/a-bridge-too-far' }, { label: 'Tools', href: '/items/tools' }],
     faq: [
       { q: 'Where is the Crystal Cave in Moonlight Peaks?', a: 'Confirmed: it\u2019s a distinct underground area to the left of Fiona\u2019s house, separate from the Cave of Echoes. A boulder blocks the entrance until your pickaxe reaches Copper tier.' },
       { q: 'What do you get from the Crystal Cave?', a: 'Confirmed: Rose Quartz nodes spawn generously alongside other gemstones. Rose Quartz is ground into powder with the Enchanted Mortar and used in several crafting recipes and quests.' },
+      { q: 'How do you unlock the Twilight Catacombs / the locked cellar door near Viktor\u2019s crypt?', a: 'Confirmed: that locked door isn\u2019t opened by a quest, item, or shop purchase \u2014 the key comes from Jada once your museum collection reaches 25% completion. If you\u2019ve been ignoring the museum, catching critters and growing higher-quality (2-star) produce to donate is the actual path to that key.' },
     ],
   },
 ];

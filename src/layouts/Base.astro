@@ -15,7 +15,7 @@ interface Props {
   ogImage?: string;
   showExport?: boolean;
   noindex?: boolean;
-  lang?: 'en' | 'es' | 'ja' | 'zh' | 'zh-hant' | 'de';
+  lang?: 'en' | 'es' | 'ja' | 'zh' | 'zh-hant' | 'de' | 'fr';
 }
 const { title, description, path = '/', jsonLd, crumbs = [], ogImage, showExport = false, noindex = false, lang = 'en' } = Astro.props;
 const canonical = new URL(path, SITE.url).href;
@@ -25,14 +25,14 @@ const ogImageUrl = ogImage ? new URL(ogImage, SITE.url).href : undefined;
 // path, then only emit an alternate for a locale if that locale genuinely has a translation for
 // this path — otherwise we'd be telling search engines a /de/... (or /es/.../ etc.) page exists
 // when it doesn't. English (the source) and the current page's own locale are always included.
-const barePath = path.replace(/^\/(es|ja|zh-hant|zh|de)(\/|$)/, '/');
+const barePath = path.replace(/^\/(es|ja|zh-hant|zh|de|fr)(\/|$)/, '/');
 const localeUrl = (code: string) => new URL(code === 'en' ? barePath : `/${code}${barePath}`.replace(/\/$/, '') || `/${code}`, SITE.url).href;
 // hreflang attribute values use proper BCP-47 casing (zh-Hant), even though the URL path segment
 // itself stays lowercase (zh-hant) per usual URL convention.
 const hreflangAttr: Record<string, string> = { 'zh-hant': 'zh-Hant' };
 const hreflangs: { code: string; href: string }[] = [
   { code: 'en', href: localeUrl('en') },
-  ...(['es', 'ja', 'zh', 'zh-hant', 'de'] as const)
+  ...(['es', 'ja', 'zh', 'zh-hant', 'de', 'fr'] as const)
     .filter((code) => code === lang || isPathTranslated(code, barePath))
     .map((code) => ({ code: hreflangAttr[code] || code, href: localeUrl(code) })),
 ];

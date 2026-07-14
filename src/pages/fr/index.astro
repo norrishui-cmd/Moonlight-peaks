@@ -1,0 +1,103 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+
+const entries = [
+  { title: 'Date de sortie et plateformes', desc: 'Disponible depuis le 7 juillet sur Steam, Switch, Switch 2 et Android — prix et démo gratuite.', href: '/release-date', img: '/card-release.webp' },
+  { title: 'Guide du débutant', desc: 'Ce qui compte vraiment lors de ta première semaine — confirmé à partir du jeu réel.', href: '/beginner-guide', img: '/card-guide.webp' },
+  { title: 'Romance et familles', desc: '23 options de romance confirmées, les sept familles et les cadeaux préférés.', href: '/romance', img: '/card-romance.webp' },
+  { title: 'Cultures et ferme', desc: 'Blood Grapes, le Granero et le bétail magique — données confirmées.', href: '/farming', img: '/card-crops.webp' },
+  { title: 'Magie', desc: 'Comment réparer la baguette cassée, Moon Fruit et la progression du mana.', href: '/magic', img: '/card-guide.webp' },
+  { title: 'Personnages', desc: 'Tous les résidents, leurs familles et qui peut être conquis.', href: '/characters', img: '/count-dracula.webp' },
+  { title: 'Lieux', desc: 'Le village, ta ferme, Howling Marshes et d\u2019autres lieux confirmés.', href: '/locations', img: '/hero-loc-town.webp' },
+  { title: 'Problèmes connus', desc: 'Plantages, problèmes de manette et solutions confirmées.', href: '/known-issues', img: '/card-guide.webp' },
+];
+
+const explore = [
+  { k: 'Romance', d: 'Niveaux de cœur, rendez-vous et mariage', href: '/romance', img: '/card-romance.webp' },
+  { k: 'Familles', d: 'Les sept familles surnaturelles du village', href: '/families', img: '/hero-fam-vampires.webp' },
+  { k: 'Activités', d: 'Pêche, magie, artisanat et loisirs douillets', href: '/activities', img: '/hero-act-seasonal-events.webp' },
+  { k: 'Objets', d: 'Outils, potions, décorations et autres catégories', href: '/items', img: null, c1: '#3a4a2f', c2: '#8ab06a' },
+  { k: 'Questions fréquentes', d: 'Réponses rapides aux questions les plus courantes', href: '/faq', img: '/card-faq.webp' },
+  { k: 'Quêtes', d: 'Guide de "A Bridge Too Far" et d\u2019autres quêtes confirmées', href: '/quests', img: '/hero-first-five-minutes.webp' },
+];
+
+const jsonLd = {
+  '@context': 'https://schema.org', '@type': 'WebSite', name: 'Moonlight Peaks Wiki & Guide (Français)',
+  url: `${SITE.url}/fr`, inLanguage: 'fr',
+  description: 'Guide francophone créé par des fans de Moonlight Peaks, le life-sim de vampires : informations de sortie, guide du débutant, romance et problèmes connus.',
+};
+---
+<Base
+  title="Moonlight Peaks Guide en Français — Sortie et Problèmes Connus"
+  description="Ton guide francophone créé par des fans de Moonlight Peaks, le cozy life-sim de vampires. Disponible depuis le 7 juillet 2026. Conseils, romance et problèmes connus."
+  path="/fr"
+  jsonLd={jsonLd}
+  lang="fr"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">L\u2019almanach d\u2019un vampire fermier</p>
+      <h1><em>Moonlight Peaks</em> est maintenant disponible.</h1>
+      <p class="intro">
+        Le guide cozy-gothique du life-sim de vampires de {GAME.developer}. {GAME.title} est sorti
+        le 7 juillet 2026 et est déjà disponible. Ce guide est mis à jour avec des informations
+        réelles et vérifiées du jeu.
+      </p>
+      <p class="callout wip">
+        Cette version française couvre pour l\u2019instant les pages les plus importantes. Le reste
+        du contenu (articles, la plupart des profils de personnages) est encore uniquement en
+        anglais — nous le traduirons progressivement. Les liens de cette page te mèneront vers ces
+        pages en anglais jusqu\u2019à ce qu\u2019elles soient disponibles en français.
+      </p>
+
+      <h2>Commence ici</h2>
+      <div class="es-grid">
+        {entries.map((e) => (
+          <a class="es-card" href={e.href}>
+            <img src={e.img} alt="" loading="lazy" width="64" height="64" />
+            <span>
+              <strong>{e.title}</strong>
+              <em>{e.desc}</em>
+            </span>
+          </a>
+        ))}
+      </div>
+
+      <h2>Explore le monde</h2>
+      <div class="es-grid">
+        {explore.map((x) => (
+          <a class="es-card" href={x.href}>
+            <span class="es-thumb" style={!x.img ? `background: linear-gradient(135deg, ${x.c1}, ${x.c2})` : undefined}>
+              {x.img ? <img src={x.img} alt="" loading="lazy" width="64" height="64" /> : <span class="es-thumb-letter">{x.k[0]}</span>}
+            </span>
+            <span>
+              <strong>{x.k}</strong>
+              <em>{x.d}</em>
+            </span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </article>
+
+  <style>
+    .page { padding: 32px 0 60px; }
+    .eyebrow { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--faint); }
+    h1 { font-family: var(--display); font-size: 2rem; margin: 6px 0 14px; }
+    h1 em { color: var(--candle); font-style: normal; }
+    .intro { color: var(--muted); font-size: 1rem; line-height: 1.6; max-width: 640px; margin-bottom: 16px; }
+    .callout.wip { border-left: 2px solid var(--candle); background: var(--ink-2); padding: 12px 16px; border-radius: 0 10px 10px 0; color: var(--muted); font-size: 0.88rem; margin: 0 0 32px; }
+    h2 { font-family: var(--display); font-size: 1.3rem; margin: 28px 0 12px; }
+    .es-grid { display: grid; grid-template-columns: 1fr; gap: 10px; }
+    @media (min-width: 640px) { .es-grid { grid-template-columns: 1fr 1fr; } }
+    .es-card { display: flex; align-items: center; gap: 12px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); padding: 12px; transition: border-color .15s ease; }
+    .es-card:hover { border-color: color-mix(in srgb, var(--candle) 50%, var(--line)); }
+    .es-card img { border-radius: 10px; object-fit: cover; width: 64px; height: 64px; flex: 0 0 auto; }
+    .es-thumb { flex: 0 0 auto; width: 64px; height: 64px; border-radius: 10px; display: flex; align-items: center; justify-content: center; border: 1px solid var(--line); }
+    .es-thumb-letter { font-family: var(--display); font-weight: 700; font-size: 1.4rem; color: rgba(255,255,255,0.9); }
+    .es-card span:not(.es-thumb) { display: flex; flex-direction: column; min-width: 0; }
+    .es-card strong { font-family: var(--display); font-weight: 600; font-size: 0.96rem; color: var(--mist); }
+    .es-card em { font-style: normal; font-size: 0.8rem; color: var(--faint); margin-top: 2px; }
+  </style>
+</Base>

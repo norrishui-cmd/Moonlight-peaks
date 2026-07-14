@@ -1,7 +1,7 @@
 // Shared UI strings for site-wide chrome (nav, search, common buttons). Content pages
 // (articles, character bios, FAQ answers) are translated separately in their own files —
 // this dictionary only covers the repeating interface text that appears on every page.
-export type Locale = 'en' | 'es' | 'ja' | 'zh' | 'zh-hant' | 'de';
+export type Locale = 'en' | 'es' | 'ja' | 'zh' | 'zh-hant' | 'de' | 'fr';
 
 export const uiStrings: Record<Locale, Record<string, string>> = {
   en: {
@@ -51,6 +51,14 @@ export const uiStrings: Record<Locale, Record<string, string>> = {
     world: 'Welt', locations: 'Orte', activities: 'Aktivitäten', collection: 'Sammlung', items: 'Gegenstände', map: 'Karte', farm: 'Bauernhof',
     search: 'Suche', searchPlaceholder: 'Charaktere, Guides, FAQ, Gegenstände suchen…',
     home: 'Startseite', notFound: 'Nicht gefunden',
+  },
+  fr: {
+    characters: 'Personnages', families: 'Familles', romance: 'Romance',
+    tools: 'Outils', faq: 'FAQ', about: 'À propos',
+    guides: 'Guides', allGuides: 'Tous les guides', quests: 'Quêtes', release: 'Sortie', demo: 'Démo', platforms: 'Plateformes',
+    world: 'Monde', locations: 'Lieux', activities: 'Activités', collection: 'Collection', items: 'Objets', map: 'Carte', farm: 'Ferme',
+    search: 'Rechercher', searchPlaceholder: 'Rechercher personnages, guides, FAQ, objets…',
+    home: 'Accueil', notFound: 'Introuvable',
   },
 };
 
