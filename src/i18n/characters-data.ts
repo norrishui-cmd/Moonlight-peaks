@@ -256,6 +256,161 @@ export const charTranslations: Record<'es' | 'ja' | 'zh' | 'zh-hant' | 'de', Rec
       ],
       romanceYes: 'Ja, bestätigte Romanze-Option.', romanceNo: '', romanceTbc: '',
     },
+    logan: {
+      name: 'Logan', familyLabel: 'Werwolf', typeLabel: 'Werwolf',
+      desc: 'KORREKTUR: Mehrere Quellen nach dem Release bestätigen, dass "Logan" der Nachname der Werwolf-Familie ist, nicht der Vorname eines einzelnen Bewohners — frühere Berichte über einen "Werwolf-Bürgermeister Logan" bezogen sich tatsächlich auf Brook.',
+      knownInfo: [
+        'Korrektur: Logan ist der Familienname, dessen Oberhaupt Bürgermeisterin Brook ist, mit Ridge als jüngerem Bruder und Saga sowie Ludo als Kindern.',
+        'Diese Seite bleibt als Weiterleitung bestehen, da andere Seiten noch hierher verlinken — siehe Brook, Ridge, Saga und Ludo für die echten Logan-Familienmitglieder.',
+      ],
+      romanceYes: '', romanceNo: 'Logan ist keine eigene Romanze-Option (siehe Korrektur oben).', romanceTbc: '',
+    },
+    'pumpkin-head': {
+      name: 'Pumpkin Head', familyLabel: 'Unbekannt', typeLabel: 'Sonstige',
+      desc: 'Berichteter theatralischer Event-Gastgeber, der die Versammlungen der Stadt belebt.',
+      knownInfo: [
+        'Berichtet als theatralischer Event-Gastgeber, der bei Stadtversammlungen auftritt.',
+        'Rolle und Details werden beim Release bestätigt.',
+      ],
+      romanceYes: '', romanceNo: '', romanceTbc: 'Noch nicht bestätigt.',
+    },
+    jarvis: {
+      name: 'Jarvis', familyLabel: 'Ohne Familie', typeLabel: 'Geist',
+      desc: 'Einer der Geister der Stadt, zusammen mit dem Mitgeist Balthasar berichtet. Gehört zu keiner der sieben Familien, ähnlich wie Death.',
+      knownInfo: [
+        'Bestätigt als Geist-Bewohner, gehört zu keiner Familie (wie Death).',
+        'Datamining-Dateien verweisen auch auf ein "Jarvis\u2019 Haus."',
+      ],
+      romanceYes: '', romanceNo: '', romanceTbc: 'Ob Jarvis eine Romanze-Option ist, ist noch nicht bestätigt.',
+    },
+    albertus: {
+      name: 'Albertus', familyLabel: 'Unbekannt', typeLabel: 'Sonstige',
+      desc: 'Eine Eule, die das Schwarze Brett der Stadt betreibt — bestätigt als Quelle von "Albertus\u2019 Jobs", dem Brett, an dem Spieler verfügbare Quests/Aufgaben einsehen.',
+      knownInfo: [
+        'Bestätigt: Albertus ist eine Eule, und "Albertus\u2019 Jobs" ist das Schwarze Brett der Stadt für verfügbare Quests.',
+      ],
+      romanceYes: '', romanceNo: '', romanceTbc: 'Ob Albertus eine Romanze-Option ist, ist noch nicht bestätigt.',
+    },
+    'viktor-dracula': {
+      name: 'Viktor', familyLabel: 'Vampir (Ambrosia)', typeLabel: 'Sonstige',
+      desc: 'Orlocks alter Onkel, der sich vor langer Zeit in eine Fledermaus verwandelte und nun in einer Gruft auf deinem Grundstück lebt. Keine Romanze-Option.',
+      knownInfo: [
+        'Bestätigt als Orlocks Onkel und Fledermaus-Begleitcharakter, gefunden in einer Gruft auf dem Grundstück der Spielfigur.',
+        'Zu unterscheiden von sowohl Graf Dracula als auch Vlad.',
+      ],
+      romanceYes: '', romanceNo: 'Viktor ist keine Romanze-Option.', romanceTbc: '',
+    },
+    judge: {
+      name: 'Judge', familyLabel: 'Unbekannt', typeLabel: 'Sonstige',
+      desc: 'Name über die offizielle Wiki-Navigation bestätigt; Rolle noch nicht dokumentiert.',
+      knownInfo: ['Im offiziellen Wiki gelistet; noch keine weiteren Details bestätigt.'],
+      romanceYes: '', romanceNo: '', romanceTbc: 'Noch nicht bestätigt.',
+    },
+    'skull-girl': {
+      name: 'Skull Girl', familyLabel: 'Unbekannt', typeLabel: 'Sonstige',
+      desc: 'Name über die offizielle Wiki-Navigation bestätigt; Rolle noch nicht dokumentiert.',
+      knownInfo: ['Im offiziellen Wiki gelistet; noch keine weiteren Details bestätigt.'],
+      romanceYes: '', romanceNo: '', romanceTbc: 'Noch nicht bestätigt.',
+    },
+    balthasar: {
+      name: 'Balthasar', familyLabel: 'Ohne Familie', typeLabel: 'Geist',
+      desc: 'Ein Geist-Bewohner der Stadt, zusammen mit dem Mitgeist Jarvis genannt — keine Romanze-Option, und gehört zu keiner der sieben Familien (wie Death).',
+      knownInfo: ['Bestätigt als einer der Geist-Charaktere der Stadt, gehört zu keiner Familie.'],
+      romanceYes: '', romanceNo: 'Balthasar ist keine Romanze-Option.', romanceTbc: '',
+    },
+    chester: {
+      name: 'Chester', familyLabel: 'Unbekannt', typeLabel: 'Sonstige',
+      desc: 'Eine lebende Aufbewahrungstruhe, geschenkt von Bürgermeisterin Brook während deiner Registrierung im Rathaus — lege Waren über Nacht hinein und wache mit dem Verkaufsgeld auf.',
+      knownInfo: [
+        'Bestätigt: erhalten von Brook bei deinem ersten Besuch im Rathaus.',
+        'Funktioniert als dein Verkaufslager über Nacht.',
+      ],
+      romanceYes: '', romanceNo: 'Chester ist ein Gegenstand/Begleiter, keine Romanze-Option.', romanceTbc: '',
+    },
+    laveau: {
+      name: 'Laveau', familyLabel: 'Hexe (Webb)', typeLabel: 'Hexe',
+      desc: 'Die Mutter deiner Spielfigur — eine Hexe, die den Webb-Zirkel anführte, bevor sie ihn verließ, um ein Leben mit Vlad Dracula zu beginnen. Zentrale Erzählfigur, keine Romanze-Option.',
+      knownInfo: [
+        'Bestätigt als Mutter der Spielfigur und ehemalige Anführerin des Webb-Zirkels, Nachfolgerin ist Fiona.',
+        'Ihre Ehe mit Vlad Dracula ist der Grund, warum deine Spielfigur ein gemischtes Vampir-/Hexen-Erbe hat.',
+      ],
+      romanceYes: '', romanceNo: 'Laveau ist keine Romanze-Option.', romanceTbc: '',
+    },
+    yabbis: {
+      name: 'Yabbis', familyLabel: 'Unbekannt', typeLabel: 'Sonstige',
+      desc: 'Eine Haiku-sprechende Kröte, die Ludo Gesellschaft leistet — keine Romanze-Option.',
+      knownInfo: ['Berichtet als Ludos Kröten-Begleiter, bekannt dafür, nur in Haikus zu sprechen.'],
+      romanceYes: '', romanceNo: 'Yabbis ist keine Romanze-Option.', romanceTbc: '',
+    },
+    grim: {
+      name: 'Grim', familyLabel: 'Unbekannt', typeLabel: 'Sonstige',
+      desc: 'Wahrscheinlich der Standard-/Vorname deines dreiäugigen Hellkitten-Begleithaustiers, das dich von Beginn des Spiels an begleitet (du kannst es benennen) — zu unterscheiden von der späteren eigenen Verwandlung in eine Hellkitten-Form.',
+      knownInfo: [
+        'Bestätigt: ein Hellkitten-Begleiter folgt der Spielfigur von Anfang an und kann benannt werden.',
+        'Im offiziellen Wiki mit dem Hellkitten-Chibi-Symbol unter "Grim" gelistet — wahrscheinlich der Standardname dieses Haustiers, noch nicht vollständig bestätigt.',
+      ],
+      romanceYes: '', romanceNo: '', romanceTbc: 'Grim ist wahrscheinlich ein Haustier, keine Romanze-Option — noch nicht vollständig bestätigt.',
+    },
+    'mr-deyes': {
+      name: 'Mr. Deyes', familyLabel: 'Unbekannt', typeLabel: 'Sonstige',
+      desc: 'Name über die offizielle Wiki-Navigation bestätigt; Rolle noch nicht dokumentiert.',
+      knownInfo: ['Im offiziellen Wiki gelistet; noch keine weiteren Details bestätigt.'],
+      romanceYes: '', romanceNo: '', romanceTbc: 'Noch nicht bestätigt.',
+    },
+    hoodini: {
+      name: 'Hoodini', familyLabel: 'Unbekannt', typeLabel: 'Sonstige',
+      desc: 'Name über die offizielle Wiki-Navigation bestätigt, gezeigt mit einem weißen Eulen-Symbol ähnlich dem von Albertus — möglicherweise ein verwandter Charakter oder eine Variante. Nicht bestätigt.',
+      knownInfo: ['Im offiziellen Wiki mit einem Symbol im Stil einer weißen Eule gelistet; Verbindung zu Albertus noch nicht bestätigt.'],
+      romanceYes: '', romanceNo: '', romanceTbc: 'Noch nicht bestätigt.',
+    },
+    larry: {
+      name: 'Larry', familyLabel: 'Unbekannt', typeLabel: 'Sonstige',
+      desc: 'Bestätigt über die offizielle Wiki: Larry ist ein Vampster, der in Alinas Haus lebt und nicht zur Höhle des Echos zurückgebracht werden möchte — er bleibt bei ihr, statt sich den anderen sammelbaren Vampstern anzuschließen. Keine Romanze-Option.',
+      knownInfo: ['Bestätigt: gefunden in Alinas Haus, bleibt dort, statt wie die anderen Vampster zurückgebracht zu werden.'],
+      romanceYes: '', romanceNo: 'Larry ist keine Romanze-Option.', romanceTbc: '',
+    },
+    rachel: {
+      name: 'Rachel', familyLabel: 'Unbekannt', typeLabel: 'Sonstige',
+      desc: 'Name über die offizielle Wiki-Navigation bestätigt, gezeigt mit dem Vampster-Symbol — wahrscheinlich ein individuell benannter Vampster statt einer Stadtbewohnerin. Keine Romanze-Option.',
+      knownInfo: ['Im offiziellen Wiki mit dem Vampster-Symbol gelistet.'],
+      romanceYes: '', romanceNo: 'Rachel ist keine Romanze-Option.', romanceTbc: '',
+    },
+    snek: {
+      name: 'Snek', familyLabel: 'Unbekannt', typeLabel: 'Sonstige',
+      desc: 'Ein benannter Schlangencharakter, dessen Existenz über die offizielle Wiki-Navigation bestätigt ist. Keine Romanze-Option.',
+      knownInfo: ['Im offiziellen Wiki mit einem Schlangen-Chibi-Symbol gelistet.'],
+      romanceYes: '', romanceNo: 'Snek ist keine Romanze-Option.', romanceTbc: '',
+    },
+    jacques: {
+      name: 'Jacques', familyLabel: 'Unbekannt', typeLabel: 'Sonstige',
+      desc: 'Ein benannter Schlangencharakter, dessen Existenz über die offizielle Wiki-Navigation bestätigt ist, zusammen mit Snek. Keine Romanze-Option.',
+      knownInfo: ['Im offiziellen Wiki mit einem Schlangen-Chibi-Symbol gelistet.'],
+      romanceYes: '', romanceNo: 'Jacques ist keine Romanze-Option.', romanceTbc: '',
+    },
+    'moon-goddess': {
+      name: 'Mondgöttin', familyLabel: 'Unbekannt', typeLabel: 'Sonstige',
+      desc: 'Eine gottheitsartige Figur, deren Existenz über die offizielle Wiki-Navigation bestätigt ist; Rolle noch nicht dokumentiert.',
+      knownInfo: [
+        'Im offiziellen Wiki gelistet; wahrscheinlich mit der Nacht-/Mond-Mythologie des Spiels verbunden.',
+        'Community-berichtet (japanischsprachige Berichterstattung): zusammen mit Brook als reiner Freundschafts-NPC eingestuft, keine Romanze-Option.',
+      ],
+      romanceYes: '', romanceNo: 'Community-berichtet als reiner Freundschafts-NPC.', romanceTbc: '',
+    },
+    'sun-god': {
+      name: 'Sonnengott', familyLabel: 'Unbekannt', typeLabel: 'Sonstige',
+      desc: 'Eine gottheitsartige Figur, deren Existenz über die offizielle Wiki-Navigation bestätigt ist; Rolle noch nicht dokumentiert.',
+      knownInfo: [
+        'Im offiziellen Wiki gelistet; wahrscheinlich das Gegenstück der Mondgöttin in der Mythologie des Spiels.',
+        'Community-berichtet (japanischsprachige Berichterstattung): zusammen mit Brook als reiner Freundschafts-NPC eingestuft, keine Romanze-Option.',
+      ],
+      romanceYes: '', romanceNo: 'Community-berichtet als reiner Freundschafts-NPC.', romanceTbc: '',
+    },
+    yasmin: {
+      name: 'Yasmin', familyLabel: 'Unbekannt', typeLabel: 'Sonstige',
+      desc: 'Name über die offizielle Wiki-Navigation bestätigt; Rolle noch nicht dokumentiert.',
+      knownInfo: ['Im offiziellen Wiki gelistet; noch keine weiteren Details bestätigt.'],
+      romanceYes: '', romanceNo: '', romanceTbc: 'Noch nicht bestätigt.',
+    },
     'count-dracula': {
       name: 'Graf Dracula', familyLabel: 'Vampir', typeLabel: 'Vampir',
       desc: 'Dein Vater und die Legende der Stadt. Aus seinem Schatten herauszutreten ist der Ausgangspunkt der Geschichte — keine Romanze-Option, sondern eine zentrale Erzählfigur.',
@@ -515,6 +670,161 @@ export const charTranslations: Record<'es' | 'ja' | 'zh' | 'zh-hant' | 'de', Rec
         'Se dice que solo se le ve en el pueblo durante festivales; ganar su corazón se describe como algo que requiere esfuerzo real.',
       ],
       romanceYes: 'Sí, opción de romance confirmada.', romanceNo: '', romanceTbc: '',
+    },
+    logan: {
+      name: 'Logan', familyLabel: 'Hombre lobo', typeLabel: 'Hombre lobo',
+      desc: 'CORRECCIÓN: fuentes múltiples después del lanzamiento confirman que "Logan" es el apellido de la familia de hombres lobo, no el nombre de un residente individual — los informes anteriores sobre un "alcalde hombre lobo Logan" en realidad se referían a Brook.',
+      knownInfo: [
+        'Corrección: Logan es el apellido familiar, cuyo patriarca es la alcaldesa Brook, con Ridge como hermano menor y Saga y Ludo como hijos.',
+        'Esta página se mantiene como redirección ya que otras páginas todavía enlazan aquí — consulta Brook, Ridge, Saga, y Ludo para los residentes reales de la familia Logan.',
+      ],
+      romanceYes: '', romanceNo: 'Logan no es una opción de romance independiente (ver corrección arriba).', romanceTbc: '',
+    },
+    'pumpkin-head': {
+      name: 'Pumpkin Head', familyLabel: 'Desconocida', typeLabel: 'Otro',
+      desc: 'Reportado como anfitrión teatral de eventos que anima las reuniones del pueblo.',
+      knownInfo: [
+        'Reportado como anfitrión teatral de eventos que aparece en reuniones del pueblo.',
+        'Rol y detalles por confirmar en el lanzamiento.',
+      ],
+      romanceYes: '', romanceNo: '', romanceTbc: 'Todavía no confirmado.',
+    },
+    jarvis: {
+      name: 'Jarvis', familyLabel: 'Sin familia', typeLabel: 'Fantasma',
+      desc: 'Uno de los fantasmas del pueblo, reportado junto con su compañero fantasma Balthasar. No pertenece a ninguna de las siete familias, similar a Death.',
+      knownInfo: [
+        'Confirmado como residente fantasma, sin pertenecer a ninguna familia (como Death).',
+        'Los archivos de datamining también hacen referencia a una "Casa de Jarvis."',
+      ],
+      romanceYes: '', romanceNo: '', romanceTbc: 'Si Jarvis es una opción de romance todavía no está confirmado.',
+    },
+    albertus: {
+      name: 'Albertus', familyLabel: 'Desconocida', typeLabel: 'Otro',
+      desc: 'Un búho que dirige el tablón de anuncios del pueblo — confirmado como la fuente de "Los trabajos de Albertus", el tablón donde los jugadores revisan misiones/tareas disponibles.',
+      knownInfo: [
+        'Confirmado: Albertus es un búho, y "Los trabajos de Albertus" es el tablón de anuncios del pueblo para revisar misiones.',
+      ],
+      romanceYes: '', romanceNo: '', romanceTbc: 'Si Albertus es una opción de romance todavía no está confirmado.',
+    },
+    'viktor-dracula': {
+      name: 'Viktor', familyLabel: 'Vampiro (Ambrosia)', typeLabel: 'Otro',
+      desc: 'El viejo tío de Orlock, que hace mucho tiempo se convirtió en murciélago y ahora vive en una cripta en tu terreno. No es una opción de romance.',
+      knownInfo: [
+        'Confirmado como tío de Orlock y personaje acompañante murciélago encontrado en una cripta en el terreno del jugador.',
+        'Distinto tanto del Conde Drácula como de Vlad.',
+      ],
+      romanceYes: '', romanceNo: 'Viktor no es una opción de romance.', romanceTbc: '',
+    },
+    judge: {
+      name: 'Judge', familyLabel: 'Desconocida', typeLabel: 'Otro',
+      desc: 'Nombre confirmado que existe a través de la navegación de la wiki oficial; rol aún no documentado.',
+      knownInfo: ['Listado en la wiki oficial; sin más detalles confirmados todavía.'],
+      romanceYes: '', romanceNo: '', romanceTbc: 'Todavía no confirmado.',
+    },
+    'skull-girl': {
+      name: 'Skull Girl', familyLabel: 'Desconocida', typeLabel: 'Otro',
+      desc: 'Nombre confirmado que existe a través de la navegación de la wiki oficial; rol aún no documentado.',
+      knownInfo: ['Listada en la wiki oficial; sin más detalles confirmados todavía.'],
+      romanceYes: '', romanceNo: '', romanceTbc: 'Todavía no confirmado.',
+    },
+    balthasar: {
+      name: 'Balthasar', familyLabel: 'Sin familia', typeLabel: 'Fantasma',
+      desc: 'Un residente fantasma del pueblo, nombrado junto con su compañero fantasma Jarvis — no es una opción de romance, y no pertenece a ninguna de las siete familias (como Death).',
+      knownInfo: ['Confirmado como uno de los personajes fantasma del pueblo, sin pertenecer a ninguna familia.'],
+      romanceYes: '', romanceNo: 'Balthasar no es una opción de romance.', romanceTbc: '',
+    },
+    chester: {
+      name: 'Chester', familyLabel: 'Desconocida', typeLabel: 'Otro',
+      desc: 'Un cofre de almacenamiento viviente, regalado por la alcaldesa Brook durante tu registro en el Ayuntamiento — deja mercancías durante la noche y despierta con el dinero de la venta.',
+      knownInfo: [
+        'Confirmado: obtenido de Brook durante tu primera visita al Ayuntamiento.',
+        'Funciona como tu almacenamiento de venta nocturna.',
+      ],
+      romanceYes: '', romanceNo: 'Chester es un objeto/acompañante, no una opción de romance.', romanceTbc: '',
+    },
+    laveau: {
+      name: 'Laveau', familyLabel: 'Bruja (Webb)', typeLabel: 'Bruja',
+      desc: 'La madre de tu personaje — una bruja que dirigió el aquelarre Webb antes de dejarlo para empezar una vida con Vlad Drácula. Central para la historia; no es una opción de romance.',
+      knownInfo: [
+        'Confirmada como madre del personaje jugador y ex líder del aquelarre Webb, sucedida por Fiona.',
+        'Su matrimonio con Vlad Drácula es la razón por la que tu personaje tiene herencia mixta de vampiro/bruja.',
+      ],
+      romanceYes: '', romanceNo: 'Laveau no es una opción de romance.', romanceTbc: '',
+    },
+    yabbis: {
+      name: 'Yabbis', familyLabel: 'Desconocida', typeLabel: 'Otro',
+      desc: 'Un sapo que habla en haiku y hace compañía a Ludo — no es una opción de romance.',
+      knownInfo: ['Reportado como el sapo acompañante de Ludo, conocido por hablar solo en haiku.'],
+      romanceYes: '', romanceNo: 'Yabbis no es una opción de romance.', romanceTbc: '',
+    },
+    grim: {
+      name: 'Grim', familyLabel: 'Desconocida', typeLabel: 'Otro',
+      desc: 'Probablemente el nombre predeterminado/dado de tu mascota Hellkitten de tres ojos, que te sigue desde el inicio del juego (puedes nombrarla) — distinto de transformarte tú mismo en una forma Hellkitten más adelante.',
+      knownInfo: [
+        'Confirmado: una mascota Hellkitten sigue al jugador desde el inicio y puede ser nombrada.',
+        'Listado en la wiki oficial con el ícono chibi de Hellkitten bajo "Grim" — probablemente el nombre predeterminado de esta mascota, aún no completamente confirmado.',
+      ],
+      romanceYes: '', romanceNo: '', romanceTbc: 'Grim probablemente es una mascota, no una opción de romance — aún no completamente confirmado.',
+    },
+    'mr-deyes': {
+      name: 'Mr. Deyes', familyLabel: 'Desconocida', typeLabel: 'Otro',
+      desc: 'Nombre confirmado que existe a través de la navegación de la wiki oficial; rol aún no documentado.',
+      knownInfo: ['Listado en la wiki oficial; sin más detalles confirmados todavía.'],
+      romanceYes: '', romanceNo: '', romanceTbc: 'Todavía no confirmado.',
+    },
+    hoodini: {
+      name: 'Hoodini', familyLabel: 'Desconocida', typeLabel: 'Otro',
+      desc: 'Nombre confirmado que existe a través de la navegación de la wiki oficial, mostrado con un ícono de búho blanco similar al de Albertus — posiblemente un personaje relacionado o variante. No confirmado.',
+      knownInfo: ['Listado en la wiki oficial con un ícono estilo búho blanco; la conexión con Albertus aún no está confirmada.'],
+      romanceYes: '', romanceNo: '', romanceTbc: 'Todavía no confirmado.',
+    },
+    larry: {
+      name: 'Larry', familyLabel: 'Desconocida', typeLabel: 'Otro',
+      desc: 'Confirmado vía la wiki oficial: Larry es un Vampster que vive en la casa de Alina y no quiere ser devuelto a la Cueva de los Ecos, así que se queda con ella en lugar de unirse a los demás Vampsters coleccionables. No es una opción de romance.',
+      knownInfo: ['Confirmado: encontrado en la casa de Alina, elige quedarse en lugar de ser devuelto como los demás Vampsters.'],
+      romanceYes: '', romanceNo: 'Larry no es una opción de romance.', romanceTbc: '',
+    },
+    rachel: {
+      name: 'Rachel', familyLabel: 'Desconocida', typeLabel: 'Otro',
+      desc: 'Nombre confirmado que existe a través de la navegación de la wiki oficial, mostrado con el ícono de Vampster — probablemente un Vampster nombrado individualmente en lugar de una habitante del pueblo. No es una opción de romance.',
+      knownInfo: ['Listado en la wiki oficial con el ícono de Vampster.'],
+      romanceYes: '', romanceNo: 'Rachel no es una opción de romance.', romanceTbc: '',
+    },
+    snek: {
+      name: 'Snek', familyLabel: 'Desconocida', typeLabel: 'Otro',
+      desc: 'Un personaje serpiente nombrado, confirmado que existe a través de la navegación de la wiki oficial. No es una opción de romance.',
+      knownInfo: ['Listado en la wiki oficial con un ícono chibi de serpiente.'],
+      romanceYes: '', romanceNo: 'Snek no es una opción de romance.', romanceTbc: '',
+    },
+    jacques: {
+      name: 'Jacques', familyLabel: 'Desconocida', typeLabel: 'Otro',
+      desc: 'Un personaje serpiente nombrado, confirmado que existe a través de la navegación de la wiki oficial, junto con Snek. No es una opción de romance.',
+      knownInfo: ['Listado en la wiki oficial con un ícono chibi de serpiente.'],
+      romanceYes: '', romanceNo: 'Jacques no es una opción de romance.', romanceTbc: '',
+    },
+    'moon-goddess': {
+      name: 'Diosa Luna', familyLabel: 'Desconocida', typeLabel: 'Otro',
+      desc: 'Una figura tipo deidad confirmada que existe a través de la navegación de la wiki oficial; rol aún no documentado.',
+      knownInfo: [
+        'Listada en la wiki oficial; probablemente vinculada a la mitología nocturna/lunar del juego.',
+        'Reportado por la comunidad (cobertura en japonés): agrupada con Brook como NPC solo de amistad, no una opción de romance.',
+      ],
+      romanceYes: '', romanceNo: 'Reportada por la comunidad como NPC solo de amistad.', romanceTbc: '',
+    },
+    'sun-god': {
+      name: 'Dios Sol', familyLabel: 'Desconocida', typeLabel: 'Otro',
+      desc: 'Una figura tipo deidad confirmada que existe a través de la navegación de la wiki oficial; rol aún no documentado.',
+      knownInfo: [
+        'Listado en la wiki oficial; probablemente la contraparte de la Diosa Luna en la mitología del juego.',
+        'Reportado por la comunidad (cobertura en japonés): agrupado con Brook como NPC solo de amistad, no una opción de romance.',
+      ],
+      romanceYes: '', romanceNo: 'Reportado por la comunidad como NPC solo de amistad.', romanceTbc: '',
+    },
+    yasmin: {
+      name: 'Yasmin', familyLabel: 'Desconocida', typeLabel: 'Otro',
+      desc: 'Nombre confirmado que existe a través de la navegación de la wiki oficial; rol aún no documentado.',
+      knownInfo: ['Listado en la wiki oficial; sin más detalles confirmados todavía.'],
+      romanceYes: '', romanceNo: '', romanceTbc: 'Todavía no confirmado.',
     },
   },
   ja: {
