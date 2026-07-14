@@ -1,0 +1,101 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+
+const faq = [
+  { q: 'Peut-on se transformer en chauve-souris dans Moonlight Peaks ?', a: 'Oui, confirmé. En tant que vampire, tu peux te transformer en chauve-souris, liée à l\u2019accomplissement "Wings of the Night" — un moyen rapide de te déplacer dans le village la nuit.' },
+  { q: 'Qu\u2019est-ce que la forme Hellkitten ?', a: 'Confirmé : tu peux aussi te transformer en ton compagnon Hellkitten à trois yeux, liée à l\u2019accomplissement "Purrgatory". Sous cette forme, tu te déplaces plus vite et tu peux labourer des parcelles de terre sans pelle, pour une fraction de l\u2019énergie habituelle. Cette transformation se débloque après avoir terminé quatre quêtes : "A Bridge Too Far", "Tension in the Crest Garden", "A Croak and a Crest", et "The Dinner Party".' },
+  { q: 'Quelles autres formes existe-t-il ?', a: 'Une troisième forme est confirmée : la forme Aqua/sirène, liée à l\u2019accomplissement "Call of the Current", débloquée plus tard dans le jeu — les conditions exactes de déblocage ne sont pas encore confirmées ici.' },
+  { q: 'Comment débloque-t-on la métamorphose ?', a: 'Confirmé : débloquer la forme Hellkitten nécessite de terminer quatre quêtes — "A Bridge Too Far", "Tension in the Crest Garden", "A Croak and a Crest" et "The Dinner Party". Une fois débloquée, tu changes de forme depuis une roue magique (bouton L).' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Accueil', item: `${SITE.url}/fr` },
+    { '@type': 'ListItem', position: 2, name: 'Métamorphose', item: `${SITE.url}/fr/shapeshifting` },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks — Métamorphose : Chauve-souris et Autres Formes"
+  description="Comment fonctionne la métamorphose dans Moonlight Peaks : te transformer en chauve-souris, en Hellkitten et en forme Aqua, et comment cela s'intègre à tes pouvoirs de vampire."
+  path="/fr/shapeshifting"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Métamorphose' }]}
+  lang="fr"
+  showExport
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Entrée · Métamorphose</p>
+      <h1>La <em>métamorphose</em> dans Moonlight Peaks</h1>
+      <p class="intro">
+        L\u2019un des avantages d\u2019être vampire dans {GAME.title} est de changer de forme. Trois
+        formes sont maintenant confirmées, chacune liée à son propre accomplissement Steam. Mis à
+        jour {SITE.updated}.
+      </p>
+
+      <h2>Se transformer en chauve-souris pour se déplacer</h2>
+      <p>
+        Confirmé à la sortie : la classique forme de chauve-souris vampirique, liée à
+        l\u2019accomplissement <strong>"Wings of the Night."</strong> Se transformer en chauve-souris
+        te permet de voler rapidement à travers le village la nuit, pratique quand tu jongles entre
+        la ferme, les courses et la vie sociale avant le lever du soleil. Rapporté par la
+        communauté : plusieurs sources décrivent son avantage spécifique comme la traversée
+        verticale — voler par-dessus les barrières, haies et espaces que tu devrais autrement
+        contourner à pied, en plus de la vitesse générale.
+      </p>
+
+      <h2>Forme Hellkitten — plus de vitesse et labour gratuit</h2>
+      <p>
+        Deux choses distinctes partagent le nom Hellkitten. Dès le tout début du jeu, un animal de
+        compagnie Hellkitten à trois yeux te suit et tu peux le nommer (probablement "Grim" par
+        défaut, selon le wiki officiel). Séparément, te <strong>métamorphoser</strong> toi-même en
+        forme Hellkitten — liée à l\u2019accomplissement <strong>"Purrgatory"</strong> — se débloque
+        confirmément plus tard, une fois que tu as terminé quatre chaînes de quêtes — "A Bridge Too
+        Far", "Tension in the Crest Garden", "A Croak and a Crest", et "The Dinner Party". Sous
+        forme Hellkitten, tu te déplaces nettement plus vite sur la carte, et appuyer sur Y te
+        permet de labourer des parcelles de terre sans pelle pour une fraction du coût énergétique
+        habituel — une forme vraiment utile, pas juste cosmétique.
+      </p>
+
+      <h2>Une troisième forme : Aqua/sirène</h2>
+      <p>
+        Confirmé : une forme Aqua/sirène existe, liée à l\u2019accomplissement <strong>"Call of the
+        Current"</strong>, débloquée plus tard dans le jeu. Les conditions exactes de déblocage
+        pour cette troisième forme ne sont pas encore confirmées ici.
+      </p>
+
+      <h2>Partie de tes pouvoirs de vampire</h2>
+      <p>
+        La métamorphose coexiste avec le reste de tes capacités surnaturelles et t\u2019aide à
+        explorer tout ce que le village a à offrir. Elle s\u2019intègre naturellement avec la
+        <a href="/magic">sorcellerie et les potions</a> — et comme tout le reste dans ta (non-)vie,
+        elle fonctionne selon la règle de retourner dans ton cercueil avant le lever du soleil.
+      </p>
+
+      <h2>Ce que nous vérifions encore</h2>
+      <ul>
+        <li>Les conditions exactes de <strong>déblocage</strong> de la forme Aqua/sirène.</li>
+        <li>Toute <strong>limite</strong> — énergie, moment, ou où tu peux et ne peux pas te transformer.</li>
+      </ul>
+
+      <h2>FAQ</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        Entrée post-sortie, mise à jour avec des données réelles du jeu. Relié :
+        <a href="/magic">magie et potions</a>, <a href="/character-creator">créateur de personnage</a>,
+        <a href="/fr/beginner-guide">guide du débutant</a> (en français).
+      </div>
+    </div>
+  </article>
+</Base>

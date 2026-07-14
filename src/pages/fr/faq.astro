@@ -1,0 +1,62 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+
+const faq = [
+  { q: 'Peut-on se marier dans Moonlight Peaks ?', a: 'Oui, confirmé. Propose à Niveau de Cœur 8, puis fixe une date au moins 2 jours après — le mariage a lieu avec les vampires et loups-garous du village présents.' },
+  { q: 'Peut-on avoir des enfants dans Moonlight Peaks ?', a: 'Non — confirmé par plusieurs sources, sans projet annoncé d\u2019en ajouter. Se marier avec un personnage plus âgé qui a déjà des enfants (comme Orlock ou Ridge) ferait de toi un beau-parent.' },
+  { q: 'Y a-t-il du combat dans Moonlight Peaks ?', a: 'Non, confirmé — le jeu se concentre entièrement sur la vie douce : agriculture, pêche, magie, décoration et relations, sans aucun système de combat.' },
+  { q: 'Combien y a-t-il d\u2019options de romance ?', a: 'Confirmé : 23 résidents romançables, répartis en six familles (Ambrosia, Webb, Logan, Hosu, Khazan, Henderson), plus Death et le démon de l\u2019amour Llemi sans famille.' },
+  { q: 'Peut-on romancer un loup-garou ?', a: 'Oui — Saga est une option de romance confirmée, une résidente loup-garou dont l\u2019énergie change avec la pleine lune.' },
+  { q: 'Moonlight Peaks est-il un dating sim ?', a: 'Non principalement — c\u2019est avant tout un cozy farming et life-sim, à la Stardew Valley, où les rendez-vous et le mariage sont un système parmi d\u2019autres (agriculture, magie, décoration, exploration).' },
+  { q: 'Quel classement d\u2019âge a Moonlight Peaks ?', a: 'Confirmé : CERO "B" (12 ans et plus) au Japon. Sans combat et avec un ton cozy-gothique, le jeu vise généralement un classement d\u2019âge bas dans les autres régions.' },
+  { q: 'Peut-on jouer sans faire de romance ?', a: 'Oui — la romance est optionnelle, tu peux cultiver, décorer et explorer sans poursuivre aucune relation.' },
+  { q: 'Moonlight Peaks est-il sur mobile ?', a: 'Oui — sur Android via Google Play, dès le jour de la sortie. Aucune version iOS/iPhone n\u2019a été annoncée.' },
+  { q: 'Moonlight Peaks a-t-il un mode coopératif ?', a: 'Aucun mode coopératif n\u2019a été annoncé. Toutes les informations actuelles indiquent que Moonlight Peaks est un jeu solo.' },
+  { q: 'La romance est-elle neutre en genre ?', a: 'Oui — les modèles de personnage sont intentionnellement neutres en genre, donc tu peux romancer n\u2019importe quel résident éligible peu importe comment tu construis ton propre vampire.' },
+  { q: 'Combien coûte Moonlight Peaks ?', a: `${GAME.price} sur Steam (PC/Mac), Switch et Android, et 39,99 $ sur Switch 2.` },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Accueil', item: `${SITE.url}/fr` },
+    { '@type': 'ListItem', position: 2, name: 'Questions fréquentes', item: `${SITE.url}/fr/faq` },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks — Questions Fréquentes (FAQ)"
+  description="Réponses aux questions les plus courantes sur Moonlight Peaks : mariage, enfants, combat, romance, boutiques et classement d'âge."
+  path="/fr/faq"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Questions fréquentes' }]}
+  lang="fr"
+  showExport
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Entrée · FAQ</p>
+      <h1>Questions <em>fréquentes</em> sur Moonlight Peaks</h1>
+      <p class="intro">
+        Réponses rapides aux questions les plus courantes sur {GAME.title}, basées sur des faits
+        confirmés à la sortie plutôt que sur des spéculations. Mis à jour {SITE.updated}.
+      </p>
+
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        Pour une FAQ complète et plus détaillée, consulte <a href="/faq">notre FAQ en anglais</a>,
+        organisée par catégorie (plateformes, romance, personnages, monde, quêtes, agriculture).
+        Relié : <a href="/fr/beginner-guide">guide du débutant</a>, <a href="/fr/romance">romance</a>.
+      </div>
+    </div>
+  </article>
+</Base>

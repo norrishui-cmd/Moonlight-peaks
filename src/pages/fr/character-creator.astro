@@ -1,0 +1,93 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+
+const faq = [
+  { q: 'Peut-on personnaliser son personnage dans Moonlight Peaks ?', a: 'Oui. Il y a un créateur de personnage complet — déjà jouable dans la démo gratuite — où tu choisis le teint de peau, les yeux, la coiffure, le maquillage et les tenues de ton vampire. Les options sont conçues pour être inclusives avec n\u2019importe quel style, avec une touche surnaturelle.' },
+  { q: 'Le créateur de personnage de Moonlight Peaks est-il neutre en genre ?', a: 'Oui. Les modèles de personnage sont intentionnellement neutres en genre, et le système de rendez-vous n\u2019est pas limité par le genre, donc tu peux construire le vampire que tu veux et romancer n\u2019importe quel résident éligible, peu importe comment tu te présentes.' },
+  { q: 'Peut-on changer son apparence après avoir créé son personnage ?', a: 'Oui. L\u2019Élixir Alter Ego est une potion qui change ton apparence, donc tu n\u2019es pas lié définitivement à ton look de départ. Confirmé : elle est vendue par Sabrina à Webb of Wonders.' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Accueil', item: `${SITE.url}/fr` },
+    { '@type': 'ListItem', position: 2, name: 'Créateur de personnage', item: `${SITE.url}/fr/character-creator` },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks — Créateur de Personnage : Options de Personnalisation"
+  description="Comment fonctionne la création de personnage dans Moonlight Peaks : le créateur de vampire de la démo — teints de peau, yeux, coiffures, maquillage et tenues, neutre en genre et inclusif."
+  path="/fr/character-creator"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Créateur de personnage' }]}
+  lang="fr"
+  showExport
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Entrée · Créateur de personnage</p>
+      <h1>Le <em>créateur de personnage</em> de Moonlight Peaks</h1>
+      <p class="intro">
+        Avant de t\u2019occuper de ta première culture au clair de lune, tu conçois ton vampire.
+        Voici ce que permet le créateur de personnage de {GAME.title} — confirmé via les détails
+        officiels et la démo gratuite, qui l\u2019inclut déjà. Mis à jour {SITE.updated}.
+      </p>
+
+      <h2>Essaie-le dès maintenant dans la démo gratuite</h2>
+      <p>
+        Le créateur de personnage est l\u2019une des fonctionnalités phares de la démo gratuite sur
+        Steam et Nintendo eShop, donc tu peux construire ton vampire et expérimenter des looks dès
+        maintenant, avant la sortie complète. Consulte notre <a href="/demo">guide de la démo</a>
+        pour voir ce qu\u2019elle inclut d\u2019autre.
+      </p>
+
+      <h2>Ce que tu peux personnaliser</h2>
+      <p>
+        Tu façonnes l\u2019apparence de ton vampire avec des teints de peau, des yeux, des
+        coiffures, du maquillage et des tenues. Le studio décrit les options comme inclusives avec
+        n\u2019importe quel style, toutes avec une touche surnaturelle — que tu veuilles avoir l\u2019air
+        décontracté, fantasque, ou, comme il se doit, mortellement beau.
+      </p>
+
+      <h2>Neutre en genre par conception</h2>
+      <p>
+        Les modèles de personnage sont intentionnellement neutres en genre, et le système de
+        rendez-vous n\u2019est pas limité par le genre. En d\u2019autres termes, tu construis le vampire
+        que tu veux et peux <a href="/romance">romancer</a> n\u2019importe quel résident éligible peu
+        importe comment tu te présentes.
+      </p>
+
+      <h2>Tu n\u2019es pas coincé — l\u2019Élixir Alter Ego</h2>
+      <p>
+        Si tu changes d\u2019avis plus tard, tu ne resteras pas bloqué(e) avec ton look de départ :
+        l\u2019<strong>Élixir Alter Ego</strong>, l\u2019une des potions que tu peux préparer, change
+        ton apparence. Consulte <a href="/magic">magie et potions</a> pour voir comment fonctionne
+        l\u2019alchimie.
+      </p>
+
+      <h2>Ce que nous vérifions encore</h2>
+      <ul>
+        <li>La liste complète des <strong>options</strong> — coiffures, visages, teints de peau et vêtements.</li>
+        <li>S\u2019il y a des <strong>préréglages</strong> et jusqu\u2019où on peut ajuster en détail.</li>
+        <li>Tout cosmétique ou style à <strong>débloquer</strong> pendant le jeu complet.</li>
+      </ul>
+
+      <h2>FAQ</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        Relié : <a href="/shapeshifting">métamorphose</a>, <a href="/characters">personnages</a>,
+        <a href="/demo">la démo</a>.
+      </div>
+    </div>
+  </article>
+</Base>

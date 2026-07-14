@@ -55,7 +55,8 @@ const dePaths = [
 const esOnlyPaths = ['/quests', '/farm', '/collections', '/map'];
 
 // French pages built so far — grows independently from here.
-const frPaths = ['/', '/release-date', '/beginner-guide', '/characters', '/romance', '/farming', '/magic', '/platforms', '/demo'];
+const frPaths = ['/', '/release-date', '/beginner-guide', '/characters', '/romance', '/farming', '/magic', '/platforms', '/demo',
+  '/families', '/locations', '/activities', '/items', '/character-creator', '/shapeshifting', '/faq', '/tools'];
 
 export const translatedPathsByLocale: Record<Locale, Set<string>> = {
   en: new Set(), // English is the source; not meaningful to check "is English translated".
