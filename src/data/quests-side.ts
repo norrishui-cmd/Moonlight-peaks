@@ -54,6 +54,7 @@ export const sideQuests: SideQuest[] = [
     troubleshooting: [
       { q: 'I can\u2019t catch bugs or Soul Blobs \u2014 where\u2019s the net?', a: 'Confirmed: the net isn\u2019t sold anywhere \u2014 it\u2019s unlocked through Death, gated behind earlier story progress (Orlock\u2019s Wine Scheme, A Bridge Too Far, and Misty Shores access). If you haven\u2019t met Death twice yet, that\u2019s the blocker.' },
       { q: 'Where do I find Death in Moonlight Peaks?', a: 'Confirmed: in town, tied to the Ambrosia Graveyard area that opens up after "A Bridge Too Far" unlocks Misty Shores.' },
+      { q: 'Why do I keep missing bugs and Soul Blobs with the net?', a: 'Confirmed: each swing of the net consumes stamina, whether or not it connects, so missed swings cost you energy. Community-reported: bugs and Soul Blobs tend to flee if you run toward them, so walking slowly up to one before swinging lands more catches and wastes less stamina than sprinting in.' },
     ],
     related: [{ label: 'Death', href: '/characters/death' }, { label: 'Soul Blobs collection', href: '/collections/soul-blobs' }],
   },

@@ -3,10 +3,13 @@ import Base from '../layouts/Base.astro';
 import { SITE, GAME } from '../consts';
 
 const issueRows = [
+  ['Door bug (forces restarting a day)', 'Confirmed · Fixed in Patch 1.1.38', 'Walking through certain doors could break the game, forcing players to restart the in-game day. Confirmed fixed via the official Patch 1.1.38 notes.'],
+  ['"Slow Walk" glitch', 'Confirmed · Fixed in Patch 1.1.38', 'A movement glitch that left the player character stuck walking at a slowed speed. Confirmed fixed via the official Patch 1.1.38 notes.'],
+  ['Hedge/decoration changes color after placing', 'Player-reported · No confirmed fix', 'Some players report a placed Hedge (e.g. pink) visually reverting to a different color (e.g. green) once placed, repeatably. Not listed as fixed in official patch notes yet.'],
   ['Steam Deck crash on startup', 'Player-reported · Workaround available', 'Multiple players report the game crashing on launch, even after reinstalling and verifying files. Reported fix: switch the Steam Deck compatibility tool to Proton 9.0-4. Not an official Valve or developer fix — a repeated player workaround.'],
   ['Micro-freezes / stutter every few seconds', 'Player-reported · No confirmed fix', 'Reported by players on high-end PCs (e.g. RTX 5090) as well as mid-range hardware, so it does not appear to be a hardware-specific issue. No confirmed workaround is currently documented — some players report partial relief from updating GPU drivers and setting Moonlight Peaks to "High performance" in system graphics settings, but this isn\u2019t confirmed to work reliably.'],
   ['Crash when leaving the farm', 'Player-reported · No confirmed fix', 'Some players report a reliable crash specifically when exiting the farm area. No confirmed workaround is currently documented; verifying game files is a general troubleshooting step some try, without confirmed success.'],
-  ['Controller stops responding mid-game', 'Player-reported · Workaround available', 'Controller works during character creation but then stops responding, with button-mapping options greyed out in Settings. Player-reported workaround: unplugging/reconnecting the controller, or switching to keyboard/mouse.'],
+  ['Controller stops responding mid-game', 'Player-reported · Workaround available', 'Controller works during character creation but then stops responding, with button-mapping options greyed out in Settings — some reports tie this to right after a game update. Player-reported workaround: unplugging/reconnecting the controller, or switching to keyboard/mouse.'],
   ['NPC gets stuck / can\u2019t be talked to', 'Player-reported · No confirmed fix', 'Reported with Orlock specifically getting stuck in one spot and becoming untalkable. Reloading the area and sleeping to the next day have both failed to fix it for affected players.'],
   ['Can\u2019t interact with objects indoors', 'Player-reported · No confirmed fix', 'Some players report being unable to click on objects inside their house (e.g. the coffin to sleep, pets) while outdoor interactions work fine.'],
   ['Switch 2 loading times', 'Confirmed by reviewers · No confirmed fix', 'Multiple reviewers flagged long loading times specifically on Nintendo Switch 2 as the main technical complaint. No official fix announced yet.'],
@@ -34,7 +37,19 @@ const faq = [
   },
   {
     q: 'My controller stopped working in Moonlight Peaks — what do I do?',
-    a: 'This is a reported, unresolved issue — the controller works during character creation but stops responding afterward, with control-remapping options greyed out. No confirmed fix exists yet; try disconnecting and reconnecting your controller, or switch to keyboard/mouse in the meantime.',
+    a: 'This is a reported, unresolved issue — the controller works during character creation but stops responding afterward, with control-remapping options greyed out. Player reports also describe this recurring after game updates (e.g. an Xbox controller working fine in other games but not responding post-update). No confirmed fix exists yet; try disconnecting and reconnecting your controller, or switch to keyboard/mouse in the meantime.',
+  },
+  {
+    q: 'Has Moonlight Peaks released a patch yet, and what does it fix?',
+    a: 'Yes — Patch 1.1.38 is confirmed released. Per the official patch notes, it fixes two of the most-reported early bugs: a "door bug" that could force players to restart a day, and a "Slow Walk" glitch. Multiple players have confirmed these specific fixes worked for them post-patch.',
+  },
+  {
+    q: 'Why does my Hedge or decoration change color when I place it?',
+    a: 'Player-reported: some players have found a placed Hedge (e.g. pink) visually reverts to a different color (green) once placed, regardless of repeated attempts. Not yet listed as fixed in official patch notes — treat as an open, unresolved report for now.',
+  },
+  {
+    q: 'Is there a text-size setting for handheld/Steam Deck play?',
+    a: 'Not currently documented. Some handheld players report on-screen text and menus feeling small, with no confirmed in-game text-size option or workaround yet.',
   },
   {
     q: 'An NPC in Moonlight Peaks is stuck and I can\u2019t talk to them — help?',
@@ -66,7 +81,7 @@ const faq = [
   },
   {
     q: 'Does this page replace official support?',
-    a: 'No. For unresolved issues, email support@xseedgames.com with your platform, a crash dump if available, and a description of what happened.',
+    a: 'No. For unresolved issues, email support@xseedgames.com with your platform, a crash dump if available, and a description of what happened. XSEED Games also runs an official Discord (discord.gg/xseedgames) where the team is reported to be active alongside the community.',
   },
 ];
 
