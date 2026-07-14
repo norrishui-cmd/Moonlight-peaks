@@ -123,6 +123,17 @@ export const sideQuests: SideQuest[] = [
     ],
     related: [{ label: 'Known issues', href: '/known-issues' }, { label: 'How to save FAQ', href: '/faq/moonlight-peaks-how-to-save' }],
   },
+  {
+    slug: 'fallen-tree-arborascend', title: 'Can\u2019t Find the Fallen Tree (The Mysterious Bay)', status: 'confirmed',
+    summary: 'Confirmed via PC Gamer: during "The Mysterious Bay" quest, you need to clear a fallen tree so your newly-discovered mermaid neighbors can rejoin the town. The tree is not in Howling Marshes, where most players assume \u2014 it\u2019s blocking a waterfall in a different area. The fix is a spell, not a tool: buy the Arborascend spell from Sabrina at Webb of Wonders, then cast it (costs 3 Mana) at the fallen tree to trigger a cutscene that removes it.',
+    reward: 'Clears the path for the Hosu mermaid family to rejoin town; leads into Samael\u2019s romance arc',
+    troubleshooting: [
+      { q: 'Where exactly is the fallen tree blocking the waterfall?', a: 'Confirmed via PC Gamer: it\u2019s not in Howling Marshes, despite that being the obvious guess. It blocks a waterfall in a different area tied to the Hosu mermaid family\u2019s route back to town \u2014 if you\u2019ve checked Howling Marshes and found nothing, that confirms you\u2019re looking in the wrong place, not that you\u2019re missing a hidden spot there.' },
+      { q: 'I don\u2019t have a tool that can clear the tree \u2014 what do I need?', a: 'Confirmed: it\u2019s not a tool at all \u2014 you need the Arborascend spell, bought from Sabrina at Webb of Wonders. Casting it costs 3 Mana, so make sure you have enough saved up (eating Mana-restoring food helps) before heading out, since you can\u2019t chop or push the tree away manually.' },
+      { q: 'I bought Arborascend but nothing happens at the tree \u2014 why?', a: 'Community-reported: casting Arborascend directly at the fallen tree triggers a cutscene that clears it. If nothing happens, double check you actually have enough Mana for the cast (3 Mana) rather than assuming the spell failed.' },
+    ],
+    related: [{ label: 'Magic & potions', href: '/magic' }, { label: 'Samael', href: '/characters/samael' }],
+  },
 ];
 
 export const sideQuestBySlug = new Map(sideQuests.map((q) => [q.slug, q]));

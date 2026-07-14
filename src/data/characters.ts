@@ -324,15 +324,20 @@ export const characters: Character[] = [
   },
   { id: 'samael', name: 'Samael', family: 'Vampire (Ambrosia)', type: 'vampire',
     status: 'confirmed', romanceable: true, img: '/samael.webp', c1: '#4a2a2a', c2: '#b06a6a',
-    desc: 'A mysterious, brooding vampire of the Ambrosia family who has run the town bar, "The Broken Lamp," for centuries. Elvira\u2019s brother.',
+    desc: 'A mysterious, brooding vampire of the Ambrosia family who has run the town bar, "The Broken Lamp," for centuries. Elvira\u2019s brother, Orlock\u2019s nephew.',
     traits: [['Mystery', 88], ['Devotion', 75]], traitsPlaceholder: true,
     knownInfo: [
       'Runs "The Broken Lamp," the town bar, and is a member of the Ambrosia family.',
-      'Elvira\u2019s brother; described as a true romantic beneath an intense, solitary exterior.',
+      'Elvira\u2019s brother and Orlock\u2019s nephew; described as a true romantic beneath an intense, solitary exterior.',
+      'Confirmed via cross-verified launch-week coverage: Samael starts with only 4 friendship hearts on his relationship panel (unlike other bachelors), which reads as a bug to some players but isn\u2019t \u2014 his romance is gated behind story progress and unlocks once you reach Luna Bay and meet the Hosu mermaid family, roughly around the first autumn or winter depending on your pace.',
+      'Confirmed: the precursor quests are "A Curious Passage" and "The Mysterious Bay" \u2014 which involve lifting a fallen tree (via the Arborascend spell, bought from Sabrina, costing 3 Mana to cast), repairing a bridge with Ludo, and helping Samael prepare for a wedding.',
+      'Confirmed: that wedding is Samael\u2019s to a mermaid named Kim, but it falls through \u2014 she gets cold feet at the altar and runs. Samael is un-datable for one week afterward; Orlock then shows up asking for help pulling his nephew out of his funk, which reopens his romance route.',
+      'Confirmed: heart-level gates for dates \u2014 hugging unlocks at Heart Level 3; dating and kissing unlock at Heart Level 4. His first heart event triggers by visiting The Broken Lamp after reaching 1 heart, where you catch him tossing a very drunk Orlock out of the bar.',
     ],
-    // Gift data via TheGamer's launch-week testing (published July 7, 2026); 'TBC' items in their
-    // original table are omitted here rather than guessed at.
-    likedGifts: ['Purple Tulip', 'Purple Azalea'],
+    // Gift data via TheGamer's launch-week testing, cross-checked against Bonus Action's dedicated
+    // Samael romance guide (both published launch week); 'TBC' items omitted rather than guessed at.
+    likedGifts: ['Purple Tulip', 'Purple Azalea', 'Red Wine', 'White Wine'],
+    lovedGifts: ['Diamond', 'Onigiri'],
     dislikedGifts: ['Stone', 'Onion Seeds', 'Pink Conch Shell'],
     giftStatus: 'reported',
     birthday: 'Winter 19',

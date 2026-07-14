@@ -1,0 +1,148 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE } from '../../consts';
+import { storyQuests, storyChapters } from '../../data/quests-story';
+import { sideQuests } from '../../data/quests-side';
+
+// The blocking-bug side quests — pulled out separately since these aren't "quests" in the normal
+// sense, they're known issues that happen to live in the side-quest troubleshooting format.
+const blockingBugs = sideQuests.filter((q) =>
+  ['npc-stuck-cant-interact', 'form-wheel-softlock', 'ui-softlock-after-shop', 'lost-save-data'].includes(q.slug)
+);
+
+// The specific side quests worth surfacing as "key quests" for the launch-week cluster — these are
+// the ones with genuine, confirmed stuck-point content, not every side quest we have.
+const keyQuestSlugs = ['fallen-tree-arborascend', 'elviras-treasure-hunt', 'the-net-and-death', 'the-magic-of-crops', 'vampster-collection-quest'];
+const keyQuests = sideQuests.filter((q) => keyQuestSlugs.includes(q.slug));
+
+const firstWeekChapter = storyChapters[0];
+const firstWeekQuests = storyQuests.filter((q) => q.chapter === 1);
+
+const faq = [
+  { q: 'Where is the fallen tree in Moonlight Peaks?', a: 'Confirmed via PC Gamer: it\u2019s not in Howling Marshes, despite that being the obvious guess. It blocks a waterfall in a different area tied to the Hosu mermaid family\u2019s route back to town, as part of "The Mysterious Bay" quest. You clear it with the Arborascend spell (bought from Sabrina), not a tool.' },
+  { q: 'How do you unlock the Cave of Echoes?', a: 'Confirmed: complete "A Bridge Too Far" first. The Cave of Echoes sits inside the Misty Shores area, which stays gated until that quest resolves.' },
+  { q: 'How do you romance Samael?', a: 'Confirmed via cross-verified launch-week coverage: his romance is gated behind story progress until you reach Luna Bay and meet the Hosu mermaid family. The precursor quests "A Curious Passage" and "The Mysterious Bay" involve lifting a fallen tree, repairing a bridge with Ludo, and helping him prepare for a wedding \u2014 to a mermaid named Kim, which falls through at the altar. He\u2019s undatable for a week afterward, then Orlock reopens his route. See his character profile for the full heart-level breakdown.' },
+  { q: 'What are the best gifts for everyone in Moonlight Peaks?', a: 'Purple Tulip is reported as broadly liked and Onion Seeds broadly disliked, but most residents have individual preferences that are still being catalogued. Use the Romance Gift Finder for what\u2019s confirmed per character, or the Gift Tracker to log your own test results.' },
+  { q: 'Where do you catch each fish in Moonlight Peaks?', a: 'The full 22-species database, with location, rarity, season, and sell price per fish, lives on the Collections: Fish page \u2014 each species has its own detail page.' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: SITE.url },
+    { '@type': 'ListItem', position: 2, name: 'Quests', item: new URL('/quests', SITE.url).href },
+    { '@type': 'ListItem', position: 3, name: 'Launch Week Task Cluster', item: new URL('/quests/launch-week', SITE.url).href },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks Launch Week Guide — Key Quests, Blockers & Fixes"
+  description="Everything to get through your first week in Moonlight Peaks: the story order, the quests players actually get stuck on (fallen tree, Cave of Echoes, Elvira's treasure hunt, Samael's romance), known blocking bugs, and where the fish/gift data actually lives."
+  path="/quests/launch-week"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Quests', href: '/quests' }, { label: 'Launch Week' }]}
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Quests · Launch Week Cluster</p>
+      <h1>Launch week <em>task cluster</em></h1>
+      <p class="intro">
+        A single jumping-off point for the quests and questions that come up most in your first
+        week — not a duplicate of the full story/side quest guides, but a shortcut straight to the
+        specific things players actually get stuck on. Updated {SITE.updated}.
+      </p>
+
+      <h2>1. First-week story flow — Chapter {firstWeekChapter.number}</h2>
+      <p>{firstWeekChapter.dek}</p>
+      <ol class="lw-list">
+        {firstWeekQuests.map((q) => (
+          <li><a href={`/quests/story/${q.slug}`}>{q.title}</a> <span class="lw-giver">— {q.giver}</span></li>
+        ))}
+      </ol>
+      <p class="lw-note">Full order and every later chapter: <a href="/quests/story">Main story guide</a>.</p>
+
+      <h2>2. Key quests people search for by name</h2>
+      <p>These are the specific stuck-point pages with the most confirmed troubleshooting content.</p>
+      <div class="lw-grid">
+        {keyQuests.map((q) => (
+          <a class="lw-card" href={`/quests/side/${q.slug}`}>
+            <span class="lw-tag">{q.status === 'confirmed' ? 'Confirmed' : 'Reported'}</span>
+            <strong>{q.title}</strong>
+            <span>{q.troubleshooting[0]?.q}</span>
+          </a>
+        ))}
+        <a class="lw-card" href="/locations/mines">
+          <span class="lw-tag">Confirmed</span>
+          <strong>Cave of Echoes / Mines</strong>
+          <span>How to unlock it, where copper and iron are, and why it might still be locked.</span>
+        </a>
+        <a class="lw-card" href="/characters/samael">
+          <span class="lw-tag">Confirmed</span>
+          <strong>Samael's romance</strong>
+          <span>Full precursor-quest chain, the wedding twist, and heart-level gates.</span>
+        </a>
+      </div>
+
+      <h2>3. Known blocking bugs</h2>
+      <p>Not quest-gating issues — genuine reported bugs. Check here before assuming you're missing a step.</p>
+      <div class="lw-grid">
+        {blockingBugs.map((q) => (
+          <a class="lw-card lw-card-bug" href={`/quests/side/${q.slug}`}>
+            <span class="lw-tag lw-tag-bug">{q.status === 'confirmed' ? 'Confirmed bug' : 'Reported bug'}</span>
+            <strong>{q.title}</strong>
+            <span>{q.troubleshooting[0]?.q}</span>
+          </a>
+        ))}
+      </div>
+      <p class="lw-note">Full list: <a href="/known-issues">Known issues</a>.</p>
+
+      <h2>4. Where the reference data actually lives</h2>
+      <p>Rather than duplicating these as text pages, use the interactive tools directly:</p>
+      <div class="lw-grid">
+        <a class="lw-card" href="/tools/romance-gift-finder"><span class="lw-tag">Tool</span><strong>Romance Gift Finder</strong><span>Confirmed loved/liked/disliked gifts, filterable per character.</span></a>
+        <a class="lw-card" href="/tools/gift-tracker"><span class="lw-tag">Tool</span><strong>Gift Tracker</strong><span>Log your own gift tests for characters without confirmed data yet.</span></a>
+        <a class="lw-card" href="/collections/fish"><span class="lw-tag">Data</span><strong>Fish Collection</strong><span>22 species, each with its own location/rarity/season/price page.</span></a>
+        <a class="lw-card" href="/map"><span class="lw-tag">Data</span><strong>Map</strong><span>Town layout, quest markers, and confirmed location names.</span></a>
+      </div>
+
+      <h2>FAQ</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        Related: <a href="/quests">Quests hub</a>, <a href="/quests/story">Main story</a>,
+        <a href="/quests/side">Side quests</a>, <a href="/beginner-guide">Beginner guide</a>,
+        <a href="/known-issues">Known issues</a>.
+      </div>
+    </div>
+  </article>
+
+  <style>
+    .lw-list { display: grid; gap: 6px; margin: 10px 0 6px; padding-left: 20px; }
+    .lw-giver { color: var(--faint); font-family: var(--mono); font-size: 0.78rem; }
+    .lw-note { font-size: 0.86rem; color: var(--muted); margin: 6px 0 22px; }
+    .lw-grid { display: grid; grid-template-columns: 1fr; gap: 10px; margin: 12px 0 22px; }
+    @media (min-width: 720px) { .lw-grid { grid-template-columns: 1fr 1fr; } }
+    .lw-card {
+      display: flex; flex-direction: column; gap: 6px; border: 1px solid var(--line); border-radius: 14px;
+      background: var(--surface); padding: 14px 16px; text-decoration: none; color: inherit;
+      transition: border-color .15s ease, transform .15s ease;
+    }
+    .lw-card:hover { border-color: color-mix(in srgb, var(--candle) 50%, var(--line)); transform: translateY(-1px); }
+    .lw-card strong { font-family: var(--display); font-size: 1.02rem; color: var(--mist); }
+    .lw-card span { color: #ded3e6; font-size: 0.86rem; }
+    .lw-tag {
+      align-self: flex-start; font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.04em;
+      text-transform: uppercase; color: var(--candle); border: 1px solid var(--candle-dim); border-radius: 999px;
+      padding: 2px 9px;
+    }
+    .lw-card-bug { border-color: color-mix(in srgb, #c85a5a 40%, var(--line)); }
+    .lw-tag-bug { color: #e08a8a; border-color: #c85a5a66; }
+  </style>
+</Base>
