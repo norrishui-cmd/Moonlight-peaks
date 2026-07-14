@@ -147,7 +147,7 @@ export const faqs: Faq[] = [
   {
     slug: 'moonlight-peaks-crashing-freezing', cat: 'general',
     q: 'Why is Moonlight Peaks crashing or freezing?',
-    a: 'Multiple confirmed player reports describe brief freezes every few seconds (even on high-end PCs) and crashes when leaving the farm or on Steam Deck startup. There\u2019s no official fix yet, but updating GPU drivers, setting "High performance" mode, and switching Steam Deck to Proton 9.0-4 have helped some players.',
+    a: 'Multiple confirmed player reports describe brief freezes every few seconds (even on high-end PCs) and crashes when leaving the farm or on Steam Deck startup. There\u2019s no official fix yet, but updating GPU drivers, setting "High performance" mode, and switching Steam Deck to Proton 9.0-4 have helped some players. Confirmed via the official Steam bug thread: on laptops or multi-GPU systems, make sure the game is actually running on your dedicated/main graphics card rather than an integrated one \u2014 check your system\u2019s "Graphics settings" menu on Windows and set Moonlight Peaks to use the high-performance GPU explicitly.',
     related: [{ label: 'Known issues tracker', href: '/known-issues' }],
   },
   {

@@ -19,7 +19,7 @@ export type SideQuest = {
 export const sideQuests: SideQuest[] = [
   {
     slug: 'noels-fishing-contest', title: 'Noel\u2019s Fishing Contest (First Fishing Rod)', npc: 'noel', status: 'confirmed',
-    summary: 'Confirmed: within your first few in-game nights, Noel challenges you to a fishing contest by the river \u2014 catch 3 different fish types before he does. It\u2019s untimed, so it\u2019s an easy win.',
+    summary: 'Confirmed: within your first few in-game nights, Noel challenges you to a fishing contest by the river \u2014 catch 3 different fish types before he does. It\u2019s untimed, so it\u2019s an easy win. Community-reported: some guides frame the contest around a 250-gold wager, so it may be worth having some coins on hand before you start, though it isn\u2019t described as a hard requirement.',
     reward: 'Your first fishing rod, plus a coin bonus',
     troubleshooting: [
       { q: 'I don\u2019t have a fishing rod yet \u2014 where do I get one?', a: 'Confirmed (cross-referenced against whisperofthehouse.com\u2019s unlock-gate guide): the fishing rod is not sold in any shop \u2014 it\u2019s a quest reward from Noel\u2019s fishing contest. If you haven\u2019t met Noel by the river yet, that\u2019s the actual blocker, not a missing purchase.' },
@@ -79,7 +79,8 @@ export const sideQuests: SideQuest[] = [
     summary: 'Confirmed via the game\u2019s official Known Issues tracking and Steam Community bug reports: some players find a specific NPC (notably Orlock) stuck in place and unresponsive to interaction. This is a known, unresolved bug rather than a quest-gating issue.',
     troubleshooting: [
       { q: 'An NPC won\u2019t respond when I try to talk to them \u2014 is this a bug or am I missing something?', a: 'Confirmed via official Known Issues tracking: this has been reported, notably with Orlock getting stuck in place. Reloading the area and sleeping to the next day have not fixed it for affected players so far, and there\u2019s no confirmed fix yet. This is a genuine bug, not a quest requirement you\u2019re missing.' },
-      { q: 'What should I do if this happens to me?', a: 'Confirmed: report it to support@xseedgames.com with your platform and a description of what happened, since there\u2019s no player-side workaround confirmed yet.' },
+      { q: 'Is there a workaround while I wait for a fix?', a: 'Community-reported on the official Steam bug thread: one player found that repeatedly interacting from the NPC\u2019s southeast side eventually triggered the prompt, after reloading the area and sleeping to the next day both failed. It\u2019s not a guaranteed fix, but it\u2019s the one confirmed workaround reported to actually work so far.' },
+      { q: 'What should I do if this happens to me?', a: 'Confirmed: report it to support@xseedgames.com with your platform and a description of what happened, since there\u2019s no guaranteed player-side fix yet.' },
     ],
     related: [{ label: 'Known issues', href: '/known-issues' }, { label: 'Orlock', href: '/characters/orlock' }],
   },
