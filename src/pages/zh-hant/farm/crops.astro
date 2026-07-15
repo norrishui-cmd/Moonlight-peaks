@@ -1,0 +1,99 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { SITE } from '../../../consts';
+import { farmlandCrops, herbCrops, treeCrops } from '../../../data/farm-crops';
+
+const cropDetailSlugs: Record<string, string> = {
+  'Blood Grapes': 'blood-grapes', 'Rice': 'rice', 'Drikker': 'drikker', 'Gobbler': 'gobbler',
+  'Hold Me Close': 'hold-me-close', 'Mandrake': 'mandrake', 'Weeping Wicca': 'weeping-wicca',
+  'Common Mushroom': 'instant-growth-mushrooms', 'Frosteria': 'instant-growth-mushrooms',
+  'Glowglammer': 'instant-growth-mushrooms', 'Yellow Glowglammer': 'instant-growth-mushrooms',
+  'Volacio Mushroom': 'instant-growth-mushrooms', 'Amanita': 'instant-growth-mushrooms',
+};
+
+const faq = [
+  { q: '月光峰一共有多少種作物?', a: `經官方wiki確認:${farmlandCrops.length}種田地作物、${herbCrops.length}種草藥園作物，以及${treeCrops.length}種樹木作物——按種植地點分成三大類。` },
+  { q: '月光峰的三種作物類別是什麼?', a: '確認:田地作物(種在耕好的田地上)、草藥園作物(需要專門的草藥園建築)，以及樹木作物(直接種在草地上，無需耕地)。' },
+  { q: '月光峰哪些作物是魔法作物?', a: '確認:魔法作物只能用Aquaflux(魔法水)澆灌，不能用普通澆水壺。有幾種還有獨特的機制——Gobbler需要餵魚或喂蟲子，Drikker需要往它的杯子裡倒水，Mandrake會根據附近是否有其他曼德拉草，長出憤怒版或開心版，Weeping Wicca會哭泣，自動澆灌周圍3x3的地塊。' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '首頁', item: `${SITE.url}/zh` },
+    { '@type': 'ListItem', position: 2, name: '農場', item: `${SITE.url}/zh-hant/farm` },
+    { '@type': 'ListItem', position: 3, name: '作物', item: `${SITE.url}/zh-hant/farm/crops` },
+  ] },
+];
+---
+<Base
+  title="月光峰作物 — 完整資料庫(田地、草藥園與樹木)"
+  description="月光峰完整作物資料庫:30多種田地作物、草藥園作物與樹木作物，資料來自官方wiki——季節、是否魔法作物、特殊機制。"
+  path="/zh-hant/farm/crops"
+  jsonLd={jsonLd}
+  crumbs={[{ label: '農場', href: '/zh-hant/farm' }, { label: '作物' }]}
+  lang="zh-hant"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">農場 · 資料庫</p>
+      <h1>月光峰<em>作物</em></h1>
+      <p class="intro">
+        完整的作物資料庫，來自月光峰官方wiki。作物按種植地點分為三大類——田地、草藥園或樹木——
+        部分是魔法作物，意味著只能用Aquaflux澆灌，而不能用普通澆水壺。僅收錄已確認的事實;
+        具體售價和生長時間只在已確認的情況下才填寫。
+      </p>
+
+      <h2>田地作物({farmlandCrops.length}種)</h2>
+      <table class="facts">
+        <tr><th>作物</th><th>季節</th><th>魔法作物?</th><th>備註</th></tr>
+        {farmlandCrops.map((c) => (
+          <tr>
+            <td>{cropDetailSlugs[c.name] ? <a href={`/zh-hant/farm/crops/${cropDetailSlugs[c.name]}`}>{c.name}</a> : c.name}</td>
+            <td>{c.seasons.length ? c.seasons.join('、') : '—'}</td>
+            <td>{c.magical ? '是' : '否'}</td>
+            <td>
+              {c.harvestDays && <>{c.harvestDays}天成熟{c.regrowDays ? `，${c.regrowDays}天后再生` : ''}{c.yieldPerHarvest ? `，每次收穫${c.yieldPerHarvest}個` : ''}{c.sellPrice ? `，售價${c.sellPrice}金` : ''}{c.seedPrice ? `(種子${c.seedPrice}金)` : ''}。</>}
+              {c.note}
+            </td>
+          </tr>
+        ))}
+      </table>
+
+      <h2>草藥園作物({herbCrops.length}種)</h2>
+      <p>確認:草藥園作物需要專門的草藥園建築，不能直接種在普通田地上。</p>
+      <table class="facts">
+        <tr><th>草藥</th><th>魔法作物?</th><th>有乾燥形態?</th></tr>
+        {herbCrops.map((h) => (
+          <tr><td>{h.name}</td><td>{h.magical ? '是' : '否'}</td><td>{h.hasDriedForm ? '是' : '否'}</td></tr>
+        ))}
+      </table>
+
+      <h2>樹木作物({treeCrops.length}種)</h2>
+      <p>確認:樹木作物直接種在草地上，不需要耕地。</p>
+      <table class="facts">
+        <tr><th>樹木</th><th>季節</th><th>魔法作物?</th><th>備註</th></tr>
+        {treeCrops.map((t) => (
+          <tr><td>{t.name}</td><td>{t.seasons.join('、')}</td><td>{t.magical ? '是' : '否'}</td><td>{t.note || '—'}</td></tr>
+        ))}
+      </table>
+
+      <h2>常見問題</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        資料來源:月光峰官方wiki(moonlightpeaks.wiki.gg)。具體售價、生長時間和產量只在信源
+        確認的情況下才填寫。相關:
+        <a href="/zh-hant/farm">農場中心</a>, <a href="/zh-hant/farm/farm-helpers">農場助手</a>,
+        <a href="/zh-hant/farming">種田指南</a>。
+      </div>
+    </div>
+  </article>
+</Base>

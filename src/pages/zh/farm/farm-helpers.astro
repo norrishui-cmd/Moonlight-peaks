@@ -1,0 +1,69 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { SITE } from '../../../consts';
+import { farmHelpers } from '../../../data/farm-helpers';
+import { farmHelperDescZh } from '../../../data/farm-helpers-zh';
+
+const faq = [
+  { q: '月光峰的农场助手机器是什么?', a: `经官方wiki确认:农场助手是能自动化种田或加工农产品的机器。目前已确认${farmHelpers.length}台，包括熔炉、酒桶、精炼机、草药园、草药烘干架、研钵、蜂箱、织布机、奶酪压榨机、魔力提取器、磨坊、果酱机、萤火虫保育箱、萤火虫传粉器、巧克力工坊，以及种子分选机。` },
+  { q: '月光峰的精炼机怎么解锁?', a: '确认:在工作台用20木材+20石头建造。它能把木材、石头、纤维、暗木等原材料加工成木板、精炼石、饲料和硬木板。' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '首页', item: `${SITE.url}/zh` },
+    { '@type': 'ListItem', position: 2, name: '农场', item: `${SITE.url}/zh/farm` },
+    { '@type': 'ListItem', position: 3, name: '农场助手', item: `${SITE.url}/zh/farm/farm-helpers` },
+  ] },
+];
+---
+<Base
+  title="月光峰农场助手 — 全部16台机器与配方"
+  description="月光峰全部已确认的农场助手机器:熔炉、酒桶、精炼机、蜂箱、磨坊、果酱机等，附建造配方与产出，资料来自官方wiki。"
+  path="/zh/farm/farm-helpers"
+  jsonLd={jsonLd}
+  crumbs={[{ label: '农场', href: '/zh/farm' }, { label: '农场助手' }]}
+  lang="zh"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">农场 · 机器</p>
+      <h1>农场<em>助手</em></h1>
+      <p class="intro">
+        经月光峰官方wiki确认:农场助手是能自动化种田或加工农产品的机器。目前已确认{farmHelpers.length}台。
+      </p>
+
+      {farmHelpers.map((h) => (
+        <>
+          <h2>{h.name}</h2>
+          <p>
+            {farmHelperDescZh[h.name] || h.desc}
+            {h.buildRecipe && <> <strong>建造:</strong> {h.buildRecipe}{h.buildSource ? `(来自${h.buildSource})` : ''}。</>}
+          </p>
+          {h.outputs && h.outputs.length > 0 && (
+            <ul>
+              {h.outputs.map((o) => (<li><strong>{o.name}:</strong> {o.recipe}</li>))}
+            </ul>
+          )}
+        </>
+      ))}
+
+      <h2>常见问题</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        资料来源:月光峰官方wiki(moonlightpeaks.wiki.gg)。相关:
+        <a href="/zh/farm">农场中心</a>, <a href="/zh/farm/crops">作物</a>, <a href="/items/mineables">矿物</a>,
+        <a href="/items/cooking">烹饪</a>。
+      </div>
+    </div>
+  </article>
+</Base>

@@ -1,0 +1,55 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import { SITE } from '../../../../consts';
+import { cropDetailsZh } from '../../../../data/farm-crop-details-zh';
+
+export function getStaticPaths() {
+  return Object.entries(cropDetailsZh).map(([slug, data]) => ({ params: { slug }, props: { slug, data } }));
+}
+
+const { slug, data } = Astro.props as { slug: string; data: (typeof cropDetailsZh)[string] };
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: data.faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '首页', item: `${SITE.url}/zh` },
+    { '@type': 'ListItem', position: 2, name: '农场', item: `${SITE.url}/zh/farm` },
+    { '@type': 'ListItem', position: 3, name: '作物', item: `${SITE.url}/zh/farm/crops` },
+    { '@type': 'ListItem', position: 4, name: data.name, item: `${SITE.url}/zh/farm/crops/${slug}` },
+  ] },
+];
+---
+<Base
+  title={`${data.name} — 月光峰作物攻略`}
+  description={data.dek}
+  path={`/zh/farm/crops/${slug}`}
+  jsonLd={jsonLd}
+  crumbs={[{ label: '农场', href: '/zh/farm' }, { label: '作物', href: '/zh/farm/crops' }, { label: data.name }]}
+  lang="zh"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">农场 · {data.category}</p>
+      <h1><em>{data.name}</em></h1>
+      <p class="intro">{data.dek}</p>
+
+      {data.body.map((p) => (<p>{p}</p>))}
+
+      <h2>常见问题</h2>
+      <div class="faq">
+        {data.faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        资料来源:月光峰官方wiki。相关:
+        <a href="/zh/farm/crops">全部作物</a>, <a href="/zh/farm">农场中心</a>,
+        <a href="/zh/farm/farm-helpers">农场助手</a>。
+      </div>
+    </div>
+  </article>
+</Base>

@@ -1,0 +1,77 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { SITE } from '../../../consts';
+
+const faq = [
+  { q: '月光峰的谷仓多少钱?', a: '经官方wiki确认:在被Luna介绍认识家畜之后，可以在Howling Hammer向Ridge花4000金购买。' },
+  { q: '月光峰的谷仓有多大?', a: '确认:谷仓需要10x6的空间，建造耗时1晚。可容纳4只动物。' },
+  { q: '月光峰能建不止一座谷仓吗?', a: '可以，确认:只要每座谷仓都有足够的10x6空间，可以建造多座谷仓，每座可养4只动物。' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '首页', item: `${SITE.url}/zh` },
+    { '@type': 'ListItem', position: 2, name: '农场', item: `${SITE.url}/zh/farm` },
+    { '@type': 'ListItem', position: 3, name: '谷仓', item: `${SITE.url}/zh/farm/barn` },
+  ] },
+];
+---
+<Base
+  title="月光峰谷仓 — 花费、大小与解锁方式"
+  description="确认:月光峰谷仓向Ridge购买需4000金，占地10x6，建造耗时1晚，可容纳4只动物。如何通过Luna和Ridge解锁。"
+  path="/zh/farm/barn"
+  jsonLd={jsonLd}
+  crumbs={[{ label: '农场', href: '/zh/farm' }, { label: '谷仓' }]}
+  lang="zh"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">农场 · 谷仓</p>
+      <h1><em>谷仓</em></h1>
+      <p class="intro">
+        经官方wiki确认，并与发售周报道交叉核实:被Luna介绍认识家畜之后，可以在Howling Hammer
+        花<strong>4000金</strong>购买谷仓。
+      </p>
+
+      <h2>如何解锁</h2>
+      <p>
+        确认:第一年春季早期，Ridge会出现在你家门口聊起你的屋顶，同时你会单独收到Luna关于
+        "出售家畜"任务的便条——去Luna的农场拜访，会看到第一只可领养的动物(一只Cheeken)。
+        屋顶修好后，可以在Howling Hammer(18:00至午夜营业)找到Ridge;选择商店，再点第二个
+        标签页，就能找到可购买的谷仓。
+      </p>
+
+      <h2>大小、花费与容量</h2>
+      <table class="facts">
+        <tr><th>花费</th><td>4000金</td></tr>
+        <tr><th>所需空间</th><td>10x6</td></tr>
+        <tr><th>建造耗时</th><td>1晚</td></tr>
+        <tr><th>动物容量</th><td>每座谷仓4只</td></tr>
+        <tr><th>能建多座吗?</th><td>可以——多建几座就能养超过4只动物</td></tr>
+      </table>
+
+      <h2>建好之后</h2>
+      <p>
+        确认:谷仓建好后，回到Luna的农场领养第一只动物。可领养的动物会在她家旁边的小围栏里
+        每天轮换，你需要自己给每一只起名字——游戏不会自动建议名字。
+      </p>
+
+      <h2>常见问题</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        资料来源:月光峰官方wiki(moonlightpeaks.wiki.gg)，并与Bonus Action和Prima Games的
+        发售周报道交叉核实。相关: <a href="/zh/farm">农场中心</a>, <a href="/zh/farm/animals">动物</a>,
+        <a href="/characters/ridge">Ridge</a>, <a href="/characters/luna">Luna</a>。
+      </div>
+    </div>
+  </article>
+</Base>

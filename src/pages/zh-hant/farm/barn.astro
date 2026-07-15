@@ -1,0 +1,77 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { SITE } from '../../../consts';
+
+const faq = [
+  { q: '月光峰的穀倉多少錢?', a: '經官方wiki確認:在被Luna介紹認識家畜之後，可以在Howling Hammer向Ridge花4000金購買。' },
+  { q: '月光峰的穀倉有多大?', a: '確認:穀倉需要10x6的空間，建造耗時1晚。可容納4只動物。' },
+  { q: '月光峰能建不止一座穀倉嗎?', a: '可以，確認:只要每座穀倉都有足夠的10x6空間，可以建造多座穀倉，每座可養4只動物。' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '首頁', item: `${SITE.url}/zh` },
+    { '@type': 'ListItem', position: 2, name: '農場', item: `${SITE.url}/zh-hant/farm` },
+    { '@type': 'ListItem', position: 3, name: '穀倉', item: `${SITE.url}/zh-hant/farm/barn` },
+  ] },
+];
+---
+<Base
+  title="月光峰穀倉 — 花費、大小與解鎖方式"
+  description="確認:月光峰穀倉向Ridge購買需4000金，佔地10x6，建造耗時1晚，可容納4只動物。如何透過Luna和Ridge解鎖。"
+  path="/zh-hant/farm/barn"
+  jsonLd={jsonLd}
+  crumbs={[{ label: '農場', href: '/zh-hant/farm' }, { label: '穀倉' }]}
+  lang="zh-hant"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">農場 · 穀倉</p>
+      <h1><em>穀倉</em></h1>
+      <p class="intro">
+        經官方wiki確認，並與發售週報道交叉核實:被Luna介紹認識家畜之後，可以在Howling Hammer
+        花<strong>4000金</strong>購買穀倉。
+      </p>
+
+      <h2>如何解鎖</h2>
+      <p>
+        確認:第一年春季早期，Ridge會出現在你家門口聊起你的屋頂，同時你會單獨收到Luna關於
+        "出售家畜"任務的便條——去Luna的農場拜訪，會看到第一隻可領養的動物(一隻Cheeken)。
+        屋頂修好後，可以在Howling Hammer(18:00至午夜營業)找到Ridge;選擇商店，再點第二個
+        標籤頁，就能找到可購買的穀倉。
+      </p>
+
+      <h2>大小、花費與容量</h2>
+      <table class="facts">
+        <tr><th>花費</th><td>4000金</td></tr>
+        <tr><th>所需空間</th><td>10x6</td></tr>
+        <tr><th>建造耗時</th><td>1晚</td></tr>
+        <tr><th>動物容量</th><td>每座穀倉4只</td></tr>
+        <tr><th>能建多座嗎?</th><td>可以——多建幾座就能養超過4只動物</td></tr>
+      </table>
+
+      <h2>建好之後</h2>
+      <p>
+        確認:穀倉建好後，回到Luna的農場領養第一隻動物。可領養的動物會在她家旁邊的小圍欄裡
+        每天輪換，你需要自己給每一隻起名字——遊戲不會自動建議名字。
+      </p>
+
+      <h2>常見問題</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        資料來源:月光峰官方wiki(moonlightpeaks.wiki.gg)，並與Bonus Action和Prima Games的
+        發售週報道交叉核實。相關: <a href="/zh-hant/farm">農場中心</a>, <a href="/zh-hant/farm/animals">動物</a>,
+        <a href="/characters/ridge">Ridge</a>, <a href="/characters/luna">Luna</a>。
+      </div>
+    </div>
+  </article>
+</Base>

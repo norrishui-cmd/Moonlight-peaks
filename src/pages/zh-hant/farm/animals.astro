@@ -1,0 +1,86 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { SITE } from '../../../consts';
+
+const animals = ['Cheeken', 'Piggoat', 'Draculamb', 'Cowcula', 'Stoney', 'Rabbicula'];
+
+const faq = [
+  { q: '月光峰能養哪些動物?', a: '目前確認:Cheeken、Piggoat、Draculamb、Cowcula、Stoney和Rabbicula。Cheeken是最早能養的。全年可能還會解鎖更多。' },
+  { q: '月光峰的動物怎麼獲得?', a: '確認:先建造穀倉(向Ridge花4000金)，然後去Luna的農場，她家旁邊的小圍欄每天會輪換展示3只可領養的動物。只要有足夠的金幣和穀倉空間，跟其中一隻互動即可領養。' },
+  { q: '月光峰的動物吃什麼?', a: '確認:動物吃飼料(在精煉機用纖維製作)，或者更好的高階飼料(50份飼料+1份魔力精華)。要在食槽裡備好糧食，動物才能在夜間進食。' },
+  { q: '月光峰的動物能產出什麼?', a: '確認:根據種類不同，動物會產出牛奶、羊毛、蛋，或者肥料——肥料能提升作物品質，即使不算直接產出的收入，飼養動物也很划算。' },
+  { q: '變身狀態下與動物互動有隱藏彩蛋嗎?', a: '有，社群報告:以Hellkitten形態與農場動物互動時，它們會真的開口跟你"說話"，而不是平時那種開心的叫聲——這是解鎖該形態後值得一試的小彩蛋。' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '首頁', item: `${SITE.url}/zh` },
+    { '@type': 'ListItem', position: 2, name: '農場', item: `${SITE.url}/zh-hant/farm` },
+    { '@type': 'ListItem', position: 3, name: '動物', item: `${SITE.url}/zh-hant/farm/animals` },
+  ] },
+];
+---
+<Base
+  title="月光峰動物 — 完整名單、餵養與產出"
+  description="月光峰已確認的農場動物:Cheeken、Piggoat、Draculamb、Cowcula、Stoney、Rabbicula。獲取方式、飼料餵養，以及它們的產出。"
+  path="/zh-hant/farm/animals"
+  jsonLd={jsonLd}
+  crumbs={[{ label: '農場', href: '/zh-hant/farm' }, { label: '動物' }]}
+  lang="zh-hant"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">農場 · 動物</p>
+      <h1>農場<em>動物</em></h1>
+      <p class="intro">
+        已確認的動物名單與基礎飼養方法，經多個發售周信源交叉核實。想了解如何解鎖養動物的資格，
+        請參見<a href="/zh-hant/farm/barn">穀倉</a>。
+      </p>
+
+      <h2>已確認動物</h2>
+      <ul>
+        {animals.map((a) => (<li>{a}</li>))}
+      </ul>
+      <p>
+        Cheeken是最常見的第一隻動物——確認喜歡被撫摸和戴帽子。據報告全年還會解鎖新的動物種類，
+        本列表會隨著確認資訊增加而擴充。
+      </p>
+
+      <h2>獲取動物</h2>
+      <p>
+        確認:穀倉建好後，去Luna的農場——她家旁邊的小圍欄每天會展示3只可領養的動物，每天輪換，
+        還包括不同的毛色變體。跟其中一隻互動即可領養(需要足夠的金幣和穀倉空餘空間)，之後需要
+        自己給它起名字。
+      </p>
+
+      <h2>餵養</h2>
+      <p>
+        確認:動物吃飼料，在精煉機用纖維製作(1份纖維→2份飼料)。更高階的高階飼料需要50份飼料
+        加1份魔力精華。要在食槽裡備好糧食，讓動物夜間進食——可以一次性囤好幾天的量。
+      </p>
+
+      <h2>產出</h2>
+      <p>
+        確認:根據種類不同，動物會產出牛奶、羊毛、蛋，或者肥料。肥料能明確提升作物品質，即使
+        不算直接產出的收入，飼養動物也很划算。品質更高的產出(來自照顧周到、心情愉快的動物)
+        售價更高，也是更好的烹飪食材。
+      </p>
+
+      <h2>常見問題</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        相關: <a href="/zh-hant/farm">農場中心</a>, <a href="/zh-hant/farm/barn">穀倉</a>,
+        <a href="/items/fertilizer">肥料</a>, <a href="/characters/luna">Luna</a>。
+      </div>
+    </div>
+  </article>
+</Base>

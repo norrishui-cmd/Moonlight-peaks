@@ -1,0 +1,73 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { SITE } from '../../../consts';
+
+const faq = [
+  { q: '月光峰的房屋能升級幾次?', a: '經官方wiki確認:4次。每次升級都會給房屋增加一個新的擴建區域。' },
+  { q: '月光峰的房屋升級怎麼解鎖?', a: '確認:只有完成Ridge在遊戲早期給出的"修屋頂"任務後，升級選項才會開放。' },
+  { q: '月光峰的房屋升級在哪裡購買?', a: '確認:升級專案在Howling Hammer用金幣和木材購買。每次升級需要一個遊戲內夜晚完成。' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '首頁', item: `${SITE.url}/zh` },
+    { '@type': 'ListItem', position: 2, name: '農場', item: `${SITE.url}/zh-hant/farm` },
+    { '@type': 'ListItem', position: 3, name: '房屋', item: `${SITE.url}/zh-hant/farm/house` },
+  ] },
+];
+---
+<Base
+  title="月光峰房屋 — 升級、花費與修屋頂任務"
+  description="確認:月光峰的房屋透過Howling Hammer可升級4次，由Ridge的修屋頂任務解鎖。花費、耗時與初始傢俱一覽。"
+  path="/zh-hant/farm/house"
+  jsonLd={jsonLd}
+  crumbs={[{ label: '農場', href: '/zh-hant/farm' }, { label: '房屋' }]}
+  lang="zh-hant"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">農場 · 房屋</p>
+      <h1>你的<em>房屋</em></h1>
+      <p class="intro">
+        經官方wiki確認:你的永久住所是一棟小石屋，可以升級4次，每次升級都會新增一個擴建區域。
+      </p>
+
+      <h2>解鎖升級</h2>
+      <p>
+        確認:房屋升級只有在完成<strong>Ridge</strong>在遊戲早期給出的<strong>"修屋頂"</strong>
+        任務後才會開放。解鎖之後，升級專案在<strong>Howling Hammer</strong>用金幣和木材購買，
+        每次升級需要一個遊戲內夜晚完成。
+      </p>
+
+      <h2>初始傢俱與雜物</h2>
+      <p>
+        確認:房屋第一階段已經包含幾件基礎裝飾和功能物品——一口木棺材、一個烹飪臺、一張工作臺、
+        一盆室內植物，以及一個箱子。第一次獲得房屋時，室內和周邊區域還會有一些雜物(垃圾、
+        落葉堆、石塊)可以清理掉。
+      </p>
+
+      <h2>外觀自定義</h2>
+      <p>
+        確認:外觀自定義同樣可以在Howling Hammer購買。部分自定義選項要等到升級至最終(第四)階段
+        才會解鎖。
+      </p>
+
+      <h2>常見問題</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        資料來源:月光峰官方wiki(moonlightpeaks.wiki.gg)。相關:
+        <a href="/zh-hant/farm">農場中心</a>, <a href="/characters/ridge">Ridge</a>,
+        <a href="/items/decorations">裝飾</a>。
+      </div>
+    </div>
+  </article>
+</Base>

@@ -92,6 +92,6 @@ export function isPathTranslated(locale: Locale, barePath: string): boolean {
   if ((locale === 'es' || locale === 'zh' || locale === 'zh-hant') && /^\/quests\/(story|side)(\/[a-z0-9-]+)?$/.test(barePath)) return true;
   // Farm sub-pages (crops, house, barn, greenhouse, animals, farm-helpers) and crop detail pages
   // are fully translated for es.
-  if (locale === 'es' && /^\/farm\/(crops|house|barn|greenhouse|animals|farm-helpers)(\/[a-z0-9-]+)?$/.test(barePath)) return true;
+  if ((locale === 'es' || locale === 'zh' || locale === 'zh-hant') && /^\/farm\/(crops|house|barn|greenhouse|animals|farm-helpers)(\/[a-z0-9-]+)?$/.test(barePath)) return true;
   return false;
 }

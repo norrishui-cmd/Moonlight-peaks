@@ -1,0 +1,74 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { SITE, GAME } from '../../../consts';
+
+const entries = [
+  { group: '数据库', title: '作物', desc: '完整的作物数据库——30多种田地作物、草药园作物和树木作物，标注季节与是否为魔法作物。', href: '/zh/farm/crops' },
+  { group: '住宅', title: '房屋', desc: '房屋如何通过Howling Hammer升级4次，由"修屋顶"任务解锁。', href: '/zh/farm/house' },
+  { group: '建筑', title: '谷仓', desc: '谷仓的花费、大小与解锁方式——4000金，占地10x6，可养4只动物。', href: '/zh/farm/barn' },
+  { group: '建筑', title: '温室', desc: '目前已确认的温室扩建相关信息。', href: '/zh/farm/greenhouse' },
+  { group: '生物', title: '动物', desc: '已确认的动物名单、领养方式、喂养方法，以及它们的产出。', href: '/zh/farm/animals' },
+  { group: '机器', title: '农场助手', desc: '全部16台已确认的加工机器——熔炉、酒桶、精炼机、蜂箱等，附配方。', href: '/zh/farm/farm-helpers' },
+];
+
+const jsonLd = {
+  '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '首页', item: `${SITE.url}/zh` },
+    { '@type': 'ListItem', position: 2, name: '农场', item: `${SITE.url}/zh/farm` },
+  ],
+};
+---
+<Base
+  title="月光峰农场 — 作物、房屋、谷仓、温室与动物"
+  description="月光峰农场中心:作物、房屋升级、谷仓、温室、家畜与加工机器——全部来自官方wiki。"
+  path="/zh/farm"
+  jsonLd={jsonLd}
+  crumbs={[{ label: '农场' }]}
+  lang="zh"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">中心 · 农场</p>
+      <h1>你的<em>农场</em></h1>
+      <p class="intro">
+        关于如何搭建你的家园——种什么、房屋和谷仓如何扩建、以及维持农场运作所需的动物和机器。
+        以下内容大多直接来自月光峰官方wiki。
+      </p>
+
+      <div class="itg">
+        {entries.map((e) => (
+          <a class="itcard" href={e.href}>
+            <span class="itgroup">{e.group}</span>
+            <h3>{e.title}</h3>
+            <p>{e.desc}</p>
+          </a>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        每个板块的详细页面也已提供。相关:
+        <a href="/zh/farming">种田指南</a>, <a href="/zh/locations">地点</a>, <a href="/zh/items">物品</a>。
+      </div>
+    </div>
+  </article>
+
+  <style>
+    .itg { display: grid; grid-template-columns: 1fr; gap: 12px; margin: 6px 0 18px; }
+    @media (min-width: 640px) { .itg { grid-template-columns: 1fr 1fr; } }
+    @media (min-width: 980px) { .itg { grid-template-columns: 1fr 1fr 1fr; } }
+    .itcard {
+      display: block;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: var(--surface);
+      padding: 14px;
+      color: inherit;
+      text-decoration: none;
+      transition: border-color .15s ease, transform .15s ease;
+    }
+    .itcard:hover { border-color: color-mix(in srgb, var(--candle) 50%, var(--line)); transform: translateY(-2px); }
+    .itgroup { font-family: var(--mono); color: var(--faint); text-transform: uppercase; letter-spacing: 0.04em; font-size: 0.62rem; }
+    .itcard h3 { font-family: var(--display); font-weight: 600; font-size: 1rem; margin: 4px 0 6px; }
+    .itcard p { color: #ded3e6; font-size: 0.84rem; margin: 0 0 10px; }
+  </style>
+</Base>

@@ -1,0 +1,61 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { SITE } from '../../../consts';
+
+const faq = [
+  { q: '月光峰的温室有什么作用?', a: '社区报告:它能增加受保护的种植空间，当户外地块用满或需要额外空间种植魔法作物时会很有用。具体建造花费、解锁条件，以及是否会改变作物生长规则，目前还没有独立确认。' },
+  { q: '建造温室有成就吗?', a: '有，确认:建造温室会获得"永恒盛开"成就。社区报告:除了成就本身，拥有温室据说也有助于完成其他几个与种田相关的目标，所以值得优先建造，而不是留到游戏后期。' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '首页', item: `${SITE.url}/zh` },
+    { '@type': 'ListItem', position: 2, name: '农场', item: `${SITE.url}/zh/farm` },
+    { '@type': 'ListItem', position: 3, name: '温室', item: `${SITE.url}/zh/farm/greenhouse` },
+  ] },
+];
+---
+<Base
+  title="月光峰温室 — 目前已确认的信息"
+  description="月光峰温室目前已确认的内容:提供额外受保护的种植空间，尚未验证的部分会诚实标注，不做猜测。"
+  path="/zh/farm/greenhouse"
+  jsonLd={jsonLd}
+  crumbs={[{ label: '农场', href: '/zh/farm' }, { label: '温室' }]}
+  lang="zh"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">农场 · 温室</p>
+      <h1><em>温室</em></h1>
+      <p class="intro">
+        社区报告:温室是一项农场扩建，能增加额外受保护的种植空间，当现有地块用满时会很有用。
+        除此之外，我们目前还没有独立确认的建造花费、解锁条件，或者它究竟如何改变种田玩法的
+        具体细节——所以这个页面保持简短，而不是随意猜测。
+      </p>
+
+      <h2>目前仍在核实的内容</h2>
+      <ul>
+        <li>建造花费和所需材料。</li>
+        <li>哪个任务或剧情节点(如果有的话)会解锁它。</li>
+        <li>是否会改变种植季节或提供天气防护。</li>
+        <li>实际能增加多少种植空间。</li>
+      </ul>
+
+      <h2>常见问题</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        一旦确认了真实的温室数据，本页会继续扩充。相关:
+        <a href="/zh/farm">农场中心</a>, <a href="/zh/farm/crops">作物</a>, <a href="/zh/farm/house">房屋</a>。
+      </div>
+    </div>
+  </article>
+</Base>

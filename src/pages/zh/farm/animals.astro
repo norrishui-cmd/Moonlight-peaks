@@ -1,0 +1,86 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { SITE } from '../../../consts';
+
+const animals = ['Cheeken', 'Piggoat', 'Draculamb', 'Cowcula', 'Stoney', 'Rabbicula'];
+
+const faq = [
+  { q: '月光峰能养哪些动物?', a: '目前确认:Cheeken、Piggoat、Draculamb、Cowcula、Stoney和Rabbicula。Cheeken是最早能养的。全年可能还会解锁更多。' },
+  { q: '月光峰的动物怎么获得?', a: '确认:先建造谷仓(向Ridge花4000金)，然后去Luna的农场，她家旁边的小围栏每天会轮换展示3只可领养的动物。只要有足够的金币和谷仓空间，跟其中一只互动即可领养。' },
+  { q: '月光峰的动物吃什么?', a: '确认:动物吃饲料(在精炼机用纤维制作)，或者更好的高级饲料(50份饲料+1份魔力精华)。要在食槽里备好粮食，动物才能在夜间进食。' },
+  { q: '月光峰的动物能产出什么?', a: '确认:根据种类不同，动物会产出牛奶、羊毛、蛋，或者肥料——肥料能提升作物品质，即使不算直接产出的收入，饲养动物也很划算。' },
+  { q: '变身状态下与动物互动有隐藏彩蛋吗?', a: '有，社区报告:以Hellkitten形态与农场动物互动时，它们会真的开口跟你"说话"，而不是平时那种开心的叫声——这是解锁该形态后值得一试的小彩蛋。' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '首页', item: `${SITE.url}/zh` },
+    { '@type': 'ListItem', position: 2, name: '农场', item: `${SITE.url}/zh/farm` },
+    { '@type': 'ListItem', position: 3, name: '动物', item: `${SITE.url}/zh/farm/animals` },
+  ] },
+];
+---
+<Base
+  title="月光峰动物 — 完整名单、喂养与产出"
+  description="月光峰已确认的农场动物:Cheeken、Piggoat、Draculamb、Cowcula、Stoney、Rabbicula。获取方式、饲料喂养，以及它们的产出。"
+  path="/zh/farm/animals"
+  jsonLd={jsonLd}
+  crumbs={[{ label: '农场', href: '/zh/farm' }, { label: '动物' }]}
+  lang="zh"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">农场 · 动物</p>
+      <h1>农场<em>动物</em></h1>
+      <p class="intro">
+        已确认的动物名单与基础饲养方法，经多个发售周信源交叉核实。想了解如何解锁养动物的资格，
+        请参见<a href="/zh/farm/barn">谷仓</a>。
+      </p>
+
+      <h2>已确认动物</h2>
+      <ul>
+        {animals.map((a) => (<li>{a}</li>))}
+      </ul>
+      <p>
+        Cheeken是最常见的第一只动物——确认喜欢被抚摸和戴帽子。据报告全年还会解锁新的动物种类，
+        本列表会随着确认信息增加而扩充。
+      </p>
+
+      <h2>获取动物</h2>
+      <p>
+        确认:谷仓建好后，去Luna的农场——她家旁边的小围栏每天会展示3只可领养的动物，每天轮换，
+        还包括不同的毛色变体。跟其中一只互动即可领养(需要足够的金币和谷仓空余空间)，之后需要
+        自己给它起名字。
+      </p>
+
+      <h2>喂养</h2>
+      <p>
+        确认:动物吃饲料，在精炼机用纤维制作(1份纤维→2份饲料)。更高级的高级饲料需要50份饲料
+        加1份魔力精华。要在食槽里备好粮食，让动物夜间进食——可以一次性囤好几天的量。
+      </p>
+
+      <h2>产出</h2>
+      <p>
+        确认:根据种类不同，动物会产出牛奶、羊毛、蛋，或者肥料。肥料能明确提升作物品质，即使
+        不算直接产出的收入，饲养动物也很划算。品质更高的产出(来自照顾周到、心情愉快的动物)
+        售价更高，也是更好的烹饪食材。
+      </p>
+
+      <h2>常见问题</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        相关: <a href="/zh/farm">农场中心</a>, <a href="/zh/farm/barn">谷仓</a>,
+        <a href="/items/fertilizer">肥料</a>, <a href="/characters/luna">Luna</a>。
+      </div>
+    </div>
+  </article>
+</Base>
