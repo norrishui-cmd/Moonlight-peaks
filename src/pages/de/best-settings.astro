@@ -1,0 +1,100 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+
+const settingsRows = [
+  ['PC', 'Bestätigte Barrierefreiheits-/Grafikoptionen: VSync-Umschalter, Controller-Vibration-Umschalter, Bildschirm-Interaktionsbeschriftungen, Text-Animations-Umschalter, neu belegbare Tasten, Framerate-Begrenzung und Render-Skalierung. Community-berichtet: du kannst auch zwischen 12- und 24-Stunden-Anzeige wählen, was wichtiger ist als es klingt, angesichts der harten 6-Uhr-Sonnenaufgangs-Deadline. Eine echte gemeldete Eigenheit: Grafikeinstellungen (einschließlich Auflösung) speichern sich in deinem Cloud-Speicherstand, sodass du zwischen Steam Deck und Desktop-Monitor jedes Mal neu justieren musst.'],
+  ['Mac', 'Läuft über denselben Steam-Build wie Windows; prüfe die aktuellen Steam-Systemanforderungen für deine spezifische Mac-Hardware.'],
+  ['Steam Deck', 'Bestätigt verifiziert auf Steam mit Gold-Bewertung auf ProtonDB. Eine ausführliche Rezension berichtete, dass das Spiel Schwierigkeiten haben kann, 60FPS mit unbegrenztem TDP zu halten, und empfiehlt eine Begrenzung der Bildwiederholrate auf 50Hz für ein flüssigeres, akkuschonenderes Erlebnis.'],
+  ['Nintendo Switch / Switch 2', 'Vollständige Controller-Unterstützung von Anfang an; Rezensenten fanden, dass die Switch-2-Version im tragbaren Modus außergewöhnlich gut lief. Siehe unseren Switch-Guide für editionsspezifische Unterschiede.'],
+  ['Kamera & UI-Komfort (jede Plattform)', 'Echte spielerseitig gemeldete Eigenheit: die Standardkamera sitzt ziemlich nah/eingezoomt, was manche PC-Spieler auf einem großen Monitor als unangenehm empfanden (bewegungskrankheitsähnlich) im Vergleich zu Steam Deck oder Switch, wo derselbe Zoom-Level auf einem kleineren Bildschirm natürlich wirkt.'],
+];
+
+const testingSteps = [
+  'Prüfe zuerst deine Barrierefreiheits-Bedürfnisse: bestätigte Optionen sind Vibration, Interaktionsbeschriftungen, Text-Animation und neu belegbare Tasten \u2014 es gibt keinen bestätigten Farbenblind-Modus.',
+  'Versuche auf dem Steam Deck, die Bildwiederholrate auf 50Hz zu begrenzen, wenn du bei unbegrenztem TDP Framerate-Einbrüche siehst.',
+  'Wenn du auf einem PC-Monitor spielst und der Standard-Kamerazoom zu nah wirkt, versuche den Fenstermodus, den mehrere Spieler als angenehmer empfanden.',
+  'Erwarte, deine Grafikeinstellungen nach einem Gerätewechsel neu anzupassen \u2014 sie werden im Cloud-Speicherstand gespeichert, nicht pro Gerät.',
+  'Teste früh Controller gegen Tastatur+Maus: mehrere Spieler berichteten, dass das Spiel controllerorientiert ist, mit unterdurchschnittlicher Mausnutzung im Standard-Tastaturschema.',
+];
+
+const faq = [
+  { q: 'Was sind die besten Moonlight-Peaks-Einstellungen?', a: 'Versuche auf dem Steam Deck eine gesperrte 50Hz-Bildwiederholrate, wenn du Framerate-Einbrüche siehst. Auf einem PC-Monitor kann der Fenstermodus helfen, wenn der Standard-Kamerazoom zu nah wirkt. Beachte, dass Grafikeinstellungen in deinem Cloud-Speicherstand gespeichert werden, erwarte also eine Neujustierung nach einem Gerätewechsel.' },
+  { q: 'Was sind die besten Steam-Deck-Einstellungen für Moonlight Peaks?', a: 'Bestätigt: das Spiel ist Steam-Deck-verifiziert mit ProtonDB-Gold-Bewertung und hat volle Controller-Unterstützung von Anfang an. Eine ausführliche Rezension fand, dass es Schwierigkeiten haben kann, 60FPS mit unbegrenztem TDP zu erreichen, und empfiehlt eine gesperrte 50Hz-Bildwiederholrate für flüssigeres, akkuschonenderes Spielen.' },
+  { q: 'Sollte ich Controller oder Tastatur nutzen?', a: 'Controller passt natürlicher \u2014 mehrere Spieler berichteten, dass das Standard-Tastatur+Maus-Schema die Maus größtenteils ungenutzt lässt, wodurch die Tastaturhand den Großteil der Arbeit übernehmen muss. Volle Controller-Unterstützung funktioniert gut auf PC, Steam Deck und Switch gleichermaßen.' },
+  { q: 'Hat Moonlight Peaks Barrierefreiheits-Einstellungen?', a: 'Einige: bestätigte Optionen sind VSync, Controller-Vibration, Bildschirm-Interaktionsbeschriftungen, Text-Animation, neu belegbare Tasten, eine Framerate-Begrenzung und Render-Skalierung. Nicht bestätigt: kein Farbenblind-Modus oder legasthenie-freundliche Textoption wurde gemeldet.' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Startseite', item: `${SITE.url}/de` },
+    { '@type': 'ListItem', position: 2, name: 'Beste Einstellungen', item: new URL('/de/best-settings', SITE.url).href },
+  ] },
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({
+    '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })) },
+];
+---
+<Base
+  title="Moonlight Peaks Beste Einstellungen - PC, Steam Deck, Switch und Mac"
+  description="Moonlight Peaks beste Einstellungen für PC, Mac, Steam Deck, Switch, Switch 2, Controller-Komfort, Lesbarkeit, Demo-Tests und Release-Updates."
+  path="/de/best-settings"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Beste Einstellungen' }]}
+  lang="de"
+  showExport
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Release / Beste Einstellungen</p>
+      <h1>Moonlight Peaks <em>beste Einstellungen</em></h1>
+      <p class="intro">
+        Echte, bestätigte Einstellungen und Barrierefreiheitsoptionen für {GAME.title} auf PC,
+        Mac, Steam Deck und Switch/Switch 2, plus ein paar plattformspezifische Eigenheiten, die
+        Spieler seit dem Release gemeldet haben.
+      </p>
+
+      <div class="callout">
+        <strong>Keine erfundenen Benchmarks:</strong> genaue FPS, Grafik-Voreinstellungen,
+        Akkulaufzeit und Plattform-Leistungsnotizen werden nur nach Release-Tests oder
+        verlässlicher Quellenbestätigung hinzugefügt.
+      </div>
+
+      <h2>Plattform-Checkliste</h2>
+      <table class="facts">
+        {settingsRows.map((row) => (<tr><th>{row[0]}</th><td>{row[1]}</td></tr>))}
+      </table>
+
+      <h2>Was du zuerst testen solltest</h2>
+      <ol>
+        {testingSteps.map((step) => (<li>{step}</li>))}
+      </ol>
+
+      <h2>Verwandte Seiten</h2>
+      <div class="link-grid">
+        <a href="/de/demo">Demo-Guide</a>
+        <a href="/de/system-requirements">Systemanforderungen</a>
+        <a href="/known-issues">Bekannte Probleme</a>
+        <a href="/de/platforms">Plattformen</a>
+        <a href="/launch-day">Release-Tag-Hub</a>
+      </div>
+
+      <h2>FAQ</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </article>
+
+  <style>
+    .link-grid { display: grid; grid-template-columns: 1fr; gap: 10px; margin-top: 10px; }
+    @media (min-width: 640px) { .link-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+    .link-grid a { border: 1px solid var(--line); border-radius: 10px; background: var(--surface); color: var(--mist); padding: 12px 14px; text-decoration: none; }
+    .link-grid a:hover { border-color: color-mix(in srgb, var(--candle) 55%, var(--line)); }
+  </style>
+</Base>

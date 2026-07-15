@@ -1,0 +1,105 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+
+const checklist = [
+  ['ストアページ', '購入前やガイド更新前の最終確認としては、Steam公式ページを使ってください。'],
+  ['Windows / Mac', 'ムーンライト・ピークスはSteamでPC・Mac向けに掲載されています。正確なOS・プロセッサ・メモリ・グラフィック・DirectX・ストレージの要件は、現在のSteamシステム要件パネルで確認してください。'],
+  ['Steam Deck', 'ValveがSteam Deckの最終的な互換性評価を示すまでは、随時確認が必要な項目として扱ってください。'],
+  ['コントローラー', '体験版は、正式発売前にゲームパッドの操作感、文字の読みやすさ、UIの拡大率を確認するのに役立ちます。'],
+  ['容量', '公式ストアページや発売時の情報に明記されていない限り、正確なストレージ容量は掲載していません。'],
+];
+
+const faq = [
+  { q: 'ムーンライト・ピークスのシステム要件は?', a: '最新のWindows・Mac向けシステム要件は、Steam公式ストアページで確認してください。このページは、ハードウェアの数値を創作することなく、何を確認すべきかを追跡しています。' },
+  { q: 'ムーンライト・ピークスはMacで動きますか?', a: 'ムーンライト・ピークスはSteamでPC・Mac向けに掲載されています。正確なMac版の要件は、現在のSteamページで確認してください。' },
+  { q: 'ムーンライト・ピークスはSteam Deck Verifiedですか?', a: 'Steam Deckのサポート状況は随時確認してください。ゲームはSteamにありますが、最終的なDeck互換性評価はValve・ストア側からのシグナルです。' },
+  { q: '体験版でパフォーマンスをテストすべきですか?', a: 'はい。無料の体験版は、購入前に自分のデバイスで操作性・文字サイズ・カメラの快適さ・全体的なパフォーマンスをテストする最も確実な方法です。' },
+];
+
+const steamUrl = 'https://store.steampowered.com/app/2209900/Moonlight_Peaks/';
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'ホーム', item: `${SITE.url}/ja` },
+    { '@type': 'ListItem', position: 2, name: 'システム要件', item: new URL('/ja/system-requirements', SITE.url).href },
+  ] },
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({
+    '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })) },
+];
+---
+<Base
+  title="ムーンライト・ピークス システム要件 — PC・Mac・Steam Deck"
+  description="ムーンライト・ピークスのシステム要件ガイド:Steam PC・Mac・Steam Deckの確認事項、体験版でのテスト方法、購入前に確認すべきポイント。"
+  path="/ja/system-requirements"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'システム要件' }]}
+  lang="ja"
+  showExport
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">発売 / システム要件</p>
+      <h1>ムーンライト・ピークス <em>システム要件</em></h1>
+      <p class="intro">
+        {GAME.title}が自分のPC・Mac・Steam Deckで動作するか確認したいプレイヤー向けの、安全な要件
+        ページです。正確なハードウェアの数値は、発売直前にストアのメタデータが変わることもあるため、
+        必ず公式のSteamページで確認してください。
+      </p>
+
+      <h2>まず確認すべき公式情報源</h2>
+      <p>
+        最新のシステム要件、対応プラットフォーム、体験版の提供状況、発売タイミングについては、
+        公式Steamの掲載情報を利用してください。このページは意図的に控えめな作りになっており、
+        何を確認すべきか、体験版をどうテストすべきかは示していますが、公式情報源で確認できない
+        CPU・GPU・RAM・容量・OSの値を創作することはありません。
+      </p>
+      <p><a href={steamUrl} target="_blank" rel="noopener noreferrer nofollow">公式Steamページを開く</a></p>
+
+      <h2>購入前チェックリスト</h2>
+      <table class="facts">
+        {checklist.map((row) => (<tr><th>{row[0]}</th><td>{row[1]}</td></tr>))}
+      </table>
+
+      <h2>体験版でのテスト方法</h2>
+      <p>
+        体験版は実際に自分のハードウェアで動くため、最も実用的なベンチマークになります。操作性・
+        メニュー・文字の読みやすさ・コントローラーの快適さ・釣り・生け花・刺繍・キャラクター作成を
+        試してみてください。携帯モードでプレイする予定なら、デスクトップの映像だけで判断せず、
+        同じ携帯環境で体験版を試すことをおすすめします。
+      </p>
+      <ul>
+        <li><strong>PC:</strong>解像度、フレームの安定性、マウス・キーボードの快適さ、読み込み時間を確認。</li>
+        <li><strong>Mac:</strong>Steamで正確なMac要件を確認し、可能であれば体験版でテスト。</li>
+        <li><strong>Steam Deck:</strong>操作性、文字サイズ、バッテリーの快適さ、発売後の最終的なDeck評価を確認。</li>
+      </ul>
+
+      <h2>関連する発売情報ページ</h2>
+      <div class="link-grid">
+        <a href="/ja/release-date">発売日</a>
+        <a href="/ja/demo">体験版ガイド</a>
+        <a href="/ja/platforms">プラットフォーム</a>
+        <a href="/ja/languages">対応言語</a>
+        <a href="/ja/beginner-guide">初心者ガイド</a>
+      </div>
+
+      <h2>FAQ</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </article>
+
+  <style>
+    .link-grid { display: grid; grid-template-columns: 1fr; gap: 10px; margin-top: 10px; }
+    @media (min-width: 640px) { .link-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+    .link-grid a { border: 1px solid var(--line); border-radius: 10px; background: var(--surface); color: var(--mist); padding: 12px 14px; text-decoration: none; }
+    .link-grid a:hover { border-color: color-mix(in srgb, var(--candle) 55%, var(--line)); }
+  </style>
+</Base>

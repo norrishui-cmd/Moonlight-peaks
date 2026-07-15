@@ -1,0 +1,100 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+
+const settingsRows = [
+  ['PC', '確認済みのアクセシビリティ・グラフィック設定:垂直同期の切り替え、コントローラー振動の切り替え、画面上の操作ラベル、文字アニメーションの切り替え、キー割り当て変更、フレームレート制限、レンダースケール。コミュニティ報告:12時間表示と24時間表示も選べます——ゲームの午前6時という厳格な日の出リミットを考えると、見た目以上に重要な設定です。実際に報告されている癖として、グラフィック設定(解像度を含む)はクラウドセーブに保存されるため、Steam Deckとデスクトップモニターを切り替えるたびに再調整が必要です。'],
+  ['Mac', 'WindowsとMac向けは同じSteamビルドで動作します。お使いのMacの具体的なハードウェアについては、最新のSteamシステム要件を確認してください。'],
+  ['Steam Deck', 'SteamでVerified認定を確認済み、ProtonDBではGold評価。ある詳細なレビューでは、TDP制限を外すと60FPSを維持するのが難しい場合があると報告されており、より滑らかでバッテリーに優しい体験のためにリフレッシュレートを50Hzに固定することを勧めています。'],
+  ['Nintendo Switch / Switch 2', '標準でフルコントローラー対応。レビュアーはSwitch 2版が携帯モードで非常に良好に動作したと報告しています。エディションごとの違いはSwitchガイドをご覧ください。'],
+  ['カメラとUIの快適さ(全プラットフォーム共通)', '実際にプレイヤーから報告されている癖:標準のカメラはかなり近く(ズームイン気味)で、大きなモニターを使うPCプレイヤーの一部はこれを不快(乗り物酔いに近い感覚)に感じたと報告しています。一方、Steam DeckやSwitchのような小さい画面では、同じズーム倍率でも自然に感じられます。'],
+];
+
+const testingSteps = [
+  'まず自分に必要なアクセシビリティ設定を確認してください:確認済みのオプションは振動、操作ラベル、文字アニメーション、キー割り当て変更です——色覚サポートモードは確認されていません。',
+  'Steam DeckでTDP制限を外した状態でフレームレートの低下が見られる場合は、リフレッシュレートを50Hzに固定してみてください。',
+  'PCモニターでプレイしていて標準のカメラズームが近すぎると感じる場合は、複数のプレイヤーがより快適だと報告しているウィンドウモードを試してください。',
+  '端末を切り替えた後はグラフィック設定を再設定する前提でいてください——端末ごとではなくクラウドセーブに保存される仕組みです。',
+  'コントローラーとキーボード+マウスは早めに両方試してください:複数のプレイヤーが、このゲームはコントローラー中心の設計で、標準のキーボード操作ではマウスがあまり活用されていないと報告しています。',
+];
+
+const faq = [
+  { q: 'ムーンライト・ピークスのおすすめ設定は?', a: 'Steam Deckでフレームレートの低下が見られる場合は、リフレッシュレートを50Hzに固定してみてください。PCモニターで標準のカメラズームが近すぎると感じる場合は、ウィンドウモードが役立つことがあります。グラフィック設定はクラウドセーブに保存されるため、端末を切り替えた後は再調整が必要になる点にご注意ください。' },
+  { q: 'ムーンライト・ピークスのSteam Deck向けおすすめ設定は?', a: '確認済み:このゲームはSteam Deck Verifiedで、ProtonDBではGold評価、標準でフルコントローラー対応です。ある詳細なレビューでは、TDP制限を外すと60FPS維持が難しいことがあると報告されており、より滑らかでバッテリーに優しいプレイのためにリフレッシュレートを50Hzに固定することを勧めています。' },
+  { q: 'コントローラーとキーボードどちらを使うべきですか?', a: 'コントローラーの方が自然に合います——複数のプレイヤーが、標準のキーボード+マウス操作ではマウスがほとんど使われず、キーボード側の手が作業の大半を担うことになると報告しています。フルコントローラー対応はPC・Steam Deck・Switchのいずれでも良好に機能します。' },
+  { q: 'ムーンライト・ピークスにアクセシビリティ設定はありますか?', a: 'いくつかあります:確認済みのオプションは垂直同期、コントローラー振動、画面上の操作ラベル、文字アニメーション、キー割り当て変更、フレームレート制限、レンダースケールです。未確認:色覚サポートモードやディスレクシア対応の文字オプションは報告されていません。' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'ホーム', item: `${SITE.url}/ja` },
+    { '@type': 'ListItem', position: 2, name: 'おすすめ設定', item: new URL('/ja/best-settings', SITE.url).href },
+  ] },
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({
+    '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })) },
+];
+---
+<Base
+  title="ムーンライト・ピークス おすすめ設定 — PC・Steam Deck・Switch・Mac"
+  description="ムーンライト・ピークスのおすすめ設定ガイド:PC・Mac・Steam Deck・Switch・Switch 2、コントローラーの快適さ、読みやすさ、体験版でのテスト、発売後の更新情報。"
+  path="/ja/best-settings"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'おすすめ設定' }]}
+  lang="ja"
+  showExport
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">発売 / おすすめ設定</p>
+      <h1>ムーンライト・ピークス <em>おすすめ設定</em></h1>
+      <p class="intro">
+        {GAME.title}のPC・Mac・Steam Deck・Switch/Switch 2向けの、実際に確認済みの設定と
+        アクセシビリティオプション、そして発売以降にプレイヤーから報告されているプラットフォームごとの
+        癖をまとめました。
+      </p>
+
+      <div class="callout">
+        <strong>架空のベンチマークは載せません:</strong>正確なFPS、グラフィックプリセット、
+        バッテリー持続時間、プラットフォームごとのパフォーマンス情報は、発売後のテストや
+        信頼できる情報源での確認が取れてから追加します。
+      </div>
+
+      <h2>プラットフォーム別チェックリスト</h2>
+      <table class="facts">
+        {settingsRows.map((row) => (<tr><th>{row[0]}</th><td>{row[1]}</td></tr>))}
+      </table>
+
+      <h2>最初に試すべきこと</h2>
+      <ol>
+        {testingSteps.map((step) => (<li>{step}</li>))}
+      </ol>
+
+      <h2>関連ページ</h2>
+      <div class="link-grid">
+        <a href="/ja/demo">体験版ガイド</a>
+        <a href="/ja/system-requirements">システム要件</a>
+        <a href="/known-issues">既知の問題</a>
+        <a href="/ja/platforms">プラットフォーム</a>
+        <a href="/launch-day">発売日ハブ</a>
+      </div>
+
+      <h2>FAQ</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </article>
+
+  <style>
+    .link-grid { display: grid; grid-template-columns: 1fr; gap: 10px; margin-top: 10px; }
+    @media (min-width: 640px) { .link-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+    .link-grid a { border: 1px solid var(--line); border-radius: 10px; background: var(--surface); color: var(--mist); padding: 12px 14px; text-decoration: none; }
+    .link-grid a:hover { border-color: color-mix(in srgb, var(--candle) 55%, var(--line)); }
+  </style>
+</Base>
