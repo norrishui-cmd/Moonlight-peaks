@@ -1,0 +1,92 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+
+const reviews = [
+  { outlet: 'Prima Games', score: '9,5 / 10', takeaway: 'Einer der stärksten Cozy-Farming-Sims der jüngeren Zeit, gelobt für sinnvolle Progression, einprägsame Charaktere und wie durchdacht das übernatürliche Thema in jedes System eingewoben ist.' },
+  { outlet: 'GameWatcher', score: '7,5 / 10', takeaway: 'Ein langsamer Start für genre-erfahrene Spieler, aber ein lohnender, entspannter Life-Sim, sobald er sich öffnet, in einem charmant übernatürlichen Setting.' },
+  { outlet: 'Gamereactor', score: '7 / 10', takeaway: 'Genoss die nächtliche Wendung der Life-Sim-Formel, merkte aber an, dass die Ausdauerleiste zusätzlich zur Sonnenaufgangs-Deadline eher überflüssig als vertiefend wirkt.' },
+  { outlet: 'Nintendo World Report', score: 'Rezensiert (Switch 2)', takeaway: 'Bestätigt eine spezifische Switch-2-Rezension, die die Horror-Thematik als gut passend für einen Cozy-Life-Sim beschreibt; eine konkrete Zahlenbewertung ist hier noch nicht bequellt.' },
+  { outlet: 'Metacritic (Kritiker-Aggregat)', score: '10 Kritikerrezensionen gelistet', takeaway: 'Eine Aggregat-Seite ist jetzt live mit 10 Kritikerrezensionen; einzelne Bewertungen variieren breit, mit wiederkehrendem Lob für Besetzung und Setting und wiederkehrenden Anmerkungen zu Ausdauer-/Mana-Pacing sowie, auf Switch 2, Ladezeiten.' },
+];
+
+const faq = [
+  { q: 'Ist Moonlight Peaks gut? Was sagen die Rezensionen?', a: 'Frühe Kritikerbewertungen reichen von 7 bis 9,5 von 10 bei Outlets wie Prima Games, GameWatcher und Gamereactor — überwiegend positiv, mit dem meisten Lob für übernatürliche Thematik und Charakterschreibung, und einigen Beschwerden zu Pacing/Ausdauersystem.' },
+  { q: 'Was ist die Moonlight-Peaks-Metacritic-Bewertung?', a: 'Eine Metacritic-Seite ist jetzt live mit 10 gelisteten Kritikerrezensionen, obwohl wir die genaue Aggregatzahl hier nicht bequellt haben — prüfe Metacritic direkt für den aktuellen Durchschnitt, da wir kein eigenes Aggregat berechnen oder erfinden.' },
+  { q: 'Was kritisieren Rezensionen an Moonlight Peaks?', a: 'Die bisher spezifischste kritische Anmerkung: Gamereactor bezeichnete die Kombination aus einer harten nächtlichen Sonnenaufgangs-Deadline und einer separaten Ausdauerleiste als überflüssig, da die Sonnenaufgangs-Grenze deine Nacht bereits von selbst begrenzt.' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Startseite', item: `${SITE.url}/de` },
+    { '@type': 'ListItem', position: 2, name: 'Rezensionen', item: new URL('/de/reviews', SITE.url).href },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks Rezensions-Übersicht — Kritikerbewertungen & Urteile"
+  description="Ist Moonlight Peaks gut? Eine Übersicht echter Launch-Week-Kritikerrezensionen und Bewertungen von Prima Games, GameWatcher, Gamereactor und mehr, aktualisiert bei neuen Rezensionen."
+  path="/de/reviews"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Rezensionen' }]}
+  lang="de"
+  showExport
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Eintrag · Rezensionen</p>
+      <h1>Moonlight Peaks <em>Rezensions</em>-Übersicht</h1>
+      <p class="intro">
+        Echte Kritikerbewertungen und Urteile für {GAME.title}, gesammelt sobald Rezensionen
+        eintreffen — nicht unsere eigene Meinung, und kein erfundenes Aggregat. Siehe unsere
+        <a href="/previews">Vorab-Vorschauen &amp; Demo-Eindrücke</a> für das frühere Hands-on-Bild.
+        Aktualisiert {SITE.updated}.
+      </p>
+
+      <h2>Kritikerbewertungen bisher</h2>
+      <table class="facts">
+        <tr><th>Outlet</th><th>Bewertung</th><th>Fazit</th></tr>
+        {reviews.map((r) => (
+          <tr>
+            <td>{r.outlet}</td>
+            <td>{r.score}</td>
+            <td>{r.takeaway}</td>
+          </tr>
+        ))}
+      </table>
+
+      <h2>Worüber sich Kritiker einig sind</h2>
+      <p>
+        Rezensenten heben durchweg die übernatürliche Wendung der Cozy-Farm-Sim-Formel hervor —
+        den nächtlichen Zeitplan, die sieben Familien und die Tiefe der Charakterschreibung — als
+        stärksten Trumpf des Spiels. Die Art Direction und der "charmant übernatürliche" Ton werden
+        unabhängig voneinander bei mehreren Outlets erwähnt.
+      </p>
+
+      <h2>Worauf Kritiker reagieren</h2>
+      <p>
+        Die bisher spezifischste, bequellte Kritik betrifft das Pacing: Gamereactors Rezension
+        merkte die Ausdauerleiste als überflüssig zusätzlich zur bereits harten
+        Sonnenaufgangs-Grenze an. GameWatcher bemerkte einen langsamen Einstieg für Spieler, die
+        bereits tief im Life-Sim-Genre stecken.
+      </p>
+
+      <div class="callout">
+        Diese Übersicht listet nur Bewertungen, die wir einem benannten Outlet zuordnen können. Wir
+        berechnen kein eigenes Aggregat, und wir fügen hier weitere Outlets hinzu, sobald mehr
+        Rezensionen verifiziert sind.
+      </div>
+
+      <h2>FAQ</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </article>
+</Base>

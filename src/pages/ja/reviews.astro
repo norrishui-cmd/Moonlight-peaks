@@ -1,0 +1,90 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+
+const reviews = [
+  { outlet: 'Prima Games', score: '9.5 / 10', takeaway: '近年で最も優れたコージーファーミングシムの一つと評価。意味のある成長、印象に残るキャラクター、超常的なテーマがあらゆるシステムに緻密に織り込まれている点を称賛。' },
+  { outlet: 'GameWatcher', score: '7.5 / 10', takeaway: 'このジャンルに慣れたプレイヤーには序盤が遅く感じられるが、開けてくると魅力的な超常的世界観の中で報われる、リラックスしたライフシムになる。' },
+  { outlet: 'Gamereactor', score: '7 / 10', takeaway: 'ライフシムの定番を夜型にひねった発想を楽しんだ一方、日の出リミットに加えて別途スタミナゲージがあることは、深みを加えるというより冗長だと指摘。' },
+  { outlet: 'Nintendo World Report', score: 'レビュー済み(Switch 2)', takeaway: 'Switch 2版専用のレビューが公開されていることを確認済み。ホラー的な演出がコージーライフシムにうまく機能していると評している。具体的な点数はまだ情報源が確認できていません。' },
+  { outlet: 'Metacritic(批評家集計)', score: '批評家レビュー10件掲載', takeaway: '批評家レビュー10件を掲載した集計ページが公開されています。各媒体のスコアは幅広く分かれており、キャストと世界観への称賛が繰り返し見られる一方、スタミナ・マナのペース配分やSwitch 2での読み込み時間についての指摘も繰り返し見られます。' },
+];
+
+const faq = [
+  { q: 'ムーンライト・ピークスは良い作品ですか?レビューでは何と言われていますか?', a: 'Prima Games、GameWatcher、Gamereactorなど各媒体の序盤の批評家スコアは10点満点中7〜9.5点の幅で、おおむね好評です。超常的な世界観とキャラクター描写が最も称賛されており、ペース配分・スタミナシステムへの不満も一部見られます。' },
+  { q: 'ムーンライト・ピークスのMetacriticスコアは?', a: '批評家レビュー10件を掲載したMetacriticページが公開されていますが、正確な集計数値についてはここではまだ情報源を確認できていません——独自の集計を計算・創作することはしないため、現在の平均値は直接Metacriticでご確認ください。' },
+  { q: 'ムーンライト・ピークスのレビューで指摘されている点は?', a: 'これまでで最も具体的で情報源のある批判点:Gamereactorのレビューでは、厳格な夜間の日の出リミットに加えて別途スタミナゲージがあることを冗長だと指摘しています。日の出リミット自体がすでに1晩の行動範囲を制限しているためです。' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'ホーム', item: `${SITE.url}/ja` },
+    { '@type': 'ListItem', position: 2, name: 'レビューまとめ', item: new URL('/ja/reviews', SITE.url).href },
+  ] },
+];
+---
+<Base
+  title="ムーンライト・ピークス レビューまとめ — 批評家スコアと評価"
+  description="ムーンライト・ピークスは良い作品?Prima Games、GameWatcher、Gamereactorなど、発売週の実際の批評家レビューとスコアをまとめました。新しいレビューが公開され次第更新します。"
+  path="/ja/reviews"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'レビューまとめ' }]}
+  lang="ja"
+  showExport
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">エントリー・レビュー</p>
+      <h1>ムーンライト・ピークス <em>レビュー</em>まとめ</h1>
+      <p class="intro">
+        {GAME.title}に関する実際の批評家スコアと評価を、レビューが公開され次第まとめています——
+        当サイト独自の意見や、創作した集計値ではありません。発売前のハンズオン評については
+        <a href="/previews">発売前プレビュー・体験版インプレッション</a>もご覧ください。
+        最終更新:{SITE.updated}。
+      </p>
+
+      <h2>これまでの批評家スコア</h2>
+      <table class="facts">
+        <tr><th>媒体</th><th>スコア</th><th>評価内容</th></tr>
+        {reviews.map((r) => (
+          <tr>
+            <td>{r.outlet}</td>
+            <td>{r.score}</td>
+            <td>{r.takeaway}</td>
+          </tr>
+        ))}
+      </table>
+
+      <h2>批評家の間で一致している点</h2>
+      <p>
+        レビュアーたちは一貫して、コージーファームシムの定番を超常的にひねった点——夜型のスケジュール、
+        7つの一族、キャラクター描写の深さ——をこのゲームの最大の強みとして挙げています。アートの方向性と
+        「魅力的な超常的」トーンについても、複数の媒体が独立してそれぞれ言及しています。
+      </p>
+
+      <h2>批評家が指摘している点</h2>
+      <p>
+        これまでで最も具体的で情報源のある批判点はペース配分に関するものです:Gamereactorのレビューでは、
+        すでに1晩の行動範囲を制限している厳格な日の出リミットに加えて、スタミナゲージがあることを冗長だと
+        指摘しています。GameWatcherは、すでにライフシムというジャンルに深く慣れたプレイヤーにとって
+        序盤の展開が遅いと述べています。
+      </p>
+
+      <div class="callout">
+        このまとめは、特定の媒体名に紐づけられるスコアのみを掲載しています。独自の集計スコアは
+        計算しておらず、レビューの検証が進み次第、新しい媒体をここに追加していきます。
+      </div>
+
+      <h2>FAQ</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </article>
+</Base>

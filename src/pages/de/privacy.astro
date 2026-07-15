@@ -1,0 +1,54 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE } from '../../consts';
+---
+<Base
+  title="Datenschutzerklärung | Moonlight Peaks Wiki & Guide"
+  description="Wie Moonlight Peaks Wiki & Guide mit Cookies, Analyse und Werbung umgeht."
+  path="/de/privacy"
+  crumbs={[{ label: 'Datenschutz' }]}
+  lang="de"
+>
+  <article class="page">
+    <div class="wrap">
+      <h1>Datenschutzerklärung</h1>
+      <p class="intro">Wie diese Seite mit Daten, Cookies, Analyse und Werbung umgeht. Zuletzt aktualisiert {SITE.updated}.</p>
+
+      <h2>Wer wir sind</h2>
+      <p>Moonlight Peaks Wiki &amp; Guide ({SITE.url}) ist eine unabhängige, von Fans erstellte Guide-Seite. Du erreichst uns unter {SITE.contact}.</p>
+
+      <h2>Cookies</h2>
+      <p>
+        Wir verwenden Cookies und ähnliche Technologien für die grundlegende Funktion der Seite, um
+        den Traffic zu messen und — sobald aktiviert — um Werbung anzuzeigen. Du kannst Cookies über
+        deine Browser-Einstellungen steuern oder löschen. Wo gesetzlich erforderlich, fragen wir um
+        Zustimmung, bevor nicht notwendige Cookies gesetzt werden.
+      </p>
+
+      <h2>Analyse</h2>
+      <p>
+        Wir können ein datenschutzfreundliches Analysetool (wie Google Analytics) nutzen, um zu
+        verstehen, welche Seiten nützlich sind. Dies sammelt aggregierte Daten wie Seitenaufrufe,
+        ungefähre Region und Gerätetyp. Es wird nicht verwendet, um dich persönlich zu identifizieren.
+      </p>
+
+      <h2>Werbung</h2>
+      <p>
+        Diese Seite kann Werbung von Drittanbieter-Netzwerken wie Google AdSense anzeigen. Diese
+        Partner können Cookies verwenden, um relevante Werbung anzuzeigen und die Leistung zu
+        messen. Du kannst dich über personalisierte Werbung informieren und diese über die
+        Anzeigeneinstellungen von Google und die relevanten Branchen-Opt-out-Seiten für deine Region abmelden.
+      </p>
+
+      <h2>Deine Wahlmöglichkeiten</h2>
+      <p>
+        Je nachdem, wo du lebst (zum Beispiel EU/EWR, UK oder Kalifornien), hast du möglicherweise
+        Rechte auf Zugriff, Korrektur oder Löschung personenbezogener Daten sowie auf Abmeldung von
+        personalisierter Werbung. Kontaktiere uns unter {SITE.contact}, um eine Anfrage zu stellen.
+      </p>
+
+      <h2>Änderungen</h2>
+      <p>Wir können diese Richtlinie aktualisieren, wenn die Seite wächst oder sich Werbe- und Analysetools ändern. Das Datum "zuletzt aktualisiert" oben spiegelt die neueste Version wider.</p>
+    </div>
+  </article>
+</Base>

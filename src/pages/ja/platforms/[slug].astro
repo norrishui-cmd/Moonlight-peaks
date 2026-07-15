@@ -1,0 +1,23 @@
+---
+import TopicPage from '../../../components/TopicPage.astro';
+import { platformsSection, platforms } from '../../../data/platforms';
+import { platformsJa } from '../../../i18n/platforms-ja';
+
+export function getStaticPaths() {
+  return platforms.filter((it) => platformsJa[it.slug]).map((it, i, arr) => {
+    const tr = platformsJa[it.slug];
+    const merged = { ...it, ...tr };
+    return {
+      params: { slug: it.slug },
+      props: {
+        item: merged,
+        prev: { ...arr[(i - 1 + arr.length) % arr.length], ...platformsJa[arr[(i - 1 + arr.length) % arr.length].slug] },
+        next: { ...arr[(i + 1) % arr.length], ...platformsJa[arr[(i + 1) % arr.length].slug] },
+      },
+    };
+  });
+}
+const { item, prev, next } = Astro.props;
+const jaSection = { ...platformsSection, base: '/ja/platforms', label: 'プラットフォーム', eyebrow: 'プラットフォーム' };
+---
+<TopicPage section={jaSection} item={item} prev={prev} next={next} lang="ja" basePath="/ja/platforms" />

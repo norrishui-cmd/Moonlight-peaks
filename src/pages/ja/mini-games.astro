@@ -1,0 +1,79 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+import GuideImage from '../../components/GuideImage.astro';
+
+const minigames = [
+  { name: '呪文詠唱', how: '杖を装備した状態で、十字キーの指示に従って円と点のパターンを描きます。', where: '魔法が解放されればどこでも' },
+  { name: 'デートのミニゲーム', how: 'デート内容によって異なります——指定された色で花束を組む、マシュマロを好みの焼き加減に焼くなどの例があります。', where: '好感度レベル4以上の住民とのデート時' },
+  { name: '釣り', how: '水面の影に向かってキャストし、タイミング式のミニゲームでリールを巻きます。', where: '釣竿が解放されれば水辺エリアで' },
+  { name: 'Noelとの釣り勝負', how: '250ゴールドを賭けて、Noelより先に3種類の異なる魚を釣ると釣竿がもらえます。', where: '序盤、Noelに関連' },
+];
+
+const faq = [
+  { q: 'ムーンライト・ピークスにはどんなミニゲームがありますか?', a: '現在確認されているのは:呪文詠唱(円と点のパターン)、花束組みやマシュマロ焼きなどのデートアクティビティ、タイミング式の釣りミニゲーム——それに加えて釣竿を解放するNoelとの釣り勝負です。' },
+  { q: 'ムーンライト・ピークスの釣りは難しいですか?', a: 'レビュアーは、技術を試される挑戦というよりも、あつまれ どうぶつの森のようなリラックスしたキャスト&リール方式に近い、意図的に低ストレスな作りだと評しています。' },
+  { q: 'ミニゲームは人間関係に影響しますか?', a: 'デートに限っては影響します——デートに遅刻したりミニゲームで失敗したりすると、関係を完全に終わらせるのではなく、確認済みで好感度ポイントが減少します。' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'ホーム', item: `${SITE.url}/ja` },
+    { '@type': 'ListItem', position: 2, name: 'ミニゲーム', item: new URL('/ja/mini-games', SITE.url).href },
+  ] },
+];
+---
+<Base
+  title="ムーンライト・ピークス ミニゲーム — デート・釣り・呪文詠唱"
+  description="ムーンライト・ピークスの確認済みミニゲーム一覧:花束作りなどのデートアクティビティ、釣りのキャスト&リールシステム、呪文詠唱の仕組み。"
+  path="/ja/mini-games"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'ミニゲーム' }]}
+  lang="ja"
+  showExport
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">エントリー・ミニゲーム</p>
+      <h1>ムーンライト・ピークス <em>ミニゲーム</em></h1>
+      <p class="intro">
+        {GAME.title}では、いくつかのミニゲームが独立したアーケードモードとしてではなく、ゲームの
+        各システムに組み込まれています。現在確認されている内容をまとめました。最終更新:{SITE.updated}。
+      </p>
+
+      <GuideImage imageId="minigame" priority />
+
+      <table class="facts">
+        <tr><th>ミニゲーム</th><th>仕組み</th><th>登場場面</th></tr>
+        {minigames.map((m) => (
+          <tr>
+            <td>{m.name}</td>
+            <td>{m.how}</td>
+            <td>{m.where}</td>
+          </tr>
+        ))}
+      </table>
+
+      <div class="callout">
+        NokturnaやCooking、ポーション作りなど他のミニゲームには、それぞれ専用の仕組みがある可能性が
+        あります——ここで重複させるのではなく、下記の関連ガイドをご覧ください。
+      </div>
+
+      <h2>FAQ</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        関連ページ: <a href="/ja/fishing">釣り</a>、<a href="/ja/magic">魔法</a>、<a href="/ja/romance">恋愛</a>、
+        <a href="/ja/nokturna">Nokturna</a>。
+      </div>
+    </div>
+  </article>
+</Base>

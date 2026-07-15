@@ -1,0 +1,68 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+
+const faq = [
+  { q: 'Wie verkauft man Gegenstände in Moonlight Peaks?', a: 'Bestätigt zum Release: Wirf Waren in Chester, die lebende Aufbewahrungstruhe, die dir Brook bei der Registrierung am Rathaus schenkt. Gegenstände verkaufen sich über Nacht, während du schläfst — es gibt keinen separaten Ladentheken-Schritt.' },
+  { q: 'Lohnt sich der Verkauf von rohen Feldfrüchten?', a: 'Berichtet: selten. Frühe Spieler fanden Verarbeitung (Blood Grapes zu Blutwein im Fass, Mahlen von Feldfrüchten zu Mehl, Herstellen von Handwerksgütern) weit wertvoller als der Verkauf roher Ernten.' },
+  { q: 'Was ist der beste Weg, um früh Geld zu verdienen?', a: 'Berichtet: baue früh Fässer und andere Verarbeitungsstationen, da die Wirtschaft auf fertigen Gütern statt Rohverkäufen aufbaut. Halte auch eine kleine Rotation an Nahrungspflanzen bereit, da Kochen sowohl Energie als auch Mana wiederherstellt.' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Startseite', item: `${SITE.url}/de` },
+    { '@type': 'ListItem', position: 2, name: 'Verkauf & Versand', item: new URL('/de/shipping', SITE.url).href },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks Verkauf & Versand — Wie Chester funktioniert"
+  description="Wie man Waren in Moonlight Peaks verkauft: Chester, die lebende Aufbewahrungstruhe, warum Verarbeitung besser ist als Rohverkauf, und der bestätigte Geldkreislauf im frühen Spiel."
+  path="/de/shipping"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Verkauf & Versand' }]}
+  lang="de"
+  showExport
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Eintrag · Wirtschaft</p>
+      <h1>Moonlight Peaks <em>Verkauf</em> & Versand</h1>
+      <p class="intro">
+        Wie sich Geld in {GAME.title} tatsächlich bewegt — nur bestätigte Mechaniken. Aktualisiert {SITE.updated}.
+      </p>
+
+      <h2>Chester ist deine Versandkiste</h2>
+      <p>
+        Bestätigt zum Release: <a href="/characters/chester">Chester</a>, eine lebende
+        Aufbewahrungstruhe, wird dir von Bürgermeisterin Brook bei deinem ersten Besuch am Rathaus
+        geschenkt. Wirf fertige Waren vor dem Schlafengehen in Chester, und das Verkaufsgeld
+        wartet auf dich, wenn du aufwachst — keine manuelle Ladentheken-Interaktion nötig.
+      </p>
+
+      <h2>Verarbeitung schlägt Rohverkauf</h2>
+      <p>
+        Berichtet von frühen Spielern: der Verkauf roher Feldfrüchte lohnt sich selten. Das echte
+        Geld liegt in der Verarbeitung — Blood Grapes zu Blutwein im Fass, Mahlen von Feldfrüchten
+        zu Mehl und Herstellen von Handwerksgütern. Früh mehrere Fässer zu bauen ist ein
+        wiederkehrender Tipp, da Verarbeitung als das Rückgrat der Spielwirtschaft beschrieben wird.
+      </p>
+
+      <h2>FAQ</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        Verwandt: <a href="/de/farming">Landwirtschaft</a>, <a href="/characters/chester">Chester</a>,
+        <a href="/de/inventory">Inventar</a>, <a href="/de/items">Gegenstände</a>.
+      </div>
+    </div>
+  </article>
+</Base>

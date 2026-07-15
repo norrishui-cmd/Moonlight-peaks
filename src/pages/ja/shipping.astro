@@ -1,0 +1,67 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+
+const faq = [
+  { q: 'ムーンライト・ピークスではどうやってアイテムを売りますか?', a: '発売時に確認済み:タウンホールでの登録時にBrookからもらえる生きた保管箱、Chesterに商品を入れてください。眠っている間に一晩で売れます——別途店頭でのやり取りは必要ありません。' },
+  { q: '収穫した作物をそのまま売るのは得ですか?', a: '報告済み:あまり得ではありません。序盤のプレイヤーは、加工(Blood GrapesをBarrelでBlood Wineにする、作物を製粉して粉にする、職人品を作るなど)の方が、収穫物をそのまま売るよりもはるかに価値が高いと感じています。' },
+  { q: '序盤で稼ぐ一番良い方法は?', a: '報告済み:経済は生の販売ではなく加工品を中心に組み立てられているため、早めにBarrelなどの加工施設を建てましょう。料理はエネルギーとマナの両方を回復するので、食用作物も少量ローテーションで確保しておくと良いです。' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'ホーム', item: `${SITE.url}/ja` },
+    { '@type': 'ListItem', position: 2, name: '販売と出荷', item: new URL('/ja/shipping', SITE.url).href },
+  ] },
+];
+---
+<Base
+  title="ムーンライト・ピークス 販売と出荷 — Chesterの仕組み"
+  description="ムーンライト・ピークスでの商品の売り方:生きた保管箱Chester、そのまま売るより加工した方が得な理由、確認済みの序盤の稼ぎ方。"
+  path="/ja/shipping"
+  jsonLd={jsonLd}
+  crumbs={[{ label: '販売と出荷' }]}
+  lang="ja"
+  showExport
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">エントリー・経済</p>
+      <h1>ムーンライト・ピークス <em>販売</em>と出荷</h1>
+      <p class="intro">
+        {GAME.title}で実際にお金がどう動くか——確認済みの仕組みのみを掲載しています。最終更新:{SITE.updated}。
+      </p>
+
+      <h2>Chesterが出荷箱の役割を果たす</h2>
+      <p>
+        発売時に確認済み:<a href="/characters/chester">Chester</a>——タウンホールへの最初の訪問時に
+        Brook町長からもらえる生きた保管箱——に、完成した商品を寝る前に入れておけば、目覚めたときには
+        売却金が用意されています——手動で店頭とやり取りする必要はありません。
+      </p>
+
+      <h2>加工した方が生販売より得</h2>
+      <p>
+        序盤のプレイヤーからの報告:収穫した作物をそのまま売るのはあまり得ではありません。本当に
+        稼げるのは加工——BarrelでBlood GrapesをBlood Wineにする、作物を製粉して粉にする、職人品を
+        作るなどです。加工がゲーム内経済の要と評されており、序盤からBarrelを複数建てておくことが
+        繰り返し勧められているコツです。
+      </p>
+
+      <h2>FAQ</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        関連ページ: <a href="/ja/farming">農業</a>、<a href="/characters/chester">Chester</a>、
+        <a href="/ja/inventory">インベントリ</a>、<a href="/ja/items">アイテム</a>。
+      </div>
+    </div>
+  </article>
+</Base>

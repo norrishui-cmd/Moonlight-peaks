@@ -1,0 +1,23 @@
+---
+import TopicPage from '../../../components/TopicPage.astro';
+import { platformsSection, platforms } from '../../../data/platforms';
+import { platformsDe } from '../../../i18n/platforms-de';
+
+export function getStaticPaths() {
+  return platforms.filter((it) => platformsDe[it.slug]).map((it, i, arr) => {
+    const tr = platformsDe[it.slug];
+    const merged = { ...it, ...tr };
+    return {
+      params: { slug: it.slug },
+      props: {
+        item: merged,
+        prev: { ...arr[(i - 1 + arr.length) % arr.length], ...platformsDe[arr[(i - 1 + arr.length) % arr.length].slug] },
+        next: { ...arr[(i + 1) % arr.length], ...platformsDe[arr[(i + 1) % arr.length].slug] },
+      },
+    };
+  });
+}
+const { item, prev, next } = Astro.props;
+const deSection = { ...platformsSection, base: '/de/platforms', label: 'Plattformen', eyebrow: 'Plattform' };
+---
+<TopicPage section={deSection} item={item} prev={prev} next={next} lang="de" basePath="/de/platforms" />
