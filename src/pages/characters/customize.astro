@@ -1,0 +1,202 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE } from '../../consts';
+import { characterCustomizeGroups, characterCustomizeItems } from '../../data/character-customize';
+
+const categories = [
+  {
+    title: 'Hair',
+    groups: characterCustomizeGroups.filter((group) => group.category === 'Hair'),
+  },
+  {
+    title: 'Face',
+    groups: characterCustomizeGroups.filter((group) => group.category === 'Face'),
+  },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: SITE.url },
+    { '@type': 'ListItem', position: 2, name: 'Characters', item: new URL('/characters', SITE.url).href },
+    { '@type': 'ListItem', position: 3, name: 'Customize', item: new URL('/characters/customize', SITE.url).href },
+  ] },
+  { '@context': 'https://schema.org', '@type': 'ItemList', name: 'Moonlight Peaks character customization icons', itemListElement: characterCustomizeItems.map((item, index) => ({
+    '@type': 'ListItem',
+    position: index + 1,
+    name: item.name,
+    image: new URL(item.icon, SITE.url).href,
+  })) },
+];
+---
+
+<Base
+  title="Moonlight Peaks Character Customize - Hair, Facial Hair & Hats"
+  description="Moonlight Peaks character customization catalog with cropped icons for hair styles, facial hair, and hats."
+  path="/characters/customize"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Characters', href: '/characters' }, { label: 'Customize' }]}
+>
+  <article class="page customize-page">
+    <div class="wrap">
+      <p class="eyebrow">Characters / Customize</p>
+      <h1>Moonlight Peaks <em>customize</em></h1>
+      <p class="intro">
+        Character customization options pulled from the supplied screenshots. The current catalog
+        includes {characterCustomizeItems.length} cropped icons across hair styles, facial hair, and hats.
+      </p>
+
+      <nav class="customize-jump" aria-label="Customize groups">
+        {characterCustomizeGroups.map((group) => (
+          <a href={`#${group.slug}`}>{group.title} <span>{group.items.length}</span></a>
+        ))}
+      </nav>
+
+      {categories.map((category) => (
+        <section class="customize-category" aria-labelledby={`${category.title.toLowerCase()}-customize`}>
+          <h2 id={`${category.title.toLowerCase()}-customize`}>{category.title}</h2>
+
+          {category.groups.map((group) => (
+            <section class="customize-table" id={group.slug} aria-labelledby={`${group.slug}-title`}>
+              <h3 id={`${group.slug}-title`} class="customize-table-title">{group.title}</h3>
+              <div class="customize-grid" style={`--customize-cols: ${group.columns}`}>
+                {group.items.map((item) => (
+                  <figure class="customize-cell">
+                    <img src={item.icon} alt={`${item.name} icon`} width="96" height="96" loading="lazy" />
+                    <figcaption>{item.name}</figcaption>
+                  </figure>
+                ))}
+              </div>
+            </section>
+          ))}
+        </section>
+      ))}
+
+      <p class="customize-note">
+        Names are numbered placeholders because the screenshots only show icons and group labels.
+        Replace the labels in <code>src/data/character-customize.ts</code> once official in-game names are verified.
+      </p>
+
+      <div class="callout">
+        Related: <a href="/characters">characters</a>, <a href="/character-creator">character creator</a>,
+        <a href="/families">families</a>, and <a href="/romance">romance</a>.
+      </div>
+    </div>
+  </article>
+
+  <style>
+    .customize-jump {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 18px 0 24px;
+    }
+
+    .customize-jump a {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--mist);
+      background: var(--surface);
+      padding: 7px 12px;
+      text-decoration: none;
+      font-family: var(--mono);
+      font-size: 0.76rem;
+    }
+
+    .customize-jump a:hover {
+      border-color: color-mix(in srgb, var(--candle) 50%, var(--line));
+      color: var(--candle);
+    }
+
+    .customize-jump span {
+      color: var(--faint);
+      margin-left: 4px;
+    }
+
+    .customize-category {
+      margin-top: 24px;
+    }
+
+    .customize-table {
+      border: 1px solid var(--line);
+      margin: 12px 0 24px;
+      overflow: hidden;
+      background: rgba(32, 18, 58, 0.72);
+    }
+
+    .customize-table-title {
+      margin: 0;
+      padding: 8px 12px;
+      text-align: center;
+      font-family: var(--sans);
+      font-size: 1rem;
+      font-weight: 800;
+      color: #dfcdfa;
+      background: #542199;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .customize-grid {
+      display: grid;
+      grid-template-columns: repeat(var(--customize-cols), minmax(76px, 1fr));
+    }
+
+    .customize-cell {
+      min-width: 0;
+      min-height: 126px;
+      margin: 0;
+      padding: 10px 8px 9px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      border-right: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .customize-cell img {
+      width: 78px;
+      height: 78px;
+      object-fit: contain;
+      display: block;
+      filter: drop-shadow(0 8px 10px rgba(5, 2, 14, 0.32));
+    }
+
+    .customize-cell figcaption {
+      width: 100%;
+      color: #ded3e6;
+      font-family: var(--mono);
+      font-size: 0.64rem;
+      line-height: 1.25;
+      text-align: center;
+      overflow-wrap: anywhere;
+    }
+
+    .customize-note {
+      color: var(--faint);
+      font-size: 0.78rem;
+      margin: 10px 0 18px;
+    }
+
+    .customize-note code {
+      color: var(--mist);
+    }
+
+    @media (max-width: 960px) {
+      .customize-grid {
+        grid-template-columns: repeat(auto-fit, minmax(86px, 1fr));
+      }
+    }
+
+    @media (max-width: 520px) {
+      .customize-cell {
+        min-height: 116px;
+      }
+
+      .customize-cell img {
+        width: 68px;
+        height: 68px;
+      }
+    }
+  </style>
+</Base>
