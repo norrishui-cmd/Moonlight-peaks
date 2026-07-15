@@ -1,6 +1,7 @@
 import { GAME } from '../consts';
 import { cookingRecipeRows } from './cooking-recipes';
 import { craftingBlueprintRows } from './crafting-blueprints';
+import { toolItemRows } from './tool-items';
 
 export type ItemCategory = {
   slug: string;
@@ -41,10 +42,10 @@ export const itemCategories: ItemCategory[] = [
     name: 'Tools',
     group: 'Equipment',
     status: 'confirmed',
-    dek: 'Farm and utility equipment for planting, watering, gathering, mining, and maintaining your moonlit homestead.',
-    summary: 'Confirmed starting kit, accessed via the tool wheel (hold the right shoulder button on Switch): Shovel (there is no separate hoe — the shovel handles that job), Watering Can, Axe, Pickaxe, Scythe, and a broken Wand. The Fishing Rod and Net (bug net) are unlocked separately through character quests rather than bought outright, and tool upgrades run through a single blacksmith, Ridge, at his shop (most commonly named the Howling Hammer).',
-    examples: ['Shovel (also tills — no separate hoe)', 'Watering Can (3-tier upgrade: 1,000 / 2,000 / 3,500 coins, each tier reduces water use per tile)', 'Axe (upgrades reduce hits to chop trees, unlock stronger wood)', 'Pickaxe (upgrades reduce hits to break rocks, unlock bigger rocks/minerals like copper, iron, gold — confirmed top upgrade priority)', 'Scythe (upgrades reduce energy cost clearing grass)', 'Fishing Rod (single Premium upgrade: 3,500 coins + 3 Gold Bars, improves efficiency and catch size; unlocked via a bet with Noel, not bought)', 'The Net / bug net (catches bugs and Soul Blobs; unlocked via Death after the "A Bridge Too Far" quest)', 'The Broom (a movement-speed tool)', 'Wand (starts broken; fixed via a quest chain through Luna and Sabrina/Noel, not the standard upgrade shop)'],
-    verify: ['Enchanted/max-tier effects for each tool (reported: the enchanted watering can removes refilling entirely)', 'Full upgrade material lists beyond ore', 'Broom\u2019s exact speed bonus'],
+    dek: 'Tool icons, names, descriptions, sources, buy prices, and sell prices captured from the supplied wiki screenshots.',
+    summary: 'The tools landing page now includes the visible tool tables from the supplied screenshots: Shovels, Watering Cans, Axes, Fishing Rods, Wands, Pickaxes, and Scythes. Each row stores the extracted icon when the screenshot shows one, plus the name, description, obtained-by source, buy price, and sell price. Rows where the source screenshot showed a wiki File:... placeholder keep that placeholder text rather than inventing a missing icon.',
+    examples: ['Rusty, Copper, Iron, Gold, and Enchanted tool tiers', 'Shovels, Watering Cans, Axes, Pickaxes, and Scythes', 'Fishing Rod, Premium Fishing Rod, and Enchanted Fishing Rod', 'Wand, Wand (taped), and Wand (broken)'],
+    verify: ['Final icon assets for rows that still show File:... placeholders', 'Final buy and sell prices currently shown as X Coin', 'Final obtained-by location names for enchanted or placeholder rows'],
     related: [{ label: 'Farming', href: '/farming' }, { label: 'Beginner guide', href: '/beginner-guide' }, { label: 'Map', href: '/map' }, { label: 'Fishing', href: '/fishing' }],
   },
   {
@@ -52,10 +53,10 @@ export const itemCategories: ItemCategory[] = [
     name: 'Fertilizer',
     group: 'Resources',
     status: 'confirmed',
-    dek: 'Confirmed source: your farm animals produce fertilizer as a byproduct, alongside milk and wool, and it raises crop quality.',
-    summary: 'Confirmed via community testing: fertilizer comes from your farm animals as a byproduct alongside milk and wool, and using it measurably increases crop quality \u2014 worth the effort of keeping animals fed and happy even before you factor in the milk/wool income. Fodder and Premium Fodder (kept in a trough) are the confirmed way to feed animals overnight so their products are ready when you wake.',
-    examples: ['Animal-produced fertilizer', 'Fodder / Premium Fodder (animal feed)', 'Crop-quality boosters'],
-    verify: ['Exact fertilizer application method', 'Quality-boost percentage', 'Whether a separate craftable fertilizer also exists'],
+    dek: 'Tool icons, names, descriptions, sources, buy prices, and sell prices captured from the supplied wiki screenshots.',
+    summary: 'The tools landing page now includes the visible tool tables from the supplied screenshots: Shovels, Watering Cans, Axes, Fishing Rods, Wands, Pickaxes, and Scythes. Each row stores the extracted icon when the screenshot shows one, plus the name, description, obtained-by source, buy price, and sell price. Rows where the source screenshot showed a wiki File:... placeholder keep that placeholder text rather than inventing a missing icon.',
+    examples: ['Rusty, Copper, Iron, Gold, and Enchanted tool tiers', 'Shovels, Watering Cans, Axes, Pickaxes, and Scythes', 'Fishing Rod, Premium Fishing Rod, and Enchanted Fishing Rod', 'Wand, Wand (taped), and Wand (broken)'],
+    verify: ['Final icon assets for rows that still show File:... placeholders', 'Final buy and sell prices currently shown as X Coin', 'Final obtained-by location names for enchanted or placeholder rows'],
     related: [{ label: 'Farming', href: '/farming' }, { label: 'Environment', href: '/environment' }, { label: 'Activities', href: '/activities' }],
   },
   {
@@ -165,23 +166,13 @@ export const itemLaunchNote = launchNote;
 export const itemFrameworks: Record<string, ItemFramework> = {
   tools: {
     parameters: [
-      { label: 'Data status', value: 'Confirmed at launch — starting kit and most upgrade costs verified' },
-      { label: 'Primary use', value: 'Farming, gathering, fishing, bug/Soul Blob catching, spellcasting' },
-      { label: 'Upgrade source', value: 'Ridge, at his shop (commonly named the Howling Hammer), weekdays only' },
+      { label: 'Data status', value: 'Captured from supplied tool screenshots, 32 rows documented' },
+      { label: 'Key fields', value: 'Icon, name, description, obtained-by source, buy price, sell price' },
+      { label: 'Covered tool families', value: 'Shovels, Watering Cans, Axes, Fishing Rods, Wands, Pickaxes, Scythes' },
     ],
-    columns: ['Tool', 'Starting kit?', 'How to get', 'Upgrade cost', 'Effect', 'Related system'],
-    rows: [
-      ['Shovel', 'Yes', 'Given at the start — no separate hoe exists', tbc, 'Tills soil and digs; doubles as the hoe', 'Farming'],
-      ['Watering Can', 'Yes', 'Given at the start', '3 tiers: 1,000 / 2,000 / 3,500 coins', 'Each tier reduces water used per tile', 'Farming'],
-      ['Axe', 'Yes', 'Given at the start', tbc, 'Fewer hits to chop trees; unlocks stronger wood over tiers', 'Farming'],
-      ['Pickaxe', 'Yes', 'Given at the start', tbc, 'Fewer hits to break rocks; unlocks bigger rocks/minerals (copper, iron, gold) — confirmed top upgrade priority', 'Mining'],
-      ['Scythe', 'Yes', 'Given at the start', tbc, 'Reduces energy cost when clearing grass', 'Farming'],
-      ['Wand', 'Yes (starts broken)', 'Fixed via a quest chain: the Dinner Party event \u2192 Luna \u2192 Sabrina \u2192 actually fixed by Noel, with duct tape', 'No standard shop upgrade path', 'Enables spellcasting (Aquaflux and more)', 'Magic'],
-      ['Fishing Rod', 'No', 'Win a 250-gold bet vs. Noel (catch 3 different fish before he does)', 'Single Premium upgrade: 3,500 coins + 3 Gold Bars', 'Premium tier improves efficiency and catch size', 'Fishing'],
-      ['The Net (bug net)', 'No', 'Given by Death after the "A Bridge Too Far" quest unlocks Misty Shores', tbc, 'Catches bugs and Soul Blobs', 'Soul Blobs / Critters'],
-      ['The Broom', 'No', tbc, tbc, 'A movement-speed tool', 'Movement'],
-    ],
-    sourceNote: 'Costs and unlock methods above are confirmed from launch-week guides; blank ("To be confirmed") cells are genuinely unverified, not omitted for space.',
+    columns: ['Icon', 'Name', 'Description', 'Obtained By', 'Buy Price', 'Sell Price'],
+    rows: toolItemRows,
+    sourceNote: 'Tool rows and icons were extracted from the supplied screenshots. Rows where the screenshot displayed a wiki File:... placeholder are preserved as text until the missing source icon is available.',
   },
   fertilizer: {
     parameters: [
