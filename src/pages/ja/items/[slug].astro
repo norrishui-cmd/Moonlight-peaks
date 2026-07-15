@@ -1,20 +1,22 @@
 ---
 import Base from '../../../layouts/Base.astro';
 import { SITE } from '../../../consts';
-import { itemCategories } from '../../../data/items';
+import { itemCategories, getItemFramework } from '../../../data/items';
 import { itemsJa } from '../../../i18n/items-ja';
 import type { ItemCategory } from '../../../data/items';
 
 export function getStaticPaths() {
-  return itemCategories.map((item, index) => ({
+  return itemCategories.filter((item) => itemsJa[item.slug]).map((item, index, arr) => ({
     params: { slug: item.slug },
-    props: { item, prev: itemCategories[(index - 1 + itemCategories.length) % itemCategories.length], next: itemCategories[(index + 1) % itemCategories.length] },
+    props: { item, prev: arr[(index - 1 + arr.length) % arr.length], next: arr[(index + 1) % arr.length] },
   }));
 }
 
 const { item } = Astro.props as { item: ItemCategory };
 const tr = itemsJa[item.slug];
 const url = new URL(`/ja/items/${item.slug}`, SITE.url).href;
+const framework = getItemFramework(item.slug);
+const hasRealData = item.slug === 'foraging' || item.slug === 'cooking';
 
 const statusLabelJa: Record<string, string> = {
   confirmed: '確認済み', datamined: 'データ解析', expected: '確認予定',
@@ -56,6 +58,25 @@ const jsonLd = [
       <h2>例</h2>
       <ul>{tr.examples.map((e) => (<li>{e}</li>))}</ul>
 
+      {hasRealData && (
+        <>
+          <h2>完全なデータテーブル</h2>
+          <div class="ja-item-table-wrap">
+            <table class="ja-item-table">
+              <thead>
+                <tr>{framework.columns.map((col) => <th>{col}</th>)}</tr>
+              </thead>
+              <tbody>
+                {framework.rows.map((row) => (
+                  <tr>{row.map((cell) => <td>{cell}</td>)}</tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <p class="ja-source-note">{framework.sourceNote}</p>
+        </>
+      )}
+
       <h2>よくある質問</h2>
       <div class="faq">
         {faq.map((f) => (
@@ -71,4 +92,13 @@ const jsonLd = [
       </div>
     </div>
   </article>
+
+  <style>
+    .ja-item-table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 14px; background: var(--surface); margin: 12px 0; }
+    .ja-item-table { width: 100%; min-width: 700px; border-collapse: collapse; font-size: 0.84rem; }
+    .ja-item-table th, .ja-item-table td { border-bottom: 1px solid var(--line); padding: 10px 12px; text-align: left; vertical-align: top; }
+    .ja-item-table th { color: var(--candle); font-family: var(--mono); font-size: 0.66rem; letter-spacing: 0.05em; text-transform: uppercase; background: rgba(21, 16, 29, 0.58); white-space: nowrap; }
+    .ja-item-table tr:last-child td { border-bottom: 0; }
+    .ja-source-note { border-left: 3px solid var(--candle-dim); color: #ded3e6; padding-left: 12px; font-size: 0.88rem; }
+  </style>
 </Base>

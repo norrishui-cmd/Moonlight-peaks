@@ -11,6 +11,12 @@ export type ItemTranslationDe = {
 };
 
 export const itemsDe: Record<string, ItemTranslationDe> = {
+  foraging: {
+    name: 'Sammeln',
+    dek: 'Bestätigt über das offizielle Wiki: Sammelbare Produkte rund um die Stadt (Moonlit Pines, Howling Marshes, Cave of Echoes, Crystal Cave) sowie Muscheln an Stränden.',
+    summary: 'Bestätigt über das offizielle Moonlight-Peaks-Wiki: Sammeln umfasst sowohl Produkte (Eggplant, Wild Potato, Sugarbones, Common Mushroom, Glowglammer), die in bestimmten benannten Gebieten gefunden werden, als auch Muscheln (White Conch, Pink Conch in klein/groß, Blue Clam, Maxima Clam), die an Stränden gesammelt werden. Versionen mit Stern-Qualität verkaufen sich für mehr — z. B. verkauft sich eine normale Eggplant für 90, eine 1-Stern-Eggplant für 110. Nicht jeder Eintrag hat bereits einen bestätigten Stern-Qualitätspreis; diese sind als unbestätigt markiert statt geraten.',
+    examples: ['Eggplant (Moonlit Pines)', 'Wild Potato (Moonlit Pines)', 'Sugarbones (Howling Marshes)', 'Common Mushroom (Cave of Echoes / Hof im Sommer)', 'Glowglammer (Crystal Cave)', 'White Conch, Pink Conch, Blue Clam, Maxima Clam (Strände)'],
+  },
   tools: {
     name: 'Werkzeuge',
     dek: 'Farm- und Alltagswerkzeuge zum Pflanzen, Gießen, Sammeln, Abbauen und für die Pflege deines Hofs.',
@@ -37,9 +43,9 @@ export const itemsDe: Record<string, ItemTranslationDe> = {
   },
   cooking: {
     name: 'Kochen',
-    dek: 'Eine Kochstation von Anfang an, 16 bekannte Startrezepte und ein Timing-Minispiel, das bei höherer Qualität strenger wird.',
-    summary: 'Bestätigt durch Bonus Action: Du hast von Beginn an eine Kochstation in deinem Starterhaus, zusammen mit 16 bereits bekannten Grundrezepten, sodass du sofort mit Zutaten kochen kannst. Zum Kochen interagierst du mit der Station, wählst ein Rezept mit vorhandenen Zutaten (farbig angezeigt), wählst eine Qualitätsstufe und absolvierst ein Timing-Minispiel — im richtigen Moment drücken, wobei höhere Qualitätsstufen präzisere Treffer verlangen. Weitere Rezepte findet man durch Erkunden und den Kauf von Rezeptbüchern, und laut einem Switch-2-Test tauchen manche Koch- und Deko-Rezepte einfach beim Graben an leuchtenden Wirbelstellen auf. Gute frühe Energie-Wiederherstellung: Violet Sashimi und Gazpacho-Eintopf/Suppe.',
-    examples: ['Gekochte Gerichte', '16 Startrezepte (von Anfang an bekannt)', 'Fischgerichte', 'Ernte-basierte Gerichte'],
+    dek: 'Eine Kochstation von Anfang an, über 40 bestätigte Rezepte in den Kategorien Essen, Suppe & Eintopf und Sushi, direkt aus dem offiziellen Wiki.',
+    summary: 'Bestätigt über das offizielle Moonlight-Peaks-Wiki: über 40 Rezepte sind in drei Kategorien dokumentiert — Essen (Burger, Burritos, Brot, Pizza, Käse), Suppe & Eintopf, und Sushi. Jedes Rezept listet seine Kochmethode (die meisten laufen über die Kochstation, manche brauchen zusätzlich die Käsepresse, den verzauberten Mörser, das Kräutertrockengestell oder eine Mühle), seine Zutaten, und seinen Verkaufspreis über normale/1-Stern/2-Stern-Qualitätsstufen, wo bestätigt. Nicht jedes Rezept hat seine Methode, Zutaten oder Preis bereits im offiziellen Wiki selbst ausgefüllt — diese Felder sind hier als unbestätigt markiert statt geraten. Siehe die vollständige Rezeptdatenbank unten.',
+    examples: ['Brot, Burger, Burritos, Pizza und Käsegerichte', 'Über 19 Suppen- und Eintopfrezepte', 'Über 11 Sushi-/Maki-Rezepte', 'Rezepte, die Käsepresse, verzauberten Mörser, Kräutertrockengestell oder Mühle benötigen'],
   },
   crafting: {
     name: 'Handwerk',

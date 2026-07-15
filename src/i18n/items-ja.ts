@@ -11,6 +11,12 @@ export type ItemTranslationJa = {
 };
 
 export const itemsJa: Record<string, ItemTranslationJa> = {
+  foraging: {
+    name: '採集',
+    dek: '公式wikiで確認済み:町の周辺(Moonlit Pines、Howling Marshes、Cave of Echoes、Crystal Cave)で採れる作物と、ビーチで拾える貝殻。',
+    summary: 'ムーンライト・ピークス公式wikiで確認済み:採集には、特定のエリアで見つかる作物(Eggplant、Wild Potato、Sugarbones、Common Mushroom、Glowglammer)と、ビーチで集める貝殻(White Conch・Pink Conchの大小、Blue Clam、Maxima Clam)の両方が含まれます。星付きの高品質版はより高く売れます——例えば通常のEggplantは90で売れますが、星1のEggplantは110で売れます。まだ星付き品質の価格が確認されていない項目もあり、その場合は推測せず未確認と表示しています。',
+    examples: ['Eggplant(Moonlit Pines)', 'Wild Potato(Moonlit Pines)', 'Sugarbones(Howling Marshes)', 'Common Mushroom(Cave of Echoes・農園の夏)', 'Glowglammer(Crystal Cave)', 'White Conch、Pink Conch、Blue Clam、Maxima Clam(ビーチ)'],
+  },
   tools: {
     name: '道具',
     dek: '植える、水をやる、集める、採掘する、農園を維持するための農具一式。',
@@ -37,9 +43,9 @@ export const itemsJa: Record<string, ItemTranslationJa> = {
   },
   cooking: {
     name: '料理',
-    dek: '作物、魚、採集品、超自然的な食材から作る料理、レシピ、食材、キッチンシステム。',
-    summary: 'レシピの材料、エネルギー回復量、贈り物としての価値、売却価格、解放条件を扱うページを目指しています。具体的なレシピはまだ推測せず随時確認中です。料理はクラフトとは別のカテゴリとして扱っています(プレイヤーの目的が異なることが多いため)。',
-    examples: ['調理済みの料理', 'レシピの材料', '魚料理', '作物ベースの料理'],
+    dek: '最初からキッチンがあり、公式wikiで確認済みの40以上のレシピが料理・スープ&シチュー・寿司の3カテゴリにわたって存在します。',
+    summary: 'ムーンライト・ピークス公式wikiで確認済み:料理・スープ&シチュー・寿司の3カテゴリにわたって40以上のレシピが記録されています。各レシピには調理方法(ほとんどはCooking Stationで作りますが、一部はCheese Press、Enchanted Mortar、Herb Drying Rack、Millも必要です)、材料、確認済みの場合は通常/星1/星2の品質段階ごとの売却価格が記載されています。公式wiki自体にまだ調理方法・材料・価格が記入されていないレシピもあり、その場合は推測せず未確認と表示しています。完全なレシピデータベースは下記をご覧ください。',
+    examples: ['パン、バーガー、ブリトー、ピザ、チーズ料理', '19以上のスープ・シチューレシピ', '11以上の寿司・巻きレシピ', 'Cheese Press、Enchanted Mortar、Herb Drying Rack、Millが必要なレシピ'],
   },
   crafting: {
     name: 'クラフト',

@@ -1,20 +1,22 @@
 ---
 import Base from '../../../layouts/Base.astro';
 import { SITE } from '../../../consts';
-import { itemCategories } from '../../../data/items';
+import { itemCategories, getItemFramework } from '../../../data/items';
 import { itemsDe } from '../../../i18n/items-de';
 import type { ItemCategory } from '../../../data/items';
 
 export function getStaticPaths() {
-  return itemCategories.map((item, index) => ({
+  return itemCategories.filter((item) => itemsDe[item.slug]).map((item, index, arr) => ({
     params: { slug: item.slug },
-    props: { item, prev: itemCategories[(index - 1 + itemCategories.length) % itemCategories.length], next: itemCategories[(index + 1) % itemCategories.length] },
+    props: { item, prev: arr[(index - 1 + arr.length) % arr.length], next: arr[(index + 1) % arr.length] },
   }));
 }
 
 const { item } = Astro.props as { item: ItemCategory };
 const tr = itemsDe[item.slug];
 const url = new URL(`/de/items/${item.slug}`, SITE.url).href;
+const framework = getItemFramework(item.slug);
+const hasRealData = item.slug === 'foraging' || item.slug === 'cooking';
 
 const statusLabelDe: Record<string, string> = {
   confirmed: 'Bestätigt', datamined: 'Datamining', expected: 'Erwartet',
@@ -56,6 +58,25 @@ const jsonLd = [
       <h2>Beispiele</h2>
       <ul>{tr.examples.map((e) => (<li>{e}</li>))}</ul>
 
+      {hasRealData && (
+        <>
+          <h2>Vollständige Datentabelle</h2>
+          <div class="de-item-table-wrap">
+            <table class="de-item-table">
+              <thead>
+                <tr>{framework.columns.map((col) => <th>{col}</th>)}</tr>
+              </thead>
+              <tbody>
+                {framework.rows.map((row) => (
+                  <tr>{row.map((cell) => <td>{cell}</td>)}</tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <p class="de-source-note">{framework.sourceNote}</p>
+        </>
+      )}
+
       <h2>Häufige Fragen</h2>
       <div class="faq">
         {faq.map((f) => (
@@ -71,4 +92,13 @@ const jsonLd = [
       </div>
     </div>
   </article>
+
+  <style>
+    .de-item-table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 14px; background: var(--surface); margin: 12px 0; }
+    .de-item-table { width: 100%; min-width: 700px; border-collapse: collapse; font-size: 0.84rem; }
+    .de-item-table th, .de-item-table td { border-bottom: 1px solid var(--line); padding: 10px 12px; text-align: left; vertical-align: top; }
+    .de-item-table th { color: var(--candle); font-family: var(--mono); font-size: 0.66rem; letter-spacing: 0.05em; text-transform: uppercase; background: rgba(21, 16, 29, 0.58); white-space: nowrap; }
+    .de-item-table tr:last-child td { border-bottom: 0; }
+    .de-source-note { border-left: 3px solid var(--candle-dim); color: #ded3e6; padding-left: 12px; font-size: 0.88rem; }
+  </style>
 </Base>
