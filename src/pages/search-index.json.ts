@@ -29,6 +29,7 @@ const staticPages: Doc[] = [
   { t: 'Beginner guide', d: 'Everything known so far, shaped into a day-one head start.', u: '/beginner-guide', k: 'Guide' },
   { t: 'Farming', d: 'Enchanted crops, glowing flowers, magical livestock, night farming.', u: '/farming', k: 'Guide' },
   { t: 'Magic & potions', d: 'Spells, wands, mana, runes, and the Alter Ego Elixir.', u: '/magic', k: 'Guide' },
+  { t: 'Spellcasting', d: 'Spell icons, mana costs, descriptions, and buy prices from the spellcasting screenshots.', u: '/spellcasting', k: 'Guide' },
   { t: 'Character creator', d: "Customization options in the demo's vampire creator.", u: '/character-creator', k: 'Guide' },
   { t: 'Character customize', d: 'Cropped hair style, facial hair, and hat icons from the customization screenshots.', u: '/characters/customize', k: 'Guide' },
   { t: 'Shapeshifting', d: 'Turning into a bat and other hinted forms.', u: '/shapeshifting', k: 'Guide' },
