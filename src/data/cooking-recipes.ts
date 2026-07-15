@@ -1,6 +1,14 @@
 const TIERS_UNKNOWN = '- / - / -';
 const VALUE_UNKNOWN = '-';
 
+const slugify = (name: string): string => name
+  .toLowerCase()
+  .replace(/&/g, 'and')
+  .replace(/[^a-z0-9]+/g, '-')
+  .replace(/^-|-$/g, '');
+
+const recipeIcon = (name: string): string => `image:/images/items/cooking/${slugify(name)}.png|${name} icon`;
+
 const recipe = (
   name: string,
   category: string,
@@ -8,7 +16,7 @@ const recipe = (
   energy: string,
   ingredients: string,
   sellPrice: string,
-): string[] => [name, category, method, energy, ingredients, sellPrice];
+): string[] => [recipeIcon(name), name, category, method, energy, ingredients, sellPrice];
 
 // Energy and sell-price fields use base / 1-star / 2-star ordering.
 export const cookingRecipeRows: string[][] = [

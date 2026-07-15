@@ -17,6 +17,10 @@ const tr = itemsJa[item.slug];
 const url = new URL(`/ja/items/${item.slug}`, SITE.url).href;
 const framework = getItemFramework(item.slug);
 const hasRealData = item.slug === 'foraging' || item.slug === 'cooking';
+const parseImageCell = (cell: string) => {
+  const [src, alt = ''] = cell.slice('image:'.length).split('|');
+  return { src, alt };
+};
 
 const statusLabelJa: Record<string, string> = {
   confirmed: '確認済み', datamined: 'データ解析', expected: '確認予定',
@@ -68,7 +72,18 @@ const jsonLd = [
               </thead>
               <tbody>
                 {framework.rows.map((row) => (
-                  <tr>{row.map((cell) => <td>{cell}</td>)}</tr>
+                  <tr>
+                    {row.map((cell) => {
+                      const image = cell.startsWith('image:') ? parseImageCell(cell) : null;
+                      return (
+                        <td>
+                          {image ? (
+                            <img class="ja-item-table-icon" src={image.src} alt={image.alt} loading="lazy" decoding="async" />
+                          ) : cell}
+                        </td>
+                      );
+                    })}
+                  </tr>
                 ))}
               </tbody>
             </table>
@@ -98,6 +113,7 @@ const jsonLd = [
     .ja-item-table { width: 100%; min-width: 700px; border-collapse: collapse; font-size: 0.84rem; }
     .ja-item-table th, .ja-item-table td { border-bottom: 1px solid var(--line); padding: 10px 12px; text-align: left; vertical-align: top; }
     .ja-item-table th { color: var(--candle); font-family: var(--mono); font-size: 0.66rem; letter-spacing: 0.05em; text-transform: uppercase; background: rgba(21, 16, 29, 0.58); white-space: nowrap; }
+    .ja-item-table-icon { display: block; width: 68px; height: 68px; object-fit: contain; }
     .ja-item-table tr:last-child td { border-bottom: 0; }
     .ja-source-note { border-left: 3px solid var(--candle-dim); color: #ded3e6; padding-left: 12px; font-size: 0.88rem; }
   </style>

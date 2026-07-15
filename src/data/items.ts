@@ -2,6 +2,7 @@ import { GAME } from '../consts';
 import { cookingRecipeRows } from './cooking-recipes';
 import { craftingBlueprintRows } from './crafting-blueprints';
 import { toolItemRows } from './tool-items';
+import { foragingItemRows } from './foraging-items';
 
 export type ItemCategory = {
   slug: string;
@@ -53,10 +54,10 @@ export const itemCategories: ItemCategory[] = [
     name: 'Fertilizer',
     group: 'Resources',
     status: 'confirmed',
-    dek: 'Tool icons, names, descriptions, sources, buy prices, and sell prices captured from the supplied wiki screenshots.',
-    summary: 'The tools landing page now includes the visible tool tables from the supplied screenshots: Shovels, Watering Cans, Axes, Fishing Rods, Wands, Pickaxes, and Scythes. Each row stores the extracted icon when the screenshot shows one, plus the name, description, obtained-by source, buy price, and sell price. Rows where the source screenshot showed a wiki File:... placeholder keep that placeholder text rather than inventing a missing icon.',
-    examples: ['Rusty, Copper, Iron, Gold, and Enchanted tool tiers', 'Shovels, Watering Cans, Axes, Pickaxes, and Scythes', 'Fishing Rod, Premium Fishing Rod, and Enchanted Fishing Rod', 'Wand, Wand (taped), and Wand (broken)'],
-    verify: ['Final icon assets for rows that still show File:... placeholders', 'Final buy and sell prices currently shown as X Coin', 'Final obtained-by location names for enchanted or placeholder rows'],
+    dek: 'Confirmed source: your farm animals produce fertilizer as a byproduct, alongside milk and wool, and it raises crop quality.',
+    summary: 'Confirmed via community testing: fertilizer comes from your farm animals as a byproduct alongside milk and wool, and using it measurably increases crop quality — worth the effort of keeping animals fed and happy even before you factor in the milk/wool income. Fodder and Premium Fodder (kept in a trough) are the confirmed way to feed animals overnight so their products are ready when you wake.',
+    examples: ['Animal-produced fertilizer', 'Fodder / Premium Fodder (animal feed)', 'Crop-quality boosters'],
+    verify: ['Exact fertilizer application method', 'Quality-boost percentage', 'Whether a separate craftable fertilizer also exists'],
     related: [{ label: 'Farming', href: '/farming' }, { label: 'Environment', href: '/environment' }, { label: 'Activities', href: '/activities' }],
   },
   {
@@ -64,10 +65,10 @@ export const itemCategories: ItemCategory[] = [
     name: 'Clothing',
     group: 'Home',
     status: 'confirmed',
-    dek: 'Confirmed: outfit sets, tops, bottoms, shoes, and accessories, changeable any time via a mirror in your house — separate from the Alter Ego Elixir potion, which does not affect clothing.',
-    summary: 'Confirmed at launch: clothing is organized into Outfit Sets, Tops, Bottoms, and Shoes, plus a separate Accessories category (Arms, Face). Everything you wear during character creation is permanently unlocked in your wardrobe, so you never have to re-buy your starting look. Beyond the creator, new clothing is bought from Aras at Third Eye Threads (the Khazan family tailor). Clothing changes happen anytime via a mirror inside your house — this is a separate, free mechanism from the Alter Ego Elixir (a 1,300-gold one-time potion from Sabrina at Webb of Wonders that changes hairstyle, hair color, skin tone, eye color, eyebrows, and makeup, but explicitly does not touch clothing or accessories).',
-    examples: ['Outfit Sets (e.g. dresses, overalls)', 'Tops', 'Bottoms', 'Shoes', 'Accessories \u2014 Arms', 'Accessories \u2014 Face', 'Starting character-creator outfit (permanently unlocked in your wardrobe)'],
-    verify: ['Exact clothing item names and prices at Third Eye Threads', 'Whether clothing rotates seasonally', 'Full accessory list beyond Arms/Face'],
+    dek: 'Confirmed source: your farm animals produce fertilizer as a byproduct, alongside milk and wool, and it raises crop quality.',
+    summary: 'Confirmed via community testing: fertilizer comes from your farm animals as a byproduct alongside milk and wool, and using it measurably increases crop quality — worth the effort of keeping animals fed and happy even before you factor in the milk/wool income. Fodder and Premium Fodder (kept in a trough) are the confirmed way to feed animals overnight so their products are ready when you wake.',
+    examples: ['Animal-produced fertilizer', 'Fodder / Premium Fodder (animal feed)', 'Crop-quality boosters'],
+    verify: ['Exact fertilizer application method', 'Quality-boost percentage', 'Whether a separate craftable fertilizer also exists'],
     related: [{ label: 'Character creator', href: '/character-creator' }, { label: 'Aras', href: '/characters/aras' }, { label: 'Demo guide', href: '/demo' }],
   },
   {
@@ -208,21 +209,9 @@ export const itemFrameworks: Record<string, ItemFramework> = {
       { label: 'Key fields', value: 'Location, sell price (base and 1-star quality)' },
       { label: 'Categories', value: 'Foraged produce and beach shells' },
     ],
-    columns: ['Item', 'Location', 'Sell Price (base)', 'Sell Price (1-star)'],
-    rows: [
-      ['Eggplant', 'Moonlit Pines', '90', '110'],
-      ['Wild Potato', 'Moonlit Pines', '20', '25'],
-      ['Sugarbones', 'Howling Marshes', '30', 'Not yet confirmed'],
-      ['Common Mushroom', 'Cave of Echoes; Farm (Summer)', '10', '11'],
-      ['Glowglammer', 'Crystal Cave', '20', '25'],
-      ['White Conch (Small)', 'Beaches', '10', 'Not yet confirmed'],
-      ['Pink Conch (Small)', 'Beaches', '10', 'Not yet confirmed'],
-      ['White Conch (Large)', 'Beaches', '30', 'Not yet confirmed'],
-      ['Pink Conch (Large)', 'Beaches', '30', 'Not yet confirmed'],
-      ['Blue Clam', 'Beaches', '10', 'Not yet confirmed'],
-      ['Maxima Clam', 'Beaches', '30', 'Not yet confirmed'],
-    ],
-    sourceNote: 'Sourced directly from the official Moonlight Peaks wiki\u2019s foraging tables. Fields the wiki itself hasn\u2019t filled in yet are marked "Not yet confirmed" rather than guessed.',
+    columns: ['Icon', 'Item', 'Location', 'Sell Price (base)', 'Sell Price (1-star)'],
+    rows: foragingItemRows,
+    sourceNote: 'Sourced directly from the official Moonlight Peaks wiki\u2019s foraging tables. Generated icon placeholders are used until exact source icons are available. Fields the wiki itself hasn\u2019t filled in yet are marked "Not yet confirmed" rather than guessed.',
   },
   cooking: {
     parameters: [
@@ -230,9 +219,9 @@ export const itemFrameworks: Record<string, ItemFramework> = {
       { label: 'Key fields', value: 'Cooking method, energy, ingredients, sell price by quality (base / 1-star / 2-star)' },
       { label: 'Categories', value: 'Food, Soup & Stew, Sushi, Jam, Dessert, Beverage' },
     ],
-    columns: ['Recipe', 'Category', 'Method', 'Energy (base / \u2605 / \u2605\u2605)', 'Ingredients', 'Sell Price (base / \u2605 / \u2605\u2605)'],
+    columns: ['Icon', 'Recipe', 'Category', 'Method', 'Energy (base / \u2605 / \u2605\u2605)', 'Ingredients', 'Sell Price (base / \u2605 / \u2605\u2605)'],
     rows: cookingRecipeRows,
-    sourceNote: 'Cooking rows were transcribed from the supplied Moonlight Peaks wiki screenshots. Dash values mean the captured table showed a blank, missing, or unconfirmed value. Violet Sashimi and Dried Seaweed are retained from the existing codebase because they were already present as confirmed cooking rows.',
+    sourceNote: 'Cooking rows were transcribed from the supplied Moonlight Peaks wiki screenshots. Generated icon placeholders are used until exact source icons are available. Dash values mean the captured table showed a blank, missing, or unconfirmed value. Violet Sashimi and Dried Seaweed are retained from the existing codebase because they were already present as confirmed cooking rows.',
   },
   fish: {
     parameters: [
