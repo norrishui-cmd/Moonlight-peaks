@@ -18,6 +18,10 @@ export function getStaticPaths() {
 const { item, prev, next } = Astro.props as { item: ItemCategory; prev: ItemCategory; next: ItemCategory };
 const url = new URL(`/items/${item.slug}`, SITE.url).href;
 const framework = getItemFramework(item.slug);
+const parseImageCell = (cell: string) => {
+  const [src, alt = ''] = cell.slice('image:'.length).split('|');
+  return { src, alt };
+};
 const collectionRedirects: Record<string, string> = {
   fish: '/collections/fish',
   critters: '/collections/critters',
@@ -127,7 +131,16 @@ const jsonLd = [
           <tbody>
             {framework.rows.map((row) => (
               <tr>
-                {row.map((cell) => <td>{cell}</td>)}
+                {row.map((cell) => {
+                  const image = cell.startsWith('image:') ? parseImageCell(cell) : null;
+                  return (
+                    <td>
+                      {image ? (
+                        <img class="item-table-icon" src={image.src} alt={image.alt} loading="lazy" decoding="async" />
+                      ) : cell}
+                    </td>
+                  );
+                })}
               </tr>
             ))}
           </tbody>
@@ -230,7 +243,7 @@ const jsonLd = [
       border-bottom: 1px solid var(--line);
       padding: 10px 12px;
       text-align: left;
-      vertical-align: top;
+      vertical-align: middle;
     }
     .item-data-table th {
       color: var(--candle);
@@ -240,6 +253,12 @@ const jsonLd = [
       text-transform: uppercase;
       background: rgba(21, 16, 29, 0.58);
       white-space: nowrap;
+    }
+    .item-table-icon {
+      display: block;
+      width: 68px;
+      height: 68px;
+      object-fit: contain;
     }
     .item-data-table tr:last-child td { border-bottom: 0; }
     .source-note {

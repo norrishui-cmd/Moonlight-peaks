@@ -9,8 +9,11 @@ const trackerItems = itemCategories.flatMap((cat) => {
     id: `${cat.slug}-${index}`,
     category: cat.name,
     categorySlug: cat.slug,
-    name: row[0] || `${cat.name} entry`,
-    detail: row.slice(1).filter(Boolean).join(' / '),
+    name: row[0]?.startsWith('image:') ? row[1] : row[0] || `${cat.name} entry`,
+    detail: row
+      .slice(row[0]?.startsWith('image:') ? 2 : 1)
+      .filter((cell) => cell && !cell.startsWith('image:'))
+      .join(' / '),
     status: cat.status,
   }));
 });

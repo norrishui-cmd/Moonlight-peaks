@@ -1,5 +1,6 @@
 import { GAME } from '../consts';
 import { cookingRecipeRows } from './cooking-recipes';
+import { craftingBlueprintRows } from './crafting-blueprints';
 
 export type ItemCategory = {
   slug: string;
@@ -95,10 +96,10 @@ export const itemCategories: ItemCategory[] = [
     name: 'Crafting',
     group: 'Crafting',
     status: 'confirmed',
-    dek: 'Materials, recipes, workbench items, and homestead upgrades players can make or assemble — including confirmed Dark Wood, used in several decoration recipes.',
-    summary: 'Crafting is a core wiki category because players search for recipes, ingredients, and unlocks. Confirmed: Dark Wood is a real crafting material, obtained by chopping oversized logs found around the farm area with a Copper Axe (an upgraded axe tier, not the starting one). It\'s used in several decoration recipes, including a Fur Chair (with hardwood planks and cloth) and a Coffin Bookcase (with planks). Beyond Dark Wood, exact crafting stations, other materials, and full recipe lists are still being verified rather than guessed at here.',
-    examples: ['Dark Wood (from farm-area logs, Copper Axe)', 'Crafting materials', 'Workbench recipes', 'Utility items', 'Upgrade components'],
-    verify: ['Recipe requirements', 'Crafting station', 'Unlock source', 'Output quantity'],
+    dek: 'Crafting blueprints, extracted icons, unlock sources, buy prices, and sell prices captured from the supplied wiki screenshot.',
+    summary: 'The crafting page now includes the visible Blueprints table from the supplied screenshot. Each row stores the extracted blueprint icon, name, obtained-by source, buy price, and sell price exactly where the screenshot exposes those fields. Placeholder values such as "Location Name" and "X Coin" are kept as placeholders because that is what the captured table currently shows.',
+    examples: ['Ambrosia blueprint', 'Antiques blueprint', 'Bush blueprint', 'Kitchen Set blueprint from Coffee & Coffins', 'Lantern blueprint'],
+    verify: ['Final obtained-by location names for placeholder rows', 'Final buy and sell prices currently shown as X Coin', 'Additional blueprint rows below the screenshot crop'],
     related: [{ label: 'Tools', href: '/items/tools' }, { label: 'Mineables', href: '/items/mineables' }, { label: 'Decorations', href: '/items/decorations' }],
   },
   {
@@ -298,17 +299,13 @@ export const itemFrameworks: Record<string, ItemFramework> = {
   },
   crafting: {
     parameters: [
-      { label: 'Data status', value: 'Crafting category known; recipe list pending' },
-      { label: 'Key fields', value: 'Materials, station, output, unlock, use, related quest' },
-      { label: 'Useful filters', value: 'By station, ingredient, upgrade path, decoration use' },
+      { label: 'Data status', value: 'Captured from supplied Blueprints screenshot, 11 visible rows documented' },
+      { label: 'Key fields', value: 'Blueprint icon, name, obtained-by source, buy price, sell price' },
+      { label: 'Useful filters', value: 'By source, shop, price, furniture set, and blueprint theme' },
     ],
-    columns: ['Crafted item', 'Materials', 'Station', 'Output', 'Unlock', 'Use'],
-    rows: [
-      ['Workbench recipe entry', tbc, tbc, tbc, tbc, tbc],
-      ['Utility item entry', tbc, tbc, tbc, tbc, tbc],
-      ['Upgrade component entry', tbc, tbc, tbc, tbc, tbc],
-    ],
-    sourceNote: 'Keep recipes marked pending until the exact material counts are verified.',
+    columns: ['Icon', 'Name', 'Obtained By', 'Buy Price', 'Sell Price'],
+    rows: craftingBlueprintRows,
+    sourceNote: 'Blueprint rows and icons were extracted from the supplied screenshot. Placeholder values such as "Location Name" and "X Coin" are preserved because they are placeholders in the captured table.',
   },
   artifacts: {
     parameters: [
