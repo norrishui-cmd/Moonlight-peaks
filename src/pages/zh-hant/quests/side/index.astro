@@ -1,0 +1,62 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import { SITE } from '../../../../consts';
+import { sideQuests } from '../../../../data/quests-side';
+import { sideQuestsZhHant } from '../../../../i18n/quests-side-zh-hant';
+
+const jsonLd = {
+  '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '首頁', item: `${SITE.url}/zh-hant` },
+    { '@type': 'ListItem', position: 2, name: '任務攻略', item: `${SITE.url}/zh-hant/quests` },
+    { '@type': 'ListItem', position: 3, name: '支線任務', item: `${SITE.url}/zh-hant/quests/side` },
+  ],
+};
+---
+<Base
+  title="月光峰支線任務攻略 — 全部NPC任務與卡點系統"
+  description="月光峰全部確認的支線任務與特定NPC委託——釣魚比賽、房屋升級、工作佈告欄，以及小鎮的兩個收集類任務線。"
+  path="/zh-hant/quests/side"
+  jsonLd={jsonLd}
+  crumbs={[{ label: '任務攻略', href: '/zh-hant/quests' }, { label: '支線任務' }]}
+  lang="zh-hant"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">任務 · 支線</p>
+      <h1><em>支線</em>任務</h1>
+      <p class="intro">
+        共{sideQuests.length}個確認的支線任務與特定NPC委託，獨立於<a href="/zh-hant/quests/story">主線劇情</a>。
+        涵蓋從與特定居民繫結的一次性任務，到工作佈告欄這類持續系統。
+      </p>
+
+      <div class="sq-grid">
+        {sideQuests.filter((q) => sideQuestsZhHant[q.slug]).map((q) => (
+          <a class="sq-card" href={`/zh-hant/quests/side/${q.slug}`}>
+            <span class="sq-tag">{q.npc ? q.npc.charAt(0).toUpperCase() + q.npc.slice(1) : '支線系統'}</span>
+            <h3>{sideQuestsZhHant[q.slug].title}</h3>
+            <p>{sideQuestsZhHant[q.slug].summary.length > 60 ? sideQuestsZhHant[q.slug].summary.slice(0, 57) + '…' : sideQuestsZhHant[q.slug].summary}</p>
+          </a>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        相關: <a href="/zh-hant/quests">任務中心</a>, <a href="/zh-hant/quests/story">主線任務</a>,
+        <a href="/collections">收藏</a>, <a href="/zh/characters">角色</a>。
+      </div>
+    </div>
+  </article>
+
+  <style>
+    .sq-grid { display: grid; grid-template-columns: 1fr; gap: 12px; margin: 22px 0 30px; }
+    @media (min-width: 640px) { .sq-grid { grid-template-columns: 1fr 1fr; } }
+    .sq-card {
+      display: block; border: 1px solid var(--line); border-radius: 14px; background: var(--surface);
+      padding: 16px; text-decoration: none; color: inherit;
+      transition: border-color .15s ease, transform .15s ease;
+    }
+    .sq-card:hover { border-color: color-mix(in srgb, var(--candle) 54%, var(--line)); transform: translateY(-2px); }
+    .sq-tag { font-family: var(--mono); font-size: 0.66rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--candle); }
+    .sq-card h3 { margin: 6px 0 6px; font-size: 1.05rem; }
+    .sq-card p { margin: 0; color: #ded3e6; font-size: 0.86rem; }
+  </style>
+</Base>

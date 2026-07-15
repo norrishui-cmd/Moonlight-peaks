@@ -1,0 +1,62 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import { SITE } from '../../../../consts';
+import { sideQuests } from '../../../../data/quests-side';
+import { sideQuestsZh } from '../../../../i18n/quests-side-zh';
+
+const jsonLd = {
+  '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '首页', item: `${SITE.url}/zh` },
+    { '@type': 'ListItem', position: 2, name: '任务攻略', item: `${SITE.url}/zh/quests` },
+    { '@type': 'ListItem', position: 3, name: '支线任务', item: `${SITE.url}/zh/quests/side` },
+  ],
+};
+---
+<Base
+  title="月光峰支线任务攻略 — 全部NPC任务与卡点系统"
+  description="月光峰全部确认的支线任务与特定NPC委托——钓鱼比赛、房屋升级、工作布告栏，以及小镇的两个收集类任务线。"
+  path="/zh/quests/side"
+  jsonLd={jsonLd}
+  crumbs={[{ label: '任务攻略', href: '/zh/quests' }, { label: '支线任务' }]}
+  lang="zh"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">任务 · 支线</p>
+      <h1><em>支线</em>任务</h1>
+      <p class="intro">
+        共{sideQuests.length}个确认的支线任务与特定NPC委托，独立于<a href="/zh/quests/story">主线剧情</a>。
+        涵盖从与特定居民绑定的一次性任务，到工作布告栏这类持续系统。
+      </p>
+
+      <div class="sq-grid">
+        {sideQuests.filter((q) => sideQuestsZh[q.slug]).map((q) => (
+          <a class="sq-card" href={`/zh/quests/side/${q.slug}`}>
+            <span class="sq-tag">{q.npc ? q.npc.charAt(0).toUpperCase() + q.npc.slice(1) : '支线系统'}</span>
+            <h3>{sideQuestsZh[q.slug].title}</h3>
+            <p>{sideQuestsZh[q.slug].summary.length > 60 ? sideQuestsZh[q.slug].summary.slice(0, 57) + '…' : sideQuestsZh[q.slug].summary}</p>
+          </a>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        相关: <a href="/zh/quests">任务中心</a>, <a href="/zh/quests/story">主线任务</a>,
+        <a href="/collections">收藏</a>, <a href="/zh/characters">角色</a>。
+      </div>
+    </div>
+  </article>
+
+  <style>
+    .sq-grid { display: grid; grid-template-columns: 1fr; gap: 12px; margin: 22px 0 30px; }
+    @media (min-width: 640px) { .sq-grid { grid-template-columns: 1fr 1fr; } }
+    .sq-card {
+      display: block; border: 1px solid var(--line); border-radius: 14px; background: var(--surface);
+      padding: 16px; text-decoration: none; color: inherit;
+      transition: border-color .15s ease, transform .15s ease;
+    }
+    .sq-card:hover { border-color: color-mix(in srgb, var(--candle) 54%, var(--line)); transform: translateY(-2px); }
+    .sq-tag { font-family: var(--mono); font-size: 0.66rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--candle); }
+    .sq-card h3 { margin: 6px 0 6px; font-size: 1.05rem; }
+    .sq-card p { margin: 0; color: #ded3e6; font-size: 0.86rem; }
+  </style>
+</Base>

@@ -1,0 +1,77 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import { SITE } from '../../../../consts';
+import { storyQuests } from '../../../../data/quests-story';
+import { storyQuestsZhHant, storyChaptersZhHant } from '../../../../i18n/quests-story-zh-hant';
+
+const jsonLd = {
+  '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '首頁', item: `${SITE.url}/zh-hant` },
+    { '@type': 'ListItem', position: 2, name: '任務攻略', item: `${SITE.url}/zh-hant/quests` },
+    { '@type': 'ListItem', position: 3, name: '主線任務', item: `${SITE.url}/zh-hant/quests/story` },
+  ],
+};
+---
+<Base
+  title="月光峰主線任務攻略 — 按章節劃分"
+  description="月光峰確認的主線任務，按5個章節整理，從初到小鎮一直到婚禮篇章。已與多個發售周信源交叉驗證。"
+  path="/zh-hant/quests/story"
+  jsonLd={jsonLd}
+  crumbs={[{ label: '任務攻略', href: '/zh-hant/quests' }, { label: '主線任務' }]}
+  lang="zh-hant"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">任務 · 主線</p>
+      <h1><em>主線任務</em>攻略</h1>
+      <p class="intro">
+        共{storyQuests.length}個主線任務，分為{storyChaptersZhHant.length}個章節。選擇你目前所在的章節——
+        每個章節內的任務都按確認的順序排列。
+      </p>
+
+      {storyChaptersZhHant.map((ch) => {
+        const quests = storyQuests.filter((q) => q.chapter === ch.number && storyQuestsZhHant[q.slug]);
+        return (
+          <section class="chapter">
+            <div class="chapter-head">
+              <span class="chapter-num">第{ch.number}章</span>
+              <h2>{ch.title}</h2>
+            </div>
+            <p class="chapter-dek">{ch.dek}</p>
+            <ol class="quest-list">
+              {quests.map((q) => (
+                <li>
+                  <a href={`/zh-hant/quests/story/${q.slug}`}>{storyQuestsZhHant[q.slug].title}</a>
+                  {q.status === 'reported' && <span class="tag-community">據報告</span>}
+                </li>
+              ))}
+            </ol>
+          </section>
+        );
+      })}
+
+      <div class="callout wip">
+        信源已在發售周交叉驗證(Neoseeker任務日誌、Bonus Action、Output Lag、Into Indie Games)。
+        相關: <a href="/zh-hant/quests">任務中心</a>, <a href="/zh-hant/quests/side">支線任務</a>。
+      </div>
+    </div>
+  </article>
+
+  <style>
+    .chapter { margin: 26px 0; padding-top: 18px; border-top: 1px solid var(--line); }
+    .chapter:first-of-type { border-top: none; padding-top: 0; }
+    .chapter-head { display: flex; align-items: baseline; gap: 10px; }
+    .chapter-num { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--candle); white-space: nowrap; }
+    .chapter-head h2 { margin: 0; }
+    .chapter-dek { color: var(--muted); font-size: 0.92rem; margin: 4px 0 12px; }
+    .quest-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 6px; counter-reset: qnum; }
+    .quest-list li { counter-increment: qnum; padding: 8px 0; border-bottom: 1px dashed var(--line); display: flex; align-items: center; gap: 8px; }
+    .quest-list li::before { content: counter(qnum) "."; color: var(--faint); font-family: var(--mono); font-size: 0.8rem; }
+    .quest-list a { color: var(--mist); text-decoration: none; flex: 1; }
+    .quest-list a:hover { color: var(--candle); }
+    .tag-community {
+      display: inline-block; font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.02em;
+      color: var(--faint); border: 1px solid var(--line); border-radius: 999px; padding: 2px 7px;
+    }
+  </style>
+</Base>

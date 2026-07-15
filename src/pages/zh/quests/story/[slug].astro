@@ -1,0 +1,108 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import { SITE, GAME } from '../../../../consts';
+import { storyQuests, storyQuestBySlug } from '../../../../data/quests-story';
+import { storyQuestsZh, storyChaptersZh } from '../../../../i18n/quests-story-zh';
+
+export function getStaticPaths() {
+  return storyQuests.filter((q) => storyQuestsZh[q.slug]).map((q) => ({ params: { slug: q.slug }, props: { q } }));
+}
+
+const { q } = Astro.props as { q: (typeof storyQuests)[number] };
+const tr = storyQuestsZh[q.slug];
+const chapter = storyChaptersZh.find((c) => c.number === q.chapter)!;
+const prev = storyQuests[storyQuests.indexOf(q) - 1];
+const next = q.leadsTo ? storyQuestBySlug.get(q.leadsTo) : undefined;
+const statusLabel = q.status === 'confirmed' ? '已确认' : '据报告';
+
+const faq = [
+  { q: `如何解锁"${tr.title}"?`, a: tr.unlock || '这个任务是上一个剧情节点的直接延续——请参见下方的上一任务链接。' },
+  { q: `"${tr.title}"的奖励是什么?`, a: tr.reward || '目前还没有确认这个任务有直接的道具奖励。' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '首页', item: `${SITE.url}/zh` },
+    { '@type': 'ListItem', position: 2, name: '任务攻略', item: `${SITE.url}/zh/quests` },
+    { '@type': 'ListItem', position: 3, name: '主线任务', item: `${SITE.url}/zh/quests/story` },
+    { '@type': 'ListItem', position: 4, name: tr.title, item: `${SITE.url}/zh/quests/story/${q.slug}` },
+  ] },
+];
+---
+<Base
+  title={`${tr.title} — 月光峰任务攻略`}
+  description={`月光峰任务"${tr.title}": ${tr.summary.slice(0, 100)}`}
+  path={`/zh/quests/story/${q.slug}`}
+  jsonLd={jsonLd}
+  crumbs={[{ label: '任务攻略', href: '/zh/quests' }, { label: '主线任务', href: '/zh/quests/story' }, { label: tr.title }]}
+  lang="zh"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">主线任务 · 第{q.chapter}章:{chapter.title} · <span class="tag-community">{statusLabel}</span></p>
+      <h1>{tr.title}</h1>
+
+      {tr.unlock && (
+        <div class="callout">
+          <strong>解锁方式:</strong> {tr.unlock}
+        </div>
+      )}
+
+      <h2>任务内容</h2>
+      <p>{tr.summary}</p>
+
+      {tr.reward && (
+        <>
+          <h2>奖励</h2>
+          <p>{tr.reward}</p>
+        </>
+      )}
+
+      {tr.troubleshooting && tr.troubleshooting.length > 0 && (
+        <>
+          <h2>卡关了?检查这些</h2>
+          <div class="faq">
+            {tr.troubleshooting.map((t) => (
+              <details open>
+                <summary>{t.q}</summary>
+                <p>{t.a}</p>
+              </details>
+            ))}
+          </div>
+        </>
+      )}
+
+      <h2>常见问题</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <nav class="prevnext" aria-label="任务导航">
+        {prev && storyQuestsZh[prev.slug] ? <a href={`/zh/quests/story/${prev.slug}`}>← {storyQuestsZh[prev.slug].title}</a> : <span />}
+        <a href="/zh/quests/story">所有章节</a>
+        {next && storyQuestsZh[next.slug] ? <a href={`/zh/quests/story/${next.slug}`}>{storyQuestsZh[next.slug].title} →</a> : <span />}
+      </nav>
+
+      <div class="callout wip">
+        相关: <a href="/zh/quests">任务中心</a>, <a href="/zh/quests/side">支线任务</a>,
+        <a href="/zh/beginner-guide">新手指南</a>。
+      </div>
+    </div>
+  </article>
+
+  <style>
+    .tag-community {
+      display: inline-block; font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.02em;
+      color: var(--faint); border: 1px solid var(--line); border-radius: 999px; padding: 2px 7px;
+      vertical-align: middle;
+    }
+    .prevnext { display: flex; justify-content: space-between; gap: 10px; margin: 22px 0; font-family: var(--mono); font-size: 0.82rem; }
+    .prevnext a { color: var(--candle); }
+  </style>
+</Base>
