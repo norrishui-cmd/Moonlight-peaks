@@ -1,0 +1,105 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+
+const rows = [
+  ['ここから始める', 'インストール前に発売時期・体験版へのアクセス・プラットフォームの選択・システム要件・対応言語を確認しましょう。'],
+  ['最初のプレイセッション', '吸血鬼を作成し、操作性をテストし、読みやすさを確認し、夜のループを覚え、未確認のお金稼ぎやギフトルートを急がないようにしましょう。'],
+  ['検証すべきデータ', '作物、魚、ギフト、スケジュール、店の価格、クエスト、セーブデータ、パフォーマンス、発売時のバグ。'],
+  ['安全な更新方針', '実機・公式情報・ストアページ・信頼できる中立的な報道で確認できた値のみを追加します。'],
+];
+
+const checklist = [
+  { label: '発売日', href: '/ja/release-date', note: '発売時期、価格、プラットフォーム、体験版の状況。' },
+  { label: '体験版ガイド', href: '/ja/demo', note: '購入前や最初からやり直す前に試すべきこと。' },
+  { label: 'システム要件', href: '/ja/system-requirements', note: 'PC・Mac・Steam Deckの確認事項。' },
+  { label: '対応言語', href: '/ja/languages', note: '日本語・中国語・韓国語・ドイツ語・英語のサポート状況。' },
+  { label: '既知の問題', href: '/known-issues', note: '発売時のバグ追跡と検証メモ。' },
+  { label: 'おすすめ設定', href: '/ja/best-settings', note: 'PC・Steam Deck・Switch・Mac設定チェックリスト。' },
+  { label: '初心者ガイド', href: '/ja/beginner-guide', note: '最初の夜に優先すべきことと、序盤の安全な目標。' },
+  { label: 'キャラクター', href: '/ja/characters', note: '住民、恋愛可否、発売後の検証状況。' },
+];
+
+const faq = [
+  { q: 'ムーンライト・ピークスの発売日にまず何を確認すべきですか?', a: '詳細なアイテムやギフトの表を追いかける前に、発売時期・プラットフォーム・システム要件・対応言語・既知の問題・初心者ガイドから確認しましょう。' },
+  { q: '発売日のデータはすぐに完全になりますか?', a: 'いいえ。作物・ギフト・スケジュール・店の価格・クエスト・パフォーマンスといった正確な値は、実機で確認できてから追加されます。' },
+  { q: '発売後も体験版をプレイすべきですか?', a: 'はい、操作性・雰囲気・読みやすさ・自分のデバイスでのパフォーマンスに不安がある場合は。体験版は手軽な確認手段として引き続き役立ちます。' },
+  { q: 'バグやパフォーマンスに関する情報はどこに掲載されますか?', a: 'クラッシュ、セーブの問題、コントローラーの不具合、Steam Deckに関するメモ、Switchのパフォーマンス、その他発売週の問題については既知の問題ページをご覧ください。' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'ホーム', item: `${SITE.url}/ja` },
+    { '@type': 'ListItem', position: 2, name: '発売日ハブ', item: new URL('/ja/launch-day', SITE.url).href },
+  ] },
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({
+    '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })) },
+];
+---
+<Base
+  title="ムーンライト・ピークス 発売日ガイド — まず確認すべきこと"
+  description="ムーンライト・ピークスの発売日ハブ:発売時期、体験版、システム要件、対応言語、既知の問題、おすすめ設定、初心者向けのコツ、安全なデータ更新方針。"
+  path="/ja/launch-day"
+  jsonLd={jsonLd}
+  crumbs={[{ label: '発売日ハブ' }]}
+  lang="ja"
+  showExport
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">発売 / 初日</p>
+      <h1>ムーンライト・ピークス <em>発売日</em>ガイド</h1>
+      <p class="intro">
+        {GAME.title}の発売初日向けハブページです。インストール前に確認すべきこと、検証済みデータが
+        どこに掲載されるか、薄い情報や推測に基づく発売時情報を避ける方法をまとめています。
+      </p>
+
+      <div class="callout">
+        <strong>発売時期:</strong> {GAME.releaseNote}
+      </div>
+
+      <h2>発売日の全体マップ</h2>
+      <table class="facts">
+        {rows.map((row) => (<tr><th>{row[0]}</th><td>{row[1]}</td></tr>))}
+      </table>
+
+      <h2>まずこれらを確認</h2>
+      <div class="link-grid">
+        {checklist.map((item) => (
+          <a href={item.href}>
+            <strong>{item.label}</strong>
+            <span>{item.note}</span>
+          </a>
+        ))}
+      </div>
+
+      <h2>推測してはいけないこと</h2>
+      <p>
+        実機や公式情報源で確認できるまで、正確な大好きなギフト・アイテム価格・クエスト結果・
+        作物の利益・魚の生息地・Steam Deck評価・セーブデータの場所を公開するのは避けましょう。
+        発売時の検索トラフィックは貴重ですが、推測に基づく表はプレイヤーにとって有害で、
+        SEO的にもリスクがあります。
+      </p>
+
+      <h2>FAQ</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </article>
+
+  <style>
+    .link-grid { display: grid; grid-template-columns: 1fr; gap: 10px; margin-top: 10px; }
+    @media (min-width: 680px) { .link-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    .link-grid a { display: flex; flex-direction: column; gap: 3px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); padding: 12px 14px; text-decoration: none; }
+    .link-grid strong { color: var(--mist); font-family: var(--display); }
+    .link-grid span { color: var(--muted); font-size: 0.84rem; }
+    .link-grid a:hover { border-color: color-mix(in srgb, var(--candle) 55%, var(--line)); }
+  </style>
+</Base>

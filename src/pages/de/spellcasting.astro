@@ -1,0 +1,142 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+import { spellcastingSections } from '../../data/spellcasting';
+
+const descDe: Record<string, string> = {
+  hoisthaven: 'Bewege ein Gebäude auf magische Weise.',
+  refilliarmus: 'Fülle deine Gießkanne sofort wieder auf.',
+  'tomorrows-tears': 'Lässt es in der nächsten Nacht regnen.',
+  'arborascend-i': 'Bewege 1 Baum auf magische Weise.',
+  'arborascend-ii': 'Bewege 5 Bäume auf magische Weise.',
+  'arborascend-iii': 'Bewege 10 Bäume auf magische Weise.',
+  'aquaflux-i': 'Beschwöre eine Gießkanne, die bis zu 16 Felder bewässern kann.',
+  'aquaflux-ii': 'Beschwöre eine Gießkanne, die bis zu - Felder bewässern kann.',
+  'aquaflux-iii': 'Beschwöre eine Gießkanne, die bis zu 144 Felder bewässern kann.',
+  'ethereal-hands-i': 'Beschwöre helfende Hände, die zusammen bis zu 32 Feldfrüchte ernten können.',
+  'ethereal-hands-ii': 'Beschwöre helfende Hände, die zusammen bis zu 64 Feldfrüchte ernten können.',
+  'ethereal-hands-iii': 'Beschwöre helfende Hände, die zusammen bis zu 128 Feldfrüchte ernten können.',
+  'metamorphosia-i': 'Verwandle 1 Feldfrucht in eine andere zufällige Feldfrucht.',
+  'metamorphosia-ii': 'Verwandle eine 2x2-Fläche an Feldfrüchten in andere zufällige Feldfrüchte.',
+  'metamorphosia-iii': 'Verwandle eine 3x3-Fläche an Feldfrüchten in andere zufällige Feldfrüchte.',
+  'maturio-i': 'Lässt Feldfrüchte auf einer 1x1-Fläche sofort ausreifen.',
+  'maturio-ii': 'Lässt Feldfrüchte auf einer 2x2-Fläche sofort ausreifen.',
+  'maturio-iii': 'Lässt Feldfrüchte auf einer 3x3-Fläche sofort ausreifen.',
+  'ethereal-shovels-i': 'Beschwöre eine Schaufel, die bis zu 32 Stellen ausheben kann.',
+  'ethereal-shovels-iii': 'Beschwöre eine Schaufel, die bis zu 128 Stellen ausheben kann.',
+  'ethereal-axes-i': 'Beschwöre eine Axt, die bis zu 16 Stämme oder Bäume fällen kann.',
+  'ethereal-axes-ii': 'Beschwöre Äxte, die bis zu - Stämme oder Bäume fällen können.',
+  'ethereal-axes-iii': 'Beschwöre eine Axt, die bis zu 48 Stämme oder Bäume fällen kann.',
+  'ethereal-pickaxes-i': 'Beschwöre eine Spitzhacke, die bis zu 16 Felsen zerkleinern kann.',
+  'ethereal-pickaxes-ii': 'Beschwöre eine Spitzhacke, die bis zu - Felsen zerkleinern kann.',
+  'ethereal-pickaxes-iii': 'Beschwöre Spitzhacken, die bis zu 48 Felsen zerkleinern können.',
+};
+const sectionTitleDe: Record<string, string> = { 'normal-spells': 'Normale Zaubersprüche', 'tiered-spells': 'Gestaffelte Zaubersprüche' };
+
+const spellcastingSpells = spellcastingSections.flatMap((s) => s.spells);
+const iconCount = spellcastingSpells.filter((spell) => spell.icon).length;
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Startseite', item: `${SITE.url}/de` },
+    { '@type': 'ListItem', position: 2, name: 'Welt', item: `${SITE.url}/de/locations` },
+    { '@type': 'ListItem', position: 3, name: 'Zaubersprüche', item: `${SITE.url}/de/spellcasting` },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks Zaubersprüche - Mana-Kosten & Kaufpreise"
+  description="Vollständiger Zauberspruch-Katalog für Moonlight Peaks mit Mana-Kosten, Beschreibungen und Kaufpreisen für alle 25 bestätigten Zaubersprüche."
+  path="/de/spellcasting"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Welt', href: '/de/locations' }, { label: 'Zaubersprüche' }]}
+  lang="de"
+>
+  <article class="page spellcasting-page">
+    <div class="wrap">
+      <p class="eyebrow">Welt / Zaubersprüche</p>
+      <h1>Moonlight Peaks <em>Zaubersprüche</em></h1>
+      <p class="intro">
+        Bestätigte Zauberspruch-Daten für {GAME.title}. Diese Seite listet {spellcastingSpells.length}
+        Zaubersprüche mit {iconCount} Icons, Mana-Kosten und Kaufpreisen, wo bekannt.
+      </p>
+
+      <nav class="spell-jump" aria-label="Zauberspruch-Abschnitte">
+        {spellcastingSections.map((section) => (
+          <a href={`#${section.slug}`}>{sectionTitleDe[section.slug] ?? section.title} <span>{section.spells.length}</span></a>
+        ))}
+      </nav>
+
+      {spellcastingSections.map((section) => (
+        <section class="spell-section" id={section.slug} aria-labelledby={`${section.slug}-title`}>
+          <h2 id={`${section.slug}-title`}>{sectionTitleDe[section.slug] ?? section.title}</h2>
+          <div class="spell-list">
+            {section.spells.map((spell) => (
+              <article class={`spell-card ${spell.icon ? '' : 'spell-card-no-icon'}`}>
+                <div class="spell-icon" aria-hidden={!spell.icon}>
+                  {spell.icon ? (
+                    <img src={spell.icon} alt={`${spell.name} Zaubersymbol`} width="144" height="144" loading="lazy" />
+                  ) : (
+                    <span>-</span>
+                  )}
+                </div>
+                <div class="spell-body">
+                  <h3>{spell.name}</h3>
+                  <p>{descDe[spell.slug] ?? spell.description}</p>
+                  <dl>
+                    <div>
+                      <dt>Mana</dt>
+                      <dd>{spell.manaCost}</dd>
+                    </div>
+                    <div>
+                      <dt>Kaufpreis</dt>
+                      <dd>{spell.buyPrice}</dd>
+                    </div>
+                  </dl>
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
+      ))}
+
+      <p class="spell-note">
+        Fehlende Werte werden als <code>-</code> beibehalten, wenn die Quelle einen Platzhalter oder keinen Wert zeigte.
+      </p>
+
+      <div class="callout">
+        Verwandt: <a href="/de/magic">Magie-Guide</a>, <a href="/de/farming">Landwirtschaft</a>,
+        <a href="/de/items/tools">Werkzeuge</a>, <a href="/de/items/cooking">Kochen</a>, <a href="/de/quests">Quests</a>.
+      </div>
+    </div>
+  </article>
+
+  <style>
+    .spell-jump { display: flex; flex-wrap: wrap; gap: 8px; margin: 18px 0 24px; }
+    .spell-jump a { border: 1px solid var(--line); border-radius: 999px; color: var(--mist); background: var(--surface); padding: 7px 12px; text-decoration: none; font-family: var(--mono); font-size: 0.76rem; }
+    .spell-jump a:hover { border-color: color-mix(in srgb, #5ecfff 54%, var(--line)); color: #84eaff; }
+    .spell-jump span { color: var(--faint); margin-left: 4px; }
+    .spell-section { margin-top: 24px; }
+    .spell-list { display: grid; grid-template-columns: 1fr; gap: 12px; }
+    @media (min-width: 760px) { .spell-list { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    .spell-card { display: grid; grid-template-columns: 104px minmax(0, 1fr); gap: 14px; align-items: center; min-height: 150px; padding: 14px; border: 1px solid var(--line); border-radius: 8px; background: rgba(32, 18, 58, 0.74); }
+    .spell-icon { width: 104px; height: 104px; display: grid; place-items: center; border-radius: 8px; border: 1px solid rgba(94, 207, 255, 0.16); background: rgba(15, 8, 36, 0.42); }
+    .spell-icon img { width: 96px; height: 96px; object-fit: contain; display: block; filter: drop-shadow(0 0 13px rgba(49, 209, 255, 0.46)); }
+    .spell-icon span { color: var(--faint); font-family: var(--mono); font-size: 1.1rem; }
+    .spell-body { min-width: 0; }
+    .spell-body h3 { margin: 0 0 8px; color: #c8a8ee; font-family: var(--sans); font-size: 1.12rem; font-weight: 800; line-height: 1.2; }
+    .spell-body p { margin: 0 0 10px; color: #eee7f3; font-size: 0.92rem; line-height: 1.45; }
+    .spell-body dl { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; }
+    .spell-body dl div { display: flex; align-items: center; gap: 6px; min-height: 28px; padding: 4px 8px; border: 1px solid var(--line); border-radius: 999px; background: rgba(20, 10, 44, 0.56); }
+    .spell-body dt { margin: 0; color: var(--faint); font-family: var(--mono); font-size: 0.66rem; text-transform: uppercase; }
+    .spell-body dd { margin: 0; color: var(--mist); font-weight: 700; font-size: 0.82rem; }
+    .spell-note { color: var(--faint); font-size: 0.78rem; margin: 16px 0 18px; }
+    .spell-note code { color: var(--mist); }
+    @media (max-width: 520px) {
+      .spell-card { grid-template-columns: 82px minmax(0, 1fr); gap: 10px; min-height: 126px; padding: 12px; }
+      .spell-icon { width: 82px; height: 82px; }
+      .spell-icon img { width: 76px; height: 76px; }
+      .spell-body h3 { font-size: 1rem; }
+    }
+  </style>
+</Base>

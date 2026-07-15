@@ -1,0 +1,99 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+
+const faq = [
+  { q: 'Wie viele Vampster gibt es in Moonlight Peaks?', a: 'Community-berichtet: insgesamt 100 Vampster, verstreut über die Außenbereiche des Spiels, von den Wäldern bis zu den Stränden.' },
+  { q: 'Wohin bringt man Vampster in Moonlight Peaks?', a: 'Community-berichtet: zurück zu ihrer Höhle in der Cave of Echoes. Alina, die du dort beim Kupferabbau triffst, bittet dich, ihr zu helfen, sie alle einzusammeln.' },
+  { q: 'Kann man mehr als einen Vampster gleichzeitig tragen?', a: 'Nein — Community-berichtet: du kannst immer nur einen Vampster gleichzeitig tragen. Mit jemandem zu interagieren oder eine Zwischensequenz auszulösen lässt dich den, den du gerade trägst, fallen.' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Startseite', item: `${SITE.url}/de` },
+    { '@type': 'ListItem', position: 2, name: 'Vampster', item: new URL('/de/vampsters', SITE.url).href },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks Vampster: Alle Fundorte & wie man sie einsammelt"
+  description="Moonlight Peaks Vampster-Guide: was sie sind, wo man alle 100 findet, wie man sie trägt, und wo ihre Höhle ist — bestätigte Fakten getrennt von Community-Berichten."
+  path="/de/vampsters"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Vampster' }]}
+  lang="de"
+  showExport
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Eintrag · Sammelobjekte</p>
+      <h1>Moonlight Peaks <em>Vampster</em></h1>
+      <p class="intro">
+        Vampster sind kleine Höhlenkreaturen, verstreut über die Welt von {GAME.title}, die du
+        einsammelst und zu ihrer Höhle zurückbringst. Hier ist, was bestätigt und community-berichtet
+        ist, um sie alle zu finden und einzusammeln.
+      </p>
+
+      <div class="callout">
+        <strong>Kurzantwort:</strong> Vampster sind verlorene Kreaturen, die du draußen findest und
+        trägst — einen nach dem anderen — zurück zu ihrer Höhle in der Cave of Echoes.
+        Community-berichtete Gesamtzahl: 100.
+      </div>
+
+      <h2>Wie die Vampster-Quest beginnt</h2>
+      <p>
+        Community-berichtet: während deiner ersten Woche oder so führt ein Ausflug zur Cave of
+        Echoes zum Kupferabbau dazu, dass ein Vampster nahe dem Eingang wegläuft. Drinnen triffst
+        du <a href="/characters/alina">Alina</a>, die erklärt, dass die Vampster verloren sind, und
+        um Hilfe bittet, sie alle nach Hause zu bringen.
+      </p>
+
+      <h2>Wo man sie findet</h2>
+      <p>
+        Community-berichtet: Vampster sind weit über die Außenbereiche des Spiels verstreut, von
+        den Wäldern bis zu den Stränden. Viele sind leichter zu entdecken, sobald du Bäume und
+        Büsche mit deiner Sense gerodet hast, da sich manche im überwucherten Gras verstecken.
+      </p>
+
+      <h2>Wie man sie trägt und zurückbringt</h2>
+      <ul>
+        <li><strong>Einen nach dem anderen:</strong> community-berichtet — du kannst nicht mehrere Vampster stapeln; du trägst immer nur einen, bis du ihn absetzt.</li>
+        <li><strong>Ihre Höhle:</strong> community-berichtet — in der Cave of Echoes, in Misty Shores (freigeschaltet über <a href="/quests/a-bridge-too-far">A Bridge Too Far</a>).</li>
+        <li><strong>Achte auf Unterbrechungen:</strong> community-berichtet — mit einem Bewohner zu reden oder eine Zwischensequenz auszulösen lässt dich den Vampster fallen, den du trägst, also räume dialoglastige Bereiche vorher.</li>
+      </ul>
+
+      <h2>Braucht man eine spezielle Form, um sie einzusammeln?</h2>
+      <p>
+        Die Quellen weichen hier leicht voneinander ab, daher stellen wir dies nicht als einen
+        festen Mechanismus dar: eine Community-Quelle beschreibt einfacheren Zugang zur
+        Vampster-Höhle, sobald du dich in die <a href="/shapeshifting">Hellkitten-Form verwandeln</a>
+        kannst, während unsere eigenen bestehenden Quest-Notizen speziell die Fledermausform für
+        das Tragen erwähnten. Beides könnte an unterschiedlichen Punkten der Questreihe zutreffen
+        (z. B. eine Form zum Tragen im Freien, eine andere für den Zugang zur Höhle) — wir
+        aktualisieren dies, sobald wir den genauen Mechanismus gegen das Live-Spiel verifizieren können.
+      </p>
+
+      <h2>Häufige Probleme</h2>
+      <ul>
+        <li><strong>Vampster nach einer Zwischensequenz aus den Augen verloren:</strong> erwartet — Zwischensequenzen lassen dich den, den du trägst, fallen; er bleibt dort liegen, wo du ihn abgesetzt hast.</li>
+        <li><strong>Keine weiteren Vampster zu finden:</strong> versuche, überwuchertes Gras und Büsche mit deiner Sense in noch nicht vollständig geräumten Bereichen zu roden.</li>
+      </ul>
+
+      <h2>Häufig gestellte Fragen</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        Verwandt: <a href="/locations/mines">Cave of Echoes</a>, <a href="/de/achievements">Errungenschaften</a>
+        (einschließlich "Back to the Den"), <a href="/characters/alina">Alina</a>, <a href="/de/shapeshifting">Metamorphose</a>.
+      </div>
+    </div>
+  </article>
+</Base>

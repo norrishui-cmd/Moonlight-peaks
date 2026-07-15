@@ -1,0 +1,96 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+
+const faq = [
+  { q: 'ムーンライト・ピークスにVampsterは何匹いますか?', a: 'コミュニティ報告:合計100匹で、森林地帯からビーチまで、ゲーム内の屋外エリア全体に散らばっています。' },
+  { q: 'ムーンライト・ピークスでVampsterはどこへ連れて行きますか?', a: 'コミュニティ報告:Cave of Echoesの中にある巣に連れ帰ります。そこで銅を採掘している最中に出会うAlinaが、Vampsterたちを全員家に帰す手伝いを頼んできます。' },
+  { q: '一度に複数のVampsterを運べますか?', a: 'いいえ——コミュニティ報告:一度に運べるVampsterは1匹だけです。誰かと会話したり、カットシーンが発生したりすると、運んでいたVampsterを落としてしまいます。' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'ホーム', item: `${SITE.url}/ja` },
+    { '@type': 'ListItem', position: 2, name: 'Vampster', item: new URL('/ja/vampsters', SITE.url).href },
+  ] },
+];
+---
+<Base
+  title="ムーンライト・ピークス Vampster — 全ての場所と集め方"
+  description="ムーンライト・ピークスのVampsterガイド:Vampsterとは何か、100匹全ての見つけ方、運び方、巣の場所——確認済みの事実とコミュニティ報告を分けて掲載。"
+  path="/ja/vampsters"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Vampster' }]}
+  lang="ja"
+  showExport
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">エントリー・コレクション</p>
+      <h1>ムーンライト・ピークス <em>Vampster</em></h1>
+      <p class="intro">
+        Vampsterは{GAME.title}の世界に散らばる小さな洞窟の生き物で、集めて巣に連れ帰ります。
+        全て見つけて集めるために確認済みの情報とコミュニティ報告をまとめました。
+      </p>
+
+      <div class="callout">
+        <strong>手短に言うと:</strong>Vampsterは屋外で見つけて運ぶ迷子の生き物です——一度に1匹ずつ
+        ——Cave of Echoesにある巣に連れ帰ります。コミュニティ報告による合計数:100匹。
+      </div>
+
+      <h2>Vampsterクエストの始まり方</h2>
+      <p>
+        コミュニティ報告:ゲーム開始から1週間ほどの間に、銅を採掘するためCave of Echoesを訪れると、
+        入口付近でVampsterが走り去っていく様子が見られます。中に入ると
+        <a href="/characters/alina">Alina</a>に出会い、Vampsterたちが迷子になっていることを
+        説明され、全員を家に帰す手伝いを頼まれます。
+      </p>
+
+      <h2>どこで見つかるか</h2>
+      <p>
+        コミュニティ報告:Vampsterは森林地帯からビーチまで、ゲーム内の屋外エリア全体に広く
+        散らばっています。多くは、生い茂った草の中に隠れているため、大鎌で木や茂みを刈った後の方が
+        見つけやすくなります。
+      </p>
+
+      <h2>運び方と連れ帰り方</h2>
+      <ul>
+        <li><strong>一度に1匹ずつ:</strong>コミュニティ報告——複数のVampsterを重ねて持つことはできません。置くまでは常に1匹だけを運びます。</li>
+        <li><strong>巣の場所:</strong>コミュニティ報告——Misty ShoresにあるCave of Echoesの中(<a href="/quests/a-bridge-too-far">A Bridge Too Far</a>で解放)。</li>
+        <li><strong>中断に注意:</strong>コミュニティ報告——住民と会話したり、何らかのカットシーンが発生したりすると、運んでいたVampsterを落としてしまうので、出発前に会話が多いエリアを片付けておきましょう。</li>
+      </ul>
+
+      <h2>集めるのに特別な変身形態が必要?</h2>
+      <p>
+        この点については情報源によって多少食い違いがあるため、確定した仕組みとしては提示していません:
+        あるコミュニティ情報源では、<a href="/shapeshifting">Hellkitten形態</a>に変身できるように
+        なるとVampsterの巣により簡単にアクセスできるようになると説明している一方、当サイトの
+        既存のクエストメモではVampsterを運ぶために特にコウモリ形態を挙げていました。両方とも、
+        クエストの異なる段階でそれぞれ正しい可能性があります(例:屋外で運ぶための形態と、巣への
+        アクセス用の形態が別、など)——実機で正確な仕組みを検証でき次第、更新します。
+      </p>
+
+      <h2>よくある問題</h2>
+      <ul>
+        <li><strong>カットシーンの後にVampsterを見失った:</strong>想定内です——カットシーンが発生すると運んでいたVampsterを落としてしまい、落とした場所にそのまま残ります。</li>
+        <li><strong>これ以上Vampsterが見つからない:</strong>まだ完全に片付けていないエリアで、大鎌を使って生い茂った草や茂みを刈ってみてください。</li>
+      </ul>
+
+      <h2>よくある質問</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        関連ページ: <a href="/locations/mines">Cave of Echoes</a>、<a href="/ja/achievements">実績</a>
+        (「Back to the Den」を含む)、<a href="/characters/alina">Alina</a>、<a href="/ja/shapeshifting">変身</a>。
+      </div>
+    </div>
+  </article>
+</Base>

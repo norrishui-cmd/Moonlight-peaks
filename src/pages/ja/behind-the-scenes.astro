@@ -1,0 +1,118 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+
+const faq = [
+  { q: 'ムーンライト・ピークスを開発しているのは誰ですか?', a: 'オランダのスタジオLittle Chicken Game Companyが開発しています。北南米ではXSEED Games、ヨーロッパではMarvelous Europeが発売しています。' },
+  { q: 'ムーンライト・ピークスの開発者ブログはありますか?', a: 'はい。Little ChickenはゲームのSteamコミュニティニュースページで、チームメンバーが自分の仕事について語る開発の舞台裏日記を投稿しています。' },
+  { q: 'Loganはムーンライト・ピークスの実在するキャラクターですか?', a: 'ほぼ間違いなくそうです。発売前のデータマイニングファイルに登場するだけでなく、Little Chickenの3Dアーティスト自身の開発日記でも「Loganの家」向けに狼男テーマの部屋をデザインした経緯が語られており、この名前を独立して裏付けています——ただし、公式発表による開発元の正式確認はまだありません。' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'ホーム', item: `${SITE.url}/ja` },
+    { '@type': 'ListItem', position: 2, name: '舞台裏', item: new URL('/ja/behind-the-scenes', SITE.url).href },
+  ] },
+];
+---
+<Base
+  title="ムーンライト・ピークス 舞台裏 — 開発チームを知る"
+  description="Little Chicken Game Company自身の開発者日記が明かす、ムーンライト・ピークス制作の裏側——Steamコミュニティの投稿から要約。"
+  path="/ja/behind-the-scenes"
+  jsonLd={jsonLd}
+  ogImage="/hero-behind-the-scenes.webp"
+  crumbs={[{ label: '舞台裏' }]}
+  lang="ja"
+  showExport
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">エントリー・舞台裏</p>
+      <h1><em>{GAME.title}</em>の舞台裏</h1>
+      <img class="bts-hero" src="/hero-behind-the-scenes.webp" alt="ムーンライト・ピークスの舞台裏——イメージアート" width="1200" height="630" fetchpriority="high" />
+      <p class="intro">
+        ムーンライト・ピークスに関する報道のほとんどはゲームプレイに焦点を当てています。あまり
+        知られていませんが、開発者自身がゲームの
+        <a href="https://steamcommunity.com/app/2209900/allnews/" target="_blank" rel="noopener">Steamコミュニティニュースページ</a>
+        で舞台裏の開発日記を公開しています。ここでは、ゲームの背後にいる人々と制作過程について
+        彼らが明かしている内容を、投稿から要約してお伝えします(長文の引用ではありません)。
+        最終更新:{SITE.updated}。
+      </p>
+
+      <h2>Little Chicken Game Company</h2>
+      <p>
+        {GAME.title}はLittle Chicken Game Companyによって開発されています。モバイルタイトルから
+        VR体験まで幅広い実績を持つ確立されたスタジオで、北南米では{GAME.publisher}、ヨーロッパでは
+        Marvelous Europeが発売を担当しています。
+      </p>
+
+      <h2>リード開発者を紹介</h2>
+      <p>
+        ある開発日記では、ゲームのリード開発者——スタジオで10年以上のプログラミング経験を持つ
+        「Jor」という名で活動——が、コンテンツデザインチームがゲーム制作に使用する中核の
+        プログラミング層と社内ツールの構築について語っており、開発戦略・コードレビュー・実際の
+        コーディング作業に多くの時間を費やしていると述べています。ゲーム業界への道は、子供の頃に
+        アイテムや場所のアイデアをスプレッドシートにスケッチすることから始まり、その後ネットで
+        ゲームの作り方を調べて、12歳頃にプログラミングを始めたそうです。
+      </p>
+
+      <h2>ある部屋のデザイン:Loganの家</h2>
+      <p>
+        別の開発日記では、チームの3DアーティストであるJuliaが、コンセプトから最終的な内装仕上げ
+        まで、ゲームの居心地の良い室内の一つを制作する工程を紹介しています——具体的には、
+        コンセプトアーティストWietse Treurnietによる、ある住民の家のための狼男テーマの部屋です。
+        元のコンセプトをそのまま複製するのではなく、あくまでガイドラインとして扱い、スケールと
+        レイアウトに焦点を当てた大まかな3Dブロックアウトから始めて、その後素材を仕上げていく
+        という流れです。
+      </p>
+      <p>
+        町について考察する上で知っておく価値のある詳細:この投稿ではこの部屋を<strong>Loganの家の
+        内装</strong>と呼んでいます。発売前のデータマイニングされたゲームファイルに「Logan's House」
+        が登場していたことと合わせると、これは実在する狼男の住民Loganを示す2つの独立した手がかりに
+        なります——彼について報告されているその他の情報は<a href="/characters/logan">キャラクター
+        プロフィール</a>をご覧ください。
+      </p>
+
+      <h2>夜を舞台にしたアートの課題</h2>
+      <p>
+        同じ開発日記では、夜を舞台にしたゲームならではの本物の制作上の課題にも触れています:
+        ムーンライト・ピークスは全体的に暗めの紫色の照明を使用しているため、アートツール上では
+        はっきり見える色が、ゲームエンジン上で照明が当たると必ずしも同じようには見えない、という
+        ことです——特に黄色と緑は、夜の照明を適用した際に元のコンセプトアートから色味を保つのが
+        難しいと指摘されています。細かい点ではありますが、初期のコンセプトアートから想像するより
+        実際のゲームのパレットがより物憂げで青紫がかって見える理由を説明しています。
+      </p>
+
+      <h2>プレイヤーにとってなぜ重要か</h2>
+      <p>
+        これらの情報がプレイの仕方を変えるわけではありませんが、{GAME.title}が自分たちの制作
+        プロセスを公に共有する、小規模で顔の見えるチームによって作られていることを示す、良い
+        リマインダーになります——そしてそれは同時に、公式トレイラーやプレスリリースに何かが
+        登場するよりずっと前に、(Loganのような)さりげない確認情報を得られる良い情報源でも
+        あります。
+      </p>
+
+      <h2>FAQ</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        出典:Little Chicken Game Company自身の開発日記
+        (<a href="https://steamcommunity.com/app/2209900/allnews/" target="_blank" rel="noopener">Steamコミュニティ</a>)、
+        ここでは要約して掲載しています。関連ページ:<a href="/characters/logan">Logan</a>、
+        <a href="/ja/characters">キャラクター</a>、<a href="/ja/about">このサイトについて</a>。
+      </div>
+    </div>
+  </article>
+
+  <style>
+    .bts-hero { display: block; width: 100%; height: auto; border-radius: var(--radius); border: 1px solid var(--line); margin: 0 0 18px; }
+  </style>
+</Base>

@@ -1,0 +1,105 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+
+const rows = [
+  ['Hier beginnen', 'Prüfe Release-Timing, Demo-Zugang, Plattformwahl, Systemanforderungen und unterstützte Sprachen vor der Installation.'],
+  ['Erste Sitzung', 'Erstelle deinen Vampir, teste die Steuerung, prüfe die Lesbarkeit, lerne den Nachtzyklus, und vermeide es, unbestätigte Geld- oder Geschenkrouten zu überstürzen.'],
+  ['Zu verifizierende Daten', 'Feldfrüchte, Fische, Geschenke, Zeitpläne, Ladenpreise, Quests, Speicherstände, Leistung, und etwaige Launch-Bugs.'],
+  ['Sichere Update-Richtlinie', 'Werte werden nur hinzugefügt, sobald sie im Live-Spiel, offiziellen Notizen, Store-Seiten oder verlässlicher neutraler Berichterstattung sichtbar sind.'],
+];
+
+const checklist = [
+  { label: 'Release-Datum', href: '/de/release-date', note: 'Release-Timing, Preis, Plattformen und Demo-Status.' },
+  { label: 'Demo-Guide', href: '/de/demo', note: 'Was vor dem Kauf oder Neustart zu testen ist.' },
+  { label: 'Systemanforderungen', href: '/de/system-requirements', note: 'PC-, Mac- und Steam-Deck-Checks.' },
+  { label: 'Sprachen', href: '/de/languages', note: 'Unterstützung für Japanisch, Chinesisch, Koreanisch, Deutsch und Englisch.' },
+  { label: 'Bekannte Probleme', href: '/known-issues', note: 'Launch-Bug-Tracker und Verifizierungsnotizen.' },
+  { label: 'Beste Einstellungen', href: '/de/best-settings', note: 'Checkliste für PC-, Steam-Deck-, Switch- und Mac-Einstellungen.' },
+  { label: 'Einsteiger-Guide', href: '/de/beginner-guide', note: 'Prioritäten für die erste Nacht und sichere frühe Ziele.' },
+  { label: 'Charaktere', href: '/de/characters', note: 'Bewohner, Romanze-Status und Launch-Verifizierung.' },
+];
+
+const faq = [
+  { q: 'Was sollte ich am Launch-Tag von Moonlight Peaks zuerst prüfen?', a: 'Beginne mit Release-Timing, Plattform, Systemanforderungen, Sprachunterstützung, bekannten Problemen und dem Einsteiger-Guide, bevor du detaillierten Gegenstands- oder Geschenktabellen nachjagst.' },
+  { q: 'Werden die Launch-Tag-Daten sofort vollständig sein?', a: 'Nein. Genaue Werte wie Feldfrüchte, Geschenke, Zeitpläne, Ladenpreise, Quests und Leistungsnotizen werden erst hinzugefügt, nachdem das Live-Spiel sie bestätigt.' },
+  { q: 'Sollte ich nach dem Release noch die Demo spielen?', a: 'Ja, wenn du dir bei Steuerung, Ton, Lesbarkeit oder Leistung auf deinem Gerät unsicher bist. Die Demo bleibt als schneller Komfort-Check nützlich.' },
+  { q: 'Wo werden Bugs und Leistungsnotizen landen?', a: 'Nutze die Seite Bekannte Probleme für Abstürze, Speicherprobleme, Controller-Probleme, Steam-Deck-Notizen, Switch-Leistung und andere Launch-Week-Probleme.' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Startseite', item: `${SITE.url}/de` },
+    { '@type': 'ListItem', position: 2, name: 'Launch-Tag', item: new URL('/de/launch-day', SITE.url).href },
+  ] },
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({
+    '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })) },
+];
+---
+<Base
+  title="Moonlight Peaks Launch-Tag-Guide - Was zuerst zu prüfen ist"
+  description="Moonlight Peaks Launch-Tag-Hub für Release-Timing, Demo, Systemanforderungen, Sprachen, bekannte Probleme, beste Einstellungen, Einsteiger-Tipps und sichere Daten-Updates."
+  path="/de/launch-day"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Launch-Tag' }]}
+  lang="de"
+  showExport
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Launch / Erster Tag</p>
+      <h1>Moonlight Peaks <em>Launch-Tag</em>-Guide</h1>
+      <p class="intro">
+        Der Tag-eins-Hub für {GAME.title}: was vor der Installation zu prüfen ist, wo verifizierte
+        Daten landen werden, und wie man dünne oder geratene Launch-Informationen vermeidet.
+      </p>
+
+      <div class="callout">
+        <strong>Release-Timing:</strong> {GAME.releaseNote}
+      </div>
+
+      <h2>Launch-Tag-Übersicht</h2>
+      <table class="facts">
+        {rows.map((row) => (<tr><th>{row[0]}</th><td>{row[1]}</td></tr>))}
+      </table>
+
+      <h2>Prüfe diese zuerst</h2>
+      <div class="link-grid">
+        {checklist.map((item) => (
+          <a href={item.href}>
+            <strong>{item.label}</strong>
+            <span>{item.note}</span>
+          </a>
+        ))}
+      </div>
+
+      <h2>Was nicht zu raten ist</h2>
+      <p>
+        Vermeide die Veröffentlichung genauer geliebter Geschenke, Gegenstandspreise,
+        Quest-Ergebnisse, Feldfrucht-Gewinne, Fisch-Fundorte, Steam-Deck-Bewertungen oder
+        Speicherpfade, bis sie im Live-Spiel oder offiziellen Quellen sichtbar sind. Launch-Suchverkehr
+        ist wertvoll, aber geratene Tabellen sind schlecht für Spieler und riskant für SEO.
+      </p>
+
+      <h2>FAQ</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </article>
+
+  <style>
+    .link-grid { display: grid; grid-template-columns: 1fr; gap: 10px; margin-top: 10px; }
+    @media (min-width: 680px) { .link-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    .link-grid a { display: flex; flex-direction: column; gap: 3px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); padding: 12px 14px; text-decoration: none; }
+    .link-grid strong { color: var(--mist); font-family: var(--display); }
+    .link-grid span { color: var(--muted); font-size: 0.84rem; }
+    .link-grid a:hover { border-color: color-mix(in srgb, var(--candle) 55%, var(--line)); }
+  </style>
+</Base>
