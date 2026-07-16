@@ -1,0 +1,87 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+import YouTube from '../../components/YouTube.astro';
+
+const facts = [
+  ['가격', '무료'],
+  ['플레이 가능 위치', 'Steam과 Nintendo eShop, Switch 2 호환'],
+  ['진행 상황 이전', '미확인; 데모는 별도의 체험판으로 여기세요'],
+  ['포함된 활동', '캐릭터 생성, 낚시, 꽃꽂이, 자수, 마을 초반 상호작용'],
+  ['정식 출시', GAME.releaseLabel],
+];
+
+const faq = [
+  { q: '문라이트 피크스 데모는 무료인가요?', a: '네. 데모는 Steam과 Nintendo eShop에서 무료입니다.' },
+  { q: '데모의 진행 상황이 정식판으로 이어지나요?', a: '이전에 대한 확인된 발표는 없으므로, 공식 출시 노트에 다른 언급이 없다면 정식판은 처음부터 시작하세요.' },
+  { q: '데모에서 무엇을 할 수 있나요?', a: '데모는 캐릭터 생성, 낚시·꽃꽂이·자수 같은 코지한 활동 미리보기, 그리고 주민들과의 초반 상호작용을 보여줍니다.' },
+  { q: '데모는 Switch 2에서도 되나요?', a: 'Nintendo eShop 데모는 Switch와 Switch 2 모두에서 플레이 가능합니다.' },
+  { q: '구매 전에 데모를 먼저 해봐야 하나요?', a: '네, 구매 전에 분위기, 조작감, 초반 루프를 테스트해보고 싶다면요.' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '홈', item: `${SITE.url}/ko` },
+    { '@type': 'ListItem', position: 2, name: '데모', item: `${SITE.url}/ko/demo` },
+  ] },
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+];
+---
+<Base
+  title="문라이트 피크스 — 데모 가이드: 다운로드, 콘텐츠, FAQ"
+  description="문라이트 피크스 데모 가이드: 다운로드 위치, 포함된 내용, 진행 상황 이전 여부, Switch와 Steam 접근성, 팁과 알려진 제한 사항까지."
+  path="/ko/demo"
+  jsonLd={jsonLd}
+  crumbs={[{ label: '데모' }]}
+  lang="ko"
+  showExport
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">허브 · 데모</p>
+      <h1>문라이트 피크스 <em>데모</em> 가이드</h1>
+      <p class="intro">
+        무료 데모는 2026년 7월 7일부터 출시된 이 코지한 뱀파이어 라이프 시뮬레이션을 정식
+        구매 전에 체험해볼 좋은 방법입니다. 어디서 다운로드하는지, 무엇이 포함되어 있는지,
+        그리고 어떤 것이 이전되지 않는지 정리했습니다.
+      </p>
+
+      <div class="demo-video">
+        <YouTube id="BvfEwKHmMfg" title="Moonlight Peaks demo video" />
+      </div>
+
+      <h2>요약</h2>
+      <table class="facts">
+        {facts.map((row) => (<tr><th>{row[0]}</th><td>{row[1]}</td></tr>))}
+      </table>
+
+      <h2>데모를 가장 잘 활용하는 법</h2>
+      <p>
+        분위기, 조작감, 카메라, 그리고 느린 코지 활동이 자신에게 맞는지 판단하는 데 데모를
+        활용하세요. 모든 시스템을 보여주도록 설계되지는 않았습니다. 정확한 작물 수치, 완전한
+        선물 표, 후반 퀘스트, 전체 컬렉션 목록은 정식판에 속합니다.
+      </p>
+      <ul>
+        <li><strong>분위기 테스트:</strong> 데모는 특히 분위기와 조작감을 확인하는 데 유용합니다.</li>
+        <li><strong>초반 활동 체험:</strong> 낚시, 꽃꽂이, 자수, 주민 소개까지 유용한 미리보기를 제공합니다.</li>
+        <li><strong>과도하게 최적화하지 마세요:</strong> 진행 상황 이전이 확인되지 않았으니, 데모는 연습으로 여기세요.</li>
+        <li><strong>플랫폼 비교:</strong> Steam, Switch, Switch 2 플레이어는 조작감과 성능을 각각 확인하세요.</li>
+      </ul>
+
+      <h2>FAQ</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        관련: <a href="/ko/release-date">출시일</a>,
+        <a href="/ko/platforms">플랫폼</a>, <a href="/demo">상세 데모 가이드</a>(영어).
+      </div>
+    </div>
+  </article>
+</Base>

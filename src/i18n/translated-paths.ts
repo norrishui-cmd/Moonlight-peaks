@@ -56,11 +56,14 @@ const esOnlyPaths = ['/quests', '/farm', '/collections', '/map'];
 
 // French pages built so far — grows independently from here.
 const frPaths = ['/', '/release-date', '/beginner-guide', '/characters', '/romance', '/farming', '/magic', '/platforms', '/demo',
-  '/families', '/locations', '/activities', '/items', '/character-creator', '/shapeshifting', '/faq', '/tools'];
+  '/families', '/locations', '/activities', '/items', '/character-creator', '/shapeshifting', '/faq', '/tools',
+  '/guides', '/cheats', '/about', '/languages'];
 
 // Korean is a brand-new locale, starting with the homepage plus a handful of core pages built
 // alongside it — grows independently from here.
-const koPaths = ['/', '/release-date', '/beginner-guide', '/characters', '/romance', '/families', '/locations', '/activities', '/items'];
+const koPaths = ['/', '/release-date', '/beginner-guide', '/characters', '/romance', '/families', '/locations', '/activities', '/items',
+  '/farming', '/magic', '/platforms', '/demo', '/character-creator', '/shapeshifting', '/faq', '/tools',
+  '/guides', '/cheats', '/about', '/languages'];
 
 export const translatedPathsByLocale: Record<Locale, Set<string>> = {
   en: new Set(), // English is the source; not meaningful to check "is English translated".

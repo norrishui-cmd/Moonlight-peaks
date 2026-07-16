@@ -1,0 +1,104 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+
+const faq = [
+  { q: '문라이트 피크스에서는 밤에 농사를 짓나요?', a: '네. 뱀파이어를 조작하기 때문에 농장 재배와 관리는 달빛 아래에서 이루어집니다 — 해가 뜨기 전에 관으로 돌아가는 것만 기억하세요. 야간 농사는 코지한 재배 루프의 대표적인 특징입니다.' },
+  { q: 'Draculamb가 무엇인가요?', a: '확인된 가축 종류 중 하나로, Cheeken(닭), Piggoat, Cowcula와 함께 있습니다. 세눈박이 Hellkitten으로 변신할 수도 있습니다.' },
+  { q: '어떤 작물을 심을 수 있나요?', a: '확인된 첫 번째 작물은 Blood Grape(Orlock이 주는 시작 씨앗, 성장까지 5일)이며, 통에서 "블러드 와인"으로 만들 수 있습니다. "cruelcumber", 호박, 벨라돈나도 확인되었지만 정확한 가격은 아직 공개되지 않았습니다.' },
+  { q: '농장 동물은 어떻게 구매하나요?', a: '확인됨: 먼저 Ridge에게 4,000골드와 재료를 주고 헛간을 지은 다음, Luna에게서 동물을 구매하세요(그 시점에 그녀의 집 앞에 있는 동물만 구매 가능).' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '홈', item: `${SITE.url}/ko` },
+    { '@type': 'ListItem', position: 2, name: '농사', item: `${SITE.url}/ko/farming` },
+  ] },
+];
+---
+<Base
+  title="문라이트 피크스 — 농사, 작물, 마법 가축"
+  description="문라이트 피크스 농사 시스템: 달빛 아래 재배하는 마법 작물과 빛나는 꽃, Draculamb 같은 마법 가축, 그리고 땅을 가꾸는 데 도움을 주는 마법까지."
+  path="/ko/farming"
+  jsonLd={jsonLd}
+  crumbs={[{ label: '농사' }]}
+  lang="ko"
+  showExport
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">입문 · 농장</p>
+      <h1>문라이트 피크스 — <em>농사</em>와 마법 작물</h1>
+      <p class="intro">
+        농장은 {GAME.title}의 핵심입니다 — 뱀파이어의 색깔이 더해진 채로요. 달빛 아래 재배, 마법
+        식물, 마법 가축이 어떻게 작동하는지 정리했습니다. 최종 업데이트: {SITE.updated}.
+      </p>
+
+      <h2>달빛 아래 재배하기</h2>
+      <p>
+        밤의 존재답게, 해가 진 후에 작물을 심고 관리합니다 — 해가 뜨기 전에 관으로 돌아가는 것만
+        기억하세요. 코지 팜 시뮬레이션 특유의 심기-관리-수확 리듬을 그대로 따르지만, 낮과 밤이
+        뒤바뀐 형태입니다.
+      </p>
+
+      <h2>마법 작물과 빛나는 꽃</h2>
+      <p>
+        초자연적인 재배 기술은 흥미로운 결과를 만들어냅니다: 평범한 농산물 대신 마법에 걸린,
+        빛나는 식물과 꽃을 재배하게 됩니다. 확인된 첫 번째 작물은 <strong>Blood Grape</strong>
+        (Orlock이 첫날 밤에 주는 씨앗, 성장까지 5일)이며, 통에서 "블러드 와인"으로 만들 수
+        있습니다 — 포도를 그냥 팔면 돈이 거의 되지 않습니다. 또한 확인된 것: "cruelcumber",
+        호박, 벨라돈나 — 정확한 가격은 아직 공개되지 않았습니다.
+      </p>
+
+      <h2>초반 도구</h2>
+      <p>
+        확인됨 (도구 휠에서 접근 가능, Switch에서는 R 길게 누르기): 삽(별도의 괭이는 없음 — 삽이
+        그 역할을 함), 물뿌리개(3단계: 1,000 / 2,000 / 3,500골드, 단계마다 칸당 물 사용량이
+        줄어듦), 도끼, 곡괭이, 낫, 그리고 시작부터 부서진 지팡이. 확인됨: <strong>곡괭이를 가장
+        먼저 업그레이드</strong>하는 것이 우선순위입니다 — 집 근처의 큰 바위를 부숴서 헛간을 더
+        지을 공간을 확보할 수 있습니다.
+      </p>
+
+      <h2>가축 — 확인된 구매 흐름</h2>
+      <p>
+        확인됨: 동물을 바로 구매할 수는 없습니다. 먼저 <strong>Ridge</strong>에게 4,000골드와
+        재료를 주고 <strong>헛간</strong>을 지은 다음, <strong>Luna</strong>에게서 가축을
+        구매하세요(그 시점에 그녀의 집 앞에 있는 것만 구매 가능). 확인된 종류:
+        <strong>Cheeken</strong>(보통 첫 구매 대상, 쓰다듬기와 모자를 좋아함),
+        <strong>Piggoat</strong>, <strong>Draculamb</strong>, <strong>Cowcula</strong>. 정제기에서
+        만든 사료를 먹으며, 나중에는 고급 사료도 먹습니다.
+      </p>
+
+      <h2>마법과 도구</h2>
+      <p>
+        농사와 마법은 함께 갑니다 — 확인된 첫 번째 주문은 <strong>Aquaflux</strong>(자동 물주기)이며,
+        Luna를 통해 해금됩니다. 진행하면서 새로운 도구를 얻고 농장을 확장해서 더 많이 재배할 수
+        있습니다.
+      </p>
+
+      <h2>아직 검증 중인 정보</h2>
+      <ul>
+        <li>완전한 <strong>작물</strong> 데이터베이스: 정확한 가격, 계절.</li>
+        <li>계절과 수익 기준 <strong>최고의 작물</strong>.</li>
+        <li><a href="/map">인터랙티브 지도</a>에 표시된 농장 지점.</li>
+      </ul>
+
+      <h2>FAQ</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        출시 후 실제 게임 데이터로 업데이트되는 페이지입니다.
+        관련: <a href="/magic">마법</a>, <a href="/items">아이템</a>,
+        <a href="/environment">환경</a>, <a href="/map">인터랙티브 지도</a>.
+      </div>
+    </div>
+  </article>
+</Base>

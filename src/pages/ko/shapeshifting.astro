@@ -1,0 +1,96 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+
+const faq = [
+  { q: '문라이트 피크스에서 박쥐로 변신할 수 있나요?', a: '네, 확인됨. 뱀파이어로서 박쥐로 변신할 수 있으며, "Wings of the Night" 업적과 연결되어 있습니다 — 밤에 마을을 빠르게 이동하는 방법입니다.' },
+  { q: 'Hellkitten 형태는 무엇인가요?', a: '확인됨: 세눈박이 동반자 Hellkitten으로도 변신할 수 있으며, "Purrgatory" 업적과 연결되어 있습니다. 이 형태에서는 더 빠르게 이동하고, 삽 없이 땅을 갈 수 있으며 에너지 소모도 훨씬 적습니다. 이 변신은 "A Bridge Too Far", "Tension in the Crest Garden", "A Croak and a Crest", "The Dinner Party" 네 개의 퀘스트를 완료해야 해금됩니다.' },
+  { q: '다른 형태도 있나요?', a: '세 번째 형태가 확인되었습니다: Aqua/인어 형태로, "Call of the Current" 업적과 연결되어 있으며 게임 후반에 해금됩니다 — 정확한 해금 조건은 아직 확인되지 않았습니다.' },
+  { q: '변신은 어떻게 해금하나요?', a: '확인됨: Hellkitten 형태를 해금하려면 "A Bridge Too Far", "Tension in the Crest Garden", "A Croak and a Crest", "The Dinner Party" 네 개의 퀘스트를 완료해야 합니다. 해금되면 마법 휠(L 버튼)에서 형태를 바꿀 수 있습니다.' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '홈', item: `${SITE.url}/ko` },
+    { '@type': 'ListItem', position: 2, name: '변신', item: `${SITE.url}/ko/shapeshifting` },
+  ] },
+];
+---
+<Base
+  title="문라이트 피크스 — 변신: 박쥐와 다른 형태들"
+  description="문라이트 피크스에서 변신이 작동하는 방식: 박쥐, Hellkitten, Aqua 형태로 변신하는 법, 그리고 뱀파이어의 힘과 어떻게 연결되는지."
+  path="/ko/shapeshifting"
+  jsonLd={jsonLd}
+  crumbs={[{ label: '변신' }]}
+  lang="ko"
+  showExport
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">입문 · 변신</p>
+      <h1>문라이트 피크스의 <em>변신</em></h1>
+      <p class="intro">
+        {GAME.title}에서 뱀파이어로 사는 것의 장점 중 하나는 형태를 바꿀 수 있다는 점입니다.
+        현재 세 가지 형태가 확인되었으며, 각각 고유한 Steam 업적과 연결되어 있습니다. 최종
+        업데이트: {SITE.updated}.
+      </p>
+
+      <h2>이동을 위해 박쥐로 변신하기</h2>
+      <p>
+        출시 시점에 확인됨: 전형적인 뱀파이어 박쥐 형태로, "Wings of the Night" 업적과 연결되어
+        있습니다. 박쥐로 변신하면 밤에 마을을 빠르게 날아다닐 수 있어, 해가 뜨기 전에 농사와
+        심부름, 사교 활동을 동시에 처리해야 할 때 유용합니다. 커뮤니티 보고: 여러 정보원에서
+        구체적인 장점으로 수직 이동을 꼽습니다 — 걸어서 돌아가야 할 울타리, 산울타리, 공간을
+        날아서 넘어갈 수 있다는 것이며, 전반적인 속도 향상도 있습니다.
+      </p>
+
+      <h2>Hellkitten 형태 — 더 빠른 속도와 무료 경작</h2>
+      <p>
+        Hellkitten이라는 이름은 두 가지 다른 것을 가리킵니다. 게임 시작부터 세눈박이 Hellkitten
+        반려동물이 따라다니며 이름을 지어줄 수 있습니다(공식 wiki에 따르면 기본값은 아마
+        "Grim"). 별도로, 스스로 <strong>변신</strong>해서 Hellkitten 형태가 되는 것은 —
+        "Purrgatory" 업적과 연결됨 — 확인된 바에 따르면 게임 후반에 해금되며, "A Bridge Too
+        Far", "Tension in the Crest Garden", "A Croak and a Crest", "The Dinner Party" 네 개의
+        퀘스트 체인을 완료해야 합니다. Hellkitten 형태에서는 맵에서 훨씬 빠르게 이동하며, Y
+        버튼을 누르면 삽 없이 땅을 갈 수 있어 평소보다 훨씬 적은 에너지가 소모됩니다 — 단순한
+        외형 변화가 아니라 실질적으로 유용한 형태입니다.
+      </p>
+
+      <h2>세 번째 형태: Aqua/인어</h2>
+      <p>
+        확인됨: Aqua/인어 형태가 존재하며, "Call of the Current" 업적과 연결되어 게임 후반에
+        해금됩니다. 이 세 번째 형태의 정확한 해금 조건은 아직 확인되지 않았습니다.
+      </p>
+
+      <h2>뱀파이어 능력의 일부</h2>
+      <p>
+        변신은 나머지 초자연적 능력들과 공존하며, 마을이 제공하는 모든 것을 탐험하는 데 도움이
+        됩니다. <a href="/magic">마법과 물약</a>과도 자연스럽게 어우러집니다 — 그리고 (불)삶의
+        다른 모든 것과 마찬가지로, 해가 뜨기 전에 관으로 돌아가야 한다는 규칙을 따릅니다.
+      </p>
+
+      <h2>아직 검증 중인 정보</h2>
+      <ul>
+        <li>Aqua/인어 형태의 정확한 <strong>해금 조건</strong>.</li>
+        <li>에너지, 시간, 변신 가능/불가능 장소 등 <strong>제한 사항</strong>이 있는지.</li>
+      </ul>
+
+      <h2>FAQ</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        출시 후 실제 게임 데이터로 업데이트되는 페이지입니다. 관련:
+        <a href="/magic">마법과 물약</a>, <a href="/character-creator">캐릭터 커스터마이징</a>,
+        <a href="/ko/beginner-guide">초보자 가이드</a>(한국어).
+      </div>
+    </div>
+  </article>
+</Base>

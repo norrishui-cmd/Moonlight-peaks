@@ -1,0 +1,62 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+
+const faq = [
+  { q: '문라이트 피크스에서 결혼할 수 있나요?', a: '네, 확인됨. 하트 레벨 8에서 청혼한 다음, 최소 2일 이후로 날짜를 정하세요 — 결혼식에는 마을의 뱀파이어와 늑대인간들이 참석합니다.' },
+  { q: '문라이트 피크스에서 아이를 가질 수 있나요?', a: '아니요 — 여러 정보원을 통해 확인됨, 추가할 계획도 발표되지 않았습니다. 이미 자녀가 있는 연상 캐릭터(Orlock이나 Ridge 같은)와 결혼하면 계부모가 됩니다.' },
+  { q: '문라이트 피크스에 전투가 있나요?', a: '아니요, 확인됨 — 게임은 전적으로 여유로운 삶에 집중합니다: 농사, 낚시, 마법, 장식, 관계 맺기까지, 전투 시스템은 전혀 없습니다.' },
+  { q: '로맨스 대상은 몇 명인가요?', a: '확인됨: 23명의 로맨스 가능한 주민이 여섯 가문(Ambrosia, Webb, Logan, Hosu, Khazan, Henderson)에 속하며, 가문에 속하지 않는 Death와 사랑의 악마 Llemi까지 포함됩니다.' },
+  { q: '늑대인간과 로맨스를 나눌 수 있나요?', a: '네 — Saga가 확인된 로맨스 대상이며, 보름달에 따라 에너지가 변하는 늑대인간 주민입니다.' },
+  { q: '문라이트 피크스는 데이팅 시뮬레이션인가요?', a: '주로는 아닙니다 — Stardew Valley 스타일의 코지 파밍 & 라이프 시뮬레이션이 우선이며, 데이트와 결혼은 여러 시스템(농사, 마법, 장식, 탐험) 중 하나입니다.' },
+  { q: '문라이트 피크스의 연령 등급은 무엇인가요?', a: '확인됨: 일본에서 CERO "B"(12세 이상) 등급입니다. 전투가 없고 코지-고딕 톤이라, 다른 지역에서도 대체로 낮은 연령 등급을 목표로 합니다.' },
+  { q: '로맨스 없이 플레이할 수 있나요?', a: '네 — 로맨스는 선택 사항이며, 어떤 관계도 추구하지 않고 농사, 장식, 탐험만 즐길 수 있습니다.' },
+  { q: '문라이트 피크스는 모바일에서도 할 수 있나요?', a: '네 — 출시일부터 Google Play를 통한 Android에서 플레이 가능합니다. iOS/iPhone 버전은 발표되지 않았습니다.' },
+  { q: '문라이트 피크스에 협동 모드가 있나요?', a: '협동 모드는 발표되지 않았습니다. 현재 모든 정보는 문라이트 피크스가 싱글플레이어 게임임을 나타냅니다.' },
+  { q: '로맨스는 성별 중립적인가요?', a: '네 — 캐릭터 모델은 의도적으로 성별 중립적으로 설계되어 있어서, 자신의 뱀파이어를 어떻게 만들든 자격이 되는 어떤 주민과도 로맨스를 나눌 수 있습니다.' },
+  { q: '문라이트 피크스 가격은 얼마인가요?', a: `Steam(PC/Mac), Switch, Android에서 ${GAME.price}이며, Switch 2에서는 39.99달러입니다.` },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '홈', item: `${SITE.url}/ko` },
+    { '@type': 'ListItem', position: 2, name: '자주 묻는 질문', item: `${SITE.url}/ko/faq` },
+  ] },
+];
+---
+<Base
+  title="문라이트 피크스 — 자주 묻는 질문 (FAQ)"
+  description="문라이트 피크스에 대해 가장 많이 묻는 질문에 대한 답변: 결혼, 자녀, 전투, 로맨스, 상점, 연령 등급까지."
+  path="/ko/faq"
+  jsonLd={jsonLd}
+  crumbs={[{ label: '자주 묻는 질문' }]}
+  lang="ko"
+  showExport
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">입문 · FAQ</p>
+      <h1>문라이트 피크스 <em>자주 묻는 질문</em></h1>
+      <p class="intro">
+        {GAME.title}에 대해 가장 많이 묻는 질문에 대한 빠른 답변으로, 추측이 아니라 출시 시점에
+        확인된 사실을 기반으로 합니다. 최종 업데이트: {SITE.updated}.
+      </p>
+
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        더 완전하고 상세한 FAQ는 <a href="/faq">영어판 FAQ</a>를 참고하세요 — 플랫폼, 로맨스,
+        캐릭터, 세계관, 퀘스트, 농사 등 카테고리별로 정리되어 있습니다.
+        관련: <a href="/ko/beginner-guide">초보자 가이드</a>, <a href="/ko/romance">로맨스</a>.
+      </div>
+    </div>
+  </article>
+</Base>

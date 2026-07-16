@@ -1,0 +1,90 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+
+const faq = [
+  { q: '문라이트 피크스에서 캐릭터를 커스터마이징할 수 있나요?', a: '네. 완전한 캐릭터 커스터마이징 시스템이 있으며 — 이미 무료 데모에서 플레이 가능합니다 — 뱀파이어의 피부톤, 눈, 헤어스타일, 메이크업, 의상을 선택할 수 있습니다. 옵션은 어떤 스타일에도 포용적이도록 설계되었으며, 초자연적인 느낌이 더해져 있습니다.' },
+  { q: '문라이트 피크스의 캐릭터 커스터마이징은 성별 중립적인가요?', a: '네. 캐릭터 모델은 의도적으로 성별 중립적으로 설계되었고, 데이트 시스템도 성별에 제한이 없어서, 원하는 대로 뱀파이어를 만들고 자격이 되는 어떤 주민과도 로맨스를 나눌 수 있습니다.' },
+  { q: '캐릭터를 만든 후에도 외모를 바꿀 수 있나요?', a: '네. Alter Ego 엘릭서는 외모를 바꿔주는 물약이라, 처음 설정한 모습에 영구적으로 묶여있지 않습니다. 확인됨: Webb of Wonders의 Sabrina가 판매합니다.' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '홈', item: `${SITE.url}/ko` },
+    { '@type': 'ListItem', position: 2, name: '캐릭터 커스터마이징', item: `${SITE.url}/ko/character-creator` },
+  ] },
+];
+---
+<Base
+  title="문라이트 피크스 — 캐릭터 커스터마이징: 옵션 정리"
+  description="문라이트 피크스 캐릭터 생성 방식: 데모의 뱀파이어 커스터마이징 — 피부톤, 눈, 헤어스타일, 메이크업, 의상까지, 성별 중립적이고 포용적으로 설계됨."
+  path="/ko/character-creator"
+  jsonLd={jsonLd}
+  crumbs={[{ label: '캐릭터 커스터마이징' }]}
+  lang="ko"
+  showExport
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">입문 · 캐릭터 커스터마이징</p>
+      <h1>문라이트 피크스의 <em>캐릭터 커스터마이징</em></h1>
+      <p class="intro">
+        달빛 아래 첫 작물을 돌보기 전에, 먼저 자신만의 뱀파이어를 디자인하게 됩니다.
+        {GAME.title}의 캐릭터 커스터마이징이 무엇을 지원하는지 정리했습니다 — 공식 정보와
+        이미 이를 포함한 무료 데모를 통해 확인되었습니다. 최종 업데이트: {SITE.updated}.
+      </p>
+
+      <h2>지금 바로 무료 데모에서 체험해보세요</h2>
+      <p>
+        캐릭터 커스터마이징은 Steam과 Nintendo eShop의 무료 데모에서 제공하는 대표 기능 중
+        하나이므로, 정식 출시 전에도 지금 바로 뱀파이어를 만들고 여러 모습을 실험해볼 수
+        있습니다. 데모에 포함된 다른 내용은 <a href="/demo">데모 가이드</a>를 참고하세요.
+      </p>
+
+      <h2>커스터마이징할 수 있는 것들</h2>
+      <p>
+        피부톤, 눈, 헤어스타일, 메이크업, 의상으로 뱀파이어의 외모를 만들 수 있습니다. 스튜디오는
+        이 옵션들이 어떤 스타일에도 포용적이도록 설계되었다고 설명하며, 모두 초자연적인 느낌이
+        더해져 있습니다 — 캐주얼하게, 기묘하게, 아니면 당연하다는 듯이 치명적으로 아름답게
+        꾸미고 싶든 상관없이요.
+      </p>
+
+      <h2>설계상 성별 중립적</h2>
+      <p>
+        캐릭터 모델은 의도적으로 성별 중립적으로 설계되었으며, 데이트 시스템도 성별에 제한이
+        없습니다. 즉, 원하는 대로 뱀파이어를 만들고 자신을 어떻게 표현하든 자격이 되는 어떤
+        주민과도 <a href="/romance">로맨스</a>를 나눌 수 있습니다.
+      </p>
+
+      <h2>고정되지 않아요 — Alter Ego 엘릭서</h2>
+      <p>
+        나중에 마음이 바뀌어도 처음 설정한 모습에 영원히 묶여있지 않습니다:
+        <strong>Alter Ego 엘릭서</strong>는 제조할 수 있는 물약 중 하나로, 외모를 바꿔줍니다.
+        연금술이 어떻게 작동하는지는 <a href="/magic">마법과 물약</a>을 참고하세요.
+      </p>
+
+      <h2>아직 검증 중인 정보</h2>
+      <ul>
+        <li>완전한 <strong>옵션</strong> 목록 — 헤어스타일, 얼굴, 피부톤, 의상.</li>
+        <li><strong>프리셋</strong>이 있는지, 그리고 얼마나 세밀하게 조정할 수 있는지.</li>
+        <li>정식판 진행 중 <strong>해금되는</strong> 코스메틱이나 스타일이 있는지.</li>
+      </ul>
+
+      <h2>FAQ</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        관련: <a href="/shapeshifting">변신</a>, <a href="/characters">캐릭터</a>,
+        <a href="/demo">데모</a>.
+      </div>
+    </div>
+  </article>
+</Base>

@@ -1,0 +1,81 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+
+const coverage = [
+  ['출시 & 플랫폼', '출시일, 데모, Steam, Steam Deck, Switch, Switch 2, Android, 구매 전 체크리스트.'],
+  ['플레이어 가이드', '초보자, 농사, 마법, 활동, 아이템, 지도, 비교, 초반 전략.'],
+  ['캐릭터 & 로맨스', '주민, 가문, 로맨스 옵션, 선물, 결혼, 출시 후 확인된 데이터.'],
+  ['도구 & FAQ', 'Platform Picker, 로맨스 도구, Item Tracker, 농사 계산기, FAQ, 업데이트 페이지.'],
+];
+
+const principles = [
+  '확인된 사실, 데모 관찰 내용, 프리뷰 정보, 미확인 데이터를 명확히 구분해서 다룹니다.',
+  '키워드 나열보다 플레이어의 실제 질문을 우선합니다.',
+  '모바일에서도 빠르고 명확하며 읽기 쉬운 페이지를 유지합니다.',
+  '신뢰할 수 있는 데이터가 확인되면 같은 URL을 계속 업데이트합니다.',
+];
+
+const faq = [
+  { q: `${SITE.brand}은 공식 사이트인가요?`, a: `아니요. ${SITE.brand}은 팬이 제작한 독립 가이드이며, ${GAME.developer}나 ${GAME.publisher}와 공식적인 관계가 없습니다.` },
+  { q: '이 사이트는 무엇을 다루나요?', a: '출시일, 데모, 플랫폼, 캐릭터, 가문, 로맨스, 선물, 농사, 마법, 아이템, 도구, FAQ, 비교 페이지까지 다룹니다.' },
+  { q: '미확인 정보는 어떻게 처리하나요?', a: '명확하게 미확인 또는 검증 필요로 표시합니다. 추측을 확정된 데이터처럼 보여주지 않습니다.' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'AboutPage', name: `${SITE.brand} 소개`, url: new URL('/ko/about', SITE.url).href },
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '홈', item: `${SITE.url}/ko` },
+    { '@type': 'ListItem', position: 2, name: '소개', item: new URL('/ko/about', SITE.url).href },
+  ] },
+];
+---
+<Base
+  title={`${SITE.brand} 소개 - 독립 문라이트 피크스 가이드`}
+  description={`${SITE.brand}은 문라이트 피크스에 관한 독립 가이드입니다: 출시일, 데모, 플랫폼, 로맨스, 캐릭터, 농사, 마법, 도구, FAQ까지.`}
+  path="/ko/about"
+  jsonLd={jsonLd}
+  crumbs={[{ label: '소개' }]}
+  lang="ko"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">팬이 제작한 독립 가이드</p>
+      <h1><em>{SITE.brand}</em> 소개</h1>
+      <p class="intro">
+        {SITE.brand}은 {GAME.title}을 위해 팬이 만든 가이드입니다. 출시일, 데모, 플랫폼,
+        로맨스, 캐릭터, 선물, 농사, 마법, 도구, 출시 준비에 관한 정보를 빠르게 찾을 수 있도록
+        돕습니다.
+      </p>
+
+      <h2>다루는 내용</h2>
+      <div class="info-grid">
+        {coverage.map((item) => <section><h3>{item[0]}</h3><p>{item[1]}</p></section>)}
+      </div>
+
+      <h2>편집 원칙</h2>
+      <ul>
+        {principles.map((item) => <li>{item}</li>)}
+      </ul>
+
+      <h2>독립성에 대하여</h2>
+      <p>
+        이 사이트는 공식 사이트가 아니며 {GAME.developer}나 {GAME.publisher}와 제휴, 승인, 협력
+        관계가 없습니다. 문라이트 피크스의 이름과 자료는 각 저작권자에게 귀속됩니다.
+      </p>
+
+      <h2>FAQ</h2>
+      <div class="faq">
+        {faq.map((f) => <details><summary>{f.q}</summary><p>{f.a}</p></details>)}
+      </div>
+    </div>
+  </article>
+
+  <style>
+    .info-grid { display: grid; grid-template-columns: 1fr; gap: 12px; margin: 16px 0 24px; }
+    @media (min-width: 760px) { .info-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    .info-grid section { border: 1px solid var(--line); border-radius: 12px; background: var(--surface); padding: 16px; }
+    .info-grid h3 { margin-top: 0; }
+  </style>
+</Base>

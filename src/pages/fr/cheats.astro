@@ -1,0 +1,56 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+
+const jsonLd = {
+  '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Accueil', item: `${SITE.url}/fr` },
+    { '@type': 'ListItem', position: 2, name: 'Cheats', item: `${SITE.url}/fr/cheats` },
+  ],
+};
+---
+<Base
+  title="Moonlight Peaks — Cheats et Commandes Console"
+  description="Cheats et commandes console de Moonlight Peaks : comment fonctionnerait une console de triche, et la liste complète des commandes pour l'argent, les compétences et les objets — dès qu'elles seront publiées après la sortie du 7 juillet 2026."
+  path="/fr/cheats"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Cheats' }]}
+  lang="fr"
+  showExport
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Entrée · Cheats</p>
+      <h1>Moonlight Peaks <em>cheats</em> et console</h1>
+      <p class="intro">
+        On ne sait pas encore, même après la sortie, si {GAME.title} propose des cheats côté
+        joueur. Voici ce à quoi tu peux t'attendre et comment fonctionnent généralement les
+        consoles de triche dans les cozy life-sims. Dernière mise à jour : {SITE.updated}.
+      </p>
+
+      <h2>Y a-t-il une console de triche ?</h2>
+      <p>
+        Les cheats côté joueur que propose {GAME.title} ne sont pas encore confirmés — cela ne
+        sera clair qu'avec la version complète. Dans ce genre de cozy life-sims, il est courant
+        d'ouvrir la console avec un raccourci clavier et de taper des commandes pour ajouter de
+        l'argent ou booster des compétences. Dès que disponible, nous résumerons ici les raccourcis
+        exacts, les commandes confirmées et les mises en garde (par exemple si les cheats
+        désactivent les succès).
+      </p>
+
+      <h2>Ce que nous ajouterons à la sortie</h2>
+      <ul>
+        <li><strong>Comment ouvrir la console</strong> — raccourci exact pour PC et Switch (le cas échéant).</li>
+        <li><strong>Commandes d'argent</strong> — codes confirmés pour ajouter de la monnaie.</li>
+        <li><strong>Compétences, besoins et objets</strong> — liste complète par catégorie.</li>
+        <li><strong>Mises en garde</strong> — notes sur la stabilité des sauvegardes et les succès.</li>
+      </ul>
+
+      <div class="callout wip">
+        Nous n'inventons aucune commande. Tout ce qui figure ici provient de la version complète ou
+        d'informations confirmées par le développeur — le contenu non confirmé n'est pas listé.
+        Nous continuons à vérifier régulièrement et à mettre à jour cette page.
+      </div>
+    </div>
+  </article>
+</Base>

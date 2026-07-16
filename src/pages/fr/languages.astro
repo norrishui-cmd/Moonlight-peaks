@@ -1,0 +1,115 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+
+const rows = [
+  ['Anglais', 'Confirmé comme langue prise en charge — interface, sous-titres et terminologie de base de ce guide.'],
+  ['Allemand', 'Confirmé comme langue prise en charge selon la fiche officielle Steam — tu peux jouer à Moonlight Peaks en allemand.'],
+  ['Japonais', 'Confirmé comme langue prise en charge, important pour les joueurs sur Steam et Switch au Japon.'],
+  ['Coréen', 'Confirmé comme langue prise en charge selon la fiche officielle Steam.'],
+  ['Chinois simplifié', 'Confirmé comme langue prise en charge, important pour les joueurs Steam sinophones.'],
+  ['Chinois traditionnel', 'Confirmé comme langue prise en charge, pertinent pour Taïwan, Hong Kong et les stores régionaux.'],
+];
+
+const faq = [
+  {
+    q: 'Quelles langues Moonlight Peaks prend-il en charge ?',
+    a: `Confirmé : ${GAME.languages.join(', ')}. La portée exacte pour l'interface, les sous-titres et le doublage par langue se trouve sur la fiche officielle du store.`,
+  },
+  {
+    q: 'Peut-on jouer à Moonlight Peaks en allemand ?',
+    a: 'Oui, confirmé — l\u2019allemand fait partie des langues officiellement prises en charge selon la fiche Steam.',
+  },
+  {
+    q: 'Moonlight Peaks est-il disponible en japonais ?',
+    a: 'Oui, confirmé — le japonais fait partie des langues officiellement prises en charge, particulièrement pertinent pour la sortie Switch et Steam au Japon.',
+  },
+  {
+    q: 'Le support linguistique peut-il encore changer après la sortie ?',
+    a: 'Possible, mais pas typique après une sortie officielle. Les métadonnées linguistiques du store peuvent changer avec de futures mises à jour — nous mettrons cette page à jour si cela se confirme.',
+  },
+];
+
+const steamUrl = 'https://store.steampowered.com/app/2209900/Moonlight_Peaks/';
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Accueil', item: `${SITE.url}/fr` },
+    { '@type': 'ListItem', position: 2, name: 'Langues', item: new URL('/fr/languages', SITE.url).href },
+  ] },
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({
+    '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })) },
+];
+---
+<Base
+  title="Langues Moonlight Peaks - Allemand, Japonais, Coréen et plus"
+  description="Support linguistique confirmé de Moonlight Peaks : anglais, allemand, japonais, coréen, chinois simplifié et traditionnel."
+  path="/fr/languages"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Langues' }]}
+  lang="fr"
+  showExport
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Sortie / Langues</p>
+      <h1>Langues prises en charge par <em>Moonlight Peaks</em></h1>
+      <p class="intro">
+        Confirmé à la sortie : {GAME.title} prend en charge {GAME.languages.length} langues, dont
+        le français n'est pas encore confirmé. Cette page résume ce qui est important pour les
+        joueurs recherchant le japonais, le chinois, le coréen, l'allemand ou l'anglais.
+      </p>
+
+      <div class="callout">
+        <strong>À noter :</strong> le français n'est pas encore confirmé parmi les langues prises
+        en charge — vérifie la fiche officielle du store pour les mises à jour.
+      </div>
+
+      <h2>Langues prises en charge</h2>
+      <table class="facts">
+        {rows.map((row) => (<tr><th>{row[0]}</th><td>{row[1]}</td></tr>))}
+      </table>
+
+      <h2>Pourquoi c'est important avant l'achat</h2>
+      <p>
+        Le support linguistique est un critère d'achat important. Beaucoup de joueurs veulent
+        savoir avant de jouer sur Steam, Switch, Switch 2 ou Android s'ils pourront profiter du jeu
+        confortablement dans leur langue.
+      </p>
+
+      <h2>Checklist à vérifier</h2>
+      <ul>
+        <li>Vérifie les colonnes interface, sous-titres et doublage dans le tableau des langues Steam.</li>
+        <li>Vérifie séparément le Nintendo eShop et Google Play.</li>
+        <li>Après la sortie, adapte les termes d'objets, de personnages et d'interface à ce qui s'affiche réellement dans le jeu.</li>
+        <li>Mise à jour prioritaire si la demande de recherche en français augmente.</li>
+      </ul>
+
+      <h2>Pages liées</h2>
+      <div class="link-grid">
+        <a href="/fr/release-date">Date de sortie</a>
+        <a href="/fr/platforms">Plateformes</a>
+        <a href="/fr/demo">Guide de la démo</a>
+        <a href="/fr/beginner-guide">Guide du débutant</a>
+      </div>
+
+      <h2>FAQ</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </article>
+
+  <style>
+    .link-grid { display: grid; grid-template-columns: 1fr; gap: 10px; margin-top: 10px; }
+    @media (min-width: 640px) { .link-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+    .link-grid a { border: 1px solid var(--line); border-radius: 10px; background: var(--surface); color: var(--mist); padding: 12px 14px; text-decoration: none; }
+    .link-grid a:hover { border-color: color-mix(in srgb, var(--candle) 55%, var(--line)); }
+  </style>
+</Base>

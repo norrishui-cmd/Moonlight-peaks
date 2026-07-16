@@ -1,0 +1,74 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE } from '../../consts';
+
+const tools = [
+  { href: '/tools/platform-picker', tag: '결정', title: 'Platform Picker', text: 'Steam, Steam Deck, Switch, Switch 2, Android 중 안전하게 선택하세요.', status: 'Live' },
+  { href: '/tools/romance-gift-finder', tag: '로맨스', title: 'Romance Gift Finder', text: '주민, 로맨스 상태, 가문 힌트, 확인된 선물 정보를 한눈에.', status: 'Live' },
+  { href: '/tools/romance-match-quiz', tag: '퀴즈', title: 'Romance Match Quiz', text: '간단한 질문으로 잠재적 로맨스 대상을 찾아보세요.', status: 'Live' },
+  { href: '/tools/romance-planner', tag: '플래너', title: 'Romance Planner', text: '즐겨찾기, 메모, 로맨스 진행 상황을 브라우저에 저장하세요.', status: 'Live' },
+  { href: '/tools/families-explorer', tag: '가문', title: 'Families Explorer', text: '23명의 로맨스 대상을 실제 가문별로 탐색하세요.', status: 'Live' },
+  { href: '/tools/item-tracker', tag: '컬렉션', title: 'Item Tracker', text: '물고기, 곤충, 레시피, 물약, 장식품의 수집 진행 상황을 추적하세요.', status: 'Live' },
+  { href: '/tools/gift-tracker', tag: '개인 기록', title: 'Gift Tracker', text: '주민별로 직접 테스트한 선물을 브라우저에 비공개로 기록하세요.', status: 'Live' },
+  { href: '/tools/fish-finder', tag: '레퍼런스', title: 'Fish Finder', text: '확인된 22종의 물고기를 장소나 희귀도로 필터링하세요.', status: 'Live' },
+  { href: '/tools/farming-profit-planner', tag: '농사', title: 'Farming Profit Planner', text: '가격과 성장 일수가 확인되면 작물 수익을 비교하세요.', status: 'Live' },
+  { href: '/tools/nokturna-tracker', tag: '카드', title: 'Nokturna Tracker', text: '확인되는 대로 자신만의 Nokturna 카드 컬렉션을 기록하세요.', status: 'Live' },
+  { href: '/tools/submit-data', tag: '커뮤니티', title: 'Data Submitter', text: '출시 주간 발견 내용을 로컬 초안으로 저장해 나중에 검증하세요.', status: 'Live' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '홈', item: `${SITE.url}/ko` },
+    { '@type': 'ListItem', position: 2, name: '도구', item: new URL('/ko/tools', SITE.url).href },
+  ] },
+  { '@context': 'https://schema.org', '@type': 'CollectionPage', name: '문라이트 피크스 도구', url: new URL('/ko/tools', SITE.url).href },
+];
+---
+<Base
+  title="문라이트 피크스 도구 - 플랫폼, 로맨스, 컬렉션"
+  description="문라이트 피크스 한국어 도구 허브. 플랫폼 선택, 로맨스, 선물, 아이템 추적, 농사 수익, 커뮤니티 데이터까지."
+  path="/ko/tools"
+  jsonLd={jsonLd}
+  crumbs={[{ label: '도구' }]}
+  lang="ko"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">도구 / 플레이어 지원</p>
+      <h1>문라이트 피크스 <em>도구</em></h1>
+      <p class="intro">
+        플랫폼 선택, 로맨스 준비, 선물 조사, 아이템 수집, 농사 계산에 유용한 도구들 — 출시 전후
+        모두 유용합니다.
+      </p>
+
+      <section class="tool-grid" aria-label="Moonlight Peaks tools">
+        {tools.map((tool) => (
+          <a class="tool-card" href={tool.href}>
+            <span class="tool-status">{tool.status}</span>
+            <span class="tool-tag">{tool.tag}</span>
+            <strong>{tool.title}</strong>
+            <span>{tool.text}</span>
+            <em>도구 열기 -&gt;</em>
+          </a>
+        ))}
+      </section>
+
+      <h2>이 도구들에 대한 우리의 접근 방식</h2>
+      <p>
+        미확인 데이터를 확실한 것처럼 보여주지 않습니다. 미확인 항목은 명확히 표시하며, 신뢰할
+        수 있는 정보가 확인되면 같은 URL을 계속 업데이트합니다.
+      </p>
+    </div>
+  </article>
+
+  <style>
+    .tool-grid { display: grid; grid-template-columns: 1fr; gap: 14px; margin: 24px 0; }
+    @media (min-width: 760px) { .tool-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    @media (min-width: 1080px) { .tool-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+    .tool-card { min-height: 190px; display: flex; flex-direction: column; gap: 10px; border: 1px solid var(--line); border-radius: 12px; background: linear-gradient(135deg, rgba(244,202,104,.12), var(--surface)); padding: 16px; text-decoration: none; }
+    .tool-card strong { font-family: var(--display); font-size: 1.25rem; color: var(--mist); }
+    .tool-card span { color: var(--muted); }
+    .tool-status, .tool-tag, .tool-card em { font-family: var(--mono); color: var(--candle); font-style: normal; }
+    .tool-card em { margin-top: auto; }
+  </style>
+</Base>
