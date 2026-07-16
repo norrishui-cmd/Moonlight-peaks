@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import { SITE } from '../consts';
+import { isPathTranslated } from '../i18n/translated-paths';
 import type { LocalizedWorldCopy, LocalizedWorldKind, LocalizedWorldLang } from '../data/localizedWorldPages';
 
 type HubItem = {
@@ -24,9 +25,13 @@ interface Props {
 const { lang, kind, copy, items } = Astro.props;
 const path = `/${lang}/${kind}`;
 const englishBase = `/${kind}`;
-const homeLabel = lang === 'es' ? 'Inicio' : lang === 'de' ? 'Startseite' : 'Home';
+const homeLabel = lang === 'es' ? 'Inicio' : lang === 'de' ? 'Startseite' : lang === 'fr' ? 'Accueil' : 'Home';
 const displayTitle = (item: HubItem) => copy.labels[item.slug] ?? item.title;
 const displayDek = (item: HubItem) => item.dek ?? item.summary ?? '';
+// Link to the localized detail page when it actually exists for this locale/kind; otherwise fall
+// back to the English detail page rather than risk a broken link.
+const detailHref = (item: HubItem) =>
+  isPathTranslated(lang, `${englishBase}/${item.slug}`) ? `${path}/${item.slug}` : `${englishBase}/${item.slug}`;
 const jsonLd = [
   {
     '@context': 'https://schema.org',
@@ -73,7 +78,7 @@ const jsonLd = [
 
         <div class="hub-grid">
           {items.map((item) => (
-            <a class="hub-card" href={`${englishBase}/${item.slug}`} aria-label={`${copy.exploreLabel}: ${displayTitle(item)}`}>
+            <a class="hub-card" href={detailHref(item)} aria-label={`${copy.exploreLabel}: ${displayTitle(item)}`}>
               {item.image && (
                 <div class="card-media">
                   <img src={item.image} alt={displayTitle(item)} loading="lazy" />

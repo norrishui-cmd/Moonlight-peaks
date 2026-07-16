@@ -1,11 +1,22 @@
 ---
 import Base from '../layouts/Base.astro';
 import { SITE } from '../consts';
+import { isPathTranslated } from '../i18n/translated-paths';
+import { relatedLabelsDe, relatedLabelsJa } from '../i18n/related-labels';
 import type { TopicSection, TopicItem } from '../data/topic';
 
 interface Props { section: TopicSection; item: TopicItem; prev: TopicItem; next: TopicItem; lang?: 'en' | 'ja' | 'de'; basePath?: string; }
 const { section, item, prev, next, lang = 'en', basePath } = Astro.props;
 const base = basePath ?? section.base;
+// Related links in the underlying data are always bare English paths and labels (shared across
+// every locale). Localize both here rather than at the data layer, falling back to English when
+// no translation exists yet, so we never link to a 404 or show an unexpectedly blank label.
+const localizeRelatedHref = (href: string): string => {
+  if (lang === 'en' || !href.startsWith('/')) return href;
+  return isPathTranslated(lang, href) ? `/${lang}${href}` : href;
+};
+const relatedLabels = lang === 'de' ? relatedLabelsDe : lang === 'ja' ? relatedLabelsJa : {};
+const localizeRelatedLabel = (label: string): string => relatedLabels[label] ?? label;
 
 const ui = {
   en: {
@@ -105,7 +116,7 @@ if (item.faq && item.faq.length > 0) {
       {item.related && item.related.length > 0 && (
         <div class="callout">
           <strong>{ui.related}</strong>{' '}
-          {item.related.map((r, i) => (<>{i > 0 ? ' - ' : ''}<a href={r.href}>{r.label}</a></>))}
+          {item.related.map((r, i) => (<>{i > 0 ? ' - ' : ''}<a href={localizeRelatedHref(r.href)}>{localizeRelatedLabel(r.label)}</a></>))}
         </div>
       )}
 
