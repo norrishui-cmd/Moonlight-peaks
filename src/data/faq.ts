@@ -28,6 +28,43 @@ export type Faq = {
 export const faqs: Faq[] = [
   // ── Platforms, price & demo ──
   {
+    slug: 'what-does-patch-1-1-41-fix',
+    cat: 'platforms',
+    q: 'What does Moonlight Peaks patch 1.1.41 fix?',
+    a: 'Confirmed via the official Steam patch notes: 1.1.41 is live on PC now (Switch/Switch 2 to follow) and makes House Storage accessible from anywhere on your plot, with a new Quick Transfer option, plus improved loading times across all scenes.',
+    more: ['The same patch also fixes the net draining stamina on missed swings, several stuck-dialogue bugs (Loveage Gift Exchange, gifting Seaweed, picking flowers in Pink Grove), and house upgrades wiping Storage Crate contents or decoration quality.'],
+    related: [{ label: 'Known issues tracker', href: '/known-issues' }],
+  },
+  {
+    slug: 'how-much-is-the-digital-deluxe-edition',
+    cat: 'platforms',
+    q: 'How much does the Moonlight Peaks Digital Deluxe Edition cost?',
+    a: 'Confirmed via the official Steam announcement: $44.97, bundling the base game with a digital art book and digital soundtrack. Both extras are also planned to be sold separately later.',
+    related: [{ label: 'Platforms & price', href: '/platforms' }],
+  },
+  {
+    slug: 'is-there-a-physical-switch-2-edition',
+    cat: 'platforms',
+    q: 'Is there a physical Switch 2 edition of Moonlight Peaks?',
+    a: 'Yes, confirmed by Marvelous Europe: a physical Nintendo Switch 2 Edition launches across Europe on August 28, 2026, for \u20ac49.99 / \u00a344.99, including a collectible sticker sheet and digital soundtrack.',
+    related: [{ label: 'Switch 2 platform page', href: '/platforms/switch-2' }],
+  },
+  {
+    slug: 'does-the-net-still-cost-stamina-on-a-miss',
+    cat: 'platforms',
+    q: "Does the net still cost stamina when you miss a swing?",
+    a: 'No longer, as of patch 1.1.41 \u2014 confirmed via the official patch notes, missed net swings no longer drain stamina, reversing the behavior reported at launch.',
+    related: [{ label: 'Known issues tracker', href: '/known-issues' }],
+  },
+  {
+    slug: 'how-many-nokturna-cards-in-a-deck',
+    cat: 'platforms',
+    q: 'How many cards go in a Nokturna deck?',
+    a: 'Confirmed: exactly 20 cards per deck, with a maximum of 2 copies of any single card, and a total of 60 printed points or under. Players can save up to 13 custom decks at once.',
+    more: ['Matches run up to 3 rounds of 3 turns each, starting with a 5-card hand; the higher board total wins each round.'],
+    related: [{ label: 'Nokturna guide', href: '/nokturna' }],
+  },
+  {
     slug: 'when-does-moonlight-peaks-release', cat: 'platforms',
     q: 'When does Moonlight Peaks release?',
     a: 'Moonlight Peaks released on July 7, 2026, and is out now.',
@@ -237,6 +274,42 @@ export const faqs: Faq[] = [
 
   // ── World & gameplay ──
   {
+    slug: 'what-does-jadas-museum-quest-require',
+    cat: 'world',
+    q: "What does Jada's museum exhibition quest require?",
+    a: 'Confirmed via a launch-week walkthrough: Jada asks for one artifact from each of four families \u2014 red wine from Orlock, a Nokturna match played against Dragan, one nightshade from Fiona, and Wolfsbane from Saga (reached via a conversation with Brook first).',
+    more: ['Returning all four and visiting the exhibition the next day places the Henderson Crest in the Crest Garden as a direct follow-up.'],
+    related: [{ label: 'Quests', href: '/quests' }],
+  },
+  {
+    slug: 'how-do-you-unlock-potion-making',
+    cat: 'world',
+    q: 'How do you unlock potion-making in Moonlight Peaks?',
+    a: 'Confirmed: a cauldron sent by your mother arrives broken; consulting the witches leads to Fiona asking for two Mana Essences, and delivering them gets you the repaired cauldron plus the Alter Ego Elixir recipe a few days later.',
+    related: [{ label: 'Magic guide', href: '/magic' }],
+  },
+  {
+    slug: 'what-other-story-quests-exist',
+    cat: 'world',
+    q: 'What other story quests exist in Moonlight Peaks beyond the early game?',
+    a: 'Confirmed to exist by name via a detailed quest walkthrough: "Elections by Moonlight," "Darkness over Moonlight Peaks," "Master of the Night," "A Key to the Deep," and "Cosmic Preparations." Their unlock conditions and rewards are not yet sourced.',
+    related: [{ label: 'Quests', href: '/quests' }],
+  },
+  {
+    slug: 'how-do-you-unlock-bat-and-mermaid-forms',
+    cat: 'world',
+    q: 'How do you unlock bat form and mermaid form in Moonlight Peaks?',
+    a: 'Confirmed via a launch-week walkthrough: bat form ties to finding "the Missing Moon" and obtaining the Khazan Family crest, while mermaid form unlocks by helping Kim with a special shell powder.',
+    related: [{ label: 'Shapeshifting guide', href: '/shapeshifting' }],
+  },
+  {
+    slug: 'do-new-residents-move-in-during-the-game',
+    cat: 'world',
+    q: 'Do new residents move in over the course of the game?',
+    a: 'Yes, confirmed: a quest chain has Ludo asking for a fried egg to help work on their house, followed by a housewarming the next day, and the Henderson family moving into a house located below the coffin shop.',
+    related: [{ label: 'Locations', href: '/locations' }],
+  },
+  {
     slug: 'is-there-combat-in-moonlight-peaks', cat: 'world',
     q: 'Is there combat in Moonlight Peaks?',
     a: 'No. Previews confirm there is no combat anywhere — even the mines and catacombs stay peaceful, so it remains a cozy experience.',
@@ -276,6 +349,43 @@ export const faqs: Faq[] = [
   },
 
   // ── Romance & marriage ──
+  {
+    slug: 'what-gifts-does-alina-like-in-moonlight-peaks',
+    cat: 'romance',
+    q: 'What gifts does Alina like in Moonlight Peaks?',
+    a: 'Cross-verified across at least two independent post-launch guides: Alina loves Black Rose and Black Tulip, alongside other black-themed flowers and moody art prints.',
+    more: ['Her first heart event triggers by visiting her at the bar after reaching one heart, where you catch her watching Noel fail at flirting with her \u2014 complimenting her own comeback lands better than complimenting Noel.'],
+    related: [{ label: 'Characters', href: '/characters' }, { label: 'Romance guide', href: '/romance' }],
+  },
+  {
+    slug: 'what-gifts-does-ridge-like',
+    cat: 'romance',
+    q: 'What gifts does Ridge like in Moonlight Peaks?',
+    a: 'Cross-verified: Beer is currently the strongest confirmed gift lead for Ridge, agreed on by at least two independent post-launch guides.',
+    related: [{ label: 'Characters', href: '/characters' }],
+  },
+  {
+    slug: 'how-does-the-gift-tracking-ui-work',
+    cat: 'romance',
+    q: 'How do I tell if a gift landed well in Moonlight Peaks?',
+    a: 'Confirmed: the relationship screen records the last eight gifts given to each resident, marking liked items with a star and loved items with a heart \u2014 the most reliable way to confirm a preference yourself.',
+    related: [{ label: 'Romance guide', href: '/romance' }],
+  },
+  {
+    slug: 'do-gift-preferences-cluster-by-family',
+    cat: 'romance',
+    q: 'Do gift preferences follow a pattern by family in Moonlight Peaks?',
+    a: 'Community-reported (single-source, not yet cross-verified per character): black flowers work well across several werewolves and witches, blue flowers suit more of the Logan werewolf family, and Mana-themed items are a safe bet for the witch family broadly.',
+    more: ['One reported exception: none of the vampire family are said to like Blood Grapes as a gift, despite it being the player\u2019s starting crop \u2014 they reportedly prefer the processed wine instead.'],
+    related: [{ label: 'Families', href: '/families' }],
+  },
+  {
+    slug: 'is-there-a-24th-romanceable-character',
+    cat: 'romance',
+    q: 'Is there a 24th romanceable character in Moonlight Peaks?',
+    a: 'Unconfirmed. Multiple post-launch guides independently name the same 23 romanceable characters, but official storefront copy still markets "about two dozen," leaving open the possibility of one more character that hasn\u2019t been reliably identified.',
+    related: [{ label: 'Romance guide', href: '/romance' }],
+  },
   {
     slug: 'can-you-get-married-in-moonlight-peaks', cat: 'romance',
     q: 'Can you get married in Moonlight Peaks?',
@@ -322,6 +432,41 @@ export const faqs: Faq[] = [
   },
 
   // ── Characters ──
+  {
+    slug: 'is-the-vampster-in-alinas-house-collectible',
+    cat: 'characters',
+    q: "Is the Vampster in Alina's house one of the 100 collectible ones?",
+    a: 'No, confirmed: Alina introduces the Vampster collection quest, but the Vampster living in her own house is specifically her pet and isn\u2019t meant to be picked up as a collectible.',
+    related: [{ label: 'Vampsters guide', href: '/vampsters' }],
+  },
+  {
+    slug: 'what-gifts-does-ludo-like',
+    cat: 'characters',
+    q: 'What gifts does Ludo like in Moonlight Peaks?',
+    a: 'Community-reported (single-source): Ludo, a mischievous werewolf, is said to favor cooked meals like burgers, burritos, and pizza, alongside black flowers.',
+    related: [{ label: 'Characters', href: '/characters' }],
+  },
+  {
+    slug: 'what-gifts-does-samael-like',
+    cat: 'characters',
+    q: 'What gifts does Samael like in Moonlight Peaks?',
+    a: 'Community-reported (single-source): Samael, who runs the town\u2019s bar, is said to favor White or Red Wine along with Japanese-style dishes such as Onigiri and Violet Sashimi.',
+    related: [{ label: 'Characters', href: '/characters' }],
+  },
+  {
+    slug: 'why-wont-an-npc-respond-to-my-gifts',
+    cat: 'characters',
+    q: "Why won't an NPC respond to gifts in Moonlight Peaks?",
+    a: 'This was a known bug where certain residents stopped reacting to gifts entirely \u2014 confirmed fixed as of patch 1.1.41. If this happened to you before the patch, it\u2019s worth trying again now.',
+    related: [{ label: 'Known issues tracker', href: '/known-issues' }],
+  },
+  {
+    slug: 'why-cant-i-find-aras-heart-event',
+    cat: 'characters',
+    q: "Why can't I find Aras's heart event even though I see a sparkle marker?",
+    a: 'This was a known bug where Aras\u2019s heart-event marker showed up on the tailor shop instead of the correct location \u2014 confirmed fixed in patch 1.1.41.',
+    related: [{ label: 'Known issues tracker', href: '/known-issues' }],
+  },
   {
     slug: 'who-is-saga', cat: 'characters',
     q: 'Who is Saga in Moonlight Peaks?',
