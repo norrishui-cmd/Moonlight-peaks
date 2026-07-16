@@ -14,7 +14,7 @@ export type CharTranslation = {
   romanceTbc: string;
 };
 
-export const charTranslations: Record<'es' | 'ja' | 'zh' | 'zh-hant' | 'de' | 'fr', Record<string, CharTranslation>> = {
+export const charTranslations: Record<'es' | 'ja' | 'zh' | 'zh-hant' | 'de' | 'fr' | 'ko', Record<string, CharTranslation>> = {
   de: {
     saga: {
       name: 'Saga', familyLabel: 'Werwolf', typeLabel: 'Werwolf',
@@ -867,6 +867,48 @@ export const charTranslations: Record<'es' | 'ja' | 'zh' | 'zh-hant' | 'de' | 'f
         'Dirige le Howling Hammer, la boutique d\u2019amélioration d\u2019outils, ouverte du lundi au vendredi de 18h à minuit.',
       ],
       romanceYes: '', romanceNo: 'Brook n\u2019est pas une option de romance confirmée.', romanceTbc: '',
+    },
+  },
+  ko: {
+    saga: {
+      name: 'Saga', familyLabel: '늑대인간 (Logan 가문)', typeLabel: '늑대인간',
+      desc: '까칠하지만 헌신적인 늑대인간으로, 마을의 자잘한 일들 — 도로 구멍 메우기, 사라진 호박 찾기 — 을 도맡아 처리하며, 로맨스에 시간을 낼 여유가 별로 없다가 어느 순간 사랑에 빠진다.',
+      knownInfo: [
+        '늑대인간 가문 Logan 소속으로 확인됨.',
+        '마을의 실질적인 잡무를 도맡아 하며, 자신을 위한 시간은 거의 없음.',
+        '커뮤니티 보고: 보름달이 뜨는 동안에는 눈에 띄게 더 예민해짐.',
+      ],
+      romanceYes: '네, 확인된 로맨스 대상입니다.', romanceNo: '', romanceTbc: '',
+    },
+    luna: {
+      name: 'Luna', familyLabel: '마녀 (Webb 가문)', typeLabel: '마녀',
+      desc: '농사짓는 마녀로, 플레이어에게 마법 작물과 첫 주문 Aquaflux를 가르쳐줌 — Fiona와 Noel의 사촌.',
+      knownInfo: [
+        '마녀 가문 Webb 소속으로 확인됨.',
+        '편지로 "작물의 마법" 퀘스트를 발동시키며, 이는 지팡이 수리와 첫 주문으로 이어짐.',
+      ],
+      romanceYes: '네, 확인된 로맨스 대상입니다.', romanceNo: '', romanceTbc: '',
+    },
+    orlock: {
+      name: 'Orlock', familyLabel: '뱀파이어 (Ambrosia 가문)', typeLabel: '뱀파이어',
+      desc: '올드스쿨 뱀파이어이자 플레이어의 삼촌으로, 게임 초반에는 자기 집 잔디밭에서 숙취에 시달리는 모습으로 자주 등장 — Mina와 Evan의 아버지.',
+      knownInfo: [
+        '플레이어의 삼촌이자 Mina와 Evan의 아버지로 확인됨.',
+        '"Orlock의 와인 계획" 퀘스트를 발동시키며, 이는 "A Bridge Too Far"로 이어짐.',
+        '언론 프리뷰에서는 코미디 감초 캐릭터로 묘사됨.',
+      ],
+      romanceYes: 'Orlock이 로맨스 대상이라는 보고가 있습니다. 선호 선물과 하트 이벤트는 실제 게임에서 확인되는 대로 추가됩니다.',
+      romanceNo: '', romanceTbc: '',
+    },
+    brook: {
+      name: 'Brook', familyLabel: '늑대인간', typeLabel: '늑대인간',
+      desc: '문라이트 피크스의 시장이자 늑대인간 가문 Logan의 가모장. 로맨스 대상은 아닙니다.',
+      knownInfo: [
+        '마을 시장으로 확인됨 — 마을회관 등록 업무를 담당하며 플레이어에게 Chester를 건네줌.',
+        'Logan 가문의 가모장; Saga와 Ludo의 어머니이자 Ridge의 누나.',
+        '도구 업그레이드 상점 Howling Hammer를 운영하며, 월~금 오후 6시부터 자정까지 영업.',
+      ],
+      romanceYes: '', romanceNo: 'Brook은 확인된 로맨스 대상이 아닙니다.', romanceTbc: '',
     },
   },
   ja: {

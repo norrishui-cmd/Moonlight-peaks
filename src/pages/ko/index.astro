@@ -1,0 +1,102 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+
+const entries = [
+  { title: '출시일 & 플랫폼', desc: '7월 7일부터 Steam, Switch, Switch 2, Android에서 플레이 가능 — 가격과 무료 데모 정보.', href: '/ko/release-date', img: '/card-release.webp' },
+  { title: '초보자 가이드', desc: '첫 주에 정말 중요한 것들 — 실제 게임을 기반으로 확인된 정보.', href: '/ko/beginner-guide', img: '/card-guide.webp' },
+  { title: '로맨스 & 가문', desc: '확인된 23명의 로맨스 대상, 일곱 가문, 선호 선물 정보.', href: '/ko/romance', img: '/card-romance.webp' },
+  { title: '작물 & 농장', desc: 'Blood Grapes, 헛간, 마법 가축까지 — 확인된 데이터.', href: '/farming', img: '/card-crops.webp' },
+  { title: '마법', desc: '부서진 지팡이를 고치는 법, Moon Fruit, 마나 진행 방식.', href: '/magic', img: '/card-guide.webp' },
+  { title: '캐릭터', desc: '모든 주민과 그들의 가문, 그리고 누구를 공략할 수 있는지.', href: '/ko/characters', img: '/count-dracula.webp' },
+  { title: '장소', desc: '마을, 내 농장, Howling Marshes 등 확인된 장소들.', href: '/ko/locations', img: '/hero-loc-town.webp' },
+  { title: '알려진 문제', desc: '충돌, 컨트롤러 문제, 확인된 해결 방법.', href: '/known-issues', img: '/card-guide.webp' },
+];
+
+const explore = [
+  { k: '로맨스', d: '하트 레벨, 데이트, 결혼', href: '/ko/romance', img: '/card-romance.webp' },
+  { k: '가문', d: '마을의 일곱 초자연적 가문', href: '/ko/families', img: '/hero-fam-vampires.webp' },
+  { k: '활동', d: '낚시, 마법, 공예, 여유로운 취미들', href: '/ko/activities', img: '/hero-act-seasonal-events.webp' },
+  { k: '아이템', d: '도구, 물약, 장식품 등 여러 카테고리', href: '/ko/items', img: null, c1: '#3a4a2f', c2: '#8ab06a' },
+  { k: 'FAQ', d: '가장 많이 묻는 질문에 대한 빠른 답변', href: '/faq', img: '/card-faq.webp' },
+  { k: '퀘스트', d: '"A Bridge Too Far" 등 확인된 퀘스트 가이드', href: '/quests', img: '/hero-first-five-minutes.webp' },
+];
+
+const jsonLd = {
+  '@context': 'https://schema.org', '@type': 'WebSite', name: 'Moonlight Peaks Wiki & Guide (한국어)',
+  url: `${SITE.url}/ko`, inLanguage: 'ko',
+  description: '뱀파이어 라이프 시뮬레이션 게임 문라이트 피크스의 팬 제작 한국어 가이드: 출시 정보, 초보자 가이드, 로맨스, 알려진 문제까지.',
+};
+---
+<Base
+  title="문라이트 피크스 한국어 가이드 — 출시 정보 & 알려진 문제"
+  description="코지한 뱀파이어 라이프 시뮬레이션 게임 문라이트 피크스의 팬 제작 한국어 가이드. 2026년 7월 7일 출시되어 지금 플레이할 수 있습니다. 공략 팁, 로맨스, 알려진 문제까지."
+  path="/ko"
+  jsonLd={jsonLd}
+  lang="ko"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">농사짓는 뱀파이어의 연감</p>
+      <h1><em>문라이트 피크스</em>, 지금 플레이할 수 있습니다.</h1>
+      <p class="intro">
+        {GAME.developer}가 만든 코지-고딕 뱀파이어 라이프 시뮬레이션 가이드입니다. {GAME.title}는
+        2026년 7월 7일 출시되어 이미 플레이할 수 있습니다. 이 가이드는 실제 게임을 기반으로 확인된
+        정보로 계속 업데이트됩니다.
+      </p>
+      <p class="callout wip">
+        한국어판은 아직 가장 중요한 페이지들부터 다루고 있습니다. 나머지 콘텐츠(기사, 대부분의
+        캐릭터 프로필)는 여전히 영어로만 제공되며, 점차 번역할 예정입니다. 이 페이지의 일부
+        링크는 한국어 페이지가 준비될 때까지 영어 페이지로 연결됩니다.
+      </p>
+
+      <h2>여기서 시작하세요</h2>
+      <div class="es-grid">
+        {entries.map((e) => (
+          <a class="es-card" href={e.href}>
+            <img src={e.img} alt="" loading="lazy" width="64" height="64" />
+            <span>
+              <strong>{e.title}</strong>
+              <em>{e.desc}</em>
+            </span>
+          </a>
+        ))}
+      </div>
+
+      <h2>세계관 둘러보기</h2>
+      <div class="es-grid">
+        {explore.map((x) => (
+          <a class="es-card" href={x.href}>
+            <span class="es-thumb" style={!x.img ? `background: linear-gradient(135deg, ${x.c1}, ${x.c2})` : undefined}>
+              {x.img ? <img src={x.img} alt="" loading="lazy" width="64" height="64" /> : <span class="es-thumb-letter">{x.k[0]}</span>}
+            </span>
+            <span>
+              <strong>{x.k}</strong>
+              <em>{x.d}</em>
+            </span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </article>
+
+  <style>
+    .page { padding: 32px 0 60px; }
+    .eyebrow { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--faint); }
+    h1 { font-family: var(--display); font-size: 2rem; margin: 6px 0 14px; }
+    h1 em { color: var(--candle); font-style: normal; }
+    .intro { color: var(--muted); font-size: 1rem; line-height: 1.6; max-width: 640px; margin-bottom: 16px; }
+    .callout.wip { border-left: 2px solid var(--candle); background: var(--ink-2); padding: 12px 16px; border-radius: 0 10px 10px 0; color: var(--muted); font-size: 0.88rem; margin: 0 0 32px; }
+    h2 { font-family: var(--display); font-size: 1.3rem; margin: 28px 0 12px; }
+    .es-grid { display: grid; grid-template-columns: 1fr; gap: 10px; }
+    @media (min-width: 640px) { .es-grid { grid-template-columns: 1fr 1fr; } }
+    .es-card { display: flex; align-items: center; gap: 12px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); padding: 12px; transition: border-color .15s ease; }
+    .es-card:hover { border-color: color-mix(in srgb, var(--candle) 50%, var(--line)); }
+    .es-card img { border-radius: 10px; object-fit: cover; width: 64px; height: 64px; flex: 0 0 auto; }
+    .es-thumb { flex: 0 0 auto; width: 64px; height: 64px; border-radius: 10px; display: flex; align-items: center; justify-content: center; border: 1px solid var(--line); }
+    .es-thumb-letter { font-family: var(--display); font-weight: 700; font-size: 1.4rem; color: rgba(255,255,255,0.9); }
+    .es-card span:not(.es-thumb) { display: flex; flex-direction: column; min-width: 0; }
+    .es-card strong { font-family: var(--display); font-weight: 600; font-size: 0.96rem; color: var(--mist); }
+    .es-card em { font-style: normal; font-size: 0.8rem; color: var(--faint); margin-top: 2px; }
+  </style>
+</Base>

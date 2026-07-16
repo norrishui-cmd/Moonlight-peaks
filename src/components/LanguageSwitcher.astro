@@ -5,16 +5,16 @@ import { isPathTranslated } from '../i18n/translated-paths';
 interface Props { lang: Locale; path: string; }
 const { lang, path } = Astro.props;
 
-const labels: Record<Locale, string> = { en: 'English', es: 'Español', ja: '日本語', zh: '简体中文', 'zh-hant': '繁體中文', de: 'Deutsch', fr: 'Français' };
-const shortLabels: Record<Locale, string> = { en: 'EN', es: 'ES', ja: 'JA', zh: 'ZH', 'zh-hant': 'ZH-TW', de: 'DE', fr: 'FR' };
-const bare = path.replace(/^\/(es|ja|zh-hant|zh|de|fr)(\/|$)/, '/');
+const labels: Record<Locale, string> = { en: 'English', es: 'Español', ja: '日本語', zh: '简体中文', 'zh-hant': '繁體中文', de: 'Deutsch', fr: 'Français', ko: '한국어' };
+const shortLabels: Record<Locale, string> = { en: 'EN', es: 'ES', ja: 'JA', zh: 'ZH', 'zh-hant': 'ZH-TW', de: 'DE', fr: 'FR', ko: 'KO' };
+const bare = path.replace(/^\/(es|ja|zh-hant|zh|de|fr|ko)(\/|$)/, '/');
 
 const hrefFor = (target: Locale): string => {
   if (target === 'en') return bare; // English (source) always exists for a translated page's bare path.
   if (!isPathTranslated(target, bare)) return `/${target}`; // no translation for this page — go to that locale's homepage instead of a broken link.
   return bare === '/' ? `/${target}` : `/${target}${bare}`;
 };
-const locales: Locale[] = ['en', 'es', 'ja', 'zh', 'zh-hant', 'de', 'fr'];
+const locales: Locale[] = ['en', 'es', 'ja', 'zh', 'zh-hant', 'de', 'fr', 'ko'];
 ---
 <details class="nav-dd lang-dd">
   <summary aria-label="Change language">

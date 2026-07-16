@@ -1,7 +1,7 @@
 // Shared UI strings for site-wide chrome (nav, search, common buttons). Content pages
 // (articles, character bios, FAQ answers) are translated separately in their own files —
 // this dictionary only covers the repeating interface text that appears on every page.
-export type Locale = 'en' | 'es' | 'ja' | 'zh' | 'zh-hant' | 'de' | 'fr';
+export type Locale = 'en' | 'es' | 'ja' | 'zh' | 'zh-hant' | 'de' | 'fr' | 'ko';
 
 export const uiStrings: Record<Locale, Record<string, string>> = {
   en: {
@@ -59,6 +59,14 @@ export const uiStrings: Record<Locale, Record<string, string>> = {
     world: 'Monde', locations: 'Lieux', activities: 'Activités', collection: 'Collection', items: 'Objets', map: 'Carte', farm: 'Ferme',
     search: 'Rechercher', searchPlaceholder: 'Rechercher personnages, guides, FAQ, objets…',
     home: 'Accueil', notFound: 'Introuvable',
+  },
+  ko: {
+    characters: '캐릭터', families: '가문', romance: '로맨스',
+    tools: '도구', faq: 'FAQ', about: '소개',
+    guides: '가이드', allGuides: '전체 가이드', quests: '퀘스트', release: '출시', demo: '데모', platforms: '플랫폼',
+    world: '세계관', locations: '장소', activities: '활동', collection: '컬렉션', items: '아이템', map: '지도', farm: '농장',
+    search: '검색', searchPlaceholder: '캐릭터, 가이드, FAQ, 아이템 검색…',
+    home: '홈', notFound: '페이지를 찾을 수 없음',
   },
 };
 

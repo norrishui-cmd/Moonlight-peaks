@@ -1,0 +1,93 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE } from '../../consts';
+
+const jsonLd = {
+  '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '홈', item: `${SITE.url}/ko` },
+    { '@type': 'ListItem', position: 2, name: '초보자 가이드', item: `${SITE.url}/ko/beginner-guide` },
+  ],
+};
+---
+<Base
+  title="문라이트 피크스 — 초보자 가이드: 첫 주"
+  description="문라이트 피크스 초보자 가이드: 첫 주에 정말 중요한 것들 — 출시 전 추측이 아니라 실제 게임을 기반으로 확인된 정보입니다."
+  path="/ko/beginner-guide"
+  jsonLd={jsonLd}
+  crumbs={[{ label: '초보자 가이드' }]}
+  lang="ko"
+  showExport
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">입문 · 가이드</p>
+      <h1>문라이트 피크스 <em>초보자 가이드</em></h1>
+      <p class="intro">
+        확인된 정보: 첫날 밤은 Orlock이 Blood Grapes 씨앗을 건네주는 것으로 시작하고, 마을회관에서
+        주민 등록을 하게 되며(Brook이 살아있는 보관함 Chester를 줍니다), 스토리를 진행하며 나중에
+        고치게 될 부서진 지팡이도 얻게 됩니다. 첫 주에 정말 중요한 것들을 정리했습니다. 최종
+        업데이트: {SITE.updated}.
+      </p>
+
+      <div class="callout">
+        <strong>빠른 답변:</strong> Blood Grapes는 바로 심으세요(성장까지 5일 소요). 마을회관에
+        등록해서 Chester와 아르바이트 게시판을 받으세요. 그리고 초반에는 너무 많이 심지 마세요 —
+        Aquaflux 마법이 해금되기 전까지는 직접 물을 줘야 합니다.
+      </div>
+
+      <h2>첫 주 체크리스트</h2>
+      <ol class="steps">
+        <li><strong>Blood Grapes를 심으세요.</strong> 확인: 성장까지 5일 소요 — 삽으로 땅을 파고(별도의 괭이는 없음) 매일 밤 물을 줍니다.</li>
+        <li><strong>마을회관에 등록하세요.</strong> Brook을 만나고 Chester를 받은 뒤, Albertus의 아르바이트 게시판을 확인하세요.</li>
+        <li><strong>초반에는 너무 많이 심지 마세요.</strong> Aquaflux가 해금되기 전까지는 손으로 물을 줘야 하니, 작은 밭이 관리하기 훨씬 쉽습니다.</li>
+        <li><strong>첫 번째 목표를 정하세요.</strong> 로맨스, 마법, Nokturna는 각각 별도의 가이드로 이어집니다.</li>
+      </ol>
+
+      <h2>핵심 루프</h2>
+      <p>
+        플레이어는 폐허가 된 가문의 저택을 물려받아 코지-고딕풍 농장으로 재건합니다. 하루하루는
+        <strong>신비로운 작물</strong> 관리, <strong>마법 가축</strong> 사육, 그리고 마법을 활용한
+        농사일로 채워집니다. 다른 장르 게임들과 달리, 여기서는 밤에 농사를 짓는데, 이는 뱀파이어
+        라이프스타일과 잘 맞아떨어집니다.
+      </p>
+
+      <h2>뱀파이어로 살아가기</h2>
+      <p>
+        혈통은 단순한 미학이 아니라 실질적인 도구입니다. 확인된 정보: 박쥐나 세눈박이 Hellkitten
+        형태로 <strong>변신</strong>해서 마을을 빠르게 이동할 수 있습니다. 탐험할 수 있는 광산
+        지역(Cave of Echoes)도 있지만, <strong>어디에도 전투는 없어서</strong> 전체적으로 여유롭게
+        즐길 수 있습니다.
+      </p>
+
+      <h2>마을과 주민들</h2>
+      <p>
+        문라이트 피크스에는 인간과 밤의 존재들 — 늑대인간, 마녀, 인어 등 — 로 이루어진 일곱 가문이
+        살고 있으며, 죽음의 신 그 자체도 눈에 띄는 캐릭터 중 하나입니다. 이들과 우정을 쌓고
+        로맨스를 나누는 것이 게임의 핵심 요소입니다 — <a href="/romance">로맨스 & 가문 소개</a>
+        페이지에서 이미 확인된 23명의 로맨스 대상과 선물 정보를 다루고 있습니다.
+      </p>
+
+      <h2>아직 검증 중인 정보</h2>
+      <p>
+        대부분의 핵심 시스템은 이미 확인되어 이 사이트에 문서화되어 있습니다 — 야간 농사, 마법
+        해금, 퀘스트, 일곱 가문 모두 이미 출시된 게임의 실제 데이터입니다. 아직 보완이 필요한
+        부분: 대부분의 주민에 대한 완전한 선물 목록(일부만 완전히 확인됨), 전체 Nokturna 카드
+        목록, 정확한 작물 가격입니다. 추측하지 않고 명확하게 표시하고 있습니다.
+      </p>
+
+      <h2>목적에 따른 다음 페이지</h2>
+      <table class="facts">
+        <tr><th>처음 시작한다면</th><td><a href="/quests">퀘스트</a>, <a href="/known-issues">알려진 문제</a>, <a href="/platforms">플랫폼 가이드</a></td></tr>
+        <tr><th>로맨스를 원한다면</th><td><a href="/romance">로맨스 가이드</a>, <a href="/ko/characters">캐릭터</a>, <a href="/characters/saga">Saga</a></td></tr>
+        <tr><th>농사를 원한다면</th><td><a href="/farming">농사 가이드</a>, <a href="/magic">마법</a>, <a href="/ko/activities">활동</a></td></tr>
+      </table>
+
+      <div class="callout wip">
+        출시 후 실제 게임 데이터로 업데이트되는 페이지입니다. 일부 콘텐츠(완전한 선물 목록, 전체
+        Nokturna 카드 목록)는 아직 검증 중이며, 추측하지 않고 명확히 표시합니다. 이 페이지의
+        링크 중 일부는 한국어판이 준비될 때까지 영어 가이드로 연결됩니다. 추가할 정보가 있다면
+        {SITE.contact}로 알려주세요.
+      </div>
+    </div>
+  </article>
+</Base>

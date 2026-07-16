@@ -1,0 +1,98 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+import YouTube from '../../components/YouTube.astro';
+
+const faq = [
+  { q: '문라이트 피크스는 언제 출시됐나요?', a: `문라이트 피크스는 ${GAME.releaseLabel}에 Steam, Nintendo Switch, Nintendo Switch 2, 그리고 Google Play를 통한 Android에서 출시되어 지금 플레이할 수 있습니다.` },
+  { q: '문라이트 피크스 가격은 얼마인가요?', a: `Steam(PC/Mac), Switch, Android에서 ${GAME.price}이며, Switch 2에서는 39.99달러입니다. ${GAME.launchDiscount}` },
+  { q: '문라이트 피크스에 데모가 있나요?', a: '네. Steam(PC/Mac)과 Nintendo eShop(Switch 2에서도 플레이 가능)에서 무료 데모를 즐길 수 있습니다. 캐릭터 생성, 낚시, 꽃꽂이, 자수를 포함하고 있습니다.' },
+  { q: '문라이트 피크스는 콘솔에서도 할 수 있나요?', a: '네 — PC와 Android 외에도 Nintendo Switch와 Switch 2에서 플레이할 수 있습니다. Switch 데모는 Switch 2에서도 플레이 가능합니다.' },
+  { q: '문라이트 피크스는 멀티플레이어인가요?', a: '문라이트 피크스는 농사, 인간관계, 마을의 미스터리에 집중하는 싱글플레이어 코지 라이프 시뮬레이션입니다.' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '홈', item: `${SITE.url}/ko` },
+    { '@type': 'ListItem', position: 2, name: '출시일', item: `${SITE.url}/ko/release-date` },
+  ] },
+];
+---
+<Base
+  title="문라이트 피크스 — 출시일: Steam, Switch, PC"
+  description="문라이트 피크스 출시일 가이드: Steam, Switch, Switch 2, Android 정보 — 데모 접근, 가격, 시스템 요구 사항, 지원 언어까지."
+  path="/ko/release-date"
+  jsonLd={jsonLd}
+  crumbs={[{ label: '출시일' }]}
+  lang="ko"
+  showExport
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">입문 · 출시</p>
+      <h1>문라이트 피크스 <em>출시일</em> — Switch, Switch 2, PC</h1>
+      <p class="intro">
+        {GAME.title}의 출시에 관해 확인된 모든 정보 — 출시일, 플레이 가능한 플랫폼, 가격, 그리고
+        지금 바로 체험할 수 있는 무료 데모까지. 최종 업데이트: {SITE.updated}.
+      </p>
+
+      <YouTube id="VL_15TiRRAM" title="Moonlight Peaks release date trailer" />
+
+      <h2>핵심 정보</h2>
+      <table class="facts">
+        <tr><th>출시일</th><td>{GAME.releaseLabel}</td></tr>
+        <tr><th>플랫폼</th><td>{GAME.platforms.join(' · ')}</td></tr>
+        <tr><th>가격</th><td>{GAME.price} (Switch 2: 39.99달러) · {GAME.launchDiscount}</td></tr>
+        <tr><th>데모</th><td>{GAME.demo}</td></tr>
+        <tr><th>개발사</th><td>{GAME.developer}</td></tr>
+        <tr><th>배급사</th><td>{GAME.publisher} (아메리카) · Marvelous Europe (유럽)</td></tr>
+        <tr><th>플레이 방식</th><td>싱글플레이어 코지 라이프 시뮬레이션</td></tr>
+      </table>
+
+      <h2>문라이트 피크스란?</h2>
+      <p>
+        문라이트 피크스는 고딕풍 코지 라이프 시뮬레이션으로, 플레이어는 뱀파이어 — 드라큘라 백작의
+        아들 또는 딸 — 을 조작하여, 늑대인간, 마녀, 인어를 비롯한 밤의 존재들이 사는 마을에 있는
+        버려진 가문의 저택에 정착하게 됩니다. 신비로운 작물을 재배하고, 마법 가축을 기르고,
+        마법과 물약 제조를 배우며, 주민들과 우정을 쌓거나 로맨스를 나누는 동시에, 회의적인
+        아버지에게 더 온화한 불멸의 삶도 가능하다는 것을 증명하게 됩니다.
+      </p>
+
+      <h2>구매 전에 데모를 먼저 해보세요</h2>
+      <p>
+        무료 데모는 {GAME.title}이 자신에게 맞는 게임인지 확인하는 가장 좋은 방법입니다. 캐릭터
+        생성과 낚시, 꽃꽂이, 자수 등 여유로운 활동 몇 가지, 그리고 마을 주민들과의 초반 상호작용을
+        체험할 수 있습니다. 데모의 진행 상황은 정식판으로 이어지지 않지만, 일상 루프에 대한 확실한
+        느낌을 얻을 수 있습니다.
+      </p>
+
+      <h2>구매 전 확인할 것들</h2>
+      <p>
+        구매 전에 가장 유용하게 확인할 부분은 플랫폼, 시스템 요구 사항, 언어 지원 여부, 그리고
+        데모가 내 기기에서 잘 작동하는지입니다. 아래 페이지들은 신중하게 작성되었으며, 출시 정보를
+        임의로 만들어내는 대신 공식 스토어 데이터를 참고합니다.
+      </p>
+      <ul>
+        <li><a href="/system-requirements">시스템 요구 사항</a> — PC, Mac, Steam Deck.</li>
+        <li><a href="/languages">지원 언어</a> — 영어, 독일어, 일본어, 한국어, 중국어(간체·번체).</li>
+        <li><a href="/platforms">플랫폼</a> — Steam, Switch, Switch 2, Steam Deck, Android.</li>
+      </ul>
+
+      <h2>FAQ</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        이 페이지는 한국어로 출시 정보를 다룹니다. 데모 체험기, 언론 리뷰, 더 상세한 가이드는
+        아직 영어로만 제공됩니다 — <a href="/previews">프리뷰 기사 모음</a>(영어)도 참고해보세요.
+      </div>
+    </div>
+  </article>
+</Base>

@@ -58,6 +58,10 @@ const esOnlyPaths = ['/quests', '/farm', '/collections', '/map'];
 const frPaths = ['/', '/release-date', '/beginner-guide', '/characters', '/romance', '/farming', '/magic', '/platforms', '/demo',
   '/families', '/locations', '/activities', '/items', '/character-creator', '/shapeshifting', '/faq', '/tools'];
 
+// Korean is a brand-new locale, starting with the homepage plus a handful of core pages built
+// alongside it — grows independently from here.
+const koPaths = ['/', '/release-date', '/beginner-guide', '/characters', '/romance', '/families', '/locations', '/activities', '/items'];
+
 export const translatedPathsByLocale: Record<Locale, Set<string>> = {
   en: new Set(), // English is the source; not meaningful to check "is English translated".
   es: new Set([...sharedEsJaZhPaths, ...esOnlyPaths]),
@@ -66,6 +70,7 @@ export const translatedPathsByLocale: Record<Locale, Set<string>> = {
   'zh-hant': new Set(sharedEsJaZhPaths), // mirrors the same 21 pages as zh, converted via OpenCC
   de: new Set(dePaths),
   fr: new Set(frPaths),
+  ko: new Set(koPaths),
 };
 
 // Character slugs translated per locale (used for /characters/{slug} pages specifically).
@@ -77,6 +82,7 @@ export const translatedCharSlugsByLocale: Record<Locale, Set<string>> = {
   'zh-hant': new Set(Object.keys(charTranslations['zh-hant'] || {})),
   de: new Set(Object.keys(charTranslations.de || {})),
   fr: new Set(Object.keys(charTranslations.fr || {})),
+  ko: new Set(Object.keys(charTranslations.ko || {})),
 };
 
 export function isPathTranslated(locale: Locale, barePath: string): boolean {
