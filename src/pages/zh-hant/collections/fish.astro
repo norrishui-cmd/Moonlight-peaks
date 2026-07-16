@@ -1,0 +1,93 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { SITE } from '../../../consts';
+import { fishDetailPages } from '../../../data/collectionDetailPages';
+
+const faq = [
+  { q: '月光峰的第一根魚竿怎麼獲得?', a: '確認:遊戲開始後幾天內會在河邊遇到Noel。他會向你發起挑戰，比他先釣到3種不同的魚——沒有時間限制，很容易贏——贏了之後會獲得魚竿和一筆金幣獎勵。' },
+  { q: '月光峰一共有多少種魚?', a: '確認:22種。每種都有基礎售價和恢復的能量值，兩者在1星、2星品質下都會提升。下方列表可以檢視每種魚的詳細頁面。' },
+  { q: '月光峰能釣到什麼魚受什麼影響?', a: '確認:地點、季節、天氣和時間段都會影響當時能釣到的魚。' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '首頁', item: `${SITE.url}/zh` },
+    { '@type': 'ListItem', position: 2, name: '收藏', item: `${SITE.url}/zh-hant/collections` },
+    { '@type': 'ListItem', position: 3, name: '魚類', item: `${SITE.url}/zh-hant/collections/fish` },
+  ] },
+];
+---
+<Base
+  title="月光峰魚類 — 約22種魚與第一根魚竿的獲取方式"
+  description="月光峰已確認的釣魚資訊:如何從Noel那裡獲得第一根魚竿、約22種魚、品質分級，以及影響能釣到什麼魚的因素。"
+  path="/zh-hant/collections/fish"
+  jsonLd={jsonLd}
+  crumbs={[{ label: '收藏', href: '/zh-hant/collections' }, { label: '魚類' }]}
+  lang="zh-hant"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">收藏 · 魚類</p>
+      <h1>月光峰的<em>魚類</em></h1>
+      <p class="intro">
+        經兩個獨立的發售周信源確認:釣魚系統基於一份真實存在、約22種的收藏名單，能釣到什麼
+        取決於地點、時間段和天氣。
+      </p>
+
+      <h2>獲得第一根魚竿</h2>
+      <p>
+        確認:遊戲開始幾天內，你會在河邊遇到<a href="/characters/noel">Noel</a>。他會向你發起
+        挑戰，比他先釣到3種不同的魚——沒有時間限制，很容易贏——贏了之後會獲得第一根魚竿和一筆
+        金幣獎勵。
+      </p>
+
+      <h2>魚類種類與變化因素</h2>
+      <p>
+        確認:收藏名單大約有22種。能釣到哪種取決於地點、季節、天氣和時間段，所以某個夜晚沒找到
+        的魚，可能只是在等條件湊齊，而不是遊戲里根本沒有這種魚。
+      </p>
+
+      <h2>品質分級</h2>
+      <p>
+        確認:每種魚都有基礎售價和食用後恢復的基礎能量值，兩者在1星、2星品質下都會提升——即使
+        是同一種魚，積極追求更高品質的漁獲也是值得的。
+      </p>
+
+      <h2>魚類圖鑑(全22種)</h2>
+      <p>點選每種魚，可以檢視它的生息地、稀有度、出現時間段、體型和售價詳情頁面。</p>
+      <ul class="fish-link-list">
+        {fishDetailPages.map((f) => (
+          <li><a href={`/zh-hant/collections/fish/${f.slug}`}>{f.name}</a></li>
+        ))}
+      </ul>
+
+      <h2>常見問題</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        相關頁面: <a href="/zh-hant/collections">收藏中心</a>、<a href="/zh-hant/activities">釣魚活動</a>、
+        <a href="/characters/noel">Noel</a>、<a href="/items/cooking">烹飪</a>。
+      </div>
+    </div>
+  </article>
+
+  <style>
+    .fish-link-list {
+      list-style: none; padding: 0; margin: 12px 0 24px;
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 8px;
+    }
+    .fish-link-list a {
+      display: block; border: 1px solid var(--line); border-radius: 10px; padding: 8px 12px;
+      background: var(--surface); color: var(--candle); text-decoration: none; font-size: 0.88rem;
+    }
+    .fish-link-list a:hover { border-color: color-mix(in srgb, var(--candle) 54%, var(--line)); }
+  </style>
+</Base>

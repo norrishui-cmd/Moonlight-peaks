@@ -1,0 +1,177 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import { SITE } from '../../../../consts';
+import { fishDetailPages } from '../../../../data/collectionDetailPages';
+
+export function getStaticPaths() {
+  return fishDetailPages.map((entry, index) => ({
+    params: { slug: entry.slug },
+    props: {
+      entry,
+      previous: fishDetailPages[index - 1],
+      next: fishDetailPages[index + 1],
+    },
+  }));
+}
+
+const { entry, previous, next } = Astro.props;
+const labelZh: Record<string, string> = {
+  'Location': '地點', 'Rarity': '稀有度', 'Spawns during': '出現時段',
+  'Size': '體型', 'Consumption value': '食用恢復量', 'Sell price': '售價',
+};
+const fact = (label: string) => entry.facts.find((item: any) => item.label === label)?.value || '-';
+const hasIcon = entry.icon.startsWith('/images/');
+const pagePath = `/zh-hant/collections/fish/${entry.slug}`;
+const title = `${entry.name} — 月光峰魚類圖鑑`;
+const description = `月光峰"${entry.name}"的地點、稀有度、出現時段、體型和售價一覽。`;
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: '首頁', item: `${SITE.url}/zh` },
+      { '@type': 'ListItem', position: 2, name: '收藏', item: `${SITE.url}/zh-hant/collections` },
+      { '@type': 'ListItem', position: 3, name: '魚類', item: `${SITE.url}/zh-hant/collections/fish` },
+      { '@type': 'ListItem', position: 4, name: entry.name, item: `${SITE.url}${pagePath}` },
+    ],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: [
+      {
+        '@type': 'Question',
+        name: `月光峰的${entry.name}在哪裡能釣到?`,
+        acceptedAnswer: { '@type': 'Answer', text: `根據目前已確認的資料，地點是${fact('Location')}。標記為"-"的欄位仍在實機中等待確認。` },
+      },
+      {
+        '@type': 'Question',
+        name: `${entry.name}的價值是多少?`,
+        acceptedAnswer: { '@type': 'Answer', text: `根據目前已確認的資料，售價為${fact('Sell price')}，食用恢復量為${fact('Consumption value')}。` },
+      },
+    ],
+  },
+];
+---
+<Base
+  title={title}
+  description={description}
+  path={pagePath}
+  jsonLd={jsonLd}
+  crumbs={[{ label: '收藏', href: '/zh-hant/collections' }, { label: '魚類', href: '/zh-hant/collections/fish' }, { label: entry.name }]}
+  lang="zh-hant"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">收藏 · 魚類</p>
+      <section class="detail-hero">
+        <div>
+          <h1>{entry.name} <em>(魚類)</em></h1>
+          <p class="intro">
+            月光峰魚類{entry.name}的詳情頁面，基於已確認的收藏資料表。未確認的數值會顯示為
+            <strong>-</strong>，直到在實機中得到確認。
+          </p>
+        </div>
+        <div class="detail-icon" aria-hidden={!hasIcon}>
+          {hasIcon ? <img src={entry.icon} alt={`${entry.name}圖示`} loading="eager" /> : <span>暫無圖示</span>}
+        </div>
+      </section>
+
+      <section class="fact-grid" aria-label={`${entry.name}的資料`}>
+        {entry.facts.map((item: any) => (
+          <div class="fact-card">
+            <span>{labelZh[item.label] ?? item.label}</span>
+            <strong>{item.value}</strong>
+          </div>
+        ))}
+      </section>
+
+      <h2>關於{entry.name}</h2>
+      <p>
+        {entry.name}出現在月光峰目前已知的魚類收藏資料中。地點、稀有度、出現時段、體型、恢復量
+        和售價——都在這一頁裡。
+      </p>
+      <p>
+        用途備註: <strong>{entry.use}</strong>。標記為"-"的欄位，說明提供的截圖資料裡尚未顯示
+        已確認的數值。
+      </p>
+      <p class="source-note">
+        資料來源說明:本頁使用已確認的月光峰魚類收藏資料表，隨著新的官方或實機資料確認後會持續
+        擴充。
+      </p>
+
+      <h2>相關頁面</h2>
+      <div class="related-grid">
+        <a href="/zh-hant/collections/fish">魚類列表</a>
+        <a href="/zh-hant/collections">收藏中心</a>
+      </div>
+
+      <nav class="detail-nav" aria-label="魚類詳情導航">
+        {previous ? <a href={`/zh-hant/collections/fish/${previous.slug}`}>← {previous.name}</a> : <span />}
+        {next ? <a href={`/zh-hant/collections/fish/${next.slug}`}>{next.name} →</a> : <span />}
+      </nav>
+    </div>
+  </article>
+  <style>
+    .detail-hero {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 20px;
+      align-items: start;
+    }
+    .detail-icon {
+      width: 140px;
+      height: 140px;
+      border-radius: 16px;
+      border: 1px solid var(--line);
+      background: var(--surface);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .detail-icon img { width: 100%; height: 100%; object-fit: contain; }
+    .detail-icon span { color: var(--faint); font-size: 0.7rem; text-transform: uppercase; }
+    .fact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px;
+      margin: 18px 0 28px;
+    }
+    .fact-card {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: var(--surface);
+      padding: 14px;
+    }
+    .fact-card span {
+      display: block;
+      color: var(--candle);
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    .fact-card strong { color: var(--text); font-size: 1rem; }
+    .related-grid, .detail-nav {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 10px;
+      margin-top: 12px;
+    }
+    .source-note { border-left: 3px solid var(--candle); padding-left: 14px; color: var(--muted); }
+    .related-grid a, .detail-nav a {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 12px 14px;
+      background: var(--surface);
+      color: var(--candle);
+      font-family: var(--mono);
+      text-decoration: none;
+    }
+    @media (max-width: 640px) {
+      .detail-hero { grid-template-columns: 1fr; }
+      .detail-icon { width: 112px; height: 112px; }
+    }
+  </style>
+</Base>

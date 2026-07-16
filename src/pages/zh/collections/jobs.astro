@@ -1,0 +1,70 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { SITE } from '../../../consts';
+
+const faq = [
+  { q: '月光峰的Albertus工作是什么?', a: '确认:由猫头鹰Albertus经营的布告栏，玩家可以在上面查看可接的工作——完成短小的委托能获得金币，有时还有道具礼物，以及与委托人的好感度。' },
+  { q: '月光峰的工作布告栏在哪里?', a: '确认:在镇公所，由Albertus经营。这是新居民登记时最早被介绍的系统之一。' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '首页', item: `${SITE.url}/zh` },
+    { '@type': 'ListItem', position: 2, name: '收藏', item: `${SITE.url}/zh/collections` },
+    { '@type': 'ListItem', position: 3, name: '工作', item: `${SITE.url}/zh/collections/jobs` },
+  ] },
+];
+---
+<Base
+  title="月光峰Albertus的工作 — 布告栏系统详解"
+  description="确认:Albertus的工作布告栏上，完成短小委托能获得金币、道具礼物，以及与委托人的好感度。"
+  path="/zh/collections/jobs"
+  jsonLd={jsonLd}
+  crumbs={[{ label: '收藏', href: '/zh/collections' }, { label: '工作' }]}
+  lang="zh"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">收藏 · 工作</p>
+      <h1>Albertus的<em>工作</em></h1>
+      <p class="intro">
+        确认:Albertus的工作是猫头鹰<a href="/characters/albertus">Albertus</a>在镇公所经营的
+        布告栏——这是新居民登记时最早被介绍的系统之一。
+      </p>
+
+      <h2>工作的运作方式</h2>
+      <p>
+        确认:工作是贴在布告栏上的短小委托。完成一项工作能获得金币，有时还有道具礼物，以及
+        与委托人的好感度提升——对早期收入和被动建立友好关系都很有帮助。
+      </p>
+
+      <h2>地点</h2>
+      <p>
+        确认:布告栏在镇公所，位于Brook镇长登记柜台旁边——是新居民在小镇上最早被介绍的东西之一。
+      </p>
+
+      <h2>目前仍在核实的信息</h2>
+      <ul>
+        <li>具体的工作池和刷新频率。</li>
+        <li>难度和奖励会不会随时间变化。</li>
+        <li>哪些居民会发布委托的完整名单。</li>
+      </ul>
+
+      <h2>常见问题</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        相关页面: <a href="/zh/collections">收藏中心</a>、<a href="/characters/albertus">Albertus</a>、
+        <a href="/locations/town-hall">镇公所</a>、<a href="/zh/characters/brook">Brook</a>。
+      </div>
+    </div>
+  </article>
+</Base>

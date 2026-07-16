@@ -1,0 +1,104 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { SITE } from '../../../consts';
+import { collections } from '../../../data/collections';
+
+const titleZh: Record<string, string> = {
+  'Fish': '魚類', 'Albertus\u2019 Jobs': 'Albertus的工作', 'Critters': '小生物',
+  'Vampsters': 'Vampster', 'Soul Blobs': 'Soul Blobs',
+};
+
+const faq = [
+  { q: '月光峰的收藏系統是什麼?', a: '收藏是可追蹤的世界清單，例如魚類、工作、小生物、Vampster和Soul Blobs。它們被歸入"世界"分類，因為玩家通常搜尋的是地點、條件和完成進度，而不是普通道具的屬性資料。' },
+  { q: '為什麼把小生物從物品分類移出來?', a: '小生物的玩法更接近可捕捉的收藏，而不是普通道具分類，所以收藏中心為它們提供了更合適的欄位:出現條件、地點、時間、天氣、用途和進度追蹤。' },
+  { q: '這些頁面是從官方wiki複製的嗎?', a: '不是。官方wiki作為資料來源被引用。本站使用自己的攻略格式、摘要、表格和驗證說明，而不是照搬整頁內容。' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '首頁', item: `${SITE.url}/zh` },
+    { '@type': 'ListItem', position: 2, name: '收藏', item: `${SITE.url}/zh-hant/collections` },
+  ] },
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+];
+---
+<Base
+  title="月光峰收藏 - 魚類、小生物、Vampster、Soul Blobs與工作"
+  description="月光峰收藏中心，涵蓋魚類、Albertus的工作、小生物、Vampster與Soul Blobs，附官方資料連結與安全的追蹤表格。"
+  path="/zh-hant/collections"
+  jsonLd={jsonLd}
+  crumbs={[{ label: '收藏' }]}
+  lang="zh-hant"
+>
+  <article class="page collections-page">
+    <div class="wrap">
+      <p class="eyebrow">世界 / 收藏</p>
+      <h1>月光峰<em>收藏</em></h1>
+      <p class="intro">
+        專門的世界收藏中心，涵蓋可追蹤的清單:魚類、Albertus的工作、小生物、Vampster與Soul Blobs。
+        這些頁面以官方wiki連結作為資料來源，同時用更清晰的攻略結構呈現資訊，方便搜尋、追蹤進度
+        與發售後更新。
+      </p>
+
+      <div class="collection-grid">
+        {collections.map((entry) => (
+          <a class="collection-card" href={`/zh-hant/collections/${entry.slug}`}>
+            <img src={entry.image} alt={`${titleZh[entry.title] ?? entry.title} - 月光峰收藏`} loading="lazy" />
+            <div class="collection-body">
+              <span>{entry.tag}</span>
+              <h2>{titleZh[entry.title] ?? entry.title}</h2>
+              <p>{entry.dek}</p>
+              <strong>開啟收藏 -&gt;</strong>
+            </div>
+          </a>
+        ))}
+      </div>
+
+      <h2>資料來源與格式說明</h2>
+      <p>
+        官方wiki頁面被視為資料參考，而不是需要照搬的文字。本站的收藏頁面被重新編寫成任務導向的
+        表格、清單和速查要點，方便玩家更快瀏覽，也不會被Google視為重複內容頁面。
+      </p>
+
+      <h2>常見問題</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </article>
+
+  <style>
+    .collection-grid { display: grid; grid-template-columns: 1fr; gap: 16px; margin: 24px 0 28px; }
+    @media (min-width: 720px) { .collection-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    .collection-card {
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: var(--surface);
+      color: inherit;
+      text-decoration: none;
+      transition: border-color .15s ease, transform .15s ease;
+    }
+    .collection-card:hover { border-color: color-mix(in srgb, var(--candle) 54%, var(--line)); transform: translateY(-2px); }
+    .collection-card img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border-bottom: 1px solid var(--line); }
+    .collection-body { padding: 16px; }
+    .collection-body span {
+      color: var(--candle);
+      font-family: var(--mono);
+      font-size: 0.66rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .collection-body h2 { margin: 6px 0 6px; font-size: 1.38rem; }
+    .collection-body p { margin: 0 0 12px; color: #ded3e6; font-size: 0.94rem; }
+    .collection-body strong { color: var(--candle); font-family: var(--mono); font-size: 0.78rem; }
+  </style>
+</Base>

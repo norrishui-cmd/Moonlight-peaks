@@ -1,0 +1,91 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { SITE } from '../../../consts';
+import { critterDetailPages } from '../../../data/collectionDetailPages';
+
+const faq = [
+  { q: '月光峰的小生物有什麼用?', a: '確認:捕獲的小生物(以及魚)可以作為家裡的裝飾擺放——稀有或可愛的品種，值得留下而不是賣掉。' },
+  { q: '月光峰的小生物會隨季節變化嗎?', a: '會，確認:和釣魚一樣，季節和天氣會決定出現哪些蟲子和小生物。' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '首頁', item: `${SITE.url}/zh` },
+    { '@type': 'ListItem', position: 2, name: '收藏', item: `${SITE.url}/zh-hant/collections` },
+    { '@type': 'ListItem', position: 3, name: '小生物', item: `${SITE.url}/zh-hant/collections/critters` },
+  ] },
+];
+---
+<Base
+  title="月光峰小生物 — 捕獲、季節與家居裝飾"
+  description="確認:月光峰的小生物和蟲子會隨季節和天氣變化，捕獲後可以作為家居裝飾擺放。"
+  path="/zh-hant/collections/critters"
+  jsonLd={jsonLd}
+  crumbs={[{ label: '收藏', href: '/zh-hant/collections' }, { label: '小生物' }]}
+  lang="zh-hant"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">收藏 · 小生物</p>
+      <h1>月光峰的<em>小生物</em></h1>
+      <p class="intro">
+        經早期進度攻略確認:捕獲的蟲子和小生物不只是用來出售和烹飪的——捕獲到的每一種都可以
+        作為家居裝飾擺放。
+      </p>
+
+      <h2>捕獲小生物</h2>
+      <p>
+        確認:抓蟲子很快就能上手，但容易揮空，小生物移動很快，揮空會消耗體力。和釣魚一樣，
+        出現的蟲子會隨季節和天氣變化，所以某個夜晚沒找到的小生物，可能只是在等條件湊齊。
+      </p>
+
+      <h2>作為裝飾擺放</h2>
+      <p>
+        確認:稀有或可愛的品種值得留下而不是賣掉——無論是魚還是蟲子，捕獲到的生物都可以擺放
+        在家裡作為裝飾品。裝飾相關內容請參見<a href="/zh-hant/farm/house">你的房屋</a>頁面。
+      </p>
+
+      <h2>小生物圖鑑</h2>
+      <p>點選每個條目，可以檢視季節、棲息地、型別和售價詳情頁面。標記為"-"的欄位尚未確認。</p>
+      <ul class="fish-link-list">
+        {critterDetailPages.map((c) => (
+          <li><a href={`/zh-hant/collections/critters/${c.slug}`}>{c.name}</a></li>
+        ))}
+      </ul>
+
+      <h2>目前仍在核實的資訊</h2>
+      <ul>
+        <li>下方詳情頁中標記為"-"的出現地點、季節和天氣。</li>
+        <li>除了展示以外，小生物能不能作為禮物贈送或出售。</li>
+      </ul>
+
+      <h2>常見問題</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        相關頁面: <a href="/zh-hant/collections">收藏中心</a>、<a href="/environment">環境</a>、
+        <a href="/map">地圖</a>、<a href="/zh-hant/activities">活動</a>。
+      </div>
+    </div>
+  </article>
+
+  <style>
+    .fish-link-list {
+      list-style: none; padding: 0; margin: 12px 0 24px;
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 8px;
+    }
+    .fish-link-list a {
+      display: block; border: 1px solid var(--line); border-radius: 10px; padding: 8px 12px;
+      background: var(--surface); color: var(--candle); text-decoration: none; font-size: 0.88rem;
+    }
+    .fish-link-list a:hover { border-color: color-mix(in srgb, var(--candle) 54%, var(--line)); }
+  </style>
+</Base>

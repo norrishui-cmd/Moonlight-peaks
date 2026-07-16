@@ -1,0 +1,86 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { SITE } from '../../../consts';
+
+const faq = [
+  { q: '月光峰有多少隻Vampster?', a: '經官方wiki確認:共100只，散落在遊戲整個戶外區域。' },
+  { q: '月光峰的Vampster要送去哪裡?', a: '確認:送回它們在Misty Shores的巢穴("遙遠的橋"任務解鎖)。' },
+  { q: '能一次運送多隻Vampster嗎?', a: '不能——一次只能運送1只。跟人對話或觸發過場動畫都會讓你手上運送的Vampster掉落。' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '首頁', item: `${SITE.url}/zh` },
+    { '@type': 'ListItem', position: 2, name: '收藏', item: `${SITE.url}/zh-hant/collections` },
+    { '@type': 'ListItem', position: 3, name: 'Vampster', item: `${SITE.url}/zh-hant/collections/vampsters` },
+  ] },
+];
+---
+<Base
+  title="月光峰Vampster:全100只與收集方法"
+  description="月光峰Vampster攻略:Vampster是什麼、已確認的100只總數、運送方式，以及巢穴在哪裡——基於官方wiki。"
+  path="/zh-hant/collections/vampsters"
+  jsonLd={jsonLd}
+  crumbs={[{ label: '收藏', href: '/zh-hant/collections' }, { label: 'Vampster' }]}
+  lang="zh-hant"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">收藏 · Vampster</p>
+      <h1>月光峰的<em>Vampster</em></h1>
+      <p class="intro">
+        Vampster是一群調皮的小生物，喜歡躲在月光峰各處搗蛋，但如果長時間獨處又會感到難過。
+        經官方wiki確認:一共有100只，需要一隻一隻捕獲並送回它們的家。
+      </p>
+
+      <div class="callout">
+        <strong>簡單來說:</strong>Vampster是散落在戶外的迷路生物，需要一隻一隻運送到它們位於
+        Misty Shores的巢穴。確認總數:100只。
+      </div>
+
+      <h2>Vampster任務如何開始</h2>
+      <p>
+        社群報告:遊戲開始約第一週內，去Cave of Echoes挖銅礦時，會在入口附近看到一隻Vampster
+        跑走。進入洞穴後會遇到<a href="/characters/alina">Alina</a>，她會解釋Vampster們都
+        走丟了，並請你幫忙把它們都送回家。
+      </p>
+
+      <h2>去哪裡找</h2>
+      <p>
+        經官方wiki確認:Vampster散落在整個月光峰各處，總是不停地小碎步移動，並躲在意想不到的
+        地方。已確認的例子:一隻藏在Moonlit Pines的Luna家裡，沿螺旋樓梯上去的床邊(頭上頂著
+        一根蠟燭)，另一隻藏在Misty Shores的Moonlit Tower裡，一張米色葉紋扶手椅後面。
+      </p>
+
+      <h2>運送與送回方式</h2>
+      <ul>
+        <li><strong>一次只能運1只:</strong>確認——無法同時疊加運送多隻Vampster，放下之前會一直帶著它。</li>
+        <li><strong>它們的家:</strong>確認——在Misty Shores的一個洞穴裡("遙遠的橋"任務解鎖)。</li>
+        <li><strong>注意中斷:</strong>社群報告——跟居民對話或觸發過場動畫都會讓你手上正在運送的Vampster掉落，所以出發前最好先清空對話密集的區域。</li>
+      </ul>
+
+      <h2>常見問題</h2>
+      <ul>
+        <li><strong>過場動畫後弄丟了Vampster:</strong>屬於正常情況——過場動畫會讓運送中的Vampster掉落，會留在被放下的地方。</li>
+        <li><strong>再也找不到更多Vampster:</strong>試著在還沒完全清理過的區域，用鐮刀砍掉生長茂密的雜草和灌木。</li>
+      </ul>
+
+      <h2>常見問題解答</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        資料來源:月光峰官方wiki(moonlightpeaks.wiki.gg)。相關頁面:
+        <a href="/zh-hant/collections">收藏中心</a>、<a href="/locations/mines">Cave of Echoes</a>、
+        <a href="/achievements">成就</a>、<a href="/characters/alina">Alina</a>。
+      </div>
+    </div>
+  </article>
+</Base>

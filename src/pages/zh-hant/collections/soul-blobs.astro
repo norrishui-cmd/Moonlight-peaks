@@ -1,0 +1,77 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { SITE } from '../../../consts';
+
+const faq = [
+  { q: '月光峰有多少個Soul Blobs?', a: '發售時確認:全世界散落著100個Soul Blobs。' },
+  { q: '月光峰的Soul Blobs怎麼捕捉?', a: '確認:用捕蟲時使用的同一把網——不能用手直接抓。' },
+  { q: '集齊全部Soul Blobs能得到什麼?', a: '確認:會獲得古董鍾，把夜晚時長從預設的15分鐘延長到25分鐘。' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '首頁', item: `${SITE.url}/zh` },
+    { '@type': 'ListItem', position: 2, name: '收藏', item: `${SITE.url}/zh-hant/collections` },
+    { '@type': 'ListItem', position: 3, name: 'Soul Blobs', item: `${SITE.url}/zh-hant/collections/soul-blobs` },
+  ] },
+];
+---
+<Base
+  title="月光峰Soul Blobs:全100個與古董鍾獎勵"
+  description="確認:月光峰有100個Soul Blobs散落在世界各地，用網捕捉。全部集齊能獲得古董鍾，把夜晚延長到25分鐘。"
+  path="/zh-hant/collections/soul-blobs"
+  jsonLd={jsonLd}
+  crumbs={[{ label: '收藏', href: '/zh-hant/collections' }, { label: 'Soul Blobs' }]}
+  lang="zh-hant"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">收藏 · Soul Blobs</p>
+      <h1>月光峰的<em>Soul Blobs</em></h1>
+      <p class="intro">
+        Soul Blobs是散落世界各地、四處飄蕩的小骷髏靈魂——發售時確認:一共有100個，集齊後
+        對喜歡收集全部內容的玩家來說，有一份實打實值得的獎勵。
+      </p>
+
+      <div class="callout">
+        <strong>簡單來說:</strong>在與Death第二次見面之後，Soul Blobs會被介紹出場，他會請你
+        用網把它們都抓起來。一共100個，集齊能獲得古董鍾。
+      </div>
+
+      <h2>Soul Blobs如何被介紹出場</h2>
+      <p>
+        確認:在鎮上與<a href="/characters/death">Death</a>第二次見面之後，他會介紹Soul Blobs，
+        並請你用網(和捕蟲用的是同一把，不是另一件道具)把它們都抓起來。
+      </p>
+
+      <h2>與其他收藏的區別</h2>
+      <p>
+        社群報告:在遊戲的兩個生物收集支線任務中，Soul Blobs的敘事性更強(另一個是
+        <a href="/zh-hant/collections/vampsters">Vampster</a>)。每捕捉到一個Soul Blob，都會講述一段
+        關於它生前如何死去的簡短小故事——不只是打鉤式的收集清單，每一個都帶著一點敘事性獎勵。
+      </p>
+
+      <h2>集齊獎勵</h2>
+      <p>
+        確認:集齊全部100個Soul Blobs能獲得<strong>古董鍾</strong>，把夜晚時長從預設的15分鐘
+        延長到25分鐘——不只是外觀上的獎勵，而是一項真正實用、永久生效的便利提升。
+      </p>
+
+      <h2>常見問題</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        相關頁面: <a href="/zh-hant/collections">收藏中心</a>、<a href="/zh-hant/collections/vampsters">Vampster</a>、
+        <a href="/characters/death">Death</a>、<a href="/zh-hant/activities">釣魚與捕蟲活動</a>。
+      </div>
+    </div>
+  </article>
+</Base>

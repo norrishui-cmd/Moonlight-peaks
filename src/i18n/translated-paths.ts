@@ -85,7 +85,8 @@ export function isPathTranslated(locale: Locale, barePath: string): boolean {
   if (charMatch && translatedCharSlugsByLocale[locale].has(charMatch[1])) return true;
   // Fish/critters detail pages are fully translated for ja and de (auto-generated from the same
   // collectionDetailPages data source as English), so any slug under these two collections counts.
-  if ((locale === 'ja' || locale === 'de' || locale === 'es') && /^\/collections\/(fish|critters)\/[a-z0-9-]+$/.test(barePath)) return true;
+  if ((locale === 'ja' || locale === 'de' || locale === 'es' || locale === 'zh' || locale === 'zh-hant') && /^\/collections\/(fish|critters)\/[a-z0-9-]+$/.test(barePath)) return true;
+  if ((locale === 'zh' || locale === 'zh-hant') && /^\/collections(\/(fish|critters|jobs|vampsters|soul-blobs))?$/.test(barePath)) return true;
   if ((locale === 'ja' || locale === 'de') && /^\/(families|platforms)\/[a-z0-9-]+$/.test(barePath)) return true;
   if (locale === 'es' && (barePath === '/collections/fish' || barePath === '/collections/critters')) return true;
   // Quest story/side detail pages are fully translated for es (all 20 story + 12 side quests).

@@ -1,0 +1,77 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { SITE } from '../../../consts';
+
+const faq = [
+  { q: '月光峰有多少个Soul Blobs?', a: '发售时确认:全世界散落着100个Soul Blobs。' },
+  { q: '月光峰的Soul Blobs怎么捕捉?', a: '确认:用捕虫时使用的同一把网——不能用手直接抓。' },
+  { q: '集齐全部Soul Blobs能得到什么?', a: '确认:会获得古董钟，把夜晚时长从默认的15分钟延长到25分钟。' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '首页', item: `${SITE.url}/zh` },
+    { '@type': 'ListItem', position: 2, name: '收藏', item: `${SITE.url}/zh/collections` },
+    { '@type': 'ListItem', position: 3, name: 'Soul Blobs', item: `${SITE.url}/zh/collections/soul-blobs` },
+  ] },
+];
+---
+<Base
+  title="月光峰Soul Blobs:全100个与古董钟奖励"
+  description="确认:月光峰有100个Soul Blobs散落在世界各地，用网捕捉。全部集齐能获得古董钟，把夜晚延长到25分钟。"
+  path="/zh/collections/soul-blobs"
+  jsonLd={jsonLd}
+  crumbs={[{ label: '收藏', href: '/zh/collections' }, { label: 'Soul Blobs' }]}
+  lang="zh"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">收藏 · Soul Blobs</p>
+      <h1>月光峰的<em>Soul Blobs</em></h1>
+      <p class="intro">
+        Soul Blobs是散落世界各地、四处飘荡的小骷髅灵魂——发售时确认:一共有100个，集齐后
+        对喜欢收集全部内容的玩家来说，有一份实打实值得的奖励。
+      </p>
+
+      <div class="callout">
+        <strong>简单来说:</strong>在与Death第二次见面之后，Soul Blobs会被介绍出场，他会请你
+        用网把它们都抓起来。一共100个，集齐能获得古董钟。
+      </div>
+
+      <h2>Soul Blobs如何被介绍出场</h2>
+      <p>
+        确认:在镇上与<a href="/characters/death">Death</a>第二次见面之后，他会介绍Soul Blobs，
+        并请你用网(和捕虫用的是同一把，不是另一件道具)把它们都抓起来。
+      </p>
+
+      <h2>与其他收藏的区别</h2>
+      <p>
+        社区报告:在游戏的两个生物收集支线任务中，Soul Blobs的叙事性更强(另一个是
+        <a href="/zh/collections/vampsters">Vampster</a>)。每捕捉到一个Soul Blob，都会讲述一段
+        关于它生前如何死去的简短小故事——不只是打钩式的收集清单，每一个都带着一点叙事性奖励。
+      </p>
+
+      <h2>集齐奖励</h2>
+      <p>
+        确认:集齐全部100个Soul Blobs能获得<strong>古董钟</strong>，把夜晚时长从默认的15分钟
+        延长到25分钟——不只是外观上的奖励，而是一项真正实用、永久生效的便利提升。
+      </p>
+
+      <h2>常见问题</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        相关页面: <a href="/zh/collections">收藏中心</a>、<a href="/zh/collections/vampsters">Vampster</a>、
+        <a href="/characters/death">Death</a>、<a href="/zh/activities">钓鱼与捕虫活动</a>。
+      </div>
+    </div>
+  </article>
+</Base>
