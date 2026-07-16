@@ -910,6 +910,349 @@ export const charTranslations: Record<'es' | 'ja' | 'zh' | 'zh-hant' | 'de' | 'f
       ],
       romanceYes: '', romanceNo: 'Brook은 확인된 로맨스 대상이 아닙니다.', romanceTbc: '',
     },
+    'count-dracula': {
+      name: '드라큘라 백작', familyLabel: '뱀파이어', typeLabel: '뱀파이어',
+      desc: '플레이어의 아버지이자 마을의 전설. 그의 그림자에서 벗어나는 것이 스토리의 출발점 — 로맨스 대상이 아니라 핵심 서사 인물.',
+      knownInfo: [
+        '플레이어의 아버지; 문라이트 피크스로 이사하는 것을 그의 오랜 그림자에서 벗어나는 발걸음으로 그리는 스토리.',
+        '로맨스 대상이 아니라 핵심 서사 인물.',
+        '게임을 진행하며 더 온화하고 평온한 불멸의 삶도 가능하다는 것을 증명하게 되며, 이는 그가 늘 의심해온 일이다.',
+      ],
+      romanceYes: '', romanceNo: '드라큘라 백작은 로맨스 대상이 아닙니다.', romanceTbc: '',
+    },
+    'the-warlock': {
+      name: '수수께끼의 술사', familyLabel: '마녀', typeLabel: '마녀',
+      desc: '한 체험판 보도에 등장했던, 마을의 상당히 나르시시스트적인 술사 — 실제 이름은 아직 확인되지 않음.',
+      knownInfo: [
+        '한 체험판 보도에 등장했던 나르시시스트적인 술사.',
+        '해당 보도에 따르면 대화 도중 끊임없이 플레이어에게 추파를 던짐.',
+        '게임 내 실제 이름은 아직 확인되지 않음.',
+      ],
+      romanceYes: '', romanceNo: '', romanceTbc: '이 술사가 로맨스 대상인지는 아직 확인되지 않았습니다 — 실기 검증을 계속 지켜보고 있습니다.',
+    },
+    mina: {
+      name: 'Mina', familyLabel: '뱀파이어 (Ambrosia 가문)', typeLabel: '뱀파이어',
+      desc: '명랑한 뱀파이어로 Orlock의 딸; 오빠 Evan과 함께 Coffee & Coffins를 운영한다.',
+      knownInfo: [
+        'Orlock의 딸이자 Evan의 동생으로 확인됨; 두 사람이 함께 Coffee & Coffins를 운영.',
+        '보고에 따르면 어머니가 떠난 후 Orlock이 카페를 닫으려 했지만 Mina가 만류함.',
+        '베이킹을 좋아하며 늘 밝고 긍정적인 태도를 유지함.',
+      ],
+      romanceYes: '네, 확인된 로맨스 대상입니다.', romanceNo: '', romanceTbc: '',
+    },
+    evan: {
+      name: 'Evan', familyLabel: '뱀파이어 (Ambrosia 가문)', typeLabel: '뱀파이어',
+      desc: '조용하고 거리감 있는 뱀파이어로, 누나 Mina와 함께 Coffee & Coffins를 운영; 아버지 Orlock은 그가 가문의 성을 이어받길 재촉한다.',
+      knownInfo: [
+        'Orlock의 아들이자 Mina의 동생으로 확인됨, 마을 카페를 공동 운영.',
+        '아버지가 물려주고 싶어하는 가문의 성을 잇기보다 별을 세는 것을 더 좋아함.',
+      ],
+      romanceYes: '네, 확인된 로맨스 대상입니다.', romanceNo: '', romanceTbc: '',
+    },
+    ridge: {
+      name: 'Ridge', familyLabel: '늑대인간 (Logan 가문)', typeLabel: '늑대인간',
+      desc: '마을의 목수 — 건장하고 믿음직하며 평화주의자, 늑대인간으로 변신하는 시간을 이용해 좋은 목재를 찾아다닌다. Brook의 동생.',
+      knownInfo: [
+        '목수인 늑대인간이자 평화주의자로 확인됨.',
+        '4,000골드와 재료를 받고 첫 헛간을 판매함(10x6 크기, 건축 1일 소요, 동물 4마리 수용) — Luna에게서 가축을 사기 전 필수.',
+        'Howling Hammer 도구 업그레이드 상점을 운영하며, 월~금 오후 6시부터 자정까지 영업.',
+      ],
+      romanceYes: '네, 확인된 로맨스 대상입니다.', romanceNo: '', romanceTbc: '',
+    },
+    jada: {
+      name: 'Jada', familyLabel: '인간 (Henderson 가문)', typeLabel: '인간',
+      desc: '활기 넘치는 초자연 애호가이자 유물 수집가로 역사 이야기를 신나게 늘어놓음 — Persephone의 조카, Winston의 누나.',
+      knownInfo: [
+        '인간 Henderson 가문 소속으로 확인됨, Persephone·Winston과 함께 이주.',
+        '유물 수집가이자 역사 애호가로 보고되어, 회의적인 오빠 Winston과 대조를 이룸.',
+        '숨 가쁘게 몰아치는 대화 스타일로 마을에서 다소 유명해짐.',
+      ],
+      romanceYes: '네, 확인된 로맨스 대상입니다.', romanceNo: '', romanceTbc: '',
+    },
+    dragan: {
+      name: 'Dragan', familyLabel: '예언자 (Khazan 가문)', typeLabel: '예언자',
+      desc: 'Khazan 예언자 삼남매 중 맏이 — 자신의 예언은 자주 빗나가지만, 설정상 인기 카드게임 Nokturna의 발명가로 더 잘 알려져 있다.',
+      knownInfo: [
+        '예언자 가문 Khazan의 장남으로 확인됨, Aras와 Alina보다 위.',
+        '설정상 Nokturna의 발명가로 보고됨.',
+      ],
+      romanceYes: '네, 확인된 로맨스 대상입니다.', romanceNo: '', romanceTbc: '',
+    },
+    alina: {
+      name: 'Alina', familyLabel: '예언자 (Khazan 가문)', typeLabel: '예언자',
+      desc: 'Khazan 가문의 반항아 — 고집 세고 열정적이며 거짓말을 못 참고, 독특한 예언 능력과 그림자를 선호하는 성향을 지님.',
+      knownInfo: [
+        '예언자 가문 Khazan 소속으로 보고됨 — Dragan의 여동생, Aras와 동년배.',
+        '자신의 집에서 혼자 살고 있어, 단역이 아닌 정착 주민임을 시사함.',
+      ],
+      romanceYes: '네, 확인된 로맨스 대상입니다.', romanceNo: '', romanceTbc: '',
+    },
+    death: {
+      name: 'Death(죽음)', familyLabel: '가문 없음', typeLabel: '죽음의 신',
+      desc: '죽음 그 자체로, 휴식을 위해 마을에 휴가차 방문 중 — 건조한 유머 감각을 지녔고, 마을 묘지를 관리하며 꽃과 영혼 둘 다를 수집한다.',
+      knownInfo: [
+        '확인된 로맨스 대상 — 더 이상 출시 전 소문이 아님.',
+        'Misty Shores 묘지 구역의 "죽음의 오두막"에 거주.',
+        '확인된 해금 흐름: "A Bridge Too Far"로 Misty Shores가 해금된 후 플레이어가 두 번 만나야 그가 벌레잡이 그물을 준다.',
+      ],
+      romanceYes: '네, 확인된 로맨스 대상입니다.', romanceNo: '', romanceTbc: '',
+    },
+    samael: {
+      name: 'Samael', familyLabel: '뱀파이어 (Ambrosia 가문)', typeLabel: '뱀파이어',
+      desc: 'Ambrosia 가문 출신의 신비롭고 우수에 찬 뱀파이어로, 수백 년째 마을 술집 "The Broken Lamp"를 운영하고 있다. Elvira의 오빠, Orlock의 조카.',
+      knownInfo: [
+        '마을 술집 The Broken Lamp를 운영하며 Ambrosia 가문 소속.',
+        '그의 로맨스는 스토리 진행과 연동되어 있으며, Luna Bay에 도착해 인어 Hosu 가문을 만나야 해금됨.',
+        '확인됨: 선행 퀘스트 "신비로운 통로"와 "신비로운 만"에는 쓰러진 나무 옮기기, Ludo와 함께 다리 고치기, 결혼식 준비 돕기가 포함되며 — 신부는 인어 Kim이지만 결혼식 당일 마음을 바꾼다.',
+      ],
+      romanceYes: '네, 확인된 로맨스 대상입니다.', romanceNo: '', romanceTbc: '',
+    },
+    elvira: {
+      name: 'Elvira', familyLabel: '뱀파이어 (Ambrosia 가문)', typeLabel: '뱀파이어',
+      desc: 'Samael의 여동생 — 예술적이고 가만있지 못하는 뱀파이어로, 끊임없이 새로운 부업을 벌여 삼촌 Orlock을 자주 곤란하게 한다.',
+      knownInfo: [
+        'Samael의 여동생이자 Orlock의 조카로 확인됨.',
+        '연약하고 예술적인 면모를 숨기고 있으며, Samael만이 이를 완전히 안다고 알려짐.',
+      ],
+      romanceYes: '네, 확인된 로맨스 대상입니다.', romanceNo: '', romanceTbc: '',
+    },
+    fiona: {
+      name: 'Fiona', familyLabel: '마녀 (Webb 가문)', typeLabel: '마녀',
+      desc: 'Webb 마녀 가문의 수장 — 날카로운 두뇌와 고집으로 유명하며, Orlock이 그녀를 놀린 조잡한 농담 때문에 다리에 저주를 내렸다.',
+      knownInfo: [
+        'Moonlit Pines의 마녀 결사 Webb의 수장으로 확인됨.',
+        '술집에서 Orlock과 취중 다툼 끝에 "A Bridge Too Far" 퀘스트에서 다리에 저주를 내림.',
+        '날카로운 두뇌와 고집으로 알려져 있지만 결국은 공정한 인물.',
+      ],
+      romanceYes: '네, 확인된 로맨스 대상입니다.', romanceNo: '', romanceTbc: '',
+    },
+    kim: {
+      name: 'Kim', familyLabel: '인어 (Hosu 가문)', typeLabel: '인어',
+      desc: '무한한 에너지와 밝은 성격을 지닌 인어로 Hosu 가문 소속, 게임 시작 약 1년 후 마을에 도착한다.',
+      knownInfo: [
+        '인어 가문 Hosu 소속으로 확인됨, Rei와 Tae의 자매.',
+        'Hosu 가문은 첫해 중반쯤 도착하며 마을에 다시 적응하는 데 도움이 필요하고, Luna Bay에서 함께 산다.',
+      ],
+      romanceYes: '네, 확인된 로맨스 대상입니다.', romanceNo: '', romanceTbc: '',
+    },
+    ludo: {
+      name: 'Ludo', familyLabel: '늑대인간 (Logan 가문)', typeLabel: '늑대인간',
+      desc: 'Brook 시장의 근심 걱정 없는 자녀(Saga의 형제자매, Ridge의 조카)로, 어떤 일에 신경 쓰기보다 잠자는 것을 더 좋아한다.',
+      knownInfo: [
+        'Brook 시장의 자녀, Saga의 형제자매, Ridge의 조카로 확인됨.',
+        '반복 작업의 체력 소모를 줄여주는 도구형 마법 지팡이(곡괭이, Aquaflux 물뿌리개, 나무 옮기기)를 파는 상점을 운영.',
+      ],
+      romanceYes: '네, 확인된 로맨스 대상입니다.', romanceNo: '', romanceTbc: '',
+    },
+    tae: {
+      name: 'Tae', familyLabel: '인어 (Hosu 가문)', typeLabel: '인어',
+      desc: '잘생기고 담백한 인어로 Hosu 가문 소속, 자신의 외모를 자랑스러워하며 다른 사람이 자신감을 찾도록 돕는 것을 좋아한다.',
+      knownInfo: [
+        '인어 가문 Hosu 소속으로 확인됨, Kim과 Rei의 형제.',
+        '충실하고 격려를 잘하는 성격으로 묘사됨.',
+      ],
+      romanceYes: '네, 확인된 로맨스 대상입니다.', romanceNo: '', romanceTbc: '',
+    },
+    winston: {
+      name: 'Winston', familyLabel: '인간 (Henderson 가문)', typeLabel: '인간',
+      desc: '마을의 회의론자 — 초자연적인 마을에 사는 것을 내키지 않아 하며 쉽게 겁먹지만, 경계를 풀면 아주 재미있는 사람.',
+      knownInfo: [
+        '인간 Henderson 가문 소속으로 확인됨, Persephone·Jada와 함께 이주.',
+        '마을로 이사 온 것은 가족의 결정이었지, 본인 의사가 아니었음 — 마을의 초자연적인 면을 믿지 않음.',
+      ],
+      romanceYes: '네, 확인된 로맨스 대상입니다.', romanceNo: '', romanceTbc: '',
+    },
+    rei: {
+      name: 'Rei', familyLabel: '인어 (Hosu 가문)', typeLabel: '인어',
+      desc: '조용하고 수줍은 인어로 Hosu 가문 소속, 환경에 집착하며 해안을 청소하며 하루를 보낸다.',
+      knownInfo: [
+        '인어 가문 Hosu 소속으로 확인됨, Kim과 Tae의 자매.',
+        '해안 청소에 집중하며 지역 주민들에게 자연을 존중하도록 가르침.',
+      ],
+      romanceYes: '네, 확인된 로맨스 대상입니다.', romanceNo: '', romanceTbc: '',
+    },
+    aras: {
+      name: 'Aras', familyLabel: '예언자 (Khazan 가문)', typeLabel: '예언자',
+      desc: 'Khazan 예언자 가문의 마을 재단사로 "Third Eye Threads"를 운영한다. 자신의 미래를 신비로 남겨두기 위해 스스로의 예언 능력을 쓰지 않으려 한다.',
+      knownInfo: [
+        '예언자 가문 Khazan 소속으로 보고됨, 재단사 상점 "Third Eye Threads"를 운영 — Dragan의 동생, Alina와 동년배.',
+        '패션과 아늑한 대화를 사랑함.',
+      ],
+      romanceYes: '네, 확인된 로맨스 대상입니다.', romanceNo: '', romanceTbc: '',
+    },
+    persephone: {
+      name: 'Persephone', familyLabel: '인간 (Henderson 가문)', typeLabel: '인간',
+      desc: '자유분방한 Henderson 가문의 가장 — 조카 Jada와 조카 Winston을 돌보는 인간 이모, 마을에 새로 도착했으며 점성술과 크리스탈을 좋아한다.',
+      knownInfo: [
+        '인간 Henderson 가문의 가장(Jada와 Winston의 이모)으로 확인됨.',
+        '점성술, 차크라, 아우라 등 신비로운 주제에 관심이 많음 — 새 출발을 위해 마을에 새로 도착.',
+      ],
+      romanceYes: '네, 확인된 로맨스 대상입니다.', romanceNo: '', romanceTbc: '',
+    },
+    llemi: {
+      name: 'Llemi', familyLabel: '사랑의 악마', typeLabel: '악마',
+      desc: '기묘한 사랑의 악마로 마을의 드라마와 혼란을 먹고 살며, Pink Grove에 살고 주로 축제 기간에만 마을을 방문한다.',
+      knownInfo: [
+        'Pink Grove의 악마 거주자로 보고됨.',
+        '축제 기간에만 마을에서 목격된다고 알려져 있으며, 그녀의 마음을 얻으려면 상당한 노력이 필요하다고 함.',
+      ],
+      romanceYes: '네, 확인된 로맨스 대상입니다.', romanceNo: '', romanceTbc: '',
+    },
+    logan: {
+      name: 'Logan', familyLabel: '늑대인간', typeLabel: '늑대인간',
+      desc: '정정: 출시 이후 여러 정보원에서 "Logan"은 개별 주민의 이름이 아니라 늑대인간 가문의 성(姓)임을 확인했습니다 — 이전에 "늑대인간 시장 Logan"으로 보고된 것은 실제로 Brook을 가리킨 것이었습니다.',
+      knownInfo: [
+        '정정: Logan은 가문의 성이며, 가장은 Brook 시장이고 Ridge가 남동생, Saga와 Ludo가 자녀입니다.',
+        '다른 페이지들이 여전히 여기로 링크되어 있어 이 페이지는 리다이렉트 형태로 유지됩니다 — 실제 Logan 가문 구성원은 Brook, Ridge, Saga, Ludo를 참고하세요.',
+      ],
+      romanceYes: '', romanceNo: 'Logan은 독립된 로맨스 대상이 아닙니다(위 정정 내용 참고).', romanceTbc: '',
+    },
+    'pumpkin-head': {
+      name: 'Pumpkin Head', familyLabel: '불명', typeLabel: '기타',
+      desc: '마을 모임을 활기차게 만드는 연극적인 이벤트 진행자로 보고됨.',
+      knownInfo: [
+        '마을 모임에 등장하는 연극적인 이벤트 진행자로 보고됨.',
+        '역할과 세부 사항은 출시 시점에 확인 예정.',
+      ],
+      romanceYes: '', romanceNo: '', romanceTbc: '아직 확인되지 않았습니다.',
+    },
+    jarvis: {
+      name: 'Jarvis', familyLabel: '가문 없음', typeLabel: '유령',
+      desc: '마을의 유령 중 하나로, 동료 유령 Balthasar와 함께 보고됨. 일곱 가문 어디에도 속하지 않음, Death와 비슷함.',
+      knownInfo: [
+        '유령 거주자로 확인됨, 어떤 가문에도 속하지 않음(Death처럼).',
+        '데이터마이닝 파일에는 "Jarvis의 집"도 언급됨.',
+      ],
+      romanceYes: '', romanceNo: '', romanceTbc: 'Jarvis가 로맨스 대상인지는 아직 확인되지 않았습니다.',
+    },
+    albertus: {
+      name: 'Albertus', familyLabel: '불명', typeLabel: '기타',
+      desc: '마을 게시판을 관리하는 부엉이 — "Albertus의 일감"의 출처로 확인됨, 플레이어가 가능한 퀘스트/작업을 확인하는 게시판.',
+      knownInfo: [
+        '확인됨: Albertus는 부엉이이며, "Albertus의 일감"은 가능한 퀘스트를 확인하는 마을 게시판입니다.',
+      ],
+      romanceYes: '', romanceNo: '', romanceTbc: 'Albertus가 로맨스 대상인지는 아직 확인되지 않았습니다.',
+    },
+    'viktor-dracula': {
+      name: 'Viktor', familyLabel: '뱀파이어 (Ambrosia 가문)', typeLabel: '기타',
+      desc: 'Orlock의 늙은 삼촌으로, 오래전 박쥐로 변해 이제 플레이어 부지의 지하 묘실에 산다. 로맨스 대상이 아님.',
+      knownInfo: [
+        'Orlock의 삼촌이자 플레이어 부지의 지하 묘실에서 발견되는 박쥐 동반 캐릭터로 확인됨.',
+        '드라큘라 백작, Vlad와는 다른 인물.',
+      ],
+      romanceYes: '', romanceNo: 'Viktor는 로맨스 대상이 아닙니다.', romanceTbc: '',
+    },
+    judge: {
+      name: 'Judge', familyLabel: '불명', typeLabel: '기타',
+      desc: '공식 wiki 내비게이션에 존재가 확인됨; 역할은 아직 문서화되지 않음.',
+      knownInfo: ['공식 wiki에 등재됨; 아직 추가 세부 사항은 확인되지 않음.'],
+      romanceYes: '', romanceNo: '', romanceTbc: '아직 확인되지 않았습니다.',
+    },
+    'skull-girl': {
+      name: 'Skull Girl', familyLabel: '불명', typeLabel: '기타',
+      desc: '공식 wiki 내비게이션에 존재가 확인됨; 역할은 아직 문서화되지 않음.',
+      knownInfo: ['공식 wiki에 등재됨; 아직 추가 세부 사항은 확인되지 않음.'],
+      romanceYes: '', romanceNo: '', romanceTbc: '아직 확인되지 않았습니다.',
+    },
+    balthasar: {
+      name: 'Balthasar', familyLabel: '가문 없음', typeLabel: '유령',
+      desc: '마을의 유령 거주자로, 동료 유령 Jarvis와 함께 이름이 언급됨 — 로맨스 대상이 아니며, 일곱 가문 어디에도 속하지 않음(Death처럼).',
+      knownInfo: ['마을 유령 캐릭터 중 하나로 확인됨, 어떤 가문에도 속하지 않음.'],
+      romanceYes: '', romanceNo: 'Balthasar는 로맨스 대상이 아닙니다.', romanceTbc: '',
+    },
+    chester: {
+      name: 'Chester', familyLabel: '불명', typeLabel: '기타',
+      desc: '살아있는 보관함으로, 마을회관 등록 시 Brook 시장이 선물해준다. 밤새 물건을 넣어두면 판매 금액과 함께 아침을 맞이한다.',
+      knownInfo: [
+        '마을회관 첫 방문 시 Brook에게서 받는 것으로 확인됨.',
+        '야간 판매 보관함 역할을 함.',
+      ],
+      romanceYes: '', romanceNo: 'Chester는 아이템/동반자이며 로맨스 대상이 아닙니다.', romanceTbc: '',
+    },
+    laveau: {
+      name: 'Laveau', familyLabel: '마녀 (Webb 가문)', typeLabel: '마녀',
+      desc: '플레이어 캐릭터의 어머니 — Webb 결사를 이끌다가 이를 떠나 Vlad 드라큘라와 삶을 시작한 마녀. 핵심 서사 인물, 로맨스 대상이 아님.',
+      knownInfo: [
+        '플레이어 캐릭터의 어머니이자 Webb 결사의 전 수장으로 확인됨, 후임은 Fiona.',
+        'Vlad 드라큘라와의 결혼이 플레이어 캐릭터가 뱀파이어·마녀 혼혈 혈통을 갖게 된 이유.',
+      ],
+      romanceYes: '', romanceNo: 'Laveau는 로맨스 대상이 아닙니다.', romanceTbc: '',
+    },
+    yabbis: {
+      name: 'Yabbis', familyLabel: '불명', typeLabel: '기타',
+      desc: 'Ludo와 함께하는 하이쿠로만 말하는 두꺼비 — 로맨스 대상이 아님.',
+      knownInfo: ['Ludo의 두꺼비 동반자로 보고됨, 하이쿠로만 말하는 것으로 알려짐.'],
+      romanceYes: '', romanceNo: 'Yabbis는 로맨스 대상이 아닙니다.', romanceTbc: '',
+    },
+    grim: {
+      name: 'Grim', familyLabel: '불명', typeLabel: '기타',
+      desc: '게임 시작부터 함께하는 세눈박이 Hellkitten 동반 반려동물의 기본/주어진 이름으로 추정됨(이름을 지어줄 수 있음) — 나중에 스스로 Hellkitten 형태로 변신하는 것과는 다름.',
+      knownInfo: [
+        '확인됨: Hellkitten 반려동물이 게임 시작부터 플레이어를 따라다니며 이름을 지어줄 수 있음.',
+        '공식 wiki에 "Grim" 아래 Hellkitten 치비 아이콘과 함께 등재됨 — 이 반려동물의 기본 이름으로 추정되나 아직 완전히 확인되지 않음.',
+      ],
+      romanceYes: '', romanceNo: '', romanceTbc: 'Grim은 반려동물로 추정되며 로맨스 대상이 아닐 가능성이 높습니다 — 아직 완전히 확인되지 않았습니다.',
+    },
+    'mr-deyes': {
+      name: 'Mr. Deyes', familyLabel: '불명', typeLabel: '기타',
+      desc: '공식 wiki 내비게이션에 존재가 확인됨; 역할은 아직 문서화되지 않음.',
+      knownInfo: ['공식 wiki에 등재됨; 아직 추가 세부 사항은 확인되지 않음.'],
+      romanceYes: '', romanceNo: '', romanceTbc: '아직 확인되지 않았습니다.',
+    },
+    hoodini: {
+      name: 'Hoodini', familyLabel: '불명', typeLabel: '기타',
+      desc: '공식 wiki 내비게이션에 존재가 확인됨, Albertus와 비슷한 흰 부엉이 아이콘으로 표시됨 — 관련 캐릭터이거나 변형일 가능성. 미확인.',
+      knownInfo: ['공식 wiki에 흰 부엉이 스타일 아이콘으로 등재됨; Albertus와의 연관성은 아직 확인되지 않음.'],
+      romanceYes: '', romanceNo: '', romanceTbc: '아직 확인되지 않았습니다.',
+    },
+    larry: {
+      name: 'Larry', familyLabel: '불명', typeLabel: '기타',
+      desc: '공식 wiki를 통해 확인됨: Larry는 Alina의 집에 사는 Vampster로, Cave of Echoes로 돌아가고 싶어하지 않아 다른 수집 가능한 Vampster들과 합류하는 대신 그녀 곁에 남는다. 로맨스 대상이 아님.',
+      knownInfo: ['확인됨: Alina의 집에서 발견되며, 다른 Vampster들처럼 돌려보내지지 않고 그곳에 남기로 선택함.'],
+      romanceYes: '', romanceNo: 'Larry는 로맨스 대상이 아닙니다.', romanceTbc: '',
+    },
+    rachel: {
+      name: 'Rachel', familyLabel: '불명', typeLabel: '기타',
+      desc: '공식 wiki 내비게이션에 존재가 확인됨, Vampster 아이콘으로 표시됨 — 마을 주민보다는 개별적으로 이름 붙은 Vampster일 가능성. 로맨스 대상이 아님.',
+      knownInfo: ['공식 wiki에 Vampster 아이콘과 함께 등재됨.'],
+      romanceYes: '', romanceNo: 'Rachel은 로맨스 대상이 아닙니다.', romanceTbc: '',
+    },
+    snek: {
+      name: 'Snek', familyLabel: '불명', typeLabel: '기타',
+      desc: '공식 wiki 내비게이션을 통해 존재가 확인된 이름 붙은 뱀 캐릭터. 로맨스 대상이 아님.',
+      knownInfo: ['공식 wiki에 뱀 치비 아이콘과 함께 등재됨.'],
+      romanceYes: '', romanceNo: 'Snek은 로맨스 대상이 아닙니다.', romanceTbc: '',
+    },
+    jacques: {
+      name: 'Jacques', familyLabel: '불명', typeLabel: '기타',
+      desc: 'Snek과 함께 공식 wiki 내비게이션을 통해 존재가 확인된 이름 붙은 뱀 캐릭터. 로맨스 대상이 아님.',
+      knownInfo: ['공식 wiki에 뱀 치비 아이콘과 함께 등재됨.'],
+      romanceYes: '', romanceNo: 'Jacques는 로맨스 대상이 아닙니다.', romanceTbc: '',
+    },
+    'moon-goddess': {
+      name: '달의 여신', familyLabel: '불명', typeLabel: '기타',
+      desc: '공식 wiki 내비게이션을 통해 존재가 확인된 신 같은 존재; 역할은 아직 문서화되지 않음.',
+      knownInfo: [
+        '공식 wiki에 등재됨; 게임의 밤·달 신화와 연관이 있을 가능성이 높음.',
+        '커뮤니티 보고(일본어권 보도): Brook과 함께 순수하게 우정 대상인 NPC로 분류되며, 로맨스 대상이 아님.',
+      ],
+      romanceYes: '', romanceNo: '커뮤니티 보고에 따르면 순수하게 우정 대상인 NPC입니다.', romanceTbc: '',
+    },
+    'sun-god': {
+      name: '태양의 신', familyLabel: '불명', typeLabel: '기타',
+      desc: '공식 wiki 내비게이션을 통해 존재가 확인된 신 같은 존재; 역할은 아직 문서화되지 않음.',
+      knownInfo: [
+        '공식 wiki에 등재됨; 게임 신화에서 달의 여신과 대응되는 존재일 가능성이 높음.',
+        '커뮤니티 보고(일본어권 보도): Brook과 함께 순수하게 우정 대상인 NPC로 분류되며, 로맨스 대상이 아님.',
+      ],
+      romanceYes: '', romanceNo: '커뮤니티 보고에 따르면 순수하게 우정 대상인 NPC입니다.', romanceTbc: '',
+    },
+    yasmin: {
+      name: 'Yasmin', familyLabel: '불명', typeLabel: '기타',
+      desc: '공식 wiki 내비게이션에 존재가 확인됨; 역할은 아직 문서화되지 않음.',
+      knownInfo: ['공식 wiki에 등재됨; 아직 추가 세부 사항은 확인되지 않음.'],
+      romanceYes: '', romanceNo: '', romanceTbc: '아직 확인되지 않았습니다.',
+    },
   },
   ja: {
     mina: {

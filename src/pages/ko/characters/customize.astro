@@ -1,0 +1,93 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { SITE } from '../../../consts';
+import { characterCustomizeGroups, characterCustomizeItems } from '../../../data/character-customize';
+
+const categoryTitleKo: Record<string, string> = { Hair: '헤어', Face: '얼굴' };
+const groupTitleKo: Record<string, string> = { 'Hair Styles': '헤어스타일', 'Facial Hair': '수염', 'Hats': '모자' };
+
+const categories = [
+  { title: 'Hair', groups: characterCustomizeGroups.filter((group) => group.category === 'Hair') },
+  { title: 'Face', groups: characterCustomizeGroups.filter((group) => group.category === 'Face') },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '홈', item: `${SITE.url}/ko` },
+    { '@type': 'ListItem', position: 2, name: '캐릭터', item: `${SITE.url}/ko/characters` },
+    { '@type': 'ListItem', position: 3, name: '커스터마이징', item: `${SITE.url}/ko/characters/customize` },
+  ] },
+];
+---
+<Base
+  title="문라이트 피크스 캐릭터 커스터마이징 — 헤어, 수염, 모자"
+  description="문라이트 피크스 캐릭터 커스터마이징 카탈로그: 헤어스타일, 수염, 모자 아이콘 모음."
+  path="/ko/characters/customize"
+  jsonLd={jsonLd}
+  crumbs={[{ label: '캐릭터', href: '/ko/characters' }, { label: '커스터마이징' }]}
+  lang="ko"
+>
+  <article class="page customize-page">
+    <div class="wrap">
+      <p class="eyebrow">캐릭터 / 커스터마이징</p>
+      <h1>문라이트 피크스 <em>커스터마이징</em></h1>
+      <p class="intro">
+        캐릭터 커스터마이징 옵션입니다. 현재 카탈로그에는 헤어스타일, 수염, 모자를 합쳐
+        {characterCustomizeItems.length}개의 아이콘이 포함되어 있습니다.
+      </p>
+
+      <nav class="customize-jump" aria-label="커스터마이징 그룹">
+        {characterCustomizeGroups.map((group) => (
+          <a href={`#${group.slug}`}>{groupTitleKo[group.title] ?? group.title} <span>{group.items.length}</span></a>
+        ))}
+      </nav>
+
+      {categories.map((category) => (
+        <section class="customize-category" aria-labelledby={`${category.title.toLowerCase()}-customize`}>
+          <h2 id={`${category.title.toLowerCase()}-customize`}>{categoryTitleKo[category.title] ?? category.title}</h2>
+
+          {category.groups.map((group) => (
+            <section class="customize-table" id={group.slug} aria-labelledby={`${group.slug}-title`}>
+              <h3 id={`${group.slug}-title`} class="customize-table-title">{groupTitleKo[group.title] ?? group.title}</h3>
+              <div class="customize-grid" style={`--customize-cols: ${group.columns}`}>
+                {group.items.map((item) => (
+                  <figure class="customize-cell">
+                    <img src={item.icon} alt={`${item.name} 아이콘`} width="96" height="96" loading="lazy" />
+                    <figcaption>{item.name}</figcaption>
+                  </figure>
+                ))}
+              </div>
+            </section>
+          ))}
+        </section>
+      ))}
+
+      <p class="customize-note">
+        이름은 번호가 매겨진 임시 표기입니다. 정보원에는 아이콘과 그룹 라벨만 표시되어 있었기 때문입니다.
+      </p>
+
+      <div class="callout">
+        관련: <a href="/ko/characters">캐릭터</a>, <a href="/ko/character-creator">캐릭터 커스터마이징(체험판)</a>,
+        <a href="/ko/families">가문</a>, <a href="/ko/romance">로맨스</a>.
+      </div>
+    </div>
+  </article>
+
+  <style>
+    .customize-jump { display: flex; flex-wrap: wrap; gap: 8px; margin: 18px 0 24px; }
+    .customize-jump a { border: 1px solid var(--line); border-radius: 999px; color: var(--mist); background: var(--surface); padding: 7px 12px; text-decoration: none; font-family: var(--mono); font-size: 0.76rem; }
+    .customize-jump a:hover { border-color: color-mix(in srgb, var(--candle) 50%, var(--line)); color: var(--candle); }
+    .customize-jump span { color: var(--faint); margin-left: 4px; }
+    .customize-category { margin-top: 24px; }
+    .customize-table { border: 1px solid var(--line); margin: 12px 0 24px; overflow: hidden; background: rgba(32, 18, 58, 0.72); }
+    .customize-table-title { margin: 0; padding: 8px 12px; text-align: center; font-family: var(--sans); font-size: 1rem; font-weight: 800; color: #dfcdfa; background: #542199; border-bottom: 1px solid var(--line); }
+    .customize-grid { display: grid; grid-template-columns: repeat(var(--customize-cols), minmax(76px, 1fr)); }
+    .customize-cell { min-width: 0; min-height: 126px; margin: 0; padding: 10px 8px 9px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 7px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .customize-cell img { width: 78px; height: 78px; object-fit: contain; display: block; filter: drop-shadow(0 8px 10px rgba(5, 2, 14, 0.32)); }
+    .customize-cell figcaption { width: 100%; color: #ded3e6; font-family: var(--mono); font-size: 0.64rem; line-height: 1.25; text-align: center; overflow-wrap: anywhere; }
+    .customize-note { color: var(--faint); font-size: 0.78rem; margin: 10px 0 18px; }
+    .customize-note code { color: var(--mist); }
+    @media (max-width: 960px) { .customize-grid { grid-template-columns: repeat(auto-fit, minmax(86px, 1fr)); } }
+    @media (max-width: 520px) { .customize-cell { min-height: 116px; } .customize-cell img { width: 68px; height: 68px; } }
+  </style>
+</Base>

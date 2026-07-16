@@ -1,29 +1,46 @@
 ---
 import Base from '../../../layouts/Base.astro';
 import { SITE, GAME } from '../../../consts';
-import { characters } from '../../../data/characters';
+import { characters, type CharType } from '../../../data/characters';
 import { charTranslations } from '../../../i18n/characters-data';
 
-const translatedSlugs = ['saga', 'luna', 'orlock', 'brook'] as const;
-const translations = charTranslations.ko;
-const list = translatedSlugs.map((slug) => ({
-  slug,
-  base: characters.find((c) => c.id === slug)!,
-  tr: translations[slug],
-}));
+const koTranslations = charTranslations.ko;
+const translatedSlugs = new Set(Object.keys(koTranslations));
+
+const typeLabelsKo: Record<CharType, string> = {
+  vampire: '뱀파이어', werewolf: '늑대인간', witch: '마녀', mermaid: '인어',
+  seer: '예언자', ghost: '유령', human: '인간', other: '기타',
+};
+const familyLabelKo = (family: string): string => {
+  if (family.includes('Vampire')) return '뱀파이어 가문 (Ambrosia)';
+  if (family.includes('Werewolf')) return '늑대인간 가문 (Logan)';
+  if (family.includes('Witch')) return '마녀 가문 (Webb)';
+  if (family.includes('Mermaid')) return '인어 가문 (Hosu)';
+  if (family.includes('Seer')) return '예언자 가문 (Khazan)';
+  if (family.includes('Human')) return '인간 가문 (Henderson)';
+  return '가문 없음';
+};
+
+const isMainCast = (c: (typeof characters)[number]) => c.romanceable === true || c.id === 'count-dracula';
+const translated = characters.filter((c) => translatedSlugs.has(c.id));
+const untranslated = characters.filter((c) => !translatedSlugs.has(c.id));
+const mainCast = translated.filter(isMainCast);
+const npcs = translated.filter((c) => !isMainCast(c));
+
+function displayName(c: (typeof characters)[number]): string {
+  return translatedSlugs.has(c.id) ? koTranslations[c.id].name : c.name;
+}
 
 const jsonLd = {
-  '@context': 'https://schema.org',
-  '@type': 'BreadcrumbList',
-  itemListElement: [
+  '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
     { '@type': 'ListItem', position: 1, name: '홈', item: `${SITE.url}/ko` },
     { '@type': 'ListItem', position: 2, name: '캐릭터', item: `${SITE.url}/ko/characters` },
   ],
 };
 ---
 <Base
-  title="문라이트 피크스 캐릭터 - 한국어 가이드"
-  description="문라이트 피크스 캐릭터 한국어 프로필: 가문, 로맨스 가능 여부, 지금까지 확인된 정보."
+  title="문라이트 피크스 캐릭터 (전체 주민) - 뱀파이어의 고딕 라이프"
+  description="문라이트 피크스의 확인된 전체 주민 한국어 프로필: 23명의 로맨스 대상과 그 외 NPC까지."
   path="/ko/characters"
   jsonLd={jsonLd}
   crumbs={[{ label: '캐릭터' }]}
@@ -32,29 +49,49 @@ const jsonLd = {
   <article class="page">
     <div class="wrap">
       <p class="eyebrow">입문 / 캐릭터</p>
-      <h1>문라이트 피크스 <em>캐릭터</em></h1>
+      <h1>{GAME.title} <em>캐릭터</em> (전체 주민)</h1>
       <p class="intro">
-        {GAME.title}에서 가장 많이 검색되는 주민들의 한국어 프로필입니다. 이 섹션은 확인된 정보를
-        표시하고, 아직 실제 게임에서 검증이 필요한 세부 사항은 명확히 구분해서 보여줍니다.
+        확인된 전체 주민을 로맨스 대상과 그 외 NPC로 나누어 정리했습니다. {translated.length}명의
+        프로필이 한국어로 완전히 번역되어 있습니다.
       </p>
 
+      <h2>로맨스 대상 & 주요 캐릭터 ({mainCast.length})</h2>
       <div class="cx-grid">
-        {list.map(({ slug, base, tr }) => (
-          <a class="cx-card" href={`/ko/characters/${slug}`}>
+        {mainCast.map((c) => (
+          <a class="cx-card" href={`/ko/characters/${c.id}`}>
             <span class="cx-thumb">
-              {base.img ? <img src={base.img} alt="" loading="lazy" width="72" height="72" /> : <span class="cx-letter" style={`background: linear-gradient(135deg, ${base.c1}, ${base.c2})`}>{tr.name.charAt(0)}</span>}
+              {c.img ? <img src={c.img} alt="" loading="lazy" width="72" height="72" /> : <span class="cx-letter" style={`background: linear-gradient(135deg, ${c.c1}, ${c.c2})`}>{displayName(c).charAt(0)}</span>}
             </span>
             <span>
-              <strong>{tr.name}</strong>
-              <em>{tr.familyLabel}</em>
+              <strong>{displayName(c)}</strong>
+              <em>{familyLabelKo(c.family)} · {typeLabelsKo[c.type]}</em>
             </span>
           </a>
         ))}
       </div>
 
-      <div class="callout wip">
-        현재 4개의 프로필이 번역되어 있습니다. 전체 주민 목록은 <a href="/characters">캐릭터 메인 페이지</a>(영어)에서 확인할 수 있습니다.
+      <h2>그 외 NPC ({npcs.length})</h2>
+      <div class="cx-grid">
+        {npcs.map((c) => (
+          <a class="cx-card" href={`/ko/characters/${c.id}`}>
+            <span class="cx-thumb">
+              {c.img ? <img src={c.img} alt="" loading="lazy" width="72" height="72" /> : <span class="cx-letter" style={`background: linear-gradient(135deg, ${c.c1}, ${c.c2})`}>{displayName(c).charAt(0)}</span>}
+            </span>
+            <span>
+              <strong>{displayName(c)}</strong>
+              <em>{familyLabelKo(c.family)} · {typeLabelsKo[c.type]}</em>
+            </span>
+          </a>
+        ))}
       </div>
+
+      {untranslated.length > 0 && (
+        <div class="callout wip">
+          {translated.length}명의 프로필이 한국어로 번역되어 있습니다. 나머지 {untranslated.length}명은
+          <a href="/characters">영어 캐릭터 페이지</a>로 연결되며, 그곳에서 가장 상세한 확인된 정보를
+          볼 수 있습니다(Kai, Celine처럼 아직 실제 내용이 없는 미확인 플레이스홀더 캐릭터 포함).
+        </div>
+      )}
     </div>
   </article>
 

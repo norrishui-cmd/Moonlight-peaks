@@ -1,33 +1,36 @@
 ---
 import Base from '../../layouts/Base.astro';
 import { SITE, GAME } from '../../consts';
+import { faqs, faqCatLabels, type FaqCat } from '../../data/faq';
+import { faqKo } from '../../i18n/faq-ko';
 
-const faq = [
-  { q: '문라이트 피크스에서 결혼할 수 있나요?', a: '네, 확인됨. 하트 레벨 8에서 청혼한 다음, 최소 2일 이후로 날짜를 정하세요 — 결혼식에는 마을의 뱀파이어와 늑대인간들이 참석합니다.' },
-  { q: '문라이트 피크스에서 아이를 가질 수 있나요?', a: '아니요 — 여러 정보원을 통해 확인됨, 추가할 계획도 발표되지 않았습니다. 이미 자녀가 있는 연상 캐릭터(Orlock이나 Ridge 같은)와 결혼하면 계부모가 됩니다.' },
-  { q: '문라이트 피크스에 전투가 있나요?', a: '아니요, 확인됨 — 게임은 전적으로 여유로운 삶에 집중합니다: 농사, 낚시, 마법, 장식, 관계 맺기까지, 전투 시스템은 전혀 없습니다.' },
-  { q: '로맨스 대상은 몇 명인가요?', a: '확인됨: 23명의 로맨스 가능한 주민이 여섯 가문(Ambrosia, Webb, Logan, Hosu, Khazan, Henderson)에 속하며, 가문에 속하지 않는 Death와 사랑의 악마 Llemi까지 포함됩니다.' },
-  { q: '늑대인간과 로맨스를 나눌 수 있나요?', a: '네 — Saga가 확인된 로맨스 대상이며, 보름달에 따라 에너지가 변하는 늑대인간 주민입니다.' },
-  { q: '문라이트 피크스는 데이팅 시뮬레이션인가요?', a: '주로는 아닙니다 — Stardew Valley 스타일의 코지 파밍 & 라이프 시뮬레이션이 우선이며, 데이트와 결혼은 여러 시스템(농사, 마법, 장식, 탐험) 중 하나입니다.' },
-  { q: '문라이트 피크스의 연령 등급은 무엇인가요?', a: '확인됨: 일본에서 CERO "B"(12세 이상) 등급입니다. 전투가 없고 코지-고딕 톤이라, 다른 지역에서도 대체로 낮은 연령 등급을 목표로 합니다.' },
-  { q: '로맨스 없이 플레이할 수 있나요?', a: '네 — 로맨스는 선택 사항이며, 어떤 관계도 추구하지 않고 농사, 장식, 탐험만 즐길 수 있습니다.' },
-  { q: '문라이트 피크스는 모바일에서도 할 수 있나요?', a: '네 — 출시일부터 Google Play를 통한 Android에서 플레이 가능합니다. iOS/iPhone 버전은 발표되지 않았습니다.' },
-  { q: '문라이트 피크스에 협동 모드가 있나요?', a: '협동 모드는 발표되지 않았습니다. 현재 모든 정보는 문라이트 피크스가 싱글플레이어 게임임을 나타냅니다.' },
-  { q: '로맨스는 성별 중립적인가요?', a: '네 — 캐릭터 모델은 의도적으로 성별 중립적으로 설계되어 있어서, 자신의 뱀파이어를 어떻게 만들든 자격이 되는 어떤 주민과도 로맨스를 나눌 수 있습니다.' },
-  { q: '문라이트 피크스 가격은 얼마인가요?', a: `Steam(PC/Mac), Switch, Android에서 ${GAME.price}이며, Switch 2에서는 39.99달러입니다.` },
-];
+const catLabelKo: Record<FaqCat, string> = {
+  platforms: '플랫폼, 가격 & 데모',
+  romance: '로맨스 & 결혼',
+  characters: '캐릭터',
+  world: '세계관 & 게임플레이',
+  farming: '농사 & 경제',
+  general: '일반',
+  quests: '퀘스트 & 진행',
+};
+
+const cats: FaqCat[] = ['platforms', 'romance', 'characters', 'world', 'farming', 'quests', 'general'];
+const translatedFaqs = faqs.filter((f) => faqKo[f.slug]);
 
 const jsonLd = [
-  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
   { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
     { '@type': 'ListItem', position: 1, name: '홈', item: `${SITE.url}/ko` },
-    { '@type': 'ListItem', position: 2, name: '자주 묻는 질문', item: `${SITE.url}/ko/faq` },
+    { '@type': 'ListItem', position: 2, name: '자주 묻는 질문', item: new URL('/ko/faq', SITE.url).href },
   ] },
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: translatedFaqs.map((f) => ({
+    '@type': 'Question', name: faqKo[f.slug].q,
+    acceptedAnswer: { '@type': 'Answer', text: [faqKo[f.slug].a, ...(faqKo[f.slug].more || [])].join(' ') },
+  })) },
 ];
 ---
 <Base
-  title="문라이트 피크스 — 자주 묻는 질문 (FAQ)"
-  description="문라이트 피크스에 대해 가장 많이 묻는 질문에 대한 답변: 결혼, 자녀, 전투, 로맨스, 상점, 연령 등급까지."
+  title="문라이트 피크스 — 자주 묻는 질문 전체 (FAQ)"
+  description="문라이트 피크스 전체 FAQ 한국어판: 플랫폼, 로맨스, 캐릭터, 세계관, 농사, 퀘스트까지 카테고리별로 정리했습니다."
   path="/ko/faq"
   jsonLd={jsonLd}
   crumbs={[{ label: '자주 묻는 질문' }]}
@@ -37,26 +40,53 @@ const jsonLd = [
   <article class="page">
     <div class="wrap">
       <p class="eyebrow">입문 · FAQ</p>
-      <h1>문라이트 피크스 <em>자주 묻는 질문</em></h1>
+      <h1>문라이트 피크스 <em>전체 FAQ</em></h1>
       <p class="intro">
-        {GAME.title}에 대해 가장 많이 묻는 질문에 대한 빠른 답변으로, 추측이 아니라 출시 시점에
-        확인된 사실을 기반으로 합니다. 최종 업데이트: {SITE.updated}.
+        {GAME.title}에 대한 {translatedFaqs.length}개의 질문과 답변을 카테고리별로 정리했습니다.
+        추측이 아니라 확인된 사실을 기반으로 하며, 미확인 정보는 명확히 표시합니다. 최종 업데이트:
+        {SITE.updated}.
       </p>
 
-      <div class="faq">
-        {faq.map((f) => (
-          <details>
-            <summary>{f.q}</summary>
-            <p>{f.a}</p>
-          </details>
-        ))}
-      </div>
+      <nav class="faq-jump" aria-label="FAQ 카테고리">
+        {cats.map((cat) => {
+          const count = translatedFaqs.filter((f) => f.cat === cat).length;
+          return count > 0 ? <a href={`#${cat}`}>{catLabelKo[cat]} <span>{count}</span></a> : null;
+        })}
+      </nav>
+
+      {cats.map((cat) => {
+        const items = translatedFaqs.filter((f) => f.cat === cat);
+        if (items.length === 0) return null;
+        return (
+          <section id={cat} class="faq-category">
+            <h2>{catLabelKo[cat]}</h2>
+            <div class="faq">
+              {items.map((f) => (
+                <details>
+                  <summary>{faqKo[f.slug].q}</summary>
+                  <p>{faqKo[f.slug].a}</p>
+                  {faqKo[f.slug].more?.map((m) => <p>{m}</p>)}
+                </details>
+              ))}
+            </div>
+          </section>
+        );
+      })}
 
       <div class="callout wip">
-        더 완전하고 상세한 FAQ는 <a href="/faq">영어판 FAQ</a>를 참고하세요 — 플랫폼, 로맨스,
-        캐릭터, 세계관, 퀘스트, 농사 등 카테고리별로 정리되어 있습니다.
+        영문판과 동일한 {translatedFaqs.length}개 질문을 한국어로 번역했습니다. 각 질문의 상세 페이지는
+        <a href="/faq">영문판 FAQ</a>에서도 확인할 수 있습니다.
         관련: <a href="/ko/beginner-guide">초보자 가이드</a>, <a href="/ko/romance">로맨스</a>.
       </div>
     </div>
   </article>
+
+  <style>
+    .faq-jump { display: flex; flex-wrap: wrap; gap: 8px; margin: 18px 0 28px; }
+    .faq-jump a { border: 1px solid var(--line); border-radius: 999px; color: var(--mist); background: var(--surface); padding: 7px 12px; text-decoration: none; font-family: var(--mono); font-size: 0.76rem; }
+    .faq-jump a:hover { border-color: color-mix(in srgb, var(--candle) 50%, var(--line)); color: var(--candle); }
+    .faq-jump span { color: var(--faint); margin-left: 4px; }
+    .faq-category { margin: 28px 0; padding-top: 20px; border-top: 1px solid var(--line); }
+    .faq-category:first-of-type { border-top: none; padding-top: 0; }
+  </style>
 </Base>
