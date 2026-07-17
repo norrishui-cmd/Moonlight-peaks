@@ -1,0 +1,49 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE } from '../../consts';
+---
+<Base
+  title="隐私政策 | Moonlight Peaks Wiki & Guide"
+  description="Moonlight Peaks Wiki & Guide 如何处理Cookie、分析数据和广告。"
+  path="/zh/privacy"
+  crumbs={[{ label: '隐私政策' }]}
+  lang="zh"
+>
+  <article class="page">
+    <div class="wrap">
+      <h1>隐私政策</h1>
+      <p class="intro">本网站如何处理数据、Cookie、分析工具和广告。最后更新:{SITE.updated}。</p>
+
+      <h2>我们是谁</h2>
+      <p>Moonlight Peaks Wiki & Guide({SITE.url})是一个独立的、由粉丝制作的攻略网站。你可以通过{SITE.contact}联系我们。</p>
+
+      <h2>Cookie</h2>
+      <p>
+        我们使用Cookie和类似技术来实现网站基本功能、统计访问流量,以及(一旦启用后)投放广告。
+        你可以通过浏览器设置来管理或删除Cookie。在法律要求的地区,我们会在设置非必要Cookie前征求同意。
+      </p>
+
+      <h2>分析工具</h2>
+      <p>
+        我们可能使用注重隐私的分析工具(例如Google Analytics)来了解哪些页面对访客有用。
+        这会收集聚合数据,如页面浏览量、大致地区和设备类型,不会用于识别你的个人身份。
+      </p>
+
+      <h2>广告</h2>
+      <p>
+        本网站可能展示来自第三方广告网络(如Google AdSense)的广告。这些合作伙伴可能使用Cookie
+        来展示相关广告并衡量效果。你可以通过Google的广告设置以及你所在地区相关的行业退出页面,
+        了解并选择退出个性化广告。
+      </p>
+
+      <h2>你的选择</h2>
+      <p>
+        根据你所在的地区(例如欧盟/欧洲经济区、英国或加利福尼亚州),你可能有权访问、更正或删除
+        个人数据,并选择退出个性化广告。请通过{SITE.contact}联系我们提出请求。
+      </p>
+
+      <h2>变更</h2>
+      <p>随着网站的发展,或广告与分析工具的变化,我们可能会更新本政策。上方"最后更新"日期反映了最新版本。</p>
+    </div>
+  </article>
+</Base>

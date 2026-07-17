@@ -1,0 +1,65 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+
+const faq = [
+  { q: 'Moonlight Peaks的物品栏是怎么运作的?', a: '发售时确认:游戏采用统一的房屋储物系统——制作台(比如厨房和坩埚)会自动从房屋储物中直接取用原料和材料,而不需要你把所有东西背在个人物品栏里。' },
+  { q: '可以扩大物品栏容量吗?', a: '尚未确认。鉴于统一储物的设计思路,如果真的有容量升级,更可能是针对房屋储物,而不是传统的携带槽位物品栏。' },
+  { q: '怎么卖东西?', a: '把物品放进Chester——这个在镇公所登记时Brook赠送的活体储物箱——物品会在你睡觉时于夜间售出。' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '首页', item: `${SITE.url}/zh` },
+    { '@type': 'ListItem', position: 2, name: '物品栏', item: new URL('/zh/inventory', SITE.url).href },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks 物品栏:没有携带上限——储物系统是这样运作的"
+  description="确认:Moonlight Peaks完全跳过了传统的携带槽位物品栏,采用统一房屋储物系统自动供应制作台——以及通过Chester销售的具体方式。"
+  path="/zh/inventory"
+  jsonLd={jsonLd}
+  crumbs={[{ label: '物品栏' }]}
+  lang="zh"
+  showExport
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">入门 · 物品栏</p>
+      <h1>Moonlight Peaks <em>物品栏</em>与储物</h1>
+      <p class="intro">
+        {GAME.title}处理物品栏的方式跟典型的携带槽位系统不同。以下是已确认的内容。最后更新:{SITE.updated}。
+      </p>
+
+      <h2>统一的房屋储物</h2>
+      <p>
+        发售时确认:Moonlight Peaks不需要为制作而在个人物品栏里来回倒腾,而是采用统一的房屋储物——
+        把材料放进家里的储物空间,制作台(厨房、坩埚等)会自动取用所需材料。早期玩家把这称为
+        游戏里更方便的生活质量系统之一。
+      </p>
+
+      <h2>通过Chester销售</h2>
+      <p>
+        确认:把物品放进<a href="/characters/chester">Chester</a>就能卖出去——这个在镇公所登记时
+        Brook赠送的活体储物箱。物品会在你睡觉时于夜间售出,基础销售不需要单独跑一趟商店。
+      </p>
+
+      <h2>FAQ</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        相关:<a href="/farming">农业</a>、<a href="/items">物品</a>、<a href="/characters/chester">Chester</a>、
+        <a href="/zh/beginner-guide">新手指南</a>。
+      </div>
+    </div>
+  </article>
+</Base>

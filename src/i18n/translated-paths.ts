@@ -73,11 +73,11 @@ export const translatedPathsByLocale: Record<Locale, Set<string>> = {
   en: new Set(), // English is the source; not meaningful to check "is English translated".
   es: new Set([...sharedEsJaZhPaths, ...esOnlyPaths]),
   ja: new Set([...sharedEsJaZhPaths, ...jaOnlyPaths, '/characters/customize']),
-  zh: new Set([...sharedEsJaZhPaths, '/characters/customize',
+  zh: new Set([...sharedEsJaZhPaths, '/characters/customize', '/privacy', '/shipping', '/inventory', '/fishing', '/friendship', '/house', '/mini-games', '/reviews', '/achievements', '/best-settings', '/system-requirements', '/vampsters',
     '/tools/fish-finder', '/tools/item-tracker', '/tools/gift-tracker', '/tools/families-explorer',
     '/tools/farming-profit-planner', '/tools/nokturna-tracker', '/tools/platform-picker',
     '/tools/romance-gift-finder', '/tools/romance-match-quiz', '/tools/romance-planner', '/tools/submit-data']),
-  'zh-hant': new Set([...sharedEsJaZhPaths, '/characters/customize',
+  'zh-hant': new Set([...sharedEsJaZhPaths, '/characters/customize', '/privacy', '/shipping', '/inventory', '/fishing', '/friendship', '/house', '/mini-games', '/reviews', '/achievements', '/best-settings', '/system-requirements', '/vampsters',
     '/tools/fish-finder', '/tools/item-tracker', '/tools/gift-tracker', '/tools/families-explorer',
     '/tools/farming-profit-planner', '/tools/nokturna-tracker', '/tools/platform-picker',
     '/tools/romance-gift-finder', '/tools/romance-match-quiz', '/tools/romance-planner', '/tools/submit-data']), // mirrors the same pages as zh, converted via OpenCC

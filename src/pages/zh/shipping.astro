@@ -1,0 +1,66 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+
+const faq = [
+  { q: 'Moonlight Peaks里怎么卖东西?', a: '发售时确认:把物品放进Chester——这个在镇公所登记时Brook赠送的活体储物箱。物品会在你睡觉时于夜间售出——不需要单独去柜台交易。' },
+  { q: '卖原始作物划算吗?', a: '据报告:很少划算。早期玩家发现加工(比如用酒桶把Blood Grapes做成Blood Wine、把作物磨成面粉、制作手工艺品)比卖原始收获物价值高得多。' },
+  { q: '早期赚钱最好的方法是什么?', a: '据报告:尽早搭建酒桶等加工设施,因为整个经济系统是围绕成品设计的,而不是原始销售。同时保留一小片食用作物的轮作,因为烹饪食物能同时恢复体力和法力。' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '首页', item: `${SITE.url}/zh` },
+    { '@type': 'ListItem', position: 2, name: '出货与销售', item: new URL('/zh/shipping', SITE.url).href },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks 出货与销售 — Chester的运作方式"
+  description="Moonlight Peaks如何卖东西:活体储物箱Chester、为什么加工比卖原料划算,以及已确认的初期赚钱循环。"
+  path="/zh/shipping"
+  jsonLd={jsonLd}
+  crumbs={[{ label: '出货与销售' }]}
+  lang="zh"
+  showExport
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">入门 · 经济</p>
+      <h1>Moonlight Peaks <em>出货</em>与销售</h1>
+      <p class="intro">
+        {GAME.title}里钱是怎么流动的——只讲已确认机制。最后更新:{SITE.updated}。
+      </p>
+
+      <h2>Chester就是你的出货箱</h2>
+      <p>
+        发售时确认:<a href="/characters/chester">Chester</a>这个活体储物箱,是Brook镇长在你第一次
+        造访镇公所时送给你的。睡前把做好的成品放进Chester,醒来时销售所得就已经到账——不需要
+        手动去柜台交易。
+      </p>
+
+      <h2>加工比卖原料划算</h2>
+      <p>
+        早期玩家报告:卖原始作物很少划算。真正赚钱的是加工——用酒桶把Blood Grapes做成Blood Wine、
+        把作物磨成面粉、制作手工艺品。尽早搭建多个酒桶是反复被提到的技巧,因为加工被描述为
+        游戏内经济的支柱。
+      </p>
+
+      <h2>FAQ</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        相关:<a href="/farming">农业</a>、<a href="/characters/chester">Chester</a>、
+        <a href="/inventory">物品栏</a>、<a href="/items">物品</a>。
+      </div>
+    </div>
+  </article>
+</Base>

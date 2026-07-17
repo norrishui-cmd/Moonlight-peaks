@@ -1,0 +1,73 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+
+const faq = [
+  { q: 'Moonlight Peaks里可以装饰自己的小屋吗?', a: '可以——据报告:你可以自定义小屋内部和宅院环境,摆放和旋转家具,还能制作小径和仙女灯这类装饰品。' },
+  { q: 'Moonlight Peaks里有温室吗?', a: '有,确认:建造温室对应一个独立的成就"永恒绽放"。查看我们专门的温室页面,了解目前已知的建造成本和它能带来什么。' },
+  { q: '可以升级房屋吗?', a: '确认:"德古拉庄园"是完全升级房屋对应的成就,所以除了装饰之外确实存在房屋升级路线,只是具体档位和花费还没有信源。谷仓(4000金币,向Ridge购买)和水井(1500金币)这两项建筑升级也已确认。' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '首页', item: `${SITE.url}/zh` },
+    { '@type': 'ListItem', position: 2, name: '房屋与装饰', item: new URL('/zh/house', SITE.url).href },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks 房屋、装饰与温室"
+  description="Moonlight Peaks小屋装饰:目前已确认的家具、小径和仙女灯,以及温室或房屋升级还有哪些尚未验证的地方。"
+  path="/zh/house"
+  jsonLd={jsonLd}
+  crumbs={[{ label: '房屋与装饰' }]}
+  lang="zh"
+  showExport
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">入门 · 家</p>
+      <h1>Moonlight Peaks <em>房屋</em>与装饰</h1>
+      <p class="intro">
+        除了农业之外,你的小屋和宅院——已确认的装饰内容,和尚未验证的部分分开说明。
+        最后更新:{SITE.updated}。
+      </p>
+
+      <h2>装饰你的小屋</h2>
+      <p>
+        据报告:Moonlight Peaks的装饰系统涵盖摆放和旋转家具、自定义小屋内部,以及为宅院制作
+        小径、仙女灯这类装饰品。
+      </p>
+
+      <h2>温室——确认存在</h2>
+      <p>
+        确认:建造温室对应一个独立的Steam成就"永恒绽放"。社区报告:拥有温室据说也有助于达成
+        其他几个农业相关目标,值得优先建造。具体建造成本和空间细节,请查看我们的
+        <a href="/farm/greenhouse">温室页面</a>,会随着确认信息更新。
+      </p>
+
+      <h2>目前已确认的建筑升级</h2>
+      <p>
+        确认:"德古拉庄园"是完全升级房屋对应的成就,所以除了装饰之外确实存在真实的升级路线——
+        具体档位和花费还没有信源。另外两项已确认的建筑购买:<strong>谷仓</strong>(4000金币加
+        材料,向Ridge购买,购买牲畜前必须先建)和<strong>水井</strong>(据报告1500金币,有助于浇水)。
+      </p>
+
+      <h2>FAQ</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        相关:<a href="/farming">农业</a>、<a href="/character-creator">角色创建器</a>、
+        <a href="/zh/beginner-guide">新手指南</a>。
+      </div>
+    </div>
+  </article>
+</Base>

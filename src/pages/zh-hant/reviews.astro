@@ -1,0 +1,86 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+
+const reviews = [
+  { outlet: 'Prima Games', score: '9.5 / 10', takeaway: '近期最出色的休閒農場模擬遊戲之一,稱讚其有意義的成長曲線、令人難忘的角色,以及超自然主題貫穿每個系統的方式。' },
+  { outlet: 'GameWatcher', score: '7.5 / 10', takeaway: '對熟悉這個型別的玩家來說開局較慢,但一旦展開就是一段有回報、放鬆的生活模擬體驗,背景設定帶著迷人的超自然色彩。' },
+  { outlet: 'Gamereactor', score: '7 / 10', takeaway: '喜歡生活模擬公式加入的夜行元素,但指出體力槽疊加在日出截止時間之上顯得多餘,而不是增加了深度。' },
+  { outlet: 'Nintendo World Report', score: '已評測(Switch 2)', takeaway: '確認已釋出Switch 2專屬評測,認為恐怖元素的運用很適合這款休閒生活模擬遊戲;具體的數字評分這裡暫未查到來源。' },
+  { outlet: 'Metacritic(媒體評分彙總)', score: '已收錄10篇媒體評測', takeaway: '彙總頁面已上線,收錄10篇媒體評測;各家評分差異較大,普遍稱讚角色陣容和世界設定,並反覆提到體力/法力節奏,以及Switch 2版本的載入時間問題。' },
+];
+
+const faq = [
+  { q: 'Moonlight Peaks好玩嗎?評測怎麼說?', a: 'Prima Games、GameWatcher、Gamereactor等媒體給出的早期評分在7到9.5分(滿分10分)之間——整體偏正面,超自然主題和角色塑造獲得最多稱讚,同時也有一些關於節奏/體力系統的批評。' },
+  { q: 'Moonlight Peaks的Metacritic評分是多少?', a: 'Metacritic頁面已上線,收錄了10篇媒體評測,但我們這裡還沒有查到具體的彙總數字——請直接檢視Metacritic獲取當前均分,我們不會自己計算或編造彙總評分。' },
+  { q: '評測對Moonlight Peaks有什麼批評?', a: '目前最具體、有出處的批評是關於節奏的:Gamereactor的評測指出,體力槽疊加在已經限制每晚時長的日出截止時間之上顯得多餘。GameWatcher則提到對已經深入這個型別的玩家來說開局較慢。' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '首頁', item: `${SITE.url}/zh` },
+    { '@type': 'ListItem', position: 2, name: '評測彙總', item: new URL('/zh-hant/reviews', SITE.url).href },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks 評測彙總 — 媒體評分與結論"
+  description="Moonlight Peaks好玩嗎?彙總來自Prima Games、GameWatcher、Gamereactor等媒體的真實發售周評測和評分,隨新評測釋出持續更新。"
+  path="/zh-hant/reviews"
+  jsonLd={jsonLd}
+  crumbs={[{ label: '評測彙總' }]}
+  lang="zh-hant"
+  showExport
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">入門 · 評測</p>
+      <h1>Moonlight Peaks <em>評測</em>彙總</h1>
+      <p class="intro">
+        {GAME.title}的真實媒體評分和結論,隨評測釋出持續收集——不是我們自己的意見,也不是編造的
+        彙總分數。發售前的早期體驗請檢視我們的<a href="/previews">發售前預覽與試玩版體驗</a>。
+        最後更新:{SITE.updated}。
+      </p>
+
+      <h2>目前的媒體評分</h2>
+      <table class="facts">
+        <tr><th>媒體</th><th>評分</th><th>要點</th></tr>
+        {reviews.map((r) => (
+          <tr>
+            <td>{r.outlet}</td>
+            <td>{r.score}</td>
+            <td>{r.takeaway}</td>
+          </tr>
+        ))}
+      </table>
+
+      <h2>媒體一致認可的地方</h2>
+      <p>
+        評測者一致點名稱讚休閒農場模擬公式里加入的超自然轉折——夜行時間表、七大家族,以及角色
+        塑造的深度——是這款遊戲最強的資產。美術方向和"迷人的超自然"氛圍在多家媒體中被獨立提及。
+      </p>
+
+      <h2>媒體提出的批評</h2>
+      <p>
+        目前最具體、有出處的批評跟節奏有關:Gamereactor的評測指出,體力槽疊加在已經限制每晚時長
+        的日出截止時間之上顯得多餘。GameWatcher則提到,對已經深入這個型別的玩家來說開局較慢。
+      </p>
+
+      <div class="callout">
+        本彙總只列出能明確歸屬到具名媒體的評分。我們不會自己計算彙總分數,會隨著更多評測被驗證
+        持續在這裡補充。
+      </div>
+
+      <h2>FAQ</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </article>
+</Base>

@@ -1,0 +1,65 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+
+const faq = [
+  { q: 'Moonlight Peaks的物品欄是怎麼運作的?', a: '發售時確認:遊戲採用統一的房屋儲物系統——製作臺(比如廚房和坩堝)會自動從房屋儲物中直接取用原料和材料,而不需要你把所有東西背在個人物品欄裡。' },
+  { q: '可以擴大物品欄容量嗎?', a: '尚未確認。鑑於統一儲物的設計思路,如果真的有容量升級,更可能是針對房屋儲物,而不是傳統的攜帶槽位物品欄。' },
+  { q: '怎麼賣東西?', a: '把物品放進Chester——這個在鎮公所登記時Brook贈送的活體儲物箱——物品會在你睡覺時於夜間售出。' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '首頁', item: `${SITE.url}/zh` },
+    { '@type': 'ListItem', position: 2, name: '物品欄', item: new URL('/zh-hant/inventory', SITE.url).href },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks 物品欄:沒有攜帶上限——儲物系統是這樣運作的"
+  description="確認:Moonlight Peaks完全跳過了傳統的攜帶槽位物品欄,採用統一房屋儲物系統自動供應制作臺——以及透過Chester銷售的具體方式。"
+  path="/zh-hant/inventory"
+  jsonLd={jsonLd}
+  crumbs={[{ label: '物品欄' }]}
+  lang="zh-hant"
+  showExport
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">入門 · 物品欄</p>
+      <h1>Moonlight Peaks <em>物品欄</em>與儲物</h1>
+      <p class="intro">
+        {GAME.title}處理物品欄的方式跟典型的攜帶槽位系統不同。以下是已確認的內容。最後更新:{SITE.updated}。
+      </p>
+
+      <h2>統一的房屋儲物</h2>
+      <p>
+        發售時確認:Moonlight Peaks不需要為製作而在個人物品欄裡來回倒騰,而是採用統一的房屋儲物——
+        把材料放進家裡的儲物空間,製作臺(廚房、坩堝等)會自動取用所需材料。早期玩家把這稱為
+        遊戲裡更方便的生活質量系統之一。
+      </p>
+
+      <h2>透過Chester銷售</h2>
+      <p>
+        確認:把物品放進<a href="/characters/chester">Chester</a>就能賣出去——這個在鎮公所登記時
+        Brook贈送的活體儲物箱。物品會在你睡覺時於夜間售出,基礎銷售不需要單獨跑一趟商店。
+      </p>
+
+      <h2>FAQ</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        相關:<a href="/farming">農業</a>、<a href="/items">物品</a>、<a href="/characters/chester">Chester</a>、
+        <a href="/zh-hant/beginner-guide">新手指南</a>。
+      </div>
+    </div>
+  </article>
+</Base>

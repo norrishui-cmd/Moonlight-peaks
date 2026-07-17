@@ -1,0 +1,92 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+
+const faq = [
+  { q: 'Moonlight Peaks里有多少只Vampster?', a: '社区报告:总共100只,分散在从林地到海滩的各个户外区域。' },
+  { q: 'Moonlight Peaks里要把Vampster带去哪里?', a: '社区报告:带回Cave of Echoes里它们的巢穴。你在那里挖铜矿时遇到的Alina会请你帮忙把它们全部找回来。' },
+  { q: '一次能带超过一只Vampster吗?', a: '不能——社区报告:一次只能携带一只Vampster。跟人互动,或者触发过场动画,都会让你手上的那只掉落。' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '首页', item: `${SITE.url}/zh` },
+    { '@type': 'ListItem', position: 2, name: 'Vampster', item: new URL('/zh/vampsters', SITE.url).href },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks Vampster:全部位置与收集方法"
+  description="Moonlight Peaks Vampster攻略:它们是什么、去哪里找齐全部100只、怎么携带,以及它们的巢穴在哪里——已确认事实和社区报告分开标注。"
+  path="/zh/vampsters"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Vampster' }]}
+  lang="zh"
+  showExport
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">入门 · 收集品</p>
+      <h1>Moonlight Peaks <em>Vampster</em></h1>
+      <p class="intro">
+        Vampster是分散在{GAME.title}世界各处的小型洞穴生物,你需要把它们找齐并带回巢穴。
+        以下是关于寻找和收集它们的已确认信息和社区报告。
+      </p>
+
+      <div class="callout">
+        <strong>快速回答:</strong>Vampster是户外找到的迷路生物,需要一次带一只回到Cave of Echoes里
+        它们的巢穴。社区报告总数:100只。
+      </div>
+
+      <h2>Vampster任务是怎么开始的</h2>
+      <p>
+        社区报告:第一周左右,前往Cave of Echoes挖铜矿时,入口附近会出现一只匆忙逃跑的Vampster。
+        进洞后你会遇到<a href="/characters/alina">Alina</a>,她会解释这些Vampster都迷路了,
+        请你帮忙把它们都带回家。
+      </p>
+
+      <h2>去哪里找它们</h2>
+      <p>
+        社区报告:Vampster广泛分散在游戏的户外区域,从林地到海滩都有。用镰刀清理过树木和灌木丛后,
+        更容易发现它们,因为有些藏在杂草里。
+      </p>
+
+      <h2>怎么携带和归还它们</h2>
+      <ul>
+        <li><strong>一次一只:</strong>社区报告——不能同时叠加携带多只Vampster;你会一直带着一只,直到把它放下。</li>
+        <li><strong>它们的巢穴:</strong>社区报告——在Misty Shores的Cave of Echoes内(通过<a href="/quests/a-bridge-too-far">A Bridge Too Far</a>解锁)。</li>
+        <li><strong>注意打断:</strong>社区报告——跟居民对话,或触发任何过场动画,都会让你手上携带的Vampster掉落,所以出发前先清空对话密集的区域。</li>
+      </ul>
+
+      <h2>需要特殊形态才能收集它们吗?</h2>
+      <p>
+        这方面的信源略有出入,所以我们不把它当作已经确定的单一机制来呈现:一个社区信源提到,
+        解锁<a href="/shapeshifting">变身</a>成Hellkitten形态后能更轻松地进入Vampster巢穴,
+        而我们此前的任务笔记则特别提到用蝙蝠形态来携带它们。这两者可能在任务线的不同阶段都成立
+        (比如一种形态用来户外携带,另一种用来进入巢穴)——一旦能对照实机验证具体机制,我们会更新本页。
+      </p>
+
+      <h2>常见问题排查</h2>
+      <ul>
+        <li><strong>过场动画后跟丢了一只Vampster:</strong>属于正常现象——过场动画会让你手上携带的那只掉落,它会留在掉落的位置。</li>
+        <li><strong>找不到更多Vampster了:</strong>试试在还没完全清理过的区域,用镰刀清除杂草和灌木丛。</li>
+      </ul>
+
+      <h2>常见问题</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        相关:<a href="/locations/mines">Cave of Echoes</a>、<a href="/achievements">成就</a>
+        (包括"Back to the Den")、<a href="/characters/alina">Alina</a>、<a href="/shapeshifting">变身</a>。
+      </div>
+    </div>
+  </article>
+</Base>

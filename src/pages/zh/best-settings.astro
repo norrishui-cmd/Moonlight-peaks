@@ -1,0 +1,124 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+
+const settingsRows = [
+  ['PC', '已确认的无障碍/画面选项:垂直同步开关、手柄震动开关、屏幕交互标签、文字动画开关、按键重新绑定、帧率锁定、渲染比例。社区报告:还可以在12小时制和24小时制之间切换显示,考虑到游戏严格的凌晨6点日出截止时间,这个设置比听起来更重要。一个真实的报告怪癖:画面设置(包括分辨率)保存在云存档里,所以在Steam Deck和桌面显示器之间切换时,每次都需要重新调整。'],
+  ['Mac', '通过与Windows相同的Steam版本运行;请查看当前Steam系统需求以确认你的具体Mac硬件是否支持。'],
+  ['Steam Deck', '已确认在Steam上获得Verified认证,ProtonDB评级为Gold。一篇深度评测报告称,在不限制TDP的情况下游戏可能难以稳定在60帧,建议锁定刷新率为50Hz以获得更流畅、更省电的体验。'],
+  ['Nintendo Switch / Switch 2', '开箱即用的完整手柄支持;评测者发现Switch 2版本在掌机模式下运行得格外出色。具体版本差异请查看我们的Switch攻略。'],
+  ['摄像机与UI舒适度(所有平台)', '真实的玩家报告怪癖:默认摄像机拉得比较近/放大,一些用大显示器玩PC版的玩家觉得不舒服(类似晕动症),相比之下在Steam Deck或Switch的小屏幕上,同样的放大倍率感觉更自然。'],
+];
+
+const testingSteps = [
+  '先确认你的无障碍需求:已确认的选项有震动、交互标签、文字动画和按键重新绑定——目前没有确认的色盲模式。',
+  '在Steam Deck上,如果在不限制TDP时看到帧率下降,可以试试锁定刷新率为50Hz。',
+  '如果用PC显示器玩,默认摄像机放大幅度感觉太近,可以试试窗口模式,不少玩家觉得这样更舒服。',
+  '换设备后要预期重新调整画面设置——这些设置保存在云存档里,不是按设备单独保存的。',
+  '尽早测试手柄和键鼠的区别:多位玩家报告这款游戏更偏向手柄优先,默认键盘方案里鼠标输入用得比较少。',
+];
+
+const faq = [
+  {
+    q: 'Moonlight Peaks最佳设置是什么?',
+    a: '在Steam Deck上,如果看到帧率下降可以试试锁定50Hz刷新率。在PC显示器上,如果默认摄像机放大幅度感觉太近,窗口模式可能有帮助。注意画面设置保存在云存档里,换设备后需要重新调整。',
+  },
+  {
+    q: 'Moonlight Peaks在Steam Deck上的最佳设置是什么?',
+    a: '确认:游戏获得Steam Deck Verified认证,ProtonDB评级Gold,开箱即用完整手柄支持。一篇深度评测发现在不限制TDP时可能难以稳定60帧,建议锁定50Hz刷新率以获得更流畅、更省电的体验。',
+  },
+  {
+    q: '应该用手柄还是键鼠?',
+    a: '手柄更贴合游戏设计——多位玩家报告默认的键鼠方案里鼠标基本用不上,主要靠键盘手来操作。完整手柄支持在PC、Steam Deck和Switch上表现都不错。',
+  },
+  {
+    q: 'Moonlight Peaks有无障碍设置吗?',
+    a: '有一些:已确认的选项有垂直同步、手柄震动、屏幕交互标签、文字动画、按键重新绑定、帧率锁定和渲染比例。尚未确认:目前没有报告色盲模式或读写困难友好的文字选项。',
+  },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '首页', item: `${SITE.url}/zh` },
+    { '@type': 'ListItem', position: 2, name: '最佳设置', item: new URL('/zh/best-settings', SITE.url).href },
+  ] },
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })) },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'HowTo',
+    name: '发售时如何安全地选择Moonlight Peaks设置',
+    description: '一份适用于PC、Mac、Steam Deck、Switch和Switch 2的Moonlight Peaks发售安全设置清单。',
+    step: testingSteps.map((text, index) => ({
+      '@type': 'HowToStep',
+      position: index + 1,
+      text,
+    })),
+  },
+];
+---
+<Base
+  title="Moonlight Peaks 最佳设置 - PC、Steam Deck、Switch与Mac"
+  description="Moonlight Peaks在PC、Mac、Steam Deck、Switch、Switch 2上的最佳设置攻略,涵盖手柄舒适度、可读性、试玩版测试和发售更新。"
+  path="/zh/best-settings"
+  jsonLd={jsonLd}
+  crumbs={[{ label: '最佳设置' }]}
+  lang="zh"
+  showExport
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">发售 · 最佳设置</p>
+      <h1>Moonlight Peaks <em>最佳设置</em></h1>
+      <p class="intro">
+        {GAME.title}在PC、Mac、Steam Deck和Switch/Switch 2上真实、已确认的设置与无障碍选项,
+        以及发售以来玩家报告的一些平台怪癖。
+      </p>
+
+      <div class="callout">
+        <strong>没有虚假跑分:</strong>具体帧率、画面预设、续航时间和平台性能笔记,只有在发售后
+        实测或有可靠信源确认时才会添加。
+      </div>
+
+      <h2>平台检查清单</h2>
+      <table class="facts">
+        {settingsRows.map((row) => (<tr><th>{row[0]}</th><td>{row[1]}</td></tr>))}
+      </table>
+
+      <h2>优先测试的内容</h2>
+      <ol>
+        {testingSteps.map((step) => (<li>{step}</li>))}
+      </ol>
+
+      <h2>相关页面</h2>
+      <div class="link-grid">
+        <a href="/demo">试玩版攻略</a>
+        <a href="/system-requirements">系统需求</a>
+        <a href="/known-issues">已知问题</a>
+        <a href="/platforms">平台</a>
+        <a href="/platforms/steam-deck">Steam Deck</a>
+        <a href="/launch-day">发售日专题</a>
+      </div>
+
+      <h2>FAQ</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </article>
+
+  <style>
+    .link-grid { display: grid; grid-template-columns: 1fr; gap: 10px; margin-top: 10px; }
+    @media (min-width: 640px) { .link-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+    .link-grid a { border: 1px solid var(--line); border-radius: 10px; background: var(--surface); color: var(--mist); padding: 12px 14px; text-decoration: none; }
+    .link-grid a:hover { border-color: color-mix(in srgb, var(--candle) 55%, var(--line)); }
+  </style>
+</Base>

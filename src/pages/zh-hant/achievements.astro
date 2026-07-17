@@ -1,0 +1,114 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+
+const achievements = [
+  { name: 'Discover all locations', desc: '找到Moonlight Peaks的每一個地點。' },
+  { name: 'A Farming Monopoly', desc: '賺取1,000,000金幣。' },
+  { name: 'Skulls in a Net', desc: '收集全部Soul Blobs。' },
+  { name: 'Back to the Den', desc: '把所有Vampster送回它們的巢穴。' },
+  { name: 'Making Mina Proud', desc: '烹飪25種不同的食譜。' },
+  { name: "Albertus' Helper", desc: '完成公告板上的25個工作。' },
+  { name: 'Magic at Max Capacity', desc: '達到法力值上限。' },
+  { name: 'Fully Energized', desc: '達到體力值上限。' },
+  { name: 'Moonlit Stretching', desc: '參加你的第一次瑜伽課。' },
+  { name: 'Back in Place', desc: '歸還所有塑膠椅子。' },
+  { name: 'Tree Hugger', desc: '愛上一棵樹。' },
+  { name: 'The Pumpking', desc: '遇見一個奇特的南瓜。' },
+  { name: 'Raiders of the Lost Art', desc: '完成Elvira的尋寶任務。' },
+  { name: 'A Childhood Dream', desc: '和Ridge一起建一座樹屋。' },
+  { name: 'Nokturna Master', desc: '收集全部Nokturna卡牌。' },
+  { name: 'Awooooo!', desc: '在滿月期間和一位狼人角色對話(社群報告)。' },
+  { name: 'AFKitten', desc: '連續撫摸你的Hellkitten 5分鐘(社群報告)。' },
+  { name: 'Cartographer', desc: '發現Moonlight Peaks的每一個地點,包括只有解鎖變身形態後才能到達的區域(社群報告)。' },
+  { name: 'Rightful Ritualist', desc: '啟用鎮上所有的女巫圈(社群報告)。' },
+  { name: 'Call of the Current', desc: '解鎖人魚/水之形態——確認在遊戲後期解鎖,但這第三種形態的具體解鎖條件仍未確認。' },
+  { name: 'Perpetual Bloom', desc: '建造一座溫室。' },
+  { name: 'Dracula Estate', desc: '把房屋完全升級。' },
+  { name: 'Vampire with a Wand', desc: '解鎖魔法,並施放任意一個法術一次。' },
+  { name: 'Master of Witchcraft', desc: '把每一個法術都升到滿級。' },
+  { name: 'A Magical Toolbelt', desc: '把任意工具升級為附魔版本。' },
+  { name: 'A Magical Cocktail', desc: '讓每種藥水效果同時生效。' },
+  { name: 'New Beginnings', desc: '種下你的第一株作物——通常是你遊戲內的第一個動作。' },
+  { name: 'Purrgatory', desc: '解鎖Hellkitten形態。' },
+  { name: 'Wings of the Night', desc: '解鎖蝙蝠形態。' },
+  { name: 'Out of the Mist', desc: '透過主線任務解除Misty Shores的詛咒。' },
+  { name: 'To the Depths', desc: '開啟地下墓室的入口。' },
+  { name: 'Happy New Year!', desc: '完整經歷遊戲內一整年的四個季節。' },
+  { name: 'A Generous Donor', desc: '總共送出299份禮物。' },
+  { name: 'Serial Gifter', desc: '一晚之內送出25份對方喜愛的禮物。' },
+  { name: 'Social Butterfly', desc: '和每一位角色的好感度都達到4顆心。' },
+  { name: 'Tied the Knot', desc: '把一段戀愛關係推到頂點並求婚。' },
+  { name: 'Buddies for Afterlife', desc: '像對待其他居民一樣,和Death建立友誼。' },
+];
+
+const faq = [
+  { q: 'Moonlight Peaks有多少個成就?', a: '發售時確認:Steam成就總數大約在59-60個之間(不同信源報告的數字略有差異)。目前公開查到具體名稱的有37個——上方表格是已確認的內容。' },
+  { q: 'Moonlight Peaks有Steam集換卡嗎?', a: '有——Steam商店頁面列出了Steam成就、Steam集換卡、Steam雲存檔,以及完整的手柄支援。' },
+  { q: '最難或最冷門的成就是什麼?', a: '幾個已確認的名稱聽起來更像是有趣的、容易錯過的成就,而不是純粹的刷數值——"Tree Hugger"(愛上一棵樹)和"The Pumpking"(遇見一個奇特的南瓜)聽起來都跟特定的一次性互動有關,而不是重複動作。' },
+  { q: '有跟戀愛或人際關係相關的成就嗎?', a: '有,確認:"Social Butterfly"(和每位角色都達到4顆心)、"Tied the Knot"(把戀愛推到頂點並求婚)、"A Generous Donor"(總共送出299份禮物)、"Serial Gifter"(一晚送出25份喜愛的禮物),以及"Buddies for Afterlife"(和Death建立友誼)都屬於戀愛/關係類標籤。"A Childhood Dream"(和Ridge建樹屋)和"Raiders of the Lost Art"(Elvira的尋寶任務)也跟特定的具名居民相關。' },
+  { q: '有建造溫室對應的成就嗎?', a: '有,確認:"Perpetual Bloom"是建造溫室後獲得的成就。' },
+  { q: '哪些成就跟變身形態相關?', a: '確認:"Purrgatory"(Hellkitten形態)、"Wings of the Night"(蝙蝠形態),以及"Call of the Current"(人魚/水之形態,遊戲後期解鎖)。' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '首頁', item: `${SITE.url}/zh` },
+    { '@type': 'ListItem', position: 2, name: '成就', item: new URL('/zh-hant/achievements', SITE.url).href },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks 成就 — 完整Steam成就攻略"
+  description="Moonlight Peaks確認有59個成就。檢視目前已查到名稱的成就,從收集Soul Blobs到賺取100萬金幣。"
+  path="/zh-hant/achievements"
+  jsonLd={jsonLd}
+  crumbs={[{ label: '成就' }]}
+  lang="zh-hant"
+  showExport
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">入門 · 成就</p>
+      <h1>Moonlight Peaks <em>成就</em></h1>
+      <p class="intro">
+        發售時確認:{GAME.title}共有<strong>59個Steam成就</strong>,還有Steam集換卡、雲存檔和完整
+        手柄支援。目前只有部分成就名稱是公開的——本頁只列出已經查到來源的內容,會隨著更多確認
+        持續增加。最後更新:{SITE.updated}。
+      </p>
+
+      <h2>已確認的成就(共59箇中的{achievements.length}個)</h2>
+      <table class="facts">
+        <tr><th>成就</th><th>解鎖方式</th></tr>
+        {achievements.map((a) => (
+          <tr>
+            <td>{a.name}</td>
+            <td>{a.desc}</td>
+          </tr>
+        ))}
+      </table>
+
+      <div class="callout">
+        還有45個成就在這裡尚未命名——我們只列出從真實Steam成就資料裡查到的內容,不做猜測。
+        請隨著更多確認持續關注更新。
+      </div>
+
+      <h2>FAQ</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        相關:<a href="/items">物品</a>、<a href="/farming">農業</a>、
+        <a href="/characters/albertus">Albertus(公告板)</a>、<a href="/characters/ridge">Ridge</a>、
+        <a href="/characters/elvira">Elvira</a>、<a href="/nokturna">Nokturna卡牌遊戲</a>。
+      </div>
+    </div>
+  </article>
+</Base>

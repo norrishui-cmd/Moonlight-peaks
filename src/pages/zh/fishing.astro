@@ -1,0 +1,65 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+
+const faq = [
+  { q: 'Moonlight Peaks里有钓鱼吗?', a: '有——钓鱼是农场之外可以做的活动之一,和采集、炼药并列。' },
+  { q: '怎么拿到鱼竿?', a: '确认:鱼竿一开始并不能获得——需要赢下和Noel的打赌(在他之前钓到3种不同的鱼)才能解锁。' },
+  { q: '完整的鱼类清单、地点和售价在哪里?', a: '完整数据库现在放在我们专门的图鉴页面——22种已确认鱼类,每种都有独立的详情页,涵盖地点、稀有度、季节/时间和售价。' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '首页', item: `${SITE.url}/zh` },
+    { '@type': 'ListItem', position: 2, name: '钓鱼', item: new URL('/zh/fishing', SITE.url).href },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks 钓鱼攻略 — 鱼类清单与地点"
+  description="Moonlight Peaks在哪里、什么时候钓鱼:怎么拿到鱼竿,以及完整的22种鱼类数据库在哪里。"
+  path="/zh/fishing"
+  jsonLd={jsonLd}
+  crumbs={[{ label: '钓鱼' }]}
+  lang="zh"
+  showExport
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">入门 · 钓鱼</p>
+      <h1>Moonlight Peaks <em>钓鱼</em>攻略</h1>
+      <p class="intro">
+        除了农场之外,{GAME.title}还能让你钓鱼、采集和炼制药水。最后更新:{SITE.updated}。
+      </p>
+
+      <h2>获得第一根鱼竿</h2>
+      <p>
+        确认:在游戏的前几个夜晚,Noel会在河边向你发起钓鱼比赛的挑战——在他之前钓到3种不同的鱼。
+        这个比赛没有时间限制,所以很容易赢,打败他能获得你的第一根鱼竿以及金币奖励。
+      </p>
+
+      <h2>完整的鱼类数据库</h2>
+      <p>
+        完整的、已确认的鱼类清单——22种鱼类,每种都有独立页面涵盖地点、稀有度、季节/天气/时间段、
+        大小和售价——现在放在<a href="/collections/fish">图鉴:鱼类</a>页面,而不是这里。
+        想查具体每种鱼的详情,请收藏那个页面。
+      </p>
+
+      <h2>FAQ</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        相关:<a href="/collections/fish">鱼类图鉴</a>、<a href="/collections">图鉴总览</a>、
+        <a href="/characters/noel">Noel</a>、<a href="/zh/beginner-guide">新手指南</a>。
+      </div>
+    </div>
+  </article>
+</Base>

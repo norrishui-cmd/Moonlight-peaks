@@ -1,0 +1,79 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+import GuideImage from '../../components/GuideImage.astro';
+
+const minigames = [
+  { name: '法術施放', how: '裝備法杖後,按照D鍵提示畫出圓點圖案。', where: '任何地方,魔法解鎖後' },
+  { name: '約會小遊戲', how: '因約會內容而異——例如按要求的顏色組裝花束,或把棉花糖烤到喜歡的程度。', where: '與好感度4級以上居民約會時' },
+  { name: '釣魚', how: '朝水中的陰影拋竿,然後用計時類小遊戲收線。', where: '水域,魚竿解鎖後' },
+  { name: '對戰Noel的釣魚比賽', how: '押注250金幣,在Noel之前釣到3種不同的魚,贏得魚竿。', where: '遊戲初期,與Noel相關' },
+];
+
+const faq = [
+  { q: 'Moonlight Peaks裡有哪些小遊戲?', a: '目前確認的有:法術施放(畫圓點圖案)、約會活動(比如組裝花束、烤棉花糖),以及計時類釣魚小遊戲——還有解鎖魚竿的Noel釣魚比賽。' },
+  { q: 'Moonlight Peaks的釣魚難嗎?', a: '評測者形容它刻意設計得低壓力而不是令人沮喪,更接近輕鬆的動物森友會式拋竿收線,而不是考驗技巧的挑戰。' },
+  { q: '小遊戲會影響關係嗎?', a: '專門針對約會來說是的——遲到或者約會小遊戲沒做好,確認會扣掉一些好感度分數,而不會直接結束關係。' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '首頁', item: `${SITE.url}/zh` },
+    { '@type': 'ListItem', position: 2, name: '小遊戲', item: new URL('/zh-hant/mini-games', SITE.url).href },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks 小遊戲 — 約會、釣魚與法術施放"
+  description="Moonlight Peaks每一個已確認的小遊戲:約會活動如組裝花束,拋竿收線的釣魚系統,以及法術施放的運作方式。"
+  path="/zh-hant/mini-games"
+  jsonLd={jsonLd}
+  crumbs={[{ label: '小遊戲' }]}
+  lang="zh-hant"
+  showExport
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">入門 · 小遊戲</p>
+      <h1>Moonlight Peaks <em>小遊戲</em></h1>
+      <p class="intro">
+        {GAME.title}把好幾個小遊戲融入了核心系統,而不是做成獨立的街機模式。以下是目前已確認的內容。
+        最後更新:{SITE.updated}。
+      </p>
+
+      <GuideImage imageId="minigame" priority />
+
+      <table class="facts">
+        <tr><th>小遊戲</th><th>怎麼玩</th><th>出現在哪裡</th></tr>
+        {minigames.map((m) => (
+          <tr>
+            <td>{m.name}</td>
+            <td>{m.how}</td>
+            <td>{m.where}</td>
+          </tr>
+        ))}
+      </table>
+
+      <div class="callout">
+        其他小遊戲(Nokturna、烹飪、煉藥)可能有各自獨立的機制——請參考下方連結的對應攻略,
+        這裡不重複展開。
+      </div>
+
+      <h2>FAQ</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        相關:<a href="/fishing">釣魚</a>、<a href="/magic">魔法</a>、<a href="/romance">戀愛</a>、
+        <a href="/nokturna">Nokturna</a>。
+      </div>
+    </div>
+  </article>
+</Base>

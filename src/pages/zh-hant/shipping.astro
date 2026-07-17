@@ -1,0 +1,66 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+
+const faq = [
+  { q: 'Moonlight Peaks裡怎麼賣東西?', a: '發售時確認:把物品放進Chester——這個在鎮公所登記時Brook贈送的活體儲物箱。物品會在你睡覺時於夜間售出——不需要單獨去櫃檯交易。' },
+  { q: '賣原始作物划算嗎?', a: '據報告:很少划算。早期玩家發現加工(比如用酒桶把Blood Grapes做成Blood Wine、把作物磨成麵粉、製作手工藝品)比賣原始收穫物價值高得多。' },
+  { q: '早期賺錢最好的方法是什麼?', a: '據報告:儘早搭建酒桶等加工設施,因為整個經濟系統是圍繞成品設計的,而不是原始銷售。同時保留一小片食用作物的輪作,因為烹飪食物能同時恢復體力和法力。' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '首頁', item: `${SITE.url}/zh` },
+    { '@type': 'ListItem', position: 2, name: '出貨與銷售', item: new URL('/zh-hant/shipping', SITE.url).href },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks 出貨與銷售 — Chester的運作方式"
+  description="Moonlight Peaks如何賣東西:活體儲物箱Chester、為什麼加工比賣原料划算,以及已確認的初期賺錢迴圈。"
+  path="/zh-hant/shipping"
+  jsonLd={jsonLd}
+  crumbs={[{ label: '出貨與銷售' }]}
+  lang="zh-hant"
+  showExport
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">入門 · 經濟</p>
+      <h1>Moonlight Peaks <em>出貨</em>與銷售</h1>
+      <p class="intro">
+        {GAME.title}裡錢是怎麼流動的——只講已確認機制。最後更新:{SITE.updated}。
+      </p>
+
+      <h2>Chester就是你的出貨箱</h2>
+      <p>
+        發售時確認:<a href="/characters/chester">Chester</a>這個活體儲物箱,是Brook鎮長在你第一次
+        造訪鎮公所時送給你的。睡前把做好的成品放進Chester,醒來時銷售所得就已經到賬——不需要
+        手動去櫃檯交易。
+      </p>
+
+      <h2>加工比賣原料划算</h2>
+      <p>
+        早期玩家報告:賣原始作物很少划算。真正賺錢的是加工——用酒桶把Blood Grapes做成Blood Wine、
+        把作物磨成麵粉、製作手工藝品。儘早搭建多個酒桶是反覆被提到的技巧,因為加工被描述為
+        遊戲內經濟的支柱。
+      </p>
+
+      <h2>FAQ</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        相關:<a href="/farming">農業</a>、<a href="/characters/chester">Chester</a>、
+        <a href="/inventory">物品欄</a>、<a href="/items">物品</a>。
+      </div>
+    </div>
+  </article>
+</Base>

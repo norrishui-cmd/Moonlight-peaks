@@ -1,0 +1,73 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+
+const faq = [
+  { q: 'Moonlight Peaks裡可以裝飾自己的小屋嗎?', a: '可以——據報告:你可以自定義小屋內部和宅院環境,擺放和旋轉傢俱,還能製作小徑和仙女燈這類裝飾品。' },
+  { q: 'Moonlight Peaks裡有溫室嗎?', a: '有,確認:建造溫室對應一個獨立的成就"永恆綻放"。檢視我們專門的溫室頁面,瞭解目前已知的建造成本和它能帶來什麼。' },
+  { q: '可以升級房屋嗎?', a: '確認:"德古拉莊園"是完全升級房屋對應的成就,所以除了裝飾之外確實存在房屋升級路線,只是具體檔位和花費還沒有信源。穀倉(4000金幣,向Ridge購買)和水井(1500金幣)這兩項建築升級也已確認。' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '首頁', item: `${SITE.url}/zh` },
+    { '@type': 'ListItem', position: 2, name: '房屋與裝飾', item: new URL('/zh-hant/house', SITE.url).href },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks 房屋、裝飾與溫室"
+  description="Moonlight Peaks小屋裝飾:目前已確認的傢俱、小徑和仙女燈,以及溫室或房屋升級還有哪些尚未驗證的地方。"
+  path="/zh-hant/house"
+  jsonLd={jsonLd}
+  crumbs={[{ label: '房屋與裝飾' }]}
+  lang="zh-hant"
+  showExport
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">入門 · 家</p>
+      <h1>Moonlight Peaks <em>房屋</em>與裝飾</h1>
+      <p class="intro">
+        除了農業之外,你的小屋和宅院——已確認的裝飾內容,和尚未驗證的部分分開說明。
+        最後更新:{SITE.updated}。
+      </p>
+
+      <h2>裝飾你的小屋</h2>
+      <p>
+        據報告:Moonlight Peaks的裝飾系統涵蓋擺放和旋轉傢俱、自定義小屋內部,以及為宅院製作
+        小徑、仙女燈這類裝飾品。
+      </p>
+
+      <h2>溫室——確認存在</h2>
+      <p>
+        確認:建造溫室對應一個獨立的Steam成就"永恆綻放"。社群報告:擁有溫室據說也有助於達成
+        其他幾個農業相關目標,值得優先建造。具體建造成本和空間細節,請檢視我們的
+        <a href="/farm/greenhouse">溫室頁面</a>,會隨著確認資訊更新。
+      </p>
+
+      <h2>目前已確認的建築升級</h2>
+      <p>
+        確認:"德古拉莊園"是完全升級房屋對應的成就,所以除了裝飾之外確實存在真實的升級路線——
+        具體檔位和花費還沒有信源。另外兩項已確認的建築購買:<strong>穀倉</strong>(4000金幣加
+        材料,向Ridge購買,購買牲畜前必須先建)和<strong>水井</strong>(據報告1500金幣,有助於澆水)。
+      </p>
+
+      <h2>FAQ</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        相關:<a href="/farming">農業</a>、<a href="/character-creator">角色建立器</a>、
+        <a href="/zh-hant/beginner-guide">新手指南</a>。
+      </div>
+    </div>
+  </article>
+</Base>

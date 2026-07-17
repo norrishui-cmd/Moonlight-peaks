@@ -1,0 +1,66 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+
+const faq = [
+  { q: 'Moonlight Peaks里友情和恋爱不一样吗?', a: '是的——每位居民(不论是否可攻略)都有一份可以通过对话和送礼来培养的关系,记录在关系菜单里。恋爱和结婚是一条可选的、更深入的路线,只对23位已确认的可攻略角色开放;其他所有人依然可以成为朋友。' },
+  { q: '培养友情能得到什么?', a: '发售时确认:关系会解锁特殊图纸和制作材料,以及角色个人故事——所以跟全镇居民打好关系,即使不走恋爱路线也很有回报。' },
+  { q: '可以跟朋友一起玩Nokturna吗?', a: '可以——和居民的Nokturna对战会和对话、礼物一起记录在他们的友情菜单里,所以这也是培养关系的一种方式。' },
+  { q: '友情和恋爱的礼物机制一样吗?', a: '机制是一样的——送礼提升关系等级——不过喜欢/一般/不喜欢的反应可能因人而异,和你是否在追求恋爱无关。' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '首页', item: `${SITE.url}/zh` },
+    { '@type': 'ListItem', position: 2, name: '友情', item: new URL('/zh/friendship', SITE.url).href },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks 友情 — 关系菜单与奖励"
+  description="Moonlight Peaks里友情(区别于恋爱)是怎么运作的:关系菜单、礼物反应,以及培养友情能解锁什么。"
+  path="/zh/friendship"
+  jsonLd={jsonLd}
+  crumbs={[{ label: '友情' }]}
+  lang="zh"
+  showExport
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">入门 · 友情</p>
+      <h1>Moonlight Peaks <em>友情</em></h1>
+      <p class="intro">
+        不是每位居民都能恋爱,但每个人都有一份可以培养的关系。本页讲的是纯友情的一面,
+        区别于<a href="/romance">恋爱攻略</a>。最后更新:{SITE.updated}。
+      </p>
+
+      <h2>友情是怎么运作的</h2>
+      <p>
+        发售时确认:和居民对话、送礼会提升关系等级,记录在关系菜单里,能看到最近的礼物以及
+        每份礼物的反应。这适用于每一位有名字的居民——不论是23位恋爱选项,还是更广泛的NPC群体。
+      </p>
+
+      <h2>友情能解锁什么</h2>
+      <p>
+        确认:更深的关系会解锁图纸和制作材料,以及角色个人故事,不论你是否在追求这个人的恋爱线。
+        和居民玩Nokturna也会记录在他们的友情菜单里。
+      </p>
+
+      <h2>FAQ</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        相关:<a href="/romance">恋爱</a>、<a href="/characters">角色</a>、
+        <a href="/tools/gift-tracker">送礼记录工具</a>、<a href="/nokturna">Nokturna</a>。
+      </div>
+    </div>
+  </article>
+</Base>

@@ -1,0 +1,132 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+
+const checklist = [
+  ['商店頁面', '購買或更新攻略前,請以官方Steam頁面作為最終信源。'],
+  ['Windows / Mac', 'Moonlight Peaks在Steam上支援PC和Mac;具體的作業系統、處理器、記憶體、顯示卡、DirectX和儲存空間要求,請檢視當前的Steam系統需求面板。'],
+  ['Steam Deck', '在Valve給出最終相容性評級之前,把Steam Deck的支援狀態視為發售時才能確認的內容。'],
+  ['手柄', '在正式發售前,試玩版是檢驗手柄舒適度、文字可讀性和UI縮放的好方法。'],
+  ['儲存空間', '除非官方商店頁面或發售說明上明確寫出,否則不要公佈具體的儲存空間數字。'],
+];
+
+const faq = [
+  {
+    q: 'Moonlight Peaks的系統需求是什麼?',
+    a: '請檢視官方Steam商店頁面獲取實時的Windows和Mac系統需求。本頁只跟蹤需要核實的內容,不會在發售前編造硬體數字。',
+  },
+  {
+    q: 'Moonlight Peaks能在Mac上執行嗎?',
+    a: 'Moonlight Peaks在Steam上支援PC和Mac。具體的Mac版本和硬體需求請對照當前的Steam頁面核實。',
+  },
+  {
+    q: 'Moonlight Peaks是Steam Deck Verified認證嗎?',
+    a: 'Steam Deck支援情況應在發售時核實。遊戲已上架Steam,但最終的Deck相容性評級是Valve/商店端的訊號。',
+  },
+  {
+    q: '應該用試玩版來測試效能嗎?',
+    a: '應該。免費試玩版是在購買前,用你自己的裝置測試操作、文字大小、攝像機舒適度和整體效能最安全的方式。',
+  },
+];
+
+const steamUrl = 'https://store.steampowered.com/app/2209900/Moonlight_Peaks/';
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '首頁', item: `${SITE.url}/zh` },
+    { '@type': 'ListItem', position: 2, name: '系統需求', item: new URL('/zh-hant/system-requirements', SITE.url).href },
+  ] },
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })) },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'TechArticle',
+    headline: 'Moonlight Peaks 系統需求',
+    description: '適用於Steam、Mac、Steam Deck的Moonlight Peaks發售安全系統需求攻略,包含試玩版測試和購買前需要核實的內容。',
+    url: new URL('/zh-hant/system-requirements', SITE.url).href,
+    author: { '@type': 'Organization', name: SITE.brand },
+    publisher: { '@type': 'Organization', name: SITE.brand },
+    about: { '@type': 'VideoGame', name: GAME.title, gamePlatform: GAME.platforms },
+    citation: [steamUrl],
+  },
+];
+---
+<Base
+  title="Moonlight Peaks 系統需求 - PC、Mac與Steam Deck"
+  description="Moonlight Peaks在Steam PC、Mac、Steam Deck上的系統需求核查、試玩版測試,以及發售前需要確認的內容。"
+  path="/zh-hant/system-requirements"
+  jsonLd={jsonLd}
+  crumbs={[{ label: '系統需求' }]}
+  lang="zh-hant"
+  showExport
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">發售 · 系統需求</p>
+      <h1>Moonlight Peaks <em>系統需求</em></h1>
+      <p class="intro">
+        為想確認{GAME.title}能否在自己的PC、Mac或Steam Deck上執行的玩家準備的發售安全需求頁面。
+        具體硬體數字請務必以官方Steam頁面為準再購買,因為商店後設資料可能在發售前臨時變動。
+      </p>
+
+      <div class="callout">
+        <strong>發售說明:</strong> {GAME.releaseNote}
+      </div>
+
+      <h2>優先檢視的官方信源</h2>
+      <p>
+        請使用官方Steam頁面獲取實時的系統需求、支援平臺、試玩版可用性和發售時間。本頁故意保持
+        謹慎:它告訴你該核實什麼、怎麼測試試玩版,但不會編造官方信源裡看不到的CPU、GPU、記憶體、
+        儲存空間或作業系統數值。
+      </p>
+      <p><a href={steamUrl} target="_blank" rel="noopener noreferrer nofollow">開啟官方Steam頁面</a></p>
+
+      <h2>發售前檢查清單</h2>
+      <table class="facts">
+        {checklist.map((row) => (<tr><th>{row[0]}</th><td>{row[1]}</td></tr>))}
+      </table>
+
+      <h2>如何用試玩版測試</h2>
+      <p>
+        試玩版是最實用的基準測試,因為它直接跑在你自己的硬體上。可以測試移動、選單、文字可讀性、
+        手柄舒適度、釣魚、插花、刺繡和角色建立。如果打算用掌機模式玩,建議直接用同樣的設定試玩,
+        而不要只看桌面端的畫面。
+      </p>
+      <ul>
+        <li><strong>PC:</strong> 檢查解析度、幀率節奏、滑鼠鍵盤舒適度和載入時間。</li>
+        <li><strong>Mac:</strong> 在Steam上確認具體的Mac系統需求,如果有試玩版就先試玩。</li>
+        <li><strong>Steam Deck:</strong> 檢查操作方式、文字大小、續航舒適度,發售後再確認最終的Deck評級。</li>
+      </ul>
+
+      <h2>相關發售頁面</h2>
+      <div class="link-grid">
+        <a href="/zh-hant/release-date">發售日期</a>
+        <a href="/zh-hant/demo">試玩版攻略</a>
+        <a href="/zh-hant/platforms">平臺</a>
+        <a href="/platforms/steam-deck">Steam Deck</a>
+        <a href="/zh-hant/languages">支援語言</a>
+        <a href="/zh-hant/beginner-guide">新手指南</a>
+      </div>
+
+      <h2>FAQ</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </article>
+
+  <style>
+    .link-grid { display: grid; grid-template-columns: 1fr; gap: 10px; margin-top: 10px; }
+    @media (min-width: 640px) { .link-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+    .link-grid a { border: 1px solid var(--line); border-radius: 10px; background: var(--surface); color: var(--mist); padding: 12px 14px; text-decoration: none; }
+    .link-grid a:hover { border-color: color-mix(in srgb, var(--candle) 55%, var(--line)); }
+  </style>
+</Base>

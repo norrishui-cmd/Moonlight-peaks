@@ -1,0 +1,86 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+
+const reviews = [
+  { outlet: 'Prima Games', score: '9.5 / 10', takeaway: '近期最出色的休闲农场模拟游戏之一,称赞其有意义的成长曲线、令人难忘的角色,以及超自然主题贯穿每个系统的方式。' },
+  { outlet: 'GameWatcher', score: '7.5 / 10', takeaway: '对熟悉这个类型的玩家来说开局较慢,但一旦展开就是一段有回报、放松的生活模拟体验,背景设定带着迷人的超自然色彩。' },
+  { outlet: 'Gamereactor', score: '7 / 10', takeaway: '喜欢生活模拟公式加入的夜行元素,但指出体力槽叠加在日出截止时间之上显得多余,而不是增加了深度。' },
+  { outlet: 'Nintendo World Report', score: '已评测(Switch 2)', takeaway: '确认已发布Switch 2专属评测,认为恐怖元素的运用很适合这款休闲生活模拟游戏;具体的数字评分这里暂未查到来源。' },
+  { outlet: 'Metacritic(媒体评分汇总)', score: '已收录10篇媒体评测', takeaway: '汇总页面已上线,收录10篇媒体评测;各家评分差异较大,普遍称赞角色阵容和世界设定,并反复提到体力/法力节奏,以及Switch 2版本的加载时间问题。' },
+];
+
+const faq = [
+  { q: 'Moonlight Peaks好玩吗?评测怎么说?', a: 'Prima Games、GameWatcher、Gamereactor等媒体给出的早期评分在7到9.5分(满分10分)之间——整体偏正面,超自然主题和角色塑造获得最多称赞,同时也有一些关于节奏/体力系统的批评。' },
+  { q: 'Moonlight Peaks的Metacritic评分是多少?', a: 'Metacritic页面已上线,收录了10篇媒体评测,但我们这里还没有查到具体的汇总数字——请直接查看Metacritic获取当前均分,我们不会自己计算或编造汇总评分。' },
+  { q: '评测对Moonlight Peaks有什么批评?', a: '目前最具体、有出处的批评是关于节奏的:Gamereactor的评测指出,体力槽叠加在已经限制每晚时长的日出截止时间之上显得多余。GameWatcher则提到对已经深入这个类型的玩家来说开局较慢。' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '首页', item: `${SITE.url}/zh` },
+    { '@type': 'ListItem', position: 2, name: '评测汇总', item: new URL('/zh/reviews', SITE.url).href },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks 评测汇总 — 媒体评分与结论"
+  description="Moonlight Peaks好玩吗?汇总来自Prima Games、GameWatcher、Gamereactor等媒体的真实发售周评测和评分,随新评测发布持续更新。"
+  path="/zh/reviews"
+  jsonLd={jsonLd}
+  crumbs={[{ label: '评测汇总' }]}
+  lang="zh"
+  showExport
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">入门 · 评测</p>
+      <h1>Moonlight Peaks <em>评测</em>汇总</h1>
+      <p class="intro">
+        {GAME.title}的真实媒体评分和结论,随评测发布持续收集——不是我们自己的意见,也不是编造的
+        汇总分数。发售前的早期体验请查看我们的<a href="/previews">发售前预览与试玩版体验</a>。
+        最后更新:{SITE.updated}。
+      </p>
+
+      <h2>目前的媒体评分</h2>
+      <table class="facts">
+        <tr><th>媒体</th><th>评分</th><th>要点</th></tr>
+        {reviews.map((r) => (
+          <tr>
+            <td>{r.outlet}</td>
+            <td>{r.score}</td>
+            <td>{r.takeaway}</td>
+          </tr>
+        ))}
+      </table>
+
+      <h2>媒体一致认可的地方</h2>
+      <p>
+        评测者一致点名称赞休闲农场模拟公式里加入的超自然转折——夜行时间表、七大家族,以及角色
+        塑造的深度——是这款游戏最强的资产。美术方向和"迷人的超自然"氛围在多家媒体中被独立提及。
+      </p>
+
+      <h2>媒体提出的批评</h2>
+      <p>
+        目前最具体、有出处的批评跟节奏有关:Gamereactor的评测指出,体力槽叠加在已经限制每晚时长
+        的日出截止时间之上显得多余。GameWatcher则提到,对已经深入这个类型的玩家来说开局较慢。
+      </p>
+
+      <div class="callout">
+        本汇总只列出能明确归属到具名媒体的评分。我们不会自己计算汇总分数,会随着更多评测被验证
+        持续在这里补充。
+      </div>
+
+      <h2>FAQ</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </article>
+</Base>

@@ -1,0 +1,65 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+
+const faq = [
+  { q: 'Moonlight Peaks裡有釣魚嗎?', a: '有——釣魚是農場之外可以做的活動之一,和採集、煉藥並列。' },
+  { q: '怎麼拿到魚竿?', a: '確認:魚竿一開始並不能獲得——需要贏下和Noel的打賭(在他之前釣到3種不同的魚)才能解鎖。' },
+  { q: '完整的魚類清單、地點和售價在哪裡?', a: '完整資料庫現在放在我們專門的圖鑑頁面——22種已確認魚類,每種都有獨立的詳情頁,涵蓋地點、稀有度、季節/時間和售價。' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '首頁', item: `${SITE.url}/zh` },
+    { '@type': 'ListItem', position: 2, name: '釣魚', item: new URL('/zh-hant/fishing', SITE.url).href },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks 釣魚攻略 — 魚類清單與地點"
+  description="Moonlight Peaks在哪裡、什麼時候釣魚:怎麼拿到魚竿,以及完整的22種魚類資料庫在哪裡。"
+  path="/zh-hant/fishing"
+  jsonLd={jsonLd}
+  crumbs={[{ label: '釣魚' }]}
+  lang="zh-hant"
+  showExport
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">入門 · 釣魚</p>
+      <h1>Moonlight Peaks <em>釣魚</em>攻略</h1>
+      <p class="intro">
+        除了農場之外,{GAME.title}還能讓你釣魚、採集和煉製藥水。最後更新:{SITE.updated}。
+      </p>
+
+      <h2>獲得第一根魚竿</h2>
+      <p>
+        確認:在遊戲的前幾個夜晚,Noel會在河邊向你發起釣魚比賽的挑戰——在他之前釣到3種不同的魚。
+        這個比賽沒有時間限制,所以很容易贏,打敗他能獲得你的第一根魚竿以及金幣獎勵。
+      </p>
+
+      <h2>完整的魚類資料庫</h2>
+      <p>
+        完整的、已確認的魚類清單——22種魚類,每種都有獨立頁面涵蓋地點、稀有度、季節/天氣/時間段、
+        大小和售價——現在放在<a href="/collections/fish">圖鑑:魚類</a>頁面,而不是這裡。
+        想查具體每種魚的詳情,請收藏那個頁面。
+      </p>
+
+      <h2>FAQ</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        相關:<a href="/collections/fish">魚類圖鑑</a>、<a href="/collections">圖鑑總覽</a>、
+        <a href="/characters/noel">Noel</a>、<a href="/zh-hant/beginner-guide">新手指南</a>。
+      </div>
+    </div>
+  </article>
+</Base>
