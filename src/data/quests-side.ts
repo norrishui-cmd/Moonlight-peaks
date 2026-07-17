@@ -96,11 +96,11 @@ export const sideQuests: SideQuest[] = [
   },
   {
     slug: 'elviras-treasure-hunt', title: 'Elvira\u2019s Treasure Hunt (Raiders of the Lost Art)', npc: 'elvira', status: 'confirmed',
-    summary: 'Confirmed: Elvira sends you on a 5-clue treasure hunt across town \u2014 reported route: Samael\u2019s bar \u2192 the graveyard \u2192 a bell at the mines \u2192 the Cave of Echoes \u2192 the Khazan Temple. Completing it ties to the "Raiders of the Lost Art" achievement.',
-    reward: '"Raiders of the Lost Art" achievement',
+    summary: 'Confirmed across multiple independent launch-week guides: Elvira sends you on a 5-clue treasure hunt across town, unlocked after reaching her four-heart event and reading a follow-up letter in your mailbox. The confirmed route: Samael\u2019s bar (The Broken Lamp) \u2192 the Ambrosia graveyard \u2192 a bell at the Cave of Echoes mine entrance \u2192 inside the Cave of Echoes \u2192 the Khazan Temple. Completing it ties to the "Raiders of the Lost Art" achievement and rewards a Treasure Hunt Painting you can hang in your house.',
+    reward: '"Raiders of the Lost Art" achievement, plus a Treasure Hunt Painting for your house',
     troubleshooting: [
-      { q: 'I\u2019m stuck on one of Elvira\u2019s treasure hunt clues \u2014 what\u2019s the route?', a: 'Community-reported: the confirmed order of locations is Samael\u2019s bar (The Broken Lamp), then the graveyard, then a bell at the mines, then the Cave of Echoes, and finally the Khazan Temple. If you\u2019re stuck at one clue, double-check you\u2019ve fully explored the previous location first \u2014 clues are reported to be tied to specific spots within each area, not just entering the general vicinity.' },
-      { q: 'Where do I start this quest?', a: 'Confirmed: it\u2019s given by Elvira. If you haven\u2019t met her yet or she has no quest to offer, her clue chain may be gated behind earlier story progress, since the Khazan Temple leg requires areas that open up later.' },
+      { q: 'I\u2019m stuck on one of Elvira\u2019s treasure hunt clues \u2014 what\u2019s the route?', a: 'Confirmed across multiple independent guides: the order is Samael\u2019s bar (The Broken Lamp), then the Ambrosia graveyard, then a bell at the Cave of Echoes mine entrance, then inside the Cave of Echoes itself, and finally the Khazan Temple. If you\u2019re stuck at one clue, double-check you\u2019ve fully explored the previous location first \u2014 clues are tied to specific spots within each area, not just entering the general vicinity.' },
+      { q: 'Where do I start this quest?', a: 'Confirmed: it\u2019s triggered by reaching Elvira\u2019s four-heart event, after which a letter appears in your mailbox the next in-game day. If her clue chain doesn\u2019t seem to progress, the Khazan Temple leg specifically requires areas that only open up later in the story, so incomplete map access can also block the final clue.' },
     ],
     related: [{ label: 'Elvira', href: '/characters/elvira' }, { label: 'Achievements', href: '/achievements' }],
   },
