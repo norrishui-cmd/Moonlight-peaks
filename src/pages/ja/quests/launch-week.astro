@@ -1,0 +1,154 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { SITE } from '../../../consts';
+import { storyQuests } from '../../../data/quests-story';
+import { sideQuests } from '../../../data/quests-side';
+import { storyQuestsJa, storyChaptersJa } from '../../../i18n/quests-story-ja';
+import { sideQuestsJa } from '../../../i18n/quests-side-ja';
+
+const blockingBugs = sideQuests.filter((q) =>
+  ['npc-stuck-cant-interact', 'form-wheel-softlock', 'ui-softlock-after-shop', 'lost-save-data'].includes(q.slug)
+).filter((q) => sideQuestsJa[q.slug]);
+
+const keyQuestSlugs = ['fallen-tree-arborascend', 'elviras-treasure-hunt', 'the-net-and-death', 'the-magic-of-crops', 'vampster-collection-quest'];
+const keyQuests = sideQuests.filter((q) => keyQuestSlugs.includes(q.slug)).filter((q) => sideQuestsJa[q.slug]);
+
+const firstWeekChapter = storyChaptersJa[0];
+const firstWeekQuests = storyQuests.filter((q) => q.chapter === 1).filter((q) => storyQuestsJa[q.slug]);
+
+const faq = [
+  { q: 'ムーンライト・ピークスで倒れた木はどこにありますか?', a: 'PC Gamerで確認済み:明らかな推測とは異なり、Howling Marshesにはありません。Hosu人魚一家が町へ戻るルートに関連する別の場所で滝を塞いでおり、「不思議な入江」クエストの一部です。道具ではなく、Sabrinaから購入するArborascendの呪文で取り除きます。' },
+  { q: 'Cave of Echoesはどうやって解放しますか?', a: '確認済み:まず「A Bridge Too Far」を完了してください。Cave of EchoesはMisty Shoresエリア内にあり、このクエストが解決するまで閉ざされたままです。' },
+  { q: 'Samaelとはどうやって恋愛関係になれますか?', a: '相互検証済みの発売週報道で確認:彼の恋愛はストーリー進行に紐づいており、Luna Bayに到達してHosu人魚一家に会うまで解放されません。前段のクエスト「奇妙な通路」と「不思議な入江」では、倒れた木を持ち上げ、Ludoと橋を修理し、彼の結婚式の準備を手伝います——相手は人魚のKimですが、祭壇で破談になります。その後1週間はデート不可になり、その後Orlockが彼のルートを再び開きます。詳細はキャラクタープロフィールをご覧ください。' },
+  { q: 'ムーンライト・ピークスで全員に効く最高の贈り物は何ですか?', a: '紫のチューリップは広く好まれ、タマネギの種は広く嫌われると報告されていますが、ほとんどの住民には個別の好みがあり、まだ整理中です。キャラクターごとに確認済みの内容はロマンスギフトファインダーを、自分のテスト結果を記録するにはギフトトラッカーをご利用ください。' },
+  { q: 'ムーンライト・ピークスで各魚はどこで釣れますか?', a: '場所、レア度、季節、売却価格を含む22種の完全なデータベースは、コレクション:魚のページにあります——各種に専用の詳細ページがあります。' },
+  { q: 'クエストが全く進行しない場合はどうすればいいですか?', a: '複数のガイドを総合した一般的なトラブルシューティング:クエストログ、掲示板/求人ボード、地図(感嘆符やきらめくオーラのマーカー)、そしてクエストに関連する特定の住民がまだ確認していない場所にいないかを確認してください。多くのライフシム(ムーンライト・ピークスも含む)は、特定のエリアに入ることをトリガーの条件にしているため、最近関連した場所を再訪すると解決することが多いです。最も多い実際の原因はアイテム不足ではなく、まだ使っていないシステム(新しい形態、呪文、道具、NPC)であることです。' },
+  { q: 'Twilight Catacombsはどうやって解放しますか?', a: '確認済み:Viktorの地下墓室近くの施錠された地下室のドアは、クエストや購入では開きません——博物館コレクションが25%完成した時点でJadaが鍵をくれます。実際の道は生物を捕まえて高品質な収穫物を寄付することであり、ストーリーの引き金ではありません。' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'ホーム', item: `${SITE.url}/ja` },
+    { '@type': 'ListItem', position: 2, name: 'クエスト', item: new URL('/ja/quests', SITE.url).href },
+    { '@type': 'ListItem', position: 3, name: '発売週タスク集', item: new URL('/ja/quests/launch-week', SITE.url).href },
+  ] },
+];
+---
+<Base
+  title="ムーンライト・ピークス 発売週ガイド — 重要クエスト、詰まりポイント、修正情報"
+  description="ムーンライト・ピークスの最初の1週間を乗り切るための全て:ストーリー順序、プレイヤーが実際に詰まるクエスト(倒れた木、Cave of Echoes、Elviraの宝探し、Samaelとの恋愛)、既知のブロッキングバグ、そして魚/贈り物データが実際にどこにあるか。"
+  path="/ja/quests/launch-week"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'クエスト', href: '/ja/quests' }, { label: '発売週タスク集' }]}
+  lang="ja"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">クエスト・発売週タスク集</p>
+      <h1>発売週<em>タスク集</em></h1>
+      <p class="intro">
+        最初の1週間で最もよく出てくるクエストや疑問への単一の入り口です——完全なストーリー/
+        サイドクエストガイドの重複ではなく、プレイヤーが実際に詰まる内容への近道です。
+        最終更新:{SITE.updated}。
+      </p>
+
+      <h2>1. 最初の1週間のストーリーの流れ — 第{firstWeekChapter.number}章</h2>
+      <p>{firstWeekChapter.dek}</p>
+      <ol class="lw-list">
+        {firstWeekQuests.map((q) => (
+          <li><a href={`/ja/quests/story/${q.slug}`}>{storyQuestsJa[q.slug].title}</a> <span class="lw-giver">— {q.giver}</span></li>
+        ))}
+      </ol>
+      <p class="lw-note">完全な順序とそれ以降の章:<a href="/ja/quests/story">メインストーリーガイド</a>。</p>
+
+      <h2>2. 名前で検索される重要なクエスト</h2>
+      <p>最も確認済みのトラブルシューティング内容がある、具体的な詰まりポイントのページです。</p>
+      <div class="lw-grid">
+        {keyQuests.map((q) => (
+          <a class="lw-card" href={`/ja/quests/side/${q.slug}`}>
+            <span class="lw-tag">{q.status === 'confirmed' ? '確認済み' : '報告済み'}</span>
+            <strong>{sideQuestsJa[q.slug].title}</strong>
+            <span>{sideQuestsJa[q.slug].troubleshooting?.[0]?.q}</span>
+          </a>
+        ))}
+        <a class="lw-card" href="/ja/locations/mines">
+          <span class="lw-tag">確認済み</span>
+          <strong>Cave of Echoes / 鉱山</strong>
+          <span>解放方法、銅と鉄の場所、なぜまだロックされているか。</span>
+        </a>
+        <a class="lw-card" href="/locations/crystal-cave">
+          <span class="lw-tag">確認済み</span>
+          <strong>Twilight Catacombs</strong>
+          <span>Viktorの地下墓室近くの施錠されたドアには、クエストではなくJadaからの鍵が必要——博物館25%完成。</span>
+        </a>
+        <a class="lw-card" href="/characters/samael">
+          <span class="lw-tag">確認済み</span>
+          <strong>Samaelとの恋愛</strong>
+          <span>前段クエストの完全な流れ、結婚式のどんでん返し、ハートレベルのゲート。</span>
+        </a>
+      </div>
+
+      <h2>3. 既知のブロッキングバグ</h2>
+      <p>クエストのゲート制限ではなく、実際に報告されているバグです。手順を見逃したと思う前にここを確認してください。</p>
+      <div class="lw-grid">
+        {blockingBugs.map((q) => (
+          <a class="lw-card lw-card-bug" href={`/ja/quests/side/${q.slug}`}>
+            <span class="lw-tag lw-tag-bug">{q.status === 'confirmed' ? '確認済みバグ' : '報告済みバグ'}</span>
+            <strong>{sideQuestsJa[q.slug].title}</strong>
+            <span>{sideQuestsJa[q.slug].troubleshooting?.[0]?.q}</span>
+          </a>
+        ))}
+      </div>
+      <p class="lw-note">完全なリスト:<a href="/ja/known-issues">既知の問題</a>。</p>
+
+      <h2>4. 参考データが実際にある場所</h2>
+      <p>テキストページとして複製する代わりに、インタラクティブなツールを直接使用してください:</p>
+      <div class="lw-grid">
+        <a class="lw-card" href="/ja/tools/romance-gift-finder"><span class="lw-tag">ツール</span><strong>ロマンスギフトファインダー</strong><span>確認済みの好き/嫌いな贈り物を、キャラクターごとに絞り込み可能。</span></a>
+        <a class="lw-card" href="/ja/tools/gift-tracker"><span class="lw-tag">ツール</span><strong>ギフトトラッカー</strong><span>まだ確認済みデータがないキャラクターへの自分の贈り物テストを記録。</span></a>
+        <a class="lw-card" href="/ja/collections/fish"><span class="lw-tag">データ</span><strong>魚コレクション</strong><span>22種、それぞれ独自の場所/レア度/季節/価格ページ付き。</span></a>
+        <a class="lw-card" href="/ja/map"><span class="lw-tag">データ</span><strong>マップ</strong><span>町のレイアウト、クエストマーカー、確認済みの地名。</span></a>
+      </div>
+
+      <h2>FAQ</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        関連:<a href="/ja/quests">クエスト一覧</a>、<a href="/ja/quests/story">メインストーリー</a>、
+        <a href="/ja/quests/side">サイドクエスト</a>、<a href="/ja/beginner-guide">初心者ガイド</a>、
+        <a href="/ja/known-issues">既知の問題</a>。
+      </div>
+    </div>
+  </article>
+
+  <style>
+    .lw-list { display: grid; gap: 6px; margin: 10px 0 6px; padding-left: 20px; }
+    .lw-giver { color: var(--faint); font-family: var(--mono); font-size: 0.78rem; }
+    .lw-note { font-size: 0.86rem; color: var(--muted); margin: 6px 0 22px; }
+    .lw-grid { display: grid; grid-template-columns: 1fr; gap: 10px; margin: 12px 0 22px; }
+    @media (min-width: 720px) { .lw-grid { grid-template-columns: 1fr 1fr; } }
+    .lw-card {
+      display: flex; flex-direction: column; gap: 6px; border: 1px solid var(--line); border-radius: 14px;
+      background: var(--surface); padding: 14px 16px; text-decoration: none; color: inherit;
+      transition: border-color .15s ease, transform .15s ease;
+    }
+    .lw-card:hover { border-color: color-mix(in srgb, var(--candle) 50%, var(--line)); transform: translateY(-1px); }
+    .lw-card strong { font-family: var(--display); font-size: 1.02rem; color: var(--mist); }
+    .lw-card span { color: #ded3e6; font-size: 0.86rem; }
+    .lw-tag {
+      align-self: flex-start; font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.04em;
+      text-transform: uppercase; color: var(--candle); border: 1px solid var(--candle-dim); border-radius: 999px;
+      padding: 2px 9px;
+    }
+    .lw-card-bug { border-color: color-mix(in srgb, #c85a5a 40%, var(--line)); }
+    .lw-tag-bug { color: #e08a8a; border-color: #c85a5a66; }
+  </style>
+</Base>

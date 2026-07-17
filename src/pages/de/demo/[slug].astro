@@ -1,0 +1,24 @@
+---
+import TopicPage from '../../../components/TopicPage.astro';
+import { demoSection, demo } from '../../../data/demo';
+import { demoDe } from '../../../i18n/demo-de';
+
+export function getStaticPaths() {
+  const translated = demo.filter((it) => demoDe[it.slug]);
+  return translated.map((it, i) => {
+    const tr = demoDe[it.slug];
+    const merged = { ...it, ...tr };
+    return {
+      params: { slug: it.slug },
+      props: {
+        item: merged,
+        prev: { ...translated[(i - 1 + translated.length) % translated.length], ...demoDe[translated[(i - 1 + translated.length) % translated.length].slug] },
+        next: { ...translated[(i + 1) % translated.length], ...demoDe[translated[(i + 1) % translated.length].slug] },
+      },
+    };
+  });
+}
+const { item, prev, next } = Astro.props;
+const deSection = { ...demoSection, base: '/de/demo', label: 'Demo', eyebrow: 'Demo' };
+---
+<TopicPage section={deSection} item={item} prev={prev} next={next} lang="de" basePath="/de/demo" />
