@@ -72,10 +72,10 @@ const koPaths = ['/', '/release-date', '/beginner-guide', '/characters', '/roman
 export const translatedPathsByLocale: Record<Locale, Set<string>> = {
   en: new Set(), // English is the source; not meaningful to check "is English translated".
   es: new Set([...sharedEsJaZhPaths, ...esOnlyPaths]),
-  ja: new Set([...sharedEsJaZhPaths, ...jaOnlyPaths]),
-  zh: new Set(sharedEsJaZhPaths),
-  'zh-hant': new Set(sharedEsJaZhPaths), // mirrors the same 21 pages as zh, converted via OpenCC
-  de: new Set(dePaths),
+  ja: new Set([...sharedEsJaZhPaths, ...jaOnlyPaths, '/characters/customize']),
+  zh: new Set([...sharedEsJaZhPaths, '/characters/customize']),
+  'zh-hant': new Set([...sharedEsJaZhPaths, '/characters/customize']), // mirrors the same pages as zh, converted via OpenCC
+  de: new Set([...dePaths, '/characters/customize']),
   fr: new Set(frPaths),
   ko: new Set(koPaths),
 };

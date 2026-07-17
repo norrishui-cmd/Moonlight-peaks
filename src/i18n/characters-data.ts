@@ -1567,6 +1567,198 @@ export const charTranslations: Record<'es' | 'ja' | 'zh' | 'zh-hant' | 'de' | 'f
       ],
       romanceYes: '是,已确认的可攻略角色。', romanceNo: '', romanceTbc: '',
     },
+    mina: {
+      name: 'Mina', familyLabel: '吸血鬼(Ambrosia家族)', typeLabel: '吸血鬼',
+      desc: '开朗的吸血鬼,Orlock的女儿;和哥哥Evan一起经营Coffee & Coffins。',
+      knownInfo: [
+        '确认是Orlock的女儿、Evan的妹妹;两人一起经营小镇咖啡馆。',
+        '据报告:母亲离开后Orlock曾想关掉咖啡馆,但Mina坚持了下来。',
+        '喜欢烘焙,性格始终开朗积极。',
+      ],
+      romanceYes: '是,已确认的可攻略角色。', romanceNo: '', romanceTbc: '',
+    },
+    sabrina: {
+      name: 'Sabrina', familyLabel: '女巫(Webb家族)', typeLabel: '女巫',
+      desc: '经营Webb of Wonders商店,出售药水和服装,包括Alter Ego Elixir。',
+      knownInfo: [
+        '确认经营Webb of Wonders,出售Alter Ego Elixir等药水和服装。',
+        '玩家的法杖最终由她安排修理,但实际动手用胶带修好的其实是Noel。',
+      ],
+      romanceYes: '是,已确认的可攻略角色。', romanceNo: '', romanceTbc: '',
+    },
+    noel: {
+      name: 'Noel', familyLabel: '未知', typeLabel: '其他',
+      desc: '出售鱼竿并教玩家钓鱼;也是那个用胶带把法杖修好的人。',
+      knownInfo: [
+        '确认出售初始鱼竿,是玩家学习钓鱼的引路人。',
+        '确认:虽然Sabrina安排修理法杖,但实际动手用胶带修好法杖的是Noel。',
+      ],
+      romanceYes: '是,已确认的可攻略角色。', romanceNo: '', romanceTbc: '',
+    },
+    fiona: {
+      name: 'Fiona', familyLabel: '女巫(Webb家族)', typeLabel: '女巫',
+      desc: 'Webb女巫会首领,以敏锐头脑和固执闻名;因Orlock一句蹩脚玩笑而诅咒了大桥。',
+      knownInfo: [
+        '确认是Moonlit Pines女巫结社Webb的首领。',
+        '在酒馆与Orlock醉酒争执后,在"A Bridge Too Far"任务中诅咒了大桥。',
+        '以敏锐头脑和固执闻名,但本质上为人公正。',
+      ],
+      romanceYes: '是,已确认的可攻略角色。', romanceNo: '', romanceTbc: '',
+    },
+    'viktor-dracula': {
+      name: 'Viktor', familyLabel: '吸血鬼(Ambrosia家族)', typeLabel: '其他',
+      desc: 'Orlock年迈的叔叔,很久以前变成了蝙蝠,如今住在玩家地块的地下墓室里。不是可攻略角色。',
+      knownInfo: [
+        '确认是Orlock的叔叔,在玩家地块地下墓室中以蝙蝠形态被发现的同伴角色。',
+        '与德古拉伯爵Vlad是不同的角色。',
+      ],
+      romanceYes: '', romanceNo: 'Viktor不是可攻略角色。', romanceTbc: '',
+    },
+    judge: {
+      name: 'Judge', familyLabel: '未知', typeLabel: '其他',
+      desc: '在官方wiki导航中确认存在;具体身份尚未查证。',
+      knownInfo: ['已在官方wiki中列出;目前尚无更多细节来源。'],
+      romanceYes: '', romanceNo: '', romanceTbc: '尚未确认。',
+    },
+    'skull-girl': {
+      name: 'Skull Girl', familyLabel: '未知', typeLabel: '其他',
+      desc: '确认是有完整机制的NPC——拥有自己的日程、礼物反应和关系事件,在官方wiki中与Llemi、Pumpkin Head等无家族角色归为一类。性格和背景故事尚未查证,但远不止是个名字。',
+      knownInfo: [
+        '确认经由官方wiki角色导航:与Llemi、Pumpkin Head、Albertus、Chester、Grim、Hoodini、Larry、Mr. Deyes、Rachel、Yabbis一起归类为无家族角色。',
+        '确认经由第三方角色数据库(生日、礼物反应列表、关系事件、每日日程均有记录):她是真实的、有系统追踪的居民,不是背景客串角色。',
+        '尚未查证:她的性格、背景故事或具体剧情角色——一旦找到可靠信源会及时更新,而非凭名字猜测。',
+        '是否可攻略目前未经证实——不同于Llemi被官方wiki明确标注"可约会",Skull Girl尚未发现同样的标签。',
+      ],
+      romanceYes: '', romanceNo: '', romanceTbc: '是否可攻略目前未经证实。',
+    },
+    jarvis: {
+      name: 'Jarvis', familyLabel: '无家族', typeLabel: '幽灵',
+      desc: '小镇的幽灵居民之一,与同为幽灵的Balthasar一起被提及。不属于七大家族中的任何一个,与Death类似。',
+      knownInfo: [
+        '确认是幽灵居民,不属于任何家族(与Death相同)。',
+        '数据挖掘文件中还提到过"Jarvis的家"。',
+      ],
+      romanceYes: '', romanceNo: '', romanceTbc: 'Jarvis是否可攻略目前尚未确认。',
+    },
+    albertus: {
+      name: 'Albertus', familyLabel: '未知', typeLabel: '其他',
+      desc: '管理小镇公告板的猫头鹰——"Albertus的工作"由此得名,是玩家查看可接任务/工作的地方。',
+      knownInfo: ['确认:Albertus是一只猫头鹰,"Albertus的工作"是查看可接任务的小镇公告板。'],
+      romanceYes: '', romanceNo: '', romanceTbc: 'Albertus是否可攻略目前尚未确认。',
+    },
+    chester: {
+      name: 'Chester', familyLabel: '未知', typeLabel: '其他',
+      desc: '一个有生命的储物箱,在镇公所登记时由Brook镇长赠送。夜间把物品放进去,过夜就能收到出售所得。',
+      knownInfo: [
+        '确认在首次前往镇公所时由Brook赠送。',
+        '作为夜间出售用储物箱使用。',
+      ],
+      romanceYes: '', romanceNo: 'Chester是道具/同伴,不是可攻略角色。', romanceTbc: '',
+    },
+    laveau: {
+      name: 'Laveau', familyLabel: '女巫(Webb家族)', typeLabel: '女巫',
+      desc: '玩家角色的母亲——曾带领Webb结社,后来离开与德古拉Vlad共度一生。核心剧情人物,不是可攻略角色。',
+      knownInfo: [
+        '确认是玩家角色的母亲,也是Webb结社的前任首领,继任者是Fiona。',
+        '她与Vlad德古拉的婚姻,正是玩家角色拥有吸血鬼与女巫混血血统的原因。',
+      ],
+      romanceYes: '', romanceNo: 'Laveau不是可攻略角色。', romanceTbc: '',
+    },
+    yabbis: {
+      name: 'Yabbis', familyLabel: '未知', typeLabel: '其他',
+      desc: '只说俳句的蟾蜍,是Ludo的同伴。不是可攻略角色。',
+      knownInfo: ['据报告是Ludo的蟾蜍同伴,只以俳句说话而闻名。'],
+      romanceYes: '', romanceNo: 'Yabbis不是可攻略角色。', romanceTbc: '',
+    },
+    grim: {
+      name: 'Grim', familyLabel: '未知', typeLabel: '其他',
+      desc: '推测是游戏开局就跟随玩家的三眼Hellkitten同伴宠物的默认/预设名字(可以改名)——与后期玩家自己变身成Hellkitten形态是两回事。',
+      knownInfo: [
+        '确认:Hellkitten宠物从游戏开局就跟随玩家,可以改名。',
+        '官方wiki在"Grim"词条下配有Hellkitten Q版图标——推测是这只宠物的默认名字,但尚未完全确认。',
+      ],
+      romanceYes: '', romanceNo: '', romanceTbc: '推测Grim是宠物,大概率不可攻略——但尚未完全确认。',
+    },
+    'mr-deyes': {
+      name: 'Mr. Deyes', familyLabel: '未知', typeLabel: '其他',
+      desc: '在官方wiki导航中确认存在;具体身份尚未查证。',
+      knownInfo: ['已在官方wiki中列出;目前尚无更多细节来源。'],
+      romanceYes: '', romanceNo: '', romanceTbc: '尚未确认。',
+    },
+    hoodini: {
+      name: 'Hoodini', familyLabel: '未知', typeLabel: '其他',
+      desc: '在官方wiki导航中确认存在,图标是与Albertus类似的白色猫头鹰——可能是相关角色或变体形象。未经确认。',
+      knownInfo: ['在官方wiki中以白色猫头鹰风格图标列出;与Albertus的关联尚未确认。'],
+      romanceYes: '', romanceNo: '', romanceTbc: '尚未确认。',
+    },
+    larry: {
+      name: 'Larry', familyLabel: '未知', typeLabel: '其他',
+      desc: '经官方wiki确认:Larry是住在Alina家里的Vampster,不愿意回到Cave of Echoes,因此没有像其他可收集Vampster那样被送回去,而是留在了她身边。不是可攻略角色。',
+      knownInfo: ['确认在Alina家中发现,选择留在那里而非像其他Vampster一样被送回去。'],
+      romanceYes: '', romanceNo: 'Larry不是可攻略角色。', romanceTbc: '',
+    },
+    rachel: {
+      name: 'Rachel', familyLabel: '未知', typeLabel: '其他',
+      desc: '在官方wiki导航中确认存在,图标是Vampster——推测是单独命名的个体Vampster,而非普通镇民。不是可攻略角色。',
+      knownInfo: ['在官方wiki中以Vampster图标列出。'],
+      romanceYes: '', romanceNo: 'Rachel不是可攻略角色。', romanceTbc: '',
+    },
+    snek: {
+      name: 'Snek', familyLabel: '未知', typeLabel: '其他',
+      desc: '经官方wiki导航确认存在的命名蛇角色。不是可攻略角色。',
+      knownInfo: ['在官方wiki中以蛇Q版图标列出。'],
+      romanceYes: '', romanceNo: 'Snek不是可攻略角色。', romanceTbc: '',
+    },
+    jacques: {
+      name: 'Jacques', familyLabel: '未知', typeLabel: '其他',
+      desc: '与Snek一起经官方wiki导航确认存在的命名蛇角色。不是可攻略角色。',
+      knownInfo: ['在官方wiki中以蛇Q版图标列出。'],
+      romanceYes: '', romanceNo: 'Jacques不是可攻略角色。', romanceTbc: '',
+    },
+    'moon-goddess': {
+      name: '月之女神', familyLabel: '未知', typeLabel: '其他',
+      desc: '经官方wiki确认:一位神只,在满月时从月岩宫殿降临,以自己的存在祝福小镇——言语玄妙,但真心喜欢与凡人相处。',
+      knownInfo: [
+        '经官方wiki确认:只在满月时现身,尽管言语方式颇为玄妙,却被描述为喜欢与普通镇民相处。',
+        '确认是太阳之神的兄妹(宇宙双胞胎)。',
+        '社区报告(日语地区报道):与Brook一同被归类为纯友情向NPC,不是恋爱对象——与本档案状态一致。',
+      ],
+      romanceYes: '', romanceNo: '社区报告显示是纯友情向NPC。', romanceTbc: '',
+    },
+    'sun-god': {
+      name: '太阳之神', familyLabel: '未知', typeLabel: '其他',
+      desc: '经官方wiki确认:月之女神的宇宙双胞胎兄弟,只在夏至现身的稀客——高傲自负,在镇上朋友寥寥,身上散发的气场让"夜行者"不敢靠近。',
+      knownInfo: [
+        '经官方wiki确认:只在夏至现身,被描述为散发高傲自负的气场,让夜行居民不敢靠近。',
+        '确认在镇上朋友很少,而且他本人对此心知肚明。',
+        '社区报告(日语地区报道):与Brook一同被归类为纯友情向NPC,不是恋爱对象——与本档案状态一致。',
+      ],
+      romanceYes: '', romanceNo: '社区报告显示是纯友情向NPC。', romanceTbc: '',
+    },
+    yasmin: {
+      name: 'Yasmin', familyLabel: '未知', typeLabel: '其他',
+      desc: '在官方wiki导航中确认存在;具体身份尚未查证。',
+      knownInfo: ['已在官方wiki中列出;目前尚无更多细节来源。'],
+      romanceYes: '', romanceNo: '', romanceTbc: '尚未确认。',
+    },
+    logan: {
+      name: 'Logan', familyLabel: '狼人', typeLabel: '狼人',
+      desc: '更正:出版后多个信源确认"Logan"并非某个单独居民的名字,而是狼人家族的姓氏——此前报道的"狼人镇长Logan"实际指的是Brook。',
+      knownInfo: [
+        '更正:Logan是家族姓氏,家长是Brook镇长,Ridge是弟弟,Saga和Ludo是子女。',
+        '由于其他页面仍链接到这里,本条目以重定向说明形式保留——实际Logan家族成员请参考Brook、Ridge、Saga、Ludo各自档案。',
+      ],
+      romanceYes: '', romanceNo: 'Logan本身不是独立的可攻略角色(详见上方更正说明)。', romanceTbc: '',
+    },
+    'pumpkin-head': {
+      name: 'Pumpkin Head', familyLabel: '未知', typeLabel: '其他',
+      desc: '据报告是让小镇聚会气氛活跃起来的戏剧化活动主持人。',
+      knownInfo: [
+        '据报告在小镇聚会中作为戏剧化活动主持人登场。',
+        '具体角色和细节待出版后确认。',
+      ],
+      romanceYes: '', romanceNo: '', romanceTbc: '尚未确认。',
+    },
   },
   'zh-hant': {
     'count-dracula': {
@@ -1777,4 +1969,197 @@ export const charTranslations: Record<'es' | 'ja' | 'zh' | 'zh-hant' | 'de' | 'f
       ],
       romanceYes: '是,已確認的可攻略角色。', romanceNo: '', romanceTbc: '',
     },
-  },};
+    mina: {
+      name: 'Mina', familyLabel: '吸血鬼(Ambrosia家族)', typeLabel: '吸血鬼',
+      desc: '開朗的吸血鬼,Orlock的女兒;和哥哥Evan一起經營Coffee & Coffins。',
+      knownInfo: [
+        '確認是Orlock的女兒、Evan的妹妹;兩人一起經營小鎮咖啡館。',
+        '據報告:母親離開後Orlock曾想關掉咖啡館,但Mina堅持了下來。',
+        '喜歡烘焙,性格始終開朗積極。',
+      ],
+      romanceYes: '是,已確認的可攻略角色。', romanceNo: '', romanceTbc: '',
+    },
+    sabrina: {
+      name: 'Sabrina', familyLabel: '女巫(Webb家族)', typeLabel: '女巫',
+      desc: '經營Webb of Wonders商店,出售藥水和服裝,包括Alter Ego Elixir。',
+      knownInfo: [
+        '確認經營Webb of Wonders,出售Alter Ego Elixir等藥水和服裝。',
+        '玩家的法杖最終由她安排修理,但實際動手用膠帶修好的其實是Noel。',
+      ],
+      romanceYes: '是,已確認的可攻略角色。', romanceNo: '', romanceTbc: '',
+    },
+    noel: {
+      name: 'Noel', familyLabel: '未知', typeLabel: '其他',
+      desc: '出售魚竿並教玩家釣魚;也是那個用膠帶把法杖修好的人。',
+      knownInfo: [
+        '確認出售初始魚竿,是玩家學習釣魚的引路人。',
+        '確認:雖然Sabrina安排修理法杖,但實際動手用膠帶修好法杖的是Noel。',
+      ],
+      romanceYes: '是,已確認的可攻略角色。', romanceNo: '', romanceTbc: '',
+    },
+    fiona: {
+      name: 'Fiona', familyLabel: '女巫(Webb家族)', typeLabel: '女巫',
+      desc: 'Webb女巫會首領,以敏銳頭腦和固執聞名;因Orlock一句蹩腳玩笑而詛咒了大橋。',
+      knownInfo: [
+        '確認是Moonlit Pines女巫結社Webb的首領。',
+        '在酒館與Orlock醉酒爭執後,在"A Bridge Too Far"任務中詛咒了大橋。',
+        '以敏銳頭腦和固執聞名,但本質上為人公正。',
+      ],
+      romanceYes: '是,已確認的可攻略角色。', romanceNo: '', romanceTbc: '',
+    },
+    'viktor-dracula': {
+      name: 'Viktor', familyLabel: '吸血鬼(Ambrosia家族)', typeLabel: '其他',
+      desc: 'Orlock年邁的叔叔,很久以前變成了蝙蝠,如今住在玩家地塊的地下墓室裡。不是可攻略角色。',
+      knownInfo: [
+        '確認是Orlock的叔叔,在玩家地塊地下墓室中以蝙蝠形態被發現的同伴角色。',
+        '與德古拉伯爵Vlad是不同的角色。',
+      ],
+      romanceYes: '', romanceNo: 'Viktor不是可攻略角色。', romanceTbc: '',
+    },
+    judge: {
+      name: 'Judge', familyLabel: '未知', typeLabel: '其他',
+      desc: '在官方wiki導航中確認存在;具體身份尚未查證。',
+      knownInfo: ['已在官方wiki中列出;目前尚無更多細節來源。'],
+      romanceYes: '', romanceNo: '', romanceTbc: '尚未確認。',
+    },
+    'skull-girl': {
+      name: 'Skull Girl', familyLabel: '未知', typeLabel: '其他',
+      desc: '確認是有完整機制的NPC——擁有自己的日程、禮物反應和關係事件,在官方wiki中與Llemi、Pumpkin Head等無家族角色歸為一類。性格和背景故事尚未查證,但遠不止是個名字。',
+      knownInfo: [
+        '確認經由官方wiki角色導航:與Llemi、Pumpkin Head、Albertus、Chester、Grim、Hoodini、Larry、Mr. Deyes、Rachel、Yabbis一起歸類為無家族角色。',
+        '確認經由第三方角色資料庫(生日、禮物反應列表、關係事件、每日日程均有記錄):她是真實的、有系統追蹤的居民,不是背景客串角色。',
+        '尚未查證:她的性格、背景故事或具體劇情角色——一旦找到可靠信源會及時更新,而非憑名字猜測。',
+        '是否可攻略目前未經證實——不同於Llemi被官方wiki明確標註"可約會",Skull Girl尚未發現同樣的標籤。',
+      ],
+      romanceYes: '', romanceNo: '', romanceTbc: '是否可攻略目前未經證實。',
+    },
+    jarvis: {
+      name: 'Jarvis', familyLabel: '無家族', typeLabel: '幽靈',
+      desc: '小鎮的幽靈居民之一,與同為幽靈的Balthasar一起被提及。不屬於七大家族中的任何一個,與Death類似。',
+      knownInfo: [
+        '確認是幽靈居民,不屬於任何家族(與Death相同)。',
+        '資料探勘檔案中還提到過"Jarvis的家"。',
+      ],
+      romanceYes: '', romanceNo: '', romanceTbc: 'Jarvis是否可攻略目前尚未確認。',
+    },
+    albertus: {
+      name: 'Albertus', familyLabel: '未知', typeLabel: '其他',
+      desc: '管理小鎮公告板的貓頭鷹——"Albertus的工作"由此得名,是玩家檢視可接任務/工作的地方。',
+      knownInfo: ['確認:Albertus是一隻貓頭鷹,"Albertus的工作"是檢視可接任務的小鎮公告板。'],
+      romanceYes: '', romanceNo: '', romanceTbc: 'Albertus是否可攻略目前尚未確認。',
+    },
+    chester: {
+      name: 'Chester', familyLabel: '未知', typeLabel: '其他',
+      desc: '一個有生命的儲物箱,在鎮公所登記時由Brook鎮長贈送。夜間把物品放進去,過夜就能收到出售所得。',
+      knownInfo: [
+        '確認在首次前往鎮公所時由Brook贈送。',
+        '作為夜間出售用儲物箱使用。',
+      ],
+      romanceYes: '', romanceNo: 'Chester是道具/同伴,不是可攻略角色。', romanceTbc: '',
+    },
+    laveau: {
+      name: 'Laveau', familyLabel: '女巫(Webb家族)', typeLabel: '女巫',
+      desc: '玩家角色的母親——曾帶領Webb結社,後來離開與德古拉Vlad共度一生。核心劇情人物,不是可攻略角色。',
+      knownInfo: [
+        '確認是玩家角色的母親,也是Webb結社的前任首領,繼任者是Fiona。',
+        '她與Vlad德古拉的婚姻,正是玩家角色擁有吸血鬼與女巫混血血統的原因。',
+      ],
+      romanceYes: '', romanceNo: 'Laveau不是可攻略角色。', romanceTbc: '',
+    },
+    yabbis: {
+      name: 'Yabbis', familyLabel: '未知', typeLabel: '其他',
+      desc: '只說俳句的蟾蜍,是Ludo的同伴。不是可攻略角色。',
+      knownInfo: ['據報告是Ludo的蟾蜍同伴,只以俳句說話而聞名。'],
+      romanceYes: '', romanceNo: 'Yabbis不是可攻略角色。', romanceTbc: '',
+    },
+    grim: {
+      name: 'Grim', familyLabel: '未知', typeLabel: '其他',
+      desc: '推測是遊戲開局就跟隨玩家的三眼Hellkitten同伴寵物的預設/預設名字(可以改名)——與後期玩家自己變身成Hellkitten形態是兩回事。',
+      knownInfo: [
+        '確認:Hellkitten寵物從遊戲開局就跟隨玩家,可以改名。',
+        '官方wiki在"Grim"詞條下配有Hellkitten Q版圖示——推測是這隻寵物的預設名字,但尚未完全確認。',
+      ],
+      romanceYes: '', romanceNo: '', romanceTbc: '推測Grim是寵物,大機率不可攻略——但尚未完全確認。',
+    },
+    'mr-deyes': {
+      name: 'Mr. Deyes', familyLabel: '未知', typeLabel: '其他',
+      desc: '在官方wiki導航中確認存在;具體身份尚未查證。',
+      knownInfo: ['已在官方wiki中列出;目前尚無更多細節來源。'],
+      romanceYes: '', romanceNo: '', romanceTbc: '尚未確認。',
+    },
+    hoodini: {
+      name: 'Hoodini', familyLabel: '未知', typeLabel: '其他',
+      desc: '在官方wiki導航中確認存在,圖示是與Albertus類似的白色貓頭鷹——可能是相關角色或變體形象。未經確認。',
+      knownInfo: ['在官方wiki中以白色貓頭鷹風格圖示列出;與Albertus的關聯尚未確認。'],
+      romanceYes: '', romanceNo: '', romanceTbc: '尚未確認。',
+    },
+    larry: {
+      name: 'Larry', familyLabel: '未知', typeLabel: '其他',
+      desc: '經官方wiki確認:Larry是住在Alina家裡的Vampster,不願意回到Cave of Echoes,因此沒有像其他可收集Vampster那樣被送回去,而是留在了她身邊。不是可攻略角色。',
+      knownInfo: ['確認在Alina家中發現,選擇留在那裡而非像其他Vampster一樣被送回去。'],
+      romanceYes: '', romanceNo: 'Larry不是可攻略角色。', romanceTbc: '',
+    },
+    rachel: {
+      name: 'Rachel', familyLabel: '未知', typeLabel: '其他',
+      desc: '在官方wiki導航中確認存在,圖示是Vampster——推測是單獨命名的個體Vampster,而非普通鎮民。不是可攻略角色。',
+      knownInfo: ['在官方wiki中以Vampster圖示列出。'],
+      romanceYes: '', romanceNo: 'Rachel不是可攻略角色。', romanceTbc: '',
+    },
+    snek: {
+      name: 'Snek', familyLabel: '未知', typeLabel: '其他',
+      desc: '經官方wiki導航確認存在的命名蛇角色。不是可攻略角色。',
+      knownInfo: ['在官方wiki中以蛇Q版圖示列出。'],
+      romanceYes: '', romanceNo: 'Snek不是可攻略角色。', romanceTbc: '',
+    },
+    jacques: {
+      name: 'Jacques', familyLabel: '未知', typeLabel: '其他',
+      desc: '與Snek一起經官方wiki導航確認存在的命名蛇角色。不是可攻略角色。',
+      knownInfo: ['在官方wiki中以蛇Q版圖示列出。'],
+      romanceYes: '', romanceNo: 'Jacques不是可攻略角色。', romanceTbc: '',
+    },
+    'moon-goddess': {
+      name: '月之女神', familyLabel: '未知', typeLabel: '其他',
+      desc: '經官方wiki確認:一位神只,在滿月時從月岩宮殿降臨,以自己的存在祝福小鎮——言語玄妙,但真心喜歡與凡人相處。',
+      knownInfo: [
+        '經官方wiki確認:只在滿月時現身,儘管言語方式頗為玄妙,卻被描述為喜歡與普通鎮民相處。',
+        '確認是太陽之神的兄妹(宇宙雙胞胎)。',
+        '社群報告(日語地區報道):與Brook一同被歸類為純友情向NPC,不是戀愛物件——與本檔案狀態一致。',
+      ],
+      romanceYes: '', romanceNo: '社群報告顯示是純友情向NPC。', romanceTbc: '',
+    },
+    'sun-god': {
+      name: '太陽之神', familyLabel: '未知', typeLabel: '其他',
+      desc: '經官方wiki確認:月之女神的宇宙雙胞胎兄弟,只在夏至現身的稀客——高傲自負,在鎮上朋友寥寥,身上散發的氣場讓"夜行者"不敢靠近。',
+      knownInfo: [
+        '經官方wiki確認:只在夏至現身,被描述為散發高傲自負的氣場,讓夜行居民不敢靠近。',
+        '確認在鎮上朋友很少,而且他本人對此心知肚明。',
+        '社群報告(日語地區報道):與Brook一同被歸類為純友情向NPC,不是戀愛物件——與本檔案狀態一致。',
+      ],
+      romanceYes: '', romanceNo: '社群報告顯示是純友情向NPC。', romanceTbc: '',
+    },
+    yasmin: {
+      name: 'Yasmin', familyLabel: '未知', typeLabel: '其他',
+      desc: '在官方wiki導航中確認存在;具體身份尚未查證。',
+      knownInfo: ['已在官方wiki中列出;目前尚無更多細節來源。'],
+      romanceYes: '', romanceNo: '', romanceTbc: '尚未確認。',
+    },
+    logan: {
+      name: 'Logan', familyLabel: '狼人', typeLabel: '狼人',
+      desc: '更正:出版後多個信源確認"Logan"並非某個單獨居民的名字,而是狼人家族的姓氏——此前報道的"狼人鎮長Logan"實際指的是Brook。',
+      knownInfo: [
+        '更正:Logan是家族姓氏,家長是Brook鎮長,Ridge是弟弟,Saga和Ludo是子女。',
+        '由於其他頁面仍連結到這裡,本條目以重定向說明形式保留——實際Logan家族成員請參考Brook、Ridge、Saga、Ludo各自檔案。',
+      ],
+      romanceYes: '', romanceNo: 'Logan本身不是獨立的可攻略角色(詳見上方更正說明)。', romanceTbc: '',
+    },
+    'pumpkin-head': {
+      name: 'Pumpkin Head', familyLabel: '未知', typeLabel: '其他',
+      desc: '據報告是讓小鎮聚會氣氛活躍起來的戲劇化活動主持人。',
+      knownInfo: [
+        '據報告在小鎮聚會中作為戲劇化活動主持人登場。',
+        '具體角色和細節待出版後確認。',
+      ],
+      romanceYes: '', romanceNo: '', romanceTbc: '尚未確認。',
+    },
+  },
+};

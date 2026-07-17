@@ -1,29 +1,46 @@
 ---
 import Base from '../../../layouts/Base.astro';
 import { SITE, GAME } from '../../../consts';
-import { characters } from '../../../data/characters';
+import { characters, type CharType } from '../../../data/characters';
 import { charTranslations } from '../../../i18n/characters-data';
 
-const translatedSlugs = ['count-dracula', 'saga', 'luna', 'orlock', 'brook', 'the-warlock'] as const;
-const translations = charTranslations['zh-hant'];
-const list = translatedSlugs.map((slug) => ({
-  slug,
-  base: characters.find((c) => c.id === slug)!,
-  tr: translations[slug],
-}));
+const zhHantTranslations = charTranslations['zh-hant'];
+const translatedSlugs = new Set(Object.keys(zhHantTranslations));
+
+const typeLabelsZh: Record<CharType, string> = {
+  vampire: '吸血鬼', werewolf: '狼人', witch: '女巫', mermaid: '人魚',
+  seer: '預言者', ghost: '幽靈', human: '人類', other: '其他',
+};
+const familyLabelZh = (family: string): string => {
+  if (family.includes('Vampire')) return '吸血鬼家族 (Ambrosia)';
+  if (family.includes('Werewolf')) return '狼人家族 (Logan)';
+  if (family.includes('Witch')) return '女巫家族 (Webb)';
+  if (family.includes('Mermaid')) return '人魚家族 (Hosu)';
+  if (family.includes('Seer')) return '預言者家族 (Khazan)';
+  if (family.includes('Human')) return '人類家族 (Henderson)';
+  return '無家族';
+};
+
+const isMainCast = (c: (typeof characters)[number]) => c.romanceable === true || c.id === 'count-dracula';
+const translated = characters.filter((c) => translatedSlugs.has(c.id));
+const untranslated = characters.filter((c) => !translatedSlugs.has(c.id));
+const mainCast = translated.filter(isMainCast);
+const npcs = translated.filter((c) => !isMainCast(c));
+
+function displayName(c: (typeof characters)[number]): string {
+  return translatedSlugs.has(c.id) ? zhHantTranslations[c.id].name : c.name;
+}
 
 const jsonLd = {
-  '@context': 'https://schema.org',
-  '@type': 'BreadcrumbList',
-  itemListElement: [
-    { '@type': 'ListItem', position: 1, name: '首頁', item: `${SITE.url}/zh-hant` },
+  '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '首頁', item: `${SITE.url}/zh` },
     { '@type': 'ListItem', position: 2, name: '角色', item: `${SITE.url}/zh-hant/characters` },
   ],
 };
 ---
 <Base
-  title="Moonlight Peaks 角色列表 - 中文攻略"
-  description="Moonlight Peaks 角色中文資料，整理主要角色、所屬家族、戀愛狀態和上線前已確認的資訊。"
+  title="Moonlight Peaks 角色(完整居民名單) - 吸血鬼的哥特生活"
+  description="Moonlight Peaks確認的完整居民中文件案:23位可攻略物件及其餘NPC。"
   path="/zh-hant/characters"
   jsonLd={jsonLd}
   crumbs={[{ label: '角色' }]}
@@ -31,32 +48,48 @@ const jsonLd = {
 >
   <article class="page">
     <div class="wrap">
-      <p class="eyebrow">詞條 / 角色</p>
-      <h1><em>Moonlight Peaks</em> 角色列表</h1>
+      <p class="eyebrow">入門 / 角色</p>
+      <h1>{GAME.title} <em>角色</em>(完整居民名單)</h1>
       <p class="intro">
-        這裡整理 {GAME.title} 目前已經翻譯的角色資料。頁面會區分已確認資訊和仍需正式版驗證的內容，
-        並在遊戲上線後繼續補充更多居民、家族、禮物和戀愛狀態。
+        已確認的全部居民,按可攻略物件和其他NPC分類整理。目前已有{translated.length}位角色的檔案翻譯為中文。
       </p>
 
+      <h2>可攻略物件及主要角色 ({mainCast.length})</h2>
       <div class="cx-grid">
-        {list.map(({ slug, base, tr }) => (
-          <a class="cx-card" href={`/zh-hant/characters/${slug}`}>
+        {mainCast.map((c) => (
+          <a class="cx-card" href={`/zh-hant/characters/${c.id}`}>
             <span class="cx-thumb">
-              {base.img ? <img src={base.img} alt="" loading="lazy" width="72" height="72" /> : <span class="cx-letter" style={`background: linear-gradient(135deg, ${base.c1}, ${base.c2})`}>{tr.name.charAt(0)}</span>}
+              {c.img ? <img src={c.img} alt="" loading="lazy" width="72" height="72" /> : <span class="cx-letter" style={`background: linear-gradient(135deg, ${c.c1}, ${c.c2})`}>{displayName(c).charAt(0)}</span>}
             </span>
             <span>
-              <strong>{tr.name}</strong>
-              <em>{tr.familyLabel}</em>
+              <strong>{displayName(c)}</strong>
+              <em>{familyLabelZh(c.family)} · {typeLabelsZh[c.type]}</em>
             </span>
           </a>
         ))}
       </div>
 
-      <div class="callout wip">
-        中文角色頁會繼續分批擴充。完整資料可先檢視
-        <a href="/characters">英文角色列表</a>、<a href="/families">家族頁面</a>和
-        <a href="/romance">戀愛攻略</a>。
+      <h2>其他NPC ({npcs.length})</h2>
+      <div class="cx-grid">
+        {npcs.map((c) => (
+          <a class="cx-card" href={`/zh-hant/characters/${c.id}`}>
+            <span class="cx-thumb">
+              {c.img ? <img src={c.img} alt="" loading="lazy" width="72" height="72" /> : <span class="cx-letter" style={`background: linear-gradient(135deg, ${c.c1}, ${c.c2})`}>{displayName(c).charAt(0)}</span>}
+            </span>
+            <span>
+              <strong>{displayName(c)}</strong>
+              <em>{familyLabelZh(c.family)} · {typeLabelsZh[c.type]}</em>
+            </span>
+          </a>
+        ))}
       </div>
+
+      {untranslated.length > 0 && (
+        <div class="callout wip">
+          目前{translated.length}位角色檔案已翻譯為中文。其餘{untranslated.length}位角色點選後會跳轉到
+          <a href="/characters">英文版角色頁面</a>,那裡有最詳細的已確認資訊(包括Kai、Celine這類尚無實際內容的未確認佔位角色)。
+        </div>
+      )}
     </div>
   </article>
 
