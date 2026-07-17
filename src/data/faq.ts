@@ -617,13 +617,19 @@ export const faqs: Faq[] = [
   {
     slug: 'can-you-divorce-in-moonlight-peaks', cat: 'romance',
     q: 'Can you divorce or break up in Moonlight Peaks?',
-    a: 'Not confirmed. The developers have confirmed you can marry a romance partner, but whether you can later divorce, break up, or re-marry someone else has not been addressed anywhere we\u2019ve found.',
+    a: 'Yes, confirmed by PC Gamer: you can divorce, and your ex reverts to "friend" status the next day with 4 hearts, no lingering "hurt" label, and no acknowledgment of the divorce in dialogue \u2014 they\u2019ll even act willing to date you again.',
+    more: [
+      'Confirmed detail: proposing gives your partner a temporary "fianc\u00e9e" label and 11 total friendship hearts; any other character you were dating or partnered with gets a temporary "hurt" label, drops to 4 broken-looking hearts, has sad dialogue, and won\u2019t accept gifts for about a day.',
+      'After marriage, your spouse moves in but keeps living their normal routine (work, exploring); they return to 8 hearts with 2 new hearts to earn (10 total), gained partly through continuing to go on dates.',
+      'Getting married locks all your other relationships at 4 hearts, so remarrying someone else means re-building that relationship from 4 hearts back up to 8 first.',
+    ],
     related: [{ label: 'Marriage FAQ', href: '/faq/can-you-get-married-in-moonlight-peaks' }, { label: 'Romance', href: '/romance' }],
   },
   {
     slug: 'is-there-a-wedding-ceremony-in-moonlight-peaks', cat: 'romance',
     q: 'Is there a wedding ceremony in Moonlight Peaks?',
-    a: 'Not confirmed. Marriage itself is confirmed, but whether it comes with an actual ceremony, guests, or a dedicated event — versus a simple menu confirmation — has not been shown or described anywhere yet.',
+    a: 'Yes, confirmed at launch: it\u2019s a real town event, not just a menu confirmation. The vampires and werewolves of Moonlight Peaks show up to celebrate, regardless of who you\u2019re marrying, and setting the wedding date unlocks dedicated wedding attire at Third Eye Threads.',
+    more: ['Your cat reminds you to change into your wedding outfit on the day itself regardless of what you\u2019re currently wearing, so it\u2019s not possible to miss the ceremony unprepared.'],
     related: [{ label: 'Marriage FAQ', href: '/faq/can-you-get-married-in-moonlight-peaks' }, { label: 'Romance', href: '/romance' }],
   },
   {
