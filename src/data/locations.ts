@@ -9,6 +9,14 @@ export const locationsSection: TopicSection = {
   title: 'All Moonlight Peaks Locations (Full List): Town, Farm, Crest Garden & More',
   description: 'The complete list of confirmed Moonlight Peaks locations and what\u2019s inside each one \u2014 town, your farm, Misty Shores, Crystal Cave, Howling Marshes, Crest Garden \u2014 with developer-confirmed facts kept separate from reports.',
   intro: 'The places that make up Moonlight Peaks — the magical mountain town, your homestead, and the wild spots around it. We mark what is developer-confirmed versus reported, datamined (from pre-launch game files, cross-referenced against pre-launch references), or expected, updating each entry as more is verified against the live game.',
+  groupByTag: true,
+  faq: [
+    { q: 'How many locations are in Moonlight Peaks?', a: 'This page currently tracks 18 confirmed named locations across the town, your homestead, the wilds, water, and underground areas, grouped below by area \u2014 plus several more named landmarks (Crest Garden, Moonlight Tower, the Crypt) confirmed but still being fully detailed.' },
+    { q: 'Is there a map of Moonlight Peaks?', a: 'Yes \u2014 see our interactive map for a visual layout of confirmed locations alongside this list.' },
+    { q: 'Where is the Crystal Cave in Moonlight Peaks?', a: 'Confirmed: it sits beside Fiona\u2019s house in Moonlit Pines, blocked by a boulder until your pickaxe reaches Copper tier. See the dedicated Crystal Cave page for the full route and what\u2019s inside.' },
+    { q: 'Where is the museum in Moonlight Peaks?', a: 'The museum is based in the town area \u2014 see our dedicated museum page for how it unlocks and what you can donate.' },
+    { q: 'Where are the Howling Marshes in Moonlight Peaks?', a: 'Confirmed: just north of the main town and east of Moonlit Pines, with two entrances \u2014 one east of Luna\u2019s seed stall, the other east of Town Hall. See the dedicated Howling Marshes page for full details.' },
+  ],
 };
 
 export const locations: TopicItem[] = [
@@ -137,10 +145,27 @@ export const locations: TopicItem[] = [
     body: [],
     sections: [
       { title: 'Misty Shores, Moonlit Pines, Pink Grove & Luna Bay', body: 'Confirmed: Misty Shores is the Ambrosia family\u2019s area, home to the Cave of Echoes (ore) and the graveyard where you meet Death, unlocked via the "A Bridge Too Far" quest. Moonlit Pines is where the witches\u2019 coven is based. Pink Grove is home to the love demon Llemi, who mostly only appears there during festivals. Luna Bay is where the Hosu mermaid family lives, arriving roughly a year into the story.' },
-      { title: 'Howling Marshes', body: 'Confirmed via multiple launch-week sources: located just north of the main town and east of Moonlit Pines. Two entrances are confirmed \u2014 one just east of Luna\u2019s seed stall in Moonlit Pines, the other just east of Town Hall. You\u2019re directed here as part of "Tension in the Crest Garden." Confirmed harvestables here include Sugarbone and several flowers, worth processing at a Cooking Station or Drying Rack rather than selling raw. The Logan family house is also here, along with a crypt that\u2019s inaccessible on your first visit, and a northern area that isn\u2019t reachable yet either \u2014 both likely tied to later quests.' },
       { title: 'Moonlit Slopes, the Crypt, Moonlight Tower & Crest Garden', body: 'Also confirmed via the game\u2019s official wiki: Moonlit Slopes, the Crypt, Moonlight Tower, and the Khazan family\u2019s Crest Garden are all real locations. Full descriptions of each are still being verified.' },
     ],
-    related: [{ label: 'Death', href: '/characters/death' }, { label: 'Mermaids', href: '/families/mermaids' }, { label: 'Seers', href: '/families/seers' }],
+    related: [{ label: 'Death', href: '/characters/death' }, { label: 'Mermaids', href: '/families/mermaids' }, { label: 'Seers', href: '/families/seers' }, { label: 'Howling Marshes', href: '/locations/howling-marshes' }],
+  },
+  {
+    slug: 'howling-marshes', title: 'Howling Marshes', tag: 'Wilds', status: 'confirmed', image: '/hero-loc-forest.webp',
+    dek: 'Just north of town and east of Moonlit Pines \u2014 two confirmed entrances, harvestable Sugarbone and flowers, and the Logan family house.',
+    seoTitle: 'Howling Marshes in Moonlight Peaks: Exact Location & How to Get There',
+    seoDescription: 'Confirmed across multiple launch-week sources: Howling Marshes sits just north of town and east of Moonlit Pines, with two entrances \u2014 one east of Luna\u2019s seed stall, the other east of Town Hall. Here\u2019s what\u2019s inside and how to reach it.',
+    body: [
+      'Confirmed via multiple launch-week sources: Howling Marshes is located just north of the main town and east of Moonlit Pines.',
+      'Two entrances are confirmed: one just east of Luna\u2019s seed stall in Moonlit Pines, and the other just east of Town Hall. You\u2019re directed here as part of the "Tension in the Crest Garden" story quest.',
+      'Confirmed harvestables here include Sugarbone and several flowers \u2014 worth processing at a Cooking Station or Drying Rack rather than selling raw.',
+      'The Logan family house is also located here, along with a crypt that\u2019s inaccessible on your first visit, and a northern area that isn\u2019t reachable yet either \u2014 both likely tied to later quests.',
+    ],
+    related: [{ label: 'All landmarks', href: '/locations/landmarks' }, { label: 'Logan family', href: '/families' }, { label: 'The town', href: '/locations/town' }],
+    faq: [
+      { q: 'Where are the Howling Marshes in Moonlight Peaks?', a: 'Confirmed: just north of the main town and east of Moonlit Pines. There are two entrances \u2014 one just east of Luna\u2019s seed stall in Moonlit Pines, and the other just east of Town Hall.' },
+      { q: 'How do you unlock Howling Marshes?', a: 'You\u2019re directed here as part of the "Tension in the Crest Garden" story quest \u2014 it\u2019s not gated behind a separate unlock.' },
+      { q: 'What can you harvest in Howling Marshes?', a: 'Confirmed harvestables include Sugarbone and several flowers. They\u2019re worth processing at a Cooking Station or Drying Rack rather than selling raw for the best value.' },
+    ],
   },
   {
     slug: 'town-hall', title: 'Town Hall', tag: 'Town', status: 'confirmed', image: '/images/moonlight-peaks/official/town-hall-garden-01.webp',

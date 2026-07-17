@@ -35,4 +35,12 @@ export type TopicSection = {
   title: string;       // <title>
   description: string; // meta description
   intro: string;       // hub intro paragraph
+  // Optional hub-level FAQ, rendered above the card grid with its own FAQPage schema.
+  // Use for hubs fielding many different long-tail queries where a flat card grid alone
+  // isn't enough content depth to convert search impressions into clicks.
+  faq?: TopicFaq[];
+  // When true, groups the card grid into sections by each item's `tag` field (e.g. Town,
+  // Wilds, Underground) instead of one flat grid — helps a visitor searching for one specific
+  // location instantly spot which group it's in rather than scanning the whole list.
+  groupByTag?: boolean;
 };

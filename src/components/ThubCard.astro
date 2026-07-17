@@ -1,0 +1,15 @@
+---
+import type { TopicItem } from '../data/topic';
+
+interface Props { item: TopicItem; base: string; }
+const { item, base } = Astro.props;
+---
+<a class="thub-card" href={`${base}/${item.slug}`}>
+  {item.image && <img class="thub-img" src={item.image} alt={`${item.title} — Moonlight Peaks`} width="1200" height="630" loading="lazy" />}
+  <div class="thub-body">
+    <span class="thub-tag">{item.tag}{item.status && item.status !== 'confirmed' ? ` · ${item.status}` : ''}</span>
+    <h2 class="thub-title">{item.title}</h2>
+    <p class="thub-dek">{item.dek}</p>
+    <span class="thub-more">Explore →</span>
+  </div>
+</a>
