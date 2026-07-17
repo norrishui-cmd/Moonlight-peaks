@@ -3,22 +3,26 @@ import Base from '../../layouts/Base.astro';
 import { SITE } from '../../consts';
 
 const tools = [
-  { href: '/tools/platform-picker', tag: 'Decision', title: 'Platform Picker', text: '在 Steam、Steam Deck、Switch、Switch 2 和 Android 之間給出更穩妥的平臺建議。', status: 'Live' },
-  { href: '/tools/romance-gift-finder', tag: 'Romance', title: 'Romance Gift Finder', text: '整理居民、戀愛狀態、家族線索和已驗證禮物資料。', status: 'Live' },
-  { href: '/tools/romance-match-quiz', tag: 'Quiz', title: 'Romance Match Quiz', text: '用簡單問題匹配可能適合你的戀愛候選人。', status: 'Live' },
-  { href: '/tools/romance-planner', tag: 'Planner', title: 'Romance Planner', text: '在瀏覽器本地儲存候選人、私人備註和戀愛進度。', status: 'Live' },
-  { href: '/tools/item-tracker', tag: 'Collection', title: 'Item Tracker', text: '追蹤魚類、蟲類、食譜、藥劑、神器、裝飾和其他收集項。', status: 'Live' },
-  { href: '/tools/farming-profit-planner', tag: 'Farming', title: 'Farming Profit Planner', text: '在價格和生長天數確認後，用來比較作物收益。', status: 'Live' },
-  { href: '/tools/submit-data', tag: 'Community', title: 'Data Submitter', text: '把發售周發現先儲存為本地草稿，方便後續人工稽核。', status: 'Live' },
+  { href: '/zh-hant/tools/platform-picker', tag: 'Decision', title: 'Platform Picker', text: '在 Steam、Steam Deck、Switch、Switch 2 和 Android 之間給出更穩妥的平臺建議。', status: 'Live' },
+  { href: '/zh-hant/tools/romance-gift-finder', tag: 'Romance', title: 'Romance Gift Finder', text: '整理居民、戀愛狀態、家族線索和已驗證禮物資料。', status: 'Live' },
+  { href: '/zh-hant/tools/romance-match-quiz', tag: 'Quiz', title: 'Romance Match Quiz', text: '用簡單問題匹配可能適合你的戀愛候選人。', status: 'Live' },
+  { href: '/zh-hant/tools/romance-planner', tag: 'Planner', title: 'Romance Planner', text: '在瀏覽器本地儲存候選人、私人備註和戀愛進度。', status: 'Live' },
+  { href: '/zh-hant/tools/families-explorer', tag: 'Families', title: 'Families Explorer', text: '按真實家族分類探索23位戀愛候選人。', status: 'Live' },
+  { href: '/zh-hant/tools/item-tracker', tag: 'Collection', title: 'Item Tracker', text: '追蹤魚類、蟲類、食譜、藥劑、神器、裝飾和其他收集項。', status: 'Live' },
+  { href: '/zh-hant/tools/gift-tracker', tag: '個人記錄', title: 'Gift Tracker', text: '在瀏覽器本地記錄你自己對每位居民的禮物測試。', status: 'Live' },
+  { href: '/zh-hant/tools/fish-finder', tag: '參考', title: 'Fish Finder', text: '按地點或稀有度篩選22種已確認魚類。', status: 'Live' },
+  { href: '/zh-hant/tools/farming-profit-planner', tag: 'Farming', title: 'Farming Profit Planner', text: '在價格和生長天數確認後，用來比較作物收益。', status: 'Live' },
+  { href: '/zh-hant/tools/nokturna-tracker', tag: '卡牌', title: 'Nokturna Tracker', text: '記錄你自己確認到的Nokturna卡牌收藏。', status: 'Live' },
+  { href: '/zh-hant/tools/submit-data', tag: 'Community', title: 'Data Submitter', text: '把發售周發現先儲存為本地草稿，方便後續人工稽核。', status: 'Live' },
   { href: '/zh-hant/demo', tag: 'Demo', title: 'Demo Guide', text: '檢視下載方式、內容限制和試玩版最值得體驗的部分。', status: 'Guide' },
 ];
 
 const jsonLd = [
   { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
     { '@type': 'ListItem', position: 1, name: '首頁', item: `${SITE.url}/zh` },
-    { '@type': 'ListItem', position: 2, name: '工具', item: new URL('/zh/tools', SITE.url).href },
+    { '@type': 'ListItem', position: 2, name: '工具', item: new URL('/zh-hant/tools', SITE.url).href },
   ] },
-  { '@context': 'https://schema.org', '@type': 'CollectionPage', name: 'Moonlight Peaks 工具', url: new URL('/zh/tools', SITE.url).href },
+  { '@context': 'https://schema.org', '@type': 'CollectionPage', name: 'Moonlight Peaks 工具', url: new URL('/zh-hant/tools', SITE.url).href },
 ];
 ---
 <Base

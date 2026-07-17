@@ -1,0 +1,198 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { SITE, GAME } from '../../../consts';
+import { characters } from '../../../data/characters';
+
+const known = characters.filter((c) => c.status !== 'unconfirmed');
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org', '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: '首页', item: `${SITE.url}/zh` },
+      { '@type': 'ListItem', position: 2, name: '工具', item: new URL('/zh/tools', SITE.url).href },
+      { '@type': 'ListItem', position: 3, name: '礼物追踪器', item: new URL('/zh/tools/gift-tracker', SITE.url).href },
+    ],
+  },
+  {
+    '@context': 'https://schema.org', '@type': 'WebApplication',
+    name: 'Moonlight Peaks 礼物追踪器', applicationCategory: 'GameApplication', operatingSystem: 'Web',
+    url: new URL('/zh/tools/gift-tracker', SITE.url).href,
+    description: '一个私人的、保存在浏览器中的Moonlight Peaks礼物测试记录本——在实机测试礼物时记录每位居民的反应。',
+  },
+];
+---
+<Base
+  title="Moonlight Peaks 礼物追踪器 — 记录你自己的礼物测试"
+  description="大多数居民的完整礼物列表还未公开确认——用这个私人的、保存在浏览器中的追踪器,记录每位Moonlight Peaks居民对你尝试的每个礼物的反应。"
+  path="/zh/tools/gift-tracker"
+  jsonLd={jsonLd}
+  crumbs={[{ label: '工具', href: '/zh/tools' }, { label: '礼物追踪器' }]}
+  lang="zh"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">工具 / 礼物追踪器</p>
+      <h1>Moonlight Peaks <em>礼物追踪器</em></h1>
+      <p class="intro">
+        大多数居民完整的喜欢/普通/不喜欢礼物列表还没有被确认——所以有趣的部分来了:你可以自己发现答案。
+        选一位居民,在游戏里送出礼物,然后在下方记录反应。所有内容只保存在你自己的浏览器里。
+        已确认的内容请查看<a href="/tools/romance-gift-finder">礼物查询工具</a>。
+      </p>
+
+      <section class="gt-shell" data-gift-tracker>
+        <aside class="gt-panel">
+          <label>
+            <span>居民</span>
+            <select data-resident>
+              {known.map((c) => <option value={c.id}>{c.name}{c.family && c.family !== 'Unknown' ? ` (${c.family})` : ''}</option>)}
+            </select>
+          </label>
+          <label>
+            <span>礼物</span>
+            <input data-item type="text" placeholder="例如:Blood Grapes" />
+          </label>
+          <label>
+            <span>反应</span>
+            <select data-reaction>
+              <option value="loved">非常喜欢</option>
+              <option value="liked">喜欢</option>
+              <option value="neutral">普通</option>
+              <option value="disliked">不喜欢</option>
+              <option value="hated">讨厌</option>
+            </select>
+          </label>
+          <label>
+            <span>备注(可选)</span>
+            <input data-notes type="text" placeholder="例如:生日加成?" />
+          </label>
+          <button type="button" class="btn btn-gold" data-add>记录这次礼物</button>
+          <button type="button" class="btn btn-ghost" data-export>导出为文本</button>
+          <button type="button" class="btn btn-ghost" data-reset>清空全部记录</button>
+        </aside>
+
+        <div class="gt-log" data-log aria-live="polite">
+          <p class="empty" data-empty>还没有记录任何礼物——在左侧添加你的第一条测试。</p>
+        </div>
+      </section>
+
+      <div class="callout">
+        本工具只把记录保存在你自己的浏览器里——不会向网站提交任何数据。
+        发现了值得分享的内容?用<a href="/tools/submit-data">数据提交工具</a>帮我们一起验证。
+      </div>
+    </div>
+  </article>
+
+  <script define:vars={{ known: known.map((c) => ({ id: c.id, name: c.name })) }}>
+    const root = document.querySelector('[data-gift-tracker]');
+    if (root) {
+      const key = 'moonlight-gift-tracker-v1';
+      const residentSel = root.querySelector('[data-resident]');
+      const itemInput = root.querySelector('[data-item]');
+      const reactionSel = root.querySelector('[data-reaction]');
+      const notesInput = root.querySelector('[data-notes]');
+      const addBtn = root.querySelector('[data-add]');
+      const exportBtn = root.querySelector('[data-export]');
+      const resetBtn = root.querySelector('[data-reset]');
+      const log = root.querySelector('[data-log]');
+      const emptyMsg = root.querySelector('[data-empty]');
+      const nameOf = Object.fromEntries(known.map((c) => [c.id, c.name]));
+
+      let entries = JSON.parse(localStorage.getItem(key) || '[]');
+      const save = () => localStorage.setItem(key, JSON.stringify(entries));
+
+      const reactionLabel = { loved: '非常喜欢 💜', liked: '喜欢', neutral: '普通', disliked: '不喜欢', hated: '讨厌' };
+
+      const render = () => {
+        if (!entries.length) {
+          emptyMsg.style.display = '';
+          log.querySelectorAll('.gt-row').forEach((r) => r.remove());
+          return;
+        }
+        emptyMsg.style.display = 'none';
+        log.querySelectorAll('.gt-row').forEach((r) => r.remove());
+        [...entries].reverse().forEach((entry, revIndex) => {
+          const index = entries.length - 1 - revIndex;
+          const row = document.createElement('div');
+          row.className = 'gt-row';
+          row.innerHTML = `
+            <span class="gt-resident">${nameOf[entry.residentId] || entry.residentId}</span>
+            <span class="gt-item">${entry.item}</span>
+            <span class="gt-reaction gt-reaction-${entry.reaction}">${reactionLabel[entry.reaction] || entry.reaction}</span>
+            <span class="gt-notes">${entry.notes || ''}</span>
+            <button type="button" class="gt-remove" data-remove="${index}" aria-label="删除记录">✕</button>
+          `;
+          log.appendChild(row);
+        });
+      };
+
+      addBtn.addEventListener('click', () => {
+        const item = itemInput.value.trim();
+        if (!item) { itemInput.focus(); return; }
+        entries.push({
+          residentId: residentSel.value,
+          item,
+          reaction: reactionSel.value,
+          notes: notesInput.value.trim(),
+        });
+        save();
+        itemInput.value = '';
+        notesInput.value = '';
+        render();
+      });
+
+      log.addEventListener('click', (event) => {
+        const btn = event.target.closest('[data-remove]');
+        if (!btn) return;
+        entries.splice(Number(btn.dataset.remove), 1);
+        save();
+        render();
+      });
+
+      exportBtn.addEventListener('click', () => {
+        if (!entries.length) return;
+        const text = entries.map((e) => `${nameOf[e.residentId] || e.residentId} — ${e.item}: ${reactionLabel[e.reaction] || e.reaction}${e.notes ? ' (' + e.notes + ')' : ''}`).join('\n');
+        navigator.clipboard?.writeText(text).catch(() => {});
+        alert('已将礼物记录复制到剪贴板！');
+      });
+
+      resetBtn.addEventListener('click', () => {
+        if (!confirm('清空你的全部礼物记录？此操作无法撤销。')) return;
+        entries = [];
+        save();
+        render();
+      });
+
+      render();
+    }
+  </script>
+
+  <style>
+    .gt-shell { display: grid; grid-template-columns: 280px minmax(0, 1fr); gap: 18px; margin: 28px 0; }
+    @media (max-width: 820px) { .gt-shell { grid-template-columns: 1fr; } }
+    .gt-panel { border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); padding: 16px; display: grid; gap: 12px; align-self: start; }
+    .gt-panel label span { display: block; margin-bottom: 6px; color: var(--mist); font-weight: 600; }
+    .gt-panel select, .gt-panel input[type="text"] {
+      width: 100%; min-height: 44px; border: 1px solid var(--line); border-radius: 10px;
+      background: var(--ink); color: var(--mist); padding: 0 12px; font: inherit;
+    }
+    .gt-log { display: grid; gap: 8px; align-content: start; }
+    .gt-row {
+      display: grid; grid-template-columns: 1fr 1fr 100px 1fr 28px; gap: 10px; align-items: center;
+      border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface);
+      padding: 10px 12px;
+    }
+    @media (max-width: 700px) { .gt-row { grid-template-columns: 1fr; } }
+    .gt-resident { color: var(--mist); font-weight: 600; }
+    .gt-item { color: var(--muted); }
+    .gt-reaction { font-family: var(--mono); font-size: 0.7rem; text-transform: uppercase; padding: 3px 8px; border-radius: 999px; text-align: center; }
+    .gt-reaction-loved { background: rgba(200,80,140,0.2); color: #e08ac0; }
+    .gt-reaction-liked { background: rgba(120,180,120,0.2); color: #9ad09a; }
+    .gt-reaction-neutral { background: rgba(150,150,150,0.2); color: var(--muted); }
+    .gt-reaction-disliked, .gt-reaction-hated { background: rgba(200,90,90,0.2); color: #e08a8a; }
+    .gt-notes { color: var(--muted); font-size: 0.85rem; }
+    .gt-remove { background: none; border: none; color: var(--muted); cursor: pointer; font-size: 1rem; }
+    .gt-remove:hover { color: var(--candle); }
+    .empty { border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); padding: 16px; color: var(--muted); }
+  </style>
+</Base>

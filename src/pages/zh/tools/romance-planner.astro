@@ -1,0 +1,254 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { SITE } from '../../../consts';
+import { characters, typeLabels } from '../../../data/characters';
+
+const typeLabelsZh: Record<string, string> = {
+  vampire: '吸血鬼', werewolf: '狼人', witch: '女巫', mermaid: '人鱼',
+  seer: '预言者', ghost: '幽灵', human: '人类', other: '其他',
+};
+const statusLabelsZh: Record<string, string> = { confirmed: '已确认', reported: '已报告', datamined: '数据挖掘', unconfirmed: '未确认' };
+
+const candidates = characters
+  .filter((c) => c.status !== 'unconfirmed' && c.romanceable !== false)
+  .map((c) => ({
+    id: c.id,
+    name: c.name,
+    family: c.family && c.family !== 'Unknown' ? c.family : null,
+    type: typeLabelsZh[c.type] || typeLabels[c.type],
+    status: statusLabelsZh[c.status] || c.status,
+    href: `/characters/${c.id}`,
+  }));
+
+const prepTasks = [
+  { id: 'read-profile', t: '阅读你候选人的档案和已知信息' },
+  { id: 'check-home', t: '记下候选人已知的居住地(参见档案中的"已知信息")' },
+  { id: 'check-family', t: '确认他们属于哪个家族,以及报告过的家族矛盾' },
+  { id: 'check-status', t: '确认他们目前的确认级别(已确认/已报告/数据挖掘)' },
+  { id: 'try-quiz', t: '做一下恋爱契合度测验,听听第二意见' },
+  { id: 'plan-day-one', t: '决定第一天想先跟谁说话' },
+  { id: 'bookmark-page', t: '收藏这个页面——你的候选清单和笔记保存在这台设备上' },
+];
+
+const faq = [
+  { q: '这个工具使用真实的礼物或好感度数据吗?', a: '不使用。目前礼物、好感度和事件数据都还没有确认,所以这里不会显示这些内容。本工具只追踪你自己的候选清单、笔记和准备清单——全部私密保存在你的浏览器里,不在我们的服务器上。' },
+  { q: '我的候选清单在发售后还会保留吗?', a: '会,只要你继续使用同一个浏览器和设备,且没有清除本网站数据。一旦真实的恋爱数据被确认,我们会扩展本工具来使用它们。' },
+  { q: '我的数据会被发送到哪里吗?', a: '不会。所有内容只保存在你浏览器的本地存储中。我们看不到、不会存到任何服务器上,也不会用于任何用途。' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '首页', item: `${SITE.url}/zh` },
+    { '@type': 'ListItem', position: 2, name: '工具', item: `${SITE.url}/zh/tools` },
+    { '@type': 'ListItem', position: 3, name: '恋爱规划器', item: new URL('/zh/tools/romance-planner', SITE.url).href },
+  ] },
+  { '@context': 'https://schema.org', '@type': 'WebApplication', name: 'Moonlight Peaks 恋爱规划器',
+    applicationCategory: 'GameApplication', operatingSystem: 'Web',
+    url: new URL('/zh/tools/romance-planner', SITE.url).href,
+    description: '一个Moonlight Peaks发售前的恋爱候选清单与准备追踪器,本地保存在你的浏览器中。' },
+];
+---
+<Base
+  title="Moonlight Peaks 恋爱规划器 — 候选清单与进度追踪"
+  description="从Moonlight Peaks确认的23位恋爱对象中挑选你的心仪人选,添加个人笔记,追踪与每个人的进度——私密保存在你的浏览器中,不编造礼物数据。"
+  path="/zh/tools/romance-planner"
+  jsonLd={jsonLd}
+  crumbs={[{ label: '工具', href: '/zh/tools' }, { label: '恋爱规划器' }]}
+  lang="zh"
+  showExport
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">工具 · 恋爱</p>
+      <h1>恋爱<em>规划器</em></h1>
+      <p class="intro">
+        从23位已确认的恋爱对象中挑选你想深入了解的人,写下自己的笔记,追踪与每个人的进度。
+        这里的一切都私密保存在你的浏览器中——没有账号、没有服务器,也没有编造的礼物或好感度数据。
+      </p>
+
+      <h2>你的候选清单</h2>
+      <p class="rp-sub">点击一位角色即可将其加入或移出候选清单。</p>
+      <div id="rp-candidates" class="rp-candidates">
+        {candidates.map((c) => (
+          <button type="button" class="rp-candidate" data-rp-id={c.id} data-rp-href={c.href} data-rp-name={c.name}>
+            <span class="rp-star" aria-hidden="true">☆</span>
+            <span class="rp-name">{c.name}</span>
+            <span class="rp-meta">{c.family ? `${c.family} · ` : ''}{c.status}</span>
+          </button>
+        ))}
+      </div>
+
+      <h2>你的笔记</h2>
+      <div id="rp-shortlist-empty" class="callout wip">你的候选清单还是空的——点击上方的角色来添加一位。</div>
+      <div id="rp-notes-list" class="rp-notes-list"></div>
+
+      <h2>发售日准备清单</h2>
+      <ul id="rp-prep-list" class="rp-prep-list">
+        {prepTasks.map((task) => (
+          <li>
+            <label>
+              <input type="checkbox" data-rp-task={task.id} />
+              <span>{task.t}</span>
+            </label>
+          </li>
+        ))}
+      </ul>
+
+      <div class="rp-actions">
+        <button type="button" id="rp-clear" class="rq-btn">清空我的候选清单和笔记</button>
+      </div>
+
+      <h2>FAQ</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        相关:<a href="/romance">恋爱与婚姻</a>、<a href="/tools/romance-match-quiz">恋爱契合度测验</a>、
+        <a href="/tools/romance-gift-finder">恋爱礼物查询器</a>、<a href="/characters">全部角色</a>。
+      </div>
+    </div>
+  </article>
+
+  <style>
+    .rp-sub { color: var(--faint); font-size: 0.8rem; margin: -6px 0 12px; }
+    .rp-candidates { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 0 0 24px; }
+    @media (min-width: 640px) { .rp-candidates { grid-template-columns: repeat(3, 1fr); } }
+    .rp-candidate {
+      display: flex; flex-direction: column; align-items: flex-start; gap: 2px; text-align: left;
+      border: 1px solid var(--line); border-radius: 12px; background: var(--surface); padding: 10px 12px;
+      cursor: pointer; transition: border-color .15s ease;
+    }
+    .rp-candidate:hover { border-color: color-mix(in srgb, var(--candle) 45%, var(--line)); }
+    .rp-candidate.is-picked { border-color: var(--candle); background: color-mix(in srgb, var(--candle) 10%, var(--surface)); }
+    .rp-candidate .rp-star { font-size: 0.9rem; color: var(--faint); }
+    .rp-candidate.is-picked .rp-star { color: var(--candle); }
+    .rp-candidate .rp-name { font-family: var(--display); font-weight: 600; font-size: 0.88rem; color: var(--mist); }
+    .rp-candidate .rp-meta { font-family: var(--mono); font-size: 0.66rem; color: var(--faint); }
+    .rp-notes-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; }
+    .rp-note-card { border: 1px solid var(--line); border-radius: 12px; background: var(--surface); padding: 12px 14px; }
+    .rp-note-card .rp-note-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
+    .rp-note-card strong { font-family: var(--display); font-size: 0.94rem; }
+    .rp-note-card a { font-family: var(--mono); font-size: 0.7rem; color: var(--candle); }
+    .rp-note-card textarea {
+      width: 100%; min-height: 64px; background: var(--ink-2); border: 1px solid var(--line); border-radius: 8px;
+      color: var(--mist); font-family: inherit; font-size: 0.84rem; padding: 8px 10px; resize: vertical;
+    }
+    .rp-prep-list { list-style: none; margin: 0 0 20px; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+    .rp-prep-list label { display: flex; align-items: center; gap: 10px; font-size: 0.86rem; color: var(--muted); cursor: pointer; }
+    .rp-prep-list input { accent-color: var(--candle); }
+    .rp-actions { margin: 0 0 24px; }
+  </style>
+
+  <script>
+    (function () {
+      var KEY_SHORTLIST = 'mp-romance-shortlist';
+      var KEY_NOTES = 'mp-romance-notes';
+      var KEY_PREP = 'mp-romance-prep';
+
+      function readJSON(key, fallback) {
+        try {
+          var raw = localStorage.getItem(key);
+          return raw ? JSON.parse(raw) : fallback;
+        } catch (e) { return fallback; }
+      }
+      function writeJSON(key, val) {
+        try { localStorage.setItem(key, JSON.stringify(val)); } catch (e) {}
+      }
+
+      var shortlist = readJSON(KEY_SHORTLIST, []);
+      var notes = readJSON(KEY_NOTES, {});
+      var prep = readJSON(KEY_PREP, {});
+
+      var candidateEls = document.querySelectorAll('.rp-candidate');
+      var notesList = document.getElementById('rp-notes-list');
+      var emptyMsg = document.getElementById('rp-shortlist-empty');
+
+      function renderCandidates() {
+        candidateEls.forEach(function (el) {
+          var id = el.getAttribute('data-rp-id');
+          el.classList.toggle('is-picked', shortlist.indexOf(id) > -1);
+          var star = el.querySelector('.rp-star');
+          if (star) star.textContent = shortlist.indexOf(id) > -1 ? '★' : '☆';
+        });
+      }
+
+      function renderNotes() {
+        notesList.innerHTML = '';
+        if (shortlist.length === 0) { emptyMsg.hidden = false; return; }
+        emptyMsg.hidden = true;
+        shortlist.forEach(function (id) {
+          var el = document.querySelector('.rp-candidate[data-rp-id="' + id + '"]');
+          if (!el) return;
+          var name = el.getAttribute('data-rp-name');
+          var href = el.getAttribute('data-rp-href');
+          var card = document.createElement('div');
+          card.className = 'rp-note-card';
+          var head = document.createElement('div');
+          head.className = 'rp-note-head';
+          var strong = document.createElement('strong');
+          strong.textContent = name;
+          var link = document.createElement('a');
+          link.href = href;
+          link.textContent = '查看档案';
+          head.appendChild(strong);
+          head.appendChild(link);
+          var textarea = document.createElement('textarea');
+          textarea.placeholder = '关于' + name + '的笔记…';
+          textarea.value = notes[id] || '';
+          textarea.addEventListener('input', function () {
+            notes[id] = textarea.value;
+            writeJSON(KEY_NOTES, notes);
+          });
+          card.appendChild(head);
+          card.appendChild(textarea);
+          notesList.appendChild(card);
+        });
+      }
+
+      candidateEls.forEach(function (el) {
+        el.addEventListener('click', function () {
+          var id = el.getAttribute('data-rp-id');
+          var idx = shortlist.indexOf(id);
+          if (idx > -1) { shortlist.splice(idx, 1); }
+          else { shortlist.push(id); }
+          writeJSON(KEY_SHORTLIST, shortlist);
+          renderCandidates();
+          renderNotes();
+        });
+      });
+
+      document.querySelectorAll('[data-rp-task]').forEach(function (box) {
+        var id = box.getAttribute('data-rp-task');
+        box.checked = !!prep[id];
+        box.addEventListener('change', function () {
+          prep[id] = box.checked;
+          writeJSON(KEY_PREP, prep);
+        });
+      });
+
+      var clearBtn = document.getElementById('rp-clear');
+      if (clearBtn) {
+        clearBtn.addEventListener('click', function () {
+          if (!window.confirm('清空你的候选清单、笔记和准备清单？此操作无法撤销。')) return;
+          shortlist = []; notes = {}; prep = {};
+          writeJSON(KEY_SHORTLIST, shortlist);
+          writeJSON(KEY_NOTES, notes);
+          writeJSON(KEY_PREP, prep);
+          renderCandidates();
+          renderNotes();
+          document.querySelectorAll('[data-rp-task]').forEach(function (box) { box.checked = false; });
+        });
+      }
+
+      renderCandidates();
+      renderNotes();
+    })();
+  </script>
+</Base>

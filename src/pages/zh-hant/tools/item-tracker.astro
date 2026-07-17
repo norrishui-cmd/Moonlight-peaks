@@ -1,0 +1,176 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { SITE, GAME } from '../../../consts';
+import { getItemFramework, itemCategories } from '../../../data/items';
+
+const trackerItems = itemCategories.flatMap((cat) => {
+  const framework = getItemFramework(cat.slug);
+  return framework.rows.map((row, index) => ({
+    id: `${cat.slug}-${index}`,
+    category: cat.name,
+    categorySlug: cat.slug,
+    name: row[0]?.startsWith('image:') || row[0]?.startsWith('File:') ? row[1] : row[0] || `${cat.name} entry`,
+    detail: row
+      .slice(row[0]?.startsWith('image:') || row[0]?.startsWith('File:') ? 2 : 1)
+      .filter((cell) => cell && !cell.startsWith('image:') && !cell.startsWith('File:'))
+      .join(' / '),
+    status: cat.status,
+  }));
+});
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: '首頁', item: `${SITE.url}/zh` },
+      { '@type': 'ListItem', position: 2, name: '工具', item: `${SITE.url}/zh-hant/tools` },
+      { '@type': 'ListItem', position: 3, name: '物品追蹤器', item: new URL('/zh-hant/tools/item-tracker', SITE.url).href },
+    ],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebApplication',
+    name: 'Moonlight Peaks 物品追蹤器',
+    applicationCategory: 'GameApplication',
+    operatingSystem: 'Web',
+    url: new URL('/zh-hant/tools/item-tracker', SITE.url).href,
+    description: '本地儲存的Moonlight Peaks收集清單——魚類、小生物、食譜、藥水、礦物和裝飾品。',
+  },
+];
+---
+<Base
+  title="Moonlight Peaks 物品追蹤器 - 魚類、小生物、食譜收集清單"
+  description="按分類追蹤你的Moonlight Peaks收集進度。魚類、小生物、烹飪、手工藝、遺物、藥水、礦物、裝飾品,以及其餘待確認的資料。"
+  path="/zh-hant/tools/item-tracker"
+  jsonLd={jsonLd}
+  crumbs={[{ label: '工具', href: '/zh-hant/tools' }, { label: '物品追蹤器' }]}
+  lang="zh-hant"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">工具 / 物品追蹤器</p>
+      <h1>Moonlight Peaks <em>物品追蹤器</em></h1>
+      <p class="intro">
+        為{GAME.title}準備的瀏覽器儲存式收集清單。結構已經就緒,覆蓋魚類、小生物、食譜、藥水、遺物、
+        礦物、裝飾品等物品分類,尚未查證的資料會標註為"待確認"。
+      </p>
+
+      <section class="tracker-shell" data-item-tracker>
+        <aside class="tracker-panel">
+          <h2>篩選</h2>
+          <label>
+            <span>分類</span>
+            <select data-category>
+              <option value="all">全部分類</option>
+              {itemCategories.map((cat) => <option value={cat.name}>{cat.name}</option>)}
+            </select>
+          </label>
+          <label>
+            <span>搜尋</span>
+            <input data-search type="search" placeholder="搜尋魚類、食譜、藥水…" />
+          </label>
+          <label class="checkline"><input data-hide-complete type="checkbox" /> 隱藏已完成</label>
+          <div class="tracker-stats">
+            <strong data-complete-count>0</strong>
+            <span>本地已完成</span>
+          </div>
+          <button type="button" class="btn btn-ghost" data-reset>重置清單</button>
+        </aside>
+
+        <div class="tracker-list" data-list aria-live="polite"></div>
+      </section>
+
+      <div class="callout">
+        本工具僅將進度儲存在你的瀏覽器中,不會向網站提交任何資料,佔位行會在{GAME.releaseLabel}之後
+        被驗證過的真實資料替換。
+      </div>
+    </div>
+  </article>
+
+  <script define:vars={{ trackerItems }}>
+    const root = document.querySelector('[data-item-tracker]');
+    if (root) {
+      const key = 'moonlight-item-tracker-v1';
+      const category = root.querySelector('[data-category]');
+      const search = root.querySelector('[data-search]');
+      const hideComplete = root.querySelector('[data-hide-complete]');
+      const list = root.querySelector('[data-list]');
+      const count = root.querySelector('[data-complete-count]');
+      const reset = root.querySelector('[data-reset]');
+      let done = JSON.parse(localStorage.getItem(key) || '{}');
+
+      const save = () => localStorage.setItem(key, JSON.stringify(done));
+      const render = () => {
+        const q = search.value.trim().toLowerCase();
+        const cat = category.value;
+        const filtered = trackerItems.filter((item) => {
+          const matchesCat = cat === 'all' || item.category === cat;
+          const matchesQuery = !q || `${item.name} ${item.category} ${item.detail}`.toLowerCase().includes(q);
+          const matchesDone = !hideComplete.checked || !done[item.id];
+          return matchesCat && matchesQuery && matchesDone;
+        });
+        count.textContent = Object.values(done).filter(Boolean).length;
+        list.innerHTML = filtered.map((item) => `
+          <label class="tracker-row">
+            <input type="checkbox" data-id="${item.id}" ${done[item.id] ? 'checked' : ''} />
+            <span>
+              <strong>${item.name}</strong>
+              <em>${item.category} - ${item.status}</em>
+              <small>${item.detail || '尚待確認'}</small>
+            </span>
+          </label>
+        `).join('') || '<p class="empty">沒有符合條件的專案。</p>';
+      };
+
+      list.addEventListener('change', (event) => {
+        const input = event.target.closest('input[data-id]');
+        if (!input) return;
+        done[input.dataset.id] = input.checked;
+        save();
+        render();
+      });
+      [category, search, hideComplete].forEach((el) => el.addEventListener('input', render));
+      reset.addEventListener('click', () => {
+        done = {};
+        save();
+        render();
+      });
+      render();
+    }
+  </script>
+
+  <style>
+    .tracker-shell { display: grid; grid-template-columns: 280px minmax(0, 1fr); gap: 18px; margin: 28px 0; }
+    @media (max-width: 820px) { .tracker-shell { grid-template-columns: 1fr; } }
+    .tracker-panel, .tracker-row {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--surface);
+    }
+    .tracker-panel { padding: 16px; display: grid; gap: 14px; align-self: start; }
+    .tracker-panel h2 { margin: 0; }
+    .tracker-panel label span { display: block; margin-bottom: 6px; color: var(--mist); font-weight: 600; }
+    .tracker-panel select, .tracker-panel input[type="search"] {
+      width: 100%;
+      min-height: 44px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: var(--ink);
+      color: var(--mist);
+      padding: 0 12px;
+      font: inherit;
+    }
+    .checkline { display: flex; gap: 9px; align-items: center; color: var(--muted); }
+    .tracker-stats { border-top: 1px solid var(--line); padding-top: 12px; }
+    .tracker-stats strong { display: block; color: var(--candle); font-family: var(--display); font-size: 2.2rem; }
+    .tracker-stats span { color: var(--muted); }
+    .tracker-list { display: grid; gap: 10px; }
+    .tracker-row { display: grid; grid-template-columns: 28px 1fr; gap: 10px; padding: 12px; cursor: pointer; }
+    .tracker-row input { margin-top: 5px; accent-color: var(--candle); }
+    .tracker-row strong { display: block; color: var(--mist); }
+    .tracker-row em { display: block; color: var(--candle); font-family: var(--mono); font-size: 0.68rem; font-style: normal; text-transform: uppercase; margin: 3px 0; }
+    .tracker-row small { color: var(--muted); line-height: 1.5; }
+    .empty { border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); padding: 16px; color: var(--muted); }
+  </style>
+</Base>

@@ -1,0 +1,232 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { SITE, GAME } from '../../../consts';
+import { characters, typeLabels } from '../../../data/characters';
+
+const typeLabelsZh: Record<string, string> = {
+  vampire: '吸血鬼', werewolf: '狼人', witch: '女巫', mermaid: '人鱼',
+  seer: '预言者', ghost: '幽灵', human: '人类', other: '其他',
+};
+const familyLabelZh: Record<string, string> = { Vampire: '吸血鬼', Werewolf: '狼人', Witch: '女巫', 'Unknown family': '未知家族' };
+
+const romanceCharacters = characters
+  .filter((character) => character.status !== 'unconfirmed' && character.romanceable !== false)
+  .map((character) => ({
+    id: character.id,
+    name: character.name,
+    family: ['Vampire', 'Werewolf', 'Witch'].includes(character.family) ? character.family : 'Unknown family',
+    type: typeLabelsZh[character.type] || typeLabels[character.type],
+    romance: character.romanceable === true ? '可攻略' : '待确认',
+    status: character.status,
+    href: `/characters/${character.id}`,
+    note: character.desc,
+    clues: character.knownInfo || [],
+    gifts: (character.lovedGifts?.length || character.likedGifts?.length)
+      ? [
+          character.lovedGifts?.length ? `最爱:${character.lovedGifts.join('、')}` : '',
+          character.likedGifts?.length ? `喜欢:${character.likedGifts.join('、')}` : '',
+          character.dislikedGifts?.length ? `不喜欢:${character.dislikedGifts.join('、')}` : '',
+        ].filter(Boolean).join(' | ')
+      : '尚未验证',
+  }));
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: '首页', item: `${SITE.url}/zh` },
+      { '@type': 'ListItem', position: 2, name: '工具', item: `${SITE.url}/zh/tools` },
+      { '@type': 'ListItem', position: 3, name: '恋爱礼物查询器', item: new URL('/zh/tools/romance-gift-finder', SITE.url).href },
+    ],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebApplication',
+    name: 'Moonlight Peaks 恋爱礼物查询器',
+    applicationCategory: 'GameApplication',
+    operatingSystem: 'Web',
+    url: new URL('/zh/tools/romance-gift-finder', SITE.url).href,
+    description: '一个Moonlight Peaks恋爱和礼物规划工具,区分已确认的角色和还需要在实机验证的礼物信息。',
+  },
+];
+---
+<Base
+  title="Moonlight Peaks 恋爱礼物查询器 - 角色、礼物与验证追踪"
+  description="查找Moonlight Peaks恋爱角色、礼物验证状态、家族线索,以及发售后安全的关系笔记,不编造喜爱礼物数据。"
+  path="/zh/tools/romance-gift-finder"
+  jsonLd={jsonLd}
+  crumbs={[{ label: '工具', href: '/zh/tools' }, { label: '恋爱礼物查询器' }]}
+  lang="zh"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">工具 / 恋爱礼物</p>
+      <h1>Moonlight Peaks <em>恋爱礼物查询器</em></h1>
+      <p class="intro">
+        用这个追踪器找到已知的恋爱候选人,查看哪些礼物信息还需要发售后的验证。在实机确认之前,
+        我们不会把任何物品标注为"最爱礼物"。
+      </p>
+
+      <section class="gift-tool" data-gift-tool>
+        <div class="gift-controls">
+          <label>
+            <span>选择居民</span>
+            <select data-character-select>
+              {romanceCharacters.map((character) => (
+                <option value={character.id}>{character.name}</option>
+              ))}
+            </select>
+          </label>
+          <label>
+            <span>按家族/类型筛选</span>
+            <select data-family-filter>
+              <option value="all">全部已知候选人</option>
+              <option value="Vampire">吸血鬼</option>
+              <option value="Werewolf">狼人</option>
+              <option value="Witch">女巫</option>
+              <option value="Other">其他/待确认</option>
+            </select>
+          </label>
+        </div>
+
+        <div class="gift-result" aria-live="polite">
+          <span class="tool-status" data-status>可攻略</span>
+          <h2 data-name>{romanceCharacters[0]?.name}</h2>
+          <p data-note>{romanceCharacters[0]?.note}</p>
+          <table class="facts compact">
+            <tr><th>家族 / 类型</th><td data-family>{familyLabelZh[romanceCharacters[0]?.family] || romanceCharacters[0]?.family} / {romanceCharacters[0]?.type}</td></tr>
+            <tr><th>礼物数据</th><td data-gifts>尚未验证</td></tr>
+            <tr><th>下一步</th><td data-next>{GAME.releaseLabel}之后请重新查证喜欢和最爱的礼物。</td></tr>
+          </table>
+          <div class="gift-clues" data-clues></div>
+          <a class="btn btn-ghost" data-profile href={romanceCharacters[0]?.href || '/characters'}>打开角色档案</a>
+        </div>
+      </section>
+
+      <h2>游戏内礼物追踪机制</h2>
+      <p>
+        已确认:关系界面会记录你送给每位居民的最近8份礼物,并显示对方是喜欢、最爱还是不喜欢——
+        所以尝试的风险很低,因为你可以随时查看哪些有效。<span class="tag-community">社区报告</span>:
+        在居民生日当天送出他们喜欢的礼物,会获得比平时更大的好感加成。有两个普遍技巧适用于很多居民:
+        把礼物颜色配成对方喜欢的颜色,以及送手工制作的礼物,比如插花花束和刺绣作品。
+      </p>
+
+      <h2>礼物验证方针</h2>
+      <div class="verification-grid">
+        <div>
+          <strong>已验证</strong>
+          <p>直接来自实机或官方资料确认。这些可以列为最爱或喜欢的礼物。</p>
+        </div>
+        <div>
+          <strong>已报告</strong>
+          <p>在预览、录像或社区报告中出现过。是有用的线索,但在实机验证前不能视为定论。</p>
+        </div>
+        <div>
+          <strong>尚未验证</strong>
+          <p>当某个角色已知,但具体礼物尚未确认时显示。这样能避免虚假的确定感,保护网站内容质量。</p>
+        </div>
+      </div>
+
+      <h2>本追踪器收录的已知恋爱候选人</h2>
+      <div class="candidate-grid">
+        {romanceCharacters.map((character) => (
+          <a class="candidate-card" href={character.href}>
+            <span>{character.romance} / {character.status}</span>
+            <strong>{character.name}</strong>
+            <em>{familyLabelZh[character.family] || character.family} / {character.type}</em>
+          </a>
+        ))}
+      </div>
+
+      <div class="callout">
+        相关:<a href="/romance">恋爱攻略</a>、<a href="/characters">全部角色</a>、<a href="/families">家族</a>、
+        <a href="/faq/can-you-get-married-in-moonlight-peaks">结婚FAQ</a>。
+      </div>
+    </div>
+  </article>
+
+  <script type="application/json" id="romanceGiftData" set:html={JSON.stringify(romanceCharacters)}></script>
+  <script>
+    const root = document.querySelector('[data-gift-tool]');
+    const dataScript = document.getElementById('romanceGiftData');
+    if (root && dataScript) {
+      const characters = JSON.parse(dataScript.textContent || '[]');
+      const select = root.querySelector('[data-character-select]');
+      const filter = root.querySelector('[data-family-filter]');
+      const status = root.querySelector('[data-status]');
+      const name = root.querySelector('[data-name]');
+      const note = root.querySelector('[data-note]');
+      const family = root.querySelector('[data-family]');
+      const gifts = root.querySelector('[data-gifts]');
+      const next = root.querySelector('[data-next]');
+      const clues = root.querySelector('[data-clues]');
+      const profile = root.querySelector('[data-profile]');
+
+      const render = () => {
+        const selected = characters.find((item) => item.id === select.value) || characters[0];
+        if (!selected) return;
+        status.textContent = `${selected.romance} / ${selected.status}`;
+        name.textContent = selected.name;
+        note.textContent = selected.note;
+        family.textContent = `${selected.family} / ${selected.type}`;
+        gifts.textContent = selected.gifts;
+        next.textContent = selected.romance === '可攻略'
+          ? '发售后先测试大众普遍喜欢的礼物,再从对话和关系提升中记录最爱礼物。'
+          : '在恋爱状态和礼物反应被验证之前,请在追踪器中保留这位居民。';
+        profile.href = selected.href;
+        clues.innerHTML = selected.clues.length
+          ? `<h3>目前已知的线索</h3><ul>${selected.clues.map((item) => `<li>${item}</li>`).join('')}</ul>`
+          : '<h3>目前已知的线索</h3><p>还没有确认与礼物相关的具体线索。</p>';
+      };
+
+      const rebuildOptions = () => {
+        const value = filter.value;
+        const visible = characters.filter((item) => value === 'all' || item.type === value || (value === 'Other' && item.family === 'Unknown family'));
+        select.innerHTML = visible.map((item) => `<option value="${item.id}">${item.name}</option>`).join('');
+        render();
+      };
+
+      filter.addEventListener('change', rebuildOptions);
+      select.addEventListener('change', render);
+      render();
+    }
+  </script>
+
+  <style>
+    .tag-community {
+      display: inline-block; font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.02em;
+      color: var(--faint); border: 1px solid var(--line); border-radius: 999px; padding: 2px 8px;
+      margin-right: 6px; vertical-align: middle;
+    }
+    .gift-tool { display: grid; grid-template-columns: minmax(250px, 0.75fr) minmax(0, 1.25fr); gap: 18px; margin: 28px 0 34px; }
+    @media (max-width: 820px) { .gift-tool { grid-template-columns: 1fr; } }
+    .gift-controls, .gift-result { border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); padding: 18px; }
+    .gift-controls { display: grid; gap: 18px; align-content: start; }
+    .gift-controls span { display: block; color: var(--mist); font-weight: 600; margin-bottom: 8px; }
+    .gift-controls select {
+      width: 100%;
+      min-height: 44px;
+      color: var(--mist);
+      background: var(--ink);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 0 12px;
+      font: inherit;
+    }
+    .gift-result h2 { margin-top: 8px; }
+    .tool-status { font-family: var(--mono); font-size: 0.68rem; color: var(--candle); text-transform: uppercase; letter-spacing: 0.12em; }
+    .facts.compact th, .facts.compact td { padding: 9px 0; }
+    .gift-clues { margin: 14px 0; }
+    .gift-clues ul { margin-top: 6px; }
+    .verification-grid, .candidate-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    @media (max-width: 820px) { .verification-grid, .candidate-grid { grid-template-columns: 1fr; } }
+    .verification-grid > div, .candidate-card { border: 1px solid var(--line); border-radius: 12px; background: var(--surface); padding: 15px; }
+    .verification-grid p { margin-bottom: 0; color: var(--muted); font-size: 0.92rem; }
+    .candidate-card { display: flex; flex-direction: column; gap: 5px; transition: transform .15s ease, border-color .15s ease; }
+    .candidate-card:hover { transform: translateY(-2px); border-color: color-mix(in srgb, var(--candle) 50%, var(--line)); }
+    .candidate-card span { font-family: var(--mono); font-size: 0.66rem; color: var(--faint); text-transform: uppercase; letter-spacing: 0.1em; }
+    .candidate-card strong { color: var(--mist); font-family: var(--display); font-size: 1.16rem; }
+    .candidate-card em { color: var(--muted); font-style: normal; font-size: 0.88rem; }
+  </style>
+</Base>

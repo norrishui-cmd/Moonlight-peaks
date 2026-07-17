@@ -1,0 +1,176 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { SITE, GAME } from '../../../consts';
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: '首页', item: `${SITE.url}/zh` },
+      { '@type': 'ListItem', position: 2, name: '工具', item: `${SITE.url}/zh/tools` },
+      { '@type': 'ListItem', position: 3, name: '农业利润规划器', item: new URL('/zh/tools/farming-profit-planner', SITE.url).href },
+    ],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebApplication',
+    name: 'Moonlight Peaks 农业利润规划器',
+    applicationCategory: 'GameApplication',
+    operatingSystem: 'Web',
+    url: new URL('/zh/tools/farming-profit-planner', SITE.url).href,
+    description: '一个Moonlight Peaks作物利润计算器,涵盖种子价格、售价、生长天数、多次收获和肥料规划。',
+  },
+];
+---
+<Base
+  title="Moonlight Peaks 农业利润规划器 - 作物计算器与最佳作物"
+  description="用现成的农业计算器规划Moonlight Peaks作物利润。比较种子价格、售价、生长天数、收获次数和肥料假设。"
+  path="/zh/tools/farming-profit-planner"
+  jsonLd={jsonLd}
+  crumbs={[{ label: '工具', href: '/zh/tools' }, { label: '利润规划器' }]}
+  lang="zh"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">工具 / 农业规划器</p>
+      <h1>Moonlight Peaks <em>农业利润规划器</em></h1>
+      <p class="intro">
+        一旦{GAME.title}的真实价格被确认,就能按每晚利润比较作物。在发售数据被验证之前,
+        用下方的手动输入框来测试各种场景,而不是把未知的作物数值当成确定答案展示出来。
+      </p>
+
+      <section class="profit-tool" data-profit-tool>
+        <form class="profit-form">
+          <label><span>作物名称</span><input data-crop value="待确认作物" /></label>
+          <label><span>种子价格</span><input data-seed type="number" min="0" value="0" /></label>
+          <label><span>每次收获售价</span><input data-sell type="number" min="0" value="0" /></label>
+          <label><span>生长天数</span><input data-days type="number" min="1" value="1" /></label>
+          <label><span>收获次数</span><input data-harvests type="number" min="1" value="1" /></label>
+          <label><span>额外成本</span><input data-extra type="number" min="0" value="0" /></label>
+          <button type="button" class="btn btn-primary" data-add>加入比较</button>
+        </form>
+
+        <aside class="profit-result">
+          <span class="result-kicker">当前估算</span>
+          <h2 data-profit>0</h2>
+          <p data-profit-copy>发售后输入价格,即可计算总利润和每日利润。</p>
+        </aside>
+      </section>
+
+      <h2>作物比较</h2>
+      <div class="profit-table-wrap">
+        <table class="profit-table">
+          <thead>
+            <tr>
+              <th>作物</th>
+              <th>种子</th>
+              <th>售价</th>
+              <th>天数</th>
+              <th>收获次数</th>
+              <th>总利润</th>
+              <th>利润/天</th>
+            </tr>
+          </thead>
+          <tbody data-rows>
+            <tr><td colspan="7">发售数据可用后,请添加作物。</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout">
+        安全数据规则:作物名称、种子价格、售价、生长时间、肥料效果和再生规则,应先在实机或官方
+        资料中核实,才能作为攻略内容呈现。
+      </div>
+    </div>
+  </article>
+
+  <script>
+    const root = document.querySelector('[data-profit-tool]');
+    const rowsEl = document.querySelector('[data-rows]');
+    if (root && rowsEl) {
+      const els = {
+        crop: root.querySelector('[data-crop]'),
+        seed: root.querySelector('[data-seed]'),
+        sell: root.querySelector('[data-sell]'),
+        days: root.querySelector('[data-days]'),
+        harvests: root.querySelector('[data-harvests]'),
+        extra: root.querySelector('[data-extra]'),
+        add: root.querySelector('[data-add]'),
+        profit: root.querySelector('[data-profit]'),
+        copy: root.querySelector('[data-profit-copy]'),
+      };
+      const key = 'moonlight-farming-planner-v1';
+      let rows = JSON.parse(localStorage.getItem(key) || '[]');
+      const num = (el) => Math.max(0, Number(el.value || 0));
+      const calc = () => {
+        const seed = num(els.seed);
+        const sell = num(els.sell);
+        const days = Math.max(1, num(els.days));
+        const harvests = Math.max(1, num(els.harvests));
+        const extra = num(els.extra);
+        const totalRevenue = sell * harvests;
+        const totalProfit = totalRevenue - seed - extra;
+        const perDay = totalProfit / days;
+        els.profit.textContent = Math.round(totalProfit).toString();
+        els.copy.textContent = `${days}天内每日利润为${perDay.toFixed(2)}。`;
+        return { crop: els.crop.value || '待确认作物', seed, sell, days, harvests, totalProfit, perDay };
+      };
+      const renderRows = () => {
+        rowsEl.innerHTML = rows.length ? rows.map((r) => `
+          <tr>
+            <td>${r.crop}</td>
+            <td>${r.seed}</td>
+            <td>${r.sell}</td>
+            <td>${r.days}</td>
+            <td>${r.harvests}</td>
+            <td>${Math.round(r.totalProfit)}</td>
+            <td>${Number(r.perDay).toFixed(2)}</td>
+          </tr>
+        `).join('') : '<tr><td colspan="7">发售数据可用后,请添加作物。</td></tr>';
+      };
+      const save = () => localStorage.setItem(key, JSON.stringify(rows.slice(-12)));
+      root.addEventListener('input', calc);
+      els.add.addEventListener('click', () => {
+        rows.push(calc());
+        save();
+        renderRows();
+      });
+      calc();
+      renderRows();
+    }
+  </script>
+
+  <style>
+    .profit-tool { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 18px; margin: 28px 0; }
+    @media (max-width: 820px) { .profit-tool { grid-template-columns: 1fr; } }
+    .profit-form, .profit-result {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--surface);
+      padding: 18px;
+    }
+    .profit-form { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    @media (max-width: 640px) { .profit-form { grid-template-columns: 1fr; } }
+    .profit-form label span { display: block; margin-bottom: 6px; color: var(--mist); font-weight: 600; }
+    .profit-form input {
+      width: 100%;
+      min-height: 44px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: var(--ink);
+      color: var(--mist);
+      padding: 0 12px;
+      font: inherit;
+    }
+    .profit-form button { grid-column: 1 / -1; justify-content: center; }
+    .result-kicker { font-family: var(--mono); color: var(--candle); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; }
+    .profit-result h2 { font-size: 3rem; margin: 8px 0; }
+    .profit-result p { color: var(--muted); }
+    .profit-table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); }
+    .profit-table { width: 100%; min-width: 720px; border-collapse: collapse; }
+    .profit-table th, .profit-table td { border-bottom: 1px solid var(--line); padding: 10px 12px; text-align: left; }
+    .profit-table th { color: var(--candle); font-family: var(--mono); font-size: 0.68rem; text-transform: uppercase; }
+    .profit-table tr:last-child td { border-bottom: 0; }
+  </style>
+</Base>

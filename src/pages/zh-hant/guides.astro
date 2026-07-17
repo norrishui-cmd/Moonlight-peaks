@@ -1,6 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
 import { SITE, GAME } from '../../consts';
+import News from '../../components/News.astro';
 
 const rows = [
   ['從這裡開始', '新手指南、Demo、發售日期和平臺資訊。'],
@@ -11,15 +12,15 @@ const rows = [
 ];
 
 const links = [
-  { href: '/zh/beginner-guide', label: '新手指南' },
-  { href: '/zh/release-date', label: '發售日期' },
-  { href: '/zh/demo', label: 'Demo' },
-  { href: '/zh/platforms', label: '平臺資訊' },
-  { href: '/zh/characters', label: '角色' },
-  { href: '/zh/romance', label: '戀愛' },
-  { href: '/zh/farming', label: '種田' },
-  { href: '/zh/magic', label: '魔法' },
-  { href: '/zh/items', label: '物品' },
+  { href: '/zh-hant/beginner-guide', label: '新手指南' },
+  { href: '/zh-hant/release-date', label: '發售日期' },
+  { href: '/zh-hant/demo', label: 'Demo' },
+  { href: '/zh-hant/platforms', label: '平臺資訊' },
+  { href: '/zh-hant/characters', label: '角色' },
+  { href: '/zh-hant/romance', label: '戀愛' },
+  { href: '/zh-hant/farming', label: '種田' },
+  { href: '/zh-hant/magic', label: '魔法' },
+  { href: '/zh-hant/items', label: '物品' },
   { href: '/tools', label: '工具' },
 ];
 
@@ -32,7 +33,7 @@ const faq = [
 const jsonLd = [
   { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
     { '@type': 'ListItem', position: 1, name: '首頁', item: `${SITE.url}/zh` },
-    { '@type': 'ListItem', position: 2, name: '攻略', item: new URL('/zh/guides', SITE.url).href },
+    { '@type': 'ListItem', position: 2, name: '攻略', item: new URL('/zh-hant/guides', SITE.url).href },
   ] },
   { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
 ];
@@ -71,6 +72,9 @@ const jsonLd = [
         <li>從種田、魔法、戀愛、收集或探索中選擇第一個目標。</li>
         <li>需要具體答案時，再進入對應專題頁。</li>
       </ol>
+
+      <h2>最新攻略更新</h2>
+      <News category="guides" limit={5} />
 
       <h2>FAQ</h2>
       <div class="faq">

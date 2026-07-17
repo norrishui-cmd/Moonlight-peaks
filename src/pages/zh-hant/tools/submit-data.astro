@@ -1,0 +1,170 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { SITE, GAME } from '../../../consts';
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: '首頁', item: `${SITE.url}/zh` },
+      { '@type': 'ListItem', position: 2, name: '工具', item: `${SITE.url}/zh-hant/tools` },
+      { '@type': 'ListItem', position: 3, name: '資料提交工具', item: new URL('/zh-hant/tools/submit-data', SITE.url).href },
+    ],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebApplication',
+    name: 'Moonlight Peaks 資料提交工具',
+    applicationCategory: 'GameApplication',
+    operatingSystem: 'Web',
+    url: new URL('/zh-hant/tools/submit-data', SITE.url).href,
+    description: '一個本地的Moonlight Peaks發售週資料提交草稿工具,涵蓋物品、食譜、地點、禮物和錯誤。',
+  },
+];
+---
+<Base
+  title="Moonlight Peaks 資料提交工具 - 分享魚類、物品、禮物、食譜與錯誤"
+  description="為Moonlight Peaks魚類、小生物、食譜、藥水、禮物、地點、商店、錯誤和其他已驗證的發現,起草發售週資料提交內容。"
+  path="/zh-hant/tools/submit-data"
+  jsonLd={jsonLd}
+  crumbs={[{ label: '工具', href: '/zh-hant/tools' }, { label: '資料提交工具' }]}
+  lang="zh-hant"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">工具 / 社群資料</p>
+      <h1>Moonlight Peaks <em>資料提交工具</em></h1>
+      <p class="intro">
+        為發售周的發現整理內容以便人工稽核:魚類、小生物、食譜、藥水、NPC禮物、商店、地點、
+        錯誤和平臺備註。沒有任何內容會被自動釋出。
+      </p>
+
+      <section class="submit-shell" data-submit-tool>
+        <form class="submit-form">
+          <label>
+            <span>資料型別</span>
+            <select name="type">
+              <option>魚類</option>
+              <option>小生物</option>
+              <option>食譜</option>
+              <option>藥水</option>
+              <option>NPC禮物</option>
+              <option>地點</option>
+              <option>商店</option>
+              <option>錯誤或問題</option>
+              <option>其他</option>
+            </select>
+          </label>
+          <label><span>名稱或標題</span><input name="name" placeholder="例如:待確認" /></label>
+          <label><span>地點/來源</span><input name="location" placeholder="你在哪裡發現的" /></label>
+          <label><span>季節/時間/天氣</span><input name="conditions" placeholder="如果相關的話" /></label>
+          <label><span>價格/數值/效果</span><input name="value" placeholder="如果遊戲內可見" /></label>
+          <label><span>證據備註</span><input name="evidence" placeholder="截圖、官方帖子或實機觀察" /></label>
+          <label class="wide"><span>備註</span><textarea name="notes" rows="5" placeholder="新增確切文字、食譜材料、角色反應、錯誤重現步驟或其他細節。"></textarea></label>
+          <button type="button" class="btn btn-primary" data-save>本地儲存草稿</button>
+        </form>
+
+        <aside class="review-card">
+          <span>稽核方針</span>
+          <h2>僅限人工稽核</h2>
+          <p>
+            草稿儲存在你的瀏覽器裡,可以匯出。請只在核實過官方來源、實機截圖或可重現的
+            遊戲內證據後再發布。
+          </p>
+          <button type="button" class="btn btn-ghost" data-export>匯出JSON</button>
+        </aside>
+      </section>
+
+      <h2>已儲存的草稿</h2>
+      <div class="draft-list" data-drafts></div>
+
+      <div class="callout">
+        推薦引用規則:儘量引用官方渠道、商店頁面或中立的社交媒體帖子。
+        不要把競爭對手的wiki頁面作為已釋出資料的引用來源。
+      </div>
+    </div>
+  </article>
+
+  <script>
+    const root = document.querySelector('[data-submit-tool]');
+    const draftsEl = document.querySelector('[data-drafts]');
+    if (root && draftsEl) {
+      const key = 'moonlight-data-drafts-v1';
+      const form = root.querySelector('.submit-form');
+      const saveButton = root.querySelector('[data-save]');
+      const exportButton = root.querySelector('[data-export]');
+      let drafts = JSON.parse(localStorage.getItem(key) || '[]');
+
+      const save = () => localStorage.setItem(key, JSON.stringify(drafts));
+      const render = () => {
+        draftsEl.innerHTML = drafts.length ? drafts.map((draft, index) => `
+          <article class="draft-card">
+            <span>${draft.type}</span>
+            <h3>${draft.name || '未命名草稿'}</h3>
+            <p>${draft.notes || '還沒有備註。'}</p>
+            <small>${draft.location || '地點待定'} - ${draft.evidence || '證據待定'}</small>
+            <button type="button" data-delete="${index}">刪除</button>
+          </article>
+        `).join('') : '<p class="empty">還沒有本地草稿。</p>';
+      };
+
+      saveButton.addEventListener('click', () => {
+        const data = Object.fromEntries(new FormData(form).entries());
+        data.createdAt = new Date().toISOString();
+        drafts.unshift(data);
+        drafts = drafts.slice(0, 25);
+        save();
+        form.reset();
+        render();
+      });
+      draftsEl.addEventListener('click', (event) => {
+        const button = event.target.closest('button[data-delete]');
+        if (!button) return;
+        drafts.splice(Number(button.dataset.delete), 1);
+        save();
+        render();
+      });
+      exportButton.addEventListener('click', async () => {
+        const text = JSON.stringify(drafts, null, 2);
+        await navigator.clipboard.writeText(text);
+        exportButton.textContent = 'JSON已複製';
+        setTimeout(() => { exportButton.textContent = '匯出JSON'; }, 1600);
+      });
+      render();
+    }
+  </script>
+
+  <style>
+    .submit-shell { display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 18px; margin: 28px 0; }
+    @media (max-width: 860px) { .submit-shell { grid-template-columns: 1fr; } }
+    .submit-form, .review-card, .draft-card, .empty {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--surface);
+    }
+    .submit-form { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; padding: 18px; }
+    @media (max-width: 640px) { .submit-form { grid-template-columns: 1fr; } }
+    .submit-form .wide, .submit-form button { grid-column: 1 / -1; }
+    .submit-form span { display: block; margin-bottom: 6px; color: var(--mist); font-weight: 600; }
+    .submit-form input, .submit-form select, .submit-form textarea {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: var(--ink);
+      color: var(--mist);
+      padding: 11px 12px;
+      font: inherit;
+    }
+    .review-card { padding: 18px; align-self: start; }
+    .review-card > span { font-family: var(--mono); color: var(--candle); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; }
+    .review-card p { color: var(--muted); }
+    .draft-list { display: grid; gap: 10px; }
+    .draft-card, .empty { padding: 14px; }
+    .draft-card span { color: var(--candle); font-family: var(--mono); font-size: 0.68rem; text-transform: uppercase; }
+    .draft-card h3 { margin: 5px 0; }
+    .draft-card p { color: var(--muted); margin: 0 0 8px; }
+    .draft-card small { color: var(--faint); }
+    .draft-card button { float: right; border: 1px solid var(--line); border-radius: 999px; background: transparent; color: var(--muted); padding: 4px 9px; cursor: pointer; }
+  </style>
+</Base>

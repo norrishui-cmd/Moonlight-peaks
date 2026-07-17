@@ -1,6 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
 import { SITE, GAME } from '../../consts';
+import News from '../../components/News.astro';
 
 const rows = [
   ['从这里开始', '新手指南、Demo、发售日期和平台信息。'],
@@ -71,6 +72,9 @@ const jsonLd = [
         <li>从种田、魔法、恋爱、收集或探索中选择第一个目标。</li>
         <li>需要具体答案时，再进入对应专题页。</li>
       </ol>
+
+      <h2>最新攻略更新</h2>
+      <News category="guides" limit={5} />
 
       <h2>FAQ</h2>
       <div class="faq">

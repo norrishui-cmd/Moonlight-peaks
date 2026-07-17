@@ -1,0 +1,133 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { SITE } from '../../../consts';
+import { fishDetailPages } from '../../../data/collectionDetailPages';
+
+const fact = (facts: { label: string; value: string }[], label: string) => facts.find((f) => f.label === label)?.value || '-';
+
+const locations = [...new Set(fishDetailPages.map((f) => fact(f.facts, 'Location')).filter((v) => v !== '-'))].sort();
+const rarities = [...new Set(fishDetailPages.map((f) => fact(f.facts, 'Rarity')).filter((v) => v !== '-'))].sort();
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '首頁', item: `${SITE.url}/zh` },
+    { '@type': 'ListItem', position: 2, name: '工具', item: `${SITE.url}/zh-hant/tools` },
+    { '@type': 'ListItem', position: 3, name: '魚類查詢器', item: new URL('/zh-hant/tools/fish-finder', SITE.url).href },
+  ] },
+  { '@context': 'https://schema.org', '@type': 'WebApplication', name: 'Moonlight Peaks 魚類查詢器',
+    applicationCategory: 'GameApplication', operatingSystem: 'Web',
+    url: new URL('/zh-hant/tools/fish-finder', SITE.url).href,
+    description: '按地點和稀有度篩選Moonlight Peaks已確認的22種魚類,精確找到你需要的魚在哪裡釣。' },
+];
+---
+<Base
+  title="Moonlight Peaks 魚類查詢器 — 按地點和稀有度篩選"
+  description="搜尋並按地點、稀有度篩選Moonlight Peaks已確認的22種魚類,附帶每種魚完整詳情頁連結。"
+  path="/zh-hant/tools/fish-finder"
+  jsonLd={jsonLd}
+  crumbs={[{ label: '工具', href: '/zh-hant/tools' }, { label: '魚類查詢器' }]}
+  lang="zh-hant"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">工具 / 魚類查詢器</p>
+      <h1>Moonlight Peaks <em>魚類查詢器</em></h1>
+      <p class="intro">
+        {fishDetailPages.length}種已確認的魚類彙總為一個可搜尋列表——按地點或稀有度篩選,找到你想要的魚,
+        再點選進入完整詳情頁檢視季節、大小和售價。資料直接來自<a href="/collections/fish">魚類圖鑑</a>。
+      </p>
+
+      <div class="ff-controls">
+        <input class="ff-search" id="ff-search" type="search" placeholder="按魚名搜尋…" aria-label="搜尋魚類" />
+        <div class="ff-selects">
+          <select id="ff-location" aria-label="按地點篩選">
+            <option value="all">全部地點</option>
+            {locations.map((l) => <option value={l}>{l}</option>)}
+          </select>
+          <select id="ff-rarity" aria-label="按稀有度篩選">
+            <option value="all">全部稀有度</option>
+            {rarities.map((r) => <option value={r}>{r}</option>)}
+          </select>
+        </div>
+      </div>
+
+      <p class="ff-count" id="ff-count">{fishDetailPages.length} 種魚</p>
+      <div class="ff-grid" id="ff-grid">
+        {fishDetailPages.map((f) => (
+          <a class="ff-card" href={`/collections/fish/${f.slug}`}
+             data-name={f.name.toLowerCase()}
+             data-location={fact(f.facts, 'Location')}
+             data-rarity={fact(f.facts, 'Rarity')}>
+            <strong>{f.name}</strong>
+            <span class="ff-meta">{fact(f.facts, 'Location')} · {fact(f.facts, 'Rarity')}</span>
+          </a>
+        ))}
+      </div>
+      <p class="ff-noresult" id="ff-noresult" hidden>沒有符合篩選條件的魚——試著去掉一個篩選項。</p>
+
+      <div class="callout wip">
+        相關:<a href="/collections/fish">完整魚類圖鑑</a>、<a href="/collections/critters">小生物</a>、
+        <a href="/zh-hant/beginner-guide">新手指南</a>、<a href="/characters/noel">Noel(第一根魚竿)</a>。
+      </div>
+    </div>
+  </article>
+
+  <script>
+    const search = document.getElementById('ff-search') as HTMLInputElement | null;
+    const locationSel = document.getElementById('ff-location') as HTMLSelectElement | null;
+    const raritySel = document.getElementById('ff-rarity') as HTMLSelectElement | null;
+    const grid = document.getElementById('ff-grid');
+    const count = document.getElementById('ff-count');
+    const noresult = document.getElementById('ff-noresult');
+    if (search && grid && locationSel && raritySel) {
+      const cards = Array.from(grid.querySelectorAll<HTMLElement>('.ff-card'));
+      const apply = () => {
+        const q = (search.value || '').trim().toLowerCase();
+        const loc = locationSel.value;
+        const rar = raritySel.value;
+        let shown = 0;
+        cards.forEach((el) => {
+          const name = el.getAttribute('data-name') || '';
+          const cardLoc = el.getAttribute('data-location') || '';
+          const cardRar = el.getAttribute('data-rarity') || '';
+          const matchText = !q || name.includes(q);
+          const matchLoc = loc === 'all' || cardLoc === loc;
+          const matchRar = rar === 'all' || cardRar === rar;
+          const show = matchText && matchLoc && matchRar;
+          el.style.display = show ? '' : 'none';
+          if (show) shown++;
+        });
+        if (count) count.textContent = shown + ' 種魚';
+        if (noresult) (noresult as HTMLElement).hidden = shown !== 0;
+      };
+      search.addEventListener('input', apply);
+      locationSel.addEventListener('change', apply);
+      raritySel.addEventListener('change', apply);
+    }
+  </script>
+
+  <style>
+    .ff-controls { display: flex; flex-direction: column; gap: 10px; margin: 16px 0 8px; }
+    .ff-search {
+      width: 100%; padding: 12px 14px; border-radius: 10px; border: 1px solid var(--line);
+      background: var(--surface); color: var(--mist); font-size: 0.95rem; font-family: var(--body);
+    }
+    .ff-search:focus { outline: 2px solid var(--candle); outline-offset: 1px; }
+    .ff-selects { display: flex; gap: 10px; flex-wrap: wrap; }
+    .ff-selects select {
+      flex: 1 1 160px; min-height: 42px; border: 1px solid var(--line); border-radius: 10px;
+      background: var(--ink); color: var(--mist); padding: 0 10px; font: inherit;
+    }
+    .ff-count { font-family: var(--mono); font-size: 0.74rem; color: var(--faint); letter-spacing: 0.06em; text-transform: uppercase; margin: 14px 0 12px; }
+    .ff-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 10px; }
+    .ff-card {
+      display: flex; flex-direction: column; gap: 4px; border: 1px solid var(--line); border-radius: 12px;
+      background: var(--surface); padding: 12px 14px; text-decoration: none; color: inherit;
+      transition: border-color .15s ease;
+    }
+    .ff-card:hover { border-color: color-mix(in srgb, var(--candle) 50%, var(--line)); }
+    .ff-card strong { font-family: var(--display); font-weight: 600; color: var(--mist); }
+    .ff-meta { color: var(--faint); font-size: 0.78rem; font-family: var(--mono); }
+    .ff-noresult { color: var(--faint); font-size: 0.9rem; margin-top: 16px; }
+  </style>
+</Base>
