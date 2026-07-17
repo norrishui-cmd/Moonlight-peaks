@@ -1,0 +1,201 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { SITE, GAME } from '../../../consts';
+import { characters } from '../../../data/characters';
+
+const known = characters.filter((c) => c.status !== 'unconfirmed');
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org', '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Inicio', item: `${SITE.url}/es` },
+      { '@type': 'ListItem', position: 2, name: 'Herramientas', item: new URL('/es/tools', SITE.url).href },
+      { '@type': 'ListItem', position: 3, name: 'Rastreador de regalos', item: new URL('/es/tools/gift-tracker', SITE.url).href },
+    ],
+  },
+  {
+    '@context': 'https://schema.org', '@type': 'WebApplication',
+    name: 'Rastreador de regalos de Moonlight Peaks', applicationCategory: 'GameApplication', operatingSystem: 'Web',
+    url: new URL('/es/tools/gift-tracker', SITE.url).href,
+    description: 'Un registro personal de pruebas de regalos, guardado en el navegador, para cada residente de Moonlight Peaks — registra reacciones mientras pruebas regalos en el juego real.',
+  },
+];
+---
+<Base
+  title="Rastreador de regalos de Moonlight Peaks — Registra tus propias pruebas"
+  description="Las listas completas de regalos confirmados aún no son públicas — usa este rastreador privado, guardado en el navegador, para registrar qué piensa cada residente de Moonlight Peaks sobre cada regalo que pruebes."
+  path="/es/tools/gift-tracker"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Herramientas', href: '/es/tools' }, { label: 'Rastreador de regalos' }]}
+  lang="es"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Herramienta / Rastreador de regalos</p>
+      <h1>Moonlight Peaks <em>rastreador de regalos</em></h1>
+      <p class="intro">
+        Las listas completas de regalos amados/gustados/no gustados aún no están confirmadas para la
+        mayoría de residentes — así que aquí viene la parte divertida: puedes averiguarlo tú mismo.
+        Elige un residente, entrégale un regalo en el juego y registra la reacción abajo. Todo se
+        guarda de forma privada solo en tu navegador. Consulta el
+        <a href="/tools/romance-gift-finder">buscador de regalos</a> para ver lo que ya está confirmado.
+      </p>
+
+      <section class="gt-shell" data-gift-tracker>
+        <aside class="gt-panel">
+          <label>
+            <span>Residente</span>
+            <select data-resident>
+              {known.map((c) => <option value={c.id}>{c.name}{c.family && c.family !== 'Unknown' ? ` (${c.family})` : ''}</option>)}
+            </select>
+          </label>
+          <label>
+            <span>Regalo</span>
+            <input data-item type="text" placeholder="ej. Blood Grapes" />
+          </label>
+          <label>
+            <span>Reacción</span>
+            <select data-reaction>
+              <option value="loved">Le encantó</option>
+              <option value="liked">Le gustó</option>
+              <option value="neutral">Neutral</option>
+              <option value="disliked">No le gustó</option>
+              <option value="hated">Lo odió</option>
+            </select>
+          </label>
+          <label>
+            <span>Notas (opcional)</span>
+            <input data-notes type="text" placeholder="ej. ¿bono de cumpleaños?" />
+          </label>
+          <button type="button" class="btn btn-gold" data-add>Registrar este regalo</button>
+          <button type="button" class="btn btn-ghost" data-export>Exportar como texto</button>
+          <button type="button" class="btn btn-ghost" data-reset>Borrar todos los registros</button>
+        </aside>
+
+        <div class="gt-log" data-log aria-live="polite">
+          <p class="empty" data-empty>Aún no hay regalos registrados — añade tu primera prueba a la izquierda.</p>
+        </div>
+      </section>
+
+      <div class="callout">
+        Esta herramienta guarda tu registro solo en tu propio navegador — nada se envía al sitio.
+        ¿Encontraste algo que vale la pena compartir? Usa el <a href="/tools/submit-data">Enviador de datos</a>
+        para ayudarnos a verificarlo para todos.
+      </div>
+    </div>
+  </article>
+
+  <script define:vars={{ known: known.map((c) => ({ id: c.id, name: c.name })) }}>
+    const root = document.querySelector('[data-gift-tracker]');
+    if (root) {
+      const key = 'moonlight-gift-tracker-v1';
+      const residentSel = root.querySelector('[data-resident]');
+      const itemInput = root.querySelector('[data-item]');
+      const reactionSel = root.querySelector('[data-reaction]');
+      const notesInput = root.querySelector('[data-notes]');
+      const addBtn = root.querySelector('[data-add]');
+      const exportBtn = root.querySelector('[data-export]');
+      const resetBtn = root.querySelector('[data-reset]');
+      const log = root.querySelector('[data-log]');
+      const emptyMsg = root.querySelector('[data-empty]');
+      const nameOf = Object.fromEntries(known.map((c) => [c.id, c.name]));
+
+      let entries = JSON.parse(localStorage.getItem(key) || '[]');
+      const save = () => localStorage.setItem(key, JSON.stringify(entries));
+
+      const reactionLabel = { loved: 'Le encantó 💜', liked: 'Le gustó', neutral: 'Neutral', disliked: 'No le gustó', hated: 'Lo odió' };
+
+      const render = () => {
+        if (!entries.length) {
+          emptyMsg.style.display = '';
+          log.querySelectorAll('.gt-row').forEach((r) => r.remove());
+          return;
+        }
+        emptyMsg.style.display = 'none';
+        log.querySelectorAll('.gt-row').forEach((r) => r.remove());
+        [...entries].reverse().forEach((entry, revIndex) => {
+          const index = entries.length - 1 - revIndex;
+          const row = document.createElement('div');
+          row.className = 'gt-row';
+          row.innerHTML = `
+            <span class="gt-resident">${nameOf[entry.residentId] || entry.residentId}</span>
+            <span class="gt-item">${entry.item}</span>
+            <span class="gt-reaction gt-reaction-${entry.reaction}">${reactionLabel[entry.reaction] || entry.reaction}</span>
+            <span class="gt-notes">${entry.notes || ''}</span>
+            <button type="button" class="gt-remove" data-remove="${index}" aria-label="Eliminar entrada">✕</button>
+          `;
+          log.appendChild(row);
+        });
+      };
+
+      addBtn.addEventListener('click', () => {
+        const item = itemInput.value.trim();
+        if (!item) { itemInput.focus(); return; }
+        entries.push({
+          residentId: residentSel.value,
+          item,
+          reaction: reactionSel.value,
+          notes: notesInput.value.trim(),
+        });
+        save();
+        itemInput.value = '';
+        notesInput.value = '';
+        render();
+      });
+
+      log.addEventListener('click', (event) => {
+        const btn = event.target.closest('[data-remove]');
+        if (!btn) return;
+        entries.splice(Number(btn.dataset.remove), 1);
+        save();
+        render();
+      });
+
+      exportBtn.addEventListener('click', () => {
+        if (!entries.length) return;
+        const text = entries.map((e) => `${nameOf[e.residentId] || e.residentId} — ${e.item}: ${reactionLabel[e.reaction] || e.reaction}${e.notes ? ' (' + e.notes + ')' : ''}`).join('\n');
+        navigator.clipboard?.writeText(text).catch(() => {});
+        alert('¡Tu registro de regalos se copió al portapapeles!');
+      });
+
+      resetBtn.addEventListener('click', () => {
+        if (!confirm('¿Borrar todo tu registro de regalos? Esto no se puede deshacer.')) return;
+        entries = [];
+        save();
+        render();
+      });
+
+      render();
+    }
+  </script>
+
+  <style>
+    .gt-shell { display: grid; grid-template-columns: 280px minmax(0, 1fr); gap: 18px; margin: 28px 0; }
+    @media (max-width: 820px) { .gt-shell { grid-template-columns: 1fr; } }
+    .gt-panel { border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); padding: 16px; display: grid; gap: 12px; align-self: start; }
+    .gt-panel label span { display: block; margin-bottom: 6px; color: var(--mist); font-weight: 600; }
+    .gt-panel select, .gt-panel input[type="text"] {
+      width: 100%; min-height: 44px; border: 1px solid var(--line); border-radius: 10px;
+      background: var(--ink); color: var(--mist); padding: 0 12px; font: inherit;
+    }
+    .gt-log { display: grid; gap: 8px; align-content: start; }
+    .gt-row {
+      display: grid; grid-template-columns: 1fr 1fr 100px 1fr 28px; gap: 10px; align-items: center;
+      border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface);
+      padding: 10px 12px;
+    }
+    @media (max-width: 700px) { .gt-row { grid-template-columns: 1fr; } }
+    .gt-resident { color: var(--mist); font-weight: 600; }
+    .gt-item { color: var(--muted); }
+    .gt-reaction { font-family: var(--mono); font-size: 0.7rem; text-transform: uppercase; padding: 3px 8px; border-radius: 999px; text-align: center; }
+    .gt-reaction-loved { background: rgba(200,80,140,0.2); color: #e08ac0; }
+    .gt-reaction-liked { background: rgba(120,180,120,0.2); color: #9ad09a; }
+    .gt-reaction-neutral { background: rgba(150,150,150,0.2); color: var(--muted); }
+    .gt-reaction-disliked, .gt-reaction-hated { background: rgba(200,90,90,0.2); color: #e08a8a; }
+    .gt-notes { color: var(--muted); font-size: 0.85rem; }
+    .gt-remove { background: none; border: none; color: var(--muted); cursor: pointer; font-size: 1rem; }
+    .gt-remove:hover { color: var(--candle); }
+    .empty { border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); padding: 16px; color: var(--muted); }
+  </style>
+</Base>

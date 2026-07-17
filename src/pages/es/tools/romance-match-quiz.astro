@@ -1,0 +1,252 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { SITE, GAME } from '../../../consts';
+import { characters } from '../../../data/characters';
+
+const cast = ['saga', 'luna', 'orlock', 'the-warlock', 'death', 'mina']
+  .map((id) => characters.find((c) => c.id === id))
+  .filter(Boolean);
+
+const results: Record<string, { tagline: string; blurb: string }> = {
+  saga: {
+    tagline: 'Quieres a alguien cuya energía cambia con la luna.',
+    blurb: 'Saga es una opción romántica confirmada de hombre lobo — los desarrolladores describen cómo su energía cambia con la luna llena. Si quieres una pareja con rango real, noche tras noche, ella es la elección.',
+  },
+  luna: {
+    tagline: 'Quieres a alguien con los pies en la tierra, buena mano con las plantas y algo de magia.',
+    blurb: 'Luna se describe como una bruja agrícola — probablemente tu primera fuente de hechizos y conocimiento de jardinería. Con los pies en la tierra, útil, y probablemente sepa exactamente qué necesitan tus cultivos.',
+  },
+  orlock: {
+    tagline: 'Quieres encanto del viejo mundo y algo de poder.',
+    blurb: 'Orlock se describe como cabeza de una familia vampírica — influencia del viejo mundo y el tipo de presencia que entra a una habitación y la cambia.',
+  },
+  'the-warlock': {
+    tagline: 'Quieres confianza, encanto, y ni una pizca de sutileza.',
+    blurb: 'Visto en un avance práctico como un brujo narcisista que no deja de coquetear. Su nombre real aún no está confirmado — la energía sí lo está.',
+  },
+  death: {
+    tagline: 'Quieres a alguien a quien todo el pueblo le tiene un poco de miedo.',
+    blurb: 'Death es un nombre que aparece en archivos filtrados antes del lanzamiento, con su propia casa ("la cabaña de Death"). Algunos rumores previos al lanzamiento lo señalaban como posible opción romántica — nada confirmado, pero si sucede, lo dijiste primero.',
+  },
+  mina: {
+    tagline: 'Quieres un misterio, y no te importa no resolverlo de inmediato.',
+    blurb: 'Mina fue nombrada por los desarrolladores, pero casi nada más sobre ella es público todavía. A veces ese es el atractivo: una hoja en blanco que conocerás en el lanzamiento.',
+  },
+};
+
+const questions = [
+  {
+    q: '¿Qué te llama la atención en tu primera noche en el pueblo?',
+    options: [
+      { t: 'La vieja mansión vampírica y sus secretos', s: 'orlock' },
+      { t: 'Los parterres de cultivo, listos para sembrar', s: 'luna' },
+      { t: 'Un aullido a lo lejos', s: 'saga' },
+      { t: 'Un lugar tranquilo que nadie más ha encontrado', s: 'death' },
+    ],
+  },
+  {
+    q: 'Alguien te coquetea a los cinco minutos de llegar. Tú:',
+    options: [
+      { t: 'Te encuentras encantado(a) de todos modos', s: 'the-warlock' },
+      { t: 'Lo rechazas educadamente — viniste a trabajar', s: 'luna' },
+      { t: 'Le devuelves la energía directamente', s: 'saga' },
+      { t: 'Te preguntas qué es lo que realmente quieren', s: 'orlock' },
+    ],
+  },
+  {
+    q: 'Elige una casa que te gustaría visitar:',
+    options: [
+      { t: 'Una gran mansión familiar, de generaciones', s: 'orlock' },
+      { t: 'Un hogar tranquilo y bien cuidado con un toque personal', s: 'orlock' },
+      { t: 'Donde sea que crezcan mejor los cultivos', s: 'luna' },
+      { t: 'Un lugar que la mitad del pueblo evita', s: 'death' },
+    ],
+  },
+  {
+    q: '¿Qué opinas del drama de las siete familias del pueblo?',
+    options: [
+      { t: 'Política del viejo mundo — quiero estar del lado ganador', s: 'orlock' },
+      { t: 'No es asunto mío, tengo una granja que dirigir', s: 'luna' },
+      { t: 'Honestamente, un poco emocionante', s: 'the-warlock' },
+      { t: 'Prefiero mantenerme completamente al margen', s: 'mina' },
+    ],
+  },
+  {
+    q: 'Sale una luna llena sobre el pueblo. ¿Qué haces?',
+    options: [
+      { t: 'Miro por la ventana, sintiendo que algo cambia', s: 'saga' },
+      { t: 'Cuido las flores que florecen de noche', s: 'luna' },
+      { t: 'Estoy en algún lugar donde nadie puede verme', s: 'death' },
+      { t: 'Me aseguro de que mi casa se vea bien bajo la luz de la luna', s: 'orlock' },
+    ],
+  },
+  {
+    q: 'Alguien en el pueblo es un completo misterio para todos. Tu reacción:',
+    options: [
+      { t: 'Intrigado(a) — quiero saber más', s: 'mina' },
+      { t: 'Encantador(a), pero mantengo la guardia', s: 'the-warlock' },
+      { t: 'Justo mi tipo', s: 'death' },
+      { t: 'Confío más en la confianza y el estatus', s: 'orlock' },
+    ],
+  },
+];
+
+const faq = [
+  { q: '¿Este cuestionario es oficial o se basa en datos reales del juego?', a: 'Es solo por diversión. Las opciones de resultado se basan en pistas reales y con fuente sobre la personalidad de cada personaje — revelaciones de desarrolladores, avances prácticos de prensa y archivos filtrados antes del lanzamiento — pero el emparejamiento en sí es nuestra propia interpretación ligera, no un sistema oficial de compatibilidad.' },
+  { q: '¿Esto me dice quién tiene los mejores regalos o la mejor ruta romántica?', a: 'No — las preferencias de regalos, eventos románticos y mecánicas de relación aún no están confirmadas en ningún lado. Consulta nuestro buscador de regalos románticos para lo que realmente está verificado frente a lo que aún está pendiente.' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Inicio', item: `${SITE.url}/es` },
+    { '@type': 'ListItem', position: 2, name: 'Herramientas', item: `${SITE.url}/es/tools` },
+    { '@type': 'ListItem', position: 3, name: 'Cuestionario de compatibilidad romántica', item: new URL('/es/tools/romance-match-quiz', SITE.url).href },
+  ] },
+  { '@context': 'https://schema.org', '@type': 'WebApplication', name: 'Cuestionario de compatibilidad romántica de Moonlight Peaks',
+    applicationCategory: 'GameApplication', operatingSystem: 'Web',
+    url: new URL('/es/tools/romance-match-quiz', SITE.url).href,
+    description: 'Un cuestionario divertido que te empareja con una opción romántica de Moonlight Peaks usando pistas reales y con fuente sobre la personalidad — sin datos inventados de compatibilidad.' },
+];
+---
+<Base
+  title="Cuestionario de compatibilidad romántica de Moonlight Peaks — Encuentra tu pareja"
+  description="Un cuestionario divertido y honesto que te empareja con una opción romántica de Moonlight Peaks, usando pistas reales de personajes con fuente — sin datos inventados de regalos o compatibilidad."
+  path="/es/tools/romance-match-quiz"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Herramientas', href: '/es/tools' }, { label: 'Cuestionario de compatibilidad' }]}
+  lang="es"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Herramienta · Romance</p>
+      <h1>Cuestionario de <em>compatibilidad</em> romántica</h1>
+      <p class="intro">
+        Seis preguntas breves, comparadas con pistas reales de personalidad de revelaciones de
+        desarrolladores, avances prácticos de prensa y archivos filtrados antes del lanzamiento. Es
+        solo por diversión — consulta las FAQ abajo para entender qué es esto (y qué no es).
+      </p>
+
+      <div id="quiz-root" class="quiz-root">
+        <div id="quiz-questions"></div>
+        <div id="quiz-result" class="quiz-result" hidden></div>
+        <div class="quiz-controls">
+          <button type="button" id="quiz-restart" class="rq-btn" hidden>Intentar de nuevo</button>
+        </div>
+      </div>
+
+      <h2>FAQ</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        Relacionado: <a href="/tools/romance-gift-finder">Buscador de regalos románticos</a>,
+        <a href="/romance">Romance y matrimonio</a>, <a href="/characters">Todos los personajes</a>.
+      </div>
+    </div>
+  </article>
+
+  <style>
+    .quiz-root { margin: 18px 0 28px; }
+    .rq-question { border: 1px solid var(--line); border-radius: 14px; background: var(--surface); padding: 16px; margin-bottom: 14px; }
+    .rq-question h3 { font-family: var(--display); font-weight: 600; font-size: 1rem; margin: 0 0 12px; color: var(--mist); }
+    .rq-options { display: grid; grid-template-columns: 1fr; gap: 8px; }
+    @media (min-width: 640px) { .rq-options { grid-template-columns: 1fr 1fr; } }
+    .rq-option {
+      text-align: left; font-size: 0.86rem; color: var(--muted); border: 1px solid var(--line);
+      border-radius: 10px; background: var(--ink-2); padding: 10px 12px; cursor: pointer;
+      transition: border-color .15s ease, color .15s ease, background .15s ease;
+    }
+    .rq-option:hover { border-color: color-mix(in srgb, var(--candle) 45%, var(--line)); color: var(--mist); }
+    .rq-option.is-picked { border-color: var(--candle); color: var(--candle); background: color-mix(in srgb, var(--candle) 10%, var(--ink-2)); }
+    .quiz-result { border: 1px solid color-mix(in srgb, var(--candle) 40%, var(--line)); border-radius: 16px; background: var(--surface); padding: 20px; text-align: center; }
+    .quiz-result h2 { font-family: var(--display); font-size: 1.3rem; margin: 4px 0 6px; }
+    .quiz-result .qr-tagline { color: var(--candle); font-size: 0.94rem; margin: 0 0 12px; }
+    .quiz-result .qr-blurb { color: var(--muted); font-size: 0.88rem; line-height: 1.6; max-width: 480px; margin: 0 auto 16px; }
+    .quiz-result a.qr-profile { display: inline-block; font-family: var(--mono); font-size: 0.8rem; color: var(--candle); border: 1px solid color-mix(in srgb, var(--candle) 45%, var(--line)); border-radius: 999px; padding: 8px 18px; }
+    .quiz-controls { text-align: center; margin-top: 14px; }
+    .rq-btn { font-family: var(--mono); font-size: 0.78rem; color: var(--muted); border: 1px solid var(--line); border-radius: 999px; background: var(--surface); padding: 8px 18px; cursor: pointer; }
+    .rq-btn:hover { color: var(--candle); border-color: color-mix(in srgb, var(--candle) 45%, var(--line)); }
+    .rq-progress { font-family: var(--mono); font-size: 0.68rem; color: var(--faint); margin-bottom: 6px; }
+  </style>
+
+  <script define:vars={{ questions, results, cast: cast.map((c) => ({ id: c!.id, name: c!.name })) }}>
+    (function () {
+      var qWrap = document.getElementById('quiz-questions');
+      var resultBox = document.getElementById('quiz-result');
+      var restartBtn = document.getElementById('quiz-restart');
+      var current = 0;
+      var scores = {};
+
+      var profileHref = {};
+      cast.forEach(function (c) { profileHref[c.id] = '/characters/' + c.id; });
+
+      function renderQuestion(i) {
+        qWrap.innerHTML = '';
+        var q = questions[i];
+        var box = document.createElement('div');
+        box.className = 'rq-question';
+        var progress = document.createElement('div');
+        progress.className = 'rq-progress';
+        progress.textContent = 'Pregunta ' + (i + 1) + ' de ' + questions.length;
+        var h3 = document.createElement('h3');
+        h3.textContent = q.q;
+        var opts = document.createElement('div');
+        opts.className = 'rq-options';
+        q.options.forEach(function (opt) {
+          var btn = document.createElement('button');
+          btn.type = 'button';
+          btn.className = 'rq-option';
+          btn.textContent = opt.t;
+          btn.addEventListener('click', function () {
+            scores[opt.s] = (scores[opt.s] || 0) + 1;
+            current++;
+            if (current < questions.length) { renderQuestion(current); }
+            else { showResult(); }
+          });
+          opts.appendChild(btn);
+        });
+        box.appendChild(progress);
+        box.appendChild(h3);
+        box.appendChild(opts);
+        qWrap.appendChild(box);
+      }
+
+      function showResult() {
+        var best = null, bestScore = -1;
+        Object.keys(scores).forEach(function (k) {
+          if (scores[k] > bestScore) { bestScore = scores[k]; best = k; }
+        });
+        if (!best) best = 'mina';
+        var info = results[best];
+        var name = (cast.filter(function (c) { return c.id === best; })[0] || {}).name || best;
+
+        qWrap.style.display = 'none';
+        resultBox.hidden = false;
+        resultBox.innerHTML =
+          '<p class="rq-progress">Tu pareja</p>' +
+          '<h2>' + name + '</h2>' +
+          '<p class="qr-tagline">' + info.tagline + '</p>' +
+          '<p class="qr-blurb">' + info.blurb + '</p>' +
+          '<a class="qr-profile" href="' + profileHref[best] + '">Ver el perfil de ' + name + '</a>';
+        restartBtn.hidden = false;
+      }
+
+      restartBtn.addEventListener('click', function () {
+        current = 0; scores = {};
+        qWrap.style.display = '';
+        resultBox.hidden = true;
+        restartBtn.hidden = true;
+        renderQuestion(0);
+      });
+
+      renderQuestion(0);
+    })();
+  </script>
+</Base>

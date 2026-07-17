@@ -1,0 +1,172 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { SITE, GAME } from '../../../consts';
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org', '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Inicio', item: `${SITE.url}/es` },
+      { '@type': 'ListItem', position: 2, name: 'Herramientas', item: `${SITE.url}/es/tools` },
+      { '@type': 'ListItem', position: 3, name: 'Rastreador de colección Nokturna', item: new URL('/es/tools/nokturna-tracker', SITE.url).href },
+    ],
+  },
+  {
+    '@context': 'https://schema.org', '@type': 'WebApplication',
+    name: 'Rastreador de colección Nokturna de Moonlight Peaks', applicationCategory: 'GameApplication', operatingSystem: 'Web',
+    url: new URL('/es/tools/nokturna-tracker', SITE.url).href,
+    description: 'Un rastreador de colección personal, guardado en el navegador, para las cartas Nokturna en Moonlight Peaks — registra cada carta a medida que la encuentras, antes de que exista una base de datos totalmente verificada.',
+  },
+];
+---
+<Base
+  title="Rastreador de colección Nokturna de Moonlight Peaks"
+  description="Registra tu propia colección de cartas Nokturna en Moonlight Peaks — se confirma la existencia de más de 67 cartas en varios arquetipos de mazo. Guarda lo que has encontrado, privado en tu navegador."
+  path="/es/tools/nokturna-tracker"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Herramientas', href: '/es/tools' }, { label: 'Rastreador Nokturna' }]}
+  lang="es"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Herramienta / Rastreador Nokturna</p>
+      <h1>Moonlight Peaks — Rastreador de colección <em>Nokturna</em></h1>
+      <p class="intro">
+        Confirmado al lanzamiento: Nokturna tiene más de 67 cartas en varios arquetipos de mazo,
+        pero los nombres individuales de las cartas aún no son públicos — consulta la
+        <a href="/nokturna">guía de Nokturna</a> para lo confirmado hasta ahora. Hasta que exista
+        una base de datos completa, registra aquí tu propia colección mientras encuentras cartas en
+        el juego. Guardado solo de forma privada en tu navegador.
+      </p>
+
+      <section class="nt-shell" data-nok-tracker>
+        <aside class="nt-panel">
+          <label>
+            <span>Nombre de la carta</span>
+            <input data-name type="text" placeholder="ej. la carta que acabas de ganar" />
+          </label>
+          <label>
+            <span>Arquetipo / tipo (opcional)</span>
+            <input data-type type="text" placeholder="ej. vampiro, bruja, hombre lobo…" />
+          </label>
+          <label>
+            <span>Cómo la conseguiste</span>
+            <input data-source type="text" placeholder="ej. ganada contra Orlock, recompensa de pesca" />
+          </label>
+          <button type="button" class="btn btn-gold" data-add>Añadir a la colección</button>
+          <button type="button" class="btn btn-ghost" data-export>Exportar como texto</button>
+          <button type="button" class="btn btn-ghost" data-reset>Borrar colección</button>
+          <div class="nt-stats"><strong data-count>0</strong><span>cartas registradas / 67+ confirmadas que existen</span></div>
+        </aside>
+
+        <div class="nt-grid" data-grid aria-live="polite">
+          <p class="empty" data-empty>Aún no hay cartas registradas — añade tu primera victoria a la izquierda.</p>
+        </div>
+      </section>
+
+      <div class="callout">
+        Este es tu propio cuaderno personal, no una lista oficial de cartas — nada aquí se envía al
+        sitio. Si quieres ayudar a construir la base de datos pública verificada, usa el
+        <a href="/tools/submit-data">Enviador de datos</a> en su lugar.
+      </div>
+    </div>
+  </article>
+
+  <script>
+    const root = document.querySelector('[data-nok-tracker]');
+    if (root) {
+      const key = 'moonlight-nokturna-tracker-v1';
+      const nameInput = root.querySelector('[data-name]');
+      const typeInput = root.querySelector('[data-type]');
+      const sourceInput = root.querySelector('[data-source]');
+      const addBtn = root.querySelector('[data-add]');
+      const exportBtn = root.querySelector('[data-export]');
+      const resetBtn = root.querySelector('[data-reset]');
+      const grid = root.querySelector('[data-grid]');
+      const emptyMsg = root.querySelector('[data-empty]');
+      const count = root.querySelector('[data-count]');
+
+      let cards = JSON.parse(localStorage.getItem(key) || '[]');
+      const save = () => localStorage.setItem(key, JSON.stringify(cards));
+
+      const render = () => {
+        count.textContent = cards.length;
+        grid.querySelectorAll('.nt-card').forEach((c) => c.remove());
+        if (!cards.length) { emptyMsg.style.display = ''; return; }
+        emptyMsg.style.display = 'none';
+        [...cards].reverse().forEach((card, revIndex) => {
+          const index = cards.length - 1 - revIndex;
+          const el = document.createElement('article');
+          el.className = 'nt-card';
+          el.innerHTML = `
+            <button type="button" class="nt-remove" data-remove="${index}" aria-label="Eliminar carta">✕</button>
+            <h3>${card.name}</h3>
+            ${card.type ? `<span class="nt-badge">${card.type}</span>` : ''}
+            ${card.source ? `<p class="nt-source">${card.source}</p>` : ''}
+          `;
+          grid.appendChild(el);
+        });
+      };
+
+      addBtn.addEventListener('click', () => {
+        const name = nameInput.value.trim();
+        if (!name) { nameInput.focus(); return; }
+        cards.push({ name, type: typeInput.value.trim(), source: sourceInput.value.trim() });
+        save();
+        nameInput.value = '';
+        typeInput.value = '';
+        sourceInput.value = '';
+        render();
+      });
+
+      grid.addEventListener('click', (event) => {
+        const btn = event.target.closest('[data-remove]');
+        if (!btn) return;
+        cards.splice(Number(btn.dataset.remove), 1);
+        save();
+        render();
+      });
+
+      exportBtn.addEventListener('click', () => {
+        if (!cards.length) return;
+        const text = cards.map((c) => `${c.name}${c.type ? ' [' + c.type + ']' : ''}${c.source ? ' — ' + c.source : ''}`).join('\n');
+        navigator.clipboard?.writeText(text).catch(() => {});
+        alert('¡Tu colección Nokturna se copió al portapapeles!');
+      });
+
+      resetBtn.addEventListener('click', () => {
+        if (!confirm('¿Borrar toda tu colección Nokturna? Esto no se puede deshacer.')) return;
+        cards = [];
+        save();
+        render();
+      });
+
+      render();
+    }
+  </script>
+
+  <style>
+    .nt-shell { display: grid; grid-template-columns: 280px minmax(0, 1fr); gap: 18px; margin: 28px 0; }
+    @media (max-width: 820px) { .nt-shell { grid-template-columns: 1fr; } }
+    .nt-panel { border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); padding: 16px; display: grid; gap: 12px; align-self: start; }
+    .nt-panel label span { display: block; margin-bottom: 6px; color: var(--mist); font-weight: 600; }
+    .nt-panel input[type="text"] {
+      width: 100%; min-height: 44px; border: 1px solid var(--line); border-radius: 10px;
+      background: var(--ink); color: var(--mist); padding: 0 12px; font: inherit;
+    }
+    .nt-stats { border-top: 1px solid var(--line); padding-top: 12px; }
+    .nt-stats strong { display: block; color: var(--candle); font-family: var(--display); font-size: 2rem; }
+    .nt-stats span { color: var(--muted); font-size: 0.85rem; }
+    .nt-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 12px; align-content: start; }
+    .nt-card {
+      position: relative; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface);
+      padding: 14px; display: grid; gap: 6px;
+    }
+    .nt-card h3 { margin: 0; color: var(--mist); font-size: 1rem; padding-right: 20px; }
+    .nt-badge { justify-self: start; font-family: var(--mono); font-size: 0.65rem; text-transform: uppercase; color: var(--candle); border: 1px solid var(--line); border-radius: 999px; padding: 2px 8px; }
+    .nt-source { color: var(--muted); font-size: 0.82rem; margin: 0; }
+    .nt-remove { position: absolute; top: 8px; right: 10px; background: none; border: none; color: var(--muted); cursor: pointer; }
+    .nt-remove:hover { color: var(--candle); }
+    .empty { border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); padding: 16px; color: var(--muted); }
+  </style>
+</Base>

@@ -53,7 +53,10 @@ const dePaths = [
 ];
 
 // Pages deepened for Spanish specifically, beyond the shared es/ja/zh baseline above.
-const esOnlyPaths = ['/quests', '/farm', '/collections', '/map'];
+const esOnlyPaths = ['/quests', '/farm', '/collections', '/map',
+  '/tools/platform-picker', '/tools/romance-gift-finder', '/tools/romance-match-quiz', '/tools/romance-planner',
+  '/tools/families-explorer', '/tools/item-tracker', '/tools/gift-tracker', '/tools/fish-finder',
+  '/tools/farming-profit-planner', '/tools/nokturna-tracker', '/tools/submit-data'];
 
 // French pages built so far — grows independently from here.
 const frPaths = ['/', '/release-date', '/beginner-guide', '/characters', '/romance', '/farming', '/magic', '/platforms', '/demo',
