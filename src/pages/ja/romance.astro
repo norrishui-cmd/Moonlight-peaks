@@ -2,6 +2,7 @@
 import Base from '../../layouts/Base.astro';
 import { SITE, GAME } from '../../consts';
 import YouTube from '../../components/YouTube.astro';
+import News from '../../components/News.astro';
 import { characters, typeLabels } from '../../data/characters';
 
 const familyNameJa: Record<string, string> = {
@@ -141,6 +142,9 @@ const jsonLd = [
         確認済みの最初の例です(白ワインが大好物)。<a href="/characters/saga">プロフィール</a>を
         確認し、<a href="/tools/gift-tracker">贈り物トラッカー</a>で自分の発見を記録しましょう。
       </p>
+
+      <h2>最新の恋愛関連アップデート</h2>
+      <News category="romance" limit={5} />
 
       <h2>よくある質問</h2>
       <div class="faq">

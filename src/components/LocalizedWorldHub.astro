@@ -2,7 +2,9 @@
 import Base from '../layouts/Base.astro';
 import { SITE } from '../consts';
 import { isPathTranslated } from '../i18n/translated-paths';
+import News from './News.astro';
 import type { LocalizedWorldCopy, LocalizedWorldKind, LocalizedWorldLang } from '../data/localizedWorldPages';
+import type { NewsCategory } from '../data/news';
 
 type HubItem = {
   slug: string;
@@ -20,9 +22,11 @@ interface Props {
   kind: LocalizedWorldKind;
   copy: LocalizedWorldCopy;
   items: HubItem[];
+  newsCategory?: NewsCategory;
+  newsHeading?: string;
 }
 
-const { lang, kind, copy, items } = Astro.props;
+const { lang, kind, copy, items, newsCategory, newsHeading } = Astro.props;
 const path = `/${lang}/${kind}`;
 const englishBase = `/${kind}`;
 const homeLabel = lang === 'es' ? 'Inicio' : lang === 'de' ? 'Startseite' : lang === 'fr' ? 'Accueil' : 'Home';
@@ -98,6 +102,13 @@ const jsonLd = [
           ))}
         </div>
       </section>
+
+      {newsCategory && (
+        <section class="news-block">
+          <h2>{newsHeading ?? 'Latest updates'}</h2>
+          <News category={newsCategory} limit={5} />
+        </section>
+      )}
 
       <section class="faq-block" aria-labelledby={`${kind}-faq-title`}>
         <h2 id={`${kind}-faq-title`}>{copy.faqTitle}</h2>

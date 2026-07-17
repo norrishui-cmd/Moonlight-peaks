@@ -1,6 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
 import { SITE } from '../../consts';
+import News from '../../components/News.astro';
 
 const faq = [
   { q: 'Wie viele Romanze-Optionen gibt es in Moonlight Peaks?', a: 'Bestätigt: 23 Bewohner sind romantisch verfügbar, verteilt auf sechs Familien (Vampire, Werwölfe, Hexen, Meerjungfrauen, Seher, Menschen) plus zwei ohne Familienzugehörigkeit (Tod und der Liebesdämon Llemi).' },
@@ -63,6 +64,9 @@ const jsonLd = [
         Bier und einzelne Blumen, aber keine Blumensträuße).
         Siehe ihr <a href="/characters/saga">Profil</a> für Details.
       </p>
+
+      <h2>Neueste Romanze-Updates</h2>
+      <News category="romance" limit={5} />
 
       <h2>Häufige Fragen</h2>
       <div class="faq">

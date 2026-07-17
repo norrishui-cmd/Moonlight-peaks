@@ -1,0 +1,235 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { SITE, GAME } from '../../../consts';
+import { characters, typeLabels } from '../../../data/characters';
+
+const typeLabelsDe: Record<string, string> = {
+  vampire: 'Vampir', werewolf: 'Werwolf', witch: 'Hexe', mermaid: 'Meerjungfrau',
+  seer: 'Seherin', ghost: 'Geist', human: 'Mensch', other: 'Sonstiges',
+};
+const familyLabelDe: Record<string, string> = { Vampire: 'Vampir', Werewolf: 'Werwolf', Witch: 'Hexe', 'Unknown family': 'Unbekannte Familie' };
+
+const romanceCharacters = characters
+  .filter((character) => character.status !== 'unconfirmed' && character.romanceable !== false)
+  .map((character) => ({
+    id: character.id,
+    name: character.name,
+    family: ['Vampire', 'Werewolf', 'Witch'].includes(character.family) ? character.family : 'Unknown family',
+    type: typeLabelsDe[character.type] || typeLabels[character.type],
+    romance: character.romanceable === true ? 'Romanzierbar' : 'Zu bestätigen',
+    status: character.status,
+    href: `/characters/${character.id}`,
+    note: character.desc,
+    clues: character.knownInfo || [],
+    gifts: (character.lovedGifts?.length || character.likedGifts?.length)
+      ? [
+          character.lovedGifts?.length ? `Geliebt: ${character.lovedGifts.join(', ')}` : '',
+          character.likedGifts?.length ? `Gemocht: ${character.likedGifts.join(', ')}` : '',
+          character.dislikedGifts?.length ? `Unerwünscht: ${character.dislikedGifts.join(', ')}` : '',
+        ].filter(Boolean).join(' | ')
+      : 'Noch nicht verifiziert',
+  }));
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Startseite', item: `${SITE.url}/de` },
+      { '@type': 'ListItem', position: 2, name: 'Werkzeuge', item: `${SITE.url}/de/tools` },
+      { '@type': 'ListItem', position: 3, name: 'Romanze-Geschenkfinder', item: new URL('/de/tools/romance-gift-finder', SITE.url).href },
+    ],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebApplication',
+    name: 'Moonlight Peaks Romanze-Geschenkfinder',
+    applicationCategory: 'GameApplication',
+    operatingSystem: 'Web',
+    url: new URL('/de/tools/romance-gift-finder', SITE.url).href,
+    description: 'Ein Moonlight-Peaks-Romanze- und Geschenkplanungswerkzeug, das bestätigte Charaktere von Geschenken trennt, die noch eine Verifizierung im echten Spiel benötigen.',
+  },
+];
+---
+<Base
+  title="Moonlight Peaks Romanze-Geschenkfinder - Charaktere, Geschenke & Verifizierungs-Tracker"
+  description="Finde Moonlight-Peaks-Romanze-Charaktere, Geschenk-Verifizierungsstatus, Familien-Hinweise und release-sichere Beziehungsnotizen ohne erfundene Lieblingsgeschenk-Daten."
+  path="/de/tools/romance-gift-finder"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Werkzeuge', href: '/de/tools' }, { label: 'Romanze-Geschenkfinder' }]}
+  lang="de"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Werkzeug / Romanze-Geschenke</p>
+      <h1>Moonlight Peaks <em>Romanze-Geschenkfinder</em></h1>
+      <p class="intro">
+        Nutze diesen Tracker, um bekannte Romanze-Kandidaten zu finden und zu sehen, welche
+        Geschenk-Details noch eine Verifizierung nach Release benötigen. Wir werden kein Item als
+        Lieblingsgeschenk kennzeichnen, bis es im echten Spiel bestätigt ist.
+      </p>
+
+      <section class="gift-tool" data-gift-tool>
+        <div class="gift-controls">
+          <label>
+            <span>Bewohner auswählen</span>
+            <select data-character-select>
+              {romanceCharacters.map((character) => (
+                <option value={character.id}>{character.name}</option>
+              ))}
+            </select>
+          </label>
+          <label>
+            <span>Nach Familie/Typ filtern</span>
+            <select data-family-filter>
+              <option value="all">Alle bekannten Kandidaten</option>
+              <option value="Vampire">Vampir</option>
+              <option value="Werewolf">Werwolf</option>
+              <option value="Witch">Hexe</option>
+              <option value="Other">Sonstiges / zu bestätigen</option>
+            </select>
+          </label>
+        </div>
+
+        <div class="gift-result" aria-live="polite">
+          <span class="tool-status" data-status>Romanzierbar</span>
+          <h2 data-name>{romanceCharacters[0]?.name}</h2>
+          <p data-note>{romanceCharacters[0]?.note}</p>
+          <table class="facts compact">
+            <tr><th>Familie / Typ</th><td data-family>{familyLabelDe[romanceCharacters[0]?.family] || romanceCharacters[0]?.family} / {romanceCharacters[0]?.type}</td></tr>
+            <tr><th>Geschenkdaten</th><td data-gifts>Noch nicht verifiziert</td></tr>
+            <tr><th>Nächster Schritt</th><td data-next>Überprüfe gemochte und geliebte Geschenke erneut nach {GAME.releaseLabel}.</td></tr>
+          </table>
+          <div class="gift-clues" data-clues></div>
+          <a class="btn btn-ghost" data-profile href={romanceCharacters[0]?.href || '/characters'}>Charakterprofil öffnen</a>
+        </div>
+      </section>
+
+      <h2>Wie Geschenk-Tracking im Spiel funktioniert</h2>
+      <p>
+        Bestätigt: das Beziehungsmenü verfolgt die letzten 8 Geschenke, die du jedem Bewohner
+        gegeben hast, und zeigt, ob sie als gemocht, geliebt oder unerwünscht ankamen — Experimentieren
+        ist also risikoarm, da du überprüfen kannst, was funktioniert hat. <span class="tag-community">Community-berichtet</span>:
+        das Lieblingsgeschenk eines Bewohners an seinem Geburtstag zu schenken, gibt einen größeren
+        Freundschaftsschub als üblich. Zwei allgemeine Tricks gelten für viele Bewohner: die Farbe
+        eines Geschenks an die Lieblingsfarbe anzupassen, und selbstgemachte Geschenke wie
+        arrangierte Blumensträuße oder Stickereien.
+      </p>
+
+      <h2>Geschenk-Verifizierungsrichtlinie</h2>
+      <div class="verification-grid">
+        <div>
+          <strong>Verifiziert</strong>
+          <p>Direkt aus dem echten Spiel oder einer offiziellen Quelle bestätigt. Diese können als geliebte oder gemochte Geschenke aufgeführt werden.</p>
+        </div>
+        <div>
+          <strong>Gemeldet</strong>
+          <p>In Vorschauen, Aufnahmen oder Community-Berichten gesehen. Nützliche Hinweise, aber nicht endgültig, bis im Spiel geprüft.</p>
+        </div>
+        <div>
+          <strong>Noch nicht verifiziert</strong>
+          <p>Wird angezeigt, wenn ein Charakter bekannt ist, aber die genauen Geschenke nicht bestätigt sind. Dies vermeidet falsche Sicherheit und schützt die Seitenqualität.</p>
+        </div>
+      </div>
+
+      <h2>Bekannte Romanze-Kandidaten in diesem Tracker</h2>
+      <div class="candidate-grid">
+        {romanceCharacters.map((character) => (
+          <a class="candidate-card" href={character.href}>
+            <span>{character.romance} / {character.status}</span>
+            <strong>{character.name}</strong>
+            <em>{familyLabelDe[character.family] || character.family} / {character.type}</em>
+          </a>
+        ))}
+      </div>
+
+      <div class="callout">
+        Verwandt: <a href="/romance">Romanze-Guide</a>, <a href="/characters">alle Charaktere</a>, <a href="/families">Familien</a>, und <a href="/faq/can-you-get-married-in-moonlight-peaks">Heirats-FAQ</a>.
+      </div>
+    </div>
+  </article>
+
+  <script type="application/json" id="romanceGiftData" set:html={JSON.stringify(romanceCharacters)}></script>
+  <script>
+    const root = document.querySelector('[data-gift-tool]');
+    const dataScript = document.getElementById('romanceGiftData');
+    if (root && dataScript) {
+      const characters = JSON.parse(dataScript.textContent || '[]');
+      const select = root.querySelector('[data-character-select]');
+      const filter = root.querySelector('[data-family-filter]');
+      const status = root.querySelector('[data-status]');
+      const name = root.querySelector('[data-name]');
+      const note = root.querySelector('[data-note]');
+      const family = root.querySelector('[data-family]');
+      const gifts = root.querySelector('[data-gifts]');
+      const next = root.querySelector('[data-next]');
+      const clues = root.querySelector('[data-clues]');
+      const profile = root.querySelector('[data-profile]');
+
+      const render = () => {
+        const selected = characters.find((item) => item.id === select.value) || characters[0];
+        if (!selected) return;
+        status.textContent = `${selected.romance} / ${selected.status}`;
+        name.textContent = selected.name;
+        note.textContent = selected.note;
+        family.textContent = `${selected.family} / ${selected.type}`;
+        gifts.textContent = selected.gifts;
+        next.textContent = selected.romance === 'Romanzierbar'
+          ? 'Teste bei Release zuerst universelle gemochte Geschenke, dann notiere geliebte Geschenke aus Dialog und Beziehungsgewinnen.'
+          : 'Behalte diesen Bewohner im Tracker, bis Romanze-Status und Geschenkreaktionen verifiziert sind.';
+        profile.href = selected.href;
+        clues.innerHTML = selected.clues.length
+          ? `<h3>Aktuelle Hinweise</h3><ul>${selected.clues.map((item) => `<li>${item}</li>`).join('')}</ul>`
+          : '<h3>Aktuelle Hinweise</h3><p>Noch keine geschenkspezifischen Hinweise bestätigt.</p>';
+      };
+
+      const rebuildOptions = () => {
+        const value = filter.value;
+        const visible = characters.filter((item) => value === 'all' || item.type === value || (value === 'Other' && item.family === 'Unknown family'));
+        select.innerHTML = visible.map((item) => `<option value="${item.id}">${item.name}</option>`).join('');
+        render();
+      };
+
+      filter.addEventListener('change', rebuildOptions);
+      select.addEventListener('change', render);
+      render();
+    }
+  </script>
+
+  <style>
+    .tag-community {
+      display: inline-block; font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.02em;
+      color: var(--faint); border: 1px solid var(--line); border-radius: 999px; padding: 2px 8px;
+      margin-right: 6px; vertical-align: middle;
+    }
+    .gift-tool { display: grid; grid-template-columns: minmax(250px, 0.75fr) minmax(0, 1.25fr); gap: 18px; margin: 28px 0 34px; }
+    @media (max-width: 820px) { .gift-tool { grid-template-columns: 1fr; } }
+    .gift-controls, .gift-result { border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); padding: 18px; }
+    .gift-controls { display: grid; gap: 18px; align-content: start; }
+    .gift-controls span { display: block; color: var(--mist); font-weight: 600; margin-bottom: 8px; }
+    .gift-controls select {
+      width: 100%;
+      min-height: 44px;
+      color: var(--mist);
+      background: var(--ink);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 0 12px;
+      font: inherit;
+    }
+    .gift-result h2 { margin-top: 8px; }
+    .tool-status { font-family: var(--mono); font-size: 0.68rem; color: var(--candle); text-transform: uppercase; letter-spacing: 0.12em; }
+    .facts.compact th, .facts.compact td { padding: 9px 0; }
+    .gift-clues { margin: 14px 0; }
+    .gift-clues ul { margin-top: 6px; }
+    .verification-grid, .candidate-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    @media (max-width: 820px) { .verification-grid, .candidate-grid { grid-template-columns: 1fr; } }
+    .verification-grid > div, .candidate-card { border: 1px solid var(--line); border-radius: 12px; background: var(--surface); padding: 15px; }
+    .verification-grid p { margin-bottom: 0; color: var(--muted); font-size: 0.92rem; }
+    .candidate-card { display: flex; flex-direction: column; gap: 5px; transition: transform .15s ease, border-color .15s ease; }
+    .candidate-card:hover { transform: translateY(-2px); border-color: color-mix(in srgb, var(--candle) 50%, var(--line)); }
+    .candidate-card span { font-family: var(--mono); font-size: 0.66rem; color: var(--faint); text-transform: uppercase; letter-spacing: 0.1em; }
+    .candidate-card strong { color: var(--mist); font-family: var(--display); font-size: 1.16rem; }
+    .candidate-card em { color: var(--muted); font-style: normal; font-size: 0.88rem; }
+  </style>
+</Base>

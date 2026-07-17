@@ -1,6 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
 import { SITE, GAME } from '../../consts';
+import News from '../../components/News.astro';
 
 const rows = [
   ['最初に読む', '初心者ガイド、デモ、発売日、対応プラットフォーム。'],
@@ -71,6 +72,9 @@ const jsonLd = [
         <li>農業、魔法、恋愛、収集、探索から最初の目標を選ぶ。</li>
         <li>具体的な答えが必要なときは個別ページを使う。</li>
       </ol>
+
+      <h2>最新のガイド更新</h2>
+      <News category="guides" limit={5} />
 
       <h2>FAQ</h2>
       <div class="faq">

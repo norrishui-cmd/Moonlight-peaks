@@ -1,0 +1,177 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { SITE, GAME } from '../../../consts';
+import { getItemFramework, itemCategories } from '../../../data/items';
+
+const trackerItems = itemCategories.flatMap((cat) => {
+  const framework = getItemFramework(cat.slug);
+  return framework.rows.map((row, index) => ({
+    id: `${cat.slug}-${index}`,
+    category: cat.name,
+    categorySlug: cat.slug,
+    name: row[0]?.startsWith('image:') || row[0]?.startsWith('File:') ? row[1] : row[0] || `${cat.name} entry`,
+    detail: row
+      .slice(row[0]?.startsWith('image:') || row[0]?.startsWith('File:') ? 2 : 1)
+      .filter((cell) => cell && !cell.startsWith('image:') && !cell.startsWith('File:'))
+      .join(' / '),
+    status: cat.status,
+  }));
+});
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Startseite', item: `${SITE.url}/de` },
+      { '@type': 'ListItem', position: 2, name: 'Werkzeuge', item: `${SITE.url}/de/tools` },
+      { '@type': 'ListItem', position: 3, name: 'Gegenstands-Tracker', item: new URL('/de/tools/item-tracker', SITE.url).href },
+    ],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebApplication',
+    name: 'Moonlight Peaks Gegenstands-Tracker',
+    applicationCategory: 'GameApplication',
+    operatingSystem: 'Web',
+    url: new URL('/de/tools/item-tracker', SITE.url).href,
+    description: 'Eine lokale Moonlight-Peaks-Sammel-Checkliste für Fische, Kleintiere, Rezepte, Tränke, Mineralien und Dekorationen.',
+  },
+];
+---
+<Base
+  title="Moonlight Peaks Gegenstands-Tracker - Fische, Kleintiere, Rezepte & Sammel-Checkliste"
+  description="Verfolge deinen Moonlight-Peaks-Sammelfortschritt nach Kategorie. Fische, Kleintiere, Kochen, Handwerk, Artefakte, Tränke, Mineralien, Dekorationen und weitere noch ausstehende Daten."
+  path="/de/tools/item-tracker"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Werkzeuge', href: '/de/tools' }, { label: 'Gegenstands-Tracker' }]}
+  lang="de"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Werkzeug / Gegenstands-Tracker</p>
+      <h1>Moonlight Peaks <em>Gegenstands-Tracker</em></h1>
+      <p class="intro">
+        Eine im Browser gespeicherte Sammel-Checkliste für {GAME.title}. Die Struktur ist bereit für
+        Fische, Kleintiere, Rezepte, Tränke, Artefakte, Mineralien, Dekorationen und weitere
+        Gegenstandskategorien, während noch unbekannte Daten als "zu bestätigen" markiert bleiben.
+      </p>
+
+      <section class="tracker-shell" data-item-tracker>
+        <aside class="tracker-panel">
+          <h2>Filter</h2>
+          <label>
+            <span>Kategorie</span>
+            <select data-category>
+              <option value="all">Alle Kategorien</option>
+              {itemCategories.map((cat) => <option value={cat.name}>{cat.name}</option>)}
+            </select>
+          </label>
+          <label>
+            <span>Suche</span>
+            <input data-search type="search" placeholder="Fische, Rezepte, Tränke suchen…" />
+          </label>
+          <label class="checkline"><input data-hide-complete type="checkbox" /> Abgeschlossene ausblenden</label>
+          <div class="tracker-stats">
+            <strong data-complete-count>0</strong>
+            <span>lokal abgeschlossen</span>
+          </div>
+          <button type="button" class="btn btn-ghost" data-reset>Checkliste zurücksetzen</button>
+        </aside>
+
+        <div class="tracker-list" data-list aria-live="polite"></div>
+      </section>
+
+      <div class="callout">
+        Dieses Werkzeug speichert den Fortschritt nur in deinem Browser. Es sendet keine Daten an die
+        Seite, und Platzhalter-Zeilen sollten nach {GAME.releaseLabel} durch verifizierte Daten ersetzt werden.
+      </div>
+    </div>
+  </article>
+
+  <script define:vars={{ trackerItems }}>
+    const root = document.querySelector('[data-item-tracker]');
+    if (root) {
+      const key = 'moonlight-item-tracker-v1';
+      const category = root.querySelector('[data-category]');
+      const search = root.querySelector('[data-search]');
+      const hideComplete = root.querySelector('[data-hide-complete]');
+      const list = root.querySelector('[data-list]');
+      const count = root.querySelector('[data-complete-count]');
+      const reset = root.querySelector('[data-reset]');
+      let done = JSON.parse(localStorage.getItem(key) || '{}');
+
+      const save = () => localStorage.setItem(key, JSON.stringify(done));
+      const render = () => {
+        const q = search.value.trim().toLowerCase();
+        const cat = category.value;
+        const filtered = trackerItems.filter((item) => {
+          const matchesCat = cat === 'all' || item.category === cat;
+          const matchesQuery = !q || `${item.name} ${item.category} ${item.detail}`.toLowerCase().includes(q);
+          const matchesDone = !hideComplete.checked || !done[item.id];
+          return matchesCat && matchesQuery && matchesDone;
+        });
+        count.textContent = Object.values(done).filter(Boolean).length;
+        list.innerHTML = filtered.map((item) => `
+          <label class="tracker-row">
+            <input type="checkbox" data-id="${item.id}" ${done[item.id] ? 'checked' : ''} />
+            <span>
+              <strong>${item.name}</strong>
+              <em>${item.category} - ${item.status}</em>
+              <small>${item.detail || 'Noch zu bestätigen'}</small>
+            </span>
+          </label>
+        `).join('') || '<p class="empty">Keine passenden Einträge.</p>';
+      };
+
+      list.addEventListener('change', (event) => {
+        const input = event.target.closest('input[data-id]');
+        if (!input) return;
+        done[input.dataset.id] = input.checked;
+        save();
+        render();
+      });
+      [category, search, hideComplete].forEach((el) => el.addEventListener('input', render));
+      reset.addEventListener('click', () => {
+        done = {};
+        save();
+        render();
+      });
+      render();
+    }
+  </script>
+
+  <style>
+    .tracker-shell { display: grid; grid-template-columns: 280px minmax(0, 1fr); gap: 18px; margin: 28px 0; }
+    @media (max-width: 820px) { .tracker-shell { grid-template-columns: 1fr; } }
+    .tracker-panel, .tracker-row {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--surface);
+    }
+    .tracker-panel { padding: 16px; display: grid; gap: 14px; align-self: start; }
+    .tracker-panel h2 { margin: 0; }
+    .tracker-panel label span { display: block; margin-bottom: 6px; color: var(--mist); font-weight: 600; }
+    .tracker-panel select, .tracker-panel input[type="search"] {
+      width: 100%;
+      min-height: 44px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: var(--ink);
+      color: var(--mist);
+      padding: 0 12px;
+      font: inherit;
+    }
+    .checkline { display: flex; gap: 9px; align-items: center; color: var(--muted); }
+    .tracker-stats { border-top: 1px solid var(--line); padding-top: 12px; }
+    .tracker-stats strong { display: block; color: var(--candle); font-family: var(--display); font-size: 2.2rem; }
+    .tracker-stats span { color: var(--muted); }
+    .tracker-list { display: grid; gap: 10px; }
+    .tracker-row { display: grid; grid-template-columns: 28px 1fr; gap: 10px; padding: 12px; cursor: pointer; }
+    .tracker-row input { margin-top: 5px; accent-color: var(--candle); }
+    .tracker-row strong { display: block; color: var(--mist); }
+    .tracker-row em { display: block; color: var(--candle); font-family: var(--mono); font-size: 0.68rem; font-style: normal; text-transform: uppercase; margin: 3px 0; }
+    .tracker-row small { color: var(--muted); line-height: 1.5; }
+    .empty { border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); padding: 16px; color: var(--muted); }
+  </style>
+</Base>

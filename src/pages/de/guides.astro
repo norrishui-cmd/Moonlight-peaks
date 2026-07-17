@@ -1,6 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
 import { SITE, GAME } from '../../consts';
+import News from '../../components/News.astro';
 
 const rows = [
   ['Zuerst lesen', 'Einsteiger-Guide, Demo, Release-Datum, unterstützte Plattformen.'],
@@ -72,6 +73,9 @@ const jsonLd = [
         <li>Ein erstes Ziel wählen: Landwirtschaft, Magie, Romanze, Sammeln oder Erkunden.</li>
         <li>Für konkrete Antworten die jeweilige Einzelseite nutzen.</li>
       </ol>
+
+      <h2>Neueste Guide-Updates</h2>
+      <News category="guides" limit={5} />
 
       <h2>FAQ</h2>
       <div class="faq">

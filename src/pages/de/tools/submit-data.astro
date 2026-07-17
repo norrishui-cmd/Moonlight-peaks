@@ -1,0 +1,173 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { SITE, GAME } from '../../../consts';
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Startseite', item: `${SITE.url}/de` },
+      { '@type': 'ListItem', position: 2, name: 'Werkzeuge', item: `${SITE.url}/de/tools` },
+      { '@type': 'ListItem', position: 3, name: 'Daten-Übermittler', item: new URL('/de/tools/submit-data', SITE.url).href },
+    ],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebApplication',
+    name: 'Moonlight Peaks Daten-Übermittler',
+    applicationCategory: 'GameApplication',
+    operatingSystem: 'Web',
+    url: new URL('/de/tools/submit-data', SITE.url).href,
+    description: 'Ein lokales Moonlight-Peaks-Entwurfswerkzeug für Datenübermittlungen zu Gegenständen, Rezepten, Orten, Geschenken und Bugs aus der Launch-Woche.',
+  },
+];
+---
+<Base
+  title="Moonlight Peaks Daten-Übermittler - Fische, Gegenstände, Geschenke, Rezepte & Bugs teilen"
+  description="Entwerfe Moonlight-Peaks-Launch-Daten-Übermittlungen für Fische, Kleintiere, Rezepte, Tränke, Geschenke, Orte, Läden, Bugs und andere verifizierte Entdeckungen."
+  path="/de/tools/submit-data"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Werkzeuge', href: '/de/tools' }, { label: 'Daten-Übermittler' }]}
+  lang="de"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Werkzeug / Community-Daten</p>
+      <h1>Moonlight Peaks <em>Daten-Übermittler</em></h1>
+      <p class="intro">
+        Bereite Entdeckungen aus der Launch-Woche für die manuelle Überprüfung vor: Fische,
+        Kleintiere, Rezepte, Tränke, NPC-Geschenke, Läden, Orte, Bugs und Plattform-Notizen. Nichts
+        wird automatisch veröffentlicht.
+      </p>
+
+      <section class="submit-shell" data-submit-tool>
+        <form class="submit-form">
+          <label>
+            <span>Datentyp</span>
+            <select name="type">
+              <option>Fisch</option>
+              <option>Kleintier</option>
+              <option>Rezept</option>
+              <option>Trank</option>
+              <option>NPC-Geschenk</option>
+              <option>Ort</option>
+              <option>Laden</option>
+              <option>Bug oder Problem</option>
+              <option>Sonstiges</option>
+            </select>
+          </label>
+          <label><span>Name oder Titel</span><input name="name" placeholder="Beispiel: zu bestätigen" /></label>
+          <label><span>Ort / Quelle</span><input name="location" placeholder="Wo du es gefunden hast" /></label>
+          <label><span>Saison / Zeit / Wetter</span><input name="conditions" placeholder="Falls relevant" /></label>
+          <label><span>Preis / Wert / Effekt</span><input name="value" placeholder="Falls im Spiel sichtbar" /></label>
+          <label><span>Beleg-Hinweis</span><input name="evidence" placeholder="Screenshot, offizieller Beitrag oder Beobachtung im echten Spiel" /></label>
+          <label class="wide"><span>Notizen</span><textarea name="notes" rows="5" placeholder="Füge genauen Wortlaut, Rezeptzutaten, Charakterreaktion, Bug-Schritte oder weitere Details hinzu."></textarea></label>
+          <button type="button" class="btn btn-primary" data-save>Entwurf lokal speichern</button>
+        </form>
+
+        <aside class="review-card">
+          <span>Überprüfungsrichtlinie</span>
+          <h2>Nur manuelle Überprüfung</h2>
+          <p>
+            Entwürfe werden in deinem Browser gespeichert und können exportiert werden.
+            Veröffentliche nur nach Überprüfung offizieller Quellen, Screenshots aus dem echten
+            Spiel oder wiederholbarer In-Game-Beweise.
+          </p>
+          <button type="button" class="btn btn-ghost" data-export>JSON exportieren</button>
+        </aside>
+      </section>
+
+      <h2>Gespeicherte Entwürfe</h2>
+      <div class="draft-list" data-drafts></div>
+
+      <div class="callout">
+        Empfohlene Quellenregel: Zitiere nach Möglichkeit offizielle Kanäle, Stores oder neutrale
+        Social-Media-Beiträge. Zitiere keine konkurrierenden Wiki-Seiten als Quelle für
+        veröffentlichte Daten.
+      </div>
+    </div>
+  </article>
+
+  <script>
+    const root = document.querySelector('[data-submit-tool]');
+    const draftsEl = document.querySelector('[data-drafts]');
+    if (root && draftsEl) {
+      const key = 'moonlight-data-drafts-v1';
+      const form = root.querySelector('.submit-form');
+      const saveButton = root.querySelector('[data-save]');
+      const exportButton = root.querySelector('[data-export]');
+      let drafts = JSON.parse(localStorage.getItem(key) || '[]');
+
+      const save = () => localStorage.setItem(key, JSON.stringify(drafts));
+      const render = () => {
+        draftsEl.innerHTML = drafts.length ? drafts.map((draft, index) => `
+          <article class="draft-card">
+            <span>${draft.type}</span>
+            <h3>${draft.name || 'Unbenannter Entwurf'}</h3>
+            <p>${draft.notes || 'Noch keine Notizen.'}</p>
+            <small>${draft.location || 'Ort ausstehend'} - ${draft.evidence || 'Beleg ausstehend'}</small>
+            <button type="button" data-delete="${index}">Löschen</button>
+          </article>
+        `).join('') : '<p class="empty">Noch keine lokalen Entwürfe.</p>';
+      };
+
+      saveButton.addEventListener('click', () => {
+        const data = Object.fromEntries(new FormData(form).entries());
+        data.createdAt = new Date().toISOString();
+        drafts.unshift(data);
+        drafts = drafts.slice(0, 25);
+        save();
+        form.reset();
+        render();
+      });
+      draftsEl.addEventListener('click', (event) => {
+        const button = event.target.closest('button[data-delete]');
+        if (!button) return;
+        drafts.splice(Number(button.dataset.delete), 1);
+        save();
+        render();
+      });
+      exportButton.addEventListener('click', async () => {
+        const text = JSON.stringify(drafts, null, 2);
+        await navigator.clipboard.writeText(text);
+        exportButton.textContent = 'JSON kopiert';
+        setTimeout(() => { exportButton.textContent = 'JSON exportieren'; }, 1600);
+      });
+      render();
+    }
+  </script>
+
+  <style>
+    .submit-shell { display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 18px; margin: 28px 0; }
+    @media (max-width: 860px) { .submit-shell { grid-template-columns: 1fr; } }
+    .submit-form, .review-card, .draft-card, .empty {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--surface);
+    }
+    .submit-form { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; padding: 18px; }
+    @media (max-width: 640px) { .submit-form { grid-template-columns: 1fr; } }
+    .submit-form .wide, .submit-form button { grid-column: 1 / -1; }
+    .submit-form span { display: block; margin-bottom: 6px; color: var(--mist); font-weight: 600; }
+    .submit-form input, .submit-form select, .submit-form textarea {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: var(--ink);
+      color: var(--mist);
+      padding: 11px 12px;
+      font: inherit;
+    }
+    .review-card { padding: 18px; align-self: start; }
+    .review-card > span { font-family: var(--mono); color: var(--candle); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; }
+    .review-card p { color: var(--muted); }
+    .draft-list { display: grid; gap: 10px; }
+    .draft-card, .empty { padding: 14px; }
+    .draft-card span { color: var(--candle); font-family: var(--mono); font-size: 0.68rem; text-transform: uppercase; }
+    .draft-card h3 { margin: 5px 0; }
+    .draft-card p { color: var(--muted); margin: 0 0 8px; }
+    .draft-card small { color: var(--faint); }
+    .draft-card button { float: right; border: 1px solid var(--line); border-radius: 999px; background: transparent; color: var(--muted); padding: 4px 9px; cursor: pointer; }
+  </style>
+</Base>

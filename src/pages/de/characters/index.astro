@@ -1,6 +1,7 @@
 ---
 import Base from '../../../layouts/Base.astro';
 import { SITE, GAME } from '../../../consts';
+import News from '../../../components/News.astro';
 import { characters, type CharType } from '../../../data/characters';
 import { charTranslations } from '../../../i18n/characters-data';
 
@@ -88,6 +89,9 @@ const jsonLd = {
           </a>
         ))}
       </div>
+
+      <h2>Neueste Charakter-Updates</h2>
+      <News category="characters" limit={5} />
 
       <div class="callout wip">
         Aktuell sind 10 Profile ins Deutsche übersetzt (Graf Dracula, Saga, Luna, Orlock, Brook,
