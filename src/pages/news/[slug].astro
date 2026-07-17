@@ -40,8 +40,8 @@ const jsonLd = [
 ];
 ---
 <Base
-  title={`${item.title} | Moonlight Peaks News`}
-  description={item.body}
+  title={item.seoTitle ?? `${item.title} | Moonlight Peaks News`}
+  description={item.seoDescription ?? item.body}
   path={`/news/${item.slug}`}
   jsonLd={jsonLd}
   crumbs={[{ label: 'News', href: '/#latest-news' }, { label: item.title }]}

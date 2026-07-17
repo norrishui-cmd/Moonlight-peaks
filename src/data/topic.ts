@@ -19,6 +19,11 @@ export type TopicItem = {
   sections?: { title: string; body: string }[];
   related?: TopicLink[];
   faq?: TopicFaq[];
+  // Optional CTR-focused overrides for the <title>/<meta description> tags specifically.
+  // Falls back to the auto-generated title (`${title} - ${section.label}`) and `dek` when absent.
+  // Use when search-console data shows high impressions but poor CTR for a specific item.
+  seoTitle?: string;
+  seoDescription?: string;
 };
 
 export type TopicSection = {

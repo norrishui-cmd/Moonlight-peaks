@@ -11,6 +11,10 @@ export type NewsItem = {
   category: NewsCategory;
   sourceLabel?: string;
   sourceUrl?: string;
+  // Optional CTR-focused overrides for the <title>/<meta description> tags specifically.
+  // Falls back to `${title} | Moonlight Peaks News` and `body` when absent.
+  seoTitle?: string;
+  seoDescription?: string;
 };
 
 export const news: NewsItem[] = [
@@ -777,6 +781,8 @@ export const news: NewsItem[] = [
     slug: 'loveage-festival-and-moonlight-ball-confirmed',
     date: '2026-07-10',
     title: 'Loveage Festival mechanics confirmed, plus a second festival: Moonlight Ball',
+    seoTitle: 'Moonlight Peaks Loveage Festival: How It Works (Confirmed Guide)',
+    seoDescription: 'Confirmed: the Loveage Festival runs Spring 20\u201321, hosted by Llemi the "Love Demon" \u2014 here\u2019s how the stalls, the secret-admirer gift exchange, and the separate Moonlight Ball festival actually work.',
     body: 'The official wiki confirms the full Loveage Festival setup (Spring 20\u201321) and a second named festival, the Moonlight Ball (Summer 20) \u2014 our environment page now covers both.',
     details: [
       'Loveage Festival: hosted by Llemi the "Love Demon," with Elvira and Mina running stalls, Luna running a flower-arranging stall, and a secret-admirer gift exchange (pick up to 3 NPCs Saturday, exchange happens Sunday).',
@@ -879,6 +885,8 @@ export const news: NewsItem[] = [
     slug: 'dark-wood-crafting-material-confirmed',
     date: '2026-07-10',
     title: 'Dark Wood confirmed as a real crafting material, obtained with a Copper Axe',
+    seoTitle: 'Moonlight Peaks Dark Wood: How to Get It & What It\u2019s Used For',
+    seoDescription: 'Confirmed by two independent sources: Dark Wood comes from chopping oversized logs around the farm with an upgraded Copper Axe (not the starting Rusty Axe) \u2014 here\u2019s exactly what it\u2019s used to craft.',
     body: 'Two independent sources confirm Dark Wood as a genuine crafting material, obtained by chopping oversized logs around the farm area with an upgraded Copper Axe \u2014 not the starting Rusty Axe.',
     details: [
       'Used in at least two decoration recipes: a Fur Chair (with hardwood planks and cloth) and a Coffin Bookcase (with planks).',

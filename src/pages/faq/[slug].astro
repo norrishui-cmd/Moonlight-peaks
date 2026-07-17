@@ -29,7 +29,7 @@ const jsonLd = [
 ---
 <Base
   title={f.q.includes('Moonlight Peaks') ? f.q : `${f.q} · Moonlight Peaks`}
-  description={plain.length > 155 ? plain.slice(0, 152) + '…' : plain}
+  description={f.seoDescription ?? (plain.length > 155 ? plain.slice(0, 152) + '…' : plain)}
   path={`/faq/${f.slug}`}
   jsonLd={jsonLd}
   crumbs={[{ label: 'FAQ', href: '/faq' }, { label: f.q }]}

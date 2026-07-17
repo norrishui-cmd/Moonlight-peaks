@@ -6,8 +6,8 @@ export const locationsSection: TopicSection = {
   eyebrow: 'World',
   heading: 'Moonlight Peaks <em>locations</em>',
   schemaType: 'Place',
-  title: 'Moonlight Peaks Locations: Town, Howling Marshes, Crest Garden & More',
-  description: 'Every confirmed Moonlight Peaks location: the town, your farm, Misty Shores, the Cave of Echoes, Howling Marshes, Crest Garden, and more — developer-confirmed facts kept separate from reports.',
+  title: 'All Moonlight Peaks Locations (Full List): Town, Farm, Crest Garden & More',
+  description: 'The complete list of confirmed Moonlight Peaks locations and what\u2019s inside each one \u2014 town, your farm, Misty Shores, Crystal Cave, Howling Marshes, Crest Garden \u2014 with developer-confirmed facts kept separate from reports.',
   intro: 'The places that make up Moonlight Peaks — the magical mountain town, your homestead, and the wild spots around it. We mark what is developer-confirmed versus reported, datamined (from pre-launch game files, cross-referenced against pre-launch references), or expected, updating each entry as more is verified against the live game.',
 };
 
@@ -202,6 +202,8 @@ export const locations: TopicItem[] = [
   {
     slug: 'crystal-cave', title: 'Crystal Cave & Twilight Catacombs', tag: 'Underground', status: 'confirmed', image: '/hero-loc-mines.webp',
     dek: 'A gem-bearing cave separate from the Cave of Echoes, located beside Fiona\u2019s house.',
+    seoTitle: 'Crystal Cave in Moonlight Peaks: Exact Location & How to Unlock It',
+    seoDescription: 'Confirmed: the Moonlight Peaks Crystal Cave sits beside Fiona\u2019s house, blocked by a boulder until your pickaxe hits Copper tier. Here\u2019s the exact route in, plus what to mine once you\u2019re inside (Rose Quartz, Moon Crystal).',
     body: [
       'Confirmed: the Crystal Cave is a distinct underground area from the Cave of Echoes, located to the left of Fiona\u2019s house. A large boulder blocks the entrance until you upgrade your pickaxe to at least Copper level.',
       'Confirmed: inside, Rose Quartz nodes spawn generously, along with other gemstones. Rose Quartz is ground into a powder using the Enchanted Mortar (unlocked once you start learning magic) and is used in several crafting recipes and quests.',

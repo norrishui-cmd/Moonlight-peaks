@@ -23,6 +23,10 @@ export type Faq = {
   a: string;
   more?: string[];
   related?: Related[];
+  // Optional CTR-focused override for the <meta description> tag. Falls back to the plain
+  // answer text (truncated) when absent. Use when the literal answer text leads with a blunt
+  // "no"/negative that kills click-through despite otherwise-decent rankings.
+  seoDescription?: string;
 };
 
 export const faqs: Faq[] = [
@@ -88,6 +92,7 @@ export const faqs: Faq[] = [
     slug: 'is-moonlight-peaks-on-ps5-or-xbox', cat: 'platforms',
     q: 'Is Moonlight Peaks on PS5 or Xbox?',
     a: 'In short: no. No PlayStation or Xbox version has been announced. The confirmed platforms are Steam, Steam Deck, Switch, Switch 2, and Android.',
+    seoDescription: 'Moonlight Peaks is confirmed on Steam, Steam Deck, Switch, Switch 2, and Android \u2014 here\u2019s exactly where that leaves PS5 and Xbox players, and what to watch for if that changes.',
     more: ['If a PS5 or Xbox release is announced later, we will update this page.'],
     related: [{ label: 'Platforms guide', href: '/platforms' }, { label: 'Release date', href: '/release-date' }],
   },
