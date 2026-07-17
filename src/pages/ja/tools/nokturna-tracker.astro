@@ -1,0 +1,171 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { SITE, GAME } from '../../../consts';
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org', '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'ホーム', item: `${SITE.url}/ja` },
+      { '@type': 'ListItem', position: 2, name: 'ツール', item: `${SITE.url}/ja/tools` },
+      { '@type': 'ListItem', position: 3, name: 'Nokturnaコレクショントラッカー', item: new URL('/ja/tools/nokturna-tracker', SITE.url).href },
+    ],
+  },
+  {
+    '@context': 'https://schema.org', '@type': 'WebApplication',
+    name: 'ムーンライト・ピークス Nokturnaコレクショントラッカー', applicationCategory: 'GameApplication', operatingSystem: 'Web',
+    url: new URL('/ja/tools/nokturna-tracker', SITE.url).href,
+    description: 'ムーンライト・ピークスのNokturnaカードを記録する個人用ブラウザ保存型トラッカー——完全な検証済みデータベースが揃うまで、見つけたカードを記録できます。',
+  },
+];
+---
+<Base
+  title="ムーンライト・ピークス Nokturnaコレクショントラッカー"
+  description="ムーンライト・ピークスの自分だけのNokturnaカードコレクションを記録——67枚以上のカードが複数のデッキアーキタイプにわたって確認されています。見つけたカードをブラウザに非公開で保存できます。"
+  path="/ja/tools/nokturna-tracker"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'ツール', href: '/ja/tools' }, { label: 'Nokturnaトラッカー' }]}
+  lang="ja"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">ツール / Nokturnaトラッカー</p>
+      <h1>ムーンライト・ピークス <em>Nokturna</em>コレクショントラッカー</h1>
+      <p class="intro">
+        発売時に確認済み:Nokturnaには複数のデッキアーキタイプにまたがる67枚以上のカードが
+        存在しますが、個々のカード名はまだ公開されていません——現在確認されている内容は
+        <a href="/nokturna">Nokturnaガイド</a>をご覧ください。完全なデータベースができるまで、
+        ゲーム内で見つけたカードをここに記録してください。ブラウザにのみ非公開で保存されます。
+      </p>
+
+      <section class="nt-shell" data-nok-tracker>
+        <aside class="nt-panel">
+          <label>
+            <span>カード名</span>
+            <input data-name type="text" placeholder="例:さっき勝ち取ったカード" />
+          </label>
+          <label>
+            <span>アーキタイプ・タイプ(任意)</span>
+            <input data-type type="text" placeholder="例:吸血鬼、魔女、狼男…" />
+          </label>
+          <label>
+            <span>入手方法</span>
+            <input data-source type="text" placeholder="例:Orlockに勝利、釣りの報酬" />
+          </label>
+          <button type="button" class="btn btn-gold" data-add>コレクションに追加</button>
+          <button type="button" class="btn btn-ghost" data-export>テキストとして書き出す</button>
+          <button type="button" class="btn btn-ghost" data-reset>コレクションをクリア</button>
+          <div class="nt-stats"><strong data-count>0</strong><span>枚記録済み / 67枚以上が存在確認済み</span></div>
+        </aside>
+
+        <div class="nt-grid" data-grid aria-live="polite">
+          <p class="empty" data-empty>まだカードが記録されていません——左側で最初の勝利を追加してください。</p>
+        </div>
+      </section>
+
+      <div class="callout">
+        これはあなた個人のメモ帳であり、公式カードリストではありません——ここでの内容はサイトに
+        送信されません。検証済みの公開データベース作りに協力したい場合は、代わりに
+        <a href="/tools/submit-data">データ送信ツール</a>をご利用ください。
+      </div>
+    </div>
+  </article>
+
+  <script>
+    const root = document.querySelector('[data-nok-tracker]');
+    if (root) {
+      const key = 'moonlight-nokturna-tracker-v1';
+      const nameInput = root.querySelector('[data-name]');
+      const typeInput = root.querySelector('[data-type]');
+      const sourceInput = root.querySelector('[data-source]');
+      const addBtn = root.querySelector('[data-add]');
+      const exportBtn = root.querySelector('[data-export]');
+      const resetBtn = root.querySelector('[data-reset]');
+      const grid = root.querySelector('[data-grid]');
+      const emptyMsg = root.querySelector('[data-empty]');
+      const count = root.querySelector('[data-count]');
+
+      let cards = JSON.parse(localStorage.getItem(key) || '[]');
+      const save = () => localStorage.setItem(key, JSON.stringify(cards));
+
+      const render = () => {
+        count.textContent = cards.length;
+        grid.querySelectorAll('.nt-card').forEach((c) => c.remove());
+        if (!cards.length) { emptyMsg.style.display = ''; return; }
+        emptyMsg.style.display = 'none';
+        [...cards].reverse().forEach((card, revIndex) => {
+          const index = cards.length - 1 - revIndex;
+          const el = document.createElement('article');
+          el.className = 'nt-card';
+          el.innerHTML = `
+            <button type="button" class="nt-remove" data-remove="${index}" aria-label="カードを削除">✕</button>
+            <h3>${card.name}</h3>
+            ${card.type ? `<span class="nt-badge">${card.type}</span>` : ''}
+            ${card.source ? `<p class="nt-source">${card.source}</p>` : ''}
+          `;
+          grid.appendChild(el);
+        });
+      };
+
+      addBtn.addEventListener('click', () => {
+        const name = nameInput.value.trim();
+        if (!name) { nameInput.focus(); return; }
+        cards.push({ name, type: typeInput.value.trim(), source: sourceInput.value.trim() });
+        save();
+        nameInput.value = '';
+        typeInput.value = '';
+        sourceInput.value = '';
+        render();
+      });
+
+      grid.addEventListener('click', (event) => {
+        const btn = event.target.closest('[data-remove]');
+        if (!btn) return;
+        cards.splice(Number(btn.dataset.remove), 1);
+        save();
+        render();
+      });
+
+      exportBtn.addEventListener('click', () => {
+        if (!cards.length) return;
+        const text = cards.map((c) => `${c.name}${c.type ? ' [' + c.type + ']' : ''}${c.source ? ' — ' + c.source : ''}`).join('\n');
+        navigator.clipboard?.writeText(text).catch(() => {});
+        alert('Nokturnaコレクションをクリップボードにコピーしました！');
+      });
+
+      resetBtn.addEventListener('click', () => {
+        if (!confirm('Nokturnaコレクションの記録をすべて消去しますか？この操作は元に戻せません。')) return;
+        cards = [];
+        save();
+        render();
+      });
+
+      render();
+    }
+  </script>
+
+  <style>
+    .nt-shell { display: grid; grid-template-columns: 280px minmax(0, 1fr); gap: 18px; margin: 28px 0; }
+    @media (max-width: 820px) { .nt-shell { grid-template-columns: 1fr; } }
+    .nt-panel { border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); padding: 16px; display: grid; gap: 12px; align-self: start; }
+    .nt-panel label span { display: block; margin-bottom: 6px; color: var(--mist); font-weight: 600; }
+    .nt-panel input[type="text"] {
+      width: 100%; min-height: 44px; border: 1px solid var(--line); border-radius: 10px;
+      background: var(--ink); color: var(--mist); padding: 0 12px; font: inherit;
+    }
+    .nt-stats { border-top: 1px solid var(--line); padding-top: 12px; }
+    .nt-stats strong { display: block; color: var(--candle); font-family: var(--display); font-size: 2rem; }
+    .nt-stats span { color: var(--muted); font-size: 0.85rem; }
+    .nt-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 12px; align-content: start; }
+    .nt-card {
+      position: relative; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface);
+      padding: 14px; display: grid; gap: 6px;
+    }
+    .nt-card h3 { margin: 0; color: var(--mist); font-size: 1rem; padding-right: 20px; }
+    .nt-badge { justify-self: start; font-family: var(--mono); font-size: 0.65rem; text-transform: uppercase; color: var(--candle); border: 1px solid var(--line); border-radius: 999px; padding: 2px 8px; }
+    .nt-source { color: var(--muted); font-size: 0.82rem; margin: 0; }
+    .nt-remove { position: absolute; top: 8px; right: 10px; background: none; border: none; color: var(--muted); cursor: pointer; }
+    .nt-remove:hover { color: var(--candle); }
+    .empty { border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); padding: 16px; color: var(--muted); }
+  </style>
+</Base>

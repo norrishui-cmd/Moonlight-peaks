@@ -1,0 +1,255 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { SITE } from '../../../consts';
+import { characters, typeLabels } from '../../../data/characters';
+
+const typeLabelsJa: Record<string, string> = {
+  vampire: '吸血鬼', werewolf: '狼男', witch: '魔女', mermaid: '人魚',
+  seer: '預言者', ghost: '幽霊', human: '人間', other: 'その他',
+};
+const statusLabelsJa: Record<string, string> = { confirmed: '確認済み', reported: '報告済み', datamined: 'データマイニング', unconfirmed: '未確認' };
+
+const candidates = characters
+  .filter((c) => c.status !== 'unconfirmed' && c.romanceable !== false)
+  .map((c) => ({
+    id: c.id,
+    name: c.name,
+    family: c.family && c.family !== 'Unknown' ? c.family : null,
+    type: typeLabelsJa[c.type] || typeLabels[c.type],
+    status: statusLabelsJa[c.status] || c.status,
+    href: `/characters/${c.id}`,
+  }));
+
+const prepTasks = [
+  { id: 'read-profile', t: '候補に挙げたキャラクターのプロフィールと判明情報を読む' },
+  { id: 'check-home', t: '候補の判明している自宅の場所をメモする(プロフィールの「確認された情報」参照)' },
+  { id: 'check-family', t: 'どの一族に属しているか、報告されている一族間の緊張関係を確認する' },
+  { id: 'check-status', t: '現在の確度ランク(確認済み・報告済み・データマイニング)を確認する' },
+  { id: 'try-quiz', t: 'ロマンス相性診断クイズを受けてセカンドオピニオンをもらう' },
+  { id: 'plan-day-one', t: '初日に最初に話しかける相手を決める' },
+  { id: 'bookmark-page', t: 'このページをブックマークする——候補リストとメモはこの端末に保存されます' },
+];
+
+const faq = [
+  { q: 'このツールは実際の選物や好感度データを使用していますか?', a: 'いいえ。選物・好感度・イベントに関するデータはまだ何も確認されていないため、ここには表示していません。このツールは、あなた自身の候補リスト、メモ、準備チェックリストのみを記録します——すべてブラウザに非公開で保存され、サーバーには送信されません。' },
+  { q: '候補リストは発売後も残りますか?', a: 'はい、同じブラウザ・端末を使い続け、サイトデータを消去しなければ残ります。実際のロマンスデータが確認され次第、このツールもそれを使えるように拡張していきます。' },
+  { q: '私のデータはどこかに送信されますか?', a: 'いいえ。すべてブラウザのローカルストレージにのみ保存されます。私たちがそれを見たり、サーバーに保存したり、何かに利用したりすることはありません。' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'ホーム', item: `${SITE.url}/ja` },
+    { '@type': 'ListItem', position: 2, name: 'ツール', item: `${SITE.url}/ja/tools` },
+    { '@type': 'ListItem', position: 3, name: 'ロマンスプランナー', item: new URL('/ja/tools/romance-planner', SITE.url).href },
+  ] },
+  { '@context': 'https://schema.org', '@type': 'WebApplication', name: 'ムーンライト・ピークス ロマンスプランナー',
+    applicationCategory: 'GameApplication', operatingSystem: 'Web',
+    url: new URL('/ja/tools/romance-planner', SITE.url).href,
+    description: 'ムーンライト・ピークスの発売前ロマンス候補リストと準備タスクトラッカー、ブラウザにローカル保存されます。' },
+];
+---
+<Base
+  title="ムーンライト・ピークス ロマンスプランナー — 候補リスト＆進捗トラッカー"
+  description="ムーンライト・ピークスのロマンス候補を絞り込み、自分用のメモを追加し、それぞれの進捗を記録できます——ブラウザに非公開で保存、架空の選物データなし。"
+  path="/ja/tools/romance-planner"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'ツール', href: '/ja/tools' }, { label: 'ロマンスプランナー' }]}
+  lang="ja"
+  showExport
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">ツール・ロマンス</p>
+      <h1>ロマンス<em>プランナー</em></h1>
+      <p class="intro">
+        確認済みの23名のロマンス対象の中から検討中の相手を絞り込み、自分用のメモを書き留めて、
+        それぞれの進捗を記録できます。ここでの内容はすべてブラウザに非公開で保存されます——
+        アカウント登録もサーバーもなく、架空の選物や好感度データも一切ありません。
+      </p>
+
+      <h2>あなたの候補リスト</h2>
+      <p class="rp-sub">キャラクターをタップすると候補リストに追加・削除できます。</p>
+      <div id="rp-candidates" class="rp-candidates">
+        {candidates.map((c) => (
+          <button type="button" class="rp-candidate" data-rp-id={c.id} data-rp-href={c.href} data-rp-name={c.name}>
+            <span class="rp-star" aria-hidden="true">☆</span>
+            <span class="rp-name">{c.name}</span>
+            <span class="rp-meta">{c.family ? `${c.family} · ` : ''}{c.status}</span>
+          </button>
+        ))}
+      </div>
+
+      <h2>あなたのメモ</h2>
+      <div id="rp-shortlist-empty" class="callout wip">候補リストが空です——上のキャラクターをタップして追加してください。</div>
+      <div id="rp-notes-list" class="rp-notes-list"></div>
+
+      <h2>発売日準備チェックリスト</h2>
+      <ul id="rp-prep-list" class="rp-prep-list">
+        {prepTasks.map((task) => (
+          <li>
+            <label>
+              <input type="checkbox" data-rp-task={task.id} />
+              <span>{task.t}</span>
+            </label>
+          </li>
+        ))}
+      </ul>
+
+      <div class="rp-actions">
+        <button type="button" id="rp-clear" class="rq-btn">候補リストとメモをクリア</button>
+      </div>
+
+      <h2>FAQ</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        関連ページ: <a href="/romance">ロマンスと結婚</a>、<a href="/tools/romance-match-quiz">ロマンス相性診断クイズ</a>、
+        <a href="/tools/romance-gift-finder">ロマンスギフトファインダー</a>、<a href="/characters">全キャラクター</a>。
+      </div>
+    </div>
+  </article>
+
+  <style>
+    .rp-sub { color: var(--faint); font-size: 0.8rem; margin: -6px 0 12px; }
+    .rp-candidates { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 0 0 24px; }
+    @media (min-width: 640px) { .rp-candidates { grid-template-columns: repeat(3, 1fr); } }
+    .rp-candidate {
+      display: flex; flex-direction: column; align-items: flex-start; gap: 2px; text-align: left;
+      border: 1px solid var(--line); border-radius: 12px; background: var(--surface); padding: 10px 12px;
+      cursor: pointer; transition: border-color .15s ease;
+    }
+    .rp-candidate:hover { border-color: color-mix(in srgb, var(--candle) 45%, var(--line)); }
+    .rp-candidate.is-picked { border-color: var(--candle); background: color-mix(in srgb, var(--candle) 10%, var(--surface)); }
+    .rp-candidate .rp-star { font-size: 0.9rem; color: var(--faint); }
+    .rp-candidate.is-picked .rp-star { color: var(--candle); }
+    .rp-candidate .rp-name { font-family: var(--display); font-weight: 600; font-size: 0.88rem; color: var(--mist); }
+    .rp-candidate .rp-meta { font-family: var(--mono); font-size: 0.66rem; color: var(--faint); }
+    .rp-notes-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; }
+    .rp-note-card { border: 1px solid var(--line); border-radius: 12px; background: var(--surface); padding: 12px 14px; }
+    .rp-note-card .rp-note-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
+    .rp-note-card strong { font-family: var(--display); font-size: 0.94rem; }
+    .rp-note-card a { font-family: var(--mono); font-size: 0.7rem; color: var(--candle); }
+    .rp-note-card textarea {
+      width: 100%; min-height: 64px; background: var(--ink-2); border: 1px solid var(--line); border-radius: 8px;
+      color: var(--mist); font-family: inherit; font-size: 0.84rem; padding: 8px 10px; resize: vertical;
+    }
+    .rp-prep-list { list-style: none; margin: 0 0 20px; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+    .rp-prep-list label { display: flex; align-items: center; gap: 10px; font-size: 0.86rem; color: var(--muted); cursor: pointer; }
+    .rp-prep-list input { accent-color: var(--candle); }
+    .rp-actions { margin: 0 0 24px; }
+  </style>
+
+  <script>
+    (function () {
+      var KEY_SHORTLIST = 'mp-romance-shortlist';
+      var KEY_NOTES = 'mp-romance-notes';
+      var KEY_PREP = 'mp-romance-prep';
+
+      function readJSON(key, fallback) {
+        try {
+          var raw = localStorage.getItem(key);
+          return raw ? JSON.parse(raw) : fallback;
+        } catch (e) { return fallback; }
+      }
+      function writeJSON(key, val) {
+        try { localStorage.setItem(key, JSON.stringify(val)); } catch (e) {}
+      }
+
+      var shortlist = readJSON(KEY_SHORTLIST, []);
+      var notes = readJSON(KEY_NOTES, {});
+      var prep = readJSON(KEY_PREP, {});
+
+      var candidateEls = document.querySelectorAll('.rp-candidate');
+      var notesList = document.getElementById('rp-notes-list');
+      var emptyMsg = document.getElementById('rp-shortlist-empty');
+
+      function renderCandidates() {
+        candidateEls.forEach(function (el) {
+          var id = el.getAttribute('data-rp-id');
+          el.classList.toggle('is-picked', shortlist.indexOf(id) > -1);
+          var star = el.querySelector('.rp-star');
+          if (star) star.textContent = shortlist.indexOf(id) > -1 ? '★' : '☆';
+        });
+      }
+
+      function renderNotes() {
+        notesList.innerHTML = '';
+        if (shortlist.length === 0) { emptyMsg.hidden = false; return; }
+        emptyMsg.hidden = true;
+        shortlist.forEach(function (id) {
+          var el = document.querySelector('.rp-candidate[data-rp-id="' + id + '"]');
+          if (!el) return;
+          var name = el.getAttribute('data-rp-name');
+          var href = el.getAttribute('data-rp-href');
+          var card = document.createElement('div');
+          card.className = 'rp-note-card';
+          var head = document.createElement('div');
+          head.className = 'rp-note-head';
+          var strong = document.createElement('strong');
+          strong.textContent = name;
+          var link = document.createElement('a');
+          link.href = href;
+          link.textContent = 'プロフィールを見る';
+          head.appendChild(strong);
+          head.appendChild(link);
+          var textarea = document.createElement('textarea');
+          textarea.placeholder = name + 'についてのメモ…';
+          textarea.value = notes[id] || '';
+          textarea.addEventListener('input', function () {
+            notes[id] = textarea.value;
+            writeJSON(KEY_NOTES, notes);
+          });
+          card.appendChild(head);
+          card.appendChild(textarea);
+          notesList.appendChild(card);
+        });
+      }
+
+      candidateEls.forEach(function (el) {
+        el.addEventListener('click', function () {
+          var id = el.getAttribute('data-rp-id');
+          var idx = shortlist.indexOf(id);
+          if (idx > -1) { shortlist.splice(idx, 1); }
+          else { shortlist.push(id); }
+          writeJSON(KEY_SHORTLIST, shortlist);
+          renderCandidates();
+          renderNotes();
+        });
+      });
+
+      document.querySelectorAll('[data-rp-task]').forEach(function (box) {
+        var id = box.getAttribute('data-rp-task');
+        box.checked = !!prep[id];
+        box.addEventListener('change', function () {
+          prep[id] = box.checked;
+          writeJSON(KEY_PREP, prep);
+        });
+      });
+
+      var clearBtn = document.getElementById('rp-clear');
+      if (clearBtn) {
+        clearBtn.addEventListener('click', function () {
+          if (!window.confirm('候補リスト、メモ、チェックリストをクリアしますか?この操作は元に戻せません。')) return;
+          shortlist = []; notes = {}; prep = {};
+          writeJSON(KEY_SHORTLIST, shortlist);
+          writeJSON(KEY_NOTES, notes);
+          writeJSON(KEY_PREP, prep);
+          renderCandidates();
+          renderNotes();
+          document.querySelectorAll('[data-rp-task]').forEach(function (box) { box.checked = false; });
+        });
+      }
+
+      renderCandidates();
+      renderNotes();
+    })();
+  </script>
+</Base>
