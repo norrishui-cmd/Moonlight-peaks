@@ -291,6 +291,7 @@ const ld = rawLd.map(enrichStructuredData);
             <a href={localizedHref('/platforms')}>{t(lang, 'platforms')}</a>
             <a href={localizedHref('/compare')}>Compare</a>
             <a href={localizedHref('/about')}>{t(lang, 'about')}</a>
+            {lang === 'en' && <a href="/methodology">Methodology</a>}
             <a href={localizedHref('/privacy')}>Privacy</a>
             <span>Updated {SITE.updated}</span>
           </span>

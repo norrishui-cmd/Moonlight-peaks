@@ -23,6 +23,68 @@ export type NewsItem = {
 
 export const news: NewsItem[] = [
   {
+    slug: 'clouded-leopard-confirms-japan-asia-switch-july-9',
+    date: '2026-07-17',
+    title: 'Clouded Leopard Entertainment confirms Japan/Asia Switch release lands July 9, not July 7',
+    body: 'Confirmed via Clouded Leopard Entertainment\u2019s own official announcement: the Nintendo Switch and Switch 2 versions of Moonlight Peaks release across the Asia region, including Japan, on Thursday, July 9, 2026 \u2014 two days after the Western Steam/Switch launch on July 7.',
+    details: [
+      'Cross-verified by an independent release-date guide: in Japan specifically, the Steam version releases one day later than the West (July 8) while Switch and Switch 2 release two days later (July 9) \u2014 both published locally by Clouded Leopard Entertainment rather than XSEED Games or Marvelous Europe.',
+      'Confirmed: the Asian console release lists language support for English, Japanese, Korean, Traditional Chinese, Simplified Chinese, and German.',
+    ],
+    category: 'platforms',
+    topics: ['platforms'],
+    sourceLabel: 'Clouded Leopard Entertainment official announcement',
+    sourceUrl: 'https://www.cloudedleopardent.com/en/news/9038/',
+  },
+  {
+    slug: 'j-anime-style-optional-art-toggle-confirmed',
+    date: '2026-07-17',
+    title: 'Confirmed: an optional "J-Anime Style" swaps character portraits for Japanese-illustrator artwork',
+    body: 'Confirmed via Clouded Leopard Entertainment\u2019s official announcement: Moonlight Peaks includes a toggle between the standard art style and a J-Anime Style, replacing standard character and animal dialogue illustrations with special stylized versions created by Japanese character illustrators, including Oguchi and T-Track.',
+    details: [
+      'This is confirmed as a pure visual/UI toggle affecting dialogue portraits specifically \u2014 not a separate game mode or a change to 3D character models in the open world.',
+    ],
+    category: 'general',
+    sourceLabel: 'Clouded Leopard Entertainment / Inven Global',
+    sourceUrl: 'https://www.invenglobal.com/articles/22390/clouded-leopard-entertainment-announces-new-j-anime-style-for-moonlight-peaks',
+  },
+  {
+    slug: 'asia-physical-edition-first-purchase-bonus-confirmed',
+    date: '2026-07-17',
+    title: 'Asia physical edition first-purchase bonus confirmed: an "Original Can Mirror" plus DLC pack',
+    body: 'Confirmed via Clouded Leopard Entertainment\u2019s official product announcement: first-purchase copies of the Asian physical package edition (Switch/Switch 2) include an "Original Can Mirror" \u2014 character artwork on the front, a compact mirror on the back \u2014 plus a "Runaway Support Pack" DLC of consumable and decorative items intended to help in the game\u2019s early stages.',
+    details: [
+      'Confirmed: the bonus DLC download code is valid for redemption until July 8, 2029, giving buyers a long window rather than a launch-week-only bonus.',
+      'The publisher explicitly notes bonus availability is "while supplies last" and may vary by individual retailer.',
+    ],
+    category: 'platforms',
+    topics: ['platforms'],
+    sourceLabel: 'Clouded Leopard Entertainment official product page',
+    sourceUrl: 'https://www.cloudedleopardent.com/en/news/10137/',
+  },
+  {
+    slug: 'europe-physical-switch-2-edition-august-28',
+    date: '2026-07-17',
+    title: 'European physical Switch 2 Edition confirmed for August 28, 2026 \u2014 about seven weeks after digital launch',
+    body: 'Confirmed by a dedicated release-date guide: Marvelous Europe is releasing a physical Nintendo Switch 2 Edition across Europe on August 28, 2026, roughly seven weeks after the digital launch on July 7.',
+    details: ['If you want to play at launch, the digital version remains the only same-day option; the physical release is confirmed as a collector\u2019s-pick timeline rather than a day-one alternative.'],
+    category: 'platforms',
+    topics: ['platforms'],
+    sourceLabel: 'Moonlight Peaks Wiki release-date guide',
+    sourceUrl: 'https://moonlightpeaks.wiki/guides/release-date-and-platforms/',
+  },
+  {
+    slug: 'publisher-split-by-region-confirmed-three-way',
+    date: '2026-07-17',
+    title: 'Confirmed: three separate publishers handle Moonlight Peaks by region',
+    body: 'Confirmed across official sources: publishing responsibilities are split three ways \u2014 XSEED Games handles the Americas, Marvelous Europe handles Europe, and Clouded Leopard Entertainment distributes the Nintendo Switch and Switch 2 versions across Japan and the wider Asia region.',
+    details: ['This explains the staggered regional release dates and platform-specific bonus content (like the Asia-exclusive physical edition bonuses) rather than a single unified worldwide rollout.'],
+    category: 'general',
+    sourceLabel: 'Moonlight Peaks Wiki release-date guide',
+    sourceUrl: 'https://moonlightpeaks.wiki/guides/release-date-and-platforms/',
+  },
+
+  {
     slug: 'elections-seeing-seers-missing-moon-chain-confirmed',
     date: '2026-07-17',
     title: 'Full quest chain confirmed: Elections by Moonlight leads into Seeing Seers, then A Missing Moon',

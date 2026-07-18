@@ -1,0 +1,114 @@
+---
+import Base from '../layouts/Base.astro';
+import { SITE, GAME } from '../consts';
+
+const tiers = [
+  { label: 'Confirmed', desc: 'Directly verified against the live game, official patch notes, or a direct developer statement (Steam Community posts, official wiki, press kit). This is the only tier we treat as settled fact.' },
+  { label: 'Reported', desc: 'Seen in press previews, reviewer coverage, or community testing (Reddit, Steam Community discussions, YouTube playthroughs) that we judge credible, but haven\u2019t independently reproduced ourselves against the live build yet.' },
+  { label: 'Datamined', desc: 'Found in pre-launch game files before release, cross-referenced against other pre-launch references where possible. Datamined content is real data, but it can change before or after release, so we don\u2019t present it as confirmed.' },
+  { label: 'Expected / Unconfirmed', desc: 'A reasonable inference based on the game\u2019s existing patterns (e.g. a shop name existing implies it has hours), explicitly labeled as our own guess rather than sourced fact.' },
+];
+
+const stats = [
+  { n: '52+', label: 'FAQ answers with a named, linked source' },
+  { n: '70+', label: 'news entries with a named, linked source' },
+  { n: '49', label: 'character profiles individually status-tagged' },
+  { n: '4', label: 'confirmation tiers, shown on every page that uses them' },
+];
+
+const faq = [
+  { q: 'How does Moonlight Peaks Wiki & Guide verify information?', a: `Every fact on this site is tagged with one of four confirmation tiers \u2014 confirmed, reported, datamined, or expected \u2014 so readers can see at a glance how solid a claim is, rather than presenting every detail with the same false certainty.` },
+  { q: 'Does this site invent gift tables, stats, or recipes that aren\u2019t confirmed?', a: 'No. Where data isn\u2019t yet available, pages say so explicitly instead of filling in a plausible-looking placeholder. We\u2019d rather show a gap than a guess.' },
+  { q: 'Can journalists or other sites cite this site\u2019s data?', a: `Yes \u2014 that\u2019s what this page is for. Please attribute ${SITE.brand} and link back to the specific page you\u2019re citing (not just the homepage), so readers can check the sourcing and confirmation tier for themselves.` },
+  { q: 'How often is this site updated?', a: 'Continuously through early access and post-launch \u2014 patch notes, new community reports, and official confirmations are folded in as they appear, with existing entries re-tagged (not deleted) as their confirmation tier changes.' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: SITE.url },
+    { '@type': 'ListItem', position: 2, name: 'Methodology & Accuracy Standards', item: `${SITE.url}/methodology` },
+  ] },
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+];
+---
+<Base
+  title="Methodology & Accuracy Standards | Moonlight Peaks Wiki & Guide"
+  description="How we verify Moonlight Peaks information: our four-tier confirmation system (confirmed, reported, datamined, expected), sourcing standards, and how to cite this site."
+  path="/methodology"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Methodology & Accuracy Standards' }]}
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">About · Methodology</p>
+      <h1>Methodology & <em>Accuracy Standards</em></h1>
+      <p class="intro">
+        {SITE.brand} is built around one rule: never present a guess with the same confidence as a
+        verified fact. This page explains exactly how we tag, source, and update information about
+        {GAME.title}, and how other sites or journalists can cite our work.
+      </p>
+
+      <h2>Our four confirmation tiers</h2>
+      <p>Every profile, FAQ answer, and guide entry that makes a factual claim is tagged with one of these four tiers, shown directly on the page rather than buried in a footnote:</p>
+      <table class="facts">
+        <tr><th>Tier</th><th>What it means</th></tr>
+        {tiers.map((t) => (<tr><th>{t.label}</th><td>{t.desc}</td></tr>))}
+      </table>
+
+      <h2>By the numbers</h2>
+      <div class="stat-grid">
+        {stats.map((s) => (
+          <div class="stat-card"><strong>{s.n}</strong><span>{s.label}</span></div>
+        ))}
+      </div>
+
+      <h2>Where our sources come from</h2>
+      <ul>
+        <li><strong>Official channels:</strong> Steam patch notes, the developer\u2019s own Steam Community posts, the official wiki, and platform storefront listings.</li>
+        <li><strong>Press coverage:</strong> Reviews and previews from outlets we name explicitly (IGN, GameRant, TheGamer, Nintendo Everything, and others), rather than citing "some reviewers say" without attribution.</li>
+        <li><strong>Community testing:</strong> Reddit, Steam Community discussions, and YouTube playthroughs, treated as "reported" rather than "confirmed" until we can cross-check them.</li>
+        <li><strong>Pre-launch datamining:</strong> Cross-referenced against other pre-launch sources where possible, and explicitly labeled as datamined rather than confirmed, since files can change before release.</li>
+      </ul>
+
+      <h2>What we won\u2019t do</h2>
+      <p>
+        We don\u2019t invent gift tables, stats, drop rates, or recipes to fill a gap. We don\u2019t upgrade a "reported" claim to "confirmed" just because it would make a page look more complete. When a fact changes confirmation tier \u2014 for example, a datamined name later confirmed in the live game \u2014 we update the tag rather than silently rewriting history.
+      </p>
+
+      <h2>Citing this site</h2>
+      <p>
+        If you\u2019re a journalist, YouTuber, or fellow guide-writer referencing our data, please link
+        directly to the specific page you\u2019re citing (a character profile, FAQ answer, or location
+        guide) rather than just the homepage, so your readers can see the sourcing and confirmation
+        tier for themselves. A short line like "<em>via {SITE.brand}</em>" with a link is exactly
+        what we ask for \u2014 no formal permission needed.
+      </p>
+      <p>
+        Found an error, or have a correction backed by a real source? Contact us at {SITE.contact}
+        and we\u2019ll verify and update the relevant page.
+      </p>
+
+      <h2>FAQ</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        Related: <a href="/about">About this site</a>, <a href="/news">Latest news</a>, <a href="/faq">FAQ hub</a>.
+      </div>
+    </div>
+  </article>
+
+  <style>
+    .stat-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin: 14px 0 22px; }
+    @media (min-width: 640px) { .stat-grid { grid-template-columns: repeat(4, 1fr); } }
+    .stat-card { border: 1px solid var(--line); border-radius: 12px; background: var(--surface); padding: 16px 14px; text-align: center; }
+    .stat-card strong { display: block; font-family: var(--display); font-size: 1.8rem; color: var(--candle); }
+    .stat-card span { color: var(--muted); font-size: 0.82rem; }
+  </style>
+</Base>
