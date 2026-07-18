@@ -66,7 +66,10 @@ const esOnlyPaths = ['/quests', '/farm', '/collections', '/map',
 // French pages built so far — grows independently from here.
 const frPaths = ['/', '/release-date', '/beginner-guide', '/characters', '/romance', '/farming', '/magic', '/platforms', '/demo',
   '/families', '/locations', '/activities', '/items', '/character-creator', '/shapeshifting', '/faq', '/tools',
-  '/guides', '/cheats', '/about', '/languages'];
+  '/guides', '/cheats', '/about', '/languages',
+  '/tools/fish-finder', '/tools/item-tracker', '/tools/gift-tracker', '/tools/families-explorer',
+  '/tools/farming-profit-planner', '/tools/nokturna-tracker', '/tools/platform-picker',
+  '/tools/romance-gift-finder', '/tools/romance-match-quiz', '/tools/romance-planner', '/tools/submit-data'];
 
 // Korean is a brand-new locale, starting with the homepage plus a handful of core pages built
 // alongside it — grows independently from here.

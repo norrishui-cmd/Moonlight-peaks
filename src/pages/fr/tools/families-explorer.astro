@@ -1,0 +1,180 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { SITE, GAME } from '../../../consts';
+import { characters, typeLabels } from '../../../data/characters';
+
+const typeLabelsFr: Record<string, string> = {
+  vampire: 'Vampire', werewolf: 'Loup-garou', witch: 'Sorcière', mermaid: 'Sirène',
+  seer: 'Voyante', ghost: 'Fantôme', human: 'Humain', other: 'Autre',
+};
+
+const known = characters.filter((c) => c.status !== 'unconfirmed');
+const groups = new Map();
+for (const c of known) {
+  const key = c.family || 'Unknown';
+  if (!groups.has(key)) groups.set(key, []);
+  groups.get(key).push(c);
+}
+const familyEntries = [...groups.entries()].sort((a, b) => {
+  if (a[0] === 'Unknown') return 1;
+  if (b[0] === 'Unknown') return -1;
+  return b[1].length - a[1].length;
+});
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org', '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Accueil', item: `${SITE.url}/fr` },
+      { '@type': 'ListItem', position: 2, name: 'Outils', item: `${SITE.url}/fr/tools` },
+      { '@type': 'ListItem', position: 3, name: 'Explorateur des sept familles', item: new URL('/fr/tools/families-explorer', SITE.url).href },
+    ],
+  },
+  {
+    '@context': 'https://schema.org', '@type': 'WebApplication',
+    name: 'Explorateur des sept familles Moonlight Peaks', applicationCategory: 'GameApplication', operatingSystem: 'Web',
+    url: new URL('/fr/tools/families-explorer', SITE.url).href,
+    description: 'Un explorateur interactif des sept familles surnaturelles de Moonlight Peaks et de leurs membres confirmés ou signalés.',
+  },
+];
+---
+<Base
+  title="Explorateur des sept familles Moonlight Peaks — Vampires, loups-garous, sorcières et plus"
+  description="Explorez les sept familles surnaturelles de Moonlight Peaks — Ambrosia, Webb, Logan, Khazan, Hosu et plus — et découvrez quels résidents appartiennent à chacune, filtrables par statut de confirmation."
+  path="/fr/tools/families-explorer"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Outils', href: '/fr/tools' }, { label: 'Explorateur de familles' }]}
+  lang="fr"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Outil / Explorateur de familles</p>
+      <h1>Moonlight Peaks — Explorateur des <em>sept familles</em></h1>
+      <p class="intro">
+        {GAME.title} s'articule autour de sept familles surnaturelles (plus les « ordinaires » qui
+        n'en font partie d'aucune). Ceci regroupe chaque résident connu par famille, en utilisant le
+        même statut confirmé/signalé/dataminé que le reste du site — rien n'est inventé ici.
+        Mis à jour le {SITE.updated}.
+      </p>
+
+      <section class="fam-shell" data-fam-explorer>
+        <aside class="fam-panel">
+          <h2>Filtres</h2>
+          <label>
+            <span>Famille</span>
+            <select data-family>
+              <option value="all">Toutes les familles</option>
+              {familyEntries.map(([name]) => <option value={name}>{name}</option>)}
+            </select>
+          </label>
+          <label>
+            <span>Type</span>
+            <select data-type>
+              <option value="all">Tous les types</option>
+              {[...new Set(known.map((c) => c.type))].map((t) => <option value={t}>{typeLabelsFr[t] || typeLabels[t] || t}</option>)}
+            </select>
+          </label>
+          <label class="checkline"><input data-romance-only type="checkbox" /> Séductibles uniquement</label>
+          <div class="fam-stats"><strong data-count>{known.length}</strong><span>résidents affichés</span></div>
+        </aside>
+
+        <div class="fam-groups" data-groups>
+          {familyEntries.map(([name, members]) => (
+            <div class="fam-group" data-family-name={name}>
+              <h3>{name} <span class="fam-count">({members.length})</span></h3>
+              <div class="fam-cards">
+                {members.map((m) => (
+                  <a
+                    class="fam-card"
+                    href={`/characters/${m.id}`}
+                    data-type={m.type}
+                    data-romance={String(m.romanceable === true)}
+                    style={`--c1:${m.c1};--c2:${m.c2}`}
+                  >
+                    <span class="fam-avatar">{m.name.charAt(0)}</span>
+                    <span class="fam-name">{m.name}</span>
+                    <span class="fam-meta">{typeLabelsFr[m.type] || typeLabels[m.type] || m.type} · {m.status}</span>
+                    {m.romanceable === true && <span class="fam-heart" aria-label="Séductible">♥</span>}
+                  </a>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <div class="callout">
+        Les noms de familles et les membres reflètent le même étiquetage confirmé/signalé/dataminé
+        utilisé partout sur le site. Cette liste s'enrichira à mesure que davantage de couverture de
+        la semaine de lancement sera vérifiée — consultez les sources dans le
+        <a href="/characters">profil complet</a> de chaque résident.
+      </div>
+    </div>
+  </article>
+
+  <script define:vars={{}}>
+    const root = document.querySelector('[data-fam-explorer]');
+    if (root) {
+      const familySel = root.querySelector('[data-family]');
+      const typeSel = root.querySelector('[data-type]');
+      const romanceOnly = root.querySelector('[data-romance-only]');
+      const groupsEl = root.querySelector('[data-groups]');
+      const count = root.querySelector('[data-count]');
+
+      const render = () => {
+        const fam = familySel.value;
+        const type = typeSel.value;
+        const romance = romanceOnly.checked;
+        let shown = 0;
+        groupsEl.querySelectorAll('.fam-group').forEach((group) => {
+          const groupFam = group.dataset.familyName;
+          let groupVisible = fam === 'all' || fam === groupFam;
+          let anyCardVisible = false;
+          group.querySelectorAll('.fam-card').forEach((card) => {
+            const matchesType = type === 'all' || card.dataset.type === type;
+            const matchesRomance = !romance || card.dataset.romance === 'true';
+            const visible = groupVisible && matchesType && matchesRomance;
+            card.style.display = visible ? '' : 'none';
+            if (visible) { anyCardVisible = true; shown++; }
+          });
+          group.style.display = anyCardVisible ? '' : 'none';
+        });
+        count.textContent = shown;
+      };
+      [familySel, typeSel, romanceOnly].forEach((el) => el.addEventListener('input', render));
+      render();
+    }
+  </script>
+
+  <style>
+    .fam-shell { display: grid; grid-template-columns: 240px minmax(0, 1fr); gap: 18px; margin: 28px 0; }
+    @media (max-width: 820px) { .fam-shell { grid-template-columns: 1fr; } }
+    .fam-panel { border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); padding: 16px; display: grid; gap: 14px; align-self: start; }
+    .fam-panel h2 { margin: 0; }
+    .fam-panel label span { display: block; margin-bottom: 6px; color: var(--mist); font-weight: 600; }
+    .fam-panel select { width: 100%; min-height: 44px; border: 1px solid var(--line); border-radius: 10px; background: var(--ink); color: var(--mist); padding: 0 12px; font: inherit; }
+    .checkline { display: flex; gap: 9px; align-items: center; color: var(--muted); }
+    .fam-stats { border-top: 1px solid var(--line); padding-top: 12px; }
+    .fam-stats strong { display: block; color: var(--candle); font-family: var(--display); font-size: 2rem; }
+    .fam-stats span { color: var(--muted); }
+
+    .fam-groups { display: grid; gap: 22px; }
+    .fam-group h3 { margin: 0 0 10px; color: var(--mist); }
+    .fam-count { color: var(--muted); font-weight: 400; }
+    .fam-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 10px; }
+    .fam-card {
+      position: relative; display: grid; gap: 6px; justify-items: center; text-align: center;
+      border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface);
+      padding: 14px 8px; text-decoration: none; transition: transform 0.15s ease, border-color 0.15s ease;
+    }
+    .fam-card:hover { transform: translateY(-2px); border-color: var(--c2, var(--candle)); }
+    .fam-avatar {
+      width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center;
+      font-family: var(--display); font-size: 1.2rem; color: #fff;
+      background: linear-gradient(135deg, var(--c1, #444), var(--c2, #888));
+    }
+    .fam-name { color: var(--mist); font-weight: 600; }
+    .fam-meta { color: var(--muted); font-size: 0.72rem; font-family: var(--mono); text-transform: uppercase; }
+    .fam-heart { position: absolute; top: 8px; right: 10px; color: var(--candle); }
+  </style>
+</Base>

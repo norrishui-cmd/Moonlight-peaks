@@ -1,0 +1,185 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { SITE, GAME } from '../../../consts';
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Accueil', item: `${SITE.url}/fr` },
+      { '@type': 'ListItem', position: 2, name: 'Outils', item: `${SITE.url}/fr/tools` },
+      { '@type': 'ListItem', position: 3, name: 'Sélecteur de plateforme', item: new URL('/fr/tools/platform-picker', SITE.url).href },
+    ],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebApplication',
+    name: 'Sélecteur de plateforme Moonlight Peaks',
+    applicationCategory: 'GameApplication',
+    operatingSystem: 'Web',
+    url: new URL('/fr/tools/platform-picker', SITE.url).href,
+    description: 'Un sélecteur de plateforme Moonlight Peaks pour Steam, Steam Deck, Nintendo Switch, Switch 2 et Android.',
+  },
+];
+---
+<Base
+  title="Sélecteur de plateforme Moonlight Peaks - Steam, Switch 2, Steam Deck ou Android ?"
+  description="Utilisez ce sélecteur de plateforme Moonlight Peaks pour décider si Steam, Steam Deck, Nintendo Switch, Switch 2 ou Android est le meilleur choix pour vous."
+  path="/fr/tools/platform-picker"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Outils', href: '/fr/tools' }, { label: 'Sélecteur de plateforme' }]}
+  lang="fr"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Outil / Sélecteur de plateforme</p>
+      <h1>Moonlight Peaks — <em>sélecteur de plateforme</em></h1>
+      <p class="intro">
+        Vous ne savez pas où jouer à {GAME.title} ? Choisissez ce qui compte le plus pour vous, et cet
+        outil vous recommandera une plateforme basée sur des données de plateforme confirmées, la
+        disponibilité de la démo et des hypothèses prudentes.
+      </p>
+
+      <section class="picker-shell" data-platform-picker>
+        <div class="picker-panel">
+          <h2>Vos priorités</h2>
+          <label>
+            <span>Façon principale de jouer</span>
+            <select data-field="playstyle">
+              <option value="desk">Au bureau ou sur ordinateur portable</option>
+              <option value="handheld">Surtout en mode portable</option>
+              <option value="tv">Sur TV ou canapé</option>
+              <option value="mobile">Sur téléphone ou appareil mobile</option>
+            </select>
+          </label>
+          <fieldset>
+            <legend>Qu'est-ce qui compte le plus pour vous ?</legend>
+            <label><input type="checkbox" value="demo" checked /> Je veux l'accès le plus facile à la démo</label>
+            <label><input type="checkbox" value="performance" /> Les performances et les correctifs m'importent</label>
+            <label><input type="checkbox" value="portable" /> Je veux jouer en mode portable</label>
+            <label><input type="checkbox" value="lowest-price" /> Je veux le prix probablement le plus bas</label>
+            <label><input type="checkbox" value="controller" /> Je préfère les contrôles manette/canapé</label>
+          </fieldset>
+        </div>
+
+        <div class="picker-result" aria-live="polite">
+          <span class="result-kicker">Recommandation</span>
+          <h2 data-result-title>Steam</h2>
+          <p data-result-copy>Steam est le choix le plus sûr si vous voulez des mises à jour rapides, un accès PC/Mac et l'accès à la démo le plus large avant le lancement.</p>
+          <div class="score-list" data-score-list></div>
+          <a class="btn btn-primary" data-result-link href="/platforms">Ouvrir le guide des plateformes</a>
+        </div>
+      </section>
+
+      <h2>Faits sur les plateformes utilisés par ce sélecteur</h2>
+      <table class="facts">
+        <tr><th>Date de sortie</th><td>{GAME.releaseLabel}</td></tr>
+        <tr><th>Plateformes confirmées</th><td>{GAME.platforms.join(', ')}</td></tr>
+        <tr><th>Démo</th><td>{GAME.demo}</td></tr>
+        <tr><th>Prix</th><td>{GAME.price} ; l'édition Switch 2 est probablement plus élevée.</td></tr>
+      </table>
+
+      <div class="callout">
+        Ceci est un outil de planification, pas un benchmark de performance. La vérification finale
+        Steam Deck, les exigences Android et les performances sur Switch doivent être revérifiées au lancement.
+      </div>
+    </div>
+  </article>
+
+  <script>
+    const tools = document.querySelector('[data-platform-picker]');
+    if (tools) {
+      const platforms = [
+        {
+          id: 'steam',
+          title: 'Steam',
+          href: '/platforms',
+          copy: 'Steam est le choix le plus sûr si vous voulez des mises à jour rapides, un accès PC/Mac et l\'accès à la démo le plus large avant le lancement.',
+          weights: { desk: 5, handheld: 1, tv: 1, mobile: 0, demo: 3, performance: 3, portable: 0, 'lowest-price': 2, controller: 1 },
+        },
+        {
+          id: 'steam-deck',
+          title: 'Steam Deck',
+          href: '/platforms/steam-deck',
+          copy: 'Steam Deck convient le mieux si vous voulez jouer en mode portable sans quitter l\'écosystème Steam.',
+          weights: { desk: 1, handheld: 5, tv: 1, mobile: 0, demo: 2, performance: 2, portable: 4, 'lowest-price': 1, controller: 2 },
+        },
+        {
+          id: 'switch-2',
+          title: 'Nintendo Switch 2',
+          href: '/platforms/switch-2',
+          copy: 'Switch 2 est le meilleur choix de console si vous voulez une version native et plus récente de Nintendo et un jeu confortable sur canapé.',
+          weights: { desk: 0, handheld: 4, tv: 5, mobile: 0, demo: 2, performance: 3, portable: 4, 'lowest-price': 0, controller: 4 },
+        },
+        {
+          id: 'switch',
+          title: 'Nintendo Switch',
+          href: '/platforms',
+          copy: 'Nintendo Switch convient bien si vous possédez déjà la console et voulez jouer en mode portable ou sur TV sans utiliser un PC.',
+          weights: { desk: 0, handheld: 4, tv: 4, mobile: 0, demo: 2, performance: 0, portable: 4, 'lowest-price': 1, controller: 4 },
+        },
+        {
+          id: 'android',
+          title: 'Android / Google Play',
+          href: '/platforms/android',
+          copy: 'Android est le choix pour les joueurs mobiles, mais les exigences de l\'appareil et les contrôles doivent être confirmés au lancement.',
+          weights: { desk: 0, handheld: 2, tv: 0, mobile: 5, demo: 0, performance: 0, portable: 4, 'lowest-price': 1, controller: 0 },
+        },
+      ];
+
+      const playstyle = tools.querySelector('[data-field="playstyle"]');
+      const checks = [...tools.querySelectorAll('input[type="checkbox"]')];
+      const resultTitle = tools.querySelector('[data-result-title]');
+      const resultCopy = tools.querySelector('[data-result-copy]');
+      const resultLink = tools.querySelector('[data-result-link]');
+      const scoreList = tools.querySelector('[data-score-list]');
+
+      const render = () => {
+        const selected = [playstyle.value, ...checks.filter((item) => item.checked).map((item) => item.value)];
+        const scored = platforms
+          .map((platform) => ({
+            ...platform,
+            score: selected.reduce((sum, key) => sum + (platform.weights[key] || 0), 0),
+          }))
+          .sort((a, b) => b.score - a.score);
+        const best = scored[0];
+        resultTitle.textContent = best.title;
+        resultCopy.textContent = best.copy;
+        resultLink.href = best.href;
+        scoreList.innerHTML = scored
+          .map((item) => `<div><span>${item.title}</span><strong>${item.score}</strong></div>`)
+          .join('');
+      };
+
+      playstyle.addEventListener('change', render);
+      checks.forEach((item) => item.addEventListener('change', render));
+      render();
+    }
+  </script>
+
+  <style>
+    .picker-shell { display: grid; grid-template-columns: minmax(0, 1fr) minmax(280px, 0.9fr); gap: 18px; margin-top: 28px; align-items: stretch; }
+    @media (max-width: 820px) { .picker-shell { grid-template-columns: 1fr; } }
+    .picker-panel, .picker-result { border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); padding: 18px; }
+    .picker-panel h2, .picker-result h2 { margin-top: 0; }
+    .picker-panel label span, .picker-panel legend { display: block; color: var(--mist); font-weight: 600; margin-bottom: 8px; }
+    .picker-panel select {
+      width: 100%;
+      min-height: 44px;
+      color: var(--mist);
+      background: var(--ink);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 0 12px;
+      font: inherit;
+    }
+    .picker-panel fieldset { border: 0; padding: 0; margin: 22px 0 0; display: grid; gap: 10px; }
+    .picker-panel fieldset label { display: flex; gap: 10px; align-items: flex-start; color: var(--muted); }
+    .picker-panel input { accent-color: var(--candle); margin-top: 5px; }
+    .result-kicker { font-family: var(--mono); font-size: 0.7rem; color: var(--candle); text-transform: uppercase; letter-spacing: 0.12em; }
+    .score-list { display: grid; gap: 8px; margin: 18px 0; }
+    .score-list div { display: flex; justify-content: space-between; gap: 12px; border-bottom: 1px solid var(--line); padding-bottom: 7px; color: var(--muted); }
+    .score-list strong { color: var(--candle); font-family: var(--mono); }
+  </style>
+</Base>

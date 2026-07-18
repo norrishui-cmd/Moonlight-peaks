@@ -1,0 +1,179 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { SITE, GAME } from '../../../consts';
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Accueil', item: `${SITE.url}/fr` },
+      { '@type': 'ListItem', position: 2, name: 'Outils', item: `${SITE.url}/fr/tools` },
+      { '@type': 'ListItem', position: 3, name: 'Planificateur de profits agricoles', item: new URL('/fr/tools/farming-profit-planner', SITE.url).href },
+    ],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebApplication',
+    name: 'Planificateur de profits agricoles Moonlight Peaks',
+    applicationCategory: 'GameApplication',
+    operatingSystem: 'Web',
+    url: new URL('/fr/tools/farming-profit-planner', SITE.url).href,
+    description: 'Un calculateur de profits de cultures Moonlight Peaks pour le prix des graines, le prix de vente, les jours de croissance, les récoltes répétées et la planification des engrais.',
+  },
+];
+---
+<Base
+  title="Planificateur de profits agricoles Moonlight Peaks - Calculateur et meilleures cultures"
+  description="Planifiez les profits de cultures Moonlight Peaks avec un calculateur agricole prêt à l'emploi. Comparez le prix des graines, le prix de vente, les jours de croissance, le nombre de récoltes et les hypothèses d'engrais."
+  path="/fr/tools/farming-profit-planner"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Outils', href: '/fr/tools' }, { label: 'Planificateur de profits' }]}
+  lang="fr"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Outil / Planificateur agricole</p>
+      <h1>Moonlight Peaks — <em>planificateur de profits agricoles</em></h1>
+      <p class="intro">
+        Comparez les cultures par profit par nuit une fois que les prix réels de {GAME.title} seront
+        confirmés. En attendant que les données de lancement soient vérifiées, utilisez les champs
+        manuels ci-dessous pour tester des scénarios sans présenter des valeurs de culture inconnues
+        comme définitives.
+      </p>
+
+      <section class="profit-tool" data-profit-tool>
+        <form class="profit-form">
+          <label><span>Nom de la culture</span><input data-crop value="Culture à confirmer" /></label>
+          <label><span>Prix de la graine</span><input data-seed type="number" min="0" value="0" /></label>
+          <label><span>Prix de vente par récolte</span><input data-sell type="number" min="0" value="0" /></label>
+          <label><span>Jours de croissance</span><input data-days type="number" min="1" value="1" /></label>
+          <label><span>Nombre de récoltes</span><input data-harvests type="number" min="1" value="1" /></label>
+          <label><span>Coûts supplémentaires</span><input data-extra type="number" min="0" value="0" /></label>
+          <button type="button" class="btn btn-primary" data-add>Ajouter à la comparaison</button>
+        </form>
+
+        <aside class="profit-result">
+          <span class="result-kicker">Estimation actuelle</span>
+          <h2 data-profit>0</h2>
+          <p data-profit-copy>Entrez les prix après le lancement pour calculer le profit total et le profit par jour.</p>
+        </aside>
+      </section>
+
+      <h2>Comparaison des cultures</h2>
+      <div class="profit-table-wrap">
+        <table class="profit-table">
+          <thead>
+            <tr>
+              <th>Culture</th>
+              <th>Graine</th>
+              <th>Vente</th>
+              <th>Jours</th>
+              <th>Récoltes</th>
+              <th>Profit total</th>
+              <th>Profit/jour</th>
+            </tr>
+          </thead>
+          <tbody data-rows>
+            <tr><td colspan="7">Ajoutez des cultures dès que les données de lancement seront disponibles.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout">
+        Règle de données sûres : les noms de cultures, prix des graines, valeurs de vente, temps de
+        croissance, effets des engrais et règles de repousse doivent être vérifiés sur le jeu réel ou
+        des documents officiels avant d'être traités comme contenu de guide.
+      </div>
+    </div>
+  </article>
+
+  <script>
+    const root = document.querySelector('[data-profit-tool]');
+    const rowsEl = document.querySelector('[data-rows]');
+    if (root && rowsEl) {
+      const els = {
+        crop: root.querySelector('[data-crop]'),
+        seed: root.querySelector('[data-seed]'),
+        sell: root.querySelector('[data-sell]'),
+        days: root.querySelector('[data-days]'),
+        harvests: root.querySelector('[data-harvests]'),
+        extra: root.querySelector('[data-extra]'),
+        add: root.querySelector('[data-add]'),
+        profit: root.querySelector('[data-profit]'),
+        copy: root.querySelector('[data-profit-copy]'),
+      };
+      const key = 'moonlight-farming-planner-v1';
+      let rows = JSON.parse(localStorage.getItem(key) || '[]');
+      const num = (el) => Math.max(0, Number(el.value || 0));
+      const calc = () => {
+        const seed = num(els.seed);
+        const sell = num(els.sell);
+        const days = Math.max(1, num(els.days));
+        const harvests = Math.max(1, num(els.harvests));
+        const extra = num(els.extra);
+        const totalRevenue = sell * harvests;
+        const totalProfit = totalRevenue - seed - extra;
+        const perDay = totalProfit / days;
+        els.profit.textContent = Math.round(totalProfit).toString();
+        els.copy.textContent = `${perDay.toFixed(2)} de profit par jour sur ${days} jour(s).`;
+        return { crop: els.crop.value || 'Culture à confirmer', seed, sell, days, harvests, totalProfit, perDay };
+      };
+      const renderRows = () => {
+        rowsEl.innerHTML = rows.length ? rows.map((r) => `
+          <tr>
+            <td>${r.crop}</td>
+            <td>${r.seed}</td>
+            <td>${r.sell}</td>
+            <td>${r.days}</td>
+            <td>${r.harvests}</td>
+            <td>${Math.round(r.totalProfit)}</td>
+            <td>${Number(r.perDay).toFixed(2)}</td>
+          </tr>
+        `).join('') : '<tr><td colspan="7">Ajoutez des cultures dès que les données de lancement seront disponibles.</td></tr>';
+      };
+      const save = () => localStorage.setItem(key, JSON.stringify(rows.slice(-12)));
+      root.addEventListener('input', calc);
+      els.add.addEventListener('click', () => {
+        rows.push(calc());
+        save();
+        renderRows();
+      });
+      calc();
+      renderRows();
+    }
+  </script>
+
+  <style>
+    .profit-tool { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 18px; margin: 28px 0; }
+    @media (max-width: 820px) { .profit-tool { grid-template-columns: 1fr; } }
+    .profit-form, .profit-result {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--surface);
+      padding: 18px;
+    }
+    .profit-form { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    @media (max-width: 640px) { .profit-form { grid-template-columns: 1fr; } }
+    .profit-form label span { display: block; margin-bottom: 6px; color: var(--mist); font-weight: 600; }
+    .profit-form input {
+      width: 100%;
+      min-height: 44px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: var(--ink);
+      color: var(--mist);
+      padding: 0 12px;
+      font: inherit;
+    }
+    .profit-form button { grid-column: 1 / -1; justify-content: center; }
+    .result-kicker { font-family: var(--mono); color: var(--candle); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; }
+    .profit-result h2 { font-size: 3rem; margin: 8px 0; }
+    .profit-result p { color: var(--muted); }
+    .profit-table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); }
+    .profit-table { width: 100%; min-width: 720px; border-collapse: collapse; }
+    .profit-table th, .profit-table td { border-bottom: 1px solid var(--line); padding: 10px 12px; text-align: left; }
+    .profit-table th { color: var(--candle); font-family: var(--mono); font-size: 0.68rem; text-transform: uppercase; }
+    .profit-table tr:last-child td { border-bottom: 0; }
+  </style>
+</Base>

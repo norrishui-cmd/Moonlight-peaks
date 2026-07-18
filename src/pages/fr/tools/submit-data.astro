@@ -1,0 +1,173 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { SITE, GAME } from '../../../consts';
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Accueil', item: `${SITE.url}/fr` },
+      { '@type': 'ListItem', position: 2, name: 'Outils', item: `${SITE.url}/fr/tools` },
+      { '@type': 'ListItem', position: 3, name: 'Soumetteur de données', item: new URL('/fr/tools/submit-data', SITE.url).href },
+    ],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebApplication',
+    name: 'Soumetteur de données Moonlight Peaks',
+    applicationCategory: 'GameApplication',
+    operatingSystem: 'Web',
+    url: new URL('/fr/tools/submit-data', SITE.url).href,
+    description: 'Un outil de brouillon local de soumission de données pour la semaine de lancement de Moonlight Peaks, couvrant objets, recettes, lieux, cadeaux et bugs.',
+  },
+];
+---
+<Base
+  title="Soumetteur de données Moonlight Peaks - Partagez poissons, objets, cadeaux, recettes et bugs"
+  description="Rédigez des soumissions de données pour la semaine de lancement de Moonlight Peaks pour les poissons, créatures, recettes, potions, cadeaux NPC, lieux, boutiques, bugs et autres découvertes vérifiées."
+  path="/fr/tools/submit-data"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Outils', href: '/fr/tools' }, { label: 'Soumetteur de données' }]}
+  lang="fr"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Outil / Données communautaires</p>
+      <h1>Moonlight Peaks — <em>soumetteur de données</em></h1>
+      <p class="intro">
+        Organisez vos découvertes de la semaine de lancement pour une revue humaine : poissons,
+        créatures, recettes, potions, cadeaux NPC, lieux, boutiques, bugs et notes de plateforme.
+        Rien n'est publié automatiquement.
+      </p>
+
+      <section class="submit-shell" data-submit-tool>
+        <form class="submit-form">
+          <label>
+            <span>Type de données</span>
+            <select name="type">
+              <option>Poisson</option>
+              <option>Créature</option>
+              <option>Recette</option>
+              <option>Potion</option>
+              <option>Cadeau NPC</option>
+              <option>Lieu</option>
+              <option>Boutique</option>
+              <option>Bug ou problème</option>
+              <option>Autre</option>
+            </select>
+          </label>
+          <label><span>Nom ou titre</span><input name="name" placeholder="ex. à confirmer" /></label>
+          <label><span>Lieu / source</span><input name="location" placeholder="Où vous l'avez trouvé" /></label>
+          <label><span>Saison/heure/météo</span><input name="conditions" placeholder="Si pertinent" /></label>
+          <label><span>Prix/valeur/effet</span><input name="value" placeholder="Si visible en jeu" /></label>
+          <label><span>Notes de preuve</span><input name="evidence" placeholder="Capture d'écran, post officiel ou observation en jeu" /></label>
+          <label class="wide"><span>Notes</span><textarea name="notes" rows="5" placeholder="Ajoutez le texte exact, les ingrédients de recette, les réactions de personnage, les étapes de reproduction de bug, ou d'autres détails."></textarea></label>
+          <button type="button" class="btn btn-primary" data-save>Sauvegarder le brouillon localement</button>
+        </form>
+
+        <aside class="review-card">
+          <span>Politique de révision</span>
+          <h2>Revue humaine uniquement</h2>
+          <p>
+            Les brouillons sont sauvegardés dans votre navigateur et peuvent être exportés. Ne publiez
+            que ce que vous avez vérifié auprès d'une source officielle, d'une capture d'écran en jeu,
+            ou d'une preuve reproductible en jeu.
+          </p>
+          <button type="button" class="btn btn-ghost" data-export>Exporter en JSON</button>
+        </aside>
+      </section>
+
+      <h2>Brouillons sauvegardés</h2>
+      <div class="draft-list" data-drafts></div>
+
+      <div class="callout">
+        Règle de citation recommandée : préférez les canaux officiels, les pages de boutique, ou les
+        posts neutres sur les réseaux sociaux. N'utilisez pas les pages wiki de concurrents comme
+        source pour des données déjà publiées.
+      </div>
+    </div>
+  </article>
+
+  <script>
+    const root = document.querySelector('[data-submit-tool]');
+    const draftsEl = document.querySelector('[data-drafts]');
+    if (root && draftsEl) {
+      const key = 'moonlight-data-drafts-v1';
+      const form = root.querySelector('.submit-form');
+      const saveButton = root.querySelector('[data-save]');
+      const exportButton = root.querySelector('[data-export]');
+      let drafts = JSON.parse(localStorage.getItem(key) || '[]');
+
+      const save = () => localStorage.setItem(key, JSON.stringify(drafts));
+      const render = () => {
+        draftsEl.innerHTML = drafts.length ? drafts.map((draft, index) => `
+          <article class="draft-card">
+            <span>${draft.type}</span>
+            <h3>${draft.name || 'Brouillon sans titre'}</h3>
+            <p>${draft.notes || 'Pas encore de notes.'}</p>
+            <small>${draft.location || 'Lieu à définir'} - ${draft.evidence || 'Preuve à définir'}</small>
+            <button type="button" data-delete="${index}">Supprimer</button>
+          </article>
+        `).join('') : '<p class="empty">Aucun brouillon local pour l\'instant.</p>';
+      };
+
+      saveButton.addEventListener('click', () => {
+        const data = Object.fromEntries(new FormData(form).entries());
+        data.createdAt = new Date().toISOString();
+        drafts.unshift(data);
+        drafts = drafts.slice(0, 25);
+        save();
+        form.reset();
+        render();
+      });
+      draftsEl.addEventListener('click', (event) => {
+        const button = event.target.closest('button[data-delete]');
+        if (!button) return;
+        drafts.splice(Number(button.dataset.delete), 1);
+        save();
+        render();
+      });
+      exportButton.addEventListener('click', async () => {
+        const text = JSON.stringify(drafts, null, 2);
+        await navigator.clipboard.writeText(text);
+        exportButton.textContent = 'JSON copié';
+        setTimeout(() => { exportButton.textContent = 'Exporter en JSON'; }, 1600);
+      });
+      render();
+    }
+  </script>
+
+  <style>
+    .submit-shell { display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 18px; margin: 28px 0; }
+    @media (max-width: 860px) { .submit-shell { grid-template-columns: 1fr; } }
+    .submit-form, .review-card, .draft-card, .empty {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--surface);
+    }
+    .submit-form { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; padding: 18px; }
+    @media (max-width: 640px) { .submit-form { grid-template-columns: 1fr; } }
+    .submit-form .wide, .submit-form button { grid-column: 1 / -1; }
+    .submit-form span { display: block; margin-bottom: 6px; color: var(--mist); font-weight: 600; }
+    .submit-form input, .submit-form select, .submit-form textarea {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: var(--ink);
+      color: var(--mist);
+      padding: 11px 12px;
+      font: inherit;
+    }
+    .review-card { padding: 18px; align-self: start; }
+    .review-card > span { font-family: var(--mono); color: var(--candle); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; }
+    .review-card p { color: var(--muted); }
+    .draft-list { display: grid; gap: 10px; }
+    .draft-card, .empty { padding: 14px; }
+    .draft-card span { color: var(--candle); font-family: var(--mono); font-size: 0.68rem; text-transform: uppercase; }
+    .draft-card h3 { margin: 5px 0; }
+    .draft-card p { color: var(--muted); margin: 0 0 8px; }
+    .draft-card small { color: var(--faint); }
+    .draft-card button { float: right; border: 1px solid var(--line); border-radius: 999px; background: transparent; color: var(--muted); padding: 4px 9px; cursor: pointer; }
+  </style>
+</Base>
