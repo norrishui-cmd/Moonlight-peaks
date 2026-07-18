@@ -63,6 +63,23 @@ const characterLocationLinks: Record<string, { label: string; href: string; note
 };
 const locationLinks = characterLocationLinks[c.id] || [];
 
+// Auto-generated FAQ for every character page (except Death, who has his own dedicated FAQ
+// above) built strictly from fields already present in this character's own data — never
+// invented. This gives every profile visible, on-page FAQ content that matches its FAQPage
+// schema, rather than only Death having structured Q&A.
+const romanceLabel = c.romanceable === true ? 'Yes' : c.romanceable === false ? 'No' : 'Not confirmed';
+const autoFaq: { q: string; a: string }[] = c.id === 'death' ? [] : [
+  { q: `Who is ${c.name} in Moonlight Peaks?`, a: c.desc },
+  ...(c.romanceable !== null ? [{ q: `Is ${c.name} a romance option in Moonlight Peaks?`, a: `${romanceLabel === 'Yes' ? 'Yes, confirmed' : romanceLabel === 'No' ? 'No' : 'Not yet confirmed'} \u2014 ${c.name} is ${romanceLabel === 'Yes' ? 'a romanceable character' : romanceLabel === 'No' ? 'not a romance option' : 'not yet confirmed as romanceable or not'} in Moonlight Peaks.` }] : []),
+  ...(c.family && c.family !== 'Unknown' ? [{ q: `What family does ${c.name} belong to in Moonlight Peaks?`, a: `${c.name} belongs to the ${c.family} family.` }] : []),
+  ...(c.birthday ? [{ q: `When is ${c.name}'s birthday in Moonlight Peaks?`, a: `${c.name}'s birthday is ${c.birthday}.` }] : []),
+  ...((c.lovedGifts?.length || c.likedGifts?.length) ? [{ q: `What gifts does ${c.name} like in Moonlight Peaks?`, a: [
+    c.lovedGifts?.length ? `Loved: ${c.lovedGifts.join(', ')}.` : '',
+    c.likedGifts?.length ? `Liked: ${c.likedGifts.join(', ')}.` : '',
+  ].filter(Boolean).join(' ') }] : []),
+].slice(0, 4);
+const allCharacterFaq = [...deathFaq, ...autoFaq];
+
 const jsonLd = [
   { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
     { '@type': 'ListItem', position: 1, name: 'Home', item: SITE.url },
@@ -70,7 +87,7 @@ const jsonLd = [
     { '@type': 'ListItem', position: 3, name: c.name, item: url },
   ] },
   { '@context': 'https://schema.org', '@type': 'Person', name: c.name, description: c.desc, ...(imgAbs ? { image: imgAbs } : {}) },
-  ...(deathFaq.length > 0 ? [{ '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: deathFaq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) }] : []),
+  ...(allCharacterFaq.length > 0 ? [{ '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: allCharacterFaq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) }] : []),
 ];
 ---
 <Base
@@ -220,6 +237,20 @@ const jsonLd = [
           <div class="ctraits">
             {c.traits.map((t) => (
               <div class="ctrait"><span class="ctrait-l">{t[0]}</span><span class="cbar"><i style={`width:${t[1]}%`}></i></span></div>
+            ))}
+          </div>
+        </>
+      )}
+
+      {autoFaq.length > 0 && (
+        <>
+          <h2>Frequently asked questions</h2>
+          <div class="faq">
+            {autoFaq.map((f) => (
+              <details>
+                <summary>{f.q}</summary>
+                <p>{f.a}</p>
+              </details>
             ))}
           </div>
         </>
