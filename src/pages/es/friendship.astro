@@ -1,0 +1,70 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+
+const faq = [
+  { q: '¿La amistad es diferente del romance en Moonlight Peaks?', a: 'Sí — cada residente (romanceable o no) tiene una relación que puedes cultivar hablando y regalando cosas, registrada en el menú de relaciones. El romance y el matrimonio son una ruta opcional y más profunda, disponible solo para los 23 candidatos románticos confirmados; todos los demás pueden seguir siendo amigos.' },
+  { q: '¿Qué se obtiene al cultivar la amistad?', a: 'Confirmado al lanzamiento: las relaciones desbloquean planos y materiales de creación especiales, así como historias personales de los personajes — así que llevarte bien con todo el pueblo tiene recompensa, incluso sin buscar el romance.' },
+  { q: '¿Se puede jugar Nokturna con amigos?', a: 'Sí — las partidas de Nokturna con residentes se registran en su menú de amistad junto con conversaciones y regalos, así que también es una forma de cultivar la relación.' },
+  { q: '¿Las mecánicas de regalos son iguales para amistad y romance?', a: 'La mecánica es la misma — regalar sube el nivel de relación — aunque las reacciones de gustado/neutral/no gustado pueden variar según la persona, sin importar si buscas romance o no.' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Inicio', item: `${SITE.url}/es` },
+    { '@type': 'ListItem', position: 2, name: 'Amistad', item: new URL('/es/friendship', SITE.url).href },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks Amistad — Menú de relaciones y recompensas"
+  description="Cómo funciona la amistad (a diferencia del romance) en Moonlight Peaks: el menú de relaciones, reacciones a regalos, y qué se desbloquea al cultivar la amistad."
+  path="/es/friendship"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Amistad' }]}
+  lang="es"
+  showExport
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Inicio · Amistad</p>
+      <h1>Moonlight Peaks — <em>amistad</em></h1>
+      <p class="intro">
+        No todos los residentes son románticos, pero todos tienen una relación que se puede cultivar.
+        Esta página se enfoca en el lado puramente de amistad, distinto de nuestra
+        <a href="/romance">guía de romance</a>. Última actualización: {SITE.updated}.
+      </p>
+
+      <h2>Cómo funciona la amistad</h2>
+      <p>
+        Confirmado al lanzamiento: hablar y regalar cosas a los residentes sube el nivel de relación,
+        registrado en el menú de relaciones, donde se ven los regalos recientes y la reacción a cada
+        uno. Esto aplica a todo residente con nombre — ya sea una de las 23 opciones románticas o el
+        grupo más amplio de NPCs.
+      </p>
+
+      <h2>Qué desbloquea la amistad</h2>
+      <p>
+        Confirmado: relaciones más profundas desbloquean planos y materiales de creación, así como
+        historias personales de los personajes, sin importar si buscas su romance o no. Jugar
+        Nokturna con residentes también se registra en su menú de amistad.
+      </p>
+
+      <h2>FAQ</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        Relacionado: <a href="/romance">Romance</a>, <a href="/characters">Personajes</a>,
+        <a href="/tools/gift-tracker">Rastreador de regalos</a>, <a href="/nokturna">Nokturna</a>.
+      </div>
+    </div>
+  </article>
+</Base>

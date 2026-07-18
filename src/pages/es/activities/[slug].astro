@@ -1,0 +1,24 @@
+---
+import TopicPage from '../../../components/TopicPage.astro';
+import { activitiesSection, activities } from '../../../data/activities';
+import { activitiesEs } from '../../../i18n/activities-es';
+
+export function getStaticPaths() {
+  const translated = activities.filter((it) => activitiesEs[it.slug]);
+  return translated.map((it, i) => {
+    const tr = activitiesEs[it.slug];
+    const merged = { ...it, ...tr };
+    return {
+      params: { slug: it.slug },
+      props: {
+        item: merged,
+        prev: { ...translated[(i - 1 + translated.length) % translated.length], ...activitiesEs[translated[(i - 1 + translated.length) % translated.length].slug] },
+        next: { ...translated[(i + 1) % translated.length], ...activitiesEs[translated[(i + 1) % translated.length].slug] },
+      },
+    };
+  });
+}
+const { item, prev, next } = Astro.props;
+const esSection = { ...activitiesSection, base: '/es/activities', label: 'Actividades', eyebrow: 'Jugabilidad' };
+---
+<TopicPage section={esSection} item={item} prev={prev} next={next} lang="es" basePath="/es/activities" />

@@ -1,0 +1,117 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+
+const systems: { name: string; note: string; status: string }[] = [
+  { name: '季节', note: '经官方wiki自身结构确认,并与发售周攻略交叉核对:一年分为春、夏、秋、冬,每季持续一个月——总共是四个月的日历。游戏从春季开始。节日日期以"春季20日"这种形式给出。', status: '已确认' },
+  { name: '天气', note: '根据发售前的数据挖掘文件,存在天气系统;具体如何影响农业或活动这里还未独立确认。', status: '数据挖掘' },
+  { name: '节日', note: '确认:全镇性的季节庆典,包括Loveage Festival和Moonlight Ball,全年可能还有更多。', status: '已确认' },
+];
+
+const festivals: { name: string; when: string; note: string; status: string }[] = [
+  { name: 'Loveage Festival', when: '春季20-21日(2天)', note: '经官方wiki确认:由"爱情恶魔"Llemi主持。Elvira和Mina各自摆摊(Mina摆出一张可以贡献菜肴的公共自助餐桌);Luna摆出限时插花摊位,售卖当季限定花卉,同时也是不错的礼物。同期还有一场暗恋礼物交换活动——你在周六选出最多3位NPC,交换在周日进行。', status: '已确认' },
+  { name: 'Moonlight Ball', when: '夏季20日', note: '经官方wiki节日列表确认存在。具体活动内容这里还没有独立细节。', status: '已确认(仅名称和日期)' },
+  { name: 'Master Soup(烹饪比赛)', when: '具体季节尚未确认', note: '多篇发售周预览报告为烹饪比赛。尚未与官方wiki交叉核实。', status: '社区报告' },
+  { name: '一场时装秀', when: '具体季节尚未确认', note: '社区报告。细节尚未有记录。', status: '社区报告' },
+  { name: 'Evernight Festival', when: '秋季(具体日期尚未确认)', note: '社区报告为带有小游戏的秋季节日。', status: '社区报告' },
+  { name: 'Pumpkin-Head万圣节季', when: '具体季节尚未确认', note: '社区报告,与已确认的NPC Pumpkin Head作为"戏剧化活动主持人"活跃镇上聚会的设定相符。', status: '社区报告' },
+];
+
+const faq = [
+  { q: 'Moonlight Peaks里有季节吗?', a: '有,确认:一年分为春、夏、秋、冬,每季持续一个月,用来安排节日和其他活动。' },
+  { q: 'Moonlight Peaks里一年有多长?', a: '确认:总共四个月的日历——每个季节(春、夏、秋、冬)各一个月。游戏从春季开始。' },
+  { q: 'Moonlight Peaks里有天气吗?', a: '发售前的数据挖掘文件里提到了天气系统。具体如何影响农业或活动这里还未独立确认。' },
+  { q: 'Moonlight Peaks里的Loveage Festival是什么?', a: '确认:一个为期2天的春季节日(春季20-21日),由爱情恶魔Llemi主持。Elvira和Mina各自摆摊,Luna摆出插花摊位,还有一场暗恋礼物交换——你在周六选出最多3位NPC,交换在接下来的周日进行。' },
+  { q: '除了Loveage还有其他节日吗?', a: '有——Moonlight Ball(夏季20日)经官方wiki确认了名称和日期。多篇发售周预览还提到了Master Soup烹饪比赛、一场时装秀、秋季的Evernight Festival,以及Pumpkin-Head主持的万圣节季,不过在独立确认之前,我们把这些当作社区报告处理。' },
+  { q: 'Moonlight Peaks的节日好玩吗?', a: '目前评价不一:一些发售周评测者喜欢Loveage的摊位和礼物交换,但至少有一位觉得节日频率和种类比同类游戏(比如Stardew Valley的季节活动)要单薄——我们如实记录这一点,而不是只报道正面评价。' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '首页', item: `${SITE.url}/zh` },
+    { '@type': 'ListItem', position: 2, name: '世界环境', item: new URL('/zh/environment', SITE.url).href },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks 世界环境与节日 — Loveage、Moonlight Ball及更多"
+  description="Moonlight Peaks的季节与节日:已确认的Loveage Festival和Moonlight Ball,以及社区报告的Master Soup、Evernight等活动——与尚未验证的内容分开标注。"
+  path="/zh/environment"
+  jsonLd={jsonLd}
+  crumbs={[{ label: '世界环境' }]}
+  lang="zh"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">总览 · 世界环境</p>
+      <h1>Moonlight Peaks <em>世界环境</em>与节日</h1>
+      <p class="intro">
+        {GAME.title}的世界随时间如何变化——季节、天气和小镇节日。已确认的细节与仍属社区报告或
+        尚未验证的内容分开标注。最后更新:{SITE.updated}。
+      </p>
+
+      <h2>季节与天气</h2>
+      <div class="envg">
+        {systems.map((s) => (
+          <div class="envcard">
+            <h3>{s.name}</h3>
+            <p>{s.note}</p>
+            <span class="envbadge">{s.status}</span>
+          </div>
+        ))}
+      </div>
+
+      <h2>节日</h2>
+      <table class="facts">
+        <tr><th>节日</th><th>时间</th><th>详情</th></tr>
+        {festivals.map((f) => (
+          <tr>
+            <td>{f.name} <span class="envbadge envbadge-inline">{f.status}</span></td>
+            <td>{f.when}</td>
+            <td>{f.note}</td>
+          </tr>
+        ))}
+      </table>
+
+      <h2>夜间优先的核心设定</h2>
+      <p>
+        不管是什么季节或天气,有一条规则始终不变:你在夜间生活和耕种,日出前要回到棺材里。
+        夜间循环如何塑造核心玩法,请查看<a href="/farming">农业攻略</a>。
+      </p>
+
+      <h2>仍在验证中</h2>
+      <ul>
+        <li><strong>Moonlight Ball</strong>除了名称和日期之外的具体活动内容。</li>
+        <li><strong>Master Soup、时装秀、Evernight和Pumpkin-Head万圣节季</strong>是否以这些名称被官方正式确认。</li>
+        <li><strong>天气</strong>具体如何影响农业或活动。</li>
+      </ul>
+
+      <h2>FAQ</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        发售后条目,会随着更多节日和天气细节被验证持续更新。相关:
+        <a href="/farming">农业</a>、<a href="/items">物品</a>、<a href="/locations">地点</a>、
+        <a href="/characters/llemi">Llemi</a>、<a href="/romance">恋爱</a>。
+      </div>
+    </div>
+  </article>
+
+  <style>
+    .envg { display: grid; grid-template-columns: 1fr; gap: 12px; margin: 6px 0 18px; }
+    @media (min-width: 640px) { .envg { grid-template-columns: 1fr 1fr 1fr; } }
+    .envcard { border: 1px solid var(--line); border-radius: 14px; background: var(--surface); padding: 14px; }
+    .envcard h3 { font-family: var(--display); font-weight: 600; font-size: 1rem; margin: 0 0 6px; }
+    .envcard p { color: #ded3e6; font-size: 0.84rem; margin: 0 0 8px; }
+    .envbadge { font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.04em; text-transform: uppercase; color: #9ac6e0; border: 1px solid #2f5a70; border-radius: 5px; padding: 2px 6px; }
+    .envbadge-inline { margin-left: 6px; vertical-align: middle; }
+  </style>
+</Base>

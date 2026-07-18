@@ -1,0 +1,181 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+
+const issueRows = [
+  ['Bug de puertas (reinicio forzado del día)', 'Confirmado · Corregido en el parche 1.1.38', 'Atravesar ciertas puertas causaba un error que forzaba a los jugadores a reiniciar el progreso del día. Confirmado como corregido según las notas oficiales del parche 1.1.38.'],
+  ['Fallo de "caminata lenta"', 'Confirmado · Corregido en el parche 1.1.38', 'Un fallo que dejaba al personaje del jugador atascado en un estado de caminata lenta. Confirmado como corregido según las notas oficiales del parche 1.1.38.'],
+  ['Setos/decoraciones cambian de color al colocarse', 'Reportado por jugadores · Sin corrección confirmada', 'Algunos jugadores reportan que las decoraciones colocadas (por ejemplo, un seto rosa) cambian visualmente a otro color (por ejemplo, verde) repetidamente después de colocarlas. Las notas oficiales del parche aún no lo listan como corregido.'],
+  ['Fallo al iniciar en Steam Deck', 'Reportado por jugadores · Solución disponible', 'Varios jugadores reportan que el juego falla al iniciar, incluso tras reinstalar y verificar archivos. Solución reportada: cambiar la herramienta de compatibilidad en Steam Deck a Proton 9.0-4. No es una corrección oficial de Valve o los desarrolladores, sino una solución alternativa verificada repetidamente por jugadores.'],
+  ['Micro tirones cada pocos segundos', 'Reportado por jugadores · Sin corrección confirmada', 'Reportado tanto en PC de gama alta (como RTX 5090) como en hardware de gama media, así que no parece ser un problema de hardware específico. Actualmente no hay solución confirmada — algunos jugadores reportan que actualizar los drivers de la tarjeta gráfica y poner el juego en modo "alto rendimiento" en la configuración gráfica del sistema ayuda parcialmente, pero no está confirmado que funcione de forma consistente.'],
+  ['Fallo al salir de la granja', 'Reportado por jugadores · Sin corrección confirmada', 'Algunos jugadores reportan fallos consistentes al salir del área de la granja. No hay solución confirmada; verificar los archivos del juego es un paso general que algunos intentan, sin confirmación de éxito.'],
+  ['El mando deja de responder a mitad del juego', 'Reportado por jugadores · Solución disponible', 'El mando funciona durante la creación de personaje pero luego deja de responder, y la opción de reasignación de botones aparece en gris — algunos reportes lo relacionan con que ocurre justo después de una actualización del juego. Solución reportada por jugadores: desconectar y reconectar el mando, o cambiar temporalmente a teclado y ratón.'],
+  ['NPC atascado/no se puede interactuar', 'Reportado por jugadores · Sin corrección confirmada', 'Hay reportes específicos de Orlock quedando atascado en un lugar, sin poder interactuar con él. Recargar el área y dormir hasta el día siguiente no resolvió el problema para los jugadores afectados.'],
+  ['No se puede interactuar con objetos en interiores', 'Reportado por jugadores · Sin corrección confirmada', 'Algunos jugadores reportan no poder hacer clic en objetos dentro de la casa (como el ataúd para dormir o mascotas), mientras que las interacciones exteriores funcionan normalmente.'],
+  ['Tiempos de carga en Switch 2', 'Confirmado por evaluadores · Sin corrección confirmada', 'Varios evaluadores señalan tiempos de carga relativamente largos en Nintendo Switch 2 como el principal punto débil técnico. Aún no se ha anunciado una corrección oficial.'],
+  ['Accesorios del personaje no se muestran', 'Reportado por jugadores · Sin corrección confirmada', 'Algunos jugadores reportan que ciertos accesorios equipados (como objetos de brazo/muñeca) no se muestran visualmente en el modelo del personaje, aunque estén equipados. Los reportes actuales no muestran un patrón claro por plataforma. No hay solución confirmada.'],
+  ['La configuración gráfica se reinicia al cambiar de dispositivo', 'Reportado por jugadores · Sin corrección confirmada', 'Jugadores que usan la nube de Steam en varias PC reportan que la configuración gráfica/de pantalla no se sincroniza, aunque la partida guardada sí se sincroniza correctamente, requiriendo reconfigurar manualmente en cada dispositivo. No hay solución confirmada — también podría ser el comportamiento esperado de la configuración de pantalla en vez de un error, pero tampoco está confirmado.'],
+  ['Tamaño de UI/texto en modo portátil (Steam Deck / Switch)', 'Reportado por jugadores · Sin corrección confirmada', 'Algunos jugadores en modo portátil reportan que el texto y los menús se ven pequeños en pantallas portátiles. No hay solución alternativa confirmada ni opción de tamaño de texto en el juego.'],
+];
+
+const reportChecklist = [
+  'La plataforma y canal de tienda específicos',
+  'El número de versión del juego o fecha de compilación (si es visible)',
+  'Qué ocurrió y qué estabas haciendo en ese momento',
+  'Si se repite después de reiniciar',
+  'Cualquier nota oficial, notas de parche o fuente neutral que respalde el problema',
+];
+
+const faq = [
+  {
+    q: '¿Por qué Moonlight Peaks se traba o se congela?',
+    a: 'Reportes confirmados de jugadores (incluso en PC de gama alta) describen breves congelamientos cada pocos segundos sin importar el hardware, así que no parece ser un problema de hardware específico. Aún no hay corrección oficial — actualizar los drivers de la tarjeta gráfica y poner el juego en modo "alto rendimiento" en la configuración gráfica del sistema es la solución parcial más reportada.',
+  },
+  {
+    q: 'Moonlight Peaks falla al iniciar en Steam Deck — ¿cómo lo soluciono?',
+    a: 'Varios jugadores han reportado este problema. Solución más común: abre las propiedades del juego en Steam, ve a Compatibilidad, y cambia la versión de Proton a 9.0-4.',
+  },
+  {
+    q: 'Mi mando dejó de funcionar en Moonlight Peaks — ¿qué hago?',
+    a: 'Este es un problema reportado y aún sin resolver — el mando funciona durante la creación de personaje pero luego deja de responder, con la opción de reasignación de botones en gris. Los reportes de jugadores también mencionan que reaparece tras actualizaciones del juego (por ejemplo, un mando de Xbox que funciona bien en otros juegos pero no responde en este tras una actualización). Aún no hay corrección confirmada; prueba desconectar y reconectar el mando, o cambia temporalmente a teclado y ratón.',
+  },
+  {
+    q: '¿Moonlight Peaks ha recibido parches? ¿Qué corrigieron?',
+    a: 'Sí — confirmado el lanzamiento del parche 1.1.38. Según las notas oficiales del parche, corrigió dos de los errores más reportados al principio: un "bug de puertas" que forzaba a reiniciar el día, y un fallo de "caminata lenta". Varios jugadores han confirmado que ambas correcciones específicas funcionaron para ellos tras el parche.',
+  },
+  {
+    q: '¿Por qué mis setos o decoraciones cambian de color al colocarlos?',
+    a: 'Reportado por jugadores: algunos encuentran que las decoraciones colocadas (por ejemplo, un seto rosa) cambian visualmente a otro color (verde) de forma repetida, incluso al intentarlo varias veces. Las notas oficiales del parche aún no lo listan como corregido — trátalo por ahora como un reporte pendiente.',
+  },
+  {
+    q: '¿Hay configuración de tamaño de texto en modo portátil/Steam Deck?',
+    a: 'Actualmente no hay registro de ello. Algunos jugadores en modo portátil reportan que el texto y los menús se ven pequeños en pantallas portátiles, sin opción confirmada de tamaño de texto en el juego ni solución alternativa.',
+  },
+  {
+    q: 'Un NPC de Moonlight Peaks se quedó atascado y no puedo interactuar con él — ¿qué hago?',
+    a: 'Este problema ha sido reportado (especialmente con Orlock quedando atascado en un lugar). Recargar el área y dormir hasta el día siguiente no ha resuelto el problema para los jugadores afectados; aún no hay corrección confirmada, considera enviar un correo con tu plataforma y descripción del problema a support@xseedgames.com.',
+  },
+  {
+    q: '¿Qué errores conocidos tiene Moonlight Peaks al lanzamiento?',
+    a: 'Sí — consulta la tabla de seguimiento arriba para ver los problemas específicos reportados actualmente y su estado. Solo listamos algo aquí tras una nota oficial, múltiples reportes repetidos de jugadores, o una fuente neutral confiable que lo respalde.',
+  },
+  {
+    q: '¿A dónde reportar problemas de partidas guardadas o nube?',
+    a: 'Los reportes relacionados con partidas guardadas y la nube se registran aquí primero; cuando se verifiquen las rutas y soluciones específicas, se moverán a una página dedicada de partidas guardadas.',
+  },
+  {
+    q: '¿Debería confiar en cualquier publicación de solución que encuentre?',
+    a: 'Trátalas con cautela. Una solución debería ser reproducible, específica de plataforma, e idealmente respaldada por notas oficiales o múltiples reportes independientes antes de considerarla confiable.',
+  },
+  {
+    q: '¿Por qué no se muestran mis accesorios en el personaje?',
+    a: 'Reportado por jugadores: algunos accesorios equipados, especialmente objetos de brazo/muñeca, no se muestran visualmente aunque estén equipados. Actualmente no hay solución confirmada.',
+  },
+  {
+    q: '¿Por qué mi configuración gráfica se reinició al cambiar de PC?',
+    a: 'Reportado por jugadores: algunos que usan la nube de Steam en varias PC encuentran que la configuración gráfica/de pantalla no se sincroniza, aunque el archivo de partida guardada sí lo hace correctamente. No hay solución confirmada, ni tampoco está confirmado si es comportamiento esperado o un error.',
+  },
+  {
+    q: '¿La interfaz en Steam Deck o Switch es demasiado pequeña?',
+    a: 'Reportado por jugadores: algunos en modo portátil consideran que el texto y los menús se ven pequeños. No hay solución alternativa confirmada ni configuración de tamaño de texto en el juego — consulta las páginas de plataforma enlazadas abajo para notas específicas por plataforma.',
+  },
+  {
+    q: '¿Esta página reemplaza el soporte oficial?',
+    a: 'No. Para problemas sin resolver, envía tu plataforma, volcado de memoria en caso de fallo (si lo tienes) y descripción del problema a support@xseedgames.com. XSEED Games también opera un Discord oficial (discord.gg/xseedgames), donde se reporta que el equipo interactúa con la comunidad.',
+  },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Inicio', item: `${SITE.url}/es` },
+    { '@type': 'ListItem', position: 2, name: 'Problemas conocidos', item: new URL('/es/known-issues', SITE.url).href },
+  ] },
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })) },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'TechArticle',
+    headline: 'Moonlight Peaks Problemas conocidos',
+    description: 'Seguimiento de problemas conocidos en la semana de lanzamiento de Moonlight Peaks: fallos, partidas guardadas, entrada de mando, Steam Deck, Switch y notas de rendimiento.',
+    url: new URL('/es/known-issues', SITE.url).href,
+    author: { '@type': 'Organization', name: SITE.brand },
+    publisher: { '@type': 'Organization', name: SITE.brand },
+    about: { '@type': 'VideoGame', name: GAME.title, gamePlatform: GAME.platforms },
+  },
+];
+---
+<Base
+  title="Moonlight Peaks Problemas conocidos: fallos, mando, carga y soluciones"
+  description="Problemas conocidos de Moonlight Peaks: fallos en Steam Deck, problemas de mando, tirones, accesorios que no se muestran, y tiempos de carga — claramente marcados como confirmados o reportados por jugadores, con soluciones existentes."
+  path="/es/known-issues"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Problemas conocidos' }]}
+  lang="es"
+  showExport
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Lanzamiento · Problemas conocidos</p>
+      <h1>Moonlight Peaks — <em>problemas conocidos</em></h1>
+      <p class="intro">
+        Tabla de seguimiento de errores confirmados, fallos, partidas guardadas, problemas de mando y
+        reportes de plataforma de la semana de lanzamiento — información de notas oficiales de
+        soporte y discusiones de Steam Community, actualizada conforme se confirman correcciones.
+      </p>
+
+      <h2>Ubicación de los archivos de guardado</h2>
+      <p>
+        Confirmado por los desarrolladores: en Windows, las partidas guardadas están en
+        <code>%USERPROFILE%/AppData/LocalLow/Little Chicken Game Company/Moonlight Peaks/</code>.
+        En Mac, están en <code>~/Library/Application Support/Little Chicken Game Company/Moonlight Peaks/</code>.
+        Los volcados de memoria en Windows suelen estar en <code>%LOCALAPPDATA%\CrashDumps</code>,
+        desde "Moonlight Peaks.exe" — adjunta estos archivos al pedir soporte.
+      </p>
+
+      <h2>Tabla de seguimiento actual</h2>
+      <table class="facts">
+        {issueRows.map((row) => (<tr><th>{row[0]}</th><td><strong>{row[1]}</strong><br />{row[2]}</td></tr>))}
+      </table>
+
+      <h2>Antes de reportar un problema</h2>
+      <p>
+        Las páginas de errores de la semana de lanzamiento pueden volverse caóticas rápidamente.
+        Ayúdanos a mantener esta página útil distinguiendo entre problemas confirmados y reportes
+        individuales, e indicando la plataforma específica cuando sea posible.
+      </p>
+      <ul>
+        {reportChecklist.map((item) => (<li>{item}</li>))}
+      </ul>
+
+      <h2>Verificaciones relacionadas</h2>
+      <div class="link-grid">
+        <a href="/es/best-settings">Mejor configuración</a>
+        <a href="/es/system-requirements">Requisitos del sistema</a>
+        <a href="/platforms/steam-deck">Steam Deck</a>
+        <a href="/platforms/switch">Nintendo Switch</a>
+        <a href="/platforms/switch-2">Nintendo Switch 2</a>
+        <a href="/es/launch-day">Especial día de lanzamiento</a>
+      </div>
+
+      <h2>FAQ</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </article>
+
+  <style>
+    .link-grid { display: grid; grid-template-columns: 1fr; gap: 10px; margin-top: 10px; }
+    @media (min-width: 640px) { .link-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+    .link-grid a { border: 1px solid var(--line); border-radius: 10px; background: var(--surface); color: var(--mist); padding: 12px 14px; text-decoration: none; }
+    .link-grid a:hover { border-color: color-mix(in srgb, var(--candle) 55%, var(--line)); }
+  </style>
+</Base>

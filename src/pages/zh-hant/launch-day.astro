@@ -1,0 +1,124 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+
+const rows = [
+  ['先從這裡開始', '安裝前先確認發售時間、試玩版訪問方式、平臺選擇、系統需求和支援語言。'],
+  ['第一次遊戲', '建立你的吸血鬼、測試操作、檢查可讀性、瞭解夜晚迴圈,不要急著追求還未驗證的賺錢或送禮路線。'],
+  ['需要驗證的資料', '作物、魚類、禮物、日程、商店價格、任務、存檔、效能,以及任何發售bug。'],
+  ['安全更新原則', '只有在實機、官方說明、商店頁面或可靠中立信源裡能看到時,才會加入具體數值。'],
+];
+
+const checklist = [
+  { label: '發售日期', href: '/zh-hant/release-date', note: '發售時間、價格、平臺和試玩版狀態。' },
+  { label: '試玩版攻略', href: '/zh-hant/demo', note: '購買或重新開始前該測試什麼。' },
+  { label: '系統需求', href: '/zh-hant/system-requirements', note: 'PC、Mac和Steam Deck核查。' },
+  { label: '支援語言', href: '/zh-hant/languages', note: '日語、中文、韓語、德語和英語支援情況。' },
+  { label: '已知問題', href: '/zh-hant/known-issues', note: '發售bug追蹤表和驗證筆記。' },
+  { label: '最佳設定', href: '/zh-hant/best-settings', note: 'PC、Steam Deck、Switch和Mac設定清單。' },
+  { label: '新手指南', href: '/zh-hant/beginner-guide', note: '第一晚的優先事項和安全的早期目標。' },
+  { label: '角色', href: '/zh-hant/characters', note: '居民、戀愛狀態和發售驗證資訊。' },
+];
+
+const faq = [
+  {
+    q: 'Moonlight Peaks發售日應該先檢查什麼?',
+    a: '先從發售時間、平臺、系統需求、語言支援、已知問題和新手指南開始,再去追求詳細的物品或禮物表格。',
+  },
+  {
+    q: '發售日的資料會立刻齊全嗎?',
+    a: '不會。作物、禮物、日程、商店價格、任務和效能筆記這類具體數值,只有在實機確認後才會加入。',
+  },
+  {
+    q: '發售後還應該玩試玩版嗎?',
+    a: '如果你對操作、氛圍、可讀性或裝置效能還不確定,應該玩。試玩版仍然是快速檢驗舒適度的好方法。',
+  },
+  {
+    q: 'bug和效能筆記應該記錄在哪裡?',
+    a: '崩潰、存檔問題、手柄問題、Steam Deck筆記、Switch效能和其他發售周問題,請檢視已知問題頁面。',
+  },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '首頁', item: `${SITE.url}/zh` },
+    { '@type': 'ListItem', position: 2, name: '發售日專題', item: new URL('/zh-hant/launch-day', SITE.url).href },
+  ] },
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })) },
+  { '@context': 'https://schema.org', '@type': 'ItemList', itemListElement: checklist.map((item, index) => ({
+    '@type': 'ListItem',
+    position: index + 1,
+    name: item.label,
+    url: new URL(item.href, SITE.url).href,
+  })) },
+];
+---
+<Base
+  title="Moonlight Peaks 發售日專題 - 該先查什麼"
+  description="Moonlight Peaks發售日專題,彙總發售時間、試玩版、系統需求、支援語言、已知問題、最佳設定、新手技巧和安全的資料更新。"
+  path="/zh-hant/launch-day"
+  jsonLd={jsonLd}
+  crumbs={[{ label: '發售日專題' }]}
+  lang="zh-hant"
+  showExport
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">發售 · 第一天</p>
+      <h1>Moonlight Peaks <em>發售日</em>專題</h1>
+      <p class="intro">
+        {GAME.title}的第一天專題:安裝前該檢查什麼、驗證過的資料會放在哪裡,以及怎麼避免看到
+        單薄或猜測性的發售資訊。
+      </p>
+
+      <div class="callout">
+        <strong>發售時間:</strong> {GAME.releaseNote}
+      </div>
+
+      <h2>發售日導覽</h2>
+      <table class="facts">
+        {rows.map((row) => (<tr><th>{row[0]}</th><td>{row[1]}</td></tr>))}
+      </table>
+
+      <h2>優先檢查這些</h2>
+      <div class="link-grid">
+        {checklist.map((item) => (
+          <a href={item.href}>
+            <strong>{item.label}</strong>
+            <span>{item.note}</span>
+          </a>
+        ))}
+      </div>
+
+      <h2>不要猜測的內容</h2>
+      <p>
+        在實機或官方信源裡能看到之前,不要釋出具體的最愛禮物、物品價格、任務結果、作物利潤、
+        魚類地點、Steam Deck評級或存檔路徑。發售期的搜尋流量很有價值,但猜測性的表格對玩家不利,
+        對SEO也有風險。
+      </p>
+
+      <h2>FAQ</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </article>
+
+  <style>
+    .link-grid { display: grid; grid-template-columns: 1fr; gap: 10px; margin-top: 10px; }
+    @media (min-width: 680px) { .link-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    .link-grid a { display: flex; flex-direction: column; gap: 3px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); padding: 12px 14px; text-decoration: none; }
+    .link-grid strong { color: var(--mist); font-family: var(--display); }
+    .link-grid span { color: var(--muted); font-size: 0.84rem; }
+    .link-grid a:hover { border-color: color-mix(in srgb, var(--candle) 55%, var(--line)); }
+  </style>
+</Base>

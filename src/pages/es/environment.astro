@@ -1,0 +1,119 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+
+const systems: { name: string; note: string; status: string }[] = [
+  { name: 'Estaciones', note: 'Confirmado por la estructura propia del wiki oficial, y verificado cruzando guías de lanzamiento: el año se divide en primavera, verano, otoño e invierno, cada una de un mes de duración — cuatro meses de calendario en total. El juego comienza en primavera. Las fechas de festivales se dan como "primavera 20", por ejemplo.', status: 'Confirmado' },
+  { name: 'Clima', note: 'Según archivos filtrados antes del lanzamiento, existe un sistema de clima; cómo afecta a la agricultura o las actividades aún no se ha confirmado de forma independiente.', status: 'Filtrado' },
+  { name: 'Festivales', note: 'Confirmado: celebraciones de temporada en todo el pueblo, incluyendo el Loveage Festival y el Moonlight Ball, posiblemente más a lo largo del año.', status: 'Confirmado' },
+];
+
+const festivals: { name: string; when: string; note: string; status: string }[] = [
+  { name: 'Loveage Festival', when: 'Primavera 20-21 (2 días)', note: 'Confirmado por el wiki oficial: presentado por Llemi, el "demonio del amor". Elvira y Mina tienen sus propios puestos (Mina monta una mesa comunitaria de comida a la que se puede contribuir); Luna monta un puesto temporal de arreglos florales con flores exclusivas de temporada, también un buen regalo. También hay un intercambio de regalos de admirador secreto — eliges hasta 3 NPC el sábado, y el intercambio ocurre el domingo.', status: 'Confirmado' },
+  { name: 'Moonlight Ball', when: 'Verano 20', note: 'Confirmado en existir a través de la lista de festivales del wiki oficial. Aún no hay detalles independientes sobre las actividades específicas.', status: 'Confirmado (solo nombre y fecha)' },
+  { name: 'Master Soup (concurso de cocina)', when: 'Temporada aún no confirmada', note: 'Múltiples avances de la semana de lanzamiento reportan un concurso de cocina. Aún sin verificar cruzando el wiki oficial.', status: 'Reportado por la comunidad' },
+  { name: 'Un desfile de moda', when: 'Temporada aún no confirmada', note: 'Reportado por la comunidad. Aún no hay detalles registrados.', status: 'Reportado por la comunidad' },
+  { name: 'Evernight Festival', when: 'Otoño (fecha exacta aún no confirmada)', note: 'Reportado por la comunidad como un festival de otoño con minijuegos.', status: 'Reportado por la comunidad' },
+  { name: 'Temporada de Halloween de Pumpkin-Head', when: 'Temporada aún no confirmada', note: 'Reportado por la comunidad, consistente con el NPC confirmado Pumpkin Head, descrito como "presentador dramático de eventos" activo en las fiestas del pueblo.', status: 'Reportado por la comunidad' },
+];
+
+const faq = [
+  { q: '¿Moonlight Peaks tiene estaciones?', a: 'Sí, confirmado: el año se divide en primavera, verano, otoño e invierno, cada una de un mes de duración, usadas para programar festivales y otras actividades.' },
+  { q: '¿Cuánto dura un año en Moonlight Peaks?', a: 'Confirmado: cuatro meses de calendario en total — un mes por cada estación (primavera, verano, otoño, invierno). El juego comienza en primavera.' },
+  { q: '¿Moonlight Peaks tiene clima?', a: 'Archivos filtrados antes del lanzamiento mencionan un sistema de clima. Cómo afecta exactamente a la agricultura o las actividades aún no se ha confirmado de forma independiente.' },
+  { q: '¿Qué es el Loveage Festival en Moonlight Peaks?', a: 'Confirmado: un festival de primavera de 2 días (primavera 20-21), presentado por el demonio del amor Llemi. Elvira y Mina tienen sus propios puestos, Luna monta un puesto de arreglos florales, y hay un intercambio de regalos de admirador secreto — eliges hasta 3 NPC el sábado, y el intercambio ocurre el domingo siguiente.' },
+  { q: '¿Hay otros festivales además de Loveage?', a: 'Sí — el Moonlight Ball (verano 20) tiene nombre y fecha confirmados por el wiki oficial. Varios avances de la semana de lanzamiento también mencionan un concurso de cocina Master Soup, un desfile de moda, el Evernight Festival de otoño, y una temporada de Halloween presentada por Pumpkin-Head, aunque los tratamos como reportes de la comunidad hasta confirmarlos de forma independiente.' },
+  { q: '¿Son divertidos los festivales de Moonlight Peaks?', a: 'La opinión hasta ahora es mixta: algunos evaluadores de la semana de lanzamiento disfrutaron los puestos e intercambios de regalos de Loveage, pero al menos uno consideró que la frecuencia y variedad de festivales es más limitada que en juegos similares (como los eventos de temporada de Stardew Valley) — lo registramos con honestidad, sin reportar solo lo positivo.' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Inicio', item: `${SITE.url}/es` },
+    { '@type': 'ListItem', position: 2, name: 'Entorno', item: new URL('/es/environment', SITE.url).href },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks Entorno y festivales — Loveage, Moonlight Ball y más"
+  description="Estaciones y festivales de Moonlight Peaks: el Loveage Festival y Moonlight Ball confirmados, y eventos reportados por la comunidad como Master Soup y Evernight — claramente separados de lo aún no verificado."
+  path="/es/environment"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Entorno' }]}
+  lang="es"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Resumen · Entorno</p>
+      <h1>Moonlight Peaks — <em>entorno</em> y festivales</h1>
+      <p class="intro">
+        Cómo cambia con el tiempo el mundo de {GAME.title} — estaciones, clima y festivales del
+        pueblo. Los detalles confirmados están separados de lo que aún es reporte de la comunidad o
+        no está verificado. Última actualización: {SITE.updated}.
+      </p>
+
+      <h2>Estaciones y clima</h2>
+      <div class="envg">
+        {systems.map((s) => (
+          <div class="envcard">
+            <h3>{s.name}</h3>
+            <p>{s.note}</p>
+            <span class="envbadge">{s.status}</span>
+          </div>
+        ))}
+      </div>
+
+      <h2>Festivales</h2>
+      <table class="facts">
+        <tr><th>Festival</th><th>Cuándo</th><th>Detalles</th></tr>
+        {festivals.map((f) => (
+          <tr>
+            <td>{f.name} <span class="envbadge envbadge-inline">{f.status}</span></td>
+            <td>{f.when}</td>
+            <td>{f.note}</td>
+          </tr>
+        ))}
+      </table>
+
+      <h2>Un enfoque nocturno como base del juego</h2>
+      <p>
+        Sin importar la estación o el clima, una regla se mantiene constante: vives y cultivas de
+        noche, y regresas a tu ataúd antes del amanecer. Para saber cómo el ciclo nocturno moldea la
+        jugabilidad principal, consulta nuestra <a href="/farming">guía de agricultura</a>.
+      </p>
+
+      <h2>Aún en verificación</h2>
+      <ul>
+        <li>Las actividades específicas del <strong>Moonlight Ball</strong>, más allá del nombre y la fecha.</li>
+        <li>Si <strong>Master Soup, el desfile de moda, Evernight y la temporada de Halloween de Pumpkin-Head</strong> están confirmados oficialmente con esos nombres.</li>
+        <li>Cómo afecta exactamente el <strong>clima</strong> a la agricultura o las actividades.</li>
+      </ul>
+
+      <h2>FAQ</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        Entrada posterior al lanzamiento, se actualizará conforme se verifiquen más detalles de
+        festivales y clima. Relacionado: <a href="/farming">Agricultura</a>, <a href="/items">Objetos</a>,
+        <a href="/locations">Ubicaciones</a>, <a href="/characters/llemi">Llemi</a>, <a href="/romance">Romance</a>.
+      </div>
+    </div>
+  </article>
+
+  <style>
+    .envg { display: grid; grid-template-columns: 1fr; gap: 12px; margin: 6px 0 18px; }
+    @media (min-width: 640px) { .envg { grid-template-columns: 1fr 1fr 1fr; } }
+    .envcard { border: 1px solid var(--line); border-radius: 14px; background: var(--surface); padding: 14px; }
+    .envcard h3 { font-family: var(--display); font-weight: 600; font-size: 1rem; margin: 0 0 6px; }
+    .envcard p { color: #ded3e6; font-size: 0.84rem; margin: 0 0 8px; }
+    .envbadge { font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.04em; text-transform: uppercase; color: #9ac6e0; border: 1px solid #2f5a70; border-radius: 5px; padding: 2px 6px; }
+    .envbadge-inline { margin-left: 6px; vertical-align: middle; }
+  </style>
+</Base>

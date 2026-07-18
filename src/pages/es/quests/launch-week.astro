@@ -1,0 +1,154 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { SITE } from '../../../consts';
+import { storyQuests } from '../../../data/quests-story';
+import { sideQuests } from '../../../data/quests-side';
+import { storyQuestsEs, storyChaptersEs } from '../../../i18n/quests-story-es';
+import { sideQuestsEs } from '../../../i18n/quests-side-es';
+
+const blockingBugs = sideQuests.filter((q) =>
+  ['npc-stuck-cant-interact', 'form-wheel-softlock', 'ui-softlock-after-shop', 'lost-save-data'].includes(q.slug)
+).filter((q) => sideQuestsEs[q.slug]);
+
+const keyQuestSlugs = ['fallen-tree-arborascend', 'elviras-treasure-hunt', 'the-net-and-death', 'the-magic-of-crops', 'vampster-collection-quest'];
+const keyQuests = sideQuests.filter((q) => keyQuestSlugs.includes(q.slug)).filter((q) => sideQuestsEs[q.slug]);
+
+const firstWeekChapter = storyChaptersEs[0];
+const firstWeekQuests = storyQuests.filter((q) => q.chapter === 1).filter((q) => storyQuestsEs[q.slug]);
+
+const faq = [
+  { q: '¿Dónde está el árbol caído en Moonlight Peaks?', a: 'Confirmado por PC Gamer: no está en Howling Marshes, aunque parezca la suposición obvia. Bloquea una cascada en otra zona relacionada con el regreso de la familia de sirenas Hosu al pueblo, como parte de la misión "La bahía misteriosa". Lo quitas con el hechizo Arborascend (comprado a Sabrina), no con una herramienta.' },
+  { q: '¿Cómo se desbloquea la Cave of Echoes?', a: 'Confirmado: primero completa "A Bridge Too Far". La Cave of Echoes está dentro de la zona de Misty Shores, que permanece bloqueada hasta completar esa misión.' },
+  { q: '¿Cómo se puede tener una cita con Samael?', a: 'Confirmado mediante cobertura cruzada de la semana de lanzamiento: su romance está ligado al progreso de la historia hasta llegar a Luna Bay y conocer a la familia de sirenas Hosu. Las misiones previas "Un pasaje enigmático" y "La bahía misteriosa" incluyen levantar un árbol caído, reparar un puente con Ludo, y preparar su boda — con una sirena llamada Kim que lo deja plantado en el altar. Después no se puede tener citas con él durante una semana, hasta que Orlock reabre su ruta. Detalles completos en el perfil del personaje.' },
+  { q: '¿Cuáles son los mejores regalos universales en Moonlight Peaks?', a: 'Se reporta que el Tulipán Morado es ampliamente apreciado, y la Semilla de Cebolla ampliamente rechazada — pero la mayoría de residentes tiene preferencias individuales aún por catalogar. Usa el Buscador de regalos románticos para lo confirmado por personaje, o el Rastreador de regalos para registrar tus propias pruebas.' },
+  { q: '¿Dónde se pesca cada pez en Moonlight Peaks?', a: 'La base de datos completa de 22 especies, incluyendo ubicación, rareza, temporada y precio de venta por pez, está en la página Colección: Peces — cada especie tiene su propia página de detalle.' },
+  { q: '¿Qué hacer si una misión no avanza en absoluto?', a: 'Solución general de múltiples guías: revisa tu registro de misiones, el tablón de anuncios/de trabajos, el mapa (marcadores de exclamación o aura brillante), y si algún residente específico relacionado con la misión está en un lugar que aún no has revisado. Muchos sims de vida (incluido Moonlight Peaks) bloquean ciertos disparadores detrás de entrar a una zona específica, así que volver a visitar lugares recientemente relevantes suele ayudar. La causa real más común no es un objeto faltante — es un sistema que el juego ya introdujo (una nueva forma, hechizo, herramienta o NPC) que aún no has incorporado a tu rutina.' },
+  { q: '¿Cómo se desbloquean las Twilight Catacombs?', a: 'Confirmado: la puerta bloqueada del sótano cerca de la cripta de Viktor no se abre con una misión ni una compra — Jada te da la llave una vez que tu colección del museo alcanza el 25% de finalización. Atrapar criaturas y donar productos de mayor calidad es el camino real, no un disparador de historia.' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Inicio', item: `${SITE.url}/es` },
+    { '@type': 'ListItem', position: 2, name: 'Misiones', item: new URL('/es/quests', SITE.url).href },
+    { '@type': 'ListItem', position: 3, name: 'Paquete de la semana de lanzamiento', item: new URL('/es/quests/launch-week', SITE.url).href },
+  ] },
+];
+---
+<Base
+  title="Guía de la semana de lanzamiento de Moonlight Peaks — Misiones clave, bloqueos y soluciones"
+  description="Todo para tu primera semana en Moonlight Peaks: el orden de la historia, las misiones donde los jugadores realmente se atascan (árbol caído, Cave of Echoes, búsqueda del tesoro de Elvira, romance de Samael), errores bloqueantes conocidos, y dónde están realmente los datos de peces/regalos."
+  path="/es/quests/launch-week"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Misiones', href: '/es/quests' }, { label: 'Semana de lanzamiento' }]}
+  lang="es"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Misiones · Paquete de la semana de lanzamiento</p>
+      <h1>Paquete de la <em>semana de lanzamiento</em></h1>
+      <p class="intro">
+        Un único punto de entrada para las misiones y preguntas más frecuentes de tu primera semana
+        — no es un duplicado de las guías completas de historia/misiones secundarias, sino un atajo
+        directo a lo que realmente atasca a los jugadores. Última actualización: {SITE.updated}.
+      </p>
+
+      <h2>1. Flujo de la historia de la primera semana — Capítulo {firstWeekChapter.number}</h2>
+      <p>{firstWeekChapter.dek}</p>
+      <ol class="lw-list">
+        {firstWeekQuests.map((q) => (
+          <li><a href={`/es/quests/story/${q.slug}`}>{storyQuestsEs[q.slug].title}</a> <span class="lw-giver">— {q.giver}</span></li>
+        ))}
+      </ol>
+      <p class="lw-note">Orden completo y cada capítulo posterior: <a href="/es/quests/story">Guía principal de la historia</a>.</p>
+
+      <h2>2. Misiones clave más buscadas por nombre</h2>
+      <p>Estas son las páginas de puntos de bloqueo específicos con más contenido confirmado de solución de problemas.</p>
+      <div class="lw-grid">
+        {keyQuests.map((q) => (
+          <a class="lw-card" href={`/es/quests/side/${q.slug}`}>
+            <span class="lw-tag">{q.status === 'confirmed' ? 'Confirmado' : 'Reportado'}</span>
+            <strong>{sideQuestsEs[q.slug].title}</strong>
+            <span>{sideQuestsEs[q.slug].troubleshooting?.[0]?.q}</span>
+          </a>
+        ))}
+        <a class="lw-card" href="/locations/mines">
+          <span class="lw-tag">Confirmado</span>
+          <strong>Cave of Echoes / Minas</strong>
+          <span>Cómo desbloquearla, dónde está el cobre y el hierro, y por qué podría seguir bloqueada.</span>
+        </a>
+        <a class="lw-card" href="/locations/crystal-cave">
+          <span class="lw-tag">Confirmado</span>
+          <strong>Twilight Catacombs</strong>
+          <span>La puerta bloqueada del sótano cerca de la cripta de Viktor necesita una llave de Jada, no una misión — 25% de finalización del museo.</span>
+        </a>
+        <a class="lw-card" href="/characters/samael">
+          <span class="lw-tag">Confirmado</span>
+          <strong>Romance de Samael</strong>
+          <span>Cadena completa de misiones previas, el giro de la boda, y los bloqueos por nivel de corazón.</span>
+        </a>
+      </div>
+
+      <h2>3. Errores bloqueantes conocidos</h2>
+      <p>No son problemas de bloqueo de misiones — son errores realmente reportados. Revisa aquí antes de asumir que te perdiste un paso.</p>
+      <div class="lw-grid">
+        {blockingBugs.map((q) => (
+          <a class="lw-card lw-card-bug" href={`/es/quests/side/${q.slug}`}>
+            <span class="lw-tag lw-tag-bug">{q.status === 'confirmed' ? 'Error confirmado' : 'Error reportado'}</span>
+            <strong>{sideQuestsEs[q.slug].title}</strong>
+            <span>{sideQuestsEs[q.slug].troubleshooting?.[0]?.q}</span>
+          </a>
+        ))}
+      </div>
+      <p class="lw-note">Lista completa: <a href="/es/known-issues">Problemas conocidos</a>.</p>
+
+      <h2>4. Dónde están realmente los datos de referencia</h2>
+      <p>En lugar de duplicar esto como páginas de texto, usa directamente las herramientas interactivas:</p>
+      <div class="lw-grid">
+        <a class="lw-card" href="/es/tools/romance-gift-finder"><span class="lw-tag">Herramienta</span><strong>Buscador de regalos románticos</strong><span>Regalos amados/gustados/no gustados confirmados, filtrables por personaje.</span></a>
+        <a class="lw-card" href="/es/tools/gift-tracker"><span class="lw-tag">Herramienta</span><strong>Rastreador de regalos</strong><span>Registra tus propias pruebas de regalos para personajes sin datos confirmados.</span></a>
+        <a class="lw-card" href="/es/collections/fish"><span class="lw-tag">Datos</span><strong>Colección de peces</strong><span>22 especies, cada una con su propia página de ubicación/rareza/temporada/precio.</span></a>
+        <a class="lw-card" href="/es/map"><span class="lw-tag">Datos</span><strong>Mapa</strong><span>Diseño del pueblo, marcadores de misiones y nombres de ubicaciones confirmados.</span></a>
+      </div>
+
+      <h2>FAQ</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        Relacionado: <a href="/es/quests">Resumen de misiones</a>, <a href="/es/quests/story">Historia principal</a>,
+        <a href="/es/quests/side">Misiones secundarias</a>, <a href="/es/beginner-guide">Guía para principiantes</a>,
+        <a href="/es/known-issues">Problemas conocidos</a>.
+      </div>
+    </div>
+  </article>
+
+  <style>
+    .lw-list { display: grid; gap: 6px; margin: 10px 0 6px; padding-left: 20px; }
+    .lw-giver { color: var(--faint); font-family: var(--mono); font-size: 0.78rem; }
+    .lw-note { font-size: 0.86rem; color: var(--muted); margin: 6px 0 22px; }
+    .lw-grid { display: grid; grid-template-columns: 1fr; gap: 10px; margin: 12px 0 22px; }
+    @media (min-width: 720px) { .lw-grid { grid-template-columns: 1fr 1fr; } }
+    .lw-card {
+      display: flex; flex-direction: column; gap: 6px; border: 1px solid var(--line); border-radius: 14px;
+      background: var(--surface); padding: 14px 16px; text-decoration: none; color: inherit;
+      transition: border-color .15s ease, transform .15s ease;
+    }
+    .lw-card:hover { border-color: color-mix(in srgb, var(--candle) 50%, var(--line)); transform: translateY(-1px); }
+    .lw-card strong { font-family: var(--display); font-size: 1.02rem; color: var(--mist); }
+    .lw-card span { color: #ded3e6; font-size: 0.86rem; }
+    .lw-tag {
+      align-self: flex-start; font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.04em;
+      text-transform: uppercase; color: var(--candle); border: 1px solid var(--candle-dim); border-radius: 999px;
+      padding: 2px 9px;
+    }
+    .lw-card-bug { border-color: color-mix(in srgb, #c85a5a 40%, var(--line)); }
+    .lw-tag-bug { color: #e08a8a; border-color: #c85a5a66; }
+  </style>
+</Base>

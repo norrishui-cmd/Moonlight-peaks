@@ -1,0 +1,179 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+
+const issueRows = [
+  ['門bug(強制重啟當天)', '已確認 · 已在1.1.38補丁修復', '走過某些門會導致遊戲出錯,強制玩家重啟當天進度。經官方1.1.38補丁說明確認已修復。'],
+  ['"慢速行走"故障', '已確認 · 已在1.1.38補丁修復', '一個會讓玩家角色卡在減速行走狀態的移動故障。經官方1.1.38補丁說明確認已修復。'],
+  ['樹籬/裝飾品放置後變色', '玩家報告 · 尚無確認修復', '一些玩家報告放置的樹籬(比如粉色)在放置後視覺上會反覆變成另一種顏色(比如綠色)。官方補丁說明目前還沒有列為已修復。'],
+  ['Steam Deck啟動崩潰', '玩家報告 · 有變通方法', '多位玩家報告遊戲啟動時崩潰,即使重灌並驗證檔案後依然如此。報告的解決方法:把Steam Deck相容工具切換到Proton 9.0-4。這不是Valve或開發者的官方修復,而是玩家反覆驗證過的變通方法。'],
+  ['每隔幾秒微卡頓', '玩家報告 · 尚無確認修復', '在高階PC(比如RTX 5090)和中端硬體上都有玩家報告,所以看起來不是特定硬體的問題。目前沒有確認有效的解決辦法——一些玩家報告更新顯示卡驅動、把遊戲設為系統顯示卡設定裡的"高效能"模式能有部分緩解,但這沒有被確認能穩定生效。'],
+  ['離開農場時崩潰', '玩家報告 · 尚無確認修復', '一些玩家報告在退出農場區域時會穩定崩潰。目前沒有確認有效的解決辦法;驗證遊戲檔案是一些人會嘗試的通用排查步驟,但沒有確認成功過。'],
+  ['手柄遊戲中途失去響應', '玩家報告 · 有變通方法', '手柄在角色建立時能用,之後就沒反應了,設定裡的按鍵對映選項變灰——一些報告認為這和遊戲更新後緊接著出現有關。玩家報告的變通方法:拔插手柄,或改用鍵盤滑鼠。'],
+  ['NPC卡住/無法對話', '玩家報告 · 尚無確認修復', '有報告特別提到Orlock卡在一個地方,無法對話。重新載入區域和睡到第二天,對受影響的玩家都沒能解決問題。'],
+  ['室內無法與物品互動', '玩家報告 · 尚無確認修復', '一些玩家報告無法點選房子裡的物品(比如用來睡覺的棺材、寵物),而室外互動正常。'],
+  ['Switch 2載入時間', '評測者確認 · 尚無確認修復', '多位評測者指出Nintendo Switch 2上偏長的載入時間是主要的技術槽點。官方尚未宣佈修復。'],
+  ['角色身上的配飾不顯示', '玩家報告 · 尚無確認修復', '一些玩家報告某些已裝備的配飾(比如手臂/手腕物品)即使已裝備,也不會在角色模型上視覺呈現出來。目前的報告裡還沒有清楚歸納出明確的平臺規律。沒有確認有效的解決辦法。'],
+  ['更換裝置後畫面設定重置', '玩家報告 · 尚無確認修復', '在多臺PC上使用Steam雲存檔的玩家報告畫面/顯示設定不會同步過去,即使存檔本身同步正常,也需要在每臺裝置上手動重新配置。目前沒有確認有效的解決辦法——這也可能是顯示設定本身的預期行為而非bug,但這一點也沒有被確認。'],
+  ['掌機(Steam Deck / Switch)UI/文字大小', '玩家報告 · 尚無確認修復', '一些掌機玩家報告螢幕文字和選單在掌機螢幕上顯得偏小。目前沒有確認的變通方法或遊戲內文字大小選項。'],
+];
+
+const reportChecklist = [
+  '具體的平臺和商店渠道',
+  '遊戲版本號或構建日期(如果能看到)',
+  '發生了什麼、當時在做什麼',
+  '重啟後是否會重複出現',
+  '任何能佐證該問題的官方說明、補丁說明或中立信源',
+];
+
+const faq = [
+  {
+    q: '為什麼Moonlight Peaks一直卡頓或凍結?',
+    a: '已確認的玩家報告(包括在高階PC上)描述不論硬體如何都會每隔幾秒短暫凍結一下,所以看起來不是特定硬體的問題。目前還沒有官方修復——更新顯示卡驅動、把遊戲設為系統顯示卡設定裡的"高效能"模式,是目前報告最多的部分緩解方法。',
+  },
+  {
+    q: 'Moonlight Peaks在Steam Deck上啟動崩潰——怎麼解決?',
+    a: '多位玩家報告了這個問題。最常見的解決方法:在Steam裡開啟遊戲的屬性,進入相容性,把Proton版本切換到9.0-4。',
+  },
+  {
+    q: '我的手柄在Moonlight Peaks裡失靈了——怎麼辦?',
+    a: '這是一個已報告、尚未解決的問題——手柄在角色建立時能用,之後就沒反應了,按鍵重對映選項變灰。玩家報告也提到這會在遊戲更新後反覆出現(比如Xbox手柄在其他遊戲里正常,但更新後在本作裡沒反應)。目前還沒有確認的修復方法;可以先嚐試拔插手柄,或暫時改用鍵盤滑鼠。',
+  },
+  {
+    q: 'Moonlight Peaks發過補丁了嗎?修復了什麼?',
+    a: '發過——確認已釋出1.1.38補丁。根據官方補丁說明,它修復了兩個報告最多的早期bug:一個會強制玩家重啟當天的"門bug",以及一個"慢速行走"故障。多位玩家已確認這兩個具體修復在補丁後對他們生效。',
+  },
+  {
+    q: '為什麼我的樹籬或裝飾品放置後會變色?',
+    a: '玩家報告:一些玩家發現放置的樹籬(比如粉色)在放置後會視覺上變成另一種顏色(綠色),反覆嘗試也是如此。官方補丁說明目前還沒有把它列為已修復——暫時當作一個懸而未決的報告處理。',
+  },
+  {
+    q: '掌機/Steam Deck有文字大小設定嗎?',
+    a: '目前沒有記錄。一些掌機玩家報告螢幕文字和選單顯得偏小,目前沒有確認的遊戲內文字大小選項或變通方法。',
+  },
+  {
+    q: 'Moonlight Peaks裡一個NPC卡住了,無法對話——怎麼辦?',
+    a: '這個問題已被報告(特別是Orlock卡在原地的情況)。重新載入區域和睡到第二天,對受影響的玩家目前都沒能解決;還沒有確認的修復方法,可以考慮把平臺和問題描述發郵件到support@xseedgames.com反饋。',
+  },
+  {
+    q: 'Moonlight Peaks發售時有哪些已知bug?',
+    a: '有——請檢視上方的追蹤表,瞭解目前正在報告的具體問題及其狀態。我們只在有官方說明、多方玩家重複報告,或可靠中立信源佐證後才會在這裡列出。',
+  },
+  {
+    q: '存檔或雲存檔問題應該反饋到哪裡?',
+    a: '存檔和雲存檔相關的報告先記錄在這裡,等具體路徑和修復方法被驗證後,會移到專門的存檔頁面。',
+  },
+  {
+    q: '應該相信隨便看到的修復帖子嗎?',
+    a: '請謹慎對待。一個修復方法在被當作可靠之前,應該是可重複的、針對特定平臺的,理想情況下還要有官方說明或多個獨立報告的佐證。',
+  },
+  {
+    q: '為什麼我的配飾沒有顯示在角色身上?',
+    a: '玩家報告:一些已裝備的配飾,特別是手臂/手腕物品,即使已裝備也不會視覺呈現出來。目前沒有確認的變通方法。',
+  },
+  {
+    q: '為什麼換了臺PC之後畫面設定重置了?',
+    a: '玩家報告:一些在多臺PC上使用Steam雲存檔的玩家發現畫面/顯示設定不會同步過去,即使存檔檔案本身同步正常。目前沒有確認的變通方法,也沒有確認這是預期行為還是bug。',
+  },
+  {
+    q: 'Steam Deck或Switch上的UI是不是太小了?',
+    a: '玩家報告:一些掌機玩家覺得螢幕文字和選單偏小。目前沒有確認的變通方法或遊戲內文字大小設定——具體平臺相關筆記請檢視下方連結的平臺頁面。',
+  },
+  {
+    q: '這個頁面能代替官方支援嗎?',
+    a: '不能。對於尚未解決的問題,請把你的平臺、崩潰轉儲檔案(如果有)和問題描述發郵件到support@xseedgames.com。XSEED Games也運營著官方Discord(discord.gg/xseedgames),據報告團隊會在裡面和社群互動。',
+  },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '首頁', item: `${SITE.url}/zh` },
+    { '@type': 'ListItem', position: 2, name: '已知問題', item: new URL('/zh-hant/known-issues', SITE.url).href },
+  ] },
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })) },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'TechArticle',
+    headline: 'Moonlight Peaks 已知問題',
+    description: 'Moonlight Peaks發售周已知問題追蹤:崩潰、存檔、手柄輸入、Steam Deck、Switch和效能相關筆記。',
+    url: new URL('/zh-hant/known-issues', SITE.url).href,
+    author: { '@type': 'Organization', name: SITE.brand },
+    publisher: { '@type': 'Organization', name: SITE.brand },
+    about: { '@type': 'VideoGame', name: GAME.title, gamePlatform: GAME.platforms },
+  },
+];
+---
+<Base
+  title="Moonlight Peaks 已知問題:崩潰、手柄、載入與修復方法"
+  description="Moonlight Peaks已知問題:Steam Deck崩潰、手柄問題、卡頓、配飾不顯示,以及載入時間——清楚標註已確認還是玩家報告,並附上現有的解決方法。"
+  path="/zh-hant/known-issues"
+  jsonLd={jsonLd}
+  crumbs={[{ label: '已知問題' }]}
+  lang="zh-hant"
+  showExport
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">發售 · 已知問題</p>
+      <h1>Moonlight Peaks <em>已知問題</em></h1>
+      <p class="intro">
+        發售周已確認bug、崩潰、存檔、手柄問題和平臺相關報告的追蹤表——資訊來自官方支援說明和
+        Steam社群討論,隨修復被確認持續更新。
+      </p>
+
+      <h2>存檔檔案位置</h2>
+      <p>
+        開發者確認:在Windows上,存檔位於
+        <code>%USERPROFILE%/AppData/LocalLow/Little Chicken Game Company/Moonlight Peaks/</code>。
+        在Mac上,位於<code>~/Library/Application Support/Little Chicken Game Company/Moonlight Peaks/</code>。
+        Windows上的崩潰轉儲檔案通常在<code>%LOCALAPPDATA%\CrashDumps</code>下,來自
+        "Moonlight Peaks.exe"——發郵件求助時請附上這些檔案。
+      </p>
+
+      <h2>當前追蹤表</h2>
+      <table class="facts">
+        {issueRows.map((row) => (<tr><th>{row[0]}</th><td><strong>{row[1]}</strong><br />{row[2]}</td></tr>))}
+      </table>
+
+      <h2>反饋問題前請注意</h2>
+      <p>
+        發售周的bug頁面很容易變得混亂。請透過區分已確認問題和單次報告,並儘可能標明具體平臺,
+        讓這個頁面保持有用。
+      </p>
+      <ul>
+        {reportChecklist.map((item) => (<li>{item}</li>))}
+      </ul>
+
+      <h2>相關檢查</h2>
+      <div class="link-grid">
+        <a href="/zh-hant/best-settings">最佳設定</a>
+        <a href="/zh-hant/system-requirements">系統需求</a>
+        <a href="/platforms/steam-deck">Steam Deck</a>
+        <a href="/platforms/switch">Nintendo Switch</a>
+        <a href="/platforms/switch-2">Nintendo Switch 2</a>
+        <a href="/zh-hant/launch-day">發售日專題</a>
+      </div>
+
+      <h2>FAQ</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </article>
+
+  <style>
+    .link-grid { display: grid; grid-template-columns: 1fr; gap: 10px; margin-top: 10px; }
+    @media (min-width: 640px) { .link-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+    .link-grid a { border: 1px solid var(--line); border-radius: 10px; background: var(--surface); color: var(--mist); padding: 12px 14px; text-decoration: none; }
+    .link-grid a:hover { border-color: color-mix(in srgb, var(--candle) 55%, var(--line)); }
+  </style>
+</Base>

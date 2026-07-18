@@ -1,0 +1,135 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { SITE, GAME } from '../../../consts';
+
+const faq = [
+  { q: '¿Cómo se inicia A Bridge Too Far en Moonlight Peaks?', a: 'Confirmado: sigue después de "El plan de vino de Orlock" — discúlpate con Orlock, paga a Samael una deuda de 350 monedas en The Broken Lamp, y repórtate con Orlock. Luego se activa una escena al entrar al pueblo, mostrando a Orlock, Evan y Mina fuera de la Finca Ambrosia.' },
+  { q: '¿Por qué está bloqueado el puente hacia Misty Shores?', a: 'Reportado por jugadores/la comunidad: Orlock cree que Fiona embrujó el puente por rencor. Resulta que no había ninguna maldición real — los dos tuvieron una pelea en la que Orlock dijo algo grosero, y la "maldición" es en realidad solo la consecuencia de esa discusión.' },
+  { q: '¿Qué hay que hacer para arreglar el puente?', a: 'Reportado por la comunidad: habla con cada uno de los hechiceros solicitados (Fiona, Sabrina, Luna y Noel aparecen mencionados en la cobertura) y luego regresa al puente. Después de una breve escena, la maldición se levanta y el área se abre.' },
+  { q: '¿Qué desbloquea A Bridge Too Far?', a: 'Confirmado: completarla reabre la Finca Ambrosia y desbloquea Misty Shores, incluyendo la Cave of Echoes — tu fuente de Mineral de Cobre para mejorar herramientas.' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Inicio', item: `${SITE.url}/es` },
+    { '@type': 'ListItem', position: 2, name: 'Misiones', item: new URL('/es/quests', SITE.url).href },
+    { '@type': 'ListItem', position: 3, name: 'A Bridge Too Far', item: new URL('/es/quests/a-bridge-too-far', SITE.url).href },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks: Guía de la misión A Bridge Too Far"
+  description="Cómo iniciar y terminar A Bridge Too Far en Moonlight Peaks: la disputa del puente entre Orlock y Fiona, con quién hablar, y qué desbloquea (Misty Shores, Cave of Echoes, cobre)."
+  path="/es/quests/a-bridge-too-far"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Misiones', href: '/es/quests' }, { label: 'A Bridge Too Far' }]}
+  lang="es"
+  showExport
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Guía de misión</p>
+      <h1>Moonlight Peaks: <em>A Bridge Too Far</em></h1>
+
+      <div class="callout">
+        <strong>Respuesta rápida:</strong> A Bridge Too Far se desbloquea después de "El plan de
+        vino de Orlock". Habla con los hechiceros del pueblo (Fiona, Sabrina, Luna y Noel aparecen
+        mencionados en las primeras guías), luego regresa al puente afuera de la Finca Ambrosia.
+        Terminarla abre Misty Shores y la Cave of Echoes — tu primera fuente de Mineral de Cobre.
+      </div>
+
+      <h2>Cómo iniciar A Bridge Too Far</h2>
+      <p>
+        Confirmado: esta misión sigue directamente después de <strong>El plan de vino de Orlock</strong>,
+        la misión inicial donde Orlock te pide que le hagas Blood Wine. Esa misión concluye
+        disculpándote con Orlock, pagando una deuda de 350 monedas a Samael en The Broken Lamp, y
+        reportándote de vuelta. A Bridge Too Far se activa automáticamente la próxima vez que entras
+        al pueblo, con una escena mostrando a Orlock, Evan y Mina fuera de la Finca Ambrosia.
+      </p>
+
+      <h2>Misiones previas requeridas</h2>
+      <ul>
+        <li><a href="/characters/orlock">El plan de vino de Orlock</a> — hacer Blood Wine, resolver la deuda con Samael.</li>
+      </ul>
+
+      <h2>Por qué está bloqueado el puente</h2>
+      <p>
+        <span class="tag-community">Reportado por la comunidad</span> Orlock cree que Fiona maldijo
+        el puente que conecta la Finca Ambrosia con el pueblo, por rencor. El giro reportado por los
+        primeros jugadores: no hay maldición real. Orlock y Fiona tuvieron una discusión en la que
+        Orlock dijo algo grosero, y el "hechizo" es en realidad solo la consecuencia de esa pelea —
+        la misión trata tanto de reconciliar una disputa familiar como de una solución mágica literal.
+      </p>
+
+      <h2>Progresión paso a paso</h2>
+      <p><span class="tag-community">Reportado por la comunidad</span> — no reverificado de forma independiente por nosotros paso a paso, pero consistente en múltiples guías de la semana de lanzamiento:</p>
+      <ol class="steps">
+        <li>Termina "El plan de vino de Orlock" (discúlpate con Orlock, paga 350 monedas a Samael, repórtate).</li>
+        <li>Entra al pueblo para activar la escena que revela el bloqueo de la Finca Ambrosia.</li>
+        <li>Habla con <a href="/characters/fiona">Fiona</a>, <a href="/characters/sabrina">Sabrina</a>, <a href="/characters/luna">Luna</a>, y <a href="/characters/noel">Noel</a> — las brujas/hechiceros mencionados en la cobertura de esta misión.</li>
+        <li>Regresa al puente cerca de la Finca Ambrosia una vez que hayas hablado con todos.</li>
+        <li>Observa la escena de resolución — la maldición se levanta y el puente se abre.</li>
+      </ol>
+
+      <h2>Qué desbloquea la misión</h2>
+      <p>
+        Confirmado: terminar A Bridge Too Far reabre la <strong>Finca Ambrosia</strong> y desbloquea
+        la zona más amplia de <strong>Misty Shores</strong>, incluyendo la <strong>Cave of Echoes</strong>
+        — la mina en la esquina inferior izquierda de Misty Shores donde se encuentra Mineral de Cobre.
+      </p>
+
+      <h2>Relación con Misty Shores</h2>
+      <p>
+        Misty Shores permanece bloqueada hasta que se resuelve esta misión. Si estás bloqueado en
+        pesca, minería u otro contenido de Misty Shores, esta misión — no un objeto de tienda
+        faltante — es casi siempre el verdadero cuello de botella.
+      </p>
+
+      <h2>Relación con la Cave of Echoes</h2>
+      <p>
+        <span class="tag-community">Reportado por la comunidad</span> Una vez que el puente se abre,
+        dirígete a la esquina más lejana de la playa y entra por el agujero en el acantilado para
+        llegar a la Cave of Echoes. El Mineral de Cobre parece roca normal con motas de cobre;
+        rómpelo con un Pico. Los grupos grandes de mineral pueden soltar hasta 6 minerales en vez de
+        1 de los nodos normales. Haz una Barra de Cobre en el Horno con 4 Mineral de Cobre + 1 Carbón.
+      </p>
+
+      <h2>Relación con encontrar a Death</h2>
+      <p>
+        El cementerio Ambrosia, donde se encuentra Death, está cerca de la Mansión Ambrosia en la
+        misma zona que reabre esta misión — así que si aún no puedes encontrar a Death, terminar
+        esta misión es probablemente un requisito previo. Consulta la página de perfil de Death para
+        lo que está confirmado por separado sobre él.
+      </p>
+
+      <h2>Problemas comunes</h2>
+      <ul>
+        <li><strong>La misión no se activa:</strong> confirma que realmente terminaste El plan de
+          vino de Orlock (pagaste a Samael y te reportaste con Orlock), no solo que la iniciaste.</li>
+        <li><strong>No encuentras a uno de los hechiceros:</strong> Fiona y Noel están ambos en
+          Moonlit Pines; Sabrina y Luna suelen encontrarse en o cerca de sus tiendas en el pueblo.</li>
+        <li><strong>El puente sigue bloqueado después de hablar con todos:</strong> aún no confirmado
+          aquí — si has hablado con los cuatro y sigue atascado, podría ser un problema de orden o un
+          error; consulta <a href="/known-issues">problemas conocidos</a> o repórtalo con el botón de
+          pulgar hacia abajo.</li>
+      </ul>
+
+      <h2>FAQ</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        Relacionado: <a href="/es/quests">Todas las misiones</a>, <a href="/locations/mines">Cave of Echoes y minas</a>,
+        <a href="/characters/death">Death</a>, <a href="/characters/orlock">Orlock</a>,
+        <a href="/characters/fiona">Fiona</a>.
+      </div>
+    </div>
+  </article>
+</Base>

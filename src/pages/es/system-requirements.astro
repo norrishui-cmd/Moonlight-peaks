@@ -1,0 +1,136 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+
+const checklist = [
+  ['Página de la tienda', 'Antes de comprar o actualizar guías, usa la página oficial de Steam como fuente definitiva.'],
+  ['Windows / Mac', 'Moonlight Peaks es compatible con PC y Mac en Steam; consulta el panel actual de requisitos de Steam para sistema operativo, procesador, memoria, tarjeta gráfica, DirectX y espacio de almacenamiento específicos.'],
+  ['Steam Deck', 'Trata el estado de soporte de Steam Deck como algo que solo se confirma al lanzamiento, hasta que Valve otorgue la calificación de compatibilidad final.'],
+  ['Mando', 'Antes del lanzamiento completo, la demo es una buena forma de probar la comodidad del mando, la legibilidad del texto y el escalado de la interfaz.'],
+  ['Espacio de almacenamiento', 'No publiques cifras específicas de espacio a menos que estén explícitamente en la página oficial de la tienda o en las notas de lanzamiento.'],
+];
+
+const faq = [
+  {
+    q: '¿Cuáles son los requisitos del sistema de Moonlight Peaks?',
+    a: 'Consulta la página oficial de Steam para los requisitos de sistema actuales de Windows y Mac. Esta página solo rastrea lo que hay que verificar, sin inventar cifras de hardware antes del lanzamiento.',
+  },
+  {
+    q: '¿Se puede jugar Moonlight Peaks en Mac?',
+    a: 'Moonlight Peaks es compatible con PC y Mac en Steam. Verifica la versión específica de Mac y los requisitos de hardware con la página actual de Steam.',
+  },
+  {
+    q: '¿Moonlight Peaks tiene certificación Steam Deck Verified?',
+    a: 'El soporte de Steam Deck debe verificarse al lanzamiento. El juego ya está en Steam, pero la calificación final de compatibilidad con Deck es una señal que viene de Valve/la tienda.',
+  },
+  {
+    q: '¿Debería usar la demo para probar el rendimiento?',
+    a: 'Sí. La demo gratuita es la forma más segura de probar controles, tamaño de texto, comodidad de cámara y rendimiento general en tu propio equipo antes de comprar.',
+  },
+];
+
+const steamUrl = 'https://store.steampowered.com/app/2209900/Moonlight_Peaks/';
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Inicio', item: `${SITE.url}/es` },
+    { '@type': 'ListItem', position: 2, name: 'Requisitos del sistema', item: new URL('/es/system-requirements', SITE.url).href },
+  ] },
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })) },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'TechArticle',
+    headline: 'Moonlight Peaks Requisitos del sistema',
+    description: 'Guía segura de requisitos del sistema de Moonlight Peaks para Steam, Mac y Steam Deck al lanzamiento, incluyendo pruebas con la demo y qué verificar antes de comprar.',
+    url: new URL('/es/system-requirements', SITE.url).href,
+    author: { '@type': 'Organization', name: SITE.brand },
+    publisher: { '@type': 'Organization', name: SITE.brand },
+    about: { '@type': 'VideoGame', name: GAME.title, gamePlatform: GAME.platforms },
+    citation: [steamUrl],
+  },
+];
+---
+<Base
+  title="Moonlight Peaks Requisitos del sistema - PC, Mac y Steam Deck"
+  description="Verificación de requisitos del sistema de Moonlight Peaks en Steam PC, Mac y Steam Deck, pruebas con la demo, y qué confirmar antes del lanzamiento."
+  path="/es/system-requirements"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Requisitos del sistema' }]}
+  lang="es"
+  showExport
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Lanzamiento · Requisitos del sistema</p>
+      <h1>Moonlight Peaks — <em>requisitos del sistema</em></h1>
+      <p class="intro">
+        Una página de requisitos segura para el lanzamiento, pensada para jugadores que quieren
+        confirmar si {GAME.title} funcionará en su PC, Mac o Steam Deck. Verifica siempre las cifras
+        específicas de hardware en la página oficial de Steam antes de comprar, ya que los metadatos
+        de la tienda pueden cambiar temporalmente antes del lanzamiento.
+      </p>
+
+      <div class="callout">
+        <strong>Nota de lanzamiento:</strong> {GAME.releaseNote}
+      </div>
+
+      <h2>Consulta primero las fuentes oficiales</h2>
+      <p>
+        Usa la página oficial de Steam para los requisitos de sistema en tiempo real, plataformas
+        compatibles, disponibilidad de la demo y horario de lanzamiento. Esta página es deliberadamente
+        cautelosa: te dice qué verificar y cómo probar la demo, pero no inventa cifras de CPU, GPU,
+        memoria, almacenamiento o sistema operativo que no aparezcan en fuentes oficiales.
+      </p>
+      <p><a href={steamUrl} target="_blank" rel="noopener noreferrer nofollow">Abrir la página oficial de Steam</a></p>
+
+      <h2>Lista de verificación antes del lanzamiento</h2>
+      <table class="facts">
+        {checklist.map((row) => (<tr><th>{row[0]}</th><td>{row[1]}</td></tr>))}
+      </table>
+
+      <h2>Cómo probar con la demo</h2>
+      <p>
+        La demo es el mejor punto de referencia práctico, porque corre directamente en tu propio
+        hardware. Puedes probar movimiento, menús, legibilidad de texto, comodidad del mando, pesca,
+        arreglos florales, bordado y creación de personaje. Si planeas jugar en modo portátil, prueba
+        la demo con esa misma configuración en vez de solo evaluar el rendimiento en escritorio.
+      </p>
+      <ul>
+        <li><strong>PC:</strong> verifica resolución, ritmo de fps, comodidad con ratón/teclado y tiempos de carga.</li>
+        <li><strong>Mac:</strong> confirma los requisitos específicos de Mac en Steam, y prueba la demo si está disponible.</li>
+        <li><strong>Steam Deck:</strong> verifica el esquema de controles, tamaño de texto y comodidad de batería; confirma la calificación final de Deck después del lanzamiento.</li>
+      </ul>
+
+      <h2>Páginas de lanzamiento relacionadas</h2>
+      <div class="link-grid">
+        <a href="/es/release-date">Fecha de lanzamiento</a>
+        <a href="/es/demo">Guía de la demo</a>
+        <a href="/es/platforms">Plataformas</a>
+        <a href="/platforms/steam-deck">Steam Deck</a>
+        <a href="/es/languages">Idiomas compatibles</a>
+        <a href="/es/beginner-guide">Guía para principiantes</a>
+      </div>
+
+      <h2>FAQ</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </article>
+
+  <style>
+    .link-grid { display: grid; grid-template-columns: 1fr; gap: 10px; margin-top: 10px; }
+    @media (min-width: 640px) { .link-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+    .link-grid a { border: 1px solid var(--line); border-radius: 10px; background: var(--surface); color: var(--mist); padding: 12px 14px; text-decoration: none; }
+    .link-grid a:hover { border-color: color-mix(in srgb, var(--candle) 55%, var(--line)); }
+  </style>
+</Base>

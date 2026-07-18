@@ -1,0 +1,54 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE } from '../../consts';
+---
+<Base
+  title="Política de privacidad | Moonlight Peaks Wiki & Guide"
+  description="Cómo Moonlight Peaks Wiki & Guide gestiona cookies, análisis y publicidad."
+  path="/es/privacy"
+  crumbs={[{ label: 'Privacidad' }]}
+  lang="es"
+>
+  <article class="page">
+    <div class="wrap">
+      <h1>Política de privacidad</h1>
+      <p class="intro">Cómo este sitio gestiona los datos, cookies, análisis y publicidad. Última actualización: {SITE.updated}.</p>
+
+      <h2>Quiénes somos</h2>
+      <p>Moonlight Peaks Wiki & Guide ({SITE.url}) es un sitio de guías independiente hecho por fans. Puedes contactarnos en {SITE.contact}.</p>
+
+      <h2>Cookies</h2>
+      <p>
+        Usamos cookies y tecnologías similares para el funcionamiento básico del sitio, medir el
+        tráfico y, una vez habilitado, mostrar publicidad. Puedes controlar o eliminar las cookies
+        desde la configuración de tu navegador. Donde la ley lo exija, pedimos consentimiento antes
+        de activar cookies no esenciales.
+      </p>
+
+      <h2>Análisis</h2>
+      <p>
+        Podemos usar una herramienta de análisis respetuosa con la privacidad (como Google Analytics)
+        para entender qué páginas son útiles. Esto recopila datos agregados como vistas de página,
+        región aproximada y tipo de dispositivo. No se usa para identificarte personalmente.
+      </p>
+
+      <h2>Publicidad</h2>
+      <p>
+        Este sitio puede mostrar anuncios de redes publicitarias de terceros como Google AdSense.
+        Estos socios pueden usar cookies para mostrar anuncios relevantes y medir su rendimiento.
+        Puedes conocer y rechazar la publicidad personalizada a través de la configuración de
+        anuncios de Google y las páginas de exclusión del sector correspondientes a tu región.
+      </p>
+
+      <h2>Tus opciones</h2>
+      <p>
+        Dependiendo de dónde vivas (por ejemplo, la UE/EEE, el Reino Unido o California), puedes
+        tener derecho a acceder, corregir o eliminar datos personales, y a rechazar la publicidad
+        personalizada. Contáctanos en {SITE.contact} para hacer una solicitud.
+      </p>
+
+      <h2>Cambios</h2>
+      <p>Podemos actualizar esta política a medida que el sitio crece o cambian las herramientas de publicidad y análisis. La fecha de "última actualización" arriba refleja la versión más reciente.</p>
+    </div>
+  </article>
+</Base>

@@ -1,0 +1,105 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+
+const faq = [
+  { q: 'Moonlight Peaks是谁开发的?', a: '荷兰工作室Little Chicken Game Company负责开发。美洲地区由XSEED Games发行,欧洲地区由Marvelous Europe发行。' },
+  { q: 'Moonlight Peaks有开发者博客吗?', a: '有。Little Chicken一直在游戏的Steam社区新闻页面发布幕后开发日志,团队成员会讲述他们的工作内容。' },
+  { q: 'Logan是Moonlight Peaks里真实存在的角色吗?', a: '很可能是。除了在发售前的数据挖掘文件中出现过,Little Chicken一位3D美术师自己的开发日志里也提到为"Logan的房子"设计了一个狼人主题房间,这独立地印证了这个名字——不过官方公告尚未正式确认。' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '首页', item: `${SITE.url}/zh` },
+    { '@type': 'ListItem', position: 2, name: '幕后花絮', item: new URL('/zh/behind-the-scenes', SITE.url).href },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks 幕后花絮 — 认识开发团队"
+  description="Little Chicken Game Company自己的开发者日记透露了哪些制作Moonlight Peaks的内幕——转述自他们的Steam社区帖子,附出处。"
+  path="/zh/behind-the-scenes"
+  jsonLd={jsonLd}
+  ogImage="/hero-behind-the-scenes.webp"
+  crumbs={[{ label: '幕后花絮' }]}
+  lang="zh"
+  showExport
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">入门 · 幕后花絮</p>
+      <h1><em>{GAME.title}</em>幕后花絮</h1>
+      <img class="bts-hero" src="/hero-behind-the-scenes.webp" alt="Moonlight Peaks幕后花絮——插画" width="1200" height="630" fetchpriority="high" />
+      <p class="intro">
+        大多数关于Moonlight Peaks的报道都聚焦在玩法上。较少人知道的是,开发者自己一直在游戏的
+        <a href="https://steamcommunity.com/app/2209900/allnews/" target="_blank" rel="noopener">Steam社区新闻页面</a>
+        发布幕后开发日记。以下是他们透露的关于游戏背后的人和制作过程的内容——转述自他们的帖子,
+        而不是大段引用原文。最后更新:{SITE.updated}。
+      </p>
+
+      <h2>Little Chicken Game Company</h2>
+      <p>
+        {GAME.title}由Little Chicken Game Company开发,这是一家成熟的工作室,过往作品涵盖从
+        移动端游戏到VR体验,美洲地区由{GAME.publisher}发行,欧洲地区由Marvelous Europe发行。
+      </p>
+
+      <h2>认识主程</h2>
+      <p>
+        在一篇开发日记中,游戏的主程——化名"Jor",在工作室有十多年编程经验——描述了自己搭建
+        核心程序层和内部工具的过程,这些工具供内容设计团队用来制作游戏,他大部分时间花在开发
+        策略、代码审查和实际编码上。他走上游戏开发这条路,是从小时候在表格里画物品和地点的
+        构想开始,后来上网搜索怎么做电子游戏,大约12岁开始学编程。
+      </p>
+
+      <h2>设计一个房间:Logan的房子</h2>
+      <p>
+        在另一篇日记中,团队里一位名叫Julia的3D美术师讲述了自己把游戏里一个温馨室内场景从
+        概念做到最终布景的全过程——具体来说,是为某位居民的家设计一个狼人主题房间,概念图
+        由概念美术师Wietse Treurniet设计。她没有完全照搬原始概念图,而是把它当作参考,先做
+        一个专注于比例和布局的粗略3D模型,再逐步细化材质。
+      </p>
+      <p>
+        如果你在推理小镇设定,这个细节值得知道:这篇帖子把这个房间称为<strong>Logan的房子内部</strong>。
+        结合发售前数据挖掘文件里出现过的"Logan's House",这是两个独立的线索,都指向一位真实存在、
+        名叫Logan的狼人居民——具体还有哪些已报告的内容,请查看他的<a href="/characters/logan">角色档案</a>。
+      </p>
+
+      <h2>一个夜间美术挑战</h2>
+      <p>
+        同一篇日记还提到了一个专属于夜晚背景游戏的真实制作难题:因为Moonlight Peaks全程使用
+        偏暗的紫色调光,在美术工具里看起来清晰的颜色,一旦在引擎里打上夜间光效后不一定还是
+        原来的效果——特别是黄色和绿色,被点名指出很难在夜间光照下还原原始概念图的效果。
+        这是个很小的细节,但解释了为什么游戏实际的调色比早期概念图给人的感觉更阴沉、更偏蓝紫色。
+      </p>
+
+      <h2>这对玩家有什么意义</h2>
+      <p>
+        这些都不会改变你玩游戏的方式,但它提醒我们{GAME.title}是由一个规模不大、愿意公开分享
+        制作过程的团队打造的——顺带一提,这也是获取一些"悄悄确认"信息(比如Logan)的好来源,
+        往往早于官方预告片或新闻稿正式公开。
+      </p>
+
+      <h2>FAQ</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        出处:Little Chicken Game Company自己在
+        <a href="https://steamcommunity.com/app/2209900/allnews/" target="_blank" rel="noopener">Steam社区</a>
+        发布的开发日记,本页为转述内容。相关:<a href="/characters/logan">Logan</a>、<a href="/characters">角色</a>、
+        <a href="/about">关于本站</a>。
+      </div>
+    </div>
+  </article>
+
+  <style>
+    .bts-hero { display: block; width: 100%; height: auto; border-radius: var(--radius); border: 1px solid var(--line); margin: 0 0 18px; }
+  </style>
+</Base>

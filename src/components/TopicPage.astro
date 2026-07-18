@@ -5,7 +5,7 @@ import { isPathTranslated } from '../i18n/translated-paths';
 import { relatedLabelsDe, relatedLabelsJa } from '../i18n/related-labels';
 import type { TopicSection, TopicItem } from '../data/topic';
 
-interface Props { section: TopicSection; item: TopicItem; prev: TopicItem; next: TopicItem; lang?: 'en' | 'ja' | 'de'; basePath?: string; }
+interface Props { section: TopicSection; item: TopicItem; prev: TopicItem; next: TopicItem; lang?: 'en' | 'ja' | 'de' | 'es'; basePath?: string; }
 const { section, item, prev, next, lang = 'en', basePath } = Astro.props;
 const base = basePath ?? section.base;
 // Related links in the underlying data are always bare English paths and labels (shared across
@@ -51,6 +51,17 @@ const ui = {
       reported: 'Gemeldet - Verifizierung beim Release',
     },
     statusNote: 'Wir halten vom Entwickler bestätigte Fakten getrennt von gemeldeten oder erwarteten Details und erfinden niemals Daten — diese Seite wird aktualisiert, sobald echte Post-Release-Informationen verifiziert sind.',
+  },
+  es: {
+    whatWeKnow: 'Lo que sabemos', status: 'Estado:', related: 'Relacionado:', faq: 'FAQ',
+    prev: 'Anterior:', next: 'Siguiente:', all: (l: string) => `Todo: ${l.toLowerCase()}`,
+    statusLabels: {
+      confirmed: 'Confirmado por el desarrollador',
+      expected: 'Esperado - aún no confirmado',
+      datamined: 'Extraído de datos - de archivos del juego previos al lanzamiento, verificado contra referencias previas; confirmar al lanzamiento',
+      reported: 'Reportado - confirmar al lanzamiento',
+    },
+    statusNote: 'Mantenemos los hechos confirmados por el desarrollador separados de los detalles reportados o esperados, y nunca inventamos datos — esta página se actualiza conforme se verifica información real posterior al lanzamiento.',
   },
 }[lang];
 

@@ -6,8 +6,8 @@ import ThubCard from './ThubCard.astro';
 import type { TopicSection, TopicItem } from '../data/topic';
 import type { NewsCategory } from '../data/news';
 
-interface Props { section: TopicSection; items: TopicItem[]; newsCategory?: NewsCategory; newsHeading?: string; }
-const { section, items, newsCategory, newsHeading } = Astro.props;
+interface Props { section: TopicSection; items: TopicItem[]; newsCategory?: NewsCategory; newsTopic?: string; newsHeading?: string; }
+const { section, items, newsCategory, newsTopic, newsHeading } = Astro.props;
 
 // Group items by their `tag` field when the section opts in, preserving first-seen tag order
 // so the grouping reads naturally rather than alphabetically.
@@ -89,10 +89,10 @@ const jsonLd = [
         </>
       )}
 
-      {newsCategory && (
+      {(newsCategory || newsTopic) && (
         <>
           <h2>{newsHeading ?? 'Latest updates'}</h2>
-          <News category={newsCategory} limit={5} />
+          <News category={newsCategory} topic={newsTopic} limit={5} />
         </>
       )}
     </div>
@@ -107,13 +107,5 @@ const jsonLd = [
     .thub-group-count { color: var(--faint); font-weight: 400; font-size: 0.85em; }
     .thub-grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
     @media (min-width: 640px) { .thub-grid { grid-template-columns: 1fr 1fr; } }
-    .thub-card { display: flex; flex-direction: column; border: 1px solid var(--line); border-radius: 16px; overflow: hidden; background: var(--surface); color: inherit; text-decoration: none; transition: border-color .15s ease, transform .15s ease; }
-    .thub-card:hover { border-color: color-mix(in srgb, var(--candle) 50%, var(--line)); transform: translateY(-2px); }
-    .thub-img { width: 100%; height: auto; display: block; border-bottom: 1px solid var(--line); }
-    .thub-body { padding: 14px 16px 16px; }
-    .thub-tag { font-family: var(--mono); font-size: 0.66rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--candle); }
-    .thub-title { font-family: var(--display); font-weight: 600; font-size: 1.22rem; margin: 6px 0 4px; }
-    .thub-dek { color: #ded3e6; font-size: 0.92rem; margin: 0 0 10px; }
-    .thub-more { font-family: var(--mono); font-size: 0.74rem; color: var(--candle); }
   </style>
 </Base>

@@ -1,0 +1,115 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+
+const achievements = [
+  { name: 'Discover all locations', desc: 'Encuentra cada ubicación de Moonlight Peaks.' },
+  { name: 'A Farming Monopoly', desc: 'Gana 1,000,000 de monedas.' },
+  { name: 'Skulls in a Net', desc: 'Recolecta todos los Soul Blobs.' },
+  { name: 'Back to the Den', desc: 'Devuelve a todos los Vampster a su guarida.' },
+  { name: 'Making Mina Proud', desc: 'Cocina 25 recetas diferentes.' },
+  { name: "Albertus' Helper", desc: 'Completa 25 trabajos del tablón de anuncios.' },
+  { name: 'Magic at Max Capacity', desc: 'Alcanza el máximo de maná.' },
+  { name: 'Fully Energized', desc: 'Alcanza el máximo de energía.' },
+  { name: 'Moonlit Stretching', desc: 'Asiste a tu primera clase de yoga.' },
+  { name: 'Back in Place', desc: 'Devuelve todas las sillas de plástico.' },
+  { name: 'Tree Hugger', desc: 'Enamórate de un árbol.' },
+  { name: 'The Pumpking', desc: 'Conoce a una calabaza peculiar.' },
+  { name: 'Raiders of the Lost Art', desc: 'Completa la búsqueda del tesoro de Elvira.' },
+  { name: 'A Childhood Dream', desc: 'Construye una casa en el árbol con Ridge.' },
+  { name: 'Nokturna Master', desc: 'Recolecta todas las cartas de Nokturna.' },
+  { name: 'Awooooo!', desc: 'Habla con un personaje hombre lobo durante la luna llena (reportado por la comunidad).' },
+  { name: 'AFKitten', desc: 'Acaricia a tu Hellkitten durante 5 minutos seguidos (reportado por la comunidad).' },
+  { name: 'Cartographer', desc: 'Descubre cada ubicación de Moonlight Peaks, incluyendo áreas solo accesibles tras desbloquear formas de transformación (reportado por la comunidad).' },
+  { name: 'Rightful Ritualist', desc: 'Activa todos los círculos de brujas del pueblo (reportado por la comunidad).' },
+  { name: 'Call of the Current', desc: 'Desbloquea la forma de sirena/agua — confirmado que se desbloquea más adelante en el juego, pero las condiciones exactas de desbloqueo de esta tercera forma aún no están confirmadas.' },
+  { name: 'Perpetual Bloom', desc: 'Construye un invernadero.' },
+  { name: 'Dracula Estate', desc: 'Mejora completamente la casa.' },
+  { name: 'Vampire with a Wand', desc: 'Desbloquea la magia y lanza cualquier hechizo una vez.' },
+  { name: 'Master of Witchcraft', desc: 'Sube todos los hechizos al nivel máximo.' },
+  { name: 'A Magical Toolbelt', desc: 'Mejora cualquier herramienta a su versión encantada.' },
+  { name: 'A Magical Cocktail', desc: 'Ten activos todos los efectos de pociones al mismo tiempo.' },
+  { name: 'New Beginnings', desc: 'Planta tu primer cultivo — normalmente tu primera acción en el juego.' },
+  { name: 'Purrgatory', desc: 'Desbloquea la forma Hellkitten.' },
+  { name: 'Wings of the Night', desc: 'Desbloquea la forma de murciélago.' },
+  { name: 'Out of the Mist', desc: 'Levanta la maldición de Misty Shores a través de la historia principal.' },
+  { name: 'To the Depths', desc: 'Abre la entrada a las catacumbas.' },
+  { name: 'Happy New Year!', desc: 'Vive un año completo del juego, con sus cuatro estaciones.' },
+  { name: 'A Generous Donor', desc: 'Da un total de 299 regalos.' },
+  { name: 'Serial Gifter', desc: 'Regala 25 objetos favoritos en una sola noche.' },
+  { name: 'Social Butterfly', desc: 'Alcanza 4 corazones de afinidad con cada personaje.' },
+  { name: 'Tied the Knot', desc: 'Lleva una relación romántica al máximo y proponte matrimonio.' },
+  { name: 'Buddies for Afterlife', desc: 'Haz amistad con Death como con cualquier otro residente.' },
+];
+
+const faq = [
+  { q: '¿Cuántos logros tiene Moonlight Peaks?', a: 'Confirmado al lanzamiento: el total de logros de Steam es de aproximadamente 59-60 (las fuentes reportan cifras ligeramente distintas). Actualmente se conocen públicamente 37 nombres específicos — la tabla de arriba es lo confirmado hasta ahora.' },
+  { q: '¿Moonlight Peaks tiene cromos de Steam?', a: 'Sí — la página de Steam lista logros de Steam, cromos coleccionables de Steam, guardado en la nube de Steam, y soporte completo de mando.' },
+  { q: '¿Cuál es el logro más difícil o extraño?', a: 'Varios nombres confirmados suenan más a logros divertidos y fáciles de pasar por alto que a simples cifras acumulativas — "Tree Hugger" (enamórate de un árbol) y "The Pumpking" (conoce a una calabaza peculiar) parecen estar ligados a una interacción específica de una sola vez, no a una acción repetida.' },
+  { q: '¿Hay logros relacionados con el romance o las relaciones?', a: 'Sí, confirmado: "Social Butterfly" (4 corazones con todos), "Tied the Knot" (llevar el romance al máximo y proponer matrimonio), "A Generous Donor" (299 regalos en total), "Serial Gifter" (25 regalos favoritos en una noche), y "Buddies for Afterlife" (amistad con Death) son todos de la categoría romance/relaciones. "A Childhood Dream" (construir la casa del árbol con Ridge) y "Raiders of the Lost Art" (búsqueda del tesoro de Elvira) también están ligados a residentes específicos con nombre.' },
+  { q: '¿Hay un logro por construir el invernadero?', a: 'Sí, confirmado: "Perpetual Bloom" es el logro que se obtiene al construir el invernadero.' },
+  { q: '¿Qué logros están relacionados con las formas de transformación?', a: 'Confirmado: "Purrgatory" (forma Hellkitten), "Wings of the Night" (forma de murciélago), y "Call of the Current" (forma de sirena/agua, desbloqueada más adelante en el juego).' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Inicio', item: `${SITE.url}/es` },
+    { '@type': 'ListItem', position: 2, name: 'Logros', item: new URL('/es/achievements', SITE.url).href },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks Logros — Guía completa de logros de Steam"
+  description="Moonlight Peaks confirma 59 logros. Consulta los logros con nombre confirmado hasta ahora, desde recolectar Soul Blobs hasta ganar 1 millón de monedas."
+  path="/es/achievements"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Logros' }]}
+  lang="es"
+  showExport
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Inicio · Logros</p>
+      <h1>Moonlight Peaks — <em>logros</em></h1>
+      <p class="intro">
+        Confirmado al lanzamiento: {GAME.title} tiene un total de <strong>59 logros de Steam</strong>,
+        además de cromos coleccionables de Steam, guardado en la nube y soporte completo de mando.
+        Solo algunos nombres de logros son públicos por ahora — esta página lista únicamente lo que
+        tiene una fuente confirmada, y crecerá conforme se confirme más. Última actualización: {SITE.updated}.
+      </p>
+
+      <h2>Logros confirmados ({achievements.length} de 59)</h2>
+      <table class="facts">
+        <tr><th>Logro</th><th>Cómo desbloquearlo</th></tr>
+        {achievements.map((a) => (
+          <tr>
+            <td>{a.name}</td>
+            <td>{a.desc}</td>
+          </tr>
+        ))}
+      </table>
+
+      <div class="callout">
+        Todavía hay 45 logros sin nombrar aquí — solo listamos lo que aparece en datos reales de
+        Steam, sin adivinar. Sigue esta página conforme se confirme más.
+      </div>
+
+      <h2>FAQ</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        Relacionado: <a href="/items">Objetos</a>, <a href="/farming">Agricultura</a>,
+        <a href="/characters/albertus">Albertus (tablón de anuncios)</a>, <a href="/characters/ridge">Ridge</a>,
+        <a href="/characters/elvira">Elvira</a>, <a href="/nokturna">Juego de cartas Nokturna</a>.
+      </div>
+    </div>
+  </article>
+</Base>

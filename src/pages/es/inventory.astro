@@ -1,0 +1,69 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+
+const faq = [
+  { q: '¿Cómo funciona el inventario en Moonlight Peaks?', a: 'Confirmado al lanzamiento: el juego usa un sistema unificado de almacenamiento en casa — las estaciones de creación (como la cocina y el crisol) toman ingredientes y materiales directamente del almacenamiento de la casa, sin necesidad de llevar todo en un inventario personal.' },
+  { q: '¿Se puede ampliar la capacidad del inventario?', a: 'Aún no confirmado. Dado el diseño de almacenamiento unificado, si existe una mejora de capacidad, probablemente sea para el almacenamiento de la casa, no para un inventario tradicional de espacios de transporte.' },
+  { q: '¿Cómo se vende algo?', a: 'Coloca objetos en Chester — el baúl viviente que Brook regala al registrarte en el ayuntamiento — y se venden durante la noche mientras duermes.' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Inicio', item: `${SITE.url}/es` },
+    { '@type': 'ListItem', position: 2, name: 'Inventario', item: new URL('/es/inventory', SITE.url).href },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks Inventario: sin límite de carga — así funciona el almacenamiento"
+  description="Confirmado: Moonlight Peaks prescinde por completo de un inventario tradicional de espacios de transporte, usando almacenamiento unificado en casa que alimenta las estaciones de creación — y cómo funciona la venta a través de Chester."
+  path="/es/inventory"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Inventario' }]}
+  lang="es"
+  showExport
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Inicio · Inventario</p>
+      <h1>Moonlight Peaks — <em>inventario</em> y almacenamiento</h1>
+      <p class="intro">
+        La forma en que {GAME.title} maneja el inventario es diferente del típico sistema de espacios
+        de transporte. Esto es lo confirmado. Última actualización: {SITE.updated}.
+      </p>
+
+      <h2>Almacenamiento unificado en casa</h2>
+      <p>
+        Confirmado al lanzamiento: Moonlight Peaks no requiere ir de un lado a otro con tu inventario
+        personal para crear — en su lugar usa almacenamiento unificado en casa: coloca materiales en
+        el almacenamiento de tu hogar, y las estaciones de creación (cocina, crisol, etc.) los toman
+        automáticamente. Los jugadores tempranos lo consideran uno de los sistemas de calidad de vida
+        más convenientes del juego.
+      </p>
+
+      <h2>Vender a través de Chester</h2>
+      <p>
+        Confirmado: coloca objetos en <a href="/characters/chester">Chester</a> para venderlos — el
+        baúl viviente que Brook regala al registrarte en el ayuntamiento. Los objetos se venden
+        durante la noche mientras duermes; las ventas básicas no requieren un viaje separado a una tienda.
+      </p>
+
+      <h2>FAQ</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        Relacionado: <a href="/farming">agricultura</a>, <a href="/items">objetos</a>,
+        <a href="/characters/chester">Chester</a>, <a href="/es/beginner-guide">guía para principiantes</a>.
+      </div>
+    </div>
+  </article>
+</Base>

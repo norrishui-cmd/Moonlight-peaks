@@ -1,0 +1,126 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+
+const rows = [
+  ['Empieza por aquí', 'Antes de instalar, confirma la hora de lanzamiento, el acceso a la demo, la elección de plataforma, los requisitos del sistema y los idiomas compatibles.'],
+  ['Tu primera partida', 'Crea tu vampiro, prueba los controles, verifica la legibilidad y entiende el ciclo nocturno — sin apresurarte hacia rutas de dinero o regalos aún no verificadas.'],
+  ['Datos por verificar', 'Cultivos, peces, regalos, horarios, precios de tiendas, misiones, partidas guardadas, rendimiento, y cualquier error de lanzamiento.'],
+  ['Principio de actualización segura', 'Solo añadimos cifras específicas cuando se ven en el juego real, notas oficiales, la página de la tienda, o una fuente neutral confiable.'],
+];
+
+const checklist = [
+  { label: 'Fecha de lanzamiento', href: '/es/release-date', note: 'Hora de lanzamiento, precio, plataformas y estado de la demo.' },
+  { label: 'Guía de la demo', href: '/es/demo', note: 'Qué probar antes de comprar o volver a empezar.' },
+  { label: 'Requisitos del sistema', href: '/es/system-requirements', note: 'Verificación para PC, Mac y Steam Deck.' },
+  { label: 'Idiomas compatibles', href: '/es/languages', note: 'Soporte de japonés, chino, coreano, alemán e inglés.' },
+  { label: 'Problemas conocidos', href: '/es/known-issues', note: 'Tabla de seguimiento de errores de lanzamiento y notas de verificación.' },
+  { label: 'Mejor configuración', href: '/es/best-settings', note: 'Lista de verificación de configuración para PC, Steam Deck, Switch y Mac.' },
+  { label: 'Guía para principiantes', href: '/es/beginner-guide', note: 'Prioridades de la primera noche y objetivos seguros al inicio.' },
+  { label: 'Personajes', href: '/es/characters', note: 'Residentes, estado romántico e información verificada de lanzamiento.' },
+];
+
+const faq = [
+  {
+    q: '¿Qué debería revisar primero el día de lanzamiento de Moonlight Peaks?',
+    a: 'Empieza por la hora de lanzamiento, plataformas, requisitos del sistema, soporte de idiomas, problemas conocidos y la guía para principiantes, antes de buscar tablas detalladas de objetos o regalos.',
+  },
+  {
+    q: '¿Los datos estarán completos el día de lanzamiento?',
+    a: 'No. Cifras específicas como cultivos, regalos, horarios, precios de tiendas, misiones y notas de rendimiento solo se añaden después de confirmarse en el juego real.',
+  },
+  {
+    q: '¿Debería seguir jugando la demo después del lanzamiento?',
+    a: 'Si aún tienes dudas sobre los controles, el ambiente, la legibilidad o el rendimiento de tu dispositivo, sí. La demo sigue siendo una buena forma rápida de verificar la comodidad.',
+  },
+  {
+    q: '¿Dónde debería registrar errores y notas de rendimiento?',
+    a: 'Consulta la página de problemas conocidos para fallos, problemas de partidas guardadas, problemas de mando, notas de Steam Deck, rendimiento en Switch y otros problemas de la semana de lanzamiento.',
+  },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Inicio', item: `${SITE.url}/es` },
+    { '@type': 'ListItem', position: 2, name: 'Especial día de lanzamiento', item: new URL('/es/launch-day', SITE.url).href },
+  ] },
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })) },
+  { '@context': 'https://schema.org', '@type': 'ItemList', itemListElement: checklist.map((item, index) => ({
+    '@type': 'ListItem',
+    position: index + 1,
+    name: item.label,
+    url: new URL(item.href, SITE.url).href,
+  })) },
+];
+---
+<Base
+  title="Moonlight Peaks Especial día de lanzamiento - Qué revisar primero"
+  description="Especial de día de lanzamiento de Moonlight Peaks, con hora de lanzamiento, demo, requisitos del sistema, idiomas compatibles, problemas conocidos, mejor configuración, consejos para principiantes y actualizaciones de datos seguras."
+  path="/es/launch-day"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Especial día de lanzamiento' }]}
+  lang="es"
+  showExport
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Lanzamiento · Primer día</p>
+      <h1>Moonlight Peaks — especial del <em>día de lanzamiento</em></h1>
+      <p class="intro">
+        Especial del primer día de {GAME.title}: qué revisar antes de instalar, dónde estarán los
+        datos verificados, y cómo evitar información de lanzamiento superficial o especulativa.
+      </p>
+
+      <div class="callout">
+        <strong>Hora de lanzamiento:</strong> {GAME.releaseNote}
+      </div>
+
+      <h2>Guía del día de lanzamiento</h2>
+      <table class="facts">
+        {rows.map((row) => (<tr><th>{row[0]}</th><td>{row[1]}</td></tr>))}
+      </table>
+
+      <h2>Revisa esto primero</h2>
+      <div class="link-grid">
+        {checklist.map((item) => (
+          <a href={item.href}>
+            <strong>{item.label}</strong>
+            <span>{item.note}</span>
+          </a>
+        ))}
+      </div>
+
+      <h2>Qué no vamos a adivinar</h2>
+      <p>
+        No publicaremos regalos favoritos específicos, precios de objetos, resultados de misiones,
+        ganancias de cultivos, ubicaciones de peces, calificaciones de Steam Deck o rutas de partidas
+        guardadas antes de verlo en el juego real o en fuentes oficiales. El tráfico de búsqueda de
+        lanzamiento es valioso, pero las tablas especulativas perjudican a los jugadores y también
+        son un riesgo para el SEO.
+      </p>
+
+      <h2>FAQ</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </article>
+
+  <style>
+    .link-grid { display: grid; grid-template-columns: 1fr; gap: 10px; margin-top: 10px; }
+    @media (min-width: 680px) { .link-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    .link-grid a { display: flex; flex-direction: column; gap: 3px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); padding: 12px 14px; text-decoration: none; }
+    .link-grid strong { color: var(--mist); font-family: var(--display); }
+    .link-grid span { color: var(--muted); font-size: 0.84rem; }
+    .link-grid a:hover { border-color: color-mix(in srgb, var(--candle) 55%, var(--line)); }
+  </style>
+</Base>

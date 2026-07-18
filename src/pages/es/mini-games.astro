@@ -1,0 +1,80 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+import GuideImage from '../../components/GuideImage.astro';
+
+const minigames = [
+  { name: 'Lanzamiento de hechizos', how: 'Con la varita equipada, dibuja el patrón de puntos indicado con el gatillo D.', where: 'En cualquier lugar, una vez desbloqueada la magia' },
+  { name: 'Minijuegos de citas', how: 'Varían según la cita — por ejemplo, armar un ramo con los colores pedidos o tostar malvaviscos al punto preferido.', where: 'Citas con residentes de nivel 4+ de afinidad' },
+  { name: 'Pesca', how: 'Lanza el anzuelo hacia una sombra en el agua, luego recoge el sedal con un minijuego de tiempo.', where: 'Cuerpos de agua, una vez desbloqueada la caña' },
+  { name: 'Competencia de pesca contra Noel', how: 'Apuesta 250 monedas y pesca 3 especies diferentes antes que Noel para ganar la caña de pescar.', where: 'Principio del juego, relacionado con Noel' },
+];
+
+const faq = [
+  { q: '¿Qué minijuegos hay en Moonlight Peaks?', a: 'Confirmados hasta ahora: lanzamiento de hechizos (dibujar patrones de puntos), actividades de citas (como armar ramos o tostar malvaviscos), y un minijuego de pesca basado en tiempo — además de la competencia de pesca con Noel que desbloquea la caña.' },
+  { q: '¿Es difícil la pesca en Moonlight Peaks?', a: 'Los evaluadores la describen como diseñada intencionalmente para ser de baja presión en vez de frustrante, más parecida al estilo relajado de Animal Crossing de lanzar y recoger, que a un desafío técnico.' },
+  { q: '¿Los minijuegos afectan las relaciones?', a: 'Específicamente en las citas, sí — llegar tarde o fallar el minijuego de la cita se confirma que resta algo de afinidad, sin terminar la relación directamente.' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Inicio', item: `${SITE.url}/es` },
+    { '@type': 'ListItem', position: 2, name: 'Minijuegos', item: new URL('/es/mini-games', SITE.url).href },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks Minijuegos — Citas, pesca y hechizos"
+  description="Cada minijuego confirmado de Moonlight Peaks: actividades de citas como armar ramos, el sistema de pesca de lanzar y recoger, y cómo funciona el lanzamiento de hechizos."
+  path="/es/mini-games"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Minijuegos' }]}
+  lang="es"
+  showExport
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Inicio · Minijuegos</p>
+      <h1>Moonlight Peaks — <em>minijuegos</em></h1>
+      <p class="intro">
+        {GAME.title} integra varios minijuegos dentro de sus sistemas principales, en lugar de un
+        modo arcade independiente. Esto es lo confirmado hasta ahora. Última actualización: {SITE.updated}.
+      </p>
+
+      <GuideImage imageId="minigame" priority />
+
+      <table class="facts">
+        <tr><th>Minijuego</th><th>Cómo se juega</th><th>Dónde aparece</th></tr>
+        {minigames.map((m) => (
+          <tr>
+            <td>{m.name}</td>
+            <td>{m.how}</td>
+            <td>{m.where}</td>
+          </tr>
+        ))}
+      </table>
+
+      <div class="callout">
+        Otros minijuegos (Nokturna, cocina, elaboración de pociones) pueden tener sus propias
+        mecánicas independientes — consulta las guías correspondientes enlazadas abajo, en vez de
+        repetir el contenido aquí.
+      </div>
+
+      <h2>FAQ</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        Relacionado: <a href="/fishing">Pesca</a>, <a href="/magic">Magia</a>, <a href="/romance">Romance</a>,
+        <a href="/nokturna">Nokturna</a>.
+      </div>
+    </div>
+  </article>
+</Base>

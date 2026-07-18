@@ -1,6 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
 import { SITE, GAME } from '../../consts';
+import News from '../../components/News.astro';
 
 const entries = [
   { group: 'Database', title: 'Crops', desc: 'The full crop database — 30+ farmland crops, herb garden crops, and tree crops, with seasons and magical status.', href: '/farm/crops' },
@@ -44,6 +45,9 @@ const jsonLd = {
           </a>
         ))}
       </div>
+
+      <h2>Latest farm updates</h2>
+      <News topic="farm" limit={5} />
 
       <div class="callout wip">
         Related: <a href="/farming">farming guide</a>, <a href="/locations">locations</a>,

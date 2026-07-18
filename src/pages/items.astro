@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import { SITE, GAME } from '../consts';
 import { itemCategories, itemLaunchNote } from '../data/items';
+import News from '../components/News.astro';
 
 const collectionSlugs = new Set(['fish', 'critters', 'vampster', 'soul-blobs']);
 const itemHubCategories = itemCategories.filter((cat) => !collectionSlugs.has(cat.slug));
@@ -72,6 +73,9 @@ const jsonLd = [
         item, how to craft or buy it, what it does, whether it is used in cooking, gifts, quests, upgrades, or
         decorating, and which related guides explain the surrounding system.
       </p>
+
+      <h2>Latest item updates</h2>
+      <News topic="items" limit={5} />
 
       <h2>FAQ</h2>
       <div class="faq">

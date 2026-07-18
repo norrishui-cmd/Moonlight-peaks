@@ -1,0 +1,73 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { SITE } from '../../../consts';
+
+const faq = [
+  { q: '¿Qué es el tablón de trabajos de Albertus en Moonlight Peaks?', a: 'Confirmado: un tablón de anuncios, operado por Albertus, un búho, donde los jugadores pueden ver los encargos disponibles — tareas cortas que recompensan oro, ocasionalmente objetos, y puntos de relación con quien encarga el trabajo.' },
+  { q: '¿Dónde se encuentra el tablón de trabajos en Moonlight Peaks?', a: 'Confirmado: en el ayuntamiento, operado por Albertus. Es una de las primeras cosas que se muestran a los nuevos residentes.' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Inicio', item: `${SITE.url}/es` },
+    { '@type': 'ListItem', position: 2, name: 'Colección', item: `${SITE.url}/es/collections` },
+    { '@type': 'ListItem', position: 3, name: 'Trabajos', item: `${SITE.url}/es/collections/albertus-jobs` },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks Trabajos de Albertus — El tablón de trabajos explicado"
+  description="Confirmado: los Trabajos de Albertus es el tablón de anuncios de Moonlight Peaks, donde encargos cortos recompensan oro, objetos y puntos de relación con quien los encarga."
+  path="/es/collections/albertus-jobs"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Colección', href: '/es/collections' }, { label: 'Trabajos' }]}
+  lang="es"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Colección · Trabajos</p>
+      <h1>Trabajos de <em>Albertus</em></h1>
+      <p class="intro">
+        Confirmado: los Trabajos de Albertus es el tablón de anuncios del pueblo, operado por
+        <a href="/characters/albertus">Albertus</a>, un búho, en el ayuntamiento — uno de los
+        primeros sistemas que se muestran a los nuevos residentes.
+      </p>
+
+      <h2>Cómo funcionan los trabajos</h2>
+      <p>
+        Confirmado: los trabajos son encargos cortos publicados en el tablón. Completar un trabajo
+        da oro, a veces también un objeto, además de un aumento en la relación con quien lo encarga
+        — útil tanto para ingresos tempranos como para cultivar relaciones de forma pasiva.
+      </p>
+
+      <h2>Dónde encontrarlo</h2>
+      <p>
+        Confirmado: el tablón está en el ayuntamiento, junto al mostrador de registro del alcalde
+        Brook — una de las primeras cosas que se muestran a los nuevos residentes del pueblo.
+      </p>
+
+      <h2>Aún en verificación</h2>
+      <ul>
+        <li>El conjunto exacto de trabajos disponibles y con qué frecuencia se actualiza.</li>
+        <li>Si la dificultad o las recompensas escalan con el tiempo.</li>
+        <li>Lista completa de qué encargos de residentes pueden aparecer.</li>
+      </ul>
+
+      <h2>Preguntas frecuentes</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        Páginas relacionadas: <a href="/es/collections">Centro de colecciones</a>, <a href="/characters/albertus">Albertus</a>,
+        <a href="/locations/town-hall">Ayuntamiento</a>, <a href="/characters/brook">Brook</a>.
+      </div>
+    </div>
+  </article>
+</Base>

@@ -1,0 +1,90 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { SITE } from '../../../consts';
+
+const faq = [
+  { q: '¿Cuántos Vampsters hay en Moonlight Peaks?', a: 'Confirmado mediante el wiki oficial: 100 Vampsters en total, repartidos por las zonas exteriores del juego.' },
+  { q: '¿A dónde se llevan los Vampsters en Moonlight Peaks?', a: 'Confirmado: de vuelta a su hogar, una cueva en Misty Shores (desbloqueada mediante la misión "A Bridge Too Far").' },
+  { q: '¿Se puede cargar varios Vampsters a la vez?', a: 'No — solo puedes cargar un Vampster a la vez. Hablar con alguien o cualquier escena que se active hará que sueltes el que llevas.' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Inicio', item: `${SITE.url}/es` },
+    { '@type': 'ListItem', position: 2, name: 'Colección', item: `${SITE.url}/es/collections` },
+    { '@type': 'ListItem', position: 3, name: 'Vampsters', item: `${SITE.url}/es/collections/vampsters` },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks Vampsters: los 100 y cómo recolectarlos"
+  description="Guía de los Vampster en Moonlight Peaks: qué son, el total confirmado de 100, cómo cargarlos, y dónde está su hogar — según el wiki oficial."
+  path="/es/collections/vampsters"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Colección', href: '/es/collections' }, { label: 'Vampsters' }]}
+  lang="es"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Colección · Vampsters</p>
+      <h1>Moonlight Peaks — <em>Vampsters</em></h1>
+      <p class="intro">
+        Los Vampster son pequeñas criaturas traviesas que se esconden por todo Moonlight Peaks
+        haciendo travesuras, pero se entristecen si se quedan solas demasiado tiempo. Confirmado
+        mediante el wiki oficial: hay 100 en total, y los recolectas uno por uno para llevarlos a casa.
+      </p>
+
+      <div class="callout">
+        <strong>Respuesta rápida:</strong> los Vampster son criaturas perdidas que encuentras afuera
+        y llevas — de uno en uno — de vuelta a su hogar en una cueva de Misty Shores. Total confirmado: 100.
+      </div>
+
+      <h2>Cómo empieza la misión de los Vampster</h2>
+      <p>
+        Reportado por la comunidad: durante una excursión a la Cave of Echoes para minar cobre en tu
+        primera semana, un Vampster huye corriendo cerca de la entrada. Adentro conoces a
+        <a href="/characters/alina">Alina</a>, quien explica que los Vampster están perdidos y pide
+        ayuda para llevarlos a todos a casa.
+      </p>
+
+      <h2>Dónde encontrarlos</h2>
+      <p>
+        Confirmado mediante el wiki oficial: los Vampster están repartidos por todo Moonlight Peaks,
+        siempre escondidos en los lugares más inusuales. Dos ejemplos confirmados: uno en la casa de
+        Luna en Moonlit Pines, subiendo su escalera de caracol junto a su cama con una vela en la
+        cabeza, y otro en la Moonlit Tower en Misty Shores, escondido detrás de un sillón de hojas
+        color beige.
+      </p>
+
+      <h2>Cómo cargarlos y devolverlos</h2>
+      <ul>
+        <li><strong>Solo uno a la vez:</strong> confirmado — no puedes acumular varios Vampster; cargas exactamente uno hasta soltarlo.</li>
+        <li><strong>Su hogar:</strong> confirmado — una cueva en Misty Shores (desbloqueada mediante <a href="/quests/story/a-bridge-too-far">A Bridge Too Far</a>).</li>
+        <li><strong>Cuidado con las interrupciones:</strong> reportado por la comunidad — hablar con un residente o cualquier escena que se active hará que sueltes el Vampster que llevas, así que despeja zonas con mucho diálogo antes de intentarlo.</li>
+      </ul>
+
+      <h2>Problemas comunes</h2>
+      <ul>
+        <li><strong>Perdiste un Vampster después de una escena:</strong> es esperado — las escenas hacen que sueltes el que llevas; se queda donde lo soltaste.</li>
+        <li><strong>No encuentras más Vampster:</strong> intenta quitar con tu hoz la hierba crecida y los arbustos en zonas que aún no has despejado del todo.</li>
+      </ul>
+
+      <h2>Preguntas frecuentes</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        Del wiki oficial de Moonlight Peaks (moonlightpeaks.wiki.gg). Páginas relacionadas:
+        <a href="/es/collections">Centro de colecciones</a>, <a href="/locations/mines">Cave of Echoes</a>,
+        <a href="/achievements">Logros</a>, <a href="/characters/alina">Alina</a>.
+      </div>
+    </div>
+  </article>
+</Base>

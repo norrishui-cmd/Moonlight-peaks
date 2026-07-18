@@ -1,0 +1,115 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+import PriorityLinks from '../../components/PriorityLinks.astro';
+import { comparisonPriorityLinks } from '../../data/priorityLinks';
+
+const faq = [
+  { q: '¿Moonlight Peaks es como Stardew Valley?', a: 'Sí, en espíritu — ambos son simuladores de vida agrícola relajados donde plantas, cuidas cultivos, haces amistad y romance con los residentes del pueblo. Moonlight Peaks añade un giro sobrenatural: juegas como vampiro, cultivas de noche y usas magia.' },
+  { q: '¿Moonlight Peaks tiene multijugador como Stardew Valley?', a: 'No. Stardew Valley tiene cooperativo para varios jugadores; Moonlight Peaks es solo para un jugador.' },
+  { q: '¿Cuál es más barato, Moonlight Peaks o Stardew Valley?', a: 'Stardew Valley es más barato (alrededor de $14.99 y frecuentemente en oferta). Moonlight Peaks se lanza a $34.99 ($39.99 en Switch 2).' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Inicio', item: `${SITE.url}/es` },
+    { '@type': 'ListItem', position: 2, name: 'Moonlight Peaks vs Stardew Valley', item: new URL('/es/moonlight-peaks-vs-stardew-valley', SITE.url).href },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks vs Stardew Valley — Comparación de sims relajados"
+  description="Moonlight Peaks vs Stardew Valley: qué comparten estos dos sims de granja relajados, qué hace diferente al sim de vida vampírica, multijugador, precio y cuál jugar."
+  path="/es/moonlight-peaks-vs-stardew-valley"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'vs Stardew Valley' }]}
+  lang="es"
+  showExport
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Inicio · Comparación</p>
+      <h1><em>Moonlight Peaks</em> vs Stardew Valley</h1>
+      <p class="intro">
+        Moonlight Peaks se compara a menudo con Stardew Valley — así se comparan realmente estos dos
+        sims de granja relajados, para que puedas decidir cuál se ajusta mejor a ti. Actualizado {SITE.updated}.
+      </p>
+
+      <h2>Comparación rápida</h2>
+      <table class="facts">
+        <tr><th>Premisa</th><td>Moonlight Peaks es un sim de vida vampírica en un pueblo sobrenatural; Stardew Valley es un sim de restauración de granja rural.</td></tr>
+        <tr><th>Estilo visual</th><td>Moonlight Peaks usa 3D moderno; Stardew Valley usa pixel art en 2D.</td></tr>
+        <tr><th>Combate</th><td>Moonlight Peaks no tiene combate; Stardew Valley incluye combate en minas y áreas relacionadas.</td></tr>
+        <tr><th>Multijugador</th><td>Moonlight Peaks es solo para un jugador; Stardew Valley soporta cooperativo.</td></tr>
+        <tr><th>Enfoque romántico</th><td>Moonlight Peaks se apoya en familias sobrenaturales y citas sin restricción de género; Stardew Valley tiene un elenco de pueblo consolidado durante años.</td></tr>
+        <tr><th>Mejor opción según</th><td>Elige Moonlight Peaks para una temática gótica relajada y fresca; elige Stardew Valley para un clásico probado con años de contenido.</td></tr>
+      </table>
+
+      <PriorityLinks
+        title="Más comparaciones de sims relajados"
+        note="grupo de comparaciones"
+        links={comparisonPriorityLinks}
+      />
+
+      <h2>Qué tienen en común</h2>
+      <p>
+        Ambos son sims de vida agrícola relajantes construidos sobre el mismo ciclo reconfortante:
+        plantar y cuidar cultivos, pescar y recolectar, decorar tu hogar, y hacer amistad — o romance
+        y matrimonio — poco a poco con los residentes del pueblo. Si te encanta el ritmo de Stardew,
+        Moonlight Peaks habla el mismo idioma.
+      </p>
+
+      <h2>Qué hace diferente a Moonlight Peaks</h2>
+      <ul>
+        <li><strong>Eres un vampiro.</strong> Eres hijo del Conde Drácula, restaurando una finca familiar en un pueblo sobrenatural de hombres lobo, brujas y sirenas.</li>
+        <li><strong>Cultivas de noche.</strong> El crecimiento ocurre bajo la luz de la luna — debes volver a tu ataúd antes del amanecer.</li>
+        <li><strong>Magia, no solo herramientas.</strong> Aprende hechicería (incluyendo un minijuego de riego y hechizos que ahorran energía) y elabora pociones como el Elixir de Alter Ego.</li>
+        <li><strong>Transformación.</strong> Conviértete en murciélago para cruzar el pueblo y llegar a áreas ocultas.</li>
+        <li><strong>Todo encantado.</strong> Cultiva plantas brillantes como Blood Grapes y "cruelcumbers", y cría ganado mágico como los Draculamb.</li>
+        <li><strong>Nokturna.</strong> Un juego de cartas coleccionable dentro del juego, con sus propias cartas por conseguir.</li>
+        <li><strong>Sin combate.</strong> Incluso las minas están libres de combate — es relajante de principio a fin.</li>
+        <li><strong>3D moderno.</strong> Gráficos en tercera persona en 3D, frente al pixel art en 2D de Stardew.</li>
+      </ul>
+
+      <h2>Multijugador</h2>
+      <p>
+        Esta es una diferencia clave. Stardew Valley ofrece cooperativo para cultivar con amigos.
+        Moonlight Peaks es <strong>solo para un jugador</strong> — no se ha anunciado modo cooperativo
+        ni en línea.
+      </p>
+
+      <h2>Precio y plataformas</h2>
+      <p>
+        Stardew Valley (2016, por el desarrollador solitario ConcernedApe) cuesta alrededor de $14.99,
+        con ofertas frecuentes, y disponible en prácticamente todas las plataformas. Moonlight Peaks
+        se lanza {GAME.releaseLabel} a <strong>$34.99</strong> ($39.99 en Switch 2) en Steam (PC/Mac),
+        Steam Deck, Switch, Switch 2 y Android.
+      </p>
+
+      <h2>¿Cuál deberías jugar?</h2>
+      <p>
+        No son excluyentes. Si quieres un clásico probado, económico, apto para cooperativo, con
+        contenido interminable, Stardew Valley es difícil de superar. Si quieres un giro fresco,
+        centrado en el romance y con temática gótica sobre la fórmula — con magia, cultivo nocturno y
+        un elenco sobrenatural — Moonlight Peaks está hecho para ti. Muchos fans de lo relajado
+        disfrutarán jugando ambos con gusto.
+      </p>
+
+      <h2>FAQ</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout">
+        Más: <a href="/es/beginner-guide">Guía para principiantes</a>, <a href="/es/platforms">Plataformas y precio</a>,
+        <a href="/es/release-date">Fecha de lanzamiento</a>.
+      </div>
+    </div>
+  </article>
+</Base>

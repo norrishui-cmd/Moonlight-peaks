@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import { SITE, GAME } from '../consts';
 import { spellcastingSections, spellcastingSpells } from '../data/spellcasting';
+import News from '../components/News.astro';
 
 const iconCount = spellcastingSpells.filter((spell) => spell.icon).length;
 
@@ -80,6 +81,9 @@ const jsonLd = [
         Missing values are kept as <code>-</code> when the screenshots showed a placeholder or no value.
         Maturio spell rows had text in the screenshots but no visible icon to crop.
       </p>
+
+      <h2>Latest spellcasting updates</h2>
+      <News topic="spellcasting" limit={5} />
 
       <div class="callout">
         Related: <a href="/magic">magic guide</a>, <a href="/farming">farming</a>,

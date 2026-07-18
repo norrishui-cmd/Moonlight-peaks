@@ -3,12 +3,14 @@ import { news, type NewsCategory } from '../data/news';
 
 interface Props {
   category?: NewsCategory;
+  topic?: string;
   limit?: number;
 }
-const { category, limit = 6 } = Astro.props as Props;
+const { category, topic, limit = 6 } = Astro.props as Props;
 
 const items = news
   .filter((n) => !category || n.category === category)
+  .filter((n) => !topic || n.topics?.includes(topic))
   .slice()
   .sort((a, b) => (a.date < b.date ? 1 : a.date > b.date ? -1 : 0))
   .slice(0, limit);

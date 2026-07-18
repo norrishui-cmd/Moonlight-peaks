@@ -1,0 +1,140 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+import { spellcastingSections } from '../../data/spellcasting';
+import News from '../../components/News.astro';
+
+const descEs: Record<string, string> = {
+  hoisthaven: 'Mueve un edificio mágicamente.',
+  refilliarmus: 'Rellena tu regadera al instante.',
+  'tomorrows-tears': 'Hace que llueva la noche siguiente.',
+  'arborascend-i': 'Mueve mágicamente 1 árbol.',
+  'arborascend-ii': 'Mueve mágicamente 5 árboles.',
+  'arborascend-iii': 'Mueve mágicamente 10 árboles.',
+  'aquaflux-i': 'Invoca una regadera que puede regar hasta 16 parcelas.',
+  'aquaflux-ii': 'Invoca una regadera que puede regar hasta - parcelas.',
+  'aquaflux-iii': 'Invoca una regadera que puede regar hasta 144 parcelas.',
+  'ethereal-hands-i': 'Invoca manos ayudantes que juntas pueden cosechar hasta 32 cultivos.',
+  'ethereal-hands-ii': 'Invoca manos ayudantes que juntas pueden cosechar hasta 64 cultivos.',
+  'ethereal-hands-iii': 'Invoca manos ayudantes que juntas pueden cosechar hasta 128 cultivos.',
+  'metamorphosia-i': 'Transforma 1 cultivo en otro cultivo aleatorio.',
+  'metamorphosia-ii': 'Transforma un área de 2x2 de cultivos en otros cultivos aleatorios.',
+  'metamorphosia-iii': 'Transforma un área de 3x3 de cultivos en otros cultivos aleatorios.',
+  'maturio-i': 'Hace madurar instantáneamente los cultivos en un área de 1x1.',
+  'maturio-ii': 'Hace madurar instantáneamente los cultivos en un área de 2x2.',
+  'maturio-iii': 'Hace madurar instantáneamente los cultivos en un área de 3x3.',
+  'ethereal-shovels-i': 'Invoca una pala que puede excavar hasta 32 puntos.',
+  'ethereal-shovels-iii': 'Invoca una pala que puede excavar hasta 128 puntos.',
+  'ethereal-axes-i': 'Invoca un hacha que puede talar hasta 16 troncos o árboles.',
+  'ethereal-axes-ii': 'Invoca hachas que pueden talar hasta - troncos o árboles.',
+  'ethereal-axes-iii': 'Invoca un hacha que puede talar hasta 48 troncos o árboles.',
+  'ethereal-pickaxes-i': 'Invoca un pico que puede romper hasta 16 rocas.',
+  'ethereal-pickaxes-ii': 'Invoca un pico que puede romper hasta - rocas.',
+  'ethereal-pickaxes-iii': 'Invoca picos que pueden romper hasta 48 rocas.',
+};
+const sectionTitleEs: Record<string, string> = { 'normal-spells': 'Hechizos normales', 'tiered-spells': 'Hechizos escalonados' };
+
+const spellcastingSpells = spellcastingSections.flatMap((s) => s.spells);
+const iconCount = spellcastingSpells.filter((spell) => spell.icon).length;
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Inicio', item: `${SITE.url}/es` },
+    { '@type': 'ListItem', position: 2, name: 'Mundo', item: `${SITE.url}/es/locations` },
+    { '@type': 'ListItem', position: 3, name: 'Hechicería', item: `${SITE.url}/es/spellcasting` },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks Hechicería - Costos de maná y precios de compra"
+  description="Catálogo completo de hechizos de Moonlight Peaks con costos de maná, descripciones y precios de compra para los 25 hechizos confirmados."
+  path="/es/spellcasting"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Mundo', href: '/es/locations' }, { label: 'Hechicería' }]}
+  lang="es"
+>
+  <article class="page spellcasting-page">
+    <div class="wrap">
+      <p class="eyebrow">Mundo / Hechicería</p>
+      <h1>Moonlight Peaks — <em>hechicería</em></h1>
+      <p class="intro">
+        Datos confirmados de hechizos para {GAME.title}. Esta página lista {spellcastingSpells.length}
+        hechizos con {iconCount} iconos, costos de maná y precios de compra, cuando se conocen.
+      </p>
+
+      <nav class="spell-jump" aria-label="Secciones de hechicería">
+        {spellcastingSections.map((section) => (
+          <a href={`#${section.slug}`}>{sectionTitleEs[section.slug] ?? section.title} <span>{section.spells.length}</span></a>
+        ))}
+      </nav>
+
+      {spellcastingSections.map((section) => (
+        <section class="spell-section" id={section.slug} aria-labelledby={`${section.slug}-title`}>
+          <h2 id={`${section.slug}-title`}>{sectionTitleEs[section.slug] ?? section.title}</h2>
+          <div class="spell-list">
+            {section.spells.map((spell) => (
+              <article class={`spell-card ${spell.icon ? '' : 'spell-card-no-icon'}`}>
+                <div class="spell-icon" aria-hidden={!spell.icon}>
+                  {spell.icon ? (
+                    <img src={spell.icon} alt={`Icono del hechizo ${spell.name}`} width="144" height="144" loading="lazy" />
+                  ) : (
+                    <span>-</span>
+                  )}
+                </div>
+                <div class="spell-body">
+                  <h3>{spell.name}</h3>
+                  <p>{descEs[spell.slug] ?? spell.description}</p>
+                  <dl>
+                    <div>
+                      <dt>Maná</dt>
+                      <dd>{spell.manaCost}</dd>
+                    </div>
+                    <div>
+                      <dt>Precio de compra</dt>
+                      <dd>{spell.buyPrice}</dd>
+                    </div>
+                  </dl>
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
+      ))}
+
+      <p class="spell-note">
+        Los valores faltantes se mantienen como <code>-</code> cuando la fuente mostraba un
+        marcador de posición o ningún valor.
+      </p>
+
+      <h2>Últimas actualizaciones de hechicería</h2>
+      <News topic="spellcasting" limit={5} />
+
+      <div class="callout">
+        Relacionado: <a href="/es/magic">guía de magia</a>, <a href="/es/farming">agricultura</a>,
+        <a href="/items/tools">herramientas</a>, <a href="/items/cooking">cocina</a>, <a href="/es/quests">misiones</a>.
+      </div>
+    </div>
+  </article>
+
+  <style>
+    .spell-jump { display: flex; flex-wrap: wrap; gap: 8px; margin: 18px 0 24px; }
+    .spell-jump a { border: 1px solid var(--line); border-radius: 999px; color: var(--mist); background: var(--surface); padding: 7px 12px; text-decoration: none; font-family: var(--mono); font-size: 0.76rem; }
+    .spell-jump a:hover { border-color: color-mix(in srgb, #5ecfff 54%, var(--line)); color: #84eaff; }
+    .spell-jump span { color: var(--faint); margin-left: 4px; }
+    .spell-section { margin-top: 24px; }
+    .spell-list { display: grid; grid-template-columns: 1fr; gap: 12px; }
+    @media (min-width: 760px) { .spell-list { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    .spell-card { display: grid; grid-template-columns: 104px minmax(0, 1fr); gap: 14px; align-items: center; min-height: 150px; padding: 14px; border: 1px solid var(--line); border-radius: 8px; background: rgba(32, 18, 58, 0.74); }
+    .spell-icon { width: 104px; height: 104px; display: grid; place-items: center; border-radius: 8px; border: 1px solid rgba(94, 207, 255, 0.16); background: rgba(15, 8, 36, 0.42); }
+    .spell-icon img { width: 96px; height: 96px; object-fit: contain; display: block; filter: drop-shadow(0 0 13px rgba(49, 209, 255, 0.46)); }
+    .spell-icon span { color: var(--faint); font-family: var(--mono); font-size: 1.1rem; }
+    .spell-body { min-width: 0; }
+    .spell-body h3 { margin: 0 0 8px; color: #c8a8ee; font-family: var(--sans); font-size: 1.12rem; font-weight: 800; line-height: 1.2; }
+    .spell-body p { margin: 0 0 10px; color: #eee7f3; font-size: 0.92rem; line-height: 1.45; }
+    .spell-body dl { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; }
+    .spell-body dl div { display: flex; align-items: center; gap: 6px; min-height: 28px; padding: 4px 8px; border: 1px solid var(--line); border-radius: 999px; background: rgba(20, 10, 44, 0.56); }
+    .spell-body dt { color: var(--faint); font-family: var(--mono); font-size: 0.68rem; text-transform: uppercase; }
+    .spell-body dd { margin: 0; color: var(--mist); font-family: var(--mono); font-size: 0.82rem; font-weight: 600; }
+    .spell-note { color: var(--faint); font-size: 0.8rem; margin: 18px 0; }
+  </style>
+</Base>

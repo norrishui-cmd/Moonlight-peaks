@@ -1,0 +1,99 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+
+const faq = [
+  { q: '¿Cuántos Vampster hay en Moonlight Peaks?', a: 'Reportado por la comunidad: 100 en total, repartidos por las zonas exteriores, desde el bosque hasta la playa.' },
+  { q: '¿A dónde se llevan los Vampster en Moonlight Peaks?', a: 'Reportado por la comunidad: de vuelta a su guarida en la Cave of Echoes. Alina, a quien conoces mientras minas cobre allí, te pide ayuda para encontrarlos a todos.' },
+  { q: '¿Se puede llevar más de un Vampster a la vez?', a: 'No — reportado por la comunidad: solo puedes cargar un Vampster a la vez. Interactuar con alguien, o cualquier escena que se active, hará que sueltes el que llevas.' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Inicio', item: `${SITE.url}/es` },
+    { '@type': 'ListItem', position: 2, name: 'Vampster', item: new URL('/es/vampsters', SITE.url).href },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks Vampster: todas las ubicaciones y cómo recolectarlos"
+  description="Guía de los Vampster en Moonlight Peaks: qué son, dónde encontrar los 100, cómo cargarlos, y dónde está su guarida — con hechos confirmados y reportes de la comunidad claramente separados."
+  path="/es/vampsters"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Vampster' }]}
+  lang="es"
+  showExport
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Inicio · Coleccionables</p>
+      <h1>Moonlight Peaks — <em>Vampster</em></h1>
+      <p class="intro">
+        Los Vampster son pequeñas criaturas de cueva repartidas por el mundo de {GAME.title}, que
+        tienes que encontrar y devolver a su guarida. Esto es lo confirmado y lo reportado por la
+        comunidad sobre encontrarlos y recolectarlos.
+      </p>
+
+      <div class="callout">
+        <strong>Respuesta rápida:</strong> los Vampster son criaturas perdidas que se encuentran al
+        aire libre, y hay que llevarlas de una en una de vuelta a su guarida en la Cave of Echoes.
+        Total reportado por la comunidad: 100.
+      </div>
+
+      <h2>Cómo comienza la misión de los Vampster</h2>
+      <p>
+        Reportado por la comunidad: durante la primera semana aproximadamente, al ir a minar cobre a
+        la Cave of Echoes, aparece un Vampster huyendo cerca de la entrada. Al entrar a la cueva,
+        conoces a <a href="/characters/alina">Alina</a>, quien explica que estos Vampster están
+        perdidos y te pide ayuda para llevarlos a todos de vuelta a casa.
+      </p>
+
+      <h2>Dónde encontrarlos</h2>
+      <p>
+        Reportado por la comunidad: los Vampster están ampliamente repartidos por las zonas exteriores
+        del juego, desde el bosque hasta la playa. Limpiar árboles y arbustos con la hoz facilita
+        encontrarlos, ya que algunos están escondidos entre la maleza.
+      </p>
+
+      <h2>Cómo cargarlos y devolverlos</h2>
+      <ul>
+        <li><strong>Uno a la vez:</strong> reportado por la comunidad — no se pueden acumular varios Vampster a la vez; siempre cargas solo uno hasta soltarlo.</li>
+        <li><strong>Su guarida:</strong> reportado por la comunidad — dentro de la Cave of Echoes en Misty Shores (desbloqueada mediante <a href="/quests/a-bridge-too-far">A Bridge Too Far</a>).</li>
+        <li><strong>Cuidado con las interrupciones:</strong> reportado por la comunidad — hablar con residentes, o cualquier escena que se active, hará que sueltes el Vampster que llevas, así que planea la ruta evitando zonas con mucho diálogo.</li>
+      </ul>
+
+      <h2>¿Se necesita una forma especial para recolectarlos?</h2>
+      <p>
+        Las fuentes difieren un poco en esto, así que no lo presentamos como una mecánica única y
+        definitiva: una fuente de la comunidad menciona que desbloquear la
+        <a href="/shapeshifting">transformación</a> en Hellkitten facilita el acceso a las guaridas
+        de los Vampster, mientras que nuestras notas de misiones anteriores mencionaban
+        específicamente la forma de murciélago para cargarlos. Ambas podrían ser ciertas en
+        diferentes etapas de la línea de misiones (una forma para cargarlos afuera, otra para entrar
+        a la guarida) — actualizaremos esto en cuanto se pueda verificar la mecánica exacta contra el juego real.
+      </p>
+
+      <h2>Solución de problemas comunes</h2>
+      <ul>
+        <li><strong>Perdí un Vampster después de una escena:</strong> es normal — las escenas hacen que sueltes el que llevas, y se queda donde lo soltaste.</li>
+        <li><strong>Ya no encuentro más Vampster:</strong> prueba a limpiar maleza y arbustos con la hoz en zonas que aún no has despejado del todo.</li>
+      </ul>
+
+      <h2>FAQ</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        Relacionado: <a href="/locations/mines">Cave of Echoes</a>, <a href="/achievements">Logros</a>
+        (incluyendo "Back to the Den"), <a href="/characters/alina">Alina</a>, <a href="/shapeshifting">Transformación</a>.
+      </div>
+    </div>
+  </article>
+</Base>

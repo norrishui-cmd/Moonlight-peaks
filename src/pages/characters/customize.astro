@@ -2,6 +2,7 @@
 import Base from '../../layouts/Base.astro';
 import { SITE } from '../../consts';
 import { characterCustomizeGroups, characterCustomizeItems } from '../../data/character-customize';
+import News from '../../components/News.astro';
 
 const categories = [
   {
@@ -75,6 +76,9 @@ const jsonLd = [
         Names are numbered placeholders because the screenshots only show icons and group labels.
         Replace the labels in <code>src/data/character-customize.ts</code> once official in-game names are verified.
       </p>
+
+      <h2>Latest customization updates</h2>
+      <News topic="customize" limit={5} />
 
       <div class="callout">
         Related: <a href="/characters">characters</a>, <a href="/character-creator">character creator</a>,

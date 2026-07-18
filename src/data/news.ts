@@ -15,9 +15,262 @@ export type NewsItem = {
   // Falls back to `${title} | Moonlight Peaks News` and `body` when absent.
   seoTitle?: string;
   seoDescription?: string;
+  // Optional fine-grained sub-topic tags, narrower than `category`, used to show relevant news
+  // on specific sub-pages (e.g. 'farm', 'collections', 'spellcasting', 'items', 'customize',
+  // 'families', 'quests') rather than just the four broad tab categories.
+  topics?: string[];
 };
 
 export const news: NewsItem[] = [
+  {
+    slug: 'elections-seeing-seers-missing-moon-chain-confirmed',
+    date: '2026-07-17',
+    title: 'Full quest chain confirmed: Elections by Moonlight leads into Seeing Seers, then A Missing Moon',
+    body: 'Confirmed via a dedicated walkthrough: after Saga is elected mayor in "Elections by Moonlight," the Khazan family\u2019s seers begin slipping into trances one by one in "Seeing Seers." Once all three have gone under together, the Moon vanishes from the sky, triggering "A Missing Moon" \u2014 tying together three previously separately-reported quest names into one confirmed sequence.',
+    details: [
+      'Confirmed follow-up: resolving "A Missing Moon" triggers a short epilogue quest, "The Moon in the Sky," where the Moon Goddess formally invites you to her home at the Moonlit Slopes \u2014 an area confirmed to stay inaccessible again until Bat form unlocks via "Master of the Night."',
+    ],
+    category: 'guides',
+    topics: ['quests'],
+    sourceLabel: 'GameRant "A Missing Moon" walkthrough',
+    sourceUrl: 'https://gamerant.com/moonlight-peaks-a-missing-moon-walkthrough/',
+  },
+  {
+    slug: 'draculas-crest-confirmed-as-emotional-endgame-quest',
+    date: '2026-07-17',
+    title: 'Dracula\u2019s Crest confirmed as the emotional final major story quest',
+    body: 'Confirmed via a dedicated late-game walkthrough: the Crest Garden\u2019s last two missing crests belong to the two vampire families, Ambrosia and Dracula. The Dracula\u2019s Crest quest specifically is described as the story\u2019s emotional conclusion, triggered by a letter a few days after unlocking Bat transformation.',
+    details: [
+      'Confirmed requirements: Orlock asks for refined stones, gold bars, and glass, with gold found deep in the Cave of Echoes past a water crossing (passable via Bat or Mermaid form). Completing it moves the Dracula family into town and closes out every family\u2019s major storyline.',
+    ],
+    category: 'guides',
+    topics: ['quests'],
+    sourceLabel: 'Into Indie Games walkthrough (Part 8)',
+    sourceUrl: 'https://intoindiegames.com/walkthroughs/moonlight-peaks-walkthrough-part-8-ambrosias-crest-gold-and-draculas-crest/',
+  },
+  {
+    slug: 'full-seven-families-breakdown-cross-confirmed',
+    date: '2026-07-17',
+    title: 'Full seven-families breakdown cross-confirmed: Dracula, Logan, Webb, Ambrosia and more',
+    body: 'Confirmed via an independent family-by-family breakdown: the Dracula family (the protagonist\u2019s father Vlad, plus Viktor, Kai, and Celine), the Logan werewolves (Mayor Brook, carpenter Ridge, Saga, Ludo), the Webb witches (Fiona now leading, after her mother Laveau stepped down), and the Ambrosia vampires (Orlock, his children Mina and Evan, nephew Samael, niece Elvira) all line up with what\u2019s already documented here.',
+    details: [
+      'This is the first cross-confirmation found that explicitly places Kai and Celine inside the Dracula family specifically, rather than just as separately-listed named characters.',
+    ],
+    category: 'characters',
+    topics: ['families'],
+    sourceLabel: 'Pocket Tactics families breakdown',
+    sourceUrl: 'https://www.pockettactics.com/moonlight-peaks/characters',
+  },
+  {
+    slug: 'orlock-town-drunk-characterization-reconfirmed',
+    date: '2026-07-17',
+    title: 'Orlock\u2019s "town drunk" characterization reconfirmed by a second, independent source',
+    body: 'A second independent character breakdown describes Orlock, head of the Ambrosia vampire family, the same way earlier coverage did: as the town\u2019s drunk, with his children Mina and Evan, and nephew Samael, looking on in embarrassment \u2014 while niece Elvira finds it funny.',
+    details: [
+      'This matches, rather than contradicts, earlier reporting on Orlock\u2019s role and family relationships, adding a second source behind the characterization.',
+    ],
+    category: 'characters',
+    topics: ['families'],
+    sourceLabel: 'Pocket Tactics families breakdown',
+    sourceUrl: 'https://www.pockettactics.com/moonlight-peaks/characters',
+  },
+  {
+    slug: 'no-family-characters-grouped-on-official-wiki-nav',
+    date: '2026-07-17',
+    title: 'Confirmed: the official wiki groups a specific set of characters as belonging to no family',
+    body: 'Confirmed via the official wiki\u2019s own character navigation footer: Skull Girl, Llemi, Pumpkin Head, Albertus, Chester, Grim, Hoodini, Larry, Mr. Deyes, Rachel, and Yabbis are all grouped together as characters outside the seven named families \u2014 alongside Death, who was already documented as family-less here.',
+    details: [
+      'This is useful for ruling out family membership guesses for these specific names going forward, since the grouping comes directly from the developers\u2019 own site structure rather than a community guess.',
+    ],
+    category: 'characters',
+    topics: ['families'],
+    sourceLabel: 'Official Moonlight Peaks wiki (character navigation)',
+    sourceUrl: 'https://moonlightpeaks.wiki.gg/wiki/Skull_Girl',
+  },
+  {
+    slug: 'wand-upgrade-tied-to-mana-extractor-summer-quest',
+    date: '2026-07-17',
+    title: 'Wand upgrade confirmed tied to a Summer quest, unlocking level-2 spells',
+    body: 'Confirmed across two independent guides: your wand upgrades specifically during Summer, after helping Sabrina and Fiona develop the Mana Extractor \u2014 at which point higher-level versions of your existing spells become available, rather than an entirely new spell list.',
+    details: [
+      'Confirmed materials for the Mana Extractor: 3 Copper Bars and 3 Iron Bars for Sabrina, plus a follow-up requirement of 10 Rose Quartz (mined from the Crystal Cave west of Fiona\u2019s house) to complete the blueprint.',
+    ],
+    category: 'world',
+    topics: ['spellcasting'],
+    sourceLabel: 'TheGamer wand and mana guide',
+    sourceUrl: 'https://www.thegamer.com/moonlight-peaks-spells-wand-magical-energy-guide/',
+  },
+  {
+    slug: 'mana-extractor-converts-magical-crops-to-mana-essence',
+    date: '2026-07-17',
+    title: 'Confirmed: the Mana Extractor turns magical crops directly into Mana Essence',
+    body: 'Confirmed via a dedicated mana-refill guide: once built, the Mana Extractor lets you feed it magical crops to produce Mana Essence, which restores your mana pool \u2014 a bulk alternative to the passive one-star-per-sleep regeneration.',
+    details: [
+      'Also confirmed: a separate, purely optional Mana Upgrade can be purchased from Sabrina for 10,000 gold, distinct from the free story-driven Mana Extractor quest.',
+    ],
+    category: 'world',
+    topics: ['spellcasting'],
+    sourceLabel: 'Method Indie mana refill guide',
+    sourceUrl: 'https://methodindie.gg/games/moonlight-peaks/guides/moonlight-peaks-how-to-refill-mana',
+  },
+  {
+    slug: 'each-spell-recorded-in-an-in-game-almanac',
+    date: '2026-07-17',
+    title: 'Confirmed: every spell you learn is logged in an in-game almanac with its casting pattern',
+    body: 'Confirmed via a dedicated wand and magic guide: each new spell is automatically registered in an almanac, which replays exactly how the spell is cast in case you forget the pattern \u2014 useful given spells are drawn with the wand rather than picked from a menu.',
+    details: [
+      'This reconfirms the broader system: magic requires a working wand and costs mana per cast, with your first spell (a self-watering "Aqua Flow"/Aquaflux) unlocked through "The Magic of Crops," triggered by a letter from Luna during Spring.',
+    ],
+    category: 'world',
+    topics: ['spellcasting'],
+    sourceLabel: 'Bonus Action magic and wand guide',
+    sourceUrl: 'https://bonus-action.com/guides/moonlight-peaks-magic-wand-spells/',
+  },
+  {
+    slug: 'soul-blob-spawn-mechanic-confirmed-no-duplicates',
+    date: '2026-07-17',
+    title: 'Soul Blob spawning mechanic confirmed: up to 5 per area, no wasted duplicates',
+    body: 'Confirmed via a dedicated Soul Blobs checklist guide: once the collection is unlocked, eligible areas can spawn up to 5 Soul Blobs at random positions, drawn only from the pool of Soul Blobs you haven\u2019t caught yet \u2014 already-caught ones are removed from the pool entirely.',
+    details: [
+      'This means every catch is confirmed to move you closer to completing the full checklist rather than risking a repeat of one you already have, which wasn\u2019t previously documented here.',
+    ],
+    category: 'world',
+    topics: ['collections'],
+    sourceLabel: 'Neoseeker Soul Blobs guide',
+    sourceUrl: 'https://www.neoseeker.com/moonlight-peaks/Soul_Blobs',
+  },
+  {
+    slug: 'soul-blob-three-milestone-clocks-confirmed',
+    date: '2026-07-17',
+    title: 'Soul Blob rewards confirmed as three separate milestones, not just one',
+    body: 'Confirmed via a dedicated milestone guide: Soul Blob collection rewards land at 10, 50, and 100 caught, each granting a visit from Death the next morning and an Antique Clock \u2014 refining what was previously documented here as a two-clock system.',
+    details: [
+      'Confirmed effects: the first clock (10 caught) unlocks setting Night Duration up to 25 minutes; the second (50 caught) unlocks shortening nights down to 10 minutes; the third (100 caught, full completion) unlocks additional fine-grained options within that 10\u201325 minute range, with 25 minutes remaining the confirmed maximum throughout.',
+    ],
+    category: 'world',
+    topics: ['collections'],
+    sourceLabel: 'GameRant Soul Blobs guide',
+    sourceUrl: 'https://gamerant.com/moonlight-peaks-soul-blobs-guide/',
+  },
+  {
+    slug: 'barn-cannot-be-upgraded-must-buy-multiple',
+    date: '2026-07-17',
+    title: 'Confirmed: the Barn can\u2019t be upgraded \u2014 you need multiple barns for a full animal roster',
+    body: 'Confirmed across two independent post-launch guides: unlike the house, the Barn has no upgrade path. Each Barn holds a fixed 4 animals, so players wanting one of every confirmed farm animal need to purchase and place more than one.',
+    details: [
+      'Reconfirmed alongside this: the Barn costs 4,000 coins from Ridge at the Howling Hammer, needs a 10x6 space, and takes one night to finish building once placed.',
+      'Livestock also produce fertilizer that collects in the barn and can be used when planting new crops \u2014 a detail not previously documented here.',
+    ],
+    category: 'world',
+    topics: ['farm'],
+    sourceLabel: 'TheGamer farm animals guide',
+    sourceUrl: 'https://www.thegamer.com/moonlight-peaks-farm-animals-barn-fodder-guide/',
+  },
+  {
+    slug: 'barn-unlock-exact-day-sequence-confirmed',
+    date: '2026-07-17',
+    title: 'Exact Barn unlock timing confirmed: Day 2 roof problem, Day 4 purchase available',
+    body: 'Confirmed via a dedicated walkthrough: on Day 2 of Spring, Year 1, Ridge is found standing outside your door pointing out your broken roof. By Day 4, the roof is fixed and Ridge moves to the Howling Hammer, where the Barn becomes purchasable under the Shop menu\u2019s second tab.',
+    details: [
+      'This confirms the Barn isn\u2019t available from day one \u2014 it\u2019s gated behind a short, fixed story beat about your roof, not just having enough gold.',
+    ],
+    category: 'world',
+    topics: ['farm'],
+    sourceLabel: 'GameRant barn unlock guide',
+    sourceUrl: 'https://gamerant.com/unlock-barn-moonlight-peaks-farm-animals/',
+  },
+  {
+    slug: 'animals-can-be-given-tiny-hats-from-weekend-vendor',
+    date: '2026-07-17',
+    title: 'Confirmed: farm animals can wear tiny hats, sold by a weekend Midnight Market vendor',
+    body: 'Confirmed via a post-launch animal guide: petting a Cheeken reveals a "give hat" option, and a specific vendor selling tiny animal hats appears in town only during the weekend Midnight Market, on Saturdays and Sundays.',
+    details: [
+      'A separate confirmed detail: once you\u2019ve unlocked Hellkitten form, interacting with your animals while transformed makes them actually respond with dialogue rather than just happy noises.',
+    ],
+    category: 'world',
+    topics: ['farm'],
+    sourceLabel: 'Bonus Action animal guide',
+    sourceUrl: 'https://bonus-action.com/guides/all-animals-in-moonlight-peaks-how-to-get-them/',
+  },
+  {
+    slug: 'fodder-and-premium-fodder-recipes-confirmed',
+    date: '2026-07-17',
+    title: 'Fodder and Premium Fodder recipes confirmed at the Refiner',
+    body: 'Confirmed via a dedicated farm animals guide: every Fiber put into the Refiner produces two bags of Fodder, and Premium Fodder is made by combining regular Fodder with Mana Essence (itself made at the Mana Extractor).',
+    details: [
+      'Reconfirmed: Luna\u2019s paddock shows 3 animals available each day, but only Cheekens appear before your first Barn is built \u2014 more variety opens up afterward.',
+    ],
+    category: 'world',
+    topics: ['farm'],
+    sourceLabel: 'TheGamer farm animals guide',
+    sourceUrl: 'https://www.thegamer.com/moonlight-peaks-farm-animals-barn-fodder-guide/',
+  },
+  {
+    slug: 'alter-ego-elixir-price-confirmed-1300-coins',
+    date: '2026-07-17',
+    title: 'Alter Ego Elixir price confirmed: 1,300 coins from Sabrina',
+    body: 'Confirmed via a dedicated appearance-change guide: changing your look after the character creator closes costs 1,300 coins for an Alter Ego Elixir, bought from Sabrina at Webb of Wonders during her working hours (7pm\u2013midnight on weekdays).',
+    details: [
+      'Drinking the elixir opens a customization screen covering skin color, eye color, hair color, and hairstyle \u2014 the same categories available at the very start of the game.',
+      'Clothing works differently and doesn\u2019t require the potion: any mirror lets you swap between outfits you\u2019ve already unlocked, for free.',
+    ],
+    category: 'characters',
+    topics: ['customize'],
+    sourceLabel: 'GameTyrant appearance-change guide',
+    sourceUrl: 'https://gametyrant.com/news/how-to-change-your-appearance-in-moonlight-peaks',
+  },
+  {
+    slug: 'character-creator-is-purely-cosmetic-no-stats',
+    date: '2026-07-17',
+    title: 'Character creator confirmed purely cosmetic \u2014 no stat or gear system tied to it',
+    body: 'Confirmed via Steam Community discussion: character customization carries no mechanical weight at all. The only progression system players found tied to equipment is tool upgrades on the farm side, not the character creator.',
+    details: [
+      'This settles a launch-week question from players expecting a stat-based creator or gear tree \u2014 confirmed there isn\u2019t one; every option (face, hair, eyes, outfit) is appearance-only.',
+    ],
+    category: 'characters',
+    topics: ['customize'],
+    sourceLabel: 'Steam Community discussion',
+    sourceUrl: 'https://steamcommunity.com/app/2209900/discussions/0/564787571097473396/',
+  },
+  {
+    slug: 'only-your-name-is-permanently-locked-in-creator',
+    date: '2026-07-17',
+    title: 'Confirmed: your character name is the only creator choice you can\u2019t change later',
+    body: 'A launch playthrough confirms that essentially every visual choice made in the character creator \u2014 hair, eyes, outfit, and the rest \u2014 can be redone later via the Alter Ego Elixir. The one exception is your character\u2019s name, which is locked in permanently.',
+    details: [
+      'The creator is also confirmed to be where you name your farm and your Hellkitten companion, alongside your character \u2014 worth slowing down on before confirming, even though hair and eyes aren\u2019t permanent.',
+    ],
+    category: 'characters',
+    topics: ['customize'],
+    sourceLabel: 'Moonlight Peaks Wiki character creator guide',
+    sourceUrl: 'https://moonlightpeaks.wiki/guides/character-creator/',
+  },
+  {
+    slug: 'official-wiki-confirms-full-customization-category-list',
+    date: '2026-07-17',
+    title: 'Official wiki confirms the full customization category list: Face, Eyes, Hair, Outfit, Accessories',
+    body: 'Confirmed via the official wiki\u2019s own Character Customization page: the creator is split into Face (with Freckles), Eyes (Iris Shapes, Eyelashes, Makeup, Eyebrows), Hair, Outfit (Sets, Tops, Bottoms, Shoes), and Accessories (Arms, Face).',
+    details: [
+      'This matches earlier reports that the creator has no alternate face or eye shapes beyond the default, but does let you add face "decor" like freckles and scars on top of it.',
+    ],
+    category: 'characters',
+    topics: ['customize'],
+    sourceLabel: 'Official Moonlight Peaks wiki (Character Customization)',
+    sourceUrl: 'https://moonlightpeaks.wiki.gg/wiki/Character_Customization',
+  },
+  {
+    slug: 'outfit-changes-free-via-mirror-vs-paid-appearance-change',
+    date: '2026-07-17',
+    title: 'Outfits and physical appearance use two different systems \u2014 one free, one paid',
+    body: 'Confirmed via a dedicated appearance guide: changing clothes and changing your physical appearance are handled completely differently in Moonlight Peaks. Any mirror lets you swap outfits you already own for free, while changing skin, eye, or hair color requires buying the Alter Ego Elixir from Sabrina.',
+    details: [
+      'New outfits themselves are unlocked either by completing in-game tasks or by purchasing them at Third Eye Threads in town \u2014 the mirror only swaps between clothing you\u2019ve already obtained.',
+    ],
+    category: 'characters',
+    topics: ['customize'],
+    sourceLabel: 'GameTyrant appearance-change guide',
+    sourceUrl: 'https://gametyrant.com/news/how-to-change-your-appearance-in-moonlight-peaks',
+  },
   {
     slug: 'patch-1-1-35-confirmed-july-10',
     date: '2026-07-17',
@@ -68,6 +321,7 @@ export const news: NewsItem[] = [
     category: 'romance',
     sourceLabel: 'GameWatcher potions and brewing guide',
     sourceUrl: 'https://www.gamewatcher.com/moonlight-peaks-all-potions-recipes-ingredients-and-brewing-guide',
+    topics: ['items'],
   },
   {
     slug: 'museum-invites-only-two-npcs-accept',
@@ -93,6 +347,7 @@ export const news: NewsItem[] = [
     category: 'romance',
     sourceLabel: 'Official Moonlight Peaks wiki + Pocket Tactics Luna guide',
     sourceUrl: 'https://moonlightpeaks.wiki.gg/wiki/Bumpkin',
+    topics: ['farm'],
   },
   {
     slug: 'quartz-dust-glass-crafting-chain-mapped',
@@ -106,6 +361,7 @@ export const news: NewsItem[] = [
     category: 'guides',
     sourceLabel: 'GameRant crafting guide',
     sourceUrl: 'https://gamerant.com/moonlight-peaks-rose-quartz-dust-glass/',
+    topics: ['items'],
   },
   {
     slug: 'mining-guide-pickaxe-upgrade-path-confirmed',
@@ -143,6 +399,7 @@ export const news: NewsItem[] = [
     category: 'guides',
     sourceLabel: 'GameWatcher potions and brewing guide',
     sourceUrl: 'https://www.gamewatcher.com/moonlight-peaks-all-potions-recipes-ingredients-and-brewing-guide',
+    topics: ['items'],
   },
   {
     slug: 'more-story-quest-names-confirmed-seeing-seers',
@@ -156,6 +413,7 @@ export const news: NewsItem[] = [
     category: 'world',
     sourceLabel: 'Neoseeker quest walkthrough',
     sourceUrl: 'https://www.neoseeker.com/moonlight-peaks/Quests',
+    topics: ['quests'],
   },
   {
     slug: 'museum-questline-timeline-confirmed',
@@ -193,6 +451,7 @@ export const news: NewsItem[] = [
     category: 'world',
     sourceLabel: 'GameRant crafting guide',
     sourceUrl: 'https://gamerant.com/moonlight-peaks-rose-quartz-dust-glass/',
+    topics: ['items'],
   },
   {
     slug: 'persephone-yoga-plan-confirmed',
@@ -329,6 +588,7 @@ export const news: NewsItem[] = [
     category: 'guides',
     sourceLabel: 'Bonus Action walkthrough guide',
     sourceUrl: 'https://bonus-action.com/guides/moonlight-peaks-walkthrough-guide/',
+    topics: ['collections'],
   },
   {
     slug: 'cross-verified-gift-leads-for-six-characters',
@@ -380,6 +640,7 @@ export const news: NewsItem[] = [
     category: 'romance',
     sourceLabel: 'Raider King gift roundup',
     sourceUrl: 'https://raiderking.com/moonlight-peaks-all-loved-gifts-guide/',
+    topics: ['families'],
   },
   {
     slug: 'romanceable-roster-holds-at-23-with-one-unconfirmed-24th',
@@ -429,6 +690,7 @@ export const news: NewsItem[] = [
     category: 'world',
     sourceLabel: 'Neoseeker quest walkthrough',
     sourceUrl: 'https://www.neoseeker.com/moonlight-peaks/Quests',
+    topics: ['quests'],
   },
   {
     slug: 'patch-fixes-storage-crate-and-decoration-quality-loss',
@@ -453,6 +715,7 @@ export const news: NewsItem[] = [
     category: 'world',
     sourceLabel: 'Into Indie Games walkthrough',
     sourceUrl: 'https://intoindiegames.com/walkthroughs/moonlight-peaks-walkthrough-4-museum-nokturna-and-potion-making/',
+    topics: ['quests'],
   },
   {
     slug: 'alina-vampster-house-pet-clarified',
@@ -743,6 +1006,7 @@ export const news: NewsItem[] = [
     category: 'romance',
     sourceLabel: 'TheGamer gift guide',
     sourceUrl: 'https://www.thegamer.com/moonlight-peaks-complete-romance-relationship-gift-guide/',
+    topics: ['collections'],
   },
   {
     slug: 'gift-menu-remembers-your-last-eight-gifts',
@@ -792,6 +1056,7 @@ export const news: NewsItem[] = [
     category: 'world',
     sourceLabel: 'Official Moonlight Peaks Wiki',
     sourceUrl: 'https://moonlightpeaks.wiki.gg/',
+    topics: ['spellcasting'],
   },
   {
     slug: 'no-minimap-confirmed-map-icons-explained',
@@ -918,6 +1183,7 @@ export const news: NewsItem[] = [
     ],
     sourceLabel: 'GAMES.GG tool upgrade guide',
     sourceUrl: 'https://games.gg/news/moonlight-peaks-tool-upgrades/',
+    topics: ['collections'],
   },
   {
     slug: 'moonlight-peaks-is-out-now',
@@ -933,6 +1199,7 @@ export const news: NewsItem[] = [
     ],
     sourceLabel: 'Launch-day review roundup',
     sourceUrl: 'https://ladiesgamers.com/moonlight-peaks-review/',
+    topics: ['spellcasting'],
   },
   {
     slug: 'launch-discount-expands-platform-wide',
@@ -946,6 +1213,7 @@ export const news: NewsItem[] = [
     ],
     sourceLabel: 'itemku',
     sourceUrl: 'https://www.itemku.com/en/blog/moonlight-peaks/moonlight-peaks-release-date/4072/',
+    topics: ['items'],
   },
   {
     slug: 'steam-final-launch-countdown',
@@ -959,6 +1227,7 @@ export const news: NewsItem[] = [
     ],
     sourceLabel: 'Steam',
     sourceUrl: 'https://store.steampowered.com/app/2209900/Moonlight_Peaks/',
+    topics: ['families'],
   },
   {
     slug: 'switch-2-release-coverage',

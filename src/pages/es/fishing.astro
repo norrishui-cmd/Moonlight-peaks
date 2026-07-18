@@ -1,0 +1,69 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+
+const faq = [
+  { q: '¿Se puede pescar en Moonlight Peaks?', a: 'Sí — la pesca es una de las actividades disponibles además de la agricultura, junto con la recolección y la elaboración de pociones.' },
+  { q: '¿Cómo se consigue la caña de pescar?', a: 'Confirmado: la caña de pescar no se obtiene desde el principio — se desbloquea ganando una apuesta con Noel (pescar 3 especies diferentes antes que él).' },
+  { q: '¿Dónde está la lista completa de peces, ubicaciones y precios?', a: 'La base de datos completa está ahora en nuestra página dedicada de colección — 22 especies confirmadas, cada una con su propia página de detalle que cubre ubicación, rareza, temporada/hora y precio de venta.' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Inicio', item: `${SITE.url}/es` },
+    { '@type': 'ListItem', position: 2, name: 'Pesca', item: new URL('/es/fishing', SITE.url).href },
+  ] },
+];
+---
+<Base
+  title="Guía de pesca de Moonlight Peaks — Lista de peces y ubicaciones"
+  description="Dónde y cuándo pescar en Moonlight Peaks: cómo conseguir la caña de pescar, y dónde está la base de datos completa de las 22 especies de peces."
+  path="/es/fishing"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Pesca' }]}
+  lang="es"
+  showExport
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Inicio · Pesca</p>
+      <h1>Guía de <em>pesca</em> de Moonlight Peaks</h1>
+      <p class="intro">
+        Además de la agricultura, {GAME.title} te permite pescar, recolectar y elaborar pociones.
+        Última actualización: {SITE.updated}.
+      </p>
+
+      <h2>Consigue tu primera caña de pescar</h2>
+      <p>
+        Confirmado: durante las primeras noches del juego, Noel te reta a una competencia de pesca
+        junto al río — pescar 3 especies diferentes antes que él. La competencia no tiene límite de
+        tiempo, así que es fácil ganarla, y vencerlo te da tu primera caña de pescar además de una
+        recompensa en monedas.
+      </p>
+
+      <h2>Base de datos completa de peces</h2>
+      <p>
+        La lista completa y confirmada de peces — 22 especies, cada una con su propia página que
+        cubre ubicación, rareza, temporada/clima/hora, tamaño y precio de venta — ahora está en
+        <a href="/collections/fish">Colección: Peces</a>, en lugar de aquí. Guarda esa página para
+        consultar los detalles de cada especie.
+      </p>
+
+      <h2>FAQ</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        Relacionado: <a href="/collections/fish">Colección de peces</a>, <a href="/collections">Colecciones</a>,
+        <a href="/characters/noel">Noel</a>, <a href="/es/beginner-guide">Guía para principiantes</a>.
+      </div>
+    </div>
+  </article>
+</Base>

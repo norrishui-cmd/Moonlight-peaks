@@ -1,0 +1,23 @@
+---
+import TopicPage from '../../../components/TopicPage.astro';
+import { familiesSection, families } from '../../../data/families';
+import { familiesEs } from '../../../i18n/families-es';
+
+export function getStaticPaths() {
+  return families.filter((it) => familiesEs[it.slug]).map((it, i, arr) => {
+    const tr = familiesEs[it.slug];
+    const merged = { ...it, ...tr };
+    return {
+      params: { slug: it.slug },
+      props: {
+        item: merged,
+        prev: { ...arr[(i - 1 + arr.length) % arr.length], ...familiesEs[arr[(i - 1 + arr.length) % arr.length].slug] },
+        next: { ...arr[(i + 1) % arr.length], ...familiesEs[arr[(i + 1) % arr.length].slug] },
+      },
+    };
+  });
+}
+const { item, prev, next } = Astro.props;
+const esSection = { ...familiesSection, base: '/es/families', label: 'Familias', eyebrow: 'Mundo' };
+---
+<TopicPage section={esSection} item={item} prev={prev} next={next} lang="es" basePath="/es/families" />

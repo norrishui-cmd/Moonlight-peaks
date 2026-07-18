@@ -1,0 +1,92 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+
+const reviews = [
+  { outlet: 'Prima Games', score: '9.5 / 10', takeaway: 'Uno de los mejores simuladores de granja relajados recientes, elogiando su curva de progresión significativa, personajes memorables, y cómo el tema sobrenatural impregna cada sistema.' },
+  { outlet: 'GameWatcher', score: '7.5 / 10', takeaway: 'Inicio lento para jugadores familiarizados con el género, pero una vez que se desarrolla, ofrece una experiencia de simulación de vida gratificante y relajante, con un ambiente sobrenatural encantador.' },
+  { outlet: 'Gamereactor', score: '7 / 10', takeaway: 'Le gusta el giro nocturno de la fórmula de simulación de vida, pero señala que apilar la barra de energía sobre el límite del amanecer se siente redundante en vez de añadir profundidad.' },
+  { outlet: 'Nintendo World Report', score: 'Reseñado (Switch 2)', takeaway: 'Confirmada una reseña específica para Switch 2, considerando que el uso de elementos de terror encaja bien en este simulador de vida relajado; aún no encontramos una puntuación numérica específica.' },
+  { outlet: 'Metacritic (agregador de medios)', score: '10 reseñas de medios registradas', takeaway: 'La página del agregador ya está activa con 10 reseñas de medios; las puntuaciones varían bastante, elogiando en general el elenco de personajes y la ambientación, mientras se repiten menciones sobre el ritmo energía/maná y los tiempos de carga en Switch 2.' },
+];
+
+const faq = [
+  { q: '¿Vale la pena Moonlight Peaks? ¿Qué dicen las reseñas?', a: 'Las puntuaciones tempranas de medios como Prima Games, GameWatcher y Gamereactor van de 7 a 9.5 sobre 10 — en general positivas, con el tema sobrenatural y la construcción de personajes como lo más elogiado, junto con algunas críticas sobre el ritmo/sistema de energía.' },
+  { q: '¿Cuál es la puntuación de Moonlight Peaks en Metacritic?', a: 'La página de Metacritic ya está activa con 10 reseñas de medios registradas, pero aún no encontramos una cifra agregada específica aquí — consulta Metacritic directamente para la puntuación promedio actual; no calculamos ni inventamos puntuaciones agregadas.' },
+  { q: '¿Qué critican las reseñas de Moonlight Peaks?', a: 'La crítica más específica y con fuente hasta ahora es sobre el ritmo: la reseña de Gamereactor señala que la barra de energía apilada sobre el límite del amanecer (que ya limita la duración de cada noche) se siente redundante. GameWatcher menciona un inicio lento para quienes ya conocen bien el género.' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Inicio', item: `${SITE.url}/es` },
+    { '@type': 'ListItem', position: 2, name: 'Reseñas', item: new URL('/es/reviews', SITE.url).href },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks Reseñas — Puntuaciones de medios y conclusiones"
+  description="¿Vale la pena Moonlight Peaks? Reseñas y puntuaciones reales de lanzamiento de Prima Games, GameWatcher, Gamereactor y más, actualizadas conforme salen nuevas reseñas."
+  path="/es/reviews"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Reseñas' }]}
+  lang="es"
+  showExport
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Inicio · Reseñas</p>
+      <h1>Moonlight Peaks — resumen de <em>reseñas</em></h1>
+      <p class="intro">
+        Puntuaciones y conclusiones reales de medios sobre {GAME.title}, recopiladas conforme se
+        publican las reseñas — no es nuestra propia opinión ni un promedio inventado. Para las
+        primeras impresiones antes del lanzamiento, consulta nuestra
+        <a href="/previews">página de avances y experiencias con la demo</a>. Última actualización: {SITE.updated}.
+      </p>
+
+      <h2>Puntuaciones de medios hasta ahora</h2>
+      <table class="facts">
+        <tr><th>Medio</th><th>Puntuación</th><th>Puntos clave</th></tr>
+        {reviews.map((r) => (
+          <tr>
+            <td>{r.outlet}</td>
+            <td>{r.score}</td>
+            <td>{r.takeaway}</td>
+          </tr>
+        ))}
+      </table>
+
+      <h2>Lo que los medios elogian por igual</h2>
+      <p>
+        Los evaluadores señalan de forma consistente el giro sobrenatural de la fórmula de
+        simulación de granja relajada — el horario nocturno, las siete familias, y la profundidad de
+        la construcción de personajes — como el mayor activo del juego. La dirección artística y el
+        ambiente "sobrenatural encantador" se mencionan de forma independiente en varios medios.
+      </p>
+
+      <h2>Lo que critican los medios</h2>
+      <p>
+        La crítica más específica y con fuente hasta ahora tiene que ver con el ritmo: la reseña de
+        Gamereactor señala que la barra de energía apilada sobre el límite del amanecer (que ya
+        limita la duración de cada noche) se siente redundante. GameWatcher menciona un inicio lento
+        para jugadores ya familiarizados con el género.
+      </p>
+
+      <div class="callout">
+        Este resumen solo incluye puntuaciones que se pueden atribuir claramente a un medio con
+        nombre. No calculamos nuestra propia puntuación agregada, y actualizaremos esto conforme se
+        verifiquen más reseñas.
+      </div>
+
+      <h2>FAQ</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </article>
+</Base>

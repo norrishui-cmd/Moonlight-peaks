@@ -1,0 +1,124 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+
+const rows = [
+  ['先从这里开始', '安装前先确认发售时间、试玩版访问方式、平台选择、系统需求和支持语言。'],
+  ['第一次游戏', '创建你的吸血鬼、测试操作、检查可读性、了解夜晚循环,不要急着追求还未验证的赚钱或送礼路线。'],
+  ['需要验证的数据', '作物、鱼类、礼物、日程、商店价格、任务、存档、性能,以及任何发售bug。'],
+  ['安全更新原则', '只有在实机、官方说明、商店页面或可靠中立信源里能看到时,才会加入具体数值。'],
+];
+
+const checklist = [
+  { label: '发售日期', href: '/zh/release-date', note: '发售时间、价格、平台和试玩版状态。' },
+  { label: '试玩版攻略', href: '/zh/demo', note: '购买或重新开始前该测试什么。' },
+  { label: '系统需求', href: '/zh/system-requirements', note: 'PC、Mac和Steam Deck核查。' },
+  { label: '支持语言', href: '/zh/languages', note: '日语、中文、韩语、德语和英语支持情况。' },
+  { label: '已知问题', href: '/zh/known-issues', note: '发售bug追踪表和验证笔记。' },
+  { label: '最佳设置', href: '/zh/best-settings', note: 'PC、Steam Deck、Switch和Mac设置清单。' },
+  { label: '新手指南', href: '/zh/beginner-guide', note: '第一晚的优先事项和安全的早期目标。' },
+  { label: '角色', href: '/zh/characters', note: '居民、恋爱状态和发售验证信息。' },
+];
+
+const faq = [
+  {
+    q: 'Moonlight Peaks发售日应该先检查什么?',
+    a: '先从发售时间、平台、系统需求、语言支持、已知问题和新手指南开始,再去追求详细的物品或礼物表格。',
+  },
+  {
+    q: '发售日的数据会立刻齐全吗?',
+    a: '不会。作物、礼物、日程、商店价格、任务和性能笔记这类具体数值,只有在实机确认后才会加入。',
+  },
+  {
+    q: '发售后还应该玩试玩版吗?',
+    a: '如果你对操作、氛围、可读性或设备性能还不确定,应该玩。试玩版仍然是快速检验舒适度的好方法。',
+  },
+  {
+    q: 'bug和性能笔记应该记录在哪里?',
+    a: '崩溃、存档问题、手柄问题、Steam Deck笔记、Switch性能和其他发售周问题,请查看已知问题页面。',
+  },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '首页', item: `${SITE.url}/zh` },
+    { '@type': 'ListItem', position: 2, name: '发售日专题', item: new URL('/zh/launch-day', SITE.url).href },
+  ] },
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })) },
+  { '@context': 'https://schema.org', '@type': 'ItemList', itemListElement: checklist.map((item, index) => ({
+    '@type': 'ListItem',
+    position: index + 1,
+    name: item.label,
+    url: new URL(item.href, SITE.url).href,
+  })) },
+];
+---
+<Base
+  title="Moonlight Peaks 发售日专题 - 该先查什么"
+  description="Moonlight Peaks发售日专题,汇总发售时间、试玩版、系统需求、支持语言、已知问题、最佳设置、新手技巧和安全的数据更新。"
+  path="/zh/launch-day"
+  jsonLd={jsonLd}
+  crumbs={[{ label: '发售日专题' }]}
+  lang="zh"
+  showExport
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">发售 · 第一天</p>
+      <h1>Moonlight Peaks <em>发售日</em>专题</h1>
+      <p class="intro">
+        {GAME.title}的第一天专题:安装前该检查什么、验证过的数据会放在哪里,以及怎么避免看到
+        单薄或猜测性的发售信息。
+      </p>
+
+      <div class="callout">
+        <strong>发售时间:</strong> {GAME.releaseNote}
+      </div>
+
+      <h2>发售日导览</h2>
+      <table class="facts">
+        {rows.map((row) => (<tr><th>{row[0]}</th><td>{row[1]}</td></tr>))}
+      </table>
+
+      <h2>优先检查这些</h2>
+      <div class="link-grid">
+        {checklist.map((item) => (
+          <a href={item.href}>
+            <strong>{item.label}</strong>
+            <span>{item.note}</span>
+          </a>
+        ))}
+      </div>
+
+      <h2>不要猜测的内容</h2>
+      <p>
+        在实机或官方信源里能看到之前,不要发布具体的最爱礼物、物品价格、任务结果、作物利润、
+        鱼类地点、Steam Deck评级或存档路径。发售期的搜索流量很有价值,但猜测性的表格对玩家不利,
+        对SEO也有风险。
+      </p>
+
+      <h2>FAQ</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </article>
+
+  <style>
+    .link-grid { display: grid; grid-template-columns: 1fr; gap: 10px; margin-top: 10px; }
+    @media (min-width: 680px) { .link-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    .link-grid a { display: flex; flex-direction: column; gap: 3px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); padding: 12px 14px; text-decoration: none; }
+    .link-grid strong { color: var(--mist); font-family: var(--display); }
+    .link-grid span { color: var(--muted); font-size: 0.84rem; }
+    .link-grid a:hover { border-color: color-mix(in srgb, var(--candle) 55%, var(--line)); }
+  </style>
+</Base>

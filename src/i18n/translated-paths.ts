@@ -56,7 +56,12 @@ const dePaths = [
 const esOnlyPaths = ['/quests', '/farm', '/collections', '/map',
   '/tools/platform-picker', '/tools/romance-gift-finder', '/tools/romance-match-quiz', '/tools/romance-planner',
   '/tools/families-explorer', '/tools/item-tracker', '/tools/gift-tracker', '/tools/fish-finder',
-  '/tools/farming-profit-planner', '/tools/nokturna-tracker', '/tools/submit-data'];
+  '/tools/farming-profit-planner', '/tools/nokturna-tracker', '/tools/submit-data',
+  '/privacy', '/shipping', '/inventory', '/fishing', '/friendship', '/house', '/mini-games',
+  '/reviews', '/achievements', '/best-settings', '/system-requirements', '/vampsters',
+  '/behind-the-scenes', '/environment', '/known-issues', '/launch-day',
+  '/moonlight-peaks-vs-stardew-valley', '/nokturna', '/spellcasting', '/characters/customize',
+  '/quests/a-bridge-too-far', '/quests/launch-week'];
 
 // French pages built so far — grows independently from here.
 const frPaths = ['/', '/release-date', '/beginner-guide', '/characters', '/romance', '/farming', '/magic', '/platforms', '/demo',
@@ -73,11 +78,11 @@ export const translatedPathsByLocale: Record<Locale, Set<string>> = {
   en: new Set(), // English is the source; not meaningful to check "is English translated".
   es: new Set([...sharedEsJaZhPaths, ...esOnlyPaths]),
   ja: new Set([...sharedEsJaZhPaths, ...jaOnlyPaths, '/characters/customize']),
-  zh: new Set([...sharedEsJaZhPaths, '/characters/customize', '/privacy', '/shipping', '/inventory', '/fishing', '/friendship', '/house', '/mini-games', '/reviews', '/achievements', '/best-settings', '/system-requirements', '/vampsters',
+  zh: new Set([...sharedEsJaZhPaths, '/characters/customize', '/privacy', '/shipping', '/inventory', '/fishing', '/friendship', '/house', '/mini-games', '/reviews', '/achievements', '/best-settings', '/system-requirements', '/vampsters', '/behind-the-scenes', '/environment', '/known-issues', '/launch-day',
     '/tools/fish-finder', '/tools/item-tracker', '/tools/gift-tracker', '/tools/families-explorer',
     '/tools/farming-profit-planner', '/tools/nokturna-tracker', '/tools/platform-picker',
     '/tools/romance-gift-finder', '/tools/romance-match-quiz', '/tools/romance-planner', '/tools/submit-data']),
-  'zh-hant': new Set([...sharedEsJaZhPaths, '/characters/customize', '/privacy', '/shipping', '/inventory', '/fishing', '/friendship', '/house', '/mini-games', '/reviews', '/achievements', '/best-settings', '/system-requirements', '/vampsters',
+  'zh-hant': new Set([...sharedEsJaZhPaths, '/characters/customize', '/privacy', '/shipping', '/inventory', '/fishing', '/friendship', '/house', '/mini-games', '/reviews', '/achievements', '/best-settings', '/system-requirements', '/vampsters', '/behind-the-scenes', '/environment', '/known-issues', '/launch-day',
     '/tools/fish-finder', '/tools/item-tracker', '/tools/gift-tracker', '/tools/families-explorer',
     '/tools/farming-profit-planner', '/tools/nokturna-tracker', '/tools/platform-picker',
     '/tools/romance-gift-finder', '/tools/romance-match-quiz', '/tools/romance-planner', '/tools/submit-data']), // mirrors the same pages as zh, converted via OpenCC
@@ -106,8 +111,12 @@ export function isPathTranslated(locale: Locale, barePath: string): boolean {
   // collectionDetailPages data source as English), so any slug under these two collections counts.
   if ((locale === 'ja' || locale === 'de' || locale === 'es' || locale === 'zh' || locale === 'zh-hant') && /^\/collections\/(fish|critters)\/[a-z0-9-]+$/.test(barePath)) return true;
   if ((locale === 'zh' || locale === 'zh-hant') && /^\/collections(\/(fish|critters|jobs|vampsters|soul-blobs))?$/.test(barePath)) return true;
-  if ((locale === 'ja' || locale === 'de') && /^\/(families|platforms)\/[a-z0-9-]+$/.test(barePath)) return true;
-  if ((locale === 'ja' || locale === 'de') && /^\/(locations|activities)\/[a-z0-9-]+$/.test(barePath)) return true;
+  if (locale === 'es' && /^\/collections(\/(fish|critters|albertus-jobs|vampsters|soul-blobs))?$/.test(barePath)) return true;
+  if ((locale === 'ja' || locale === 'de' || locale === 'es') && /^\/(families|platforms)\/[a-z0-9-]+$/.test(barePath)) return true;
+  if ((locale === 'ja' || locale === 'de' || locale === 'es') && /^\/(locations|activities)\/[a-z0-9-]+$/.test(barePath)) return true;
+  if (locale === 'es' && /^\/items\/[a-z0-9-]+$/.test(barePath)) return true;
+  if (locale === 'es' && /^\/demo\/[a-z0-9-]+$/.test(barePath)) return true;
+  if (locale === 'es' && /^\/faq\/[a-z0-9-]+$/.test(barePath)) return true;
   if (locale === 'es' && (barePath === '/collections/fish' || barePath === '/collections/critters')) return true;
   // Quest story/side detail pages are fully translated for es (all 20 story + 12 side quests).
   if ((locale === 'es' || locale === 'zh' || locale === 'zh-hant') && /^\/quests\/(story|side)(\/[a-z0-9-]+)?$/.test(barePath)) return true;

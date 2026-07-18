@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import { SITE, GAME } from '../consts';
+import News from '../components/News.astro';
 
 // Confirmed quest names sourced from launch-week walkthroughs (Neoseeker, Bonus Action, Into Indie
 // Games). Full step lists live on those sites; here we map names, unlock conditions, and rewards.
@@ -88,6 +89,9 @@ const jsonLd = [
         This table grows as more quests are confirmed. We don't invent quest names, givers, or
         rewards — every row above traces to a real source.
       </div>
+
+      <h2>Latest quest updates</h2>
+      <News topic="quests" limit={5} />
 
       <h2>FAQ</h2>
       <div class="faq">

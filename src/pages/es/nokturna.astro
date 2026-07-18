@@ -1,0 +1,249 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE } from '../../consts';
+import { cards } from '../../data/nokturna';
+
+const types = [...new Set(cards.map((c) => c.type).filter(Boolean))] as string[];
+
+const faq = [
+  { q: '¿Qué es Nokturna en Moonlight Peaks?', a: 'Nokturna es el juego de cartas coleccionables favorito del pueblo. Recolectas cartas y retas a los residentes de Moonlight Peaks a partidas, y también sirve como una forma de cultivar amistades.' },
+  { q: '¿Cómo se juega Nokturna?', a: 'Confirmado: las partidas son al mejor de tres, con 3 cartas jugadas por ronda; un empate significa que ambos bandos ganan esa ronda. Las cartas usan una mecánica de palabra clave "Persist", y los mazos se inclinan hacia arquetipos como Hombre Lobo, Vampiro, Planta y Acuático, o construcciones mixtas.' },
+  { q: '¿Dónde se consiguen cartas de Nokturna?', a: 'Confirmado: ganar una partida contra un residente añade una carta a tu colección — esta es la fuente principal confirmada. Reportado por la comunidad: las cartas también pueden aparecer como recompensa de puntos de excavación una vez que esa función esté activa. Recolectar todas las cartas otorga el logro de Steam "Nokturna Master".' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Inicio', item: `${SITE.url}/es` },
+    { '@type': 'ListItem', position: 2, name: 'Nokturna', item: new URL('/es/nokturna', SITE.url).href },
+  ] },
+];
+---
+<Base
+  title="Guía de Nokturna en Moonlight Peaks: mazos, cartas y problemas comunes"
+  description="Guía del juego de cartas Nokturna en Moonlight Peaks: reglas confirmadas, más de 67 cartas, arquetipos de mazo, y respuestas honestas sobre preguntas de construcción de mazos aún sin documentar."
+  path="/es/nokturna"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Nokturna' }]}
+  lang="es"
+  showExport
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Inicio · Cartas</p>
+      <h1>Nokturna — el juego de cartas de <em>Moonlight Peaks</em></h1>
+      <p class="intro">
+        Nokturna es el juego de cartas favorito del pueblo: recolecta cartas y reta a los residentes
+        a una partida. Confirmado al lanzamiento: es un formato al mejor de tres con más de 67 cartas
+        y múltiples arquetipos de mazo, inventado dentro del universo del juego por la vidente Dragan.
+        Esta es tu base de datos de cartas buscable, además de una guía de cómo ganar. Última
+        actualización: {SITE.updated}.
+      </p>
+
+      <h2>Cómo se juega</h2>
+      <p>
+        Confirmado al lanzamiento: Nokturna es un juego de cartas al mejor de tres — en cada ronda,
+        ambos jugadores juegan tres cartas, y se suman puntos para ver quién gana esa ronda (un
+        empate cuenta como victoria para ambos jugadores). Gana dos de tres rondas para ganar la
+        partida. Cada carta tiene un valor de puntos, y algunas tienen efectos o palabras clave —
+        "Persist", por ejemplo, mantiene una carta jugada en juego el resto de la partida. Las cartas
+        que has ganado se quedan en tu menú, y jugar Nokturna con un residente se registra en su menú
+        de amistad junto con conversaciones y regalos.
+      </p>
+      <p>
+        El total de cartas confirmado es de más de 67, repartidas en múltiples arquetipos de mazo —
+        confirmados hasta ahora: mazos de Hombre Lobo, Vampiro, Planta y Acuático, además de mazos mixtos.
+      </p>
+
+      <h2>Cómo conseguir cartas nuevas</h2>
+      <p>
+        Confirmado: ganar una partida contra un residente añade una carta a tu colección personal.
+        <span class="tag-community">Reportado por la comunidad</span> las cartas también pueden
+        aparecer como recompensa de puntos de excavación mientras excavas por el pueblo, una vez que
+        esa función esté activa — así que jugar partidas no es la única fuente, aunque sigue siendo
+        la principal confirmada hasta ahora.
+      </p>
+      <p>
+        Confirmado: recolectar todas las cartas de Nokturna otorga el logro de Steam
+        <strong>"Nokturna Master"</strong> — consulta nuestra <a href="/achievements">guía de logros</a>
+        para el resto de la lista.
+      </p>
+
+      <h2>Por qué no aparecen cartas nuevas de Nokturna</h2>
+      <p>
+        Esto no está documentado de forma independiente en nuestras fuentes actuales. Si una carta
+        que ganaste en una partida no aparece donde esperas, el hecho confirmado más aplicable es
+        este: las cartas que has ganado se registran en tu propio menú, y jugar con un residente se
+        registra por separado en su menú de amistad — así que revisa ambos lugares en vez de asumir
+        que una carta se perdió. Más allá de eso, no tenemos una explicación confirmada para cartas
+        que no aparecen, y no vamos a adivinar una. Si mientras tanto quieres llevar un registro de tu
+        propia colección, el <a href="/tools/nokturna-tracker">Rastreador de Nokturna</a> te permite
+        registrar cartas de forma privada en tu navegador.
+      </p>
+
+      <h2>Cómo crear un mazo nuevo</h2>
+      <p>
+        Aún no documentado en nuestras fuentes actuales. No tenemos detalles confirmados ni siquiera
+        reportados por la comunidad sobre un menú de creación de mazos, el tamaño del mazo, o límites
+        de espacios de mazo para Nokturna — en vez de describir un constructor de mazos que no
+        podemos verificar, dejamos esta sección honesta sobre el vacío de información. Si lo has
+        encontrado en el juego, la mecánica probablemente esté en el mismo menú donde revisas tu
+        colección de cartas.
+      </p>
+
+      <h2>¿Se puede editar el mazo inicial?</h2>
+      <p>
+        Aún no documentado. No tenemos información confirmada ni reportada por la comunidad sobre si
+        un mazo inicial/base es editable, o si todas las partidas usan un único mazo compartido y
+        construido por el jugador. Preferimos dejar esto sin responder antes que inventar una regla.
+      </p>
+
+      <h2>Cómo añadir cartas recolectadas</h2>
+      <p>
+        Aún no documentado. Confirmado: ganar una partida añade una carta a tu colección personal,
+        visible en tu menú. Cómo (o si) luego tienes que añadir manualmente una carta ganada a un
+        mazo activo — frente a que los mazos se surtan automáticamente de tu colección completa — no
+        es algo que podamos confirmar con las fuentes actuales.
+      </p>
+
+      <h2>Problemas comunes al construir mazos</h2>
+      <ul>
+        <li><strong>No estás seguro si ganar una partida realmente añadió una carta:</strong> revisa
+          directamente el menú de tu colección de cartas en vez de asumirlo solo por la pantalla de fin de partida.</li>
+        <li><strong>No sabes hacia qué arquetipo construir:</strong> los arquetipos de mazo confirmados
+          hasta ahora son Hombre Lobo, Vampiro, Planta y Acuático, además de construcciones mixtas —
+          Alpha Wolf (una carta del arquetipo Hombre Lobo) es la única carta cuyo efecto podemos
+          confirmar, potenciando otras cartas de Hombre Lobo, lo cual sugiere que los arquetipos
+          premian mantenerse "dentro del color".</li>
+        <li><strong>Algo en el menú de construcción de mazos parece bloqueado:</strong> aún no está
+          confirmado si esto se relaciona con el progreso de la historia, el nivel de amistad con la
+          vidente que inventó Nokturna (Dragan), o algo más — consulta el
+          <a href="/characters/dragan">perfil de Dragan</a>.</li>
+      </ul>
+
+      <h2>Base de datos de cartas</h2>
+      {cards.length === 0 ? (
+        <div class="nok-empty">
+          <p><strong>Confirmado: existen más de 67 cartas, en múltiples arquetipos de mazo.</strong> Los
+          nombres y efectos de cartas individuales aún no son públicos, así que no hemos listado
+          ninguna — no vamos a inventar cartas. Esto se convertirá en una base de datos completamente
+          buscable de cada carta de Nokturna, su efecto, y cómo conseguirla, conforme las verifiquemos.</p>
+        </div>
+      ) : (
+        <div class="nok-tool">
+          <div class="nok-controls">
+            <input class="nok-search" id="nok-search" type="search" placeholder="Buscar cartas por nombre o efecto…" aria-label="Buscar cartas de Nokturna" />
+            <div class="nok-chips" id="nok-chips">
+              <button class="nok-chip is-active" data-type="all" type="button">Todas</button>
+              {types.map((t) => <button class="nok-chip" data-type={t.toLowerCase()} type="button">{t}</button>)}
+            </div>
+          </div>
+          <p class="nok-count" id="nok-count">{cards.length} cartas</p>
+          <div class="nok-grid" id="nok-grid">
+            {cards.map((c) => (
+              <article class="nok-card" data-name={c.name.toLowerCase()} data-type={(c.type || '').toLowerCase()} data-effect={(c.effect || '').toLowerCase()}>
+                <h3>{c.name}</h3>
+                <div class="nok-meta">
+                  {c.type && <span class="nok-badge">{c.type}</span>}
+                  {c.rarity && <span class="nok-badge">{c.rarity}</span>}
+                  {c.cost && <span class="nok-badge">Costo {c.cost}</span>}
+                  {c.power && <span class="nok-badge">Poder {c.power}</span>}
+                </div>
+                {c.effect && <p class="nok-effect">{c.effect}</p>}
+                {c.howToGet && <p class="nok-get"><strong>Cómo conseguirla:</strong> {c.howToGet}</p>}
+              </article>
+            ))}
+          </div>
+          <p class="nok-noresult" id="nok-noresult" hidden>Ninguna carta coincide — prueba otra búsqueda.</p>
+        </div>
+      )}
+
+      <h2>Cómo ganar y mejores mazos</h2>
+      <p>
+        Cuando los nombres y efectos de cartas individuales estén más documentados, esta sección
+        tendrá sugerencias de mazos para principiantes y respuestas a oponentes difíciles. Hasta
+        entonces preferimos mantenerlo honesto en vez de adivinar una meta basada en cartas que no
+        podemos verificar.
+      </p>
+
+      <h2>FAQ</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        Relacionado: <a href="/es/beginner-guide">Guía para principiantes</a>,
+        <a href="/es/romance">Romance y familias</a>, <a href="/tools/nokturna-tracker">Rastreador de Nokturna</a>,
+        <a href="/characters/dragan">Dragan</a>, <a href="/es/release-date">Fecha de lanzamiento</a>.
+      </div>
+    </div>
+  </article>
+
+  <style>
+    .tag-community {
+      display: inline-block; font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.02em;
+      color: var(--faint); border: 1px solid var(--line); border-radius: 999px; padding: 2px 8px;
+      margin-right: 6px; vertical-align: middle;
+    }
+    .nok-empty { border: 1px dashed var(--line); border-radius: 12px; background: var(--ink-2); padding: 18px; color: var(--muted); }
+    .nok-controls { display: flex; flex-direction: column; gap: 12px; margin: 8px 0 14px; }
+    .nok-search { width: 100%; padding: 12px 14px; border-radius: 10px; border: 1px solid var(--line); background: var(--surface); color: var(--mist); font-size: 0.95rem; font-family: var(--body); }
+    .nok-search:focus { outline: 2px solid var(--candle); outline-offset: 1px; }
+    .nok-chips { display: flex; gap: 8px; flex-wrap: wrap; }
+    .nok-chip { font-size: 0.84rem; color: var(--muted); background: var(--ink); border: 1px solid var(--line); border-radius: 999px; padding: 6px 13px; cursor: pointer; transition: color .14s, border-color .14s; }
+    .nok-chip:hover { color: var(--mist); }
+    .nok-chip.is-active { color: #20160a; background: var(--candle); border-color: var(--candle); font-weight: 600; }
+    .nok-count { font-family: var(--mono); font-size: 0.74rem; color: var(--faint); letter-spacing: 0.06em; text-transform: uppercase; margin: 0 0 12px; }
+    .nok-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 14px; }
+    .nok-card { border: 1px solid var(--line); border-radius: 12px; background: var(--surface); padding: 16px; }
+    .nok-card h3 { font-family: var(--display); font-weight: 600; font-size: 1.1rem; margin: 0 0 8px; }
+    .nok-meta { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 8px; }
+    .nok-badge { font-family: var(--mono); font-size: 0.68rem; color: var(--candle); border: 1px solid var(--candle-dim); border-radius: 6px; padding: 2px 7px; }
+    .nok-effect { color: #ded3e6; font-size: 0.9rem; margin: 0 0 8px; }
+    .nok-get { color: var(--muted); font-size: 0.82rem; margin: 0; }
+    .nok-noresult { color: var(--faint); font-size: 0.9rem; }
+  </style>
+
+  <script>
+    const search = document.getElementById('nok-search');
+    const grid = document.getElementById('nok-grid');
+    const chips = document.getElementById('nok-chips');
+    const count = document.getElementById('nok-count');
+    const noresult = document.getElementById('nok-noresult');
+    if (search && grid) {
+      const items = Array.from(grid.querySelectorAll('.nok-card'));
+      let activeType = 'all';
+      const apply = () => {
+        const q = (search.value || '').trim().toLowerCase();
+        let shown = 0;
+        items.forEach((el) => {
+          const name = el.getAttribute('data-name') || '';
+          const effect = el.getAttribute('data-effect') || '';
+          const type = el.getAttribute('data-type') || '';
+          const matchText = !q || name.includes(q) || effect.includes(q);
+          const matchType = activeType === 'all' || type === activeType;
+          const show = matchText && matchType;
+          el.style.display = show ? '' : 'none';
+          if (show) shown++;
+        });
+        if (count) count.textContent = shown + (shown === 1 ? ' carta' : ' cartas');
+        if (noresult) noresult.hidden = shown !== 0;
+      };
+      search.addEventListener('input', apply);
+      if (chips) {
+        chips.addEventListener('click', (e) => {
+          const btn = e.target.closest('.nok-chip');
+          if (!btn) return;
+          activeType = btn.getAttribute('data-type') || 'all';
+          chips.querySelectorAll('.nok-chip').forEach((c) => c.classList.toggle('is-active', c === btn));
+          apply();
+        });
+      }
+    }
+  </script>
+</Base>

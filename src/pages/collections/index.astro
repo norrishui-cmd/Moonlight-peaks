@@ -2,6 +2,7 @@
 import Base from '../../layouts/Base.astro';
 import { SITE } from '../../consts';
 import { collections } from '../../data/collections';
+import News from '../../components/News.astro';
 
 const faq = [
   { q: 'What are Moonlight Peaks collections?', a: 'Collections are trackable world lists such as fish, jobs, critters, Vampsters, and Soul Blobs. They belong under World because players usually search for locations, conditions, and completion progress rather than generic item stats.' },
@@ -60,6 +61,9 @@ const jsonLd = [
         site are rewritten into task-oriented tables, checklists, and quick facts so players can scan them faster
         and Google does not see them as duplicate pages.
       </p>
+
+      <h2>Latest collections updates</h2>
+      <News topic="collections" limit={5} />
 
       <h2>FAQ</h2>
       <div class="faq">

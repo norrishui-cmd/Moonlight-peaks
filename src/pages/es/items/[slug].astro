@@ -1,0 +1,120 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { SITE } from '../../../consts';
+import { itemCategories, getItemFramework } from '../../../data/items';
+import { itemsEs } from '../../../i18n/items-es';
+import type { ItemCategory } from '../../../data/items';
+
+export function getStaticPaths() {
+  return itemCategories.filter((item) => itemsEs[item.slug]).map((item, index, arr) => ({
+    params: { slug: item.slug },
+    props: { item, prev: arr[(index - 1 + arr.length) % arr.length], next: arr[(index + 1) % arr.length] },
+  }));
+}
+
+const { item } = Astro.props as { item: ItemCategory };
+const tr = itemsEs[item.slug];
+const url = new URL(`/es/items/${item.slug}`, SITE.url).href;
+const framework = getItemFramework(item.slug);
+const hasRealData = item.slug === 'foraging' || item.slug === 'cooking';
+const parseImageCell = (cell: string) => {
+  const [src, alt = ''] = cell.slice('image:'.length).split('|');
+  return { src, alt };
+};
+
+const statusLabelEs: Record<string, string> = {
+  confirmed: 'Confirmado', datamined: 'Extraído de datos', expected: 'Esperado',
+};
+
+const faq = [
+  { q: `¿Qué es ${tr.name} en Moonlight Peaks?`, a: `${tr.name} es una categoría de objetos en Moonlight Peaks. ${tr.summary}` },
+  { q: `¿La información sobre ${tr.name} está confirmada?`, a: item.status === 'confirmed'
+      ? `El sistema de ${tr.name} está confirmado, pero los nombres y efectos de objetos individuales se siguen verificando en el juego real.`
+      : `La categoría ${tr.name} aún no está confirmada de forma independiente en el juego real. No adivinamos, y actualizaremos esta página en cuanto algo se confirme.` },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Inicio', item: `${SITE.url}/es` },
+    { '@type': 'ListItem', position: 2, name: 'Objetos', item: `${SITE.url}/es/items` },
+    { '@type': 'ListItem', position: 3, name: tr.name, item: url },
+  ] },
+];
+---
+<Base
+  title={`${tr.name} | Guía de objetos de Moonlight Peaks`}
+  description={tr.dek}
+  path={`/es/items/${item.slug}`}
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Objetos', href: '/es/items' }, { label: tr.name }]}
+  lang="es"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Objetos · {statusLabelEs[item.status] ?? item.status}</p>
+      <h1><em>{tr.name}</em></h1>
+      <p class="intro">{tr.dek}</p>
+
+      <h2>Detalles</h2>
+      <p>{tr.summary}</p>
+
+      <h2>Ejemplos</h2>
+      <ul>{tr.examples.map((e) => (<li>{e}</li>))}</ul>
+
+      {hasRealData && (
+        <>
+          <h2>Tabla completa de datos</h2>
+          <div class="es-item-table-wrap">
+            <table class="es-item-table">
+              <thead>
+                <tr>{framework.columns.map((col) => <th>{col}</th>)}</tr>
+              </thead>
+              <tbody>
+                {framework.rows.map((row) => (
+                  <tr>
+                    {row.map((cell) => {
+                      const image = cell.startsWith('image:') ? parseImageCell(cell) : null;
+                      return (
+                        <td>
+                          {image ? (
+                            <img class="es-item-table-icon" src={image.src} alt={image.alt} loading="lazy" decoding="async" />
+                          ) : cell}
+                        </td>
+                      );
+                    })}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <p class="es-source-note">{framework.sourceNote}</p>
+        </>
+      )}
+
+      <h2>Preguntas frecuentes</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        Relacionado: <a href="/es/items">Todos los objetos</a>, <a href={`/items/${item.slug}`}>versión detallada en inglés</a>.
+      </div>
+    </div>
+  </article>
+
+  <style>
+    .es-item-table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 14px; background: var(--surface); margin: 12px 0; }
+    .es-item-table { width: 100%; min-width: 700px; border-collapse: collapse; font-size: 0.84rem; }
+    .es-item-table th, .es-item-table td { border-bottom: 1px solid var(--line); padding: 10px 12px; text-align: left; vertical-align: top; }
+    .es-item-table th { color: var(--candle); font-family: var(--mono); font-size: 0.66rem; letter-spacing: 0.05em; text-transform: uppercase; background: rgba(21, 16, 29, 0.58); white-space: nowrap; }
+    .es-item-table-icon { display: block; width: 68px; height: 68px; object-fit: contain; }
+    .es-item-table tr:last-child td { border-bottom: 0; }
+    .es-source-note { border-left: 3px solid var(--candle-dim); color: #ded3e6; padding-left: 12px; font-size: 0.88rem; }
+  </style>
+</Base>
