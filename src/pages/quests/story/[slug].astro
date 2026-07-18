@@ -50,6 +50,15 @@ const jsonLd = [
       <h2>What happens</h2>
       <p>{q.summary}</p>
 
+      {q.related && q.related.length > 0 && (
+        <div class="callout wip">
+          <strong>Related:</strong>{' '}
+          {q.related.map((r, i) => (
+            <>{i > 0 ? ' · ' : ''}<a href={r.href}>{r.label}</a></>
+          ))}
+        </div>
+      )}
+
       {q.troubleshooting && q.troubleshooting.length > 0 && (
         <>
           <h2>Stuck? Common problems with this quest</h2>

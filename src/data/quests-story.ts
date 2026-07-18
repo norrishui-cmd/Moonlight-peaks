@@ -5,6 +5,7 @@
 // Chapter numbers are our own organizing device (the game itself doesn't label numbered
 // "chapters" in what's been sourced so far) — grouped by natural story arcs.
 export type Troubleshoot = { q: string; a: string };
+export type QuestRelated = { label: string; href: string };
 export type StoryQuest = {
   slug: string;
   chapter: number;
@@ -16,6 +17,7 @@ export type StoryQuest = {
   reward?: string;
   leadsTo?: string; // slug of the next quest/arc, for prev/next navigation
   troubleshooting?: Troubleshoot[]; // stuck-point Q&A — the core reason story pages exist
+  related?: QuestRelated[]; // optional cross-links to relevant location/character pages
 };
 
 export const storyChapters = [
@@ -69,6 +71,7 @@ export const storyQuests: StoryQuest[] = [
     summary: 'Confirmed via Neoseeker\u2019s quest log, cross-checked against Output Lag: the day after the bridge opens, walking into town triggers a cutscene at the Crest Garden (a new area beside Town Hall) where Brook accuses Orlock of stealing her missing family crest, launching a mystery plot.',
     reward: 'Requires A Bridge Too Far + 1 day; leads to A Croak and a Crest',
     leadsTo: 'a-croak-and-a-crest',
+    related: [{ label: 'Crest Garden location guide', href: '/locations/crest-garden' }, { label: 'Orlock', href: '/characters/orlock' }],
   },
   {
     slug: 'a-croak-and-a-crest', chapter: 3, title: 'A Croak and a Crest', giver: 'Story', status: 'confirmed',
@@ -76,6 +79,7 @@ export const storyQuests: StoryQuest[] = [
     summary: 'Confirmed via Neoseeker\u2019s quest log transcription as the direct follow-up to the Crest Garden mystery.',
     reward: 'Places the Logan Crest in the Crest Garden and counts toward Crest achievements',
     leadsTo: 'the-quest-for-mana',
+    related: [{ label: 'Crest Garden location guide', href: '/locations/crest-garden' }, { label: 'Dragan', href: '/characters/dragan' }, { label: 'Yabbis', href: '/characters/yabbis' }],
   },
   {
     slug: 'the-quest-for-mana', chapter: 3, title: 'The Quest for Mana', giver: 'Luna / Story', status: 'confirmed',

@@ -252,7 +252,7 @@ export const locations: TopicItem[] = [
       'Confirmed: once inside, the tunnel network connects several of the game\u2019s underground and outdoor areas via blue pressure plates \u2014 one links to a collapsed doorway in the Crystal Cave, another to the catacombs entrance in the Misty Shores graveyard, another north along the river to a collapsed doorway in Luna Bay, and another east to the catacombs entrance in the Howling Marshes.',
       'Reported by a walkthrough: after finding these connections, sleeping in your coffin and checking your mailbox the next day brings a letter from Samael. Visiting him at The Broken Lamp unlocks a further entrance for you.',
     ],
-    related: [{ label: 'Crystal Cave', href: '/locations/crystal-cave' }, { label: 'The mines', href: '/locations/mines' }, { label: 'Howling Marshes', href: '/locations/howling-marshes' }, { label: 'Museum', href: '/locations/silverveil-museum' }],
+    related: [{ label: 'Crystal Cave', href: '/locations/crystal-cave' }, { label: 'The mines', href: '/locations/mines' }, { label: 'Howling Marshes', href: '/locations/howling-marshes' }, { label: 'Museum', href: '/locations/silverveil-museum' }, { label: 'Viktor', href: '/characters/viktor-dracula' }, { label: 'Samael', href: '/characters/samael' }],
     faq: [
       { q: 'How do you unlock the Twilight Catacombs in Moonlight Peaks?', a: 'Confirmed: reach 25% completion on your Museum donation progress to receive the Dracula Insignia Key from Jada, then show it to Viktor in the Crypt to start the "A Key to the Deep" quest, which opens the catacombs.' },
       { q: 'Where are the Twilight Catacombs entrances in Moonlight Peaks?', a: 'Confirmed entrances are in the Crypt (Viktor\u2019s location) and the Misty Shores graveyard. Reported by a walkthrough: internal pressure plates also connect through to Crystal Cave, Luna Bay, and Howling Marshes once you\u2019re inside.' },
@@ -267,7 +267,7 @@ export const locations: TopicItem[] = [
       'Reported by a walkthrough: the Logan family crest specifically goes missing partway through, sending you on a fetch-quest detour \u2014 Dragan points you to The Broken Lamp for information, which leads to the Howling Marshes, where Yabbis turns out to have eaten the crest and wants a Copper Bar in exchange for it back.',
       'Reported by a walkthrough: the last two crests to fill in belong to the two vampire families, Ambrosia and Dracula. Orlock asks for crafting materials (refined stone, gold bars, and glass) for the Ambrosia crest, while the Dracula crest quest is described as the emotional conclusion of the main story, triggered by a letter a few days after unlocking bat transformation.',
     ],
-    related: [{ label: 'Town Hall', href: '/locations/town-hall' }, { label: 'Families', href: '/families' }, { label: 'Howling Marshes', href: '/locations/howling-marshes' }],
+    related: [{ label: 'Town Hall', href: '/locations/town-hall' }, { label: 'Families', href: '/families' }, { label: 'Howling Marshes', href: '/locations/howling-marshes' }, { label: 'Dragan', href: '/characters/dragan' }, { label: 'Yabbis', href: '/characters/yabbis' }, { label: 'Orlock', href: '/characters/orlock' }],
     faq: [
       { q: 'Where is the Crest Garden in Moonlight Peaks?', a: 'Confirmed by the official wiki: it\u2019s located beside Town Hall.' },
       { q: 'What does the Crest Garden do in Moonlight Peaks?', a: 'Confirmed: it displays the crests of all seven families in town, unlocking one by one as you advance each family\u2019s main story content.' },
@@ -282,7 +282,7 @@ export const locations: TopicItem[] = [
       'Confirmed: Moonlit Slopes is the Moon Goddess\u2019s home, reached after resolving the "A Missing Moon" story arc, where the Khazan family\u2019s seers fall into simultaneous trances and the Moon vanishes from the sky. A short follow-up quest, "The Moon in the Sky," has her formally invite you to visit.',
       'Confirmed: after that first visit, Moonlit Slopes locks again and stays inaccessible until you unlock Bat form through the "Master of the Night" quest \u2014 so if you can\u2019t get back in right after meeting the Moon Goddess, that\u2019s expected rather than a bug.',
     ],
-    related: [{ label: 'Shapeshifting', href: '/shapeshifting' }, { label: 'Characters', href: '/characters' }, { label: 'Quests', href: '/quests' }],
+    related: [{ label: 'Shapeshifting', href: '/shapeshifting' }, { label: 'Moon Goddess', href: '/characters/moon-goddess' }, { label: 'Quests', href: '/quests' }],
     faq: [
       { q: 'Where do you meet the Moon Goddess in Moonlight Peaks?', a: 'Confirmed: at Moonlit Slopes, after completing "A Missing Moon" and the short follow-up quest "The Moon in the Sky," where she formally invites you.' },
       { q: 'Why can\u2019t I go back to Moonlit Slopes after visiting once?', a: 'Confirmed: the area locks again after your first visit and only reopens once you unlock Bat form via the "Master of the Night" quest \u2014 this is expected, not a bug.' },
@@ -295,7 +295,7 @@ export const locations: TopicItem[] = [
       'Confirmed by community reports: the Midnight Market is a weekend-only event in town, running Saturdays and Sundays, distinct from the game\u2019s regular weekday shops.',
       'Reported: Snek sells tiny hats for your farm animals at the Midnight Market, and Sabrina sells the Alchemist\u2019s Globe and other potion-related items there as well \u2014 items not confirmed to be available from either character during regular weekday hours.',
     ],
-    related: [{ label: 'Characters', href: '/characters' }, { label: 'Farm animals', href: '/farm/animals' }, { label: 'Potions', href: '/items/potions' }],
+    related: [{ label: 'Snek', href: '/characters/snek' }, { label: 'Sabrina', href: '/characters/sabrina' }, { label: 'Farm animals', href: '/farm/animals' }, { label: 'Potions', href: '/items/potions' }],
     faq: [
       { q: 'When is the Midnight Market open in Moonlight Peaks?', a: 'Reported by the community: Saturdays and Sundays only, distinct from the game\u2019s regular weekday shop hours.' },
       { q: 'What can you buy at the Midnight Market in Moonlight Peaks?', a: 'Reported: tiny hats for farm animals from Snek, and the Alchemist\u2019s Globe and other potion-related items from Sabrina \u2014 items not confirmed to be sold on regular weekdays.' },

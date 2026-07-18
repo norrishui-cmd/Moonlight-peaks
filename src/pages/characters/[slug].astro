@@ -49,6 +49,20 @@ const deathFaq = c.id === 'death' ? [
   { q: 'Can you romance Death?', a: 'Yes, confirmed — Death is a romance option, no longer just pre-launch rumor as it once was.' },
 ] : [];
 
+// Lightweight per-character links to newly-documented locations they're tied to, for internal
+// link density — not a full custom content block like Death's, just contextual "also see" links.
+const characterLocationLinks: Record<string, { label: string; href: string; note: string }[]> = {
+  'viktor-dracula': [{ label: 'Twilight Catacombs', href: '/locations/twilight-catacombs', note: 'Viktor holds the crypt door you show the Dracula Insignia Key to in order to unlock the catacombs.' }],
+  dragan: [{ label: 'Crest Garden', href: '/locations/crest-garden', note: 'Dragan is the first stop when the Logan family crest goes missing from the Crest Garden.' }],
+  yabbis: [{ label: 'Crest Garden', href: '/locations/crest-garden', note: 'Reported to have eaten the missing Logan family crest, tracked down as part of the Crest Garden storyline.' }],
+  samael: [{ label: 'Twilight Catacombs', href: '/locations/twilight-catacombs', note: 'Visiting Samael at The Broken Lamp reportedly unlocks a further Twilight Catacombs entrance.' }],
+  snek: [{ label: 'Midnight Market', href: '/locations/midnight-market', note: 'Reported to sell tiny animal hats at the weekend-only Midnight Market.' }],
+  sabrina: [{ label: 'Midnight Market', href: '/locations/midnight-market', note: 'Reported to sell the Alchemist\u2019s Globe and other potion items at the weekend-only Midnight Market.' }],
+  'moon-goddess': [{ label: 'Moonlit Slopes', href: '/locations/moonlit-slopes', note: 'Her confirmed home, reached after the "A Missing Moon" story arc.' }],
+  orlock: [{ label: 'Crest Garden', href: '/locations/crest-garden', note: 'Asks for crafting materials for the Ambrosia family crest as part of the Crest Garden storyline.' }],
+};
+const locationLinks = characterLocationLinks[c.id] || [];
+
 const jsonLd = [
   { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
     { '@type': 'ListItem', position: 1, name: 'Home', item: SITE.url },
@@ -209,6 +223,15 @@ const jsonLd = [
             ))}
           </div>
         </>
+      )}
+
+      {locationLinks.length > 0 && (
+        <div class="callout wip">
+          <strong>Also see:</strong>{' '}
+          {locationLinks.map((l, i) => (
+            <>{i > 0 ? ' · ' : ''}<a href={l.href}>{l.label}</a> — {l.note}</>
+          ))}
+        </div>
       )}
 
       <div class="callout">
