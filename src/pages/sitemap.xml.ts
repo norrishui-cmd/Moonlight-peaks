@@ -24,7 +24,7 @@ import { collectionDetailPages } from '../data/collectionDetailPages';
 // substantial content edits in recent rounds get that later date; everything else defaults to
 // launch day. Bump a path prefix here only when its actual content changed.
 const LASTMOD_LAUNCH = '2026-07-07';
-const LASTMOD_OVERRIDES: [string, string][] = [
+const LASTMOD_OVERRIDES = [
   ['/collections/vampsters', '2026-07-10'],
   ['/collections/fish', '2026-07-11'],
   ['/collections/critters', '2026-07-11'],
@@ -49,12 +49,27 @@ const LASTMOD_OVERRIDES: [string, string][] = [
   ['/achievements', '2026-07-08'],
   ['/known-issues', '2026-07-08'],
   ['/reviews', '2026-07-08'],
-  ['/locations', '/locations/twilight-catacombs', '/locations/crest-garden', '/locations/moonlit-slopes', '/locations/midnight-market', '/locations/bloom-boutique', '2026-07-09'],
+  ['/locations', '2026-07-09'],
   ['/families', '2026-07-08'],
-  ['/faq', '/faq/is-patch-1-1-41-out-on-switch', '/faq/does-1-1-41-fix-crop-growth', '/faq/does-1-1-41-fix-lost-saves', '/faq/house-storage-from-barn-greenhouse', '/faq/does-1-1-41-fix-nokturna-card-reward', '/faq/does-1-1-41-fix-cloud-save-sync', '/faq/embroidery-unlock-timing-patch', '/faq/what-are-the-water-bubbles-ripples', '/faq/how-does-the-scarecrow-protection-work', '/faq/does-house-storage-have-a-capacity-limit', '/faq/can-you-decorate-from-universal-storage', '/faq/do-you-pick-furniture-color-when-crafting', '/faq/is-decorating-on-a-grid-in-moonlight-peaks', '/faq/is-cooking-available-from-night-one', '/faq/how-does-the-cooking-minigame-work', '/faq/when-is-coffee-and-coffins-open', '/faq/when-is-minas-birthday', '/faq/what-happens-after-marrying-mina', '/faq/do-birthday-gifts-give-a-bonus', '/faq/how-many-gifts-per-day-per-person', '/faq/does-relationship-screen-track-gift-history', '/faq/are-there-universally-loved-gifts', '/faq/how-do-you-learn-npc-preferences-organically', '/faq/how-many-critters-fish-vampsters-total', '/faq/when-does-the-museum-unlock', '/faq/does-the-museum-require-perfect-quality-items', '/faq/how-many-museum-collection-rooms', '/faq/what-does-the-refiner-do', '/faq/can-you-buy-an-inventory-upgrade', '/faq/what-happens-at-sunrise-if-youre-not-home', '/faq/can-you-change-night-length-settings', '/faq/do-magical-crops-need-special-watering', '/faq/do-ethereal-tool-spells-lock-you-in-place', '/faq/is-nokturna-a-relationship-activity', '/faq/how-many-total-characters-are-in-the-game', '/faq/do-new-characters-appear-later-in-the-year', '/faq/who-is-snek-in-moonlight-peaks', '/faq/is-death-a-real-character-you-can-meet', '/faq/why-does-noel-challenge-you-to-a-fishing-contest', '/faq/are-there-tensions-between-the-four-factions', '/faq/is-orlock-drunk-animation-a-real-detail', '/faq/are-character-portraits-chibi-style', '/faq/does-the-town-color-palette-change-by-season', '/faq/save-data-and-crash-dump-locations', '/faq/how-to-report-a-bug-to-the-developers', '/faq/does-net-drain-stamina-on-a-miss', '/faq/does-1-1-41-fix-decorate-mode-item-loss', '/faq/does-1-1-41-fix-orlock-bench-interaction', '/faq/does-1-1-41-fix-hellkitten-dig-spots', '/faq/does-1-1-41-fix-cutscene-blocking-bugs', '/faq/does-1-1-41-fix-aras-heart-event-marker', '/faq/what-is-the-current-version-per-platform', '2026-07-08'],
+  ['/faq', '2026-07-08'],
   ['/tools', '2026-07-08'],
   ['/spellcasting', '2026-07-15'],
-];
+] as const satisfies ReadonlyArray<readonly [pathPrefix: string, lastmod: string]>;
+
+const isValidLastmod = (value: string): boolean => {
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(value)) return false;
+  const parsed = new Date(`${value}T00:00:00Z`);
+  return !Number.isNaN(parsed.getTime()) && parsed.toISOString().slice(0, 10) === value;
+};
+
+for (const [, lastmod] of LASTMOD_OVERRIDES) {
+  if (!isValidLastmod(lastmod)) {
+    throw new Error(`Invalid sitemap lastmod value: ${lastmod}`);
+  }
+}
+if (!isValidLastmod(LASTMOD_LAUNCH)) {
+  throw new Error(`Invalid sitemap launch lastmod value: ${LASTMOD_LAUNCH}`);
+}
 const lastmodFor = (path: string): string => {
   const hit = LASTMOD_OVERRIDES.find(([prefix]) => path === prefix || path.startsWith(`${prefix}/`));
   return hit ? hit[1] : LASTMOD_LAUNCH;
@@ -130,10 +145,22 @@ export const GET: APIRoute = () => {
     ...seoPages.map((p) => ({ path: p.path })),
   ];
 
+  // Several route sources intentionally overlap (for example staticPaths and translated
+  // collection generators). Emit each canonical URL once and retain any images contributed by
+  // either source.
+  const uniqueEntries = [...entries.reduce((byPath, entry) => {
+    const existing = byPath.get(entry.path);
+    byPath.set(entry.path, {
+      path: entry.path,
+      images: [...new Set([...(existing?.images || []), ...(entry.images || [])])],
+    });
+    return byPath;
+  }, new Map<string, Entry>()).values()];
+
   const abs = (u: string) => new URL(u, SITE.url).href;
   const body = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
-${entries.map((e) => `  <url>
+${uniqueEntries.map((e) => `  <url>
     <loc>${abs(e.path)}</loc>
     <lastmod>${lastmodFor(e.path)}</lastmod>${(e.images || []).map((img) => `
     <image:image><image:loc>${abs(img)}</image:loc></image:image>`).join('')}
