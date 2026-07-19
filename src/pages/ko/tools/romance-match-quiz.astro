@@ -1,0 +1,252 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { SITE, GAME } from '../../../consts';
+import { characters } from '../../../data/characters';
+
+const cast = ['saga', 'luna', 'orlock', 'the-warlock', 'death', 'mina']
+  .map((id) => characters.find((c) => c.id === id))
+  .filter(Boolean);
+
+const results: Record<string, { tagline: string; blurb: string }> = {
+  saga: {
+    tagline: '달과 함께 에너지가 변하는 상대를 원하신다면.',
+    blurb: 'Saga는 확인된 늑대인간 연애 상대입니다 — 개발자들은 그녀의 에너지가 보름달에 따라 변한다고 설명했습니다. 매일 밤 진정한 깊이를 가진 상대를 원한다면 최고의 선택입니다.',
+  },
+  luna: {
+    tagline: '현실적이고 원예에 능하며 약간의 마법이 있는 상대를 원하신다면.',
+    blurb: 'Luna는 농업에 몰두하는 마녀로 묘사됩니다 — 아마도 주문과 원예 지식을 얻는 첫 번째 원천일 것입니다. 안정적이고 실용적이며, 아마 여러분의 작물이 무엇을 필요로 하는지 가장 잘 아는 사람일 것입니다.',
+  },
+  orlock: {
+    tagline: '옛 시대의 매력과 약간의 권력을 원하신다면.',
+    blurb: 'Orlock은 뱀파이어 가문의 가장으로 묘사됩니다 — 옛 시대의 영향력과 방에 들어서는 순간 분위기를 바꾸는 존재감을 가지고 있습니다.',
+  },
+  'the-warlock': {
+    tagline: '자신감과 매력, 그리고 거리낌 없는 솔직함을 원하신다면.',
+    blurb: '한 실제 플레이 보도에서 그는 나르시시스트적이면서 끊임없이 추파를 던지는 마법사로 등장합니다. 본명은 아직 확인되지 않았지만 — 그 존재감은 진짜입니다.',
+  },
+  death: {
+    tagline: '마을 전체를 조금 긴장하게 만드는 상대를 원하신다면.',
+    blurb: 'Death는 출시 전 유출된 파일에 등장한 이름으로, 자신만의 집("Death의 오두막")도 가지고 있습니다. 출시 전 일부 소문은 그가 연애 상대일 수도 있다고 암시했습니다 — 확인되지는 않았지만, 만약 사실이라면 일찍 알아챈 셈이네요.',
+  },
+  mina: {
+    tagline: '미스터리를 원하고, 당장 풀리지 않아도 괜찮으시다면.',
+    blurb: 'Mina는 개발자들이 직접 언급했지만, 현재로서는 공개된 다른 정보가 거의 없습니다. 때로는 그게 바로 매력이죠: 출시 시점에 여러분이 직접 알아갈 백지 같은 존재입니다.',
+  },
+};
+
+const questions = [
+  {
+    q: '마을에서의 첫날 밤, 무엇이 가장 매력적으로 느껴지나요?',
+    options: [
+      { t: '오래된 뱀파이어 성과 그 비밀들', s: 'orlock' },
+      { t: '이미 씨를 뿌릴 준비가 된 텃밭', s: 'luna' },
+      { t: '멀리서 들려오는 늑대의 울음소리', s: 'saga' },
+      { t: '아직 아무도 발견하지 못한 조용한 구석', s: 'death' },
+    ],
+  },
+  {
+    q: '도착한 지 5분 만에 누군가 당신에게 추파를 던집니다. 당신은:',
+    options: [
+      { t: '그래도 마음이 흔들린다', s: 'the-warlock' },
+      { t: '정중하게 거절한다 — 일하러 온 거니까', s: 'luna' },
+      { t: '같은 기세로 맞받아친다', s: 'saga' },
+      { t: '그들이 정말 원하는 게 뭔지 궁금해한다', s: 'orlock' },
+    ],
+  },
+  {
+    q: '방문하고 싶은 집을 선택하세요:',
+    options: [
+      { t: '여러 세대를 거쳐 전해진 대가족 저택', s: 'orlock' },
+      { t: '조용하고 잘 정돈된, 약간의 개성이 있는 집', s: 'orlock' },
+      { t: '어디든 상관없다, 작물이 가장 잘 자라는 곳이면', s: 'luna' },
+      { t: '마을 사람 절반이 피하는 곳', s: 'death' },
+    ],
+  },
+  {
+    q: '마을의 일곱 가문 간의 라이벌 관계에 대해 어떻게 생각하시나요?',
+    options: [
+      { t: '옛 시대의 정치 게임 같다 — 이기는 쪽에 서고 싶다', s: 'orlock' },
+      { t: '내 알 바 아니다, 농장 일이 있으니까', s: 'luna' },
+      { t: '솔직히 꽤 흥미진진하다', s: 'the-warlock' },
+      { t: '완전히 관여하지 않는 게 낫다', s: 'mina' },
+    ],
+  },
+  {
+    q: '보름달이 마을 위로 떠오릅니다. 당신은 무엇을 하고 있나요?',
+    options: [
+      { t: '창밖을 바라보며 뭔가 변하는 것을 느낀다', s: 'saga' },
+      { t: '밤에만 피는 꽃을 돌본다', s: 'luna' },
+      { t: '아무도 볼 수 없는 곳에 머문다', s: 'death' },
+      { t: '달빛 아래 내 집이 멋져 보이는지 확인한다', s: 'orlock' },
+    ],
+  },
+  {
+    q: '마을의 누군가가 모두에게 완전한 미스터리입니다. 당신의 반응은:',
+    options: [
+      { t: '매우 흥미롭다 — 더 알고 싶다', s: 'mina' },
+      { t: '매력적이지만 조심스럽다', s: 'the-warlock' },
+      { t: '완전히 내 취향이다', s: 'death' },
+      { t: '자신감과 지위를 더 신뢰한다', s: 'orlock' },
+    ],
+  },
+];
+
+const faq = [
+  { q: '이 퀴즈는 공식적인 것인가요, 아니면 실제 게임 데이터를 기반으로 한 것인가요?', a: '순수히 재미를 위한 것입니다. 결과 선택지는 각 캐릭터의 실제 출처가 있는 성격 단서 — 개발자 공개 정보, 실제 플레이 언론 보도, 출시 전 유출 파일 — 를 기반으로 하지만, 매칭 자체는 저희만의 가벼운 해석이며 공식 매칭 시스템이 아닙니다.' },
+  { q: '이걸로 어떤 선물이나 연애 루트가 가장 좋은지 알 수 있나요?', a: '아니요 — 선물 선호도, 연애 이벤트, 관계 메커니즘은 대부분의 캐릭터에서 아직 확인되지 않았습니다. 무엇이 검증되었고 무엇이 확인을 기다리고 있는지는 연애 선물 검색기에서 확인하세요.' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '홈', item: `${SITE.url}/ko` },
+    { '@type': 'ListItem', position: 2, name: '도구', item: `${SITE.url}/ko/tools` },
+    { '@type': 'ListItem', position: 3, name: '연애 궁합 퀴즈', item: new URL('/ko/tools/romance-match-quiz', SITE.url).href },
+  ] },
+  { '@context': 'https://schema.org', '@type': 'WebApplication', name: 'Moonlight Peaks 연애 궁합 퀴즈',
+    applicationCategory: 'GameApplication', operatingSystem: 'Web',
+    url: new URL('/ko/tools/romance-match-quiz', SITE.url).href,
+    description: '실제 출처가 있는 성격 단서를 사용해 Moonlight Peaks 연애 상대와 매칭해주는 재미있는 퀴즈 — 지어낸 궁합 데이터는 사용하지 않습니다.' },
+];
+---
+<Base
+  title="Moonlight Peaks 연애 궁합 퀴즈 — 나의 반쪽 찾기"
+  description="실제 출처가 있는 캐릭터 단서를 사용해 Moonlight Peaks 연애 상대와 매칭해주는 재미있고 정직한 퀴즈 — 선물이나 궁합 데이터를 지어내지 않습니다."
+  path="/ko/tools/romance-match-quiz"
+  jsonLd={jsonLd}
+  crumbs={[{ label: '도구', href: '/ko/tools' }, { label: '연애 궁합 퀴즈' }]}
+  lang="ko"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">도구 · 연애</p>
+      <h1><em>연애 궁합</em> 퀴즈</h1>
+      <p class="intro">
+        여섯 개의 짧은 질문을 개발자 유출 정보, 실제 플레이 언론 보도, 출시 전 유출 파일에서 나온
+        실제 성격 단서와 비교합니다. 순수히 재미를 위한 것입니다 — 아래 FAQ에서 이것이 무엇인지
+        (그리고 무엇이 아닌지) 설명합니다.
+      </p>
+
+      <div id="quiz-root" class="quiz-root">
+        <div id="quiz-questions"></div>
+        <div id="quiz-result" class="quiz-result" hidden></div>
+        <div class="quiz-controls">
+          <button type="button" id="quiz-restart" class="rq-btn" hidden>다시 시도</button>
+        </div>
+      </div>
+
+      <h2>FAQ</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        관련: <a href="/tools/romance-gift-finder">연애 선물 검색기</a>,
+        <a href="/romance">연애와 결혼</a>, <a href="/characters">전체 캐릭터</a>.
+      </div>
+    </div>
+  </article>
+
+  <style>
+    .quiz-root { margin: 18px 0 28px; }
+    .rq-question { border: 1px solid var(--line); border-radius: 14px; background: var(--surface); padding: 16px; margin-bottom: 14px; }
+    .rq-question h3 { font-family: var(--display); font-weight: 600; font-size: 1rem; margin: 0 0 12px; color: var(--mist); }
+    .rq-options { display: grid; grid-template-columns: 1fr; gap: 8px; }
+    @media (min-width: 640px) { .rq-options { grid-template-columns: 1fr 1fr; } }
+    .rq-option {
+      text-align: left; font-size: 0.86rem; color: var(--muted); border: 1px solid var(--line);
+      border-radius: 10px; background: var(--ink-2); padding: 10px 12px; cursor: pointer;
+      transition: border-color .15s ease, color .15s ease, background .15s ease;
+    }
+    .rq-option:hover { border-color: color-mix(in srgb, var(--candle) 45%, var(--line)); color: var(--mist); }
+    .rq-option.is-picked { border-color: var(--candle); color: var(--candle); background: color-mix(in srgb, var(--candle) 10%, var(--ink-2)); }
+    .quiz-result { border: 1px solid color-mix(in srgb, var(--candle) 40%, var(--line)); border-radius: 16px; background: var(--surface); padding: 20px; text-align: center; }
+    .quiz-result h2 { font-family: var(--display); font-size: 1.3rem; margin: 4px 0 6px; }
+    .quiz-result .qr-tagline { color: var(--candle); font-size: 0.94rem; margin: 0 0 12px; }
+    .quiz-result .qr-blurb { color: var(--muted); font-size: 0.88rem; line-height: 1.6; max-width: 480px; margin: 0 auto 16px; }
+    .quiz-result a.qr-profile { display: inline-block; font-family: var(--mono); font-size: 0.8rem; color: var(--candle); border: 1px solid color-mix(in srgb, var(--candle) 45%, var(--line)); border-radius: 999px; padding: 8px 18px; }
+    .quiz-controls { text-align: center; margin-top: 14px; }
+    .rq-btn { font-family: var(--mono); font-size: 0.78rem; color: var(--muted); border: 1px solid var(--line); border-radius: 999px; background: var(--surface); padding: 8px 18px; cursor: pointer; }
+    .rq-btn:hover { color: var(--candle); border-color: color-mix(in srgb, var(--candle) 45%, var(--line)); }
+    .rq-progress { font-family: var(--mono); font-size: 0.68rem; color: var(--faint); margin-bottom: 6px; }
+  </style>
+
+  <script define:vars={{ questions, results, cast: cast.map((c) => ({ id: c!.id, name: c!.name })) }}>
+    (function () {
+      var qWrap = document.getElementById('quiz-questions');
+      var resultBox = document.getElementById('quiz-result');
+      var restartBtn = document.getElementById('quiz-restart');
+      var current = 0;
+      var scores = {};
+
+      var profileHref = {};
+      cast.forEach(function (c) { profileHref[c.id] = '/characters/' + c.id; });
+
+      function renderQuestion(i) {
+        qWrap.innerHTML = '';
+        var q = questions[i];
+        var box = document.createElement('div');
+        box.className = 'rq-question';
+        var progress = document.createElement('div');
+        progress.className = 'rq-progress';
+        progress.textContent = '질문 ' + (i + 1) + ' / ' + questions.length;
+        var h3 = document.createElement('h3');
+        h3.textContent = q.q;
+        var opts = document.createElement('div');
+        opts.className = 'rq-options';
+        q.options.forEach(function (opt) {
+          var btn = document.createElement('button');
+          btn.type = 'button';
+          btn.className = 'rq-option';
+          btn.textContent = opt.t;
+          btn.addEventListener('click', function () {
+            scores[opt.s] = (scores[opt.s] || 0) + 1;
+            current++;
+            if (current < questions.length) { renderQuestion(current); }
+            else { showResult(); }
+          });
+          opts.appendChild(btn);
+        });
+        box.appendChild(progress);
+        box.appendChild(h3);
+        box.appendChild(opts);
+        qWrap.appendChild(box);
+      }
+
+      function showResult() {
+        var best = null, bestScore = -1;
+        Object.keys(scores).forEach(function (k) {
+          if (scores[k] > bestScore) { bestScore = scores[k]; best = k; }
+        });
+        if (!best) best = 'mina';
+        var info = results[best];
+        var name = (cast.filter(function (c) { return c.id === best; })[0] || {}).name || best;
+
+        qWrap.style.display = 'none';
+        resultBox.hidden = false;
+        resultBox.innerHTML =
+          '<p class="rq-progress">당신의 매칭 상대</p>' +
+          '<h2>' + name + '</h2>' +
+          '<p class="qr-tagline">' + info.tagline + '</p>' +
+          '<p class="qr-blurb">' + info.blurb + '</p>' +
+          '<a class="qr-profile" href="' + profileHref[best] + '">' + name + '의 프로필 보기</a>';
+        restartBtn.hidden = false;
+      }
+
+      restartBtn.addEventListener('click', function () {
+        current = 0; scores = {};
+        qWrap.style.display = '';
+        resultBox.hidden = true;
+        restartBtn.hidden = true;
+        renderQuestion(0);
+      });
+
+      renderQuestion(0);
+    })();
+  </script>
+</Base>

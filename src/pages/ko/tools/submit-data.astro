@@ -1,0 +1,170 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { SITE, GAME } from '../../../consts';
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: '홈', item: `${SITE.url}/ko` },
+      { '@type': 'ListItem', position: 2, name: '도구', item: `${SITE.url}/ko/tools` },
+      { '@type': 'ListItem', position: 3, name: '데이터 제출 도구', item: new URL('/ko/tools/submit-data', SITE.url).href },
+    ],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebApplication',
+    name: 'Moonlight Peaks 데이터 제출 도구',
+    applicationCategory: 'GameApplication',
+    operatingSystem: 'Web',
+    url: new URL('/ko/tools/submit-data', SITE.url).href,
+    description: '물고기, 레시피, 장소, 선물, 버그를 포함한 Moonlight Peaks 출시 주간 데이터 제출을 위한 로컬 초안 도구.',
+  },
+];
+---
+<Base
+  title="Moonlight Peaks 데이터 제출 도구 - 물고기, 아이템, 선물, 레시피, 버그 공유"
+  description="물고기, 생물, 레시피, 물약, NPC 선물, 장소, 상점, 버그 및 기타 검증된 발견 사항에 대한 Moonlight Peaks 출시 주간 데이터 제출 초안을 작성하세요."
+  path="/ko/tools/submit-data"
+  jsonLd={jsonLd}
+  crumbs={[{ label: '도구', href: '/ko/tools' }, { label: '데이터 제출 도구' }]}
+  lang="ko"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">도구 / 커뮤니티 데이터</p>
+      <h1>Moonlight Peaks — <em>데이터 제출 도구</em></h1>
+      <p class="intro">
+        출시 주간 발견 사항을 사람이 검토할 수 있도록 정리하세요: 물고기, 생물, 레시피, 물약, NPC
+        선물, 장소, 상점, 버그, 플랫폼 메모. 어떤 것도 자동으로 게시되지 않습니다.
+      </p>
+
+      <section class="submit-shell" data-submit-tool>
+        <form class="submit-form">
+          <label>
+            <span>데이터 유형</span>
+            <select name="type">
+              <option>물고기</option>
+              <option>생물</option>
+              <option>레시피</option>
+              <option>물약</option>
+              <option>NPC 선물</option>
+              <option>장소</option>
+              <option>상점</option>
+              <option>버그 또는 문제</option>
+              <option>기타</option>
+            </select>
+          </label>
+          <label><span>이름 또는 제목</span><input name="name" placeholder="예: 확인 필요" /></label>
+          <label><span>장소 / 출처</span><input name="location" placeholder="어디서 발견했는지" /></label>
+          <label><span>시즌/시간/날씨</span><input name="conditions" placeholder="관련이 있다면" /></label>
+          <label><span>가격/가치/효과</span><input name="value" placeholder="게임에서 보였다면" /></label>
+          <label><span>증거 메모</span><input name="evidence" placeholder="스크린샷, 공식 게시물, 또는 게임 내 관찰" /></label>
+          <label class="wide"><span>메모</span><textarea name="notes" rows="5" placeholder="정확한 텍스트, 레시피 재료, 캐릭터 반응, 버그 재현 단계 또는 기타 세부 사항을 추가하세요."></textarea></label>
+          <button type="button" class="btn btn-primary" data-save>초안 로컬 저장</button>
+        </form>
+
+        <aside class="review-card">
+          <span>검토 정책</span>
+          <h2>사람의 검토만 진행</h2>
+          <p>
+            초안은 브라우저에 저장되며 내보낼 수 있습니다. 공식 출처, 게임 내 스크린샷, 또는
+            게임에서 재현 가능한 증거로 확인한 내용만 게시하세요.
+          </p>
+          <button type="button" class="btn btn-ghost" data-export>JSON으로 내보내기</button>
+        </aside>
+      </section>
+
+      <h2>저장된 초안</h2>
+      <div class="draft-list" data-drafts></div>
+
+      <div class="callout">
+        권장 인용 규칙: 공식 채널, 상점 페이지, 또는 중립적인 소셜 미디어 게시물을 우선하세요.
+        이미 게시된 데이터의 출처로 경쟁 위키 페이지를 사용하지 마세요.
+      </div>
+    </div>
+  </article>
+
+  <script>
+    const root = document.querySelector('[data-submit-tool]');
+    const draftsEl = document.querySelector('[data-drafts]');
+    if (root && draftsEl) {
+      const key = 'moonlight-data-drafts-v1';
+      const form = root.querySelector('.submit-form');
+      const saveButton = root.querySelector('[data-save]');
+      const exportButton = root.querySelector('[data-export]');
+      let drafts = JSON.parse(localStorage.getItem(key) || '[]');
+
+      const save = () => localStorage.setItem(key, JSON.stringify(drafts));
+      const render = () => {
+        draftsEl.innerHTML = drafts.length ? drafts.map((draft, index) => `
+          <article class="draft-card">
+            <span>${draft.type}</span>
+            <h3>${draft.name || '제목 없는 초안'}</h3>
+            <p>${draft.notes || '아직 메모가 없습니다.'}</p>
+            <small>${draft.location || '장소 미정'} - ${draft.evidence || '증거 미정'}</small>
+            <button type="button" data-delete="${index}">삭제</button>
+          </article>
+        `).join('') : '<p class="empty">아직 로컬 초안이 없습니다.</p>';
+      };
+
+      saveButton.addEventListener('click', () => {
+        const data = Object.fromEntries(new FormData(form).entries());
+        data.createdAt = new Date().toISOString();
+        drafts.unshift(data);
+        drafts = drafts.slice(0, 25);
+        save();
+        form.reset();
+        render();
+      });
+      draftsEl.addEventListener('click', (event) => {
+        const button = event.target.closest('button[data-delete]');
+        if (!button) return;
+        drafts.splice(Number(button.dataset.delete), 1);
+        save();
+        render();
+      });
+      exportButton.addEventListener('click', async () => {
+        const text = JSON.stringify(drafts, null, 2);
+        await navigator.clipboard.writeText(text);
+        exportButton.textContent = 'JSON 복사됨';
+        setTimeout(() => { exportButton.textContent = 'JSON으로 내보내기'; }, 1600);
+      });
+      render();
+    }
+  </script>
+
+  <style>
+    .submit-shell { display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 18px; margin: 28px 0; }
+    @media (max-width: 860px) { .submit-shell { grid-template-columns: 1fr; } }
+    .submit-form, .review-card, .draft-card, .empty {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--surface);
+    }
+    .submit-form { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; padding: 18px; }
+    @media (max-width: 640px) { .submit-form { grid-template-columns: 1fr; } }
+    .submit-form .wide, .submit-form button { grid-column: 1 / -1; }
+    .submit-form span { display: block; margin-bottom: 6px; color: var(--mist); font-weight: 600; }
+    .submit-form input, .submit-form select, .submit-form textarea {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: var(--ink);
+      color: var(--mist);
+      padding: 11px 12px;
+      font: inherit;
+    }
+    .review-card { padding: 18px; align-self: start; }
+    .review-card > span { font-family: var(--mono); color: var(--candle); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; }
+    .review-card p { color: var(--muted); }
+    .draft-list { display: grid; gap: 10px; }
+    .draft-card, .empty { padding: 14px; }
+    .draft-card span { color: var(--candle); font-family: var(--mono); font-size: 0.68rem; text-transform: uppercase; }
+    .draft-card h3 { margin: 5px 0; }
+    .draft-card p { color: var(--muted); margin: 0 0 8px; }
+    .draft-card small { color: var(--faint); }
+    .draft-card button { float: right; border: 1px solid var(--line); border-radius: 999px; background: transparent; color: var(--muted); padding: 4px 9px; cursor: pointer; }
+  </style>
+</Base>

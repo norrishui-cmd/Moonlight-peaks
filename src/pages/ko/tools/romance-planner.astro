@@ -1,0 +1,255 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { SITE } from '../../../consts';
+import { characters, typeLabels } from '../../../data/characters';
+
+const typeLabelsKo: Record<string, string> = {
+  vampire: '뱀파이어', werewolf: '늑대인간', witch: '마녀', mermaid: '인어',
+  seer: '예언자', ghost: '유령', human: '인간', other: '기타',
+};
+const statusLabelsKo: Record<string, string> = { confirmed: '확인됨', reported: '제보됨', datamined: '데이터마이닝', unconfirmed: '미확인' };
+
+const candidates = characters
+  .filter((c) => c.status !== 'unconfirmed' && c.romanceable !== false)
+  .map((c) => ({
+    id: c.id,
+    name: c.name,
+    family: c.family && c.family !== 'Unknown' ? c.family : null,
+    type: typeLabelsKo[c.type] || typeLabels[c.type],
+    status: statusLabelsKo[c.status] || c.status,
+    href: `/characters/${c.id}`,
+  }));
+
+const prepTasks = [
+  { id: 'read-profile', t: '후보의 프로필과 알려진 정보 읽기' },
+  { id: 'check-home', t: '후보가 알려진 곳에서 어디에 사는지 메모하기 (프로필의 "알려진 정보" 참고)' },
+  { id: 'check-family', t: '어느 가문에 속하는지, 제보된 가문 간 갈등 확인하기' },
+  { id: 'check-status', t: '현재 확인 상태 확인하기 (확인됨/제보됨/데이터마이닝)' },
+  { id: 'try-quiz', t: '연애 궁합 퀴즈를 해보며 다른 의견 들어보기' },
+  { id: 'plan-day-one', t: '첫날 누구에게 먼저 말을 걸지 정하기' },
+  { id: 'bookmark-page', t: '이 페이지를 즐겨찾기하기 — 후보 목록과 메모가 이 기기에 저장됩니다' },
+];
+
+const faq = [
+  { q: '이 도구는 실제 선물이나 호감도 데이터를 사용하나요?', a: '아니요. 선물, 호감도, 이벤트 데이터는 대부분 아직 확인되지 않았기 때문에 여기에는 표시되지 않습니다. 이 도구는 여러분 자신의 후보 목록, 메모, 준비 체크리스트만 추적합니다 — 모두 브라우저에만 비공개로 저장되며, 저희 서버에는 저장되지 않습니다.' },
+  { q: '내 후보 목록은 출시 후에도 유지되나요?', a: '네, 같은 브라우저와 기기를 계속 사용하고 이 사이트의 데이터를 지우지 않는 한 유지됩니다. 실제 연애 데이터가 확인되면 이 도구를 확장해 사용할 예정입니다.' },
+  { q: '내 데이터가 어딘가로 전송되나요?', a: '아니요. 모든 것은 브라우저의 로컬 저장소에만 저장됩니다. 저희는 이를 볼 수 없고, 어떤 서버에도 저장하지 않으며, 어떤 목적으로도 사용하지 않습니다.' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '홈', item: `${SITE.url}/ko` },
+    { '@type': 'ListItem', position: 2, name: '도구', item: `${SITE.url}/ko/tools` },
+    { '@type': 'ListItem', position: 3, name: '연애 계획기', item: new URL('/ko/tools/romance-planner', SITE.url).href },
+  ] },
+  { '@context': 'https://schema.org', '@type': 'WebApplication', name: 'Moonlight Peaks 연애 계획기',
+    applicationCategory: 'GameApplication', operatingSystem: 'Web',
+    url: new URL('/ko/tools/romance-planner', SITE.url).href,
+    description: '브라우저에 로컬로 저장되는 Moonlight Peaks 출시 전 연애 후보 목록 및 준비 기록기.' },
+];
+---
+<Base
+  title="Moonlight Peaks 연애 계획기 — 후보 목록과 진행 상황 추적"
+  description="Moonlight Peaks의 확인된 23명의 연애 상대 중 마음에 드는 사람을 선택하고, 개인 메모를 추가하고, 각 사람과의 진행 상황을 추적하세요 — 브라우저에 비공개로 저장되며 선물 데이터를 지어내지 않습니다."
+  path="/ko/tools/romance-planner"
+  jsonLd={jsonLd}
+  crumbs={[{ label: '도구', href: '/ko/tools' }, { label: '연애 계획기' }]}
+  lang="ko"
+  showExport
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">도구 · 연애</p>
+      <h1>연애 <em>계획기</em></h1>
+      <p class="intro">
+        확인된 23명의 연애 상대 중 더 알아보고 싶은 사람을 선택하고, 자신만의 메모를 작성하고,
+        각 사람과의 진행 상황을 추적하세요. 여기 있는 모든 것은 브라우저에만 비공개로 저장됩니다 —
+        계정도, 서버도 없고, 지어낸 선물이나 호감도 데이터도 없습니다.
+      </p>
+
+      <h2>나의 후보 목록</h2>
+      <p class="rp-sub">캐릭터를 클릭하면 후보 목록에 추가하거나 제거할 수 있습니다.</p>
+      <div id="rp-candidates" class="rp-candidates">
+        {candidates.map((c) => (
+          <button type="button" class="rp-candidate" data-rp-id={c.id} data-rp-href={c.href} data-rp-name={c.name}>
+            <span class="rp-star" aria-hidden="true">☆</span>
+            <span class="rp-name">{c.name}</span>
+            <span class="rp-meta">{c.family ? `${c.family} · ` : ''}{c.status}</span>
+          </button>
+        ))}
+      </div>
+
+      <h2>나의 메모</h2>
+      <div id="rp-shortlist-empty" class="callout wip">후보 목록이 비어 있습니다 — 위에서 캐릭터를 클릭해 추가하세요.</div>
+      <div id="rp-notes-list" class="rp-notes-list"></div>
+
+      <h2>출시일 준비 체크리스트</h2>
+      <ul id="rp-prep-list" class="rp-prep-list">
+        {prepTasks.map((task) => (
+          <li>
+            <label>
+              <input type="checkbox" data-rp-task={task.id} />
+              <span>{task.t}</span>
+            </label>
+          </li>
+        ))}
+      </ul>
+
+      <div class="rp-actions">
+        <button type="button" id="rp-clear" class="rq-btn">나의 후보 목록과 메모 지우기</button>
+      </div>
+
+      <h2>FAQ</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        관련: <a href="/romance">연애와 결혼</a>, <a href="/tools/romance-match-quiz">연애 궁합 퀴즈</a>,
+        <a href="/tools/romance-gift-finder">연애 선물 검색기</a>, <a href="/characters">전체 캐릭터</a>.
+      </div>
+    </div>
+  </article>
+
+  <style>
+    .rp-sub { color: var(--faint); font-size: 0.8rem; margin: -6px 0 12px; }
+    .rp-candidates { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 0 0 24px; }
+    @media (min-width: 640px) { .rp-candidates { grid-template-columns: repeat(3, 1fr); } }
+    .rp-candidate {
+      display: flex; flex-direction: column; align-items: flex-start; gap: 2px; text-align: left;
+      border: 1px solid var(--line); border-radius: 12px; background: var(--surface); padding: 10px 12px;
+      cursor: pointer; transition: border-color .15s ease;
+    }
+    .rp-candidate:hover { border-color: color-mix(in srgb, var(--candle) 45%, var(--line)); }
+    .rp-candidate.is-picked { border-color: var(--candle); background: color-mix(in srgb, var(--candle) 10%, var(--surface)); }
+    .rp-candidate .rp-star { font-size: 0.9rem; color: var(--faint); }
+    .rp-candidate.is-picked .rp-star { color: var(--candle); }
+    .rp-candidate .rp-name { font-family: var(--display); font-weight: 600; font-size: 0.88rem; color: var(--mist); }
+    .rp-candidate .rp-meta { font-family: var(--mono); font-size: 0.66rem; color: var(--faint); }
+    .rp-notes-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; }
+    .rp-note-card { border: 1px solid var(--line); border-radius: 12px; background: var(--surface); padding: 12px 14px; }
+    .rp-note-card .rp-note-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
+    .rp-note-card strong { font-family: var(--display); font-size: 0.94rem; }
+    .rp-note-card a { font-family: var(--mono); font-size: 0.7rem; color: var(--candle); }
+    .rp-note-card textarea {
+      width: 100%; min-height: 64px; background: var(--ink-2); border: 1px solid var(--line); border-radius: 8px;
+      color: var(--mist); font-family: inherit; font-size: 0.84rem; padding: 8px 10px; resize: vertical;
+    }
+    .rp-prep-list { list-style: none; margin: 0 0 20px; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+    .rp-prep-list label { display: flex; align-items: center; gap: 10px; font-size: 0.86rem; color: var(--muted); cursor: pointer; }
+    .rp-prep-list input { accent-color: var(--candle); }
+    .rp-actions { margin: 0 0 24px; }
+  </style>
+
+  <script>
+    (function () {
+      var KEY_SHORTLIST = 'mp-romance-shortlist';
+      var KEY_NOTES = 'mp-romance-notes';
+      var KEY_PREP = 'mp-romance-prep';
+
+      function readJSON(key, fallback) {
+        try {
+          var raw = localStorage.getItem(key);
+          return raw ? JSON.parse(raw) : fallback;
+        } catch (e) { return fallback; }
+      }
+      function writeJSON(key, val) {
+        try { localStorage.setItem(key, JSON.stringify(val)); } catch (e) {}
+      }
+
+      var shortlist = readJSON(KEY_SHORTLIST, []);
+      var notes = readJSON(KEY_NOTES, {});
+      var prep = readJSON(KEY_PREP, {});
+
+      var candidateEls = document.querySelectorAll('.rp-candidate');
+      var notesList = document.getElementById('rp-notes-list');
+      var emptyMsg = document.getElementById('rp-shortlist-empty');
+
+      function renderCandidates() {
+        candidateEls.forEach(function (el) {
+          var id = el.getAttribute('data-rp-id');
+          el.classList.toggle('is-picked', shortlist.indexOf(id) > -1);
+          var star = el.querySelector('.rp-star');
+          if (star) star.textContent = shortlist.indexOf(id) > -1 ? '★' : '☆';
+        });
+      }
+
+      function renderNotes() {
+        notesList.innerHTML = '';
+        if (shortlist.length === 0) { emptyMsg.hidden = false; return; }
+        emptyMsg.hidden = true;
+        shortlist.forEach(function (id) {
+          var el = document.querySelector('.rp-candidate[data-rp-id="' + id + '"]');
+          if (!el) return;
+          var name = el.getAttribute('data-rp-name');
+          var href = el.getAttribute('data-rp-href');
+          var card = document.createElement('div');
+          card.className = 'rp-note-card';
+          var head = document.createElement('div');
+          head.className = 'rp-note-head';
+          var strong = document.createElement('strong');
+          strong.textContent = name;
+          var link = document.createElement('a');
+          link.href = href;
+          link.textContent = '프로필 보기';
+          head.appendChild(strong);
+          head.appendChild(link);
+          var textarea = document.createElement('textarea');
+          textarea.placeholder = name + '에 대한 메모…';
+          textarea.value = notes[id] || '';
+          textarea.addEventListener('input', function () {
+            notes[id] = textarea.value;
+            writeJSON(KEY_NOTES, notes);
+          });
+          card.appendChild(head);
+          card.appendChild(textarea);
+          notesList.appendChild(card);
+        });
+      }
+
+      candidateEls.forEach(function (el) {
+        el.addEventListener('click', function () {
+          var id = el.getAttribute('data-rp-id');
+          var idx = shortlist.indexOf(id);
+          if (idx > -1) { shortlist.splice(idx, 1); }
+          else { shortlist.push(id); }
+          writeJSON(KEY_SHORTLIST, shortlist);
+          renderCandidates();
+          renderNotes();
+        });
+      });
+
+      document.querySelectorAll('[data-rp-task]').forEach(function (box) {
+        var id = box.getAttribute('data-rp-task');
+        box.checked = !!prep[id];
+        box.addEventListener('change', function () {
+          prep[id] = box.checked;
+          writeJSON(KEY_PREP, prep);
+        });
+      });
+
+      var clearBtn = document.getElementById('rp-clear');
+      if (clearBtn) {
+        clearBtn.addEventListener('click', function () {
+          if (!window.confirm('후보 목록, 메모, 준비 체크리스트를 지우시겠습니까? 이 작업은 되돌릴 수 없습니다.')) return;
+          shortlist = []; notes = {}; prep = {};
+          writeJSON(KEY_SHORTLIST, shortlist);
+          writeJSON(KEY_NOTES, notes);
+          writeJSON(KEY_PREP, prep);
+          renderCandidates();
+          renderNotes();
+          document.querySelectorAll('[data-rp-task]').forEach(function (box) { box.checked = false; });
+        });
+      }
+
+      renderCandidates();
+      renderNotes();
+    })();
+  </script>
+</Base>

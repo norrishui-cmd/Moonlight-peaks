@@ -1,0 +1,171 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { SITE, GAME } from '../../../consts';
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org', '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: '홈', item: `${SITE.url}/ko` },
+      { '@type': 'ListItem', position: 2, name: '도구', item: `${SITE.url}/ko/tools` },
+      { '@type': 'ListItem', position: 3, name: 'Nokturna 수집 기록기', item: new URL('/ko/tools/nokturna-tracker', SITE.url).href },
+    ],
+  },
+  {
+    '@context': 'https://schema.org', '@type': 'WebApplication',
+    name: 'Moonlight Peaks Nokturna 수집 기록기', applicationCategory: 'GameApplication', operatingSystem: 'Web',
+    url: new URL('/ko/tools/nokturna-tracker', SITE.url).href,
+    description: '완전히 검증된 데이터베이스가 나오기 전까지, 게임에서 발견한 카드를 브라우저에 개인적으로 저장하며 기록하는 Moonlight Peaks Nokturna 카드 추적기.',
+  },
+];
+---
+<Base
+  title="Moonlight Peaks Nokturna 수집 기록기"
+  description="나만의 Moonlight Peaks Nokturna 카드 컬렉션을 기록하세요 — 여러 덱 아키타입에 걸쳐 67장 이상의 카드가 확인되었습니다. 브라우저에만 비공개로 저장되는 나의 발견을 추적해 보세요."
+  path="/ko/tools/nokturna-tracker"
+  jsonLd={jsonLd}
+  crumbs={[{ label: '도구', href: '/ko/tools' }, { label: 'Nokturna 기록기' }]}
+  lang="ko"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">도구 / Nokturna 기록기</p>
+      <h1>Moonlight Peaks — <em>Nokturna</em> 수집 기록기</h1>
+      <p class="intro">
+        출시 시점에 확인된 사실: Nokturna는 여러 덱 아키타입에 걸쳐 67장 이상의 카드가 존재하지만,
+        개별 카드 이름은 아직 공개되지 않았습니다 — 지금까지 확인된 내용은
+        <a href="/nokturna">Nokturna 가이드</a>에서 확인하세요. 완전한 데이터베이스가 나오기 전까지,
+        게임에서 카드를 발견할 때마다 여기에 나만의 컬렉션을 기록하세요. 브라우저에만 비공개로 저장됩니다.
+      </p>
+
+      <section class="nt-shell" data-nok-tracker>
+        <aside class="nt-panel">
+          <label>
+            <span>카드 이름</span>
+            <input data-name type="text" placeholder="예: 방금 획득한 카드" />
+          </label>
+          <label>
+            <span>아키타입 / 유형 (선택 사항)</span>
+            <input data-type type="text" placeholder="예: 뱀파이어, 마녀, 늑대인간…" />
+          </label>
+          <label>
+            <span>획득 방법</span>
+            <input data-source type="text" placeholder="예: Orlock을 이겨서 획득, 낚시 보상" />
+          </label>
+          <button type="button" class="btn btn-gold" data-add>컬렉션에 추가</button>
+          <button type="button" class="btn btn-ghost" data-export>텍스트로 내보내기</button>
+          <button type="button" class="btn btn-ghost" data-reset>컬렉션 지우기</button>
+          <div class="nt-stats"><strong data-count>0</strong><span>장 기록됨 / 67장 이상 확인됨</span></div>
+        </aside>
+
+        <div class="nt-grid" data-grid aria-live="polite">
+          <p class="empty" data-empty>아직 기록된 카드가 없습니다 — 왼쪽에서 첫 승리를 추가하세요.</p>
+        </div>
+      </section>
+
+      <div class="callout">
+        이것은 여러분만의 개인 노트이며, 공식 카드 목록이 아닙니다 — 여기 내용은 사이트로 전송되지
+        않습니다. 검증된 공개 데이터베이스 구축을 돕고 싶다면 대신
+        <a href="/tools/submit-data">데이터 제출 도구</a>를 이용하세요.
+      </div>
+    </div>
+  </article>
+
+  <script>
+    const root = document.querySelector('[data-nok-tracker]');
+    if (root) {
+      const key = 'moonlight-nokturna-tracker-v1';
+      const nameInput = root.querySelector('[data-name]');
+      const typeInput = root.querySelector('[data-type]');
+      const sourceInput = root.querySelector('[data-source]');
+      const addBtn = root.querySelector('[data-add]');
+      const exportBtn = root.querySelector('[data-export]');
+      const resetBtn = root.querySelector('[data-reset]');
+      const grid = root.querySelector('[data-grid]');
+      const emptyMsg = root.querySelector('[data-empty]');
+      const count = root.querySelector('[data-count]');
+
+      let cards = JSON.parse(localStorage.getItem(key) || '[]');
+      const save = () => localStorage.setItem(key, JSON.stringify(cards));
+
+      const render = () => {
+        count.textContent = cards.length;
+        grid.querySelectorAll('.nt-card').forEach((c) => c.remove());
+        if (!cards.length) { emptyMsg.style.display = ''; return; }
+        emptyMsg.style.display = 'none';
+        [...cards].reverse().forEach((card, revIndex) => {
+          const index = cards.length - 1 - revIndex;
+          const el = document.createElement('article');
+          el.className = 'nt-card';
+          el.innerHTML = `
+            <button type="button" class="nt-remove" data-remove="${index}" aria-label="카드 삭제">✕</button>
+            <h3>${card.name}</h3>
+            ${card.type ? `<span class="nt-badge">${card.type}</span>` : ''}
+            ${card.source ? `<p class="nt-source">${card.source}</p>` : ''}
+          `;
+          grid.appendChild(el);
+        });
+      };
+
+      addBtn.addEventListener('click', () => {
+        const name = nameInput.value.trim();
+        if (!name) { nameInput.focus(); return; }
+        cards.push({ name, type: typeInput.value.trim(), source: sourceInput.value.trim() });
+        save();
+        nameInput.value = '';
+        typeInput.value = '';
+        sourceInput.value = '';
+        render();
+      });
+
+      grid.addEventListener('click', (event) => {
+        const btn = event.target.closest('[data-remove]');
+        if (!btn) return;
+        cards.splice(Number(btn.dataset.remove), 1);
+        save();
+        render();
+      });
+
+      exportBtn.addEventListener('click', () => {
+        if (!cards.length) return;
+        const text = cards.map((c) => `${c.name}${c.type ? ' [' + c.type + ']' : ''}${c.source ? ' — ' + c.source : ''}`).join('\n');
+        navigator.clipboard?.writeText(text).catch(() => {});
+        alert('Nokturna 컬렉션을 클립보드에 복사했습니다!');
+      });
+
+      resetBtn.addEventListener('click', () => {
+        if (!confirm('전체 Nokturna 컬렉션을 지우시겠습니까? 이 작업은 되돌릴 수 없습니다.')) return;
+        cards = [];
+        save();
+        render();
+      });
+
+      render();
+    }
+  </script>
+
+  <style>
+    .nt-shell { display: grid; grid-template-columns: 280px minmax(0, 1fr); gap: 18px; margin: 28px 0; }
+    @media (max-width: 820px) { .nt-shell { grid-template-columns: 1fr; } }
+    .nt-panel { border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); padding: 16px; display: grid; gap: 12px; align-self: start; }
+    .nt-panel label span { display: block; margin-bottom: 6px; color: var(--mist); font-weight: 600; }
+    .nt-panel input[type="text"] {
+      width: 100%; min-height: 44px; border: 1px solid var(--line); border-radius: 10px;
+      background: var(--ink); color: var(--mist); padding: 0 12px; font: inherit;
+    }
+    .nt-stats { border-top: 1px solid var(--line); padding-top: 12px; }
+    .nt-stats strong { display: block; color: var(--candle); font-family: var(--display); font-size: 2rem; }
+    .nt-stats span { color: var(--muted); font-size: 0.85rem; }
+    .nt-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 12px; align-content: start; }
+    .nt-card {
+      position: relative; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface);
+      padding: 14px; display: grid; gap: 6px;
+    }
+    .nt-card h3 { margin: 0; color: var(--mist); font-size: 1rem; padding-right: 20px; }
+    .nt-badge { justify-self: start; font-family: var(--mono); font-size: 0.65rem; text-transform: uppercase; color: var(--candle); border: 1px solid var(--line); border-radius: 999px; padding: 2px 8px; }
+    .nt-source { color: var(--muted); font-size: 0.82rem; margin: 0; }
+    .nt-remove { position: absolute; top: 8px; right: 10px; background: none; border: none; color: var(--muted); cursor: pointer; }
+    .nt-remove:hover { color: var(--candle); }
+    .empty { border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); padding: 16px; color: var(--muted); }
+  </style>
+</Base>

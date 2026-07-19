@@ -1,0 +1,179 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { SITE, GAME } from '../../../consts';
+import { characters, typeLabels } from '../../../data/characters';
+
+const typeLabelsKo: Record<string, string> = {
+  vampire: '뱀파이어', werewolf: '늑대인간', witch: '마녀', mermaid: '인어',
+  seer: '예언자', ghost: '유령', human: '인간', other: '기타',
+};
+
+const known = characters.filter((c) => c.status !== 'unconfirmed');
+const groups = new Map();
+for (const c of known) {
+  const key = c.family || 'Unknown';
+  if (!groups.has(key)) groups.set(key, []);
+  groups.get(key).push(c);
+}
+const familyEntries = [...groups.entries()].sort((a, b) => {
+  if (a[0] === 'Unknown') return 1;
+  if (b[0] === 'Unknown') return -1;
+  return b[1].length - a[1].length;
+});
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org', '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: '홈', item: `${SITE.url}/ko` },
+      { '@type': 'ListItem', position: 2, name: '도구', item: `${SITE.url}/ko/tools` },
+      { '@type': 'ListItem', position: 3, name: '일곱 가문 탐색기', item: new URL('/ko/tools/families-explorer', SITE.url).href },
+    ],
+  },
+  {
+    '@context': 'https://schema.org', '@type': 'WebApplication',
+    name: 'Moonlight Peaks 일곱 가문 탐색기', applicationCategory: 'GameApplication', operatingSystem: 'Web',
+    url: new URL('/ko/tools/families-explorer', SITE.url).href,
+    description: 'Moonlight Peaks의 일곱 초자연적 가문과 확인되거나 제보된 소속 주민을 탐색하는 인터랙티브 도구.',
+  },
+];
+---
+<Base
+  title="Moonlight Peaks 일곱 가문 탐색기 — 뱀파이어, 늑대인간, 마녀 그리고"
+  description="Moonlight Peaks의 일곱 초자연적 가문 — Ambrosia, Webb, Logan, Khazan, Hosu 등 — 을 탐색하고 어떤 주민이 어느 가문에 속하는지 확인 상태별로 필터링해 보세요."
+  path="/ko/tools/families-explorer"
+  jsonLd={jsonLd}
+  crumbs={[{ label: '도구', href: '/ko/tools' }, { label: '가문 탐색기' }]}
+  lang="ko"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">도구 / 가문 탐색기</p>
+      <h1>Moonlight Peaks — <em>일곱 가문</em> 탐색기</h1>
+      <p class="intro">
+        {GAME.title}는 일곱 초자연적 가문(그리고 어느 가문에도 속하지 않는 "평범한" 주민들)을
+        중심으로 구성됩니다. 이 도구는 이름이 확인된 모든 주민을 가문별로 정리하며, 사이트 전체에서
+        사용하는 확인/제보/데이터마이닝 상태 표기를 그대로 사용합니다 — 여기서는 아무것도
+        지어내지 않습니다. 마지막 업데이트: {SITE.updated}.
+      </p>
+
+      <section class="fam-shell" data-fam-explorer>
+        <aside class="fam-panel">
+          <h2>필터</h2>
+          <label>
+            <span>가문</span>
+            <select data-family>
+              <option value="all">모든 가문</option>
+              {familyEntries.map(([name]) => <option value={name}>{name}</option>)}
+            </select>
+          </label>
+          <label>
+            <span>유형</span>
+            <select data-type>
+              <option value="all">모든 유형</option>
+              {[...new Set(known.map((c) => c.type))].map((t) => <option value={t}>{typeLabelsKo[t] || typeLabels[t] || t}</option>)}
+            </select>
+          </label>
+          <label class="checkline"><input data-romance-only type="checkbox" /> 연애 가능 캐릭터만</label>
+          <div class="fam-stats"><strong data-count>{known.length}</strong><span>명의 주민 표시 중</span></div>
+        </aside>
+
+        <div class="fam-groups" data-groups>
+          {familyEntries.map(([name, members]) => (
+            <div class="fam-group" data-family-name={name}>
+              <h3>{name} <span class="fam-count">({members.length})</span></h3>
+              <div class="fam-cards">
+                {members.map((m) => (
+                  <a
+                    class="fam-card"
+                    href={`/characters/${m.id}`}
+                    data-type={m.type}
+                    data-romance={String(m.romanceable === true)}
+                    style={`--c1:${m.c1};--c2:${m.c2}`}
+                  >
+                    <span class="fam-avatar">{m.name.charAt(0)}</span>
+                    <span class="fam-name">{m.name}</span>
+                    <span class="fam-meta">{typeLabelsKo[m.type] || typeLabels[m.type] || m.type} · {m.status}</span>
+                    {m.romanceable === true && <span class="fam-heart" aria-label="연애 가능">♥</span>}
+                  </a>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <div class="callout">
+        가문 이름과 구성원은 사이트 전체에서 사용하는 확인/제보/데이터마이닝 표기를 그대로
+        반영합니다. 출시 주간 보도가 검증됨에 따라 이 목록은 계속 늘어날 예정입니다 — 각 주민의
+        구체적인 출처는 <a href="/characters">전체 프로필</a>에서 확인하세요.
+      </div>
+    </div>
+  </article>
+
+  <script define:vars={{}}>
+    const root = document.querySelector('[data-fam-explorer]');
+    if (root) {
+      const familySel = root.querySelector('[data-family]');
+      const typeSel = root.querySelector('[data-type]');
+      const romanceOnly = root.querySelector('[data-romance-only]');
+      const groupsEl = root.querySelector('[data-groups]');
+      const count = root.querySelector('[data-count]');
+
+      const render = () => {
+        const fam = familySel.value;
+        const type = typeSel.value;
+        const romance = romanceOnly.checked;
+        let shown = 0;
+        groupsEl.querySelectorAll('.fam-group').forEach((group) => {
+          const groupFam = group.dataset.familyName;
+          let groupVisible = fam === 'all' || fam === groupFam;
+          let anyCardVisible = false;
+          group.querySelectorAll('.fam-card').forEach((card) => {
+            const matchesType = type === 'all' || card.dataset.type === type;
+            const matchesRomance = !romance || card.dataset.romance === 'true';
+            const visible = groupVisible && matchesType && matchesRomance;
+            card.style.display = visible ? '' : 'none';
+            if (visible) { anyCardVisible = true; shown++; }
+          });
+          group.style.display = anyCardVisible ? '' : 'none';
+        });
+        count.textContent = shown;
+      };
+      [familySel, typeSel, romanceOnly].forEach((el) => el.addEventListener('input', render));
+      render();
+    }
+  </script>
+
+  <style>
+    .fam-shell { display: grid; grid-template-columns: 240px minmax(0, 1fr); gap: 18px; margin: 28px 0; }
+    @media (max-width: 820px) { .fam-shell { grid-template-columns: 1fr; } }
+    .fam-panel { border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); padding: 16px; display: grid; gap: 14px; align-self: start; }
+    .fam-panel h2 { margin: 0; }
+    .fam-panel label span { display: block; margin-bottom: 6px; color: var(--mist); font-weight: 600; }
+    .fam-panel select { width: 100%; min-height: 44px; border: 1px solid var(--line); border-radius: 10px; background: var(--ink); color: var(--mist); padding: 0 12px; font: inherit; }
+    .checkline { display: flex; gap: 9px; align-items: center; color: var(--muted); }
+    .fam-stats { border-top: 1px solid var(--line); padding-top: 12px; }
+    .fam-stats strong { display: block; color: var(--candle); font-family: var(--display); font-size: 2rem; }
+    .fam-stats span { color: var(--muted); }
+
+    .fam-groups { display: grid; gap: 22px; }
+    .fam-group h3 { margin: 0 0 10px; color: var(--mist); }
+    .fam-count { color: var(--muted); font-weight: 400; }
+    .fam-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 10px; }
+    .fam-card {
+      position: relative; display: grid; gap: 6px; justify-items: center; text-align: center;
+      border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface);
+      padding: 14px 8px; text-decoration: none; transition: transform 0.15s ease, border-color 0.15s ease;
+    }
+    .fam-card:hover { transform: translateY(-2px); border-color: var(--c2, var(--candle)); }
+    .fam-avatar {
+      width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center;
+      font-family: var(--display); font-size: 1.2rem; color: #fff;
+      background: linear-gradient(135deg, var(--c1, #444), var(--c2, #888));
+    }
+    .fam-name { color: var(--mist); font-weight: 600; }
+    .fam-meta { color: var(--muted); font-size: 0.72rem; font-family: var(--mono); text-transform: uppercase; }
+    .fam-heart { position: absolute; top: 8px; right: 10px; color: var(--candle); }
+  </style>
+</Base>

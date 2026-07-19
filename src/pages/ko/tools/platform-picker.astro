@@ -1,0 +1,184 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { SITE, GAME } from '../../../consts';
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: '홈', item: `${SITE.url}/ko` },
+      { '@type': 'ListItem', position: 2, name: '도구', item: `${SITE.url}/ko/tools` },
+      { '@type': 'ListItem', position: 3, name: '플랫폼 선택기', item: new URL('/ko/tools/platform-picker', SITE.url).href },
+    ],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebApplication',
+    name: 'Moonlight Peaks 플랫폼 선택기',
+    applicationCategory: 'GameApplication',
+    operatingSystem: 'Web',
+    url: new URL('/ko/tools/platform-picker', SITE.url).href,
+    description: 'Steam, Steam Deck, Nintendo Switch, Switch 2, Android 중에서 선택할 수 있는 Moonlight Peaks 플랫폼 선택기.',
+  },
+];
+---
+<Base
+  title="Moonlight Peaks 플랫폼 선택기 - Steam, Switch 2, Steam Deck, Android?"
+  description="이 Moonlight Peaks 플랫폼 선택기로 Steam, Steam Deck, Nintendo Switch, Switch 2, Android 중 자신에게 가장 적합한 선택이 무엇인지 확인해 보세요."
+  path="/ko/tools/platform-picker"
+  jsonLd={jsonLd}
+  crumbs={[{ label: '도구', href: '/ko/tools' }, { label: '플랫폼 선택기' }]}
+  lang="ko"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">도구 / 플랫폼 선택기</p>
+      <h1>Moonlight Peaks — <em>플랫폼 선택기</em></h1>
+      <p class="intro">
+        {GAME.title}를 어디서 플레이할지 고민되시나요? 가장 중요하게 생각하는 것을 선택하면, 확인된
+        플랫폼 데이터와 데모 이용 가능 여부, 신중한 가정을 바탕으로 이 도구가 플랫폼을 추천해 드립니다.
+      </p>
+
+      <section class="picker-shell" data-platform-picker>
+        <div class="picker-panel">
+          <h2>나의 우선순위</h2>
+          <label>
+            <span>주로 플레이하는 방식</span>
+            <select data-field="playstyle">
+              <option value="desk">책상이나 노트북에서</option>
+              <option value="handheld">주로 휴대 모드로</option>
+              <option value="tv">TV나 소파에서</option>
+              <option value="mobile">휴대폰이나 모바일 기기에서</option>
+            </select>
+          </label>
+          <fieldset>
+            <legend>가장 중요하게 생각하는 것은?</legend>
+            <label><input type="checkbox" value="demo" checked /> 가장 쉬운 데모 접근성을 원해요</label>
+            <label><input type="checkbox" value="performance" /> 성능과 패치가 중요해요</label>
+            <label><input type="checkbox" value="portable" /> 휴대 모드로 플레이하고 싶어요</label>
+            <label><input type="checkbox" value="lowest-price" /> 가능한 가장 낮은 가격을 원해요</label>
+            <label><input type="checkbox" value="controller" /> 컨트롤러/소파 조작을 선호해요</label>
+          </fieldset>
+        </div>
+
+        <div class="picker-result" aria-live="polite">
+          <span class="result-kicker">추천</span>
+          <h2 data-result-title>Steam</h2>
+          <p data-result-copy>빠른 업데이트, PC/Mac 접근성, 출시 전 가장 폭넓은 데모 접근이 필요하다면 Steam이 가장 안전한 선택입니다.</p>
+          <div class="score-list" data-score-list></div>
+          <a class="btn btn-primary" data-result-link href="/platforms">플랫폼 가이드 열기</a>
+        </div>
+      </section>
+
+      <h2>이 선택기가 사용하는 플랫폼 정보</h2>
+      <table class="facts">
+        <tr><th>출시일</th><td>{GAME.releaseLabel}</td></tr>
+        <tr><th>확인된 플랫폼</th><td>{GAME.platforms.join(', ')}</td></tr>
+        <tr><th>데모</th><td>{GAME.demo}</td></tr>
+        <tr><th>가격</th><td>{GAME.price}; Switch 2 에디션은 더 높을 가능성이 있습니다.</td></tr>
+      </table>
+
+      <div class="callout">
+        이것은 계획 도구이지 성능 벤치마크가 아닙니다. Steam Deck 최종 인증, Android 요구 사항,
+        Switch 성능은 출시 후 다시 확인해야 합니다.
+      </div>
+    </div>
+  </article>
+
+  <script>
+    const tools = document.querySelector('[data-platform-picker]');
+    if (tools) {
+      const platforms = [
+        {
+          id: 'steam',
+          title: 'Steam',
+          href: '/platforms',
+          copy: '빠른 업데이트, PC/Mac 접근성, 출시 전 가장 폭넓은 데모 접근이 필요하다면 Steam이 가장 안전한 선택입니다.',
+          weights: { desk: 5, handheld: 1, tv: 1, mobile: 0, demo: 3, performance: 3, portable: 0, 'lowest-price': 2, controller: 1 },
+        },
+        {
+          id: 'steam-deck',
+          title: 'Steam Deck',
+          href: '/platforms/steam-deck',
+          copy: 'Steam 생태계를 벗어나지 않고 휴대 모드로 플레이하고 싶다면 Steam Deck이 가장 적합합니다.',
+          weights: { desk: 1, handheld: 5, tv: 1, mobile: 0, demo: 2, performance: 2, portable: 4, 'lowest-price': 1, controller: 2 },
+        },
+        {
+          id: 'switch-2',
+          title: 'Nintendo Switch 2',
+          href: '/platforms/switch-2',
+          copy: '네이티브 최신 닌텐도 버전과 소파에서 편안한 플레이를 원한다면 Switch 2가 최고의 콘솔 선택입니다.',
+          weights: { desk: 0, handheld: 4, tv: 5, mobile: 0, demo: 2, performance: 3, portable: 4, 'lowest-price': 0, controller: 4 },
+        },
+        {
+          id: 'switch',
+          title: 'Nintendo Switch',
+          href: '/platforms',
+          copy: '이미 콘솔을 보유하고 있고 PC 없이 휴대 모드나 TV로 플레이하고 싶다면 Nintendo Switch가 잘 맞습니다.',
+          weights: { desk: 0, handheld: 4, tv: 4, mobile: 0, demo: 2, performance: 0, portable: 4, 'lowest-price': 1, controller: 4 },
+        },
+        {
+          id: 'android',
+          title: 'Android / Google Play',
+          href: '/platforms/android',
+          copy: 'Android는 모바일 플레이어를 위한 선택이지만, 기기 요구 사항과 조작 방식은 출시 후 확인해야 합니다.',
+          weights: { desk: 0, handheld: 2, tv: 0, mobile: 5, demo: 0, performance: 0, portable: 4, 'lowest-price': 1, controller: 0 },
+        },
+      ];
+
+      const playstyle = tools.querySelector('[data-field="playstyle"]');
+      const checks = [...tools.querySelectorAll('input[type="checkbox"]')];
+      const resultTitle = tools.querySelector('[data-result-title]');
+      const resultCopy = tools.querySelector('[data-result-copy]');
+      const resultLink = tools.querySelector('[data-result-link]');
+      const scoreList = tools.querySelector('[data-score-list]');
+
+      const render = () => {
+        const selected = [playstyle.value, ...checks.filter((item) => item.checked).map((item) => item.value)];
+        const scored = platforms
+          .map((platform) => ({
+            ...platform,
+            score: selected.reduce((sum, key) => sum + (platform.weights[key] || 0), 0),
+          }))
+          .sort((a, b) => b.score - a.score);
+        const best = scored[0];
+        resultTitle.textContent = best.title;
+        resultCopy.textContent = best.copy;
+        resultLink.href = best.href;
+        scoreList.innerHTML = scored
+          .map((item) => `<div><span>${item.title}</span><strong>${item.score}</strong></div>`)
+          .join('');
+      };
+
+      playstyle.addEventListener('change', render);
+      checks.forEach((item) => item.addEventListener('change', render));
+      render();
+    }
+  </script>
+
+  <style>
+    .picker-shell { display: grid; grid-template-columns: minmax(0, 1fr) minmax(280px, 0.9fr); gap: 18px; margin-top: 28px; align-items: stretch; }
+    @media (max-width: 820px) { .picker-shell { grid-template-columns: 1fr; } }
+    .picker-panel, .picker-result { border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); padding: 18px; }
+    .picker-panel h2, .picker-result h2 { margin-top: 0; }
+    .picker-panel label span, .picker-panel legend { display: block; color: var(--mist); font-weight: 600; margin-bottom: 8px; }
+    .picker-panel select {
+      width: 100%;
+      min-height: 44px;
+      color: var(--mist);
+      background: var(--ink);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 0 12px;
+      font: inherit;
+    }
+    .picker-panel fieldset { border: 0; padding: 0; margin: 22px 0 0; display: grid; gap: 10px; }
+    .picker-panel fieldset label { display: flex; gap: 10px; align-items: flex-start; color: var(--muted); }
+    .picker-panel input { accent-color: var(--candle); margin-top: 5px; }
+    .result-kicker { font-family: var(--mono); font-size: 0.7rem; color: var(--candle); text-transform: uppercase; letter-spacing: 0.12em; }
+    .score-list { display: grid; gap: 8px; margin: 18px 0; }
+    .score-list div { display: flex; justify-content: space-between; gap: 12px; border-bottom: 1px solid var(--line); padding-bottom: 7px; color: var(--muted); }
+    .score-list strong { color: var(--candle); font-family: var(--mono); }
+  </style>
+</Base>
