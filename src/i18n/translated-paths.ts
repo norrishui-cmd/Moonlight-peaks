@@ -75,7 +75,10 @@ const frPaths = ['/', '/release-date', '/beginner-guide', '/characters', '/roman
 // alongside it — grows independently from here.
 const koPaths = ['/', '/release-date', '/beginner-guide', '/characters', '/romance', '/families', '/locations', '/activities', '/items',
   '/farming', '/magic', '/platforms', '/demo', '/character-creator', '/shapeshifting', '/faq', '/tools',
-  '/guides', '/cheats', '/about', '/languages'];
+  '/guides', '/cheats', '/about', '/languages',
+  '/tools/fish-finder', '/tools/item-tracker', '/tools/gift-tracker', '/tools/families-explorer',
+  '/tools/farming-profit-planner', '/tools/nokturna-tracker', '/tools/platform-picker',
+  '/tools/romance-gift-finder', '/tools/romance-match-quiz', '/tools/romance-planner', '/tools/submit-data'];
 
 export const translatedPathsByLocale: Record<Locale, Set<string>> = {
   en: new Set(), // English is the source; not meaningful to check "is English translated".
