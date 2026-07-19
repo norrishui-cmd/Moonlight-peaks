@@ -3,6 +3,7 @@ import Base from '../layouts/Base.astro';
 import { SITE, GAME } from '../consts';
 import YouTube from '../components/YouTube.astro';
 import PriorityLinks from '../components/PriorityLinks.astro';
+import News from '../components/News.astro';
 import { demo } from '../data/demo';
 import { demoPriorityLinks } from '../data/priorityLinks';
 
@@ -102,6 +103,9 @@ const jsonLd = [
           </a>
         ))}
       </div>
+
+      <h2>Latest demo &amp; customization updates</h2>
+      <News topic="customize" limit={5} />
 
       <h2>FAQ</h2>
       <div class="faq">

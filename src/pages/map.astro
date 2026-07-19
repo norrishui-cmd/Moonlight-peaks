@@ -3,6 +3,7 @@ import Base from '../layouts/Base.astro';
 import { SITE, GAME } from '../consts';
 import { markers, categories, markersConfirmed } from '../data/map-locations';
 import GuideImage from '../components/GuideImage.astro';
+import News from '../components/News.astro';
 
 const colorOf = Object.fromEntries(categories.map((c) => [c.id, c.color]));
 const labelOf = Object.fromEntries(categories.map((c) => [c.id, c.label]));
@@ -140,6 +141,9 @@ const jsonLd = [
         <li><strong>Shops</strong> and what each sells.</li>
         <li><strong>Resident homes</strong> linked to the romance & gift pages.</li>
       </ul>
+
+      <h2>Latest world &amp; location updates</h2>
+      <News category="world" limit={5} />
 
       <h2>FAQ</h2>
       <div class="faq">

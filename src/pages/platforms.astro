@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import { SITE, GAME } from '../consts';
 import PriorityLinks from '../components/PriorityLinks.astro';
+import News from '../components/News.astro';
 import { platforms } from '../data/platforms';
 import { platformPriorityLinks } from '../data/priorityLinks';
 
@@ -78,6 +79,9 @@ const jsonLd = [
         (PC &amp; Mac), Steam Deck, Nintendo Switch, Nintendo Switch 2, and Android via Google Play.
         If that changes, we will update this page.
       </p>
+
+      <h2>Latest platform updates</h2>
+      <News category="platforms" limit={5} />
 
       <div class="callout">
         Related: <a href="/release-date">release date</a> - <a href="/demo">the demo</a> -
