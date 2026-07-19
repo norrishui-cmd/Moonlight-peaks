@@ -2,4 +2,9 @@
 import TopicHub from '../../components/TopicHub.astro';
 import { familiesSection, families } from '../../data/families';
 ---
-<TopicHub section={familiesSection} items={families} newsTopic="families" newsHeading="Latest family updates" />
+<TopicHub section={familiesSection} items={families} newsTopic="families" newsHeading="Latest family updates"
+  faqLinks={[
+    { label: 'How many characters?', href: '/faq/how-many-total-characters-are-in-the-game' },
+    { label: 'Family gift disagreements', href: '/faq/which-characters-have-disputed-gift-data' },
+  ]}
+/>

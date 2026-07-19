@@ -2,4 +2,9 @@
 import TopicHub from '../components/TopicHub.astro';
 import { activitiesSection, activities } from '../data/activities';
 ---
-<TopicHub section={activitiesSection} items={activities} newsCategory="world" newsHeading="Latest world updates" />
+<TopicHub section={activitiesSection} items={activities} newsCategory="world" newsHeading="Latest world updates"
+  faqLinks={[
+    { label: 'Where does Yoga unlock?', href: '/faq/where-does-yoga-unlock-in-moonlight-peaks' },
+    { label: 'Are handmade gifts better?', href: '/faq/are-handmade-gifts-better-than-store-bought' },
+  ]}
+/>

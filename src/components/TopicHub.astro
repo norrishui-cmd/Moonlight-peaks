@@ -6,8 +6,11 @@ import ThubCard from './ThubCard.astro';
 import type { TopicSection, TopicItem } from '../data/topic';
 import type { NewsCategory } from '../data/news';
 
-interface Props { section: TopicSection; items: TopicItem[]; newsCategory?: NewsCategory; newsTopic?: string; newsHeading?: string; }
-const { section, items, newsCategory, newsTopic, newsHeading } = Astro.props;
+interface Props {
+  section: TopicSection; items: TopicItem[]; newsCategory?: NewsCategory; newsTopic?: string; newsHeading?: string;
+  faqLinks?: { label: string; href: string }[];
+}
+const { section, items, newsCategory, newsTopic, newsHeading, faqLinks } = Astro.props;
 
 // Group items by their `tag` field when the section opts in, preserving first-seen tag order
 // so the grouping reads naturally rather than alphabetically.
@@ -94,6 +97,16 @@ const jsonLd = [
           <h2>{newsHeading ?? 'Latest updates'}</h2>
           <News category={newsCategory} topic={newsTopic} limit={5} />
         </>
+      )}
+
+      {faqLinks && faqLinks.length > 0 && (
+        <div class="callout">
+          <strong>Related FAQ:</strong>{' '}
+          {faqLinks.map((l, i) => (
+            <>{i > 0 ? ' · ' : ''}<a href={l.href}>{l.label}</a></>
+          ))}
+          {' · '}<a href="/faq">full FAQ hub</a>.
+        </div>
       )}
     </div>
   </article>

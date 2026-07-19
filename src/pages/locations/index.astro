@@ -2,4 +2,9 @@
 import TopicHub from '../../components/TopicHub.astro';
 import { locationsSection, locations } from '../../data/locations';
 ---
-<TopicHub section={locationsSection} items={locations} newsCategory="world" newsHeading="Latest world updates" />
+<TopicHub section={locationsSection} items={locations} newsCategory="world" newsHeading="Latest world updates"
+  faqLinks={[
+    { label: 'Museum collection counts', href: '/faq/how-many-items-in-each-museum-collection' },
+    { label: 'Twilight Catacombs unlock', href: '/locations/twilight-catacombs' },
+  ]}
+/>
