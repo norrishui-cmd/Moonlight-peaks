@@ -5,6 +5,28 @@
   "outputDirectory": "dist",
   "cleanUrls": true,
   "trailingSlash": false,
+  "redirects": [
+    { "source": "/collection", "destination": "/collections", "permanent": true },
+    { "source": "/collection/vampsters", "destination": "/collections/vampsters", "permanent": true },
+    { "source": "/collection/jobs", "destination": "/collections/albertus-jobs", "permanent": true },
+    { "source": "/collection/fish", "destination": "/collections/fish", "permanent": true },
+    { "source": "/collection/critters", "destination": "/collections/critters", "permanent": true },
+    { "source": "/collection/soul-blobs", "destination": "/collections/soul-blobs", "permanent": true },
+    { "source": "/collection/fish/:slug", "destination": "/collections/fish/:slug", "permanent": true },
+    { "source": "/collection/critters/:slug", "destination": "/collections/critters/:slug", "permanent": true },
+    { "source": "/de/collection", "destination": "/de/collections", "permanent": true },
+    { "source": "/de/collection/vampsters", "destination": "/de/collections/vampsters", "permanent": true },
+    { "source": "/de/collection/jobs", "destination": "/de/collections/jobs", "permanent": true },
+    { "source": "/de/collection/fish", "destination": "/de/collections/fish", "permanent": true },
+    { "source": "/de/collection/critters", "destination": "/de/collections/critters", "permanent": true },
+    { "source": "/de/collection/soul-blobs", "destination": "/de/collections/soul-blobs", "permanent": true },
+    { "source": "/ja/collection", "destination": "/ja/collections", "permanent": true },
+    { "source": "/ja/collection/vampsters", "destination": "/ja/collections/vampsters", "permanent": true },
+    { "source": "/ja/collection/jobs", "destination": "/ja/collections/jobs", "permanent": true },
+    { "source": "/ja/collection/fish", "destination": "/ja/collections/fish", "permanent": true },
+    { "source": "/ja/collection/critters", "destination": "/ja/collections/critters", "permanent": true },
+    { "source": "/ja/collection/soul-blobs", "destination": "/ja/collections/soul-blobs", "permanent": true }
+  ],
   "headers": [
     {
       "source": "/sitemap.xml",
