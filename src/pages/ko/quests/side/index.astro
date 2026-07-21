@@ -1,0 +1,63 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import { SITE } from '../../../../consts';
+import { sideQuests } from '../../../../data/quests-side';
+import { sideQuestsKo } from '../../../../i18n/quests-side-ko';
+
+const jsonLd = {
+  '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '홈', item: `${SITE.url}/ko` },
+    { '@type': 'ListItem', position: 2, name: '퀘스트 가이드', item: `${SITE.url}/ko/quests` },
+    { '@type': 'ListItem', position: 3, name: '사이드 퀘스트', item: `${SITE.url}/ko/quests/side` },
+  ],
+};
+---
+<Base
+  title="Moonlight Peaks 사이드 퀘스트 — 모든 NPC 퀘스트 & 서브 시스템"
+  description="확인된 모든 Moonlight Peaks 사이드 퀘스트와 NPC별 요청 — 낚시 대회, 집 확장, 일거리 게시판, 그리고 마을의 생물 수집 서브 시스템."
+  path="/ko/quests/side"
+  jsonLd={jsonLd}
+  crumbs={[{ label: '퀘스트 가이드', href: '/ko/quests' }, { label: '사이드 퀘스트' }]}
+  lang="ko"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">퀘스트 · 사이드 퀘스트</p>
+      <h1>사이드 <em>퀘스트</em></h1>
+      <p class="intro">
+        <a href="/ko/quests/story">메인 스토리 체인</a>과는 별개인, 확인된 {sideQuests.length}개의
+        사이드 퀘스트와 NPC별 요청입니다. 특정 주민과의 일회성 퀘스트부터 일거리 게시판 같은
+        진행형 서브 시스템까지 다양합니다.
+      </p>
+
+      <div class="sq-grid">
+        {sideQuests.filter((q) => sideQuestsKo[q.slug]).map((q) => (
+          <a class="sq-card" href={`/ko/quests/side/${q.slug}`}>
+            <span class="sq-tag">{q.npc ? q.npc.charAt(0).toUpperCase() + q.npc.slice(1) : '서브 시스템'}</span>
+            <h3>{sideQuestsKo[q.slug].title}</h3>
+            <p>{sideQuestsKo[q.slug].summary.length > 130 ? sideQuestsKo[q.slug].summary.slice(0, 127) + '…' : sideQuestsKo[q.slug].summary}</p>
+          </a>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        관련: <a href="/ko/quests">퀘스트 허브</a>, <a href="/ko/quests/story">메인 스토리</a>,
+        <a href="/ko/collections">컬렉션</a>, <a href="/ko/characters">캐릭터</a>.
+      </div>
+    </div>
+  </article>
+
+  <style>
+    .sq-grid { display: grid; grid-template-columns: 1fr; gap: 12px; margin: 22px 0 30px; }
+    @media (min-width: 640px) { .sq-grid { grid-template-columns: 1fr 1fr; } }
+    .sq-card {
+      display: block; border: 1px solid var(--line); border-radius: 14px; background: var(--surface);
+      padding: 16px; text-decoration: none; color: inherit;
+      transition: border-color .15s ease, transform .15s ease;
+    }
+    .sq-card:hover { border-color: color-mix(in srgb, var(--candle) 54%, var(--line)); transform: translateY(-2px); }
+    .sq-tag { font-family: var(--mono); font-size: 0.66rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--candle); }
+    .sq-card h3 { margin: 6px 0 6px; font-size: 1.05rem; }
+    .sq-card p { margin: 0; color: #ded3e6; font-size: 0.86rem; }
+  </style>
+</Base>

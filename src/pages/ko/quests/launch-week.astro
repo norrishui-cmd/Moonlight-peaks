@@ -1,0 +1,154 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { SITE } from '../../../consts';
+import { storyQuests } from '../../../data/quests-story';
+import { sideQuests } from '../../../data/quests-side';
+import { storyQuestsKo, storyChaptersKo } from '../../../i18n/quests-story-ko';
+import { sideQuestsKo } from '../../../i18n/quests-side-ko';
+
+const blockingBugs = sideQuests.filter((q) =>
+  ['npc-stuck-cant-interact', 'form-wheel-softlock', 'ui-softlock-after-shop', 'lost-save-data'].includes(q.slug)
+).filter((q) => sideQuestsKo[q.slug]);
+
+const keyQuestSlugs = ['fallen-tree-arborascend', 'elviras-treasure-hunt', 'the-net-and-death', 'the-magic-of-crops', 'vampster-collection-quest'];
+const keyQuests = sideQuests.filter((q) => keyQuestSlugs.includes(q.slug)).filter((q) => sideQuestsKo[q.slug]);
+
+const firstWeekChapter = storyChaptersKo[0];
+const firstWeekQuests = storyQuests.filter((q) => q.chapter === 1).filter((q) => storyQuestsKo[q.slug]);
+
+const faq = [
+  { q: 'Moonlight Peaks에서 쓰러진 나무는 어디에 있나요?', a: 'PC Gamer로 확인됨: 뻔한 추측과 달리 Howling Marshes에는 없습니다. "신비로운 만" 퀘스트의 일부로, Hosu 인어 가족이 마을로 돌아오는 것과 관련된 다른 구역의 폭포를 막고 있습니다. 도구가 아니라 Arborascend 주문(Sabrina에게서 구매)으로 제거합니다.' },
+  { q: 'Cave of Echoes는 어떻게 해금하나요?', a: '확인됨: 먼저 "A Bridge Too Far"를 완료하세요. Cave of Echoes는 이 퀘스트를 완료할 때까지 잠겨 있는 Misty Shores 구역 안에 있습니다.' },
+  { q: 'Samael과는 어떻게 데이트할 수 있나요?', a: '교차 확인된 출시 주간 보도로 확인됨: 그의 로맨스는 Luna Bay에 도달해 Hosu 인어 가족을 만날 때까지 스토리 진행에 묶여 있습니다. 이전의 "수수께끼 같은 통로"와 "신비로운 만" 퀘스트는 쓰러진 나무 치우기, Ludo와 함께 다리 고치기, 그의 결혼식 준비를 포함하며 — 인어 Kim이 제단에서 난입합니다. 그 후 Orlock이 그의 루트를 다시 열어줄 때까지 일주일 동안 데이트할 수 없습니다. 전체 세부 사항은 캐릭터 프로필에서 확인하세요.' },
+  { q: 'Moonlight Peaks에서 모두에게 좋은 최고의 선물은 무엇인가요?', a: '보라색 튤립이 널리 좋아하는 선물로, 양파 씨앗이 널리 싫어하는 선물로 제보되지만 — 대부분의 주민은 아직 정리 중인 개별 취향을 가지고 있습니다. 캐릭터별로 확인된 정보는 로맨스 선물 찾기를, 직접 테스트한 결과를 기록하려면 선물 추적기를 사용하세요.' },
+  { q: 'Moonlight Peaks에서 각 물고기는 어디서 잡나요?', a: '장소, 희귀도, 계절, 물고기별 판매 가격을 포함한 22종의 전체 데이터베이스는 컬렉션: 물고기 페이지에 있습니다 — 각 종마다 자체 상세 페이지가 있습니다.' },
+  { q: '퀘스트가 전혀 진행되지 않으면 어떻게 하나요?', a: '여러 가이드에서 나온 일반적인 문제 해결법: 퀘스트 로그, 게시판/일거리 보드, 지도(느낌표나 반짝이는 오라 마커)를 확인하고, 퀘스트와 관련된 특정 주민이 아직 확인하지 않은 곳에 있는지 확인하세요. 많은 라이프 시뮬레이션(Moonlight Peaks 포함)은 특정 구역에 들어가는 것에 특정 발동 조건을 걸어두므로, 최근 관련 있는 장소를 다시 방문하는 것이 도움이 되는 경우가 많습니다. 가장 흔한 실제 원인은 빠진 아이템이 아니라 — 게임이 이미 도입했지만 아직 사용하지 않은 시스템(새 형태, 주문, 도구, NPC)입니다.' },
+  { q: 'Twilight Catacombs는 어떻게 해금하나요?', a: '확인됨: Viktor의 무덤 근처 잠긴 지하실 문은 퀘스트나 구매로 열리지 않습니다 — 박물관 컬렉션이 25% 완성도에 도달하면 Jada가 열쇠를 줍니다. 생물을 잡고 더 좋은 품질의 생산물을 기부하는 것이 진짜 방법이지, 스토리 발동 조건이 아닙니다.' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '홈', item: `${SITE.url}/ko` },
+    { '@type': 'ListItem', position: 2, name: '퀘스트', item: new URL('/ko/quests', SITE.url).href },
+    { '@type': 'ListItem', position: 3, name: '출시 주간 패키지', item: new URL('/ko/quests/launch-week', SITE.url).href },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks 출시 주간 가이드 — 핵심 퀘스트, 막힘 & 해결법"
+  description="Moonlight Peaks 첫 주를 위한 모든 것: 스토리 순서, 플레이어들이 실제로 막히는 퀘스트(쓰러진 나무, Cave of Echoes, Elvira의 보물찾기, Samael의 로맨스), 알려진 막힘 버그, 그리고 물고기/선물 데이터가 실제로 어디에 있는지."
+  path="/ko/quests/launch-week"
+  jsonLd={jsonLd}
+  crumbs={[{ label: '퀘스트', href: '/ko/quests' }, { label: 'Launch Week' }]}
+  lang="ko"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">퀘스트 · 출시 주간 패키지</p>
+      <h1>출시 주간 <em>패키지</em></h1>
+      <p class="intro">
+        첫 주에 가장 자주 등장하는 퀘스트와 질문들을 위한 단일 진입점입니다 — 전체 스토리/사이드
+        퀘스트 가이드의 복제가 아니라, 플레이어가 실제로 막히는 부분으로 바로 가는 지름길입니다.
+        {SITE.updated} 업데이트됨.
+      </p>
+
+      <h2>1. 첫 주 스토리 흐름 — 챕터 {firstWeekChapter.number}</h2>
+      <p>{firstWeekChapter.dek}</p>
+      <ol class="lw-list">
+        {firstWeekQuests.map((q) => (
+          <li><a href={`/ko/quests/story/${q.slug}`}>{storyQuestsKo[q.slug].title}</a> <span class="lw-giver">— {q.giver}</span></li>
+        ))}
+      </ol>
+      <p class="lw-note">전체 순서와 이후 모든 챕터: <a href="/ko/quests/story">메인 스토리 가이드</a>.</p>
+
+      <h2>2. 이름으로 가장 많이 검색되는 핵심 퀘스트</h2>
+      <p>가장 확인된 문제 해결 콘텐츠가 많은 특정 막힘 지점 페이지들입니다.</p>
+      <div class="lw-grid">
+        {keyQuests.map((q) => (
+          <a class="lw-card" href={`/ko/quests/side/${q.slug}`}>
+            <span class="lw-tag">{q.status === 'confirmed' ? '확인됨' : '제보됨'}</span>
+            <strong>{sideQuestsKo[q.slug].title}</strong>
+            <span>{sideQuestsKo[q.slug].troubleshooting?.[0]?.q}</span>
+          </a>
+        ))}
+        <a class="lw-card" href="/locations/mines">
+          <span class="lw-tag">확인됨</span>
+          <strong>Cave of Echoes / 광산</strong>
+          <span>해금 방법, 구리와 철이 있는 곳, 그리고 아직 잠겨 있을 수 있는 이유.</span>
+        </a>
+        <a class="lw-card" href="/locations/crystal-cave">
+          <span class="lw-tag">확인됨</span>
+          <strong>Twilight Catacombs</strong>
+          <span>Viktor의 무덤 근처 잠긴 지하실 문은 퀘스트가 아니라 Jada의 열쇠가 필요합니다 — 박물관 완성도 25%.</span>
+        </a>
+        <a class="lw-card" href="/characters/samael">
+          <span class="lw-tag">확인됨</span>
+          <strong>Samael의 로맨스</strong>
+          <span>전제 퀘스트 체인 전체, 결혼식 반전, 그리고 하트 레벨 잠금.</span>
+        </a>
+      </div>
+
+      <h2>3. 알려진 막힘 버그</h2>
+      <p>퀘스트 조건 문제가 아니라 실제로 제보된 버그입니다. 단계를 놓쳤다고 가정하기 전에 여기를 확인하세요.</p>
+      <div class="lw-grid">
+        {blockingBugs.map((q) => (
+          <a class="lw-card lw-card-bug" href={`/ko/quests/side/${q.slug}`}>
+            <span class="lw-tag lw-tag-bug">{q.status === 'confirmed' ? '확인된 버그' : '제보된 버그'}</span>
+            <strong>{sideQuestsKo[q.slug].title}</strong>
+            <span>{sideQuestsKo[q.slug].troubleshooting?.[0]?.q}</span>
+          </a>
+        ))}
+      </div>
+      <p class="lw-note">전체 목록: <a href="/known-issues">알려진 문제</a>.</p>
+
+      <h2>4. 참고 데이터는 실제로 어디에 있나요</h2>
+      <p>텍스트 페이지로 중복하는 대신, 인터랙티브 도구를 직접 사용하세요:</p>
+      <div class="lw-grid">
+        <a class="lw-card" href="/ko/tools/romance-gift-finder"><span class="lw-tag">도구</span><strong>로맨스 선물 찾기</strong><span>캐릭터별로 필터링 가능한 확인된 최고/선호/비선호 선물.</span></a>
+        <a class="lw-card" href="/ko/tools/gift-tracker"><span class="lw-tag">도구</span><strong>선물 추적기</strong><span>확인된 데이터가 없는 캐릭터를 위해 직접 선물 테스트를 기록하세요.</span></a>
+        <a class="lw-card" href="/ko/collections/fish"><span class="lw-tag">데이터</span><strong>물고기 컬렉션</strong><span>22종, 각각 자체 장소/희귀도/계절/가격 페이지 보유.</span></a>
+        <a class="lw-card" href="/map"><span class="lw-tag">데이터</span><strong>지도</strong><span>마을 배치, 퀘스트 마커, 확인된 장소 이름.</span></a>
+      </div>
+
+      <h2>자주 묻는 질문</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        관련: <a href="/ko/quests">퀘스트 개요</a>, <a href="/ko/quests/story">메인 스토리</a>,
+        <a href="/ko/quests/side">사이드 퀘스트</a>, <a href="/ko/beginner-guide">초보자 가이드</a>,
+        <a href="/known-issues">알려진 문제</a>.
+      </div>
+    </div>
+  </article>
+
+  <style>
+    .lw-list { display: grid; gap: 6px; margin: 10px 0 6px; padding-left: 20px; }
+    .lw-giver { color: var(--faint); font-family: var(--mono); font-size: 0.78rem; }
+    .lw-note { font-size: 0.86rem; color: var(--muted); margin: 6px 0 22px; }
+    .lw-grid { display: grid; grid-template-columns: 1fr; gap: 10px; margin: 12px 0 22px; }
+    @media (min-width: 720px) { .lw-grid { grid-template-columns: 1fr 1fr; } }
+    .lw-card {
+      display: flex; flex-direction: column; gap: 6px; border: 1px solid var(--line); border-radius: 14px;
+      background: var(--surface); padding: 14px 16px; text-decoration: none; color: inherit;
+      transition: border-color .15s ease, transform .15s ease;
+    }
+    .lw-card:hover { border-color: color-mix(in srgb, var(--candle) 50%, var(--line)); transform: translateY(-1px); }
+    .lw-card strong { font-family: var(--display); font-size: 1.02rem; color: var(--mist); }
+    .lw-card span { color: #ded3e6; font-size: 0.86rem; }
+    .lw-tag {
+      align-self: flex-start; font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.04em;
+      text-transform: uppercase; color: var(--candle); border: 1px solid var(--candle-dim); border-radius: 999px;
+      padding: 2px 9px;
+    }
+    .lw-card-bug { border-color: color-mix(in srgb, #c85a5a 40%, var(--line)); }
+    .lw-tag-bug { color: #e08a8a; border-color: #c85a5a66; }
+  </style>
+</Base>

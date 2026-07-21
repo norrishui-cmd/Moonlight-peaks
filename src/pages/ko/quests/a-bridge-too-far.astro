@@ -1,0 +1,79 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { SITE } from '../../../consts';
+
+const faq = [
+  { q: 'Moonlight Peaks에서 A Bridge Too Far는 어떻게 시작하나요?', a: '확인됨: 이 퀘스트는 "Orlock의 와인 계획" 바로 다음에 이어집니다 — Orlock에게 사과하고, Samael의 빚(350골드)을 갚은 다음, 돌아가서 보고하세요.' },
+  { q: 'A Bridge Too Far는 무엇을 해금하나요?', a: '확인됨: Ambrosia 저택과 Cave of Echoes(구리 광석)를 포함한 Misty Shores 전체 구역.' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '홈', item: `${SITE.url}/ko` },
+    { '@type': 'ListItem', position: 2, name: '퀘스트', item: `${SITE.url}/ko/quests/a-bridge-too-far` },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks: A Bridge Too Far 퀘스트 가이드 (한국어)"
+  description="한국어로 보는 Moonlight Peaks A Bridge Too Far: 퀘스트 시작 방법, Orlock과 Fiona의 다툼, 그리고 무엇을 해금하는지(Misty Shores, Cave of Echoes)."
+  path="/ko/quests/a-bridge-too-far"
+  jsonLd={jsonLd}
+  crumbs={[{ label: '퀘스트' }, { label: 'A Bridge Too Far' }]}
+  lang="ko"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">퀘스트 가이드</p>
+      <h1>Moonlight Peaks: <em>A Bridge Too Far</em></h1>
+
+      <div class="callout">
+        <strong>빠른 답변:</strong> A Bridge Too Far는 "Orlock's Wine Scheme" 이후에 해금됩니다.
+        마을의 마법에 능한 사람들과 대화한 후 Ambrosia 저택 근처 다리로 돌아가세요. 완료하면
+        Misty Shores와 Cave of Echoes가 열립니다.
+      </div>
+
+      <h2>퀘스트 시작 방법</h2>
+      <p>
+        확인됨: 이 퀘스트는 Orlock을 위해 블러드 와인을 만드는 <strong>Orlock's Wine Scheme</strong> 바로
+        다음에 이어집니다. Orlock에게 사과하고 Broken Lamp에서 Samael에게 진 350골드 빚을 갚으면,
+        다음에 마을을 방문할 때 퀘스트가 자동으로 시작됩니다.
+      </p>
+
+      <h2>다리가 막힌 이유</h2>
+      <p>
+        <span class="tag-community">커뮤니티 제보</span> Orlock은 Fiona가 다리를 저주했다고
+        믿습니다. 사실 진짜 저주는 없습니다 — 둘은 Orlock이 무례했던 말다툼을 했을 뿐입니다.
+      </p>
+
+      <h2>퀘스트가 해금하는 것</h2>
+      <p>
+        확인됨: 완료하면 Ambrosia 저택과 Cave of Echoes를 포함한 Misty Shores 전체 구역이
+        열립니다.
+      </p>
+
+      <h2>자주 묻는 질문</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        더 알아보기: <a href="/locations/mines">Cave of Echoes</a>,
+        <a href="/quests/a-bridge-too-far">전체 가이드(영어)</a>.
+      </div>
+    </div>
+  </article>
+  <style>
+    .tag-community {
+      display: inline-block; font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.02em;
+      color: var(--faint); border: 1px solid var(--line); border-radius: 999px; padding: 2px 8px;
+      margin-right: 6px; vertical-align: middle;
+    }
+  </style>
+</Base>
