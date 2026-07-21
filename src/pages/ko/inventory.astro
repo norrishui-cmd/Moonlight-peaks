@@ -1,0 +1,68 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+
+const faq = [
+  { q: 'Moonlight Peaks에서 인벤토리는 어떻게 작동하나요?', a: '출시 시점에 확인됨: 게임은 통합 집 창고 시스템을 사용합니다 — 요리대와 솥 같은 제작대는 개인 인벤토리에 모든 것을 들고 다닐 필요 없이 집 창고에서 재료와 자재를 자동으로 가져옵니다.' },
+  { q: '인벤토리 공간을 늘릴 수 있나요?', a: '아직 확인되지 않았습니다. 통합 창고 설계를 감안하면, 용량 업그레이드가 있다면 전통적인 슬롯형 인벤토리보다는 집 창고에 관련될 가능성이 높습니다.' },
+  { q: '아이템은 어떻게 파나요?', a: '시청 등록 시 Brook이 주는 살아있는 보관 상자 Chester에 물건을 던져 넣으세요 — 아이템은 잠자는 동안 밤새 팔립니다.' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '홈', item: `${SITE.url}/ko` },
+    { '@type': 'ListItem', position: 2, name: '인벤토리', item: `${SITE.url}/ko/inventory` },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks 인벤토리 — 통합 창고 시스템 설명"
+  description="Moonlight Peaks에서 인벤토리가 작동하는 방식: 제작대에 자동으로 자재를 공급하는 통합 집 창고 시스템과 Chester를 통한 판매 방식."
+  path="/ko/inventory"
+  jsonLd={jsonLd}
+  crumbs={[{ label: '인벤토리' }]}
+  lang="ko"
+  showExport
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">항목 · 인벤토리</p>
+      <h1>Moonlight Peaks <em>인벤토리</em> & 창고</h1>
+      <p class="intro">
+        {GAME.title}는 일반적인 슬롯 시스템과 다르게 인벤토리를 처리합니다. 확인된 내용은
+        다음과 같습니다. 최근 업데이트: {SITE.updated}.
+      </p>
+
+      <h2>통합 집 창고</h2>
+      <p>
+        출시 시점에 확인됨: 제작을 위해 개인 인벤토리를 이리저리 관리하는 대신, Moonlight
+        Peaks는 통합 집 창고를 사용합니다 — 자재를 집 창고에 던져 넣으면 요리대, 솥 등의
+        제작대가 필요한 것을 자동으로 가져갑니다. 초기 플레이어들은 이를 게임에서 가장
+        편리한 편의 시스템 중 하나로 설명합니다.
+      </p>
+
+      <h2>Chester를 통한 판매</h2>
+      <p>
+        확인됨: 시청 등록 시 Brook이 주는 살아있는 보관 상자인 <a href="/characters/chester">Chester</a>에
+        물건을 던져 넣어서 판매합니다. 아이템은 잠자는 동안 밤새 팔리므로, 단순 판매를 위해
+        따로 상점을 방문할 필요가 없습니다.
+      </p>
+
+      <h2>자주 묻는 질문</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        관련: <a href="/ko/farming">농사</a>, <a href="/ko/items">아이템</a>,
+        <a href="/characters/chester">Chester</a>, <a href="/ko/beginner-guide">초보자 가이드</a>.
+      </div>
+    </div>
+  </article>
+</Base>

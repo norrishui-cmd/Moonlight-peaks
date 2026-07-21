@@ -1,0 +1,71 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE } from '../../consts';
+
+const faq = [
+  { q: "L'amitié est-elle différente de la romance dans Moonlight Peaks ?", a: "Oui — chaque habitant (romance possible ou non) a une relation que vous pouvez développer en parlant et en offrant des cadeaux, enregistrée dans un menu de relation. La romance et le mariage sont un chemin plus profond et optionnel, disponible seulement avec les 23 options de romance confirmées ; tous les autres peuvent quand même devenir des amis." },
+  { q: "Que gagne-t-on en développant des amitiés ?", a: "Confirmé au lancement : les relations débloquent des plans de construction et matériaux d'artisanat spéciaux, plus des histoires de personnage personnelles — se faire des amis dans toute la ville vaut donc le coup au-delà de tout chemin romantique." },
+  { q: 'Peut-on jouer à Nokturna avec des amis ?', a: "Oui — les parties de Nokturna avec un habitant sont enregistrées avec les conversations et cadeaux dans son menu d'amitié, ce qui est aussi une façon de développer la relation." },
+  { q: 'Les cadeaux fonctionnent-ils de la même façon pour amitié et romance ?', a: "Le mécanisme est le même — offrir des cadeaux pour augmenter le niveau de relation — les réactions adorées/aimées/détestées étant probablement différentes selon la personne, que vous poursuiviez une romance ou non." },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Accueil', item: `${SITE.url}/fr` },
+    { '@type': 'ListItem', position: 2, name: 'Amitié', item: `${SITE.url}/fr/friendship` },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks Amitié — Menu de relation & récompenses"
+  description="Comment fonctionne l'amitié dans Moonlight Peaks, séparée de la romance : le menu de relation, les réactions aux cadeaux, et ce que développer des amitiés débloque."
+  path="/fr/friendship"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Amitié' }]}
+  lang="fr"
+  showExport
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Entrée · Amitié</p>
+      <h1>Moonlight Peaks <em>Amitié</em></h1>
+      <p class="intro">
+        Tous les habitants ne sont pas des options de romance, mais vous pouvez développer une
+        relation avec chacun d'eux. Cette page couvre le côté platonique, séparé du
+        <a href="/fr/romance">guide de romance</a>. Dernière mise à jour : {SITE.updated}.
+      </p>
+
+      <h2>Comment fonctionne l'amitié</h2>
+      <p>
+        Confirmé au lancement : parler aux habitants et leur offrir des cadeaux augmente votre
+        niveau de relation, enregistré dans un menu de relation qui montre les cadeaux récents et
+        leur effet. Cela s'applique à chaque habitant nommé — les 23 options de romance comme le
+        reste du casting de PNJ.
+      </p>
+
+      <h2>Ce que l'amitié débloque</h2>
+      <p>
+        Confirmé : des relations plus profondes débloquent des plans de construction et matériaux
+        d'artisanat, plus des histoires de personnage personnelles, que vous poursuiviez ou non
+        une romance avec cette personne. Jouer à Nokturna avec un habitant est aussi enregistré
+        dans son menu d'amitié.
+      </p>
+
+      <h2>FAQ</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        Lié : <a href="/fr/romance">romance</a>, <a href="/fr/characters">personnages</a>,
+        <a href="/tools/gift-tracker">suivi de cadeaux</a>, <a href="/fr/nokturna">Nokturna</a>.
+      </div>
+    </div>
+  </article>
+</Base>

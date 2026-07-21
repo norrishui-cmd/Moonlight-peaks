@@ -1,0 +1,107 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+
+const faq = [
+  { q: 'Moonlight Peaks ressemble-t-il à Stardew Valley ?', a: "Oui, dans l'esprit — les deux sont des simulations de vie agricole cosy où vous plantez, entretenez, vous faites des amis et courtisez des villageois. Moonlight Peaks ajoute une touche surnaturelle : vous jouez un vampire, cultivez la nuit et utilisez la magie." },
+  { q: 'Moonlight Peaks est-il multijoueur comme Stardew Valley ?', a: "Non. Stardew Valley a une coopération multijoueur ; Moonlight Peaks est une expérience purement solo." },
+  { q: 'Lequel est moins cher, Moonlight Peaks ou Stardew Valley ?', a: "Stardew Valley est moins cher (environ 14,99 $, souvent en promotion). Moonlight Peaks démarre à 34,99 $ (39,99 $ sur Switch 2)." },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Accueil', item: `${SITE.url}/fr` },
+    { '@type': 'ListItem', position: 2, name: 'vs Stardew Valley', item: new URL('/fr/moonlight-peaks-vs-stardew-valley', SITE.url).href },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks vs Stardew Valley — Comparaison de cozy sims"
+  description="Moonlight Peaks vs Stardew Valley : ce que les deux cozy farming sims ont en commun, ce qui rend le vampire life sim différent, multijoueur, prix, et lequel jouer."
+  path="/fr/moonlight-peaks-vs-stardew-valley"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'vs Stardew Valley' }]}
+  lang="fr"
+  showExport
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Entrée · Comparaison</p>
+      <h1><em>Moonlight Peaks</em> vs Stardew Valley</h1>
+      <p class="intro">
+        Moonlight Peaks est souvent comparé à Stardew Valley — voici comment les deux cozy farming
+        sims se comparent réellement, pour vous aider à décider ce qui vous convient. Mis à jour {SITE.updated}.
+      </p>
+
+      <h2>Comparaison rapide</h2>
+      <table class="facts">
+        <tr><th>Prémisse</th><td>Moonlight Peaks est un vampire life sim dans une ville surnaturelle ; Stardew Valley est un sim de restauration de ferme rurale.</td></tr>
+        <tr><th>Style visuel</th><td>Moonlight Peaks utilise du 3D moderne ; Stardew Valley utilise du pixel art 2D.</td></tr>
+        <tr><th>Combat</th><td>Moonlight Peaks est sans combat ; Stardew Valley inclut du combat dans les mines et zones associées.</td></tr>
+        <tr><th>Multijoueur</th><td>Moonlight Peaks est une expérience purement solo ; Stardew Valley supporte la coopération.</td></tr>
+        <tr><th>Approche romance</th><td>Moonlight Peaks mise sur des familles surnaturelles et des rendez-vous sans genre imposé ; Stardew Valley a un casting villageois établi de longue date.</td></tr>
+        <tr><th>Meilleur choix</th><td>Choisissez Moonlight Peaks pour un thème gothique cosy et frais ; choisissez Stardew Valley pour un classique éprouvé avec des années de contenu.</td></tr>
+      </table>
+
+      <h2>Ce qu'ils ont en commun</h2>
+      <p>
+        Les deux sont des simulations agricoles relaxantes, construites sur la même boucle
+        apaisante : planter et entretenir des cultures, pêcher et cueillir, décorer votre maison,
+        et lentement vous faire des amis — et courtiser ou épouser des villageois. Si vous aimez
+        le rythme de Stardew, Moonlight Peaks parle la même langue.
+      </p>
+
+      <h2>Ce qui rend Moonlight Peaks différent</h2>
+      <ul>
+        <li><strong>Vous êtes un vampire.</strong> Vous êtes l'enfant du comte Dracula, restaurant une ferme familiale dans une ville surnaturelle de loups-garous, sorcières et sirènes.</li>
+        <li><strong>Vous cultivez la nuit.</strong> L'agriculture se fait au clair de lune — soyez de retour dans votre cercueil au lever du soleil.</li>
+        <li><strong>De la magie, pas juste des outils.</strong> Apprenez des sorts (dont un mini-jeu d'arrosage et des sorts économisant l'énergie) et brassez des potions comme l'élixir d'alter ego.</li>
+        <li><strong>Métamorphose.</strong> Transformez-vous en chauve-souris pour traverser la ville et atteindre des zones cachées.</li>
+        <li><strong>Tout est enchanté.</strong> Cultivez des récoltes lumineuses comme les Blood Grapes et les "Cruelcumbers", et élevez du bétail magique comme les Draculambs.</li>
+        <li><strong>Nokturna.</strong> Un jeu de cartes à collectionner intégré au jeu, avec ses propres cartes à chasser.</li>
+        <li><strong>Pas de combat.</strong> Même les mines sont sans combat — cosy de bout en bout.</li>
+        <li><strong>3D moderne.</strong> Graphismes 3D à la troisième personne, contre le pixel art 2D de Stardew.</li>
+      </ul>
+
+      <h2>Multijoueur</h2>
+      <p>
+        C'est une différence clé. Stardew Valley offre de la coopération, permettant de cultiver
+        avec des amis. Moonlight Peaks est une <strong>expérience purement solo</strong> — aucun
+        mode coopératif ou en ligne annoncé.
+      </p>
+
+      <h2>Prix & plateformes</h2>
+      <p>
+        Stardew Valley (2016, par le développeur solo ConcernedApe) coûte environ 14,99 $, souvent
+        en promotion, et est disponible sur pratiquement toutes les plateformes. Moonlight Peaks
+        démarre {GAME.releaseLabel} à <strong>34,99 $</strong> (39,99 $ sur Switch 2) sur Steam
+        (PC/Mac), Steam Deck, Switch, Switch 2 et Android.
+      </p>
+
+      <h2>Lequel devriez-vous jouer ?</h2>
+      <p>
+        Ce n'est pas l'un ou l'autre. Si vous voulez un classique éprouvé, abordable et adapté à la
+        coopération avec un contenu infini, Stardew Valley est difficile à battre. Si vous voulez
+        une touche fraîche, orientée romance et gothique de la formule — avec magie, agriculture
+        nocturne et un casting surnaturel — Moonlight Peaks est fait pour vous. Beaucoup de fans de
+        cosy games seront heureux de jouer aux deux.
+      </p>
+
+      <h2>FAQ</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout">
+        Plus : <a href="/fr/beginner-guide">guide du débutant</a>, <a href="/fr/platforms">plateformes & prix</a>,
+        <a href="/fr/release-date">date de sortie</a>.
+      </div>
+    </div>
+  </article>
+</Base>

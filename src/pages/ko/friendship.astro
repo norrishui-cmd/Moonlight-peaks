@@ -1,0 +1,69 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE } from '../../consts';
+
+const faq = [
+  { q: 'Moonlight Peaks에서 우정은 로맨스와 다른가요?', a: '네 — 모든 주민(로맨스 가능 여부와 관계없이)은 대화하고 선물을 주며 쌓을 수 있는 관계가 있으며, 관계 메뉴에 기록됩니다. 로맨스와 결혼은 확인된 23명의 로맨스 옵션에게만 가능한 선택적이고 더 깊은 경로입니다. 나머지 모두는 그래도 친구가 될 수 있습니다.' },
+  { q: '우정을 쌓으면 무엇을 얻나요?', a: '출시 시점에 확인됨: 관계는 특별한 설계도와 공예 재료, 그리고 개인적인 캐릭터 스토리를 해금합니다 — 마을 전체와 친구가 되는 것은 어떤 로맨스 경로와도 별개로 그 자체로 가치가 있습니다.' },
+  { q: '친구와 Nokturna를 할 수 있나요?', a: '네 — 주민과의 Nokturna 대결은 대화나 선물과 함께 그 사람의 우정 메뉴에 기록되며, 이는 관계를 쌓는 또 하나의 방법이기도 합니다.' },
+  { q: '선물은 우정과 로맨스에서 똑같이 작동하나요?', a: '메커니즘은 동일합니다 — 선물을 줘서 관계 수준을 올립니다 — 최고/선호/비선호 반응은 로맨스를 추구하는지 여부와 관계없이 사람마다 다를 가능성이 높습니다.' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '홈', item: `${SITE.url}/ko` },
+    { '@type': 'ListItem', position: 2, name: '우정', item: `${SITE.url}/ko/friendship` },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks 우정 — 관계 메뉴 & 보상"
+  description="Moonlight Peaks에서 로맨스와 별개인 우정이 작동하는 방식: 관계 메뉴, 선물 반응, 그리고 우정을 쌓으면 무엇이 해금되는지."
+  path="/ko/friendship"
+  jsonLd={jsonLd}
+  crumbs={[{ label: '우정' }]}
+  lang="ko"
+  showExport
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">항목 · 우정</p>
+      <h1>Moonlight Peaks <em>우정</em></h1>
+      <p class="intro">
+        모든 주민이 로맨스 옵션은 아니지만, 누구와도 관계를 쌓을 수 있습니다. 이 페이지는
+        <a href="/ko/romance">로맨스 가이드</a>와 별개로 플라토닉한 측면을 다룹니다.
+        최근 업데이트: {SITE.updated}.
+      </p>
+
+      <h2>우정이 작동하는 방식</h2>
+      <p>
+        출시 시점에 확인됨: 주민과 대화하고 선물을 주면 관계 수준이 올라가며, 이는 최근 선물과
+        그 효과를 보여주는 관계 메뉴에 기록됩니다. 이는 23명의 로맨스 옵션뿐 아니라 더 넓은
+        NPC 전체에게 적용됩니다.
+      </p>
+
+      <h2>우정이 해금하는 것</h2>
+      <p>
+        확인됨: 더 깊은 관계는 설계도와 공예 재료, 그리고 그 사람과 로맨스를 추구하는지와
+        관계없이 개인적인 캐릭터 스토리를 해금합니다. 주민과 Nokturna를 플레이하는 것도 그
+        사람의 우정 메뉴에 기록됩니다.
+      </p>
+
+      <h2>자주 묻는 질문</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        관련: <a href="/ko/romance">로맨스</a>, <a href="/ko/characters">캐릭터</a>,
+        <a href="/tools/gift-tracker">선물 추적기</a>, <a href="/ko/nokturna">Nokturna</a>.
+      </div>
+    </div>
+  </article>
+</Base>

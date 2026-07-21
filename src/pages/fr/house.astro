@@ -1,0 +1,78 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE } from '../../consts';
+
+const faq = [
+  { q: 'Peut-on décorer sa maison dans Moonlight Peaks ?', a: "Oui — rapporté : vous pouvez personnaliser l'intérieur de votre maison et le terrain de votre ferme, placer et tourner des meubles, et fabriquer de la déco comme des chemins et des lumières féeriques." },
+  { q: 'Y a-t-il une serre dans Moonlight Peaks ?', a: 'Oui, confirmé : construire une serre est lié à son propre succès, "Perpetual Bloom." Voir notre <a href="/farm/greenhouse">page serre</a> pour ce qui est connu jusqu\'à présent sur le coût de construction et l\'utilité.' },
+  { q: 'Peut-on agrandir sa maison ?', a: 'Confirmé : "Dracula Estate" est le succès pour agrandir entièrement votre maison, il y a donc un vrai chemin d\'agrandissement au-delà de la décoration cosmétique — les paliers et coûts exacts ne sont pas encore sourcés. La grange (4 000 pièces d\'or, chez Ridge) et le puits (1 500 pièces d\'or) sont aussi des achats de bâtiments confirmés.' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Accueil', item: `${SITE.url}/fr` },
+    { '@type': 'ListItem', position: 2, name: 'Maison & décoration', item: `${SITE.url}/fr/house` },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks Maison, décoration & serre"
+  description="Décorer votre maison dans Moonlight Peaks : meubles, chemins et lumières féeriques confirmés jusqu'à présent, plus ce qui reste non confirmé sur la serre et les agrandissements de maison."
+  path="/fr/house"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Maison & décoration' }]}
+  lang="fr"
+  showExport
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Entrée · Foyer</p>
+      <h1>Moonlight Peaks <em>Maison</em> & décoration</h1>
+      <p class="intro">
+        Votre maison et le terrain de votre ferme au-delà de l'agriculture — ce qui est confirmé
+        pour la décoration, séparé de ce qui reste non confirmé. Dernière mise à jour : {SITE.updated}.
+      </p>
+
+      <h2>Décorer votre maison</h2>
+      <p>
+        Rapporté : décorer dans Moonlight Peaks inclut placer et tourner des meubles, personnaliser
+        l'intérieur de votre maison, et fabriquer de la déco pour le terrain de la ferme — y compris
+        des chemins et des lumières féeriques.
+      </p>
+
+      <h2>Serre — confirmée exister</h2>
+      <p>
+        Confirmé : construire une serre est lié à son propre succès Steam, "Perpetual Bloom."
+        Rapporté par la communauté : en avoir une aiderait aussi avec plusieurs autres objectifs
+        agricoles, donc cela vaut la peine de la prioriser. Voir notre
+        <a href="/farm/greenhouse">page serre</a> pour les détails de coût de construction et
+        d'espace dès qu'ils seront confirmés.
+      </p>
+
+      <h2>Agrandissements de bâtiments confirmés jusqu'à présent</h2>
+      <p>
+        Confirmé : "Dracula Estate" est le succès pour agrandir entièrement votre maison, il y a
+        donc un vrai chemin d'agrandissement au-delà de la décoration cosmétique — les paliers et
+        coûts exacts ne sont pas encore sourcés. Deux autres achats de bâtiments confirmés : la
+        <strong>grange</strong> (4 000 pièces d'or + matériaux, chez Ridge, requise avant d'acheter
+        du bétail) et le <strong>puits</strong> (rapporté à 1 500 pièces d'or, aide pour l'arrosage).
+      </p>
+
+      <h2>FAQ</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        Lié : <a href="/fr/farming">agriculture</a>, <a href="/fr/character-creator">éditeur de personnage</a>,
+        <a href="/fr/beginner-guide">guide du débutant</a>.
+      </div>
+    </div>
+  </article>
+</Base>

@@ -1,0 +1,57 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE } from '../../consts';
+---
+<Base
+  title="Politique de confidentialité | Moonlight Peaks Wiki & Guide"
+  description="Comment Moonlight Peaks Wiki & Guide gère les cookies, l'analyse et la publicité."
+  path="/fr/privacy"
+  crumbs={[{ label: 'Confidentialité' }]}
+  lang="fr"
+>
+  <article class="page">
+    <div class="wrap">
+      <h1>Politique de confidentialité</h1>
+      <p class="intro">Comment ce site gère les données, cookies, analyse et publicité. Dernière mise à jour {SITE.updated}.</p>
+
+      <h2>Qui nous sommes</h2>
+      <p>Moonlight Peaks Wiki &amp; Guide ({SITE.url}) est un site de guide indépendant, créé par des fans. Vous pouvez nous joindre à {SITE.contact}.</p>
+
+      <h2>Cookies</h2>
+      <p>
+        Nous utilisons des cookies et technologies similaires pour le fonctionnement de base du
+        site, pour mesurer le trafic et — une fois activé — pour afficher de la publicité. Vous
+        pouvez contrôler ou supprimer les cookies via les paramètres de votre navigateur. Là où la
+        loi l'exige, nous demandons votre consentement avant de placer des cookies non essentiels.
+      </p>
+
+      <h2>Analyse</h2>
+      <p>
+        Nous pouvons utiliser un outil d'analyse respectueux de la vie privée (comme Google
+        Analytics) pour comprendre quelles pages sont utiles. Cela collecte des données agrégées
+        comme les vues de page, la région approximative et le type d'appareil. Cela n'est pas
+        utilisé pour vous identifier personnellement.
+      </p>
+
+      <h2>Publicité</h2>
+      <p>
+        Ce site peut afficher de la publicité de réseaux tiers comme Google AdSense. Ces
+        partenaires peuvent utiliser des cookies pour afficher des publicités pertinentes et
+        mesurer les performances. Vous pouvez en savoir plus sur la publicité personnalisée et
+        vous en désinscrire via les paramètres publicitaires de Google et les pages de
+        désinscription sectorielles pertinentes pour votre région.
+      </p>
+
+      <h2>Vos choix</h2>
+      <p>
+        Selon où vous vivez (par exemple UE/EEE, Royaume-Uni ou Californie), vous pouvez avoir des
+        droits d'accès, de correction ou de suppression de données personnelles, ainsi que de
+        désinscription de la publicité personnalisée. Contactez-nous à {SITE.contact} pour faire
+        une demande.
+      </p>
+
+      <h2>Modifications</h2>
+      <p>Nous pouvons mettre à jour cette politique à mesure que le site grandit ou que les outils publicitaires et d'analyse changent. La date "dernière mise à jour" ci-dessus reflète la version la plus récente.</p>
+    </div>
+  </article>
+</Base>

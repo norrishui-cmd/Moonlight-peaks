@@ -1,0 +1,69 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+
+const faq = [
+  { q: 'Moonlight Peaks에서 아이템은 어떻게 파나요?', a: '출시 시점에 확인됨: 시청 등록 시 Brook이 주는 살아있는 보관 상자 Chester에 물건을 던져 넣으세요. 아이템은 잠자는 동안 밤새 팔립니다 — 별도의 계산대 단계가 없습니다.' },
+  { q: '생 작물을 파는 것이 가치가 있나요?', a: '제보됨: 거의 그렇지 않습니다. 초기 플레이어들은 가공(통에서 Blood Grapes를 블러드 와인으로, 작물을 밀가루로 빻기, 공예품 제작)이 생 수확물을 파는 것보다 훨씬 가치 있다는 것을 발견했습니다.' },
+  { q: '초반에 돈을 버는 가장 좋은 방법은 무엇인가요?', a: '제보됨: 경제가 생 판매보다 완제품에 기반하므로 통과 다른 가공 시설을 일찍 지으세요. 요리가 에너지와 마나를 모두 회복시켜주므로 식량 작물을 소량 돌려 재배하는 것도 좋습니다.' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '홈', item: `${SITE.url}/ko` },
+    { '@type': 'ListItem', position: 2, name: '판매 & 배송', item: new URL('/ko/shipping', SITE.url).href },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks 판매 & 배송 — Chester 작동 방식"
+  description="Moonlight Peaks에서 상품을 파는 방법: 살아있는 보관 상자 Chester, 가공이 생 판매보다 나은 이유, 그리고 확인된 초반 게임 자금 순환 구조."
+  path="/ko/shipping"
+  jsonLd={jsonLd}
+  crumbs={[{ label: '판매 & 배송' }]}
+  lang="ko"
+  showExport
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">항목 · 경제</p>
+      <h1>Moonlight Peaks <em>판매</em> & 배송</h1>
+      <p class="intro">
+        {GAME.title}에서 실제로 돈이 어떻게 움직이는지 — 확인된 메커니즘만 다룹니다.
+        업데이트: {SITE.updated}.
+      </p>
+
+      <h2>Chester가 여러분의 배송 상자입니다</h2>
+      <p>
+        출시 시점에 확인됨: <a href="/characters/chester">Chester</a>라는 살아있는 보관
+        상자는 시청을 처음 방문할 때 Brook 시장이 선물로 줍니다. 잠자리에 들기 전 완성된
+        상품을 Chester에 던져 넣으면, 잠에서 깰 때 판매금이 기다리고 있습니다 — 수동으로
+        계산대와 상호작용할 필요가 없습니다.
+      </p>
+
+      <h2>가공이 생 판매를 이깁니다</h2>
+      <p>
+        초기 플레이어들의 제보: 생 작물을 파는 것은 거의 가치가 없습니다. 진짜 돈은
+        가공에서 나옵니다 — 통에서 Blood Grapes를 블러드 와인으로, 작물을 밀가루로 빻기,
+        공예품 제작. 가공이 게임 경제의 근간으로 묘사되므로, 초반에 통을 여러 개 짓는 것이
+        반복적으로 등장하는 팁입니다.
+      </p>
+
+      <h2>자주 묻는 질문</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        관련: <a href="/ko/farming">농사</a>, <a href="/characters/chester">Chester</a>,
+        <a href="/ko/inventory">인벤토리</a>, <a href="/ko/items">아이템</a>.
+      </div>
+    </div>
+  </article>
+</Base>

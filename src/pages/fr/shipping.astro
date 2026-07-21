@@ -1,0 +1,70 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+
+const faq = [
+  { q: 'Comment vend-on des objets dans Moonlight Peaks ?', a: "Confirmé au lancement : jetez des marchandises dans Chester, le coffre de rangement vivant que Brook vous offre lors de l'inscription à la mairie. Les objets se vendent pendant la nuit, pendant que vous dormez — pas d'étape de comptoir séparée." },
+  { q: "Est-ce que vendre des cultures brutes vaut le coup ?", a: "Rapporté : rarement. Les premiers joueurs ont trouvé la transformation (Blood Grapes en vin de sang au tonneau, moudre des cultures en farine, fabriquer des produits artisanaux) bien plus rentable que vendre les récoltes brutes." },
+  { q: "Quelle est la meilleure façon de gagner de l'argent tôt ?", a: "Rapporté : construisez des tonneaux et autres stations de transformation tôt, car l'économie repose sur les produits finis plutôt que les ventes brutes. Gardez aussi une petite rotation de cultures alimentaires, car cuisiner restaure à la fois l'énergie et le mana." },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Accueil', item: `${SITE.url}/fr` },
+    { '@type': 'ListItem', position: 2, name: 'Vente & expédition', item: new URL('/fr/shipping', SITE.url).href },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks Vente & expédition — Comment fonctionne Chester"
+  description="Comment vendre des marchandises dans Moonlight Peaks : Chester, le coffre de rangement vivant, pourquoi la transformation est meilleure que la vente brute, et le cycle monétaire confirmé en début de jeu."
+  path="/fr/shipping"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Vente & expédition' }]}
+  lang="fr"
+  showExport
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Entrée · Économie</p>
+      <h1>Moonlight Peaks <em>vente</em> & expédition</h1>
+      <p class="intro">
+        Comment l'argent circule vraiment dans {GAME.title} — uniquement des mécaniques
+        confirmées. Mis à jour {SITE.updated}.
+      </p>
+
+      <h2>Chester est votre coffre d'expédition</h2>
+      <p>
+        Confirmé au lancement : <a href="/characters/chester">Chester</a>, un coffre de rangement
+        vivant, vous est offert par la maire Brook lors de votre première visite à la mairie.
+        Jetez des marchandises finies dans Chester avant de vous coucher, et l'argent de la vente
+        vous attend à votre réveil — pas d'interaction manuelle au comptoir nécessaire.
+      </p>
+
+      <h2>La transformation bat la vente brute</h2>
+      <p>
+        Rapporté par les premiers joueurs : vendre des cultures brutes vaut rarement le coup. Le
+        vrai argent se trouve dans la transformation — Blood Grapes en vin de sang au tonneau,
+        moudre des cultures en farine, et fabriquer des produits artisanaux. Construire plusieurs
+        tonneaux tôt est un conseil récurrent, la transformation étant décrite comme l'épine
+        dorsale de l'économie du jeu.
+      </p>
+
+      <h2>FAQ</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        Lié : <a href="/fr/farming">agriculture</a>, <a href="/characters/chester">Chester</a>,
+        <a href="/fr/inventory">inventaire</a>, <a href="/fr/items">objets</a>.
+      </div>
+    </div>
+  </article>
+</Base>

@@ -1,0 +1,114 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+
+const achievements = [
+  { name: 'Discover all locations', desc: 'Moonlight Peaks의 모든 장소를 발견하세요.' },
+  { name: 'A Farming Monopoly', desc: '100만 골드를 모으세요.' },
+  { name: 'Skulls in a Net', desc: '모든 소울 블롭을 수집하세요.' },
+  { name: 'Back to the Den', desc: '모든 뱀스터를 동굴로 돌려보내세요.' },
+  { name: 'Making Mina Proud', desc: '25가지의 다른 레시피를 요리하세요.' },
+  { name: "Albertus' Helper", desc: '일거리 게시판의 일거리 25개를 완료하세요.' },
+  { name: 'Magic at Max Capacity', desc: '최대 마나에 도달하세요.' },
+  { name: 'Fully Energized', desc: '최대 에너지에 도달하세요.' },
+  { name: 'Moonlit Stretching', desc: '첫 요가 세션에 참여하세요.' },
+  { name: 'Back in Place', desc: '모든 플라스틱 의자를 제자리로 돌려놓으세요.' },
+  { name: 'Tree Hugger', desc: '나무와 사랑에 빠지세요.' },
+  { name: 'The Pumpking', desc: '특이한 호박을 만나세요.' },
+  { name: 'Raiders of the Lost Art', desc: 'Elvira의 보물찾기를 완료하세요.' },
+  { name: 'A Childhood Dream', desc: 'Ridge와 함께 나무집을 지으세요.' },
+  { name: 'Nokturna Master', desc: '모든 Nokturna 카드를 수집하세요.' },
+  { name: 'Awooooo!', desc: '보름달이 뜬 밤에 늑대인간 캐릭터와 대화하세요(커뮤니티 제보).' },
+  { name: 'AFKitten', desc: '5분 동안 쉬지 않고 Hellkitten을 쓰다듬으세요(커뮤니티 제보).' },
+  { name: 'Cartographer', desc: '변신 형태를 해금해야만 갈 수 있는 구역을 포함해 Moonlight Peaks의 모든 장소를 발견하세요(커뮤니티 제보).' },
+  { name: 'Rightful Ritualist', desc: '마을의 모든 마녀 서클을 활성화하세요(커뮤니티 제보).' },
+  { name: 'Call of the Current', desc: '인어/물의 형태를 해금하세요 — 게임 후반에 해금되는 것으로 확인되었지만, 이 세 번째 형태의 정확한 해금 조건은 아직 확인되지 않았습니다.' },
+  { name: 'Perpetual Bloom', desc: '온실을 지으세요.' },
+  { name: 'Dracula Estate', desc: '집을 완전히 확장하세요.' },
+  { name: 'Vampire with a Wand', desc: '마법을 해금하고 주문을 한 번 시전하세요.' },
+  { name: 'Master of Witchcraft', desc: '모든 주문을 완전히 업그레이드하세요.' },
+  { name: 'A Magical Toolbelt', desc: '도구 하나를 마법 부여 버전으로 업그레이드하세요.' },
+  { name: 'A Magical Cocktail', desc: '모든 물약 효과를 동시에 활성화하세요.' },
+  { name: 'New Beginnings', desc: '첫 작물을 심으세요 — 보통 게임에서 여러분의 가장 첫 행동입니다.' },
+  { name: 'Purrgatory', desc: 'Hellkitten 형태를 해금하세요.' },
+  { name: 'Wings of the Night', desc: '박쥐 형태를 해금하세요.' },
+  { name: 'Out of the Mist', desc: '메인 스토리를 통해 Misty Shores의 저주를 풀어주세요.' },
+  { name: 'To the Depths', desc: '카타콤 입구를 여세요.' },
+  { name: 'Happy New Year!', desc: '4계절 전체를 아우르는 게임 내 1년을 완료하세요.' },
+  { name: 'A Generous Donor', desc: '총 299개의 선물을 주세요.' },
+  { name: 'Serial Gifter', desc: '하룻밤에 최고 선물 25개를 선물하세요.' },
+  { name: 'Social Butterfly', desc: '모든 캐릭터와 하트 4단계에 도달하세요.' },
+  { name: 'Tied the Knot', desc: '로맨스를 최대치로 올리고 프러포즈하세요.' },
+  { name: 'Buddies for Afterlife', desc: '다른 주민과 마찬가지로 Death와 우정을 쌓으세요.' },
+];
+
+const faq = [
+  { q: 'Moonlight Peaks에는 업적이 몇 개 있나요?', a: '출시 시점에 확인됨: 총 약 59~60개의 Steam 업적(자료마다 두 숫자 모두 언급됨). 지금까지 37개의 이름이 붙은 업적이 공개적으로 알려져 있습니다 — 확인된 내용은 위 표를 참고하세요.' },
+  { q: 'Moonlight Peaks에 Steam 트레이딩 카드가 있나요?', a: '있습니다 — 게임의 Steam 스토어 페이지에는 Steam 업적, Steam 트레이딩 카드, Steam 클라우드 저장, 완전한 컨트롤러 지원이 나열되어 있습니다.' },
+  { q: '가장 어렵거나 잘 알려지지 않은 업적은 무엇인가요?', a: '확인된 여러 이름들은 단순한 반복 작업보다는 특이하고 놓치기 쉬운 업적을 시사합니다 — "Tree Hugger"(나무와 사랑에 빠지기)와 "The Pumpking"(특이한 호박 만나기) 모두 반복적인 행동보다는 특정한 일회성 상호작용처럼 들립니다.' },
+  { q: '로맨스나 관계 관련 업적이 있나요?', a: '네, 확인됨: "Social Butterfly"(모든 캐릭터와 하트 4), "Tied the Knot"(로맨스 최대화 후 프러포즈), "A Generous Donor"(총 299개 선물 증정), "Serial Gifter"(하룻밤에 최고 선물 25개), "Buddies for Afterlife"(Death와 우정 쌓기) 모두 로맨스/관계 관련입니다. "A Childhood Dream"(Ridge와 나무집 짓기)과 "Raiders of the Lost Art"(Elvira의 보물찾기)도 특정 이름이 있는 주민과 연결되어 있습니다.' },
+  { q: '온실을 짓는 업적이 있나요?', a: '네, 확인됨: "Perpetual Bloom"은 온실을 지으면 주어집니다.' },
+  { q: '변신 형태와 연결된 업적은 무엇인가요?', a: '확인됨: "Purrgatory"(Hellkitten 형태), "Wings of the Night"(박쥐 형태), "Call of the Current"(인어/물의 형태, 게임 후반에 해금).' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '홈', item: `${SITE.url}/ko` },
+    { '@type': 'ListItem', position: 2, name: '업적', item: `${SITE.url}/ko/achievements` },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks 업적 — 전체 트로피 & Steam 업적 가이드"
+  description="Moonlight Peaks에는 59개의 확인된 업적이 있습니다. 소울 블롭 수집부터 100만 골드 모으기까지, 지금까지 알려진 이름이 붙은 업적을 확인하세요."
+  path="/ko/achievements"
+  jsonLd={jsonLd}
+  crumbs={[{ label: '업적' }]}
+  lang="ko"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">항목 · 업적</p>
+      <h1>Moonlight Peaks <em>업적</em></h1>
+      <p class="intro">
+        출시 시점에 확인됨: {GAME.title}에는 <strong>59개의 Steam 업적</strong>이 있으며, Steam
+        트레이딩 카드, 클라우드 저장, 완전한 컨트롤러 지원도 포함됩니다. 지금까지는 일부 업적
+        이름만 공개적으로 알려져 있습니다 — 이 페이지는 확인된 것만 정리하며, 더 많이 밝혀지는
+        대로 늘어날 예정입니다.
+      </p>
+
+      <h2>확인된 업적 (59개 중 {achievements.length}개)</h2>
+      <table class="facts">
+        <tr><th>업적</th><th>해금 방법</th></tr>
+        {achievements.map((a) => (
+          <tr>
+            <td>{a.name}</td>
+            <td>{a.desc}</td>
+          </tr>
+        ))}
+      </table>
+
+      <div class="callout">
+        45개의 업적은 아직 여기 이름이 없습니다 — 실제 Steam 업적 데이터로 확인된 것만
+        나열하며, 추측하지 않습니다. 더 많이 확인되면 다시 확인해 보세요.
+      </div>
+
+      <h2>자주 묻는 질문</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        관련: <a href="/ko/items">아이템</a>, <a href="/ko/farming">농사</a>,
+        <a href="/characters/albertus">Albertus (일거리 게시판)</a>, <a href="/characters/ridge">Ridge</a>,
+        <a href="/characters/elvira">Elvira</a>, <a href="/nokturna">Nokturna 카드 게임</a>.
+      </div>
+    </div>
+  </article>
+</Base>

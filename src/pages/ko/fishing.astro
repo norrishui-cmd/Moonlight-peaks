@@ -1,0 +1,67 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+
+const faq = [
+  { q: 'Moonlight Peaks에 낚시가 있나요?', a: '있습니다 — 낚시는 채집, 물약 제조와 함께 농장 밖 활동 중 하나입니다.' },
+  { q: '낚싯대는 어떻게 얻나요?', a: '확인됨: 낚싯대는 처음부터 주어지지 않습니다 — Noel과의 내기(그보다 먼저 서로 다른 물고기 3종 잡기)에서 이기면 해금됩니다.' },
+  { q: '전체 물고기 목록, 장소, 가격은 어디 있나요?', a: '이 전체 데이터베이스는 이제 전용 컬렉션 페이지에 있습니다 — 확인된 22종, 각각 장소, 희귀도, 계절/시간, 크기, 판매 가격을 담은 자체 상세 페이지가 있습니다.' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '홈', item: `${SITE.url}/ko` },
+    { '@type': 'ListItem', position: 2, name: '낚시', item: `${SITE.url}/ko/fishing` },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks 낚시 가이드 — 물고기 목록 & 장소"
+  description="Moonlight Peaks에서 낚시하는 장소와 시간: 낚싯대를 얻는 방법, 22종 물고기 전체 데이터베이스가 있는 곳."
+  path="/ko/fishing"
+  jsonLd={jsonLd}
+  crumbs={[{ label: '낚시' }]}
+  lang="ko"
+  showExport
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">항목 · 낚시</p>
+      <h1>Moonlight Peaks <em>낚시</em> 가이드</h1>
+      <p class="intro">
+        농장 밖에서 {GAME.title}는 낚시, 채집, 물약 제조를 할 수 있게 해줍니다.
+        최근 업데이트: {SITE.updated}.
+      </p>
+
+      <h2>첫 낚싯대 얻기</h2>
+      <p>
+        확인됨: 게임 초반 며칠 밤 사이에 Noel이 강가에서 낚시 대회를 제안합니다 — 그보다
+        먼저 서로 다른 물고기 3종을 잡으세요. 시간 제한이 없어 쉽게 이길 수 있고, 이기면
+        첫 낚싯대와 골드 보너스를 받습니다.
+      </p>
+
+      <h2>전체 물고기 데이터베이스</h2>
+      <p>
+        전체 확인된 물고기 목록 — 22종, 각각 장소, 희귀도, 계절/날씨/시간대, 크기, 판매
+        가격을 담은 자체 페이지 — 은 이제 여기가 아니라 <a href="/ko/collections/fish">컬렉션:
+        물고기</a> 페이지에 있습니다. 종별 세부 정보는 그 페이지를 즐겨찾기 해두세요.
+      </p>
+
+      <h2>자주 묻는 질문</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        관련: <a href="/ko/collections/fish">물고기 컬렉션</a>, <a href="/ko/collections">컬렉션 허브</a>,
+        <a href="/characters/noel">Noel</a>, <a href="/ko/beginner-guide">초보자 가이드</a>.
+      </div>
+    </div>
+  </article>
+</Base>

@@ -1,0 +1,69 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+
+const faq = [
+  { q: 'Y a-t-il de la pêche dans Moonlight Peaks ?', a: "Oui — la pêche est l'une des activités en dehors de la ferme, avec la cueillette et le brassage de potions." },
+  { q: 'Comment obtient-on une canne à pêche ?', a: "Confirmé : la canne n'est pas disponible dès le départ — vous la débloquez en gagnant un pari contre Noel (attraper 3 poissons différents avant lui)." },
+  { q: 'Où est la liste complète des poissons, lieux et prix ?', a: "Cette base de données complète se trouve maintenant sur notre page collection dédiée — 22 espèces confirmées, chacune avec sa propre page de détail pour le lieu, la rareté, la saison/heure, la taille et le prix de vente." },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Accueil', item: `${SITE.url}/fr` },
+    { '@type': 'ListItem', position: 2, name: 'Pêche', item: `${SITE.url}/fr/fishing` },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks Guide de pêche — Liste des poissons & lieux"
+  description="Où et quand pêcher dans Moonlight Peaks : comment obtenir la canne à pêche, et où trouver la base de données complète des 22 espèces de poissons."
+  path="/fr/fishing"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Pêche' }]}
+  lang="fr"
+  showExport
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Entrée · Pêche</p>
+      <h1>Guide de <em>pêche</em> Moonlight Peaks</h1>
+      <p class="intro">
+        En dehors de la ferme, {GAME.title} vous laisse pêcher, cueillir et brasser des potions.
+        Dernière mise à jour : {SITE.updated}.
+      </p>
+
+      <h2>Obtenir votre première canne à pêche</h2>
+      <p>
+        Confirmé : dans vos premières soirées de jeu, Noel vous met au défi dans un concours de
+        pêche près de la rivière — attrapez 3 espèces de poissons différentes avant lui. C'est
+        sans limite de temps, donc facile à gagner, et le battre vous récompense avec votre
+        première canne à pêche plus un bonus en or.
+      </p>
+
+      <h2>La base de données complète des poissons</h2>
+      <p>
+        La liste complète et confirmée des poissons — 22 espèces, chacune avec sa propre page pour
+        le lieu, la rareté, la fenêtre de saison/météo/heure, la taille et le prix de vente — se
+        trouve maintenant sur notre page <a href="/fr/collections/fish">Collection : Poissons</a>
+        plutôt qu'ici. C'est la page à mettre en favori pour les détails spécifiques à chaque espèce.
+      </p>
+
+      <h2>FAQ</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        Lié : <a href="/fr/collections/fish">collection de poissons</a>, <a href="/fr/collections">hub des collections</a>,
+        <a href="/characters/noel">Noel</a>, <a href="/fr/beginner-guide">guide du débutant</a>.
+      </div>
+    </div>
+  </article>
+</Base>

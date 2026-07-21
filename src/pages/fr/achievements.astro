@@ -1,0 +1,115 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+
+const achievements = [
+  { name: 'Discover all locations', desc: 'Découvrez chaque lieu de Moonlight Peaks.' },
+  { name: 'A Farming Monopoly', desc: "Gagnez 1 000 000 de pièces d'or." },
+  { name: 'Skulls in a Net', desc: 'Collectez tous les Soul Blobs.' },
+  { name: 'Back to the Den', desc: 'Ramenez tous les Vampsters à leur grotte.' },
+  { name: 'Making Mina Proud', desc: 'Cuisinez 25 recettes différentes.' },
+  { name: "Albertus' Helper", desc: 'Terminez 25 petits boulots du tableau.' },
+  { name: 'Magic at Max Capacity', desc: 'Atteignez le mana maximum.' },
+  { name: 'Fully Energized', desc: "Atteignez l'énergie maximale." },
+  { name: 'Moonlit Stretching', desc: 'Participez à votre première séance de yoga.' },
+  { name: 'Back in Place', desc: 'Remettez toutes les chaises en plastique à leur place.' },
+  { name: 'Tree Hugger', desc: 'Tombez amoureux(se) d\'un arbre.' },
+  { name: 'The Pumpking', desc: 'Rencontrez une citrouille singulière.' },
+  { name: 'Raiders of the Lost Art', desc: "Terminez la chasse au trésor d'Elvira." },
+  { name: 'A Childhood Dream', desc: 'Construisez une cabane dans les arbres avec Ridge.' },
+  { name: 'Nokturna Master', desc: 'Collectez toutes les cartes Nokturna.' },
+  { name: 'Awooooo!', desc: 'Parlez à un personnage loup-garou pendant une pleine lune (rapporté par la communauté).' },
+  { name: 'AFKitten', desc: 'Caressez votre Hellkitten pendant 5 minutes sans interruption (rapporté par la communauté).' },
+  { name: 'Cartographer', desc: "Découvrez chaque lieu de Moonlight Peaks, y compris les zones accessibles uniquement après avoir débloqué une forme de métamorphose (rapporté par la communauté)." },
+  { name: 'Rightful Ritualist', desc: 'Activez chaque cercle de sorcières de la ville (rapporté par la communauté).' },
+  { name: 'Call of the Current', desc: "Débloquez la forme sirène/aquatique — confirmé qu'elle se débloque plus tard dans le jeu, la condition exacte de déblocage de cette troisième forme restant encore non confirmée." },
+  { name: 'Perpetual Bloom', desc: 'Construisez une serre.' },
+  { name: 'Dracula Estate', desc: 'Agrandissez entièrement votre maison.' },
+  { name: 'Vampire with a Wand', desc: 'Débloquez la magie et lancez un sort une fois.' },
+  { name: 'Master of Witchcraft', desc: 'Améliorez entièrement chaque sort.' },
+  { name: 'A Magical Toolbelt', desc: 'Améliorez un outil vers sa version enchantée.' },
+  { name: 'A Magical Cocktail', desc: 'Ayez chaque effet de potion actif simultanément.' },
+  { name: 'New Beginnings', desc: 'Plantez votre première culture — généralement votre toute première action dans le jeu.' },
+  { name: 'Purrgatory', desc: 'Débloquez la forme Hellkitten.' },
+  { name: 'Wings of the Night', desc: 'Débloquez la forme chauve-souris.' },
+  { name: 'Out of the Mist', desc: "Levez la malédiction sur Misty Shores via l'histoire principale." },
+  { name: 'To the Depths', desc: "Ouvrez l'entrée des catacombes." },
+  { name: 'Happy New Year!', desc: 'Terminez une année de jeu complète sur les quatre saisons.' },
+  { name: 'A Generous Donor', desc: "Offrez un total de 299 cadeaux." },
+  { name: 'Serial Gifter', desc: 'Offrez 25 cadeaux adorés en une seule nuit.' },
+  { name: 'Social Butterfly', desc: 'Atteignez 4 cœurs avec chaque personnage.' },
+  { name: 'Tied the Knot', desc: "Maximisez une romance et faites une demande en mariage." },
+  { name: 'Buddies for Afterlife', desc: "Développez une amitié avec Death, comme avec n'importe quel autre habitant." },
+];
+
+const faq = [
+  { q: "Combien d'achievements Moonlight Peaks a-t-il ?", a: "Confirmé au lancement : environ 59-60 achievements Steam au total (les sources citent les deux chiffres). 37 achievements nommés sont publiquement connus jusqu'à présent — voir le tableau ci-dessus pour ce qui est confirmé." },
+  { q: 'Moonlight Peaks a-t-il des cartes à collectionner Steam ?', a: 'Oui — la page Steam du jeu liste des achievements Steam, des cartes à collectionner Steam, des sauvegardes cloud Steam et un support complet des manettes.' },
+  { q: "Quel est l'achievement le plus difficile ou le moins connu ?", a: "Plusieurs noms confirmés suggèrent des achievements singuliers et faciles à manquer plutôt que du pur grind — \"Tree Hugger\" (tomber amoureux d'un arbre) et \"The Pumpking\" (rencontrer une citrouille singulière) sonnent tous deux comme des interactions uniques spécifiques plutôt que des actions répétées." },
+  { q: "Y a-t-il des achievements pour la romance ou les relations ?", a: '"Social Butterfly" (4 cœurs avec chaque personnage), "Tied the Knot" (maximiser une romance et faire une demande), "A Generous Donor" (offrir 299 cadeaux au total), "Serial Gifter" (25 cadeaux adorés en une nuit) et "Buddies for Afterlife" (développer une amitié avec Death) sont tous liés à la romance/aux relations. "A Childhood Dream" (construire une cabane avec Ridge) et "Raiders of the Lost Art" (la chasse au trésor d\'Elvira) sont aussi liés à des habitants nommés spécifiques.' },
+  { q: 'Y a-t-il un achievement pour construire une serre ?', a: 'Oui, confirmé : "Perpetual Bloom" est accordé pour la construction d\'une serre.' },
+  { q: 'Quels achievements sont liés aux formes de métamorphose ?', a: 'Confirmé : "Purrgatory" (forme Hellkitten), "Wings of the Night" (forme chauve-souris) et "Call of the Current" (forme sirène/aquatique, débloquée plus tard dans le jeu).' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Accueil', item: `${SITE.url}/fr` },
+    { '@type': 'ListItem', position: 2, name: 'Achievements', item: `${SITE.url}/fr/achievements` },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks Achievements — Guide complet des trophées & achievements Steam"
+  description="Moonlight Peaks compte 59 achievements confirmés. Découvrez les achievements nommés connus jusqu'à présent, de la collecte des Soul Blobs à gagner 1 000 000 de pièces d'or."
+  path="/fr/achievements"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Achievements' }]}
+  lang="fr"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Entrée · Achievements</p>
+      <h1>Moonlight Peaks <em>achievements</em></h1>
+      <p class="intro">
+        Confirmé au lancement : {GAME.title} compte <strong>59 achievements Steam</strong>, plus des
+        cartes à collectionner Steam, des sauvegardes cloud et un support complet des manettes.
+        Jusqu'à présent, seuls certains noms d'achievements sont publiquement connus — cette page
+        liste exactement ce qui est confirmé et s'agrandira à mesure que d'autres seront révélés.
+      </p>
+
+      <h2>Achievements confirmés ({achievements.length} sur 59)</h2>
+      <table class="facts">
+        <tr><th>Achievement</th><th>Comment le débloquer</th></tr>
+        {achievements.map((a) => (
+          <tr>
+            <td>{a.name}</td>
+            <td>{a.desc}</td>
+          </tr>
+        ))}
+      </table>
+
+      <div class="callout">
+        45 achievements ne sont pas encore nommés ici — nous listons seulement ce qui est confirmé
+        via de véritables données d'achievements Steam, pas deviné. Revenez plus tard à mesure
+        que d'autres sont confirmés.
+      </div>
+
+      <h2>FAQ</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        Lié : <a href="/fr/items">objets</a>, <a href="/fr/farming">agriculture</a>,
+        <a href="/characters/albertus">Albertus (tableau des petits boulots)</a>, <a href="/characters/ridge">Ridge</a>,
+        <a href="/characters/elvira">Elvira</a>, <a href="/nokturna">jeu de cartes Nokturna</a>.
+      </div>
+    </div>
+  </article>
+</Base>

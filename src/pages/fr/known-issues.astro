@@ -1,0 +1,68 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE } from '../../consts';
+
+const issueRows = [
+  ['Crash au démarrage (Steam Deck)', 'Rapporté par les joueurs · Solution de contournement disponible', "Plusieurs joueurs rapportent des crashs au démarrage. Correctif rapporté : passer l'outil de compatibilité à Proton 9.0-4."],
+  ['Micro-saccades toutes les quelques secondes', 'Rapporté par les joueurs · Aucune solution confirmée', "Affecte aussi les PC puissants — ne semble pas être un simple problème matériel."],
+  ['La manette ne répond plus', 'Rapporté par les joueurs · Solution de contournement disponible', "La manette fonctionne pendant la création de personnage, puis ne répond plus. Solution de contournement : reconnecter la manette ou passer au clavier/souris."],
+];
+
+const faq = [
+  { q: 'Moonlight Peaks plante sur Steam Deck — que faire ?', a: "Rapporté par les joueurs : dans les propriétés du jeu sur Steam, sous Compatibilité, passer l'outil Proton à 9.0-4." },
+  { q: 'Ma manette ne fonctionne plus — que puis-je faire ?', a: "Rapporté par les joueurs, non résolu : reconnecter la manette ou passer temporairement au clavier/souris." },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Accueil', item: `${SITE.url}/fr` },
+    { '@type': 'ListItem', position: 2, name: 'Problèmes connus', item: `${SITE.url}/fr/known-issues` },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks Problèmes connus — Crashs & manette (Français)"
+  description="Problèmes connus de Moonlight Peaks en français : crashs Steam Deck, problèmes de manette, et solutions de contournement confirmées, clairement séparés des rapports de la communauté."
+  path="/fr/known-issues"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Problèmes connus' }]}
+  lang="fr"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Entrée / Problèmes</p>
+      <h1>Moonlight Peaks <em>problèmes connus</em></h1>
+      <p class="intro">
+        Un suivi des bugs confirmés, crashs et problèmes de manette — distinguant clairement ce
+        qui est confirmé de ce qui est rapporté par les joueurs.
+      </p>
+
+      <table class="facts">
+        <tr><th>Problème</th><th>Statut</th><th>Détails</th></tr>
+        {issueRows.map((r) => (<tr><td>{r[0]}</td><td>{r[1]}</td><td>{r[2]}</td></tr>))}
+      </table>
+
+      <h2>Emplacement des sauvegardes</h2>
+      <p>
+        Confirmé : sur Windows, les sauvegardes se trouvent sous
+        <code>%USERPROFILE%/AppData/LocalLow/Little Chicken Game Company/Moonlight Peaks/</code>.
+      </p>
+
+      <h2>Questions fréquentes</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        Aller plus loin : <a href="/fr/platforms">plateformes</a>,
+        <a href="/known-issues">guide complet (en anglais)</a>.
+      </div>
+    </div>
+  </article>
+</Base>

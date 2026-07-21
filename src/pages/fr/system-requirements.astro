@@ -1,0 +1,108 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+
+const checklist = [
+  ['Page de la boutique', "Utilisez la page Steam officielle comme source finale avant un achat ou une mise à jour du guide."],
+  ['Windows / Mac', "Moonlight Peaks est listé pour Steam sur PC et Mac ; consultez le panneau actuel des configurations requises Steam pour les détails exacts d'OS, processeur, mémoire, graphique, DirectX et espace disque."],
+  ['Steam Deck', "Considérez le statut Steam Deck comme une vérification continue, jusqu'à ce que Valve affiche une évaluation de compatibilité définitive."],
+  ['Manette', "La démo est utile pour vérifier le confort de la manette, la lisibilité du texte et la mise à l'échelle de l'interface avant l'achat."],
+  ['Espace disque', "Nous ne publions pas de chiffre exact d'espace disque, sauf s'il est visible sur la page officielle de la boutique ou dans les notes de version."],
+];
+
+const faq = [
+  { q: 'Quelles sont les configurations requises de Moonlight Peaks ?', a: "Consultez la page Steam officielle pour les configurations requises actuelles Windows et Mac. Cette page suit ce qu'il faut vérifier sans inventer de chiffres matériels." },
+  { q: 'Moonlight Peaks fonctionne-t-il sur Mac ?', a: "Moonlight Peaks est listé pour Steam sur PC et Mac. Vérifiez les exigences exactes de version et de matériel Mac par rapport à la page Steam actuelle." },
+  { q: 'Moonlight Peaks est-il vérifié Steam Deck ?', a: "Vérifiez directement le support Steam Deck. Le jeu est sur Steam, mais l'évaluation finale de compatibilité Deck est un signal Valve/boutique." },
+  { q: 'Devrais-je utiliser la démo pour tester les performances ?', a: "Oui. La démo gratuite est le moyen le plus sûr de tester les contrôles, la taille du texte, le confort de la caméra et les performances générales sur votre propre appareil avant l'achat." },
+];
+
+const steamUrl = 'https://store.steampowered.com/app/2209900/Moonlight_Peaks/';
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Accueil', item: `${SITE.url}/fr` },
+    { '@type': 'ListItem', position: 2, name: 'Configuration requise', item: new URL('/fr/system-requirements', SITE.url).href },
+  ] },
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({
+    '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })) },
+];
+---
+<Base
+  title="Moonlight Peaks Configuration requise - PC, Mac et Steam Deck"
+  description="Configuration requise de Moonlight Peaks pour Steam PC, Mac, vérifications Steam Deck, tests de démo, et ce qu'il faut vérifier avant l'achat."
+  path="/fr/system-requirements"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Configuration requise' }]}
+  lang="fr"
+  showExport
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Sortie / Configuration requise</p>
+      <h1>Moonlight Peaks <em>configuration requise</em></h1>
+      <p class="intro">
+        Une page de configuration requise fiable pour les joueurs qui vérifient si {GAME.title}
+        fonctionne sur leur PC, Mac ou Steam Deck. Vérifiez toujours les chiffres matériels exacts
+        par rapport à la page Steam officielle, car les métadonnées de la boutique peuvent changer
+        juste avant la sortie.
+      </p>
+
+      <h2>Vérifiez d'abord la source officielle</h2>
+      <p>
+        Utilisez la fiche Steam officielle pour les configurations requises actuelles, les
+        plateformes supportées, la disponibilité de la démo et le calendrier de sortie. Cette page
+        est délibérément prudente : elle vous montre quoi vérifier et comment tester la démo, mais
+        n'invente aucune valeur de CPU, GPU, RAM, espace disque ou OS non visible dans une source
+        officielle.
+      </p>
+      <p><a href={steamUrl} target="_blank" rel="noopener noreferrer nofollow">Ouvrir la page Steam officielle</a></p>
+
+      <h2>Liste de vérification avant l'achat</h2>
+      <table class="facts">
+        {checklist.map((row) => (<tr><th>{row[0]}</th><td>{row[1]}</td></tr>))}
+      </table>
+
+      <h2>Comment tester avec la démo</h2>
+      <p>
+        La démo est le test pratique le plus utile, car elle fonctionne sur votre propre matériel.
+        Testez le mouvement, les menus, la lisibilité du texte, le confort de la manette, la
+        pêche, l'arrangement floral, la broderie et la création de personnage. Si vous voulez
+        jouer en déplacement, testez la démo dans exactement cette configuration plutôt que de
+        juger sur des captures de bureau.
+      </p>
+      <ul>
+        <li><strong>PC :</strong> vérifiez la résolution, la fluidité des images, le confort souris/clavier et les temps de chargement.</li>
+        <li><strong>Mac :</strong> confirmez l'exigence Mac exacte sur Steam, puis testez la démo si disponible.</li>
+        <li><strong>Steam Deck :</strong> vérifiez les contrôles, la taille du texte, le confort de la batterie et l'évaluation finale du Deck après la sortie.</li>
+      </ul>
+
+      <h2>Pages de sortie liées</h2>
+      <div class="link-grid">
+        <a href="/fr/release-date">Date de sortie</a>
+        <a href="/fr/demo">Guide de la démo</a>
+        <a href="/fr/platforms">Plateformes</a>
+        <a href="/fr/languages">Langues</a>
+        <a href="/fr/beginner-guide">Guide du débutant</a>
+      </div>
+
+      <h2>FAQ</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </article>
+
+  <style>
+    .link-grid { display: grid; grid-template-columns: 1fr; gap: 10px; margin-top: 10px; }
+    @media (min-width: 640px) { .link-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+    .link-grid a { border: 1px solid var(--line); border-radius: 10px; background: var(--surface); color: var(--mist); padding: 12px 14px; text-decoration: none; }
+    .link-grid a:hover { border-color: color-mix(in srgb, var(--candle) 55%, var(--line)); }
+  </style>
+</Base>

@@ -1,0 +1,121 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+
+const tiers = [
+  { label: 'Confirmé', desc: "Vérifié directement contre le jeu en cours, des notes de patch officielles ou une déclaration directe des développeurs (publications de la communauté Steam, wiki officiel, dossier de presse). C'est le seul niveau que nous traitons comme un fait établi." },
+  { label: 'Rapporté', desc: "Vu dans des previews de presse, des rapports de reviewers ou des tests communautaires (Reddit, discussions de la communauté Steam, playthroughs YouTube) que nous jugeons crédibles, mais que nous n'avons pas encore reproduits nous-mêmes indépendamment sur le build en cours." },
+  { label: 'Datamining', desc: "Trouvé dans les fichiers du jeu avant le lancement, recoupé avec d'autres sources préalables quand possible. Le contenu de datamining est une donnée réelle, mais peut changer avant ou après le lancement, donc nous ne le présentons pas comme confirmé." },
+  { label: 'Attendu / Non confirmé', desc: "Une conclusion raisonnable basée sur les schémas existants du jeu (par ex. un nom de boutique existant implique des horaires d'ouverture), explicitement marquée comme notre propre supposition plutôt qu'un fait étayé." },
+];
+
+const stats = [
+  { n: '52+', label: 'réponses FAQ avec source nommée et liée' },
+  { n: '70+', label: 'entrées news avec source nommée et liée' },
+  { n: '49', label: 'profils de personnages marqués individuellement avec statut' },
+  { n: '4', label: 'niveaux de confirmation, affichés sur chaque page qui les utilise' },
+];
+
+const faq = [
+  { q: 'Comment Moonlight Peaks Wiki & Guide vérifie-t-il les informations ?', a: "Chaque fait sur ce site est marqué avec l'un des quatre niveaux de confirmation — confirmé, rapporté, datamining ou attendu — afin que les lecteurs puissent voir en un coup d'œil la fiabilité d'une affirmation, plutôt que de présenter chaque détail avec la même fausse certitude." },
+  { q: "Ce site invente-t-il des tableaux de cadeaux, statistiques ou recettes non confirmés ?", a: "Non. Là où les données ne sont pas encore disponibles, les pages le disent explicitement plutôt que de combler un vide plausible. Nous préférons montrer un vide qu'une supposition." },
+  { q: 'Les journalistes ou autres sites peuvent-ils citer les données de ce site ?', a: `Oui — c'est à ça que sert ce site. Merci de mentionner ${SITE.brand} et de créer un lien retour vers la page spécifique que vous citez (pas juste la page d'accueil), afin que les lecteurs puissent vérifier eux-mêmes les sources et le niveau de confirmation.` },
+  { q: 'À quelle fréquence ce site est-il mis à jour ?', a: "En continu pendant l'accès anticipé et après le lancement — les notes de patch, nouveaux rapports communautaires et confirmations officielles sont intégrés dès qu'ils apparaissent, les entrées existantes étant re-marquées (pas supprimées) quand leur niveau de confirmation change." },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Accueil', item: `${SITE.url}/fr` },
+    { '@type': 'ListItem', position: 2, name: 'Méthodologie & normes de précision', item: `${SITE.url}/fr/methodology` },
+  ] },
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+];
+---
+<Base
+  title="Méthodologie & normes de précision | Moonlight Peaks Wiki & Guide"
+  description="Comment nous vérifions les informations sur Moonlight Peaks : notre système de confirmation à quatre niveaux (confirmé, rapporté, datamining, attendu), normes de source, et comment citer ce site."
+  path="/fr/methodology"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Méthodologie & normes de précision' }]}
+  lang="fr"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">À propos · Méthodologie</p>
+      <h1>Méthodologie & <em>normes de précision</em></h1>
+      <p class="intro">
+        {SITE.brand} repose sur une règle : ne jamais présenter une supposition avec la même
+        certitude qu'un fait vérifié. Cette page explique exactement comment nous marquons,
+        sourçons et mettons à jour les informations sur {GAME.title}, et comment d'autres sites ou
+        journalistes peuvent citer notre travail.
+      </p>
+
+      <h2>Nos quatre niveaux de confirmation</h2>
+      <p>Chaque profil, réponse FAQ et entrée de guide contenant une affirmation factuelle est marqué avec l'un de ces quatre niveaux, visible directement sur la page plutôt que caché en note de bas de page :</p>
+      <table class="facts">
+        <tr><th>Niveau</th><th>Ce que ça signifie</th></tr>
+        {tiers.map((t) => (<tr><th>{t.label}</th><td>{t.desc}</td></tr>))}
+      </table>
+
+      <h2>En chiffres</h2>
+      <div class="stat-grid">
+        {stats.map((s) => (
+          <div class="stat-card"><strong>{s.n}</strong><span>{s.label}</span></div>
+        ))}
+      </div>
+
+      <h2>D'où viennent nos sources</h2>
+      <ul>
+        <li><strong>Canaux officiels :</strong> notes de patch Steam, publications de la communauté Steam du développeur lui-même, le wiki officiel et les fiches boutique des plateformes.</li>
+        <li><strong>Rapports de presse :</strong> reviews et previews d'organes que nous nommons explicitement (IGN, GameRant, TheGamer, Nintendo Everything et autres), plutôt que de citer "certains reviewers disent" sans attribution.</li>
+        <li><strong>Tests communautaires :</strong> Reddit, discussions de la communauté Steam et playthroughs YouTube, traités comme "rapportés" plutôt que "confirmés" jusqu'à ce que nous puissions vérifier.</li>
+        <li><strong>Datamining préalable :</strong> recoupé avec d'autres sources préalables quand possible, et explicitement marqué comme datamining plutôt que confirmé, car les fichiers peuvent changer avant la sortie.</li>
+      </ul>
+
+      <h2>Ce que nous ne faisons pas</h2>
+      <p>
+        Nous n'inventons pas de tableaux de cadeaux, statistiques, taux de drop ou recettes pour
+        combler un vide. Nous ne surclassons pas une affirmation "rapportée" en "confirmée" juste
+        pour qu'une page paraisse plus complète. Quand le niveau de confirmation d'un fait change —
+        par exemple un nom de datamining plus tard confirmé dans le jeu en cours — nous mettons à
+        jour le marquage plutôt que de réécrire silencieusement l'histoire.
+      </p>
+
+      <h2>Citer ce site</h2>
+      <p>
+        Si vous êtes journaliste, YouTuber ou co-auteur d'un autre guide et référencez nos données,
+        merci de créer un lien direct vers la page spécifique que vous citez (un profil de
+        personnage, une réponse FAQ ou un guide de lieu), plutôt que juste vers la page d'accueil,
+        afin que vos lecteurs puissent voir eux-mêmes les sources et le niveau de confirmation. Une
+        courte ligne comme "<em>via {SITE.brand}</em>" avec un lien est exactement ce que nous
+        demandons — aucune autorisation formelle nécessaire.
+      </p>
+      <p>
+        Vous avez trouvé une erreur, ou une correction avec une vraie source ? Contactez-nous à
+        {SITE.contact} et nous vérifierons et mettrons à jour la page concernée.
+      </p>
+
+      <h2>FAQ</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        Lié : <a href="/fr/about">À propos de ce site</a>, <a href="/fr/faq">hub FAQ</a>.
+      </div>
+    </div>
+  </article>
+
+  <style>
+    .stat-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin: 14px 0 22px; }
+    @media (min-width: 640px) { .stat-grid { grid-template-columns: repeat(4, 1fr); } }
+    .stat-card { border: 1px solid var(--line); border-radius: 12px; background: var(--surface); padding: 16px 14px; text-align: center; }
+    .stat-card strong { display: block; font-family: var(--display); font-size: 1.8rem; color: var(--candle); }
+    .stat-card span { color: var(--muted); font-size: 0.82rem; }
+  </style>
+</Base>

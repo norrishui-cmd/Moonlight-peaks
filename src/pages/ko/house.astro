@@ -1,0 +1,75 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE } from '../../consts';
+
+const faq = [
+  { q: 'Moonlight Peaks에서 집을 꾸밀 수 있나요?', a: '네 — 제보됨: 집 내부와 농장 부지를 커스터마이징하고, 가구를 배치하고 회전시키며, 오솔길과 요정 조명 같은 장식을 제작할 수 있습니다.' },
+  { q: 'Moonlight Peaks에 온실이 있나요?', a: '네, 확인됨: 온실을 짓는 것은 "Perpetual Bloom"이라는 자체 업적과 연결되어 있습니다. 건설 비용과 효용에 대해 지금까지 알려진 내용은 <a href="/farm/greenhouse">온실 페이지</a>를 참고하세요.' },
+  { q: '집을 확장할 수 있나요?', a: '확인됨: "Dracula Estate"는 집을 완전히 확장하는 업적이므로, 단순한 미관 꾸미기를 넘어선 진짜 확장 경로가 있습니다 — 정확한 단계와 비용은 아직 출처가 확인되지 않았습니다. 헛간(4,000골드, Ridge에게서)과 우물(1,500골드)도 확인된 건물 구매 항목입니다.' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '홈', item: `${SITE.url}/ko` },
+    { '@type': 'ListItem', position: 2, name: '집 & 장식', item: `${SITE.url}/ko/house` },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks 집, 장식 & 온실"
+  description="Moonlight Peaks에서 집을 꾸미는 방법: 지금까지 확인된 가구, 오솔길, 요정 조명, 그리고 온실과 집 확장에 대해 아직 확인되지 않은 내용."
+  path="/ko/house"
+  jsonLd={jsonLd}
+  crumbs={[{ label: '집 & 장식' }]}
+  lang="ko"
+  showExport
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">항목 · 나의 집</p>
+      <h1>Moonlight Peaks <em>집</em> & 장식</h1>
+      <p class="intro">
+        농사를 넘어선 나의 집과 농장 부지 — 꾸미기에 대해 확인된 내용과 아직 확인되지 않은
+        내용을 구분해서 정리합니다. 최근 업데이트: {SITE.updated}.
+      </p>
+
+      <h2>집 꾸미기</h2>
+      <p>
+        제보됨: Moonlight Peaks에서 꾸미기는 가구 배치와 회전, 집 내부 커스터마이징, 그리고
+        오솔길과 요정 조명을 포함한 농장 부지 장식 제작을 포함합니다.
+      </p>
+
+      <h2>온실 — 존재 확인됨</h2>
+      <p>
+        확인됨: 온실을 짓는 것은 "Perpetual Bloom"이라는 자체 Steam 업적과 연결되어 있습니다.
+        커뮤니티 제보: 온실이 있으면 다른 여러 농사 목표에도 도움이 된다고 하니, 우선순위를
+        둘 가치가 있습니다. 건설 비용과 공간에 대한 세부 사항이 확인되는 대로
+        <a href="/farm/greenhouse">온실 페이지</a>를 참고하세요.
+      </p>
+
+      <h2>지금까지 확인된 건물 확장</h2>
+      <p>
+        확인됨: "Dracula Estate"는 집을 완전히 확장하는 업적이므로, 단순한 미관 꾸미기를 넘어선
+        진짜 확장 경로가 있습니다 — 정확한 단계와 비용은 아직 출처가 확인되지 않았습니다.
+        확인된 다른 두 건물 구매: <strong>헛간</strong>(4,000골드 + 재료, Ridge에게서, 가축
+        구매 전 필요)과 <strong>우물</strong>(1,500골드로 제보됨, 물주기에 도움).
+      </p>
+
+      <h2>자주 묻는 질문</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        관련: <a href="/ko/farming">농사</a>, <a href="/ko/character-creator">캐릭터 에디터</a>,
+        <a href="/ko/beginner-guide">초보자 가이드</a>.
+      </div>
+    </div>
+  </article>
+</Base>

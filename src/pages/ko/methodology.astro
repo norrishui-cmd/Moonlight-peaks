@@ -1,0 +1,119 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+
+const tiers = [
+  { label: '확인됨', desc: '실제 게임, 공식 패치 노트, 또는 개발자의 직접적인 발언(Steam 커뮤니티 게시물, 공식 위키, 보도자료)을 통해 직접 검증됨. 이것이 확실한 사실로 취급하는 유일한 단계입니다.' },
+  { label: '제보됨', desc: '언론 프리뷰, 리뷰어 보고서, 커뮤니티 테스트(Reddit, Steam 커뮤니티 토론, YouTube 플레이스루)에서 확인되어 신뢰할 만하다고 판단되지만, 아직 실제 게임에서 직접 독립적으로 재현하지 못한 내용.' },
+  { label: '데이터마이닝', desc: '출시 전 게임 파일에서 발견되었으며, 가능한 경우 다른 사전 자료와 교차 확인됨. 데이터마이닝 내용은 실제 데이터이지만 출시 전후로 변경될 수 있어 확인된 것으로 제시하지 않습니다.' },
+  { label: '예상 / 미확인', desc: '게임의 기존 패턴을 기반으로 한 합리적인 추론(예: 기존 상점 이름이 영업시간을 암시함)으로, 입증된 사실이 아니라 저희 자체 추측임을 명시적으로 표시합니다.' },
+];
+
+const stats = [
+  { n: '52+', label: '출처가 명시되고 링크된 FAQ 답변' },
+  { n: '70+', label: '출처가 명시되고 링크된 뉴스 항목' },
+  { n: '49', label: '개별적으로 상태가 표시된 캐릭터 프로필' },
+  { n: '4', label: '사용하는 모든 페이지에 표시되는 확인 단계' },
+];
+
+const faq = [
+  { q: 'Moonlight Peaks Wiki & Guide는 정보를 어떻게 검증하나요?', a: '이 사이트의 모든 사실은 확인됨, 제보됨, 데이터마이닝, 예상됨이라는 네 가지 확인 단계 중 하나로 표시되어, 독자가 모든 세부 사항을 같은 잘못된 확신으로 제시받는 대신 한눈에 그 신뢰도를 알 수 있게 합니다.' },
+  { q: '이 사이트는 확인되지 않은 선물 표, 통계, 레시피를 지어내나요?', a: '아니요. 데이터가 아직 없는 경우, 그럴듯해 보이는 빈틈을 채우는 대신 페이지에서 명시적으로 그렇게 말합니다. 저희는 추측보다 빈틈을 보여주는 쪽을 선호합니다.' },
+  { q: '기자나 다른 사이트가 이 사이트의 데이터를 인용해도 되나요?', a: `네 — 이 사이트가 존재하는 이유입니다. ${SITE.brand}를 언급하고 인용하는 구체적인 페이지(단순히 홈페이지가 아니라)로 다시 링크해 주세요. 그래야 독자가 직접 출처와 확인 단계를 확인할 수 있습니다.` },
+  { q: '이 사이트는 얼마나 자주 업데이트되나요?', a: '얼리 액세스 기간과 출시 이후 지속적으로 — 패치 노트, 새로운 커뮤니티 제보, 공식 확인 사항이 나오는 대로 반영되며, 확인 단계가 바뀌면 기존 항목은 삭제되지 않고 다시 표시됩니다.' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '홈', item: `${SITE.url}/ko` },
+    { '@type': 'ListItem', position: 2, name: '방법론 & 정확성 기준', item: `${SITE.url}/ko/methodology` },
+  ] },
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+];
+---
+<Base
+  title="방법론 & 정확성 기준 | Moonlight Peaks Wiki & Guide"
+  description="Moonlight Peaks 정보를 검증하는 방법: 4단계 확인 시스템(확인됨, 제보됨, 데이터마이닝, 예상됨), 출처 기준, 이 사이트를 인용하는 방법."
+  path="/ko/methodology"
+  jsonLd={jsonLd}
+  crumbs={[{ label: '방법론 & 정확성 기준' }]}
+  lang="ko"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">소개 · 방법론</p>
+      <h1>방법론 & <em>정확성 기준</em></h1>
+      <p class="intro">
+        {SITE.brand}는 하나의 규칙에 기반합니다: 추측을 검증된 사실과 같은 확신으로 제시하지
+        않는다는 것입니다. 이 페이지는 {GAME.title}에 대한 정보를 어떻게 표시하고, 출처를
+        밝히고, 업데이트하는지, 그리고 다른 사이트나 기자가 저희 작업을 어떻게 인용할 수
+        있는지 정확히 설명합니다.
+      </p>
+
+      <h2>네 가지 확인 단계</h2>
+      <p>사실을 담은 모든 프로필, FAQ 답변, 가이드 항목은 각주에 숨겨지지 않고 페이지에 직접 표시되는 다음 네 단계 중 하나로 표시됩니다:</p>
+      <table class="facts">
+        <tr><th>단계</th><th>의미</th></tr>
+        {tiers.map((t) => (<tr><th>{t.label}</th><td>{t.desc}</td></tr>))}
+      </table>
+
+      <h2>숫자로 보기</h2>
+      <div class="stat-grid">
+        {stats.map((s) => (
+          <div class="stat-card"><strong>{s.n}</strong><span>{s.label}</span></div>
+        ))}
+      </div>
+
+      <h2>출처는 어디서 오나요</h2>
+      <ul>
+        <li><strong>공식 채널:</strong> Steam 패치 노트, 개발자 자체의 Steam 커뮤니티 게시물, 공식 위키, 플랫폼 스토어 등록 정보.</li>
+        <li><strong>언론 보도:</strong> 출처를 명확히 밝히는 매체(IGN, GameRant, TheGamer, Nintendo Everything 등)의 리뷰와 프리뷰. "일부 리뷰어가 말하길" 식으로 출처 없이 인용하지 않습니다.</li>
+        <li><strong>커뮤니티 테스트:</strong> Reddit, Steam 커뮤니티 토론, YouTube 플레이스루는 확인할 때까지 "확인됨"이 아니라 "제보됨"으로 취급합니다.</li>
+        <li><strong>사전 데이터마이닝:</strong> 가능한 경우 다른 사전 자료와 교차 확인하며, 출시 전 파일이 변경될 수 있으므로 확인된 것이 아니라 명시적으로 데이터마이닝으로 표시합니다.</li>
+      </ul>
+
+      <h2>저희가 하지 않는 것</h2>
+      <p>
+        빈틈을 채우기 위해 선물 표, 통계, 드롭률, 레시피를 지어내지 않습니다. 페이지를 더
+        완전해 보이게 하려고 "제보됨"을 "확인됨"으로 격상시키지 않습니다. 사실의 확인 단계가
+        바뀔 때 — 예를 들어 데이터마이닝으로 나온 이름이 나중에 실제 게임에서 확인될 때 —
+        저희는 이야기를 조용히 다시 쓰는 대신 표시를 업데이트합니다.
+      </p>
+
+      <h2>이 사이트 인용하기</h2>
+      <p>
+        기자, 유튜버, 혹은 다른 가이드의 공동 작성자로서 저희 데이터를 참조한다면, 단순히
+        홈페이지가 아니라 인용하는 구체적인 페이지(캐릭터 프로필, FAQ 답변, 장소 가이드)로
+        직접 링크해 주세요. 그래야 독자가 직접 출처와 확인 단계를 볼 수 있습니다. "<em>{SITE.brand}
+        경유</em>" 같은 짧은 문구와 링크가 저희가 요청하는 전부입니다 — 공식 허가는
+        필요하지 않습니다.
+      </p>
+      <p>
+        오류를 발견했거나 실제 출처가 있는 정정 사항이 있나요? {SITE.contact}로 연락 주시면
+        해당 페이지를 검증하고 업데이트하겠습니다.
+      </p>
+
+      <h2>자주 묻는 질문</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        관련: <a href="/ko/about">이 사이트 소개</a>, <a href="/ko/faq">FAQ 허브</a>.
+      </div>
+    </div>
+  </article>
+
+  <style>
+    .stat-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin: 14px 0 22px; }
+    @media (min-width: 640px) { .stat-grid { grid-template-columns: repeat(4, 1fr); } }
+    .stat-card { border: 1px solid var(--line); border-radius: 12px; background: var(--surface); padding: 16px 14px; text-align: center; }
+    .stat-card strong { display: block; font-family: var(--display); font-size: 1.8rem; color: var(--candle); }
+    .stat-card span { color: var(--muted); font-size: 0.82rem; }
+  </style>
+</Base>
