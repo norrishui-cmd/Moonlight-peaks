@@ -262,6 +262,8 @@ export const locations: TopicItem[] = [
   {
     slug: 'crest-garden', title: 'Crest Garden', tag: 'Town', status: 'confirmed', image: '/images/moonlight-peaks/official/town-hall-garden-01.webp',
     dek: 'A town garden beside Town Hall that displays the crests of all seven families as you unlock them through the main story.',
+    seoTitle: 'Crest Garden in Moonlight Peaks: Location & How the Family Crests Unlock',
+    seoDescription: 'Confirmed by the official wiki: the Crest Garden sits beside Town Hall and displays all seven family crests as you unlock them through the main story \\u2014 including why one crest can go missing and which two unlock last.',
     body: [
       'Confirmed by the official wiki: the Crest Garden is located beside Town Hall and displays the crests of each of Moonlight Peaks\u2019 seven families as they\u2019re unlocked through story progression \u2014 a visual tracker of how far you\u2019ve advanced the game\u2019s central family storylines.',
       'Reported by a walkthrough: the Logan family crest specifically goes missing partway through, sending you on a fetch-quest detour \u2014 Dragan points you to The Broken Lamp for information, which leads to the Howling Marshes, where Yabbis turns out to have eaten the crest and wants a Copper Bar in exchange for it back.',
