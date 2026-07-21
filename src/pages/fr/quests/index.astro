@@ -1,0 +1,80 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { SITE, GAME } from '../../../consts';
+import { storyQuests } from '../../../data/quests-story';
+import { sideQuests } from '../../../data/quests-side';
+
+const jsonLd = {
+  '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Accueil', item: `${SITE.url}/fr` },
+    { '@type': 'ListItem', position: 2, name: 'Guide des quêtes', item: `${SITE.url}/fr/quests` },
+  ],
+};
+---
+<Base
+  title="Moonlight Peaks Guide des quêtes — Histoire principale & quêtes secondaires"
+  description="Le guide complet des quêtes de Moonlight Peaks : l'histoire principale chapitre par chapitre, chaque quête secondaire confirmée, et des réponses si vous êtes bloqué — issu de walkthroughs de la semaine de lancement recoupés."
+  path="/fr/quests"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Guide des quêtes' }]}
+  lang="fr"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Hub · Quêtes</p>
+      <h1>{GAME.title} <em>guide des quêtes</em></h1>
+      <p class="intro">
+        Que vous vouliez suivre l'histoire principale dans l'ordre ou que vous soyez bloqué sur
+        une quête spécifique — c'est le bon endroit. Tout ici est recoupé via plusieurs sources
+        indépendantes de la semaine de lancement plutôt que tiré d'un seul walkthrough — les
+        quêtes sont marquées <strong>confirmées</strong> quand deux sources ou plus concordent, et
+        <strong>rapportées</strong> quand une seule source l'a documenté jusqu'à présent. Rien ici
+        n'est inventé pour combler un vide.
+      </p>
+
+      <div class="q-split">
+        <a class="q-card" href="/fr/quests/story">
+          <span class="q-tag">Histoire principale</span>
+          <h2>Suivre l'histoire chapitre par chapitre</h2>
+          <p>{storyQuests.length} quêtes d'histoire principale, organisées en 5 chapitres de l'arrivée en ville à l'arc du mariage. Choisissez le chapitre qui vous correspond et reprenez directement là.</p>
+          <strong>Parcourir les chapitres →</strong>
+        </a>
+        <a class="q-card" href="/fr/quests/side">
+          <span class="q-tag">Quêtes secondaires</span>
+          <h2>Quêtes de PNJ & systèmes secondaires</h2>
+          <p>{sideQuests.length} quêtes secondaires confirmées et systèmes continus — concours de pêche, agrandissements de maison, le tableau des petits boulots, et les deux systèmes secondaires de collecte de créatures de la ville.</p>
+          <strong>Parcourir les quêtes secondaires →</strong>
+        </a>
+      </div>
+
+      <h2>Bloqué sur quelque chose de précis ?</h2>
+      <p>
+        Si vous êtes bloqué sur un moment précis de l'histoire : <a href="/quests/story/a-bridge-too-far">A Bridge Too Far</a>
+        est la quête précoce la plus recherchée (actuellement en anglais uniquement) — vous y
+        trouverez le walkthrough complet du pont Orlock/Fiona. Pour des questions générales liées
+        aux quêtes, consultez la <a href="/faq">FAQ</a>, qui a sa propre section quêtes.
+      </p>
+
+      <div class="callout wip">
+        Lié : <a href="/fr/beginner-guide">guide du débutant</a>, <a href="/fr/characters">personnages</a>,
+        <a href="/map">carte</a>, <a href="/known-issues">problèmes connus</a>.
+      </div>
+    </div>
+  </article>
+
+  <style>
+    .q-split { display: grid; grid-template-columns: 1fr; gap: 14px; margin: 24px 0 30px; }
+    @media (min-width: 720px) { .q-split { grid-template-columns: 1fr 1fr; } }
+    .q-card {
+      display: flex; flex-direction: column; gap: 8px;
+      border: 1px solid var(--line); border-radius: 16px; background: var(--surface);
+      padding: 20px; text-decoration: none; color: inherit;
+      transition: border-color .15s ease, transform .15s ease;
+    }
+    .q-card:hover { border-color: color-mix(in srgb, var(--candle) 54%, var(--line)); transform: translateY(-2px); }
+    .q-tag { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--candle); }
+    .q-card h2 { margin: 4px 0 6px; font-size: 1.2rem; }
+    .q-card p { margin: 0 0 8px; color: #ded3e6; font-size: 0.9rem; }
+    .q-card strong { font-family: var(--mono); font-size: 0.82rem; color: var(--candle); }
+  </style>
+</Base>

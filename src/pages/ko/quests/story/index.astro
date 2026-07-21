@@ -1,0 +1,80 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import { SITE } from '../../../../consts';
+import { storyQuests } from '../../../../data/quests-story';
+import { storyQuestsKo, storyChaptersKo } from '../../../../i18n/quests-story-ko';
+
+const jsonLd = {
+  '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '홈', item: `${SITE.url}/ko` },
+    { '@type': 'ListItem', position: 2, name: '퀘스트 가이드', item: `${SITE.url}/ko/quests` },
+    { '@type': 'ListItem', position: 3, name: '메인 스토리', item: `${SITE.url}/ko/quests/story` },
+  ],
+};
+---
+<Base
+  title="Moonlight Peaks 메인 스토리 퀘스트 — 챕터별 정리"
+  description="확인된 Moonlight Peaks 메인 스토리 퀘스트 전체를 마을 도착부터 결혼식 이야기까지 5개 챕터로 정리, 여러 출시 주간 자료로 교차 확인."
+  path="/ko/quests/story"
+  jsonLd={jsonLd}
+  crumbs={[{ label: '퀘스트 가이드', href: '/ko/quests' }, { label: '메인 스토리' }]}
+  lang="ko"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">퀘스트 · 메인 스토리</p>
+      <h1>메인 스토리 <em>퀘스트</em></h1>
+      <p class="intro">
+        {storyChaptersKo.length}개 챕터로 묶인 {storyQuests.length}개의 메인 스토리 퀘스트입니다.
+        자신의 진행 상황에 맞는 챕터를 선택하세요 — 각 챕터 안의 퀘스트는 확인된 순서대로
+        나열되어 있습니다.
+      </p>
+
+      {storyChaptersKo.map((ch) => {
+        const quests = storyQuests.filter((q) => q.chapter === ch.number && storyQuestsKo[q.slug]);
+        return (
+          <section class="chapter">
+            <div class="chapter-head">
+              <span class="chapter-num">챕터 {ch.number}</span>
+              <h2>{ch.title}</h2>
+            </div>
+            <p class="chapter-dek">{ch.dek}</p>
+            <ol class="quest-list">
+              {quests.map((q) => (
+                <li>
+                  <a href={`/ko/quests/story/${q.slug}`}>{storyQuestsKo[q.slug].title}</a>
+                  {q.status === 'reported' && <span class="tag-community">제보됨</span>}
+                </li>
+              ))}
+            </ol>
+          </section>
+        );
+      })}
+
+      <div class="callout wip">
+        Sourced from cross-verified launch-week walkthroughs (Neoseeker's quest log, Bonus Action,
+        Output Lag, Into Indie Games). 챕터 구분은 저희가 자체적으로 정리한 것이며 게임 내 공식
+        라벨이 아닙니다. 관련: <a href="/ko/quests">퀘스트 허브</a>,
+        <a href="/ko/quests/side">사이드 퀘스트</a>, <a href="/quests/story/a-bridge-too-far">A Bridge Too Far (전체 공략, 영어)</a>.
+      </div>
+    </div>
+  </article>
+
+  <style>
+    .chapter { margin: 26px 0; padding-top: 18px; border-top: 1px solid var(--line); }
+    .chapter:first-of-type { border-top: none; padding-top: 0; }
+    .chapter-head { display: flex; align-items: baseline; gap: 10px; }
+    .chapter-num { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--candle); white-space: nowrap; }
+    .chapter-head h2 { margin: 0; }
+    .chapter-dek { color: var(--muted); font-size: 0.92rem; margin: 4px 0 12px; }
+    .quest-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 6px; counter-reset: qnum; }
+    .quest-list li { counter-increment: qnum; padding: 8px 0; border-bottom: 1px dashed var(--line); display: flex; align-items: center; gap: 8px; }
+    .quest-list li::before { content: counter(qnum) "."; color: var(--faint); font-family: var(--mono); font-size: 0.8rem; }
+    .quest-list a { color: var(--mist); text-decoration: none; flex: 1; }
+    .quest-list a:hover { color: var(--candle); }
+    .tag-community {
+      display: inline-block; font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.02em;
+      color: var(--faint); border: 1px solid var(--line); border-radius: 999px; padding: 2px 7px;
+    }
+  </style>
+</Base>

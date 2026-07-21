@@ -1,0 +1,79 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { SITE, GAME } from '../../../consts';
+import { storyQuests } from '../../../data/quests-story';
+import { sideQuests } from '../../../data/quests-side';
+
+const jsonLd = {
+  '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '홈', item: `${SITE.url}/ko` },
+    { '@type': 'ListItem', position: 2, name: '퀘스트 가이드', item: `${SITE.url}/ko/quests` },
+  ],
+};
+---
+<Base
+  title="Moonlight Peaks 퀘스트 가이드 — 메인 스토리 & 사이드 퀘스트"
+  description="Moonlight Peaks 완전 퀘스트 가이드: 메인 스토리를 챕터별로, 확인된 모든 사이드 퀘스트, 막혔을 때의 해답 — 교차 확인된 출시 주간 공략 기반."
+  path="/ko/quests"
+  jsonLd={jsonLd}
+  crumbs={[{ label: '퀘스트 가이드' }]}
+  lang="ko"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">허브 · 퀘스트</p>
+      <h1>{GAME.title} <em>퀘스트 가이드</em></h1>
+      <p class="intro">
+        메인 스토리를 순서대로 따라가고 싶든, 특정 퀘스트에서 막혔든 — 여기가 맞는 곳입니다.
+        여기 있는 모든 내용은 하나의 공략만 참고한 것이 아니라 여러 독립적인 출시 주간 자료를
+        교차 확인한 것입니다 — 두 개 이상의 자료가 일치하면 <strong>확인됨</strong>으로,
+        지금까지 하나의 자료만 이를 문서화했다면 <strong>제보됨</strong>으로 표시됩니다. 빈
+        곳을 채우기 위해 지어낸 내용은 없습니다.
+      </p>
+
+      <div class="q-split">
+        <a class="q-card" href="/ko/quests/story">
+          <span class="q-tag">메인 스토리</span>
+          <h2>스토리를 챕터별로 따라가기</h2>
+          <p>마을 도착부터 결혼식 이야기까지 5개 챕터로 구성된 {storyQuests.length}개의 메인 스토리 퀘스트. 자신의 진행 상황에 맞는 챕터를 선택해 바로 이어서 하세요.</p>
+          <strong>챕터 둘러보기 →</strong>
+        </a>
+        <a class="q-card" href="/ko/quests/side">
+          <span class="q-tag">사이드 퀘스트</span>
+          <h2>NPC 퀘스트 & 서브 시스템</h2>
+          <p>확인된 {sideQuests.length}개의 사이드 퀘스트와 진행형 시스템 — 낚시 대회, 집 확장, 일거리 게시판, 그리고 마을의 두 가지 생물 수집 서브 시스템.</p>
+          <strong>사이드 퀘스트 둘러보기 →</strong>
+        </a>
+      </div>
+
+      <h2>특정 부분에서 막혔나요?</h2>
+      <p>
+        특정 스토리 지점에서 막혔다면: <a href="/quests/story/a-bridge-too-far">A Bridge Too Far</a>가
+        가장 많이 검색되는 초반 퀘스트입니다(현재 영어로만 제공) — Orlock/Fiona 다리 공략 전체를
+        확인할 수 있습니다. 퀘스트 관련 일반적인 질문은 별도의 퀘스트 섹션이 있는
+        <a href="/faq">FAQ</a>를 참고하세요.
+      </p>
+
+      <div class="callout wip">
+        관련: <a href="/ko/beginner-guide">초보자 가이드</a>, <a href="/ko/characters">캐릭터</a>,
+        <a href="/map">지도</a>, <a href="/known-issues">알려진 문제</a>.
+      </div>
+    </div>
+  </article>
+
+  <style>
+    .q-split { display: grid; grid-template-columns: 1fr; gap: 14px; margin: 24px 0 30px; }
+    @media (min-width: 720px) { .q-split { grid-template-columns: 1fr 1fr; } }
+    .q-card {
+      display: flex; flex-direction: column; gap: 8px;
+      border: 1px solid var(--line); border-radius: 16px; background: var(--surface);
+      padding: 20px; text-decoration: none; color: inherit;
+      transition: border-color .15s ease, transform .15s ease;
+    }
+    .q-card:hover { border-color: color-mix(in srgb, var(--candle) 54%, var(--line)); transform: translateY(-2px); }
+    .q-tag { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--candle); }
+    .q-card h2 { margin: 4px 0 6px; font-size: 1.2rem; }
+    .q-card p { margin: 0 0 8px; color: #ded3e6; font-size: 0.9rem; }
+    .q-card strong { font-family: var(--mono); font-size: 0.82rem; color: var(--candle); }
+  </style>
+</Base>
