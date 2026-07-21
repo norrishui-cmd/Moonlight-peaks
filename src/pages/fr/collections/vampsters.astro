@@ -1,0 +1,92 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { SITE } from '../../../consts';
+
+const faq = [
+  { q: 'Combien de Vampsters y a-t-il dans Moonlight Peaks ?', a: 'Confirmé via le wiki officiel : 100 Vampsters au total, répartis dans les zones extérieures du jeu.' },
+  { q: 'Où ramène-t-on les Vampsters dans Moonlight Peaks ?', a: 'Confirmé : chez eux, une grotte de Misty Shores (débloquée via la quête « A Bridge Too Far »).' },
+  { q: 'Peut-on porter plusieurs Vampsters à la fois ?', a: 'Non — vous ne pouvez porter qu\'un seul Vampster à la fois. Parler à quelqu\'un ou déclencher une cinématique vous fait lâcher le Vampster porté.' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Accueil', item: `${SITE.url}/fr` },
+    { '@type': 'ListItem', position: 2, name: 'Collections', item: `${SITE.url}/fr/collections` },
+    { '@type': 'ListItem', position: 3, name: 'Vampsters', item: `${SITE.url}/fr/collections/vampsters` },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks Vampsters : les 100 & comment les collecter"
+  description="Guide Vampsters de Moonlight Peaks : ce qu'ils sont, le total confirmé de 100, comment les porter, et où se trouve leur maison — issu du wiki officiel."
+  path="/fr/collections/vampsters"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Collections', href: '/fr/collections' }, { label: 'Vampsters' }]}
+  lang="fr"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Collections · Vampsters</p>
+      <h1>Moonlight Peaks <em>Vampsters</em></h1>
+      <p class="intro">
+        Les Vampsters sont de petites créatures espiègles qui se cachent partout dans Moonlight
+        Peaks et font des bêtises, mais deviennent tristes si elles restent seules trop longtemps.
+        Confirmé via le wiki officiel : il y en a 100, et vous les collectez un par un pour les
+        ramener chez eux.
+      </p>
+
+      <div class="callout">
+        <strong>Réponse rapide :</strong> les Vampsters sont des créatures perdues que vous
+        trouvez à l'extérieur et ramenez — un par un — chez eux, dans une grotte de Misty Shores.
+        Total confirmé : 100.
+      </div>
+
+      <h2>Comment démarre la quête des Vampsters</h2>
+      <p>
+        Rapporté par la communauté : lors d'une excursion à la Cave of Echoes pour miner du cuivre
+        dans votre première semaine, un Vampster détale à l'entrée. À l'intérieur, vous rencontrez
+        <a href="/characters/alina">Alina</a>, qui explique que les Vampsters sont perdus et
+        demande de l'aide pour les ramener tous chez eux.
+      </p>
+
+      <h2>Où les trouver</h2>
+      <p>
+        Confirmé via le wiki officiel : les Vampsters sont répartis dans tout Moonlight Peaks et se
+        cachent toujours dans les endroits les plus improbables. Deux exemples confirmés : un dans
+        la maison de Luna à Moonlit Pines, en haut de son escalier en colimaçon près de son lit
+        avec une bougie sur la tête, et un autre dans la Moonlit Tower à Misty Shores, caché
+        derrière un fauteuil à feuilles beige.
+      </p>
+
+      <h2>Comment les porter et les ramener</h2>
+      <ul>
+        <li><strong>Un seul à la fois :</strong> confirmé — vous ne pouvez pas empiler plusieurs Vampsters ; vous en portez exactement un jusqu'à ce que vous le déposiez.</li>
+        <li><strong>Leur maison :</strong> confirmé — une grotte de Misty Shores (débloquée via <a href="/quests/story/a-bridge-too-far">A Bridge Too Far</a>).</li>
+        <li><strong>Attention aux interruptions :</strong> rapporté par la communauté — parler à un habitant ou déclencher une cinématique vous fait lâcher le Vampster porté, alors évitez les zones riches en dialogues au préalable.</li>
+      </ul>
+
+      <h2>Problèmes fréquents</h2>
+      <ul>
+        <li><strong>Vampster perdu après une cinématique :</strong> attendu — les cinématiques vous font lâcher le Vampster porté ; il reste là où vous l'avez laissé tomber.</li>
+        <li><strong>Impossible de trouver d'autres Vampsters :</strong> essayez de faucher l'herbe et les buissons envahis dans les zones pas encore entièrement dégagées.</li>
+      </ul>
+
+      <h2>Questions fréquentes</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        Issu du wiki officiel de Moonlight Peaks (moonlightpeaks.wiki.gg). Pages liées :
+        <a href="/fr/collections">hub des collections</a>, <a href="/locations/mines">Cave of Echoes</a>,
+        <a href="/achievements">succès</a>, <a href="/characters/alina">Alina</a>.
+      </div>
+    </div>
+  </article>
+</Base>

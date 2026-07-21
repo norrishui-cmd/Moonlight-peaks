@@ -69,7 +69,10 @@ const frPaths = ['/', '/release-date', '/beginner-guide', '/characters', '/roman
   '/guides', '/cheats', '/about', '/languages',
   '/tools/fish-finder', '/tools/item-tracker', '/tools/gift-tracker', '/tools/families-explorer',
   '/tools/farming-profit-planner', '/tools/nokturna-tracker', '/tools/platform-picker',
-  '/tools/romance-gift-finder', '/tools/romance-match-quiz', '/tools/romance-planner', '/tools/submit-data'];
+  '/tools/romance-gift-finder', '/tools/romance-match-quiz', '/tools/romance-planner', '/tools/submit-data',
+  '/collections', '/collections/fish', '/collections/critters', '/collections/vampsters',
+  '/collections/soul-blobs', '/collections/albertus-jobs',
+  '/farm', '/farm/crops', '/farm/house', '/farm/barn', '/farm/greenhouse', '/farm/animals', '/farm/farm-helpers'];
 
 // Korean is a brand-new locale, starting with the homepage plus a handful of core pages built
 // alongside it — grows independently from here.
@@ -78,7 +81,10 @@ const koPaths = ['/', '/release-date', '/beginner-guide', '/characters', '/roman
   '/guides', '/cheats', '/about', '/languages',
   '/tools/fish-finder', '/tools/item-tracker', '/tools/gift-tracker', '/tools/families-explorer',
   '/tools/farming-profit-planner', '/tools/nokturna-tracker', '/tools/platform-picker',
-  '/tools/romance-gift-finder', '/tools/romance-match-quiz', '/tools/romance-planner', '/tools/submit-data'];
+  '/tools/romance-gift-finder', '/tools/romance-match-quiz', '/tools/romance-planner', '/tools/submit-data',
+  '/collections', '/collections/fish', '/collections/critters', '/collections/vampsters',
+  '/collections/soul-blobs', '/collections/albertus-jobs',
+  '/farm', '/farm/crops', '/farm/house', '/farm/barn', '/farm/greenhouse', '/farm/animals', '/farm/farm-helpers'];
 
 export const translatedPathsByLocale: Record<Locale, Set<string>> = {
   en: new Set(), // English is the source; not meaningful to check "is English translated".
@@ -115,7 +121,7 @@ export function isPathTranslated(locale: Locale, barePath: string): boolean {
   if (charMatch && translatedCharSlugsByLocale[locale].has(charMatch[1])) return true;
   // Fish/critters detail pages are fully translated for ja and de (auto-generated from the same
   // collectionDetailPages data source as English), so any slug under these two collections counts.
-  if ((locale === 'ja' || locale === 'de' || locale === 'es' || locale === 'zh' || locale === 'zh-hant') && /^\/collections\/(fish|critters)\/[a-z0-9-]+$/.test(barePath)) return true;
+  if ((locale === 'ja' || locale === 'de' || locale === 'es' || locale === 'zh' || locale === 'zh-hant' || locale === 'fr' || locale === 'ko') && /^\/collections\/(fish|critters)\/[a-z0-9-]+$/.test(barePath)) return true;
   if ((locale === 'zh' || locale === 'zh-hant') && /^\/collections(\/(fish|critters|jobs|vampsters|soul-blobs))?$/.test(barePath)) return true;
   if (locale === 'es' && /^\/collections(\/(fish|critters|albertus-jobs|vampsters|soul-blobs))?$/.test(barePath)) return true;
   if ((locale === 'ja' || locale === 'de' || locale === 'es') && /^\/(families|platforms)\/[a-z0-9-]+$/.test(barePath)) return true;
@@ -128,6 +134,6 @@ export function isPathTranslated(locale: Locale, barePath: string): boolean {
   if ((locale === 'es' || locale === 'zh' || locale === 'zh-hant') && /^\/quests\/(story|side)(\/[a-z0-9-]+)?$/.test(barePath)) return true;
   // Farm sub-pages (crops, house, barn, greenhouse, animals, farm-helpers) and crop detail pages
   // are fully translated for es.
-  if ((locale === 'es' || locale === 'zh' || locale === 'zh-hant') && /^\/farm\/(crops|house|barn|greenhouse|animals|farm-helpers)(\/[a-z0-9-]+)?$/.test(barePath)) return true;
+  if ((locale === 'es' || locale === 'zh' || locale === 'zh-hant' || locale === 'fr' || locale === 'ko') && /^\/farm\/(crops|house|barn|greenhouse|animals|farm-helpers)(\/[a-z0-9-]+)?$/.test(barePath)) return true;
   return false;
 }

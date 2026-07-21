@@ -1,0 +1,78 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { SITE } from '../../../consts';
+
+const faq = [
+  { q: 'Combien de fois peut-on agrandir sa maison dans Moonlight Peaks ?', a: "Confirmé via le wiki officiel : quatre fois. Chaque agrandissement ajoute une nouvelle extension à la maison." },
+  { q: 'Comment débloque-t-on les agrandissements de la maison dans Moonlight Peaks ?', a: 'Confirmé : les agrandissements ne deviennent disponibles qu\'après avoir terminé la quête "Fix the Roof", que Ridge donne tôt dans le jeu.' },
+  { q: 'Où achète-t-on les agrandissements de la maison dans Moonlight Peaks ?', a: "Confirmé : les agrandissements s'achètent chez le Howling Hammer avec de l'or et du bois. Chaque agrandissement prend une nuit de jeu." },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Accueil', item: `${SITE.url}/fr` },
+    { '@type': 'ListItem', position: 2, name: 'Ferme', item: `${SITE.url}/fr/farm` },
+    { '@type': 'ListItem', position: 3, name: 'Maison', item: `${SITE.url}/fr/farm/house` },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks Maison — Agrandissements, coûts & la quête Fix the Roof"
+  description="Confirmé : la maison de Moonlight Peaks peut être agrandie 4 fois via le Howling Hammer, débloqué par la quête Fix the Roof. Coûts, temps requis et mobilier de départ."
+  path="/fr/farm/house"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Ferme', href: '/fr/farm' }, { label: 'Maison' }]}
+  lang="fr"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Ferme · Maison</p>
+      <h1>Votre <em>maison</em></h1>
+      <p class="intro">
+        Confirmé via le wiki officiel : votre foyer permanent est une petite maison en pierre qui
+        peut être agrandie quatre fois, chaque agrandissement ajoutant une nouvelle extension.
+      </p>
+
+      <h2>Débloquer les agrandissements</h2>
+      <p>
+        Confirmé : les agrandissements de la maison ne deviennent disponibles qu'après avoir
+        terminé la quête <strong>"Fix the Roof"</strong>, que Ridge donne tôt dans le jeu. Ensuite,
+        les agrandissements s'achètent chez le <strong>Howling Hammer</strong> avec de l'or et du
+        bois, et chacun prend une seule nuit de jeu.
+      </p>
+
+      <h2>Mobilier de départ et bric-à-brac</h2>
+      <p>
+        Confirmé : le premier niveau de la maison contient déjà plusieurs objets décoratifs et
+        fonctionnels de base — un cercueil en bois, une station de cuisine, un établi, une plante
+        d'intérieur et un coffre. À la première réception de la maison, il y a aussi du
+        bric-à-brac à l'intérieur et autour (ordures, tas de feuilles, pierres) qui peut être
+        retiré.
+      </p>
+
+      <h2>Personnalisation extérieure</h2>
+      <p>
+        Confirmé : la personnalisation extérieure passe aussi par le Howling Hammer. Certaines
+        options de personnalisation ne se débloquent qu'une fois le dernier (quatrième) niveau de
+        maison atteint.
+      </p>
+
+      <h2>Questions fréquentes</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        Issu du wiki officiel de Moonlight Peaks. Pages liées :
+        <a href="/fr/farm">hub de la ferme</a>, <a href="/characters/ridge">Ridge</a>,
+        <a href="/fr/items">objets décoratifs</a>.
+      </div>
+    </div>
+  </article>
+</Base>

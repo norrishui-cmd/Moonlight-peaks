@@ -1,0 +1,73 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { SITE } from '../../../consts';
+
+const faq = [
+  { q: "Qu'est-ce qu'Albertus' Jobs dans Moonlight Peaks ?", a: "Confirmé : un tableau d'affichage tenu par Albertus, un hibou, où les joueurs consultent les tâches disponibles — de courtes missions récompensant de l'or, parfois des objets, et des points de relation avec le demandeur." },
+  { q: 'Où trouve-t-on le tableau des petits boulots dans Moonlight Peaks ?', a: "Confirmé : à la mairie, tenu par Albertus. C'est l'une des premières choses montrées aux nouveaux habitants." },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Accueil', item: `${SITE.url}/fr` },
+    { '@type': 'ListItem', position: 2, name: 'Collections', item: `${SITE.url}/fr/collections` },
+    { '@type': 'ListItem', position: 3, name: 'Petits boulots', item: `${SITE.url}/fr/collections/albertus-jobs` },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks Albertus' Jobs — Le tableau des petits boulots expliqué"
+  description="Confirmé : Albertus' Jobs est le tableau d'affichage de Moonlight Peaks où de courtes missions récompensent de l'or, des objets et des points de relation avec le demandeur."
+  path="/fr/collections/albertus-jobs"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Collections', href: '/fr/collections' }, { label: 'Petits boulots' }]}
+  lang="fr"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Collections · Petits boulots</p>
+      <h1>Albertus' <em>Jobs</em></h1>
+      <p class="intro">
+        Confirmé : Albertus' Jobs est le tableau d'affichage de la ville, tenu par
+        <a href="/characters/albertus">Albertus</a>, un hibou, à la mairie — l'un des premiers
+        systèmes montrés aux nouveaux habitants.
+      </p>
+
+      <h2>Comment fonctionnent les petits boulots</h2>
+      <p>
+        Confirmé : les petits boulots sont de courtes missions affichées sur le tableau. Terminer
+        un job rapporte de l'or, parfois un objet, plus une hausse de relation avec le demandeur —
+        utile à la fois pour un revenu précoce et pour construire des relations en passant.
+      </p>
+
+      <h2>Où le trouver</h2>
+      <p>
+        Confirmé : le tableau se trouve à la mairie, à côté du bureau d'enregistrement du maire
+        Brook — l'une des toutes premières choses montrées aux nouveaux habitants de la ville.
+      </p>
+
+      <h2>Encore en vérification</h2>
+      <ul>
+        <li>Le pool exact de jobs et sa fréquence de mise à jour.</li>
+        <li>Si la difficulté ou les récompenses évoluent avec le temps.</li>
+        <li>Liste complète des missions d'habitants pouvant apparaître.</li>
+      </ul>
+
+      <h2>Questions fréquentes</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        Pages liées : <a href="/fr/collections">hub des collections</a>, <a href="/characters/albertus">Albertus</a>,
+        <a href="/locations/town-hall">mairie</a>, <a href="/characters/brook">Brook</a>.
+      </div>
+    </div>
+  </article>
+</Base>

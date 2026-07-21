@@ -1,0 +1,70 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { SITE } from '../../../consts';
+import { farmHelpers } from '../../../data/farm-helpers';
+import { farmHelperDescKo } from '../../../data/farm-helpers-ko';
+
+const faq = [
+  { q: 'Moonlight Peaks에서 농장 보조기구란 무엇인가요?', a: `공식 위키로 확인됨: 농장 보조기구는 농사를 자동화하거나 농장 생산물을 가공하는 기계입니다. 지금까지 화로, 통, 정제기, 허브 정원, 허브 건조대, 절구, 벌집, 베틀, 치즈 압착기, 마나 추출기, 제분기, 잼 메이커, 반딧불이 보호소, 반딧불이 수분기, 초콜릿 제조기, 씨앗 시퀀서를 포함해 ${farmHelpers.length}개가 확인되었습니다.` },
+  { q: 'Moonlight Peaks에서 정제기는 어떻게 해금하나요?', a: '확인됨: 작업대에서 나무 20개 + 돌 20개로 제작합니다. 나무, 돌, 섬유, 어둠나무 같은 원자재를 판자, 정제된 돌, 사료, 단단한 나무 판자로 바꿉니다.' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '홈', item: `${SITE.url}/ko` },
+    { '@type': 'ListItem', position: 2, name: '농장', item: `${SITE.url}/ko/farm` },
+    { '@type': 'ListItem', position: 3, name: '농장 보조기구', item: `${SITE.url}/ko/farm/farm-helpers` },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks 농장 보조기구 — 16개 기계 & 레시피 전체"
+  description="Moonlight Peaks에서 확인된 모든 농장 보조기구 기계: 화로, 통, 정제기, 벌집, 제분기, 잼 메이커 등, 건설 레시피와 산출량 포함, 공식 위키 기반."
+  path="/ko/farm/farm-helpers"
+  jsonLd={jsonLd}
+  crumbs={[{ label: '농장', href: '/ko/farm' }, { label: '농장 보조기구' }]}
+  lang="ko"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">농장 · 기계</p>
+      <h1>농장 <em>보조기구</em></h1>
+      <p class="intro">
+        공식 Moonlight Peaks 위키로 확인됨: 농장 보조기구는 농사를 자동화하거나 농장
+        생산물을 가공하는 기계입니다. 지금까지 {farmHelpers.length}개가 확인되었습니다.
+      </p>
+
+      {farmHelpers.map((h) => (
+        <>
+          <h2>{h.name}</h2>
+          <p>
+            {farmHelperDescKo[h.name] ?? h.desc}
+            {h.buildRecipe && <> <strong>제작:</strong> {h.buildRecipe}{h.buildSource ? ` (${h.buildSource}에서)` : ''}.</>}
+          </p>
+          {h.outputs && h.outputs.length > 0 && (
+            <ul>
+              {h.outputs.map((o) => (<li><strong>{o.name}:</strong> {o.recipe}</li>))}
+            </ul>
+          )}
+        </>
+      ))}
+
+      <h2>자주 묻는 질문</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        공식 Moonlight Peaks 위키 기반. 관련 페이지:
+        <a href="/ko/farm">농장 허브</a>, <a href="/ko/farm/crops">작물</a>,
+        <a href="/ko/items">채굴 자원</a>, <a href="/ko/items">요리</a>.
+      </div>
+    </div>
+  </article>
+</Base>

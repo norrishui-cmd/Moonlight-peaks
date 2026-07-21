@@ -1,0 +1,99 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { SITE } from '../../../consts';
+import { farmlandCrops, herbCrops, treeCrops } from '../../../data/farm-crops';
+
+const cropDetailSlugs: Record<string, string> = {
+  'Blood Grapes': 'blood-grapes', 'Rice': 'rice', 'Drikker': 'drikker', 'Gobbler': 'gobbler',
+  'Hold Me Close': 'hold-me-close', 'Mandrake': 'mandrake', 'Weeping Wicca': 'weeping-wicca',
+  'Common Mushroom': 'instant-growth-mushrooms', 'Frosteria': 'instant-growth-mushrooms',
+  'Glowglammer': 'instant-growth-mushrooms', 'Yellow Glowglammer': 'instant-growth-mushrooms',
+  'Volacio Mushroom': 'instant-growth-mushrooms', 'Amanita': 'instant-growth-mushrooms',
+};
+
+const faq = [
+  { q: 'Combien de cultures y a-t-il dans Moonlight Peaks ?', a: `Confirmé via le wiki officiel : ${farmlandCrops.length} cultures de champ, ${herbCrops.length} plantes de jardin d'herbes et ${treeCrops.length} arbres fruitiers — répartis en trois catégories de plantation selon le lieu de culture.` },
+  { q: 'Quelles sont les trois catégories de cultures dans Moonlight Peaks ?', a: "Confirmé : les cultures de champ (plantées sur un champ labouré), les plantes de jardin d'herbes (nécessitant une structure de jardin dédiée) et les arbres fruitiers (plantés directement sur l'herbe, sans labour nécessaire)." },
+  { q: 'Quelles cultures de Moonlight Peaks sont magiques ?', a: "Confirmé : les cultures magiques ne peuvent être arrosées qu'avec Aquaflux (eau magique), pas avec un arrosoir normal. Plusieurs ont aussi des particularités uniques — Gobbler doit être nourri de poisson ou de bestioles, la coupe de Drikker doit être remplie d'eau, Mandrake produit une variante en colère ou heureuse selon le voisinage, et Weeping Wicca pleure en arrosant automatiquement une parcelle de 3x3 autour d'elle." },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Accueil', item: `${SITE.url}/fr` },
+    { '@type': 'ListItem', position: 2, name: 'Ferme', item: `${SITE.url}/fr/farm` },
+    { '@type': 'ListItem', position: 3, name: 'Cultures', item: `${SITE.url}/fr/farm/crops` },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks Cultures — Base de données complète"
+  description="La base de données complète des cultures de Moonlight Peaks en français : plus de 30 cultures, plantes de jardin d'herbes et arbres fruitiers, issue du wiki officiel."
+  path="/fr/farm/crops"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Ferme', href: '/fr/farm' }, { label: 'Cultures' }]}
+  lang="fr"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Ferme · Base de données</p>
+      <h1>Moonlight Peaks <em>cultures</em></h1>
+      <p class="intro">
+        La base de données complète des cultures, issue du wiki officiel de Moonlight Peaks. Les
+        cultures se répartissent en trois catégories selon le lieu de culture — champ, jardin
+        d'herbes ou arbre — et certaines sont magiques, ce qui signifie qu'elles ne peuvent être
+        arrosées qu'avec Aquaflux plutôt qu'un arrosoir normal.
+      </p>
+
+      <h2>Cultures de champ ({farmlandCrops.length})</h2>
+      <table class="facts">
+        <tr><th>Culture</th><th>Saisons</th><th>Magique ?</th><th>Remarques</th></tr>
+        {farmlandCrops.map((c) => (
+          <tr>
+            <td>{cropDetailSlugs[c.name] ? <a href={`/fr/farm/crops/${cropDetailSlugs[c.name]}`}>{c.name}</a> : c.name}</td>
+            <td>{c.seasons.length ? c.seasons.join(', ') : '—'}</td>
+            <td>{c.magical ? 'Oui' : 'Non'}</td>
+            <td>
+              {c.harvestDays && <>{c.harvestDays} jours de croissance{c.regrowDays ? `, repousse tous les ${c.regrowDays} jours` : ''}{c.yieldPerHarvest ? `, ${c.yieldPerHarvest}/récolte` : ''}{c.sellPrice ? `, se vend ${c.sellPrice}o` : ''}{c.seedPrice ? ` (graines ${c.seedPrice}o)` : ''}. </>}
+              {c.note}
+            </td>
+          </tr>
+        ))}
+      </table>
+
+      <h2>Plantes de jardin d'herbes ({herbCrops.length})</h2>
+      <p>Confirmé : les plantes de jardin d'herbes nécessitent une structure de jardin dédiée et ne peuvent pas être plantées directement sur un champ normal.</p>
+      <table class="facts">
+        <tr><th>Herbe</th><th>Magique ?</th><th>Forme séchée ?</th></tr>
+        {herbCrops.map((h) => (
+          <tr><td>{h.name}</td><td>{h.magical ? 'Oui' : 'Non'}</td><td>{h.hasDriedForm ? 'Oui' : 'Non'}</td></tr>
+        ))}
+      </table>
+
+      <h2>Arbres fruitiers ({treeCrops.length})</h2>
+      <p>Confirmé : les arbres fruitiers sont plantés directement sur l'herbe, sans labour nécessaire.</p>
+      <table class="facts">
+        <tr><th>Arbre</th><th>Saisons</th><th>Magique ?</th><th>Remarques</th></tr>
+        {treeCrops.map((t) => (
+          <tr><td>{t.name}</td><td>{t.seasons.join(', ')}</td><td>{t.magical ? 'Oui' : 'Non'}</td><td>{t.note || '—'}</td></tr>
+        ))}
+      </table>
+
+      <h2>Questions fréquentes</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        Issu du wiki officiel de Moonlight Peaks (moonlightpeaks.wiki.gg). Pages liées :
+        <a href="/fr/farm">hub de la ferme</a>, <a href="/fr/farm/farm-helpers">auxiliaires de ferme</a>,
+        <a href="/fr/farming">guide agriculture</a>.
+      </div>
+    </div>
+  </article>
+</Base>

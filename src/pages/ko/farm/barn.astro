@@ -1,0 +1,78 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { SITE } from '../../../consts';
+
+const faq = [
+  { q: 'Moonlight Peaks에서 헛간은 얼마인가요?', a: '공식 위키로 확인됨: Luna가 농장 동물을 소개해 준 후 Howling Hammer에서 Ridge에게 4,000골드.' },
+  { q: 'Moonlight Peaks에서 헛간 크기는 어느 정도인가요?', a: '확인됨: 헛간은 10x6 부지가 필요하고 짓는 데 하룻밤이 걸립니다. 동물 4마리를 수용합니다.' },
+  { q: 'Moonlight Peaks에서 헛간을 하나 이상 지을 수 있나요?', a: '네, 확인됨: 각각 필요한 10x6 부지만 있다면 동물 4마리씩 수용하는 헛간을 여러 채 지을 수 있습니다.' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '홈', item: `${SITE.url}/ko` },
+    { '@type': 'ListItem', position: 2, name: '농장', item: `${SITE.url}/ko/farm` },
+    { '@type': 'ListItem', position: 3, name: '헛간', item: `${SITE.url}/ko/farm/barn` },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks 헛간 — 비용, 크기 & 해금"
+  description="확인됨: Moonlight Peaks 헛간은 Ridge에게 4,000골드, 10x6 부지가 필요하며, 짓는 데 하룻밤이 걸리고 동물 4마리를 수용합니다."
+  path="/ko/farm/barn"
+  jsonLd={jsonLd}
+  crumbs={[{ label: '농장', href: '/ko/farm' }, { label: '헛간' }]}
+  lang="ko"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">농장 · 헛간</p>
+      <h1><em>헛간</em></h1>
+      <p class="intro">
+        공식 위키로 확인되고 출시 주간 보도와 교차 확인됨: 헛간은 Luna가 농장 동물을 소개해 준
+        후 Howling Hammer에서 <strong>4,000골드</strong>입니다.
+      </p>
+
+      <h2>해금 방법</h2>
+      <p>
+        확인됨: 첫 해 봄 초반에 Ridge가 여러분의 문 앞에 나타나 지붕에 대해 언급하고, 동시에
+        "Farm Animals for Sale" 퀘스트에 관한 Luna의 편지를 받습니다 — Luna를 방문하면 처음
+        이용 가능한 동물(Cheeken)을 보여줍니다. 지붕을 수리하면 Howling Hammer(오후 6시~자정
+        영업)에서 Ridge를 찾을 수 있습니다. 상점을 선택한 후 두 번째 탭에서 헛간을 구매하세요.
+      </p>
+
+      <h2>크기, 비용, 수용량</h2>
+      <table class="facts">
+        <tr><th>비용</th><td>4,000골드</td></tr>
+        <tr><th>필요 부지</th><td>10x6</td></tr>
+        <tr><th>건설 시간</th><td>1박</td></tr>
+        <tr><th>동물 수용량</th><td>헛간당 4마리</td></tr>
+        <tr><th>여러 헛간?</th><td>가능 — 4마리 이상 키우려면 추가로 지으세요</td></tr>
+      </table>
+
+      <h2>그 다음</h2>
+      <p>
+        확인됨: 헛간을 지은 후 Luna의 농장으로 돌아가 첫 동물을 입양하세요. 이용 가능한 동물은
+        그녀의 집 근처 작은 우리에서 매일 바뀌며, 색상 변형도 있습니다. 동물과 상호작용하면
+        입양할 수 있고(충분한 골드와 헛간 공간 필요), 직접 이름을 지어주라는 요청을 받습니다.
+      </p>
+
+      <h2>자주 묻는 질문</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        공식 Moonlight Peaks 위키 기반, Bonus Action과 Prima Games 보도와 교차 확인됨. 관련 페이지:
+        <a href="/ko/farm">농장 허브</a>, <a href="/ko/farm/animals">동물</a>,
+        <a href="/characters/ridge">Ridge</a>, <a href="/characters/luna">Luna</a>.
+      </div>
+    </div>
+  </article>
+</Base>

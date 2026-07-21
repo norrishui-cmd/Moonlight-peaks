@@ -1,0 +1,71 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { SITE } from '../../../consts';
+import { farmHelpers } from '../../../data/farm-helpers';
+import { farmHelperDescFr } from '../../../data/farm-helpers-fr';
+
+const faq = [
+  { q: 'Que sont les auxiliaires de ferme dans Moonlight Peaks ?', a: `Confirmé via le wiki officiel : les auxiliaires de ferme sont des machines qui automatisent l'agriculture ou traitent les produits de la ferme. ${farmHelpers.length} sont confirmés jusqu'à présent, dont le fourneau, le tonneau, le raffineur, le jardin d'herbes, le séchoir à herbes, le mortier, la ruche, le métier à tisser, la presse à fromage, l'extracteur de mana, le moulin, la confiturière, le sanctuaire de lucioles, le pollinisateur de lucioles, le chocolatier et le séquenceur de graines.` },
+  { q: 'Comment débloquer le raffineur dans Moonlight Peaks ?', a: "Confirmé : construit à l'établi pour 20 bois + 20 pierre. Il transforme les matières premières comme le bois, la pierre, la fibre et le bois sombre en planches, pierre raffinée, nourriture et planches de bois dur." },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Accueil', item: `${SITE.url}/fr` },
+    { '@type': 'ListItem', position: 2, name: 'Ferme', item: `${SITE.url}/fr/farm` },
+    { '@type': 'ListItem', position: 3, name: 'Auxiliaires de ferme', item: `${SITE.url}/fr/farm/farm-helpers` },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks Auxiliaires de ferme — Les 16 machines & recettes"
+  description="Chaque machine auxiliaire de ferme confirmée de Moonlight Peaks : fourneau, tonneau, raffineur, ruche, moulin, confiturière et plus, avec recettes de construction et rendements, issu du wiki officiel."
+  path="/fr/farm/farm-helpers"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Ferme', href: '/fr/farm' }, { label: 'Auxiliaires de ferme' }]}
+  lang="fr"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Ferme · Machines</p>
+      <h1>Auxiliaires de <em>ferme</em></h1>
+      <p class="intro">
+        Confirmé via le wiki officiel de Moonlight Peaks : les auxiliaires de ferme sont des
+        machines qui automatisent l'agriculture ou traitent les produits de la ferme.
+        {farmHelpers.length} sont confirmés jusqu'à présent.
+      </p>
+
+      {farmHelpers.map((h) => (
+        <>
+          <h2>{h.name}</h2>
+          <p>
+            {farmHelperDescFr[h.name] ?? h.desc}
+            {h.buildRecipe && <> <strong>Construction :</strong> {h.buildRecipe}{h.buildSource ? ` (à ${h.buildSource})` : ''}.</>}
+          </p>
+          {h.outputs && h.outputs.length > 0 && (
+            <ul>
+              {h.outputs.map((o) => (<li><strong>{o.name} :</strong> {o.recipe}</li>))}
+            </ul>
+          )}
+        </>
+      ))}
+
+      <h2>Questions fréquentes</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        Issu du wiki officiel de Moonlight Peaks. Pages liées :
+        <a href="/fr/farm">hub de la ferme</a>, <a href="/fr/farm/crops">cultures</a>,
+        <a href="/fr/items">ressources minables</a>, <a href="/fr/items">cuisine</a>.
+      </div>
+    </div>
+  </article>
+</Base>

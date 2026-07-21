@@ -1,0 +1,69 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { SITE, GAME } from '../../../consts';
+
+const entries = [
+  { group: 'Pêche', title: 'Poissons', desc: 'Environ 22 espèces de poissons, comment obtenir sa première canne à pêche auprès de Noel, et ce qui influence les prises.', href: '/fr/collections/fish' },
+  { group: 'Économie', title: 'Petits boulots', desc: "Le tableau des petits boulots d'Albertus — des tâches courtes contre de l'or, des cadeaux et des points de relation.", href: '/fr/collections/albertus-jobs' },
+  { group: 'Créatures', title: 'Bestioles', desc: 'Des insectes attrapables qui changent selon la saison et la météo, et servent aussi de décoration.', href: '/fr/collections/critters' },
+  { group: 'Créatures', title: 'Vampsters', desc: 'Les 100 Vampsters confirmés, où les trouver, et comment les ramener chez eux.', href: '/fr/collections/vampsters' },
+  { group: 'Créatures', title: 'Soul Blobs', desc: "Les 100 Soul Blobs et la récompense de l'Horloge Antique pour tous les collecter.", href: '/fr/collections/soul-blobs' },
+];
+
+const jsonLd = {
+  '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Accueil', item: `${SITE.url}/fr` },
+    { '@type': 'ListItem', position: 2, name: 'Collections', item: `${SITE.url}/fr/collections` },
+  ],
+};
+---
+<Base
+  title="Moonlight Peaks Collections — Poissons, Petits boulots, Bestioles, Vampsters & Soul Blobs"
+  description="Le hub des collections de Moonlight Peaks en français : poissons, petits boulots d'Albertus, bestioles, Vampsters et Soul Blobs — issu du wiki officiel et recoupé avec la couverture de lancement."
+  path="/fr/collections"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Collections' }]}
+  lang="fr"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Hub · Collections</p>
+      <h1>{GAME.title} <em>collections</em></h1>
+      <p class="intro">
+        Tout ce qui concerne les systèmes de collection et de récolte du jeu — quoi attraper, quoi
+        déposer, et ce que ça vaut. La majorité du contenu ci-dessous provient directement du wiki
+        officiel de Moonlight Peaks.
+      </p>
+
+      <div class="itg">
+        {entries.map((e) => (
+          <a class="itcard" href={e.href}>
+            <span class="itgroup">{e.group}</span>
+            <h3>{e.title}</h3>
+            <p>{e.desc}</p>
+          </a>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        Pages liées : <a href="/fr/farm">ferme</a>, <a href="/fr/items">objets</a>,
+        <a href="/fr/activities">activités</a>, <a href="/achievements">succès</a>.
+      </div>
+    </div>
+  </article>
+
+  <style>
+    .itg { display: grid; grid-template-columns: 1fr; gap: 12px; margin: 6px 0 18px; }
+    @media (min-width: 640px) { .itg { grid-template-columns: 1fr 1fr; } }
+    @media (min-width: 980px) { .itg { grid-template-columns: 1fr 1fr 1fr; } }
+    .itcard {
+      display: block; border: 1px solid var(--line); border-radius: 14px;
+      background: var(--surface); padding: 14px; color: inherit; text-decoration: none;
+      transition: border-color .15s ease, transform .15s ease;
+    }
+    .itcard:hover { border-color: color-mix(in srgb, var(--candle) 50%, var(--line)); transform: translateY(-2px); }
+    .itgroup { font-family: var(--mono); color: var(--faint); text-transform: uppercase; letter-spacing: 0.04em; font-size: 0.62rem; }
+    .itcard h3 { font-family: var(--display); font-weight: 600; font-size: 1rem; margin: 4px 0 6px; }
+    .itcard p { color: #ded3e6; font-size: 0.84rem; margin: 0 0 10px; }
+  </style>
+</Base>

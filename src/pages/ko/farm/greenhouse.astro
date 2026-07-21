@@ -1,0 +1,61 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { SITE } from '../../../consts';
+
+const faq = [
+  { q: 'Moonlight Peaks에서 온실은 어떤 역할을 하나요?', a: '커뮤니티 제보: 야외 부지가 가득 찼거나 마법 작물을 위한 공간이 더 필요할 때 유용한 추가 보호 재배 공간을 제공합니다. 정확한 건설 비용, 해금 조건, 성장 규칙을 바꾸는지 여부는 아직 독립적으로 확인되지 않았습니다.' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '홈', item: `${SITE.url}/ko` },
+    { '@type': 'ListItem', position: 2, name: '농장', item: `${SITE.url}/ko/farm` },
+    { '@type': 'ListItem', position: 3, name: '온실', item: `${SITE.url}/ko/farm/greenhouse` },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks 온실 — 지금까지 확인된 내용"
+  description="Moonlight Peaks 온실에 대해 확인된 내용: 추가 보호 재배 공간, 추측 없이 정직하게 정리."
+  path="/ko/farm/greenhouse"
+  jsonLd={jsonLd}
+  crumbs={[{ label: '농장', href: '/ko/farm' }, { label: '온실' }]}
+  lang="ko"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">농장 · 온실</p>
+      <h1><em>온실</em></h1>
+      <p class="intro">
+        커뮤니티 제보: 온실은 기존 부지가 가득 찼을 때 유용한 추가 보호 재배 공간을 제공하는
+        농장 확장 시설입니다. 그 외에 건설 비용, 해금 조건, 정확히 어떻게 농사를 바꾸는지에
+        대해서는 아직 독립적으로 확인된 세부 사항이 없어 이 페이지는 추측하지 않고 짧게
+        유지합니다.
+      </p>
+
+      <h2>아직 확인 중</h2>
+      <ul>
+        <li>건설 비용과 필요한 재료.</li>
+        <li>어떤 퀘스트나 스토리 단계(있다면)가 이를 해금하는지.</li>
+        <li>계절을 바꾸거나 날씨로부터 보호하는지 여부.</li>
+        <li>실제로 얼마나 많은 추가 재배 공간을 제공하는지.</li>
+      </ul>
+
+      <h2>자주 묻는 질문</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        실제 온실 데이터가 확인되는 대로 이 페이지를 확장할 예정입니다. 관련 페이지:
+        <a href="/ko/farm">농장 허브</a>, <a href="/ko/farm/crops">작물</a>, <a href="/ko/farm/house">집</a>.
+      </div>
+    </div>
+  </article>
+</Base>

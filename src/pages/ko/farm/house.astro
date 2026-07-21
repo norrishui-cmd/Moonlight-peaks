@@ -1,0 +1,74 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { SITE } from '../../../consts';
+
+const faq = [
+  { q: 'Moonlight Peaks에서 집은 몇 번 확장할 수 있나요?', a: '공식 위키로 확인됨: 4번. 확장할 때마다 집에 새 공간이 추가됩니다.' },
+  { q: 'Moonlight Peaks에서 집 확장은 어떻게 해금하나요?', a: '확인됨: 확장은 게임 초반에 Ridge가 주는 "Fix the Roof" 퀘스트를 완료해야 이용할 수 있습니다.' },
+  { q: 'Moonlight Peaks에서 집 확장은 어디서 구매하나요?', a: '확인됨: 확장은 Howling Hammer에서 골드와 나무로 구매합니다. 확장마다 하룻밤이 걸립니다.' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '홈', item: `${SITE.url}/ko` },
+    { '@type': 'ListItem', position: 2, name: '농장', item: `${SITE.url}/ko/farm` },
+    { '@type': 'ListItem', position: 3, name: '집', item: `${SITE.url}/ko/farm/house` },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks 집 — 확장, 비용 & Fix the Roof 퀘스트"
+  description="확인됨: Moonlight Peaks의 집은 Fix the Roof 퀘스트로 해금되는 Howling Hammer를 통해 4번 확장할 수 있습니다. 비용, 소요 시간, 초기 가구."
+  path="/ko/farm/house"
+  jsonLd={jsonLd}
+  crumbs={[{ label: '농장', href: '/ko/farm' }, { label: '집' }]}
+  lang="ko"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">농장 · 집</p>
+      <h1>나의 <em>집</em></h1>
+      <p class="intro">
+        공식 위키로 확인됨: 여러분의 영구적인 보금자리는 작은 돌집으로, 4번 확장할 수 있으며
+        확장할 때마다 새 공간이 추가됩니다.
+      </p>
+
+      <h2>확장 해금하기</h2>
+      <p>
+        확인됨: 집 확장은 게임 초반에 Ridge가 주는 <strong>"Fix the Roof"</strong> 퀘스트를
+        완료해야 이용할 수 있습니다. 그 후 확장은 <strong>Howling Hammer</strong>에서 골드와
+        나무로 구매하며, 각 확장은 하룻밤이 걸립니다.
+      </p>
+
+      <h2>초기 가구와 잡동사니</h2>
+      <p>
+        확인됨: 집의 첫 단계에는 이미 기본적인 장식품과 기능 아이템 몇 가지가 포함되어 있습니다
+        — 나무 관, 요리 스테이션, 작업대, 화분, 상자. 집을 처음 받았을 때는 안팎에 제거할 수 있는
+        잡동사니(쓰레기, 낙엽 더미, 돌)도 있습니다.
+      </p>
+
+      <h2>외부 커스터마이징</h2>
+      <p>
+        확인됨: 외부 커스터마이징도 Howling Hammer를 통해 이루어집니다. 일부 커스터마이징
+        옵션은 마지막(네 번째) 집 단계에 도달해야만 해금됩니다.
+      </p>
+
+      <h2>자주 묻는 질문</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        공식 Moonlight Peaks 위키 기반. 관련 페이지:
+        <a href="/ko/farm">농장 허브</a>, <a href="/characters/ridge">Ridge</a>,
+        <a href="/ko/items">장식품</a>.
+      </div>
+    </div>
+  </article>
+</Base>

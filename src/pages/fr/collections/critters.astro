@@ -1,0 +1,96 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { SITE } from '../../../consts';
+import { critterDetailPages } from '../../../data/collectionDetailPages';
+
+const faq = [
+  { q: 'Que peut-on faire avec les bestioles dans Moonlight Peaks ?', a: "Confirmé : chaque bestiole (ou poisson) attrapé peut être exposé dans votre maison comme décoration — cela vaut la peine de garder quelque chose de rare ou de mignon plutôt que de le vendre." },
+  { q: 'Les bestioles changent-elles selon la saison dans Moonlight Peaks ?', a: 'Oui, confirmé : comme pour la pêche, différentes saisons et conditions météo font apparaître différents insectes et bestioles.' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Accueil', item: `${SITE.url}/fr` },
+    { '@type': 'ListItem', position: 2, name: 'Collections', item: `${SITE.url}/fr/collections` },
+    { '@type': 'ListItem', position: 3, name: 'Bestioles', item: `${SITE.url}/fr/collections/critters` },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks Bestioles — Attraper, saisons & décoration"
+  description="Confirmé : les bestioles et insectes de Moonlight Peaks changent selon la saison et la météo, et chacun attrapé peut être exposé dans votre maison comme décoration."
+  path="/fr/collections/critters"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Collections', href: '/fr/collections' }, { label: 'Bestioles' }]}
+  lang="fr"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Collections · Bestioles</p>
+      <h1>Moonlight Peaks <em>bestioles</em></h1>
+      <p class="intro">
+        Confirmé par un guide de première semaine : les insectes et bestioles que vous attrapez ne
+        servent pas seulement à vendre ou cuisiner — chacun attrapé peut être exposé dans votre
+        maison comme décoration.
+      </p>
+
+      <h2>Attraper les bestioles</h2>
+      <p>
+        Confirmé : attraper des insectes s'apprend vite mais se rate facilement, car les bestioles
+        bougent rapidement et un coup manqué coûte de l'énergie. Comme pour la pêche, différentes
+        saisons et conditions météo font apparaître différents insectes, donc une bestiole
+        introuvable un soir n'attend peut-être que les bonnes conditions.
+      </p>
+
+      <h2>Exposer comme décoration</h2>
+      <p>
+        Confirmé : cela vaut la peine de garder quelque chose de rare ou de mignon plutôt que de
+        le vendre, car chaque créature attrapée — poisson ou insecte — peut être placée comme
+        élément décoratif dans la maison. Voir <a href="/fr/farm/house">votre maison</a> pour plus
+        sur la décoration.
+      </p>
+
+      <h2>Répertoire des créatures</h2>
+      <p>Cliquez sur une entrée pour sa page détaillée avec saison, lieu, type et prix de vente. Les champs avec « - » sont encore non confirmés.</p>
+      <ul class="fish-link-list">
+        {critterDetailPages.map((c) => (
+          <li><a href={`/fr/collections/critters/${c.slug}`}>{c.name}</a></li>
+        ))}
+      </ul>
+
+      <h2>Encore en vérification</h2>
+      <ul>
+        <li>Lieu, saison et météo là où les pages détaillées affichent encore « - ».</li>
+        <li>Si les bestioles peuvent être offertes ou vendues, au-delà de l'exposition.</li>
+      </ul>
+
+      <h2>Questions fréquentes</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        Pages liées : <a href="/fr/collections">hub des collections</a>, <a href="/environment">environnement</a>,
+        <a href="/map">carte</a>, <a href="/fr/activities">activités</a>.
+      </div>
+    </div>
+  </article>
+
+  <style>
+    .fish-link-list {
+      list-style: none; padding: 0; margin: 12px 0 24px;
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 8px;
+    }
+    .fish-link-list a {
+      display: block; border: 1px solid var(--line); border-radius: 10px; padding: 8px 12px;
+      background: var(--surface); color: var(--candle); text-decoration: none; font-size: 0.88rem;
+    }
+    .fish-link-list a:hover { border-color: color-mix(in srgb, var(--candle) 54%, var(--line)); }
+  </style>
+</Base>

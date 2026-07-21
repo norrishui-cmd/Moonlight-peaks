@@ -1,0 +1,92 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { SITE } from '../../../consts';
+
+const animals = ['Cheeken', 'Piggoat', 'Draculamb', 'Cowcula', 'Stoney', 'Rabbicula'];
+
+const faq = [
+  { q: 'Quels animaux peut-on avoir dans Moonlight Peaks ?', a: 'Confirmé jusqu\'à présent : Cheeken, Piggoat, Draculamb, Cowcula, Stoney et Rabbicula. Cheeken est disponible le plus tôt. D\'autres pourraient se débloquer au fil de l\'année.' },
+  { q: 'Comment obtenir des animaux dans Moonlight Peaks ?', a: "Confirmé : construisez d'abord une grange (4 000 pièces d'or chez Ridge), puis visitez la ferme de Luna, où un petit enclos montre 3 animaux disponibles qui changent chaque jour. Interagissez avec l'un d'eux pour l'adopter, tant que vous avez l'or et la place en grange." },
+  { q: 'Que nourrit-on aux animaux dans Moonlight Peaks ?', a: "Confirmé : de la nourriture (fabriquée à partir de fibre chez un raffineur) ou la meilleure nourriture premium (50 nourriture + 1 essence de mana). Gardez la mangeoire pleine pour que les animaux mangent pendant la nuit." },
+  { q: 'Que produisent les animaux dans Moonlight Peaks ?', a: "Confirmé : du lait, de la laine, des œufs et de l'engrais, selon le type d'animal — l'engrais améliore la qualité des récoltes, ce qui rend l'entretien des animaux rentable avant même le revenu direct des produits." },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Accueil', item: `${SITE.url}/fr` },
+    { '@type': 'ListItem', position: 2, name: 'Ferme', item: `${SITE.url}/fr/farm` },
+    { '@type': 'ListItem', position: 3, name: 'Animaux', item: `${SITE.url}/fr/farm/animals` },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks Animaux — Liste complète, alimentation & produits"
+  description="Animaux de ferme confirmés dans Moonlight Peaks : Cheeken, Piggoat, Draculamb, Cowcula, Stoney, Rabbicula. Comment les obtenir, les nourrir, et ce qu'ils produisent."
+  path="/fr/farm/animals"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Ferme', href: '/fr/farm' }, { label: 'Animaux' }]}
+  lang="fr"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Ferme · Animaux</p>
+      <h1>Animaux de <em>ferme</em></h1>
+      <p class="intro">
+        Liste confirmée des animaux et bases de leur entretien, recoupées via plusieurs sources de
+        la semaine de lancement. Voir <a href="/fr/farm/barn">la grange</a> pour savoir comment
+        débloquer la possession d'animaux en premier lieu.
+      </p>
+
+      <h2>Animaux confirmés</h2>
+      <ul>
+        {animals.map((a) => (<li>{a}</li>))}
+      </ul>
+      <p>
+        Cheeken est généralement le premier animal — confirmé, il aime les caresses et les
+        chapeaux. D'autres types d'animaux devraient se débloquer au fil de l'année ; cette liste
+        s'agrandira à mesure que davantage seront confirmés.
+      </p>
+
+      <h2>Obtenir des animaux</h2>
+      <p>
+        Confirmé : une fois votre grange construite, visitez la ferme de Luna — un petit enclos
+        près de sa maison montre 3 animaux disponibles qui changent chaque jour, avec aussi des
+        variantes de couleur différentes. Interagissez avec l'un d'eux pour l'adopter (il vous faut
+        assez d'or et de la place en grange), et on vous demandera de le nommer vous-même.
+      </p>
+
+      <h2>Alimentation</h2>
+      <p>
+        Confirmé : les animaux mangent de la nourriture, fabriquée chez un raffineur à partir de
+        fibre (1 fibre → 2 nourriture). Un niveau supérieur, la nourriture premium, nécessite 50
+        nourriture plus 1 essence de mana. Gardez la mangeoire pleine pour que les animaux soient
+        nourris pendant la nuit — vous pouvez constituer un stock de plusieurs jours à la fois.
+      </p>
+
+      <h2>Ce qu'ils produisent</h2>
+      <p>
+        Confirmé : les animaux produisent du lait, de la laine, des œufs ou de l'engrais selon
+        leur type. L'engrais améliore spécifiquement la qualité des récoltes, ce qui rend
+        l'entretien des animaux rentable avant même le revenu direct des produits. Les produits de
+        meilleure qualité (d'animaux bien entretenus et heureux) se vendent mieux et donnent de
+        meilleurs ingrédients de cuisine.
+      </p>
+
+      <h2>Questions fréquentes</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        Pages liées : <a href="/fr/farm">hub de la ferme</a>, <a href="/fr/farm/barn">la grange</a>,
+        <a href="/fr/items">engrais</a>, <a href="/characters/luna">Luna</a>.
+      </div>
+    </div>
+  </article>
+</Base>

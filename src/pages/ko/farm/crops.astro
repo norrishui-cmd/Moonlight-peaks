@@ -1,0 +1,98 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { SITE } from '../../../consts';
+import { farmlandCrops, herbCrops, treeCrops } from '../../../data/farm-crops';
+
+const cropDetailSlugs: Record<string, string> = {
+  'Blood Grapes': 'blood-grapes', 'Rice': 'rice', 'Drikker': 'drikker', 'Gobbler': 'gobbler',
+  'Hold Me Close': 'hold-me-close', 'Mandrake': 'mandrake', 'Weeping Wicca': 'weeping-wicca',
+  'Common Mushroom': 'instant-growth-mushrooms', 'Frosteria': 'instant-growth-mushrooms',
+  'Glowglammer': 'instant-growth-mushrooms', 'Yellow Glowglammer': 'instant-growth-mushrooms',
+  'Volacio Mushroom': 'instant-growth-mushrooms', 'Amanita': 'instant-growth-mushrooms',
+};
+
+const faq = [
+  { q: 'Moonlight Peaks에는 작물이 몇 종류 있나요?', a: `공식 위키로 확인됨: 농지 작물 ${farmlandCrops.length}종, 허브 정원 식물 ${herbCrops.length}종, 나무 열매 ${treeCrops.length}종 — 재배 장소에 따라 세 가지 재배 범주로 나뉩니다.` },
+  { q: 'Moonlight Peaks의 세 가지 작물 범주는 무엇인가요?', a: '확인됨: 농지 작물(갈아엎은 땅에 심음), 허브 정원 식물(전용 허브 정원 구조물 필요), 나무 열매(갈아엎을 필요 없이 잔디에 직접 심음).' },
+  { q: 'Moonlight Peaks에서 어떤 작물이 마법 작물인가요?', a: '확인됨: 마법 작물은 일반 물뿌리개가 아니라 Aquaflux(마법의 물)로만 물을 줄 수 있습니다. 여러 작물은 독특한 특징도 있습니다 — Gobbler는 물고기나 작은 생물을 먹여야 하고, Drikker의 컵은 물로 채워야 하며, Mandrake는 주변 상황에 따라 화난 또는 행복한 버전을 만들고, Weeping Wicca는 울면서 주변 3x3 농지에 자동으로 물을 줍니다.' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '홈', item: `${SITE.url}/ko` },
+    { '@type': 'ListItem', position: 2, name: '농장', item: `${SITE.url}/ko/farm` },
+    { '@type': 'ListItem', position: 3, name: '작물', item: `${SITE.url}/ko/farm/crops` },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks 작물 — 전체 데이터베이스"
+  description="한국어로 보는 Moonlight Peaks 전체 작물 데이터베이스: 30종 이상의 농지 작물, 허브 정원 식물, 나무 열매 — 공식 위키 기반."
+  path="/ko/farm/crops"
+  jsonLd={jsonLd}
+  crumbs={[{ label: '농장', href: '/ko/farm' }, { label: '작물' }]}
+  lang="ko"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">농장 · 데이터베이스</p>
+      <h1>Moonlight Peaks <em>작물</em></h1>
+      <p class="intro">
+        공식 Moonlight Peaks 위키에서 가져온 전체 작물 데이터베이스입니다. 작물은 재배 장소에
+        따라 세 범주로 나뉩니다 — 농지, 허브 정원, 나무 — 그리고 일부는 마법 작물이라 일반
+        물뿌리개가 아닌 Aquaflux로만 물을 줄 수 있습니다.
+      </p>
+
+      <h2>농지 작물 ({farmlandCrops.length}종)</h2>
+      <table class="facts">
+        <tr><th>작물</th><th>계절</th><th>마법?</th><th>비고</th></tr>
+        {farmlandCrops.map((c) => (
+          <tr>
+            <td>{cropDetailSlugs[c.name] ? <a href={`/ko/farm/crops/${cropDetailSlugs[c.name]}`}>{c.name}</a> : c.name}</td>
+            <td>{c.seasons.length ? c.seasons.join(', ') : '—'}</td>
+            <td>{c.magical ? '예' : '아니오'}</td>
+            <td>
+              {c.harvestDays && <>성장 {c.harvestDays}일{c.regrowDays ? `, ${c.regrowDays}일마다 재성장` : ''}{c.yieldPerHarvest ? `, 수확당 ${c.yieldPerHarvest}개` : ''}{c.sellPrice ? `, 판매가 ${c.sellPrice}골드` : ''}{c.seedPrice ? ` (씨앗 ${c.seedPrice}골드)` : ''}. </>}
+              {c.note}
+            </td>
+          </tr>
+        ))}
+      </table>
+
+      <h2>허브 정원 식물 ({herbCrops.length}종)</h2>
+      <p>확인됨: 허브 정원 식물은 전용 허브 정원 구조물이 필요하며 일반 농지에 직접 심을 수 없습니다.</p>
+      <table class="facts">
+        <tr><th>허브</th><th>마법?</th><th>건조 형태?</th></tr>
+        {herbCrops.map((h) => (
+          <tr><td>{h.name}</td><td>{h.magical ? '예' : '아니오'}</td><td>{h.hasDriedForm ? '예' : '아니오'}</td></tr>
+        ))}
+      </table>
+
+      <h2>나무 열매 ({treeCrops.length}종)</h2>
+      <p>확인됨: 나무 열매는 갈아엎을 필요 없이 잔디에 직접 심습니다.</p>
+      <table class="facts">
+        <tr><th>나무</th><th>계절</th><th>마법?</th><th>비고</th></tr>
+        {treeCrops.map((t) => (
+          <tr><td>{t.name}</td><td>{t.seasons.join(', ')}</td><td>{t.magical ? '예' : '아니오'}</td><td>{t.note || '—'}</td></tr>
+        ))}
+      </table>
+
+      <h2>자주 묻는 질문</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        공식 Moonlight Peaks 위키(moonlightpeaks.wiki.gg) 기반. 관련 페이지:
+        <a href="/ko/farm">농장 허브</a>, <a href="/ko/farm/farm-helpers">농장 보조기구</a>,
+        <a href="/ko/farming">농사 가이드</a>.
+      </div>
+    </div>
+  </article>
+</Base>

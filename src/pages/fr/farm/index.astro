@@ -1,0 +1,70 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { SITE, GAME } from '../../../consts';
+
+const entries = [
+  { group: 'Base de données', title: 'Cultures', desc: 'La base de données complète des cultures — plus de 30 cultures, plantes de jardin d\'herbes et arbres fruitiers, avec saisons et statut magique.', href: '/fr/farm/crops' },
+  { group: 'Maison', title: 'Maison', desc: 'Comment votre maison peut être agrandie 4 fois via le Howling Hammer, débloqué par la quête "Fix the Roof".', href: '/fr/farm/house' },
+  { group: 'Bâtiment', title: 'Grange', desc: 'Coût, taille et comment débloquer la grange — 4 000 pièces d\'or, surface de 10x6, place pour 4 animaux.', href: '/fr/farm/barn' },
+  { group: 'Bâtiment', title: 'Serre', desc: 'Ce qui est confirmé jusqu\'à présent sur l\'extension de la serre.', href: '/fr/farm/greenhouse' },
+  { group: 'Créatures', title: 'Animaux', desc: 'La liste confirmée des animaux, comment les adopter, les nourrir et ce qu\'ils produisent.', href: '/fr/farm/animals' },
+  { group: 'Machines', title: "Auxiliaires de ferme", desc: 'Les 16 machines de traitement confirmées — fourneau, tonneau, raffineur et plus, avec recettes.', href: '/fr/farm/farm-helpers' },
+];
+
+const jsonLd = {
+  '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Accueil', item: `${SITE.url}/fr` },
+    { '@type': 'ListItem', position: 2, name: 'Ferme', item: `${SITE.url}/fr/farm` },
+  ],
+};
+---
+<Base
+  title="Moonlight Peaks Ferme — Cultures, Maison, Grange, Serre & Animaux"
+  description="Le hub de la ferme de Moonlight Peaks en français : cultures, agrandissement de la maison, la grange, la serre, les animaux de ferme et les machines auxiliaires — tout issu du wiki officiel."
+  path="/fr/farm"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Ferme' }]}
+  lang="fr"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Hub · Ferme</p>
+      <h1>Votre {GAME.title} <em>ferme</em></h1>
+      <p class="intro">
+        Tout ce qui concerne le développement de votre ferme — quoi cultiver, comment la maison et
+        la grange grandissent, et quels animaux et machines font tourner la ferme. La majorité du
+        contenu ci-dessous provient directement du wiki officiel de Moonlight Peaks.
+      </p>
+
+      <div class="itg">
+        {entries.map((e) => (
+          <a class="itcard" href={e.href}>
+            <span class="itgroup">{e.group}</span>
+            <h3>{e.title}</h3>
+            <p>{e.desc}</p>
+          </a>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        Pages liées : <a href="/fr/farming">guide agriculture</a>, <a href="/fr/locations">lieux</a>,
+        <a href="/fr/items">objets</a>, <a href="/farm">version détaillée en anglais</a>.
+      </div>
+    </div>
+  </article>
+
+  <style>
+    .itg { display: grid; grid-template-columns: 1fr; gap: 12px; margin: 6px 0 18px; }
+    @media (min-width: 640px) { .itg { grid-template-columns: 1fr 1fr; } }
+    @media (min-width: 980px) { .itg { grid-template-columns: 1fr 1fr 1fr; } }
+    .itcard {
+      display: block; border: 1px solid var(--line); border-radius: 14px;
+      background: var(--surface); padding: 14px; color: inherit; text-decoration: none;
+      transition: border-color .15s ease, transform .15s ease;
+    }
+    .itcard:hover { border-color: color-mix(in srgb, var(--candle) 50%, var(--line)); transform: translateY(-2px); }
+    .itgroup { font-family: var(--mono); color: var(--faint); text-transform: uppercase; letter-spacing: 0.04em; font-size: 0.62rem; }
+    .itcard h3 { font-family: var(--display); font-weight: 600; font-size: 1rem; margin: 4px 0 6px; }
+    .itcard p { color: #ded3e6; font-size: 0.84rem; margin: 0 0 10px; }
+  </style>
+</Base>

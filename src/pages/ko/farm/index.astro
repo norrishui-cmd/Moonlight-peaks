@@ -1,0 +1,70 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { SITE, GAME } from '../../../consts';
+
+const entries = [
+  { group: '데이터베이스', title: '작물', desc: '30종 이상의 농지 작물, 허브 정원 식물, 나무 열매를 담은 전체 작물 데이터베이스 — 계절과 마법 여부 포함.', href: '/ko/farm/crops' },
+  { group: '집', title: '집', desc: '"Fix the Roof" 퀘스트로 해금되는, Howling Hammer를 통해 4번 확장할 수 있는 집.', href: '/ko/farm/house' },
+  { group: '건물', title: '헛간', desc: '헛간 비용, 크기, 해금 방법 — 4,000골드, 10x6 부지, 동물 4마리 수용.', href: '/ko/farm/barn' },
+  { group: '건물', title: '온실', desc: '온실 확장에 대해 지금까지 확인된 내용.', href: '/ko/farm/greenhouse' },
+  { group: '생물', title: '동물', desc: '확인된 동물 목록, 입양 방법, 먹이 주기, 생산물.', href: '/ko/farm/animals' },
+  { group: '기계', title: '농장 보조기구', desc: '확인된 16개 가공 기계 전체 — 화로, 통, 정제기 등, 레시피 포함.', href: '/ko/farm/farm-helpers' },
+];
+
+const jsonLd = {
+  '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '홈', item: `${SITE.url}/ko` },
+    { '@type': 'ListItem', position: 2, name: '농장', item: `${SITE.url}/ko/farm` },
+  ],
+};
+---
+<Base
+  title="Moonlight Peaks 농장 — 작물, 집, 헛간, 온실 & 동물"
+  description="한국어로 보는 Moonlight Peaks 농장 허브: 작물, 집 확장, 헛간, 온실, 농장 동물, 농장 보조기구 — 모두 공식 위키 기반."
+  path="/ko/farm"
+  jsonLd={jsonLd}
+  crumbs={[{ label: '농장' }]}
+  lang="ko"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">허브 · 농장</p>
+      <h1>나의 {GAME.title} <em>농장</em></h1>
+      <p class="intro">
+        농장을 발전시키는 모든 것 — 무엇을 재배하고, 집과 헛간이 어떻게 커지며, 어떤 동물과
+        기계가 농장을 굴러가게 하는지. 아래 내용 대부분은 공식 Moonlight Peaks 위키에서
+        직접 가져왔습니다.
+      </p>
+
+      <div class="itg">
+        {entries.map((e) => (
+          <a class="itcard" href={e.href}>
+            <span class="itgroup">{e.group}</span>
+            <h3>{e.title}</h3>
+            <p>{e.desc}</p>
+          </a>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        관련 페이지: <a href="/ko/farming">농사 가이드</a>, <a href="/ko/locations">장소</a>,
+        <a href="/ko/items">아이템</a>, <a href="/farm">영어 상세 버전</a>.
+      </div>
+    </div>
+  </article>
+
+  <style>
+    .itg { display: grid; grid-template-columns: 1fr; gap: 12px; margin: 6px 0 18px; }
+    @media (min-width: 640px) { .itg { grid-template-columns: 1fr 1fr; } }
+    @media (min-width: 980px) { .itg { grid-template-columns: 1fr 1fr 1fr; } }
+    .itcard {
+      display: block; border: 1px solid var(--line); border-radius: 14px;
+      background: var(--surface); padding: 14px; color: inherit; text-decoration: none;
+      transition: border-color .15s ease, transform .15s ease;
+    }
+    .itcard:hover { border-color: color-mix(in srgb, var(--candle) 50%, var(--line)); transform: translateY(-2px); }
+    .itgroup { font-family: var(--mono); color: var(--faint); text-transform: uppercase; letter-spacing: 0.04em; font-size: 0.62rem; }
+    .itcard h3 { font-family: var(--display); font-weight: 600; font-size: 1rem; margin: 4px 0 6px; }
+    .itcard p { color: #ded3e6; font-size: 0.84rem; margin: 0 0 10px; }
+  </style>
+</Base>

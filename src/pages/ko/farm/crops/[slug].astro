@@ -1,0 +1,55 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import { SITE } from '../../../../consts';
+import { cropDetailsKo } from '../../../../data/farm-crop-details-ko';
+
+export function getStaticPaths() {
+  return Object.entries(cropDetailsKo).map(([slug, data]) => ({ params: { slug }, props: { slug, data } }));
+}
+
+const { slug, data } = Astro.props as { slug: string; data: (typeof cropDetailsKo)[string] };
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: data.faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '홈', item: `${SITE.url}/ko` },
+    { '@type': 'ListItem', position: 2, name: '농장', item: `${SITE.url}/ko/farm` },
+    { '@type': 'ListItem', position: 3, name: '작물', item: `${SITE.url}/ko/farm/crops` },
+    { '@type': 'ListItem', position: 4, name: data.name, item: `${SITE.url}/ko/farm/crops/${slug}` },
+  ] },
+];
+---
+<Base
+  title={`${data.name} — Moonlight Peaks 작물 가이드`}
+  description={data.dek}
+  path={`/ko/farm/crops/${slug}`}
+  jsonLd={jsonLd}
+  crumbs={[{ label: '농장', href: '/ko/farm' }, { label: '작물', href: '/ko/farm/crops' }, { label: data.name }]}
+  lang="ko"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">농장 · {data.category}</p>
+      <h1><em>{data.name}</em></h1>
+      <p class="intro">{data.dek}</p>
+
+      {data.body.map((p) => (<p>{p}</p>))}
+
+      <h2>자주 묻는 질문</h2>
+      <div class="faq">
+        {data.faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        공식 Moonlight Peaks 위키 기반. 관련 페이지:
+        <a href="/ko/farm/crops">모든 작물</a>, <a href="/ko/farm">농장 허브</a>,
+        <a href="/ko/farm/farm-helpers">농장 보조기구</a>.
+      </div>
+    </div>
+  </article>
+</Base>

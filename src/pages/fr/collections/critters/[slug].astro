@@ -1,0 +1,180 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import { SITE } from '../../../../consts';
+import { critterDetailPages } from '../../../../data/collectionDetailPages';
+
+export function getStaticPaths() {
+  return critterDetailPages.map((entry, index) => ({
+    params: { slug: entry.slug },
+    props: {
+      entry,
+      previous: critterDetailPages[index - 1],
+      next: critterDetailPages[index + 1],
+    },
+  }));
+}
+
+const { entry, previous, next } = Astro.props;
+const labelFr: Record<string, string> = {
+  'Season': 'Saison', 'Location': 'Lieu', 'Type': 'Type', 'Sells for': 'Prix de vente',
+};
+const fact = (label: string) => entry.facts.find((item: any) => item.label === label)?.value || '-';
+const hasIcon = entry.icon.startsWith('/images/');
+const pagePath = `/fr/collections/critters/${entry.slug}`;
+const title = `${entry.name} — Guide Créature Moonlight Peaks`;
+const description = `Moonlight Peaks ${entry.name} : saison, lieu, type et prix de vente en un coup d'œil.`;
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Accueil', item: `${SITE.url}/fr` },
+      { '@type': 'ListItem', position: 2, name: 'Collections', item: `${SITE.url}/fr/collections` },
+      { '@type': 'ListItem', position: 3, name: 'Bestioles', item: `${SITE.url}/fr/collections/critters` },
+      { '@type': 'ListItem', position: 4, name: entry.name, item: `${SITE.url}${pagePath}` },
+    ],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: [
+      {
+        '@type': 'Question',
+        name: `Où trouver ${entry.name} dans Moonlight Peaks ?`,
+        acceptedAnswer: { '@type': 'Answer', text: `Les données actuellement visibles indiquent le lieu comme ${fact('Location')}. Les champs avec - attendent encore confirmation en jeu.` },
+      },
+      {
+        '@type': 'Question',
+        name: `Quel type de créature est ${entry.name} ?`,
+        acceptedAnswer: { '@type': 'Answer', text: `${entry.name} est actuellement classé comme ${fact('Type')}, avec un prix de vente de ${fact('Sells for')}.` },
+      },
+    ],
+  },
+];
+---
+<Base
+  title={title}
+  description={description}
+  path={pagePath}
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Collections', href: '/fr/collections' }, { label: 'Bestioles', href: '/fr/collections/critters' }, { label: entry.name }]}
+  lang="fr"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Collections · Bestioles</p>
+      <section class="detail-hero">
+        <div>
+          <h1>{entry.name} <em>(Créature)</em></h1>
+          <p class="intro">
+            Une page détaillée de créature Moonlight Peaks, créée à partir des données visibles du
+            tableau de collection. Les valeurs inconnues restent marquées <strong>-</strong>
+            jusqu'à confirmation en jeu.
+          </p>
+        </div>
+        <div class="detail-icon" aria-hidden={!hasIcon}>
+          {hasIcon ? <img src={entry.icon} alt={`Icône de ${entry.name}`} loading="eager" /> : <span>Pas encore d'icône</span>}
+        </div>
+      </section>
+
+      <section class="fact-grid" aria-label={`Faits sur ${entry.name}`}>
+        {entry.facts.map((item: any) => (
+          <div class="fact-card">
+            <span>{labelFr[item.label] ?? item.label}</span>
+            <strong>{item.value}</strong>
+          </div>
+        ))}
+      </section>
+
+      <h2>{entry.name} — notes</h2>
+      <p>
+        {entry.name} figure dans les données actuelles de collection de créatures de Moonlight
+        Peaks. Cette page regroupe les paramètres clés en un seul endroit pour vérifier
+        rapidement la saison, le lieu, le type et le prix de vente sans parcourir tout le tableau.
+      </p>
+      <p>
+        Note d'utilisation : <strong>{entry.use}</strong>. Si un champ affiche encore
+        <strong>-</strong>, cela signifie que la capture d'écran source fournie ne montrait pas
+        encore de valeur confirmée.
+      </p>
+      <p class="source-note">
+        Note de source : cette page utilise le tableau de collection actuel, construit à partir
+        des données de créatures visibles de Moonlight Peaks, et ne sera étendue qu'à mesure que
+        de nouvelles valeurs officielles ou de jeu en direct seront confirmées.
+      </p>
+
+      <h2>Pages liées</h2>
+      <div class="related-grid">
+        <a href="/fr/collections/critters">Toutes les créatures</a>
+        <a href="/fr/collections">Hub des collections</a>
+      </div>
+
+      <nav class="detail-nav" aria-label="Navigation détail créature">
+        {previous ? <a href={`/fr/collections/critters/${previous.slug}`}>← {previous.name}</a> : <span />}
+        {next ? <a href={`/fr/collections/critters/${next.slug}`}>{next.name} →</a> : <span />}
+      </nav>
+    </div>
+  </article>
+  <style>
+    .detail-hero {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 20px;
+      align-items: start;
+    }
+    .detail-icon {
+      width: 140px;
+      height: 140px;
+      border-radius: 16px;
+      border: 1px solid var(--line);
+      background: var(--surface);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .detail-icon img { width: 100%; height: 100%; object-fit: contain; }
+    .detail-icon span { color: var(--faint); font-size: 0.7rem; text-transform: uppercase; }
+    .fact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px;
+      margin: 18px 0 28px;
+    }
+    .fact-card {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: var(--surface);
+      padding: 14px;
+    }
+    .fact-card span {
+      display: block;
+      color: var(--candle);
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    .fact-card strong { color: var(--text); font-size: 1rem; }
+    .related-grid, .detail-nav {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 10px;
+      margin-top: 12px;
+    }
+    .source-note { border-left: 3px solid var(--candle); padding-left: 14px; color: var(--muted); }
+    .related-grid a, .detail-nav a {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 12px 14px;
+      background: var(--surface);
+      color: var(--candle);
+      font-family: var(--mono);
+      text-decoration: none;
+    }
+    @media (max-width: 640px) {
+      .detail-hero { grid-template-columns: 1fr; }
+      .detail-icon { width: 112px; height: 112px; }
+    }
+  </style>
+</Base>

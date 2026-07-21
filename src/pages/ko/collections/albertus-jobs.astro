@@ -1,0 +1,72 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { SITE } from '../../../consts';
+
+const faq = [
+  { q: 'Moonlight Peaks의 알베르투스의 일거리는 무엇인가요?', a: '확인됨: 부엉이인 알베르투스가 운영하는 게시판으로, 플레이어가 가능한 의뢰를 확인할 수 있습니다 — 골드, 때때로 아이템, 그리고 의뢰인과의 관계 포인트를 보상하는 짧은 임무입니다.' },
+  { q: 'Moonlight Peaks에서 일거리 게시판은 어디에 있나요?', a: '확인됨: 시청에 있으며 알베르투스가 운영합니다. 새 주민에게 가장 먼저 소개되는 것 중 하나입니다.' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '홈', item: `${SITE.url}/ko` },
+    { '@type': 'ListItem', position: 2, name: '컬렉션', item: `${SITE.url}/ko/collections` },
+    { '@type': 'ListItem', position: 3, name: '일거리', item: `${SITE.url}/ko/collections/albertus-jobs` },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks 알베르투스의 일거리 — 게시판 설명"
+  description="확인됨: 알베르투스의 일거리는 Moonlight Peaks의 게시판으로, 짧은 의뢰가 골드, 아이템, 의뢰인과의 관계 포인트를 보상합니다."
+  path="/ko/collections/albertus-jobs"
+  jsonLd={jsonLd}
+  crumbs={[{ label: '컬렉션', href: '/ko/collections' }, { label: '일거리' }]}
+  lang="ko"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">컬렉션 · 일거리</p>
+      <h1>알베르투스의 <em>일거리</em></h1>
+      <p class="intro">
+        확인됨: 알베르투스의 일거리는 시청에 있는 부엉이 <a href="/characters/albertus">알베르투스</a>가
+        운영하는 마을 게시판으로, 새 주민에게 가장 먼저 소개되는 시스템 중 하나입니다.
+      </p>
+
+      <h2>일거리 작동 방식</h2>
+      <p>
+        확인됨: 일거리는 게시판에 올라오는 짧은 의뢰입니다. 일거리를 완료하면 골드, 때때로
+        아이템, 그리고 의뢰인과의 관계 상승을 받습니다 — 초반 수입과 은근한 관계 형성 모두에
+        유용합니다.
+      </p>
+
+      <h2>찾을 수 있는 곳</h2>
+      <p>
+        확인됨: 게시판은 시청에 있으며 Brook 시장의 등록 창구 옆에 있습니다 — 마을의 새 주민에게
+        가장 먼저 소개되는 것 중 하나입니다.
+      </p>
+
+      <h2>아직 확인 중</h2>
+      <ul>
+        <li>정확한 일거리 풀과 갱신 빈도.</li>
+        <li>난이도나 보상이 시간이 지나며 상승하는지 여부.</li>
+        <li>등장 가능한 주민 의뢰의 전체 목록.</li>
+      </ul>
+
+      <h2>자주 묻는 질문</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        관련 페이지: <a href="/ko/collections">컬렉션 허브</a>, <a href="/characters/albertus">알베르투스</a>,
+        <a href="/locations/town-hall">시청</a>, <a href="/characters/brook">Brook</a>.
+      </div>
+    </div>
+  </article>
+</Base>

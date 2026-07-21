@@ -1,0 +1,55 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import { SITE } from '../../../../consts';
+import { cropDetailsFr } from '../../../../data/farm-crop-details-fr';
+
+export function getStaticPaths() {
+  return Object.entries(cropDetailsFr).map(([slug, data]) => ({ params: { slug }, props: { slug, data } }));
+}
+
+const { slug, data } = Astro.props as { slug: string; data: (typeof cropDetailsFr)[string] };
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: data.faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Accueil', item: `${SITE.url}/fr` },
+    { '@type': 'ListItem', position: 2, name: 'Ferme', item: `${SITE.url}/fr/farm` },
+    { '@type': 'ListItem', position: 3, name: 'Cultures', item: `${SITE.url}/fr/farm/crops` },
+    { '@type': 'ListItem', position: 4, name: data.name, item: `${SITE.url}/fr/farm/crops/${slug}` },
+  ] },
+];
+---
+<Base
+  title={`${data.name} — Guide Culture Moonlight Peaks`}
+  description={data.dek}
+  path={`/fr/farm/crops/${slug}`}
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Ferme', href: '/fr/farm' }, { label: 'Cultures', href: '/fr/farm/crops' }, { label: data.name }]}
+  lang="fr"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Ferme · {data.category}</p>
+      <h1><em>{data.name}</em></h1>
+      <p class="intro">{data.dek}</p>
+
+      {data.body.map((p) => (<p>{p}</p>))}
+
+      <h2>Questions fréquentes</h2>
+      <div class="faq">
+        {data.faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        Issu du wiki officiel de Moonlight Peaks. Pages liées :
+        <a href="/fr/farm/crops">Toutes les cultures</a>, <a href="/fr/farm">Hub de la ferme</a>,
+        <a href="/fr/farm/farm-helpers">Auxiliaires de ferme</a>.
+      </div>
+    </div>
+  </article>
+</Base>

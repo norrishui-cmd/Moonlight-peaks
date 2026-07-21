@@ -1,0 +1,63 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { SITE } from '../../../consts';
+
+const faq = [
+  { q: 'À quoi sert la serre dans Moonlight Peaks ?', a: "Rapporté par la communauté : elle offre un espace de culture protégé supplémentaire, utile une fois vos surfaces extérieures pleines ou si vous avez besoin de plus de place pour les cultures magiques. Le coût exact de construction, les conditions de déblocage et si elle modifie les règles de croissance ne sont pas encore confirmés indépendamment." },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Accueil', item: `${SITE.url}/fr` },
+    { '@type': 'ListItem', position: 2, name: 'Ferme', item: `${SITE.url}/fr/farm` },
+    { '@type': 'ListItem', position: 3, name: 'Serre', item: `${SITE.url}/fr/farm/greenhouse` },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks Serre — Ce qui est confirmé jusqu'à présent"
+  description="Ce qui est confirmé sur la serre de Moonlight Peaks : un espace de culture protégé supplémentaire, présenté honnêtement plutôt que deviné."
+  path="/fr/farm/greenhouse"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Ferme', href: '/fr/farm' }, { label: 'Serre' }]}
+  lang="fr"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Ferme · Serre</p>
+      <h1>La <em>serre</em></h1>
+      <p class="intro">
+        Rapporté par la communauté : la serre est une extension de ferme offrant un espace de
+        culture protégé supplémentaire, utile une fois vos surfaces existantes pleines. Au-delà de
+        cela, nous n'avons pas encore de détails confirmés indépendamment sur le coût de
+        construction, les conditions de déblocage, ou comment exactement elle change l'agriculture
+        — c'est pourquoi cette page reste courte plutôt que de deviner.
+      </p>
+
+      <h2>Encore en vérification</h2>
+      <ul>
+        <li>Coût de construction et matériaux nécessaires.</li>
+        <li>Quelle quête ou étape narrative (le cas échéant) la débloque.</li>
+        <li>Si elle modifie les saisons ou protège de la météo.</li>
+        <li>Combien d'espace de culture supplémentaire elle apporte réellement.</li>
+      </ul>
+
+      <h2>Questions fréquentes</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        Cette page sera étendue dès que de véritables données sur la serre seront confirmées.
+        Pages liées : <a href="/fr/farm">hub de la ferme</a>, <a href="/fr/farm/crops">cultures</a>,
+        <a href="/fr/farm/house">maison</a>.
+      </div>
+    </div>
+  </article>
+</Base>

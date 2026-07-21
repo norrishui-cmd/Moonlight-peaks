@@ -1,0 +1,95 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { SITE } from '../../../consts';
+import { fishDetailPages } from '../../../data/collectionDetailPages';
+
+const faq = [
+  { q: 'Moonlight Peaks에서 첫 낚싯대는 어떻게 얻나요?', a: '확인됨: 게임 초반 며칠 밤 사이에 강가에서 Noel을 만납니다. 그는 자신보다 먼저 서로 다른 물고기 3종을 잡으라고 도전하는데 — 시간 제한이 없어 쉽게 이길 수 있으며, 첫 낚싯대와 골드 보너스를 보상으로 줍니다.' },
+  { q: 'Moonlight Peaks에는 물고기가 몇 종류 있나요?', a: '확인됨: 총 22종의 물고기가 있으며, 각각 기본 판매 가치와 기본 에너지 값을 가지고 있고 1성, 2성 품질에서 둘 다 상승합니다. 물고기별 상세 페이지를 포함한 전체 목록은 아래에 있습니다.' },
+  { q: 'Moonlight Peaks에서 어떤 물고기가 잡힐지는 무엇에 영향을 받나요?', a: '확인됨: 장소, 계절, 날씨, 시간대가 모두 그 순간에 어떤 물고기를 잡을 수 있는지에 영향을 줍니다.' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '홈', item: `${SITE.url}/ko` },
+    { '@type': 'ListItem', position: 2, name: '컬렉션', item: `${SITE.url}/ko/collections` },
+    { '@type': 'ListItem', position: 3, name: '물고기', item: `${SITE.url}/ko/collections/fish` },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks 물고기 — 약 22종 & 첫 낚싯대"
+  description="확인된 Moonlight Peaks 낚시 정보: Noel에게서 첫 낚싯대를 얻는 방법, 약 22종의 물고기, 품질 등급, 그리고 어떤 물고기가 잡힐지에 영향을 주는 요소."
+  path="/ko/collections/fish"
+  jsonLd={jsonLd}
+  crumbs={[{ label: '컬렉션', href: '/ko/collections' }, { label: '물고기' }]}
+  lang="ko"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">컬렉션 · 물고기</p>
+      <h1>Moonlight Peaks <em>물고기</em></h1>
+      <p class="intro">
+        두 개의 독립적인 출시 주간 자료로 확인됨: 낚시는 약 22종으로 이루어진 실제 컬렉션을
+        기반으로 하며, 각각 낚싯줄을 던질 때의 장소, 시간, 날씨의 영향을 받습니다.
+      </p>
+
+      <h2>첫 낚싯대 얻기</h2>
+      <p>
+        확인됨: 게임 초반 며칠 밤 사이에 강가에서 <a href="/characters/noel">Noel</a>을 만납니다.
+        그는 자신보다 먼저 서로 다른 물고기 3종을 잡으라고 도전하는데 — 시간 제한이 없어 쉽게
+        이길 수 있으며, 첫 낚싯대와 골드 보너스를 보상으로 줍니다.
+      </p>
+
+      <h2>물고기 종류와 변화하는 요소</h2>
+      <p>
+        확인됨: 컬렉션은 약 22종으로 구성됩니다. 어떤 물고기를 잡을 수 있는지는 장소, 계절, 날씨,
+        시간대에 달려 있습니다 — 어떤 밤에 찾지 못한 물고기라도 완전히 없는 것이 아니라 알맞은
+        조건을 기다리고 있는 것일 수 있습니다.
+      </p>
+
+      <h2>품질 등급</h2>
+      <p>
+        확인됨: 모든 물고기는 기본 판매 가치와 섭취 시 기본 에너지 값을 가지며, 둘 다 1성과 2성
+        품질에서 상승합니다 — 같은 종이라도 더 높은 품질로 잡는 것이 적극적으로 노려볼 가치가
+        있습니다.
+      </p>
+
+      <h2>물고기 목록 (전체 22종)</h2>
+      <p>물고기를 클릭하면 장소, 희귀도, 출현 시기, 크기, 판매 가격이 담긴 상세 페이지로 이동합니다.</p>
+      <ul class="fish-link-list">
+        {fishDetailPages.map((f) => (
+          <li><a href={`/ko/collections/fish/${f.slug}`}>{f.name}</a></li>
+        ))}
+      </ul>
+
+      <h2>자주 묻는 질문</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        관련 페이지: <a href="/ko/collections">컬렉션 허브</a>, <a href="/ko/activities">활동으로서의 낚시</a>,
+        <a href="/characters/noel">Noel</a>, <a href="/ko/items">아이템</a>.
+      </div>
+    </div>
+  </article>
+
+  <style>
+    .fish-link-list {
+      list-style: none; padding: 0; margin: 12px 0 24px;
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 8px;
+    }
+    .fish-link-list a {
+      display: block; border: 1px solid var(--line); border-radius: 10px; padding: 8px 12px;
+      background: var(--surface); color: var(--candle); text-decoration: none; font-size: 0.88rem;
+    }
+    .fish-link-list a:hover { border-color: color-mix(in srgb, var(--candle) 54%, var(--line)); }
+  </style>
+</Base>
