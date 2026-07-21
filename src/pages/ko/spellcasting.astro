@@ -1,0 +1,142 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+import { spellcastingSections } from '../../data/spellcasting';
+
+const descKo: Record<string, string> = {
+  hoisthaven: '건물을 마법으로 이동시킵니다.',
+  refilliarmus: '물뿌리개를 즉시 다시 채웁니다.',
+  'tomorrows-tears': '다음 날 밤에 비가 내리게 합니다.',
+  'arborascend-i': '나무 1그루를 마법으로 이동시킵니다.',
+  'arborascend-ii': '나무 5그루를 마법으로 이동시킵니다.',
+  'arborascend-iii': '나무 10그루를 마법으로 이동시킵니다.',
+  'aquaflux-i': '최대 16칸에 물을 줄 수 있는 물뿌리개를 소환합니다.',
+  'aquaflux-ii': '최대 -칸에 물을 줄 수 있는 물뿌리개를 소환합니다.',
+  'aquaflux-iii': '최대 144칸에 물을 줄 수 있는 물뿌리개를 소환합니다.',
+  'ethereal-hands-i': '함께 최대 32개의 작물을 수확할 수 있는 도움의 손을 소환합니다.',
+  'ethereal-hands-ii': '함께 최대 64개의 작물을 수확할 수 있는 도움의 손을 소환합니다.',
+  'ethereal-hands-iii': '함께 최대 128개의 작물을 수확할 수 있는 도움의 손을 소환합니다.',
+  'metamorphosia-i': '작물 1개를 다른 무작위 작물로 바꿉니다.',
+  'metamorphosia-ii': '2x2 작물 구역을 다른 무작위 작물로 바꿉니다.',
+  'metamorphosia-iii': '3x3 작물 구역을 다른 무작위 작물로 바꿉니다.',
+  'maturio-i': '1x1 구역의 작물을 즉시 다 자라게 합니다.',
+  'maturio-ii': '2x2 구역의 작물을 즉시 다 자라게 합니다.',
+  'maturio-iii': '3x3 구역의 작물을 즉시 다 자라게 합니다.',
+  'ethereal-shovels-i': '최대 32곳을 팔 수 있는 삽을 소환합니다.',
+  'ethereal-shovels-iii': '최대 128곳을 팔 수 있는 삽을 소환합니다.',
+  'ethereal-axes-i': '최대 16그루의 통나무나 나무를 벨 수 있는 도끼를 소환합니다.',
+  'ethereal-axes-ii': '최대 -그루의 통나무나 나무를 벨 수 있는 도끼를 소환합니다.',
+  'ethereal-axes-iii': '최대 48그루의 통나무나 나무를 벨 수 있는 도끼를 소환합니다.',
+  'ethereal-pickaxes-i': '최대 16개의 바위를 부술 수 있는 곡괭이를 소환합니다.',
+  'ethereal-pickaxes-ii': '최대 -개의 바위를 부술 수 있는 곡괭이를 소환합니다.',
+  'ethereal-pickaxes-iii': '최대 48개의 바위를 부술 수 있는 곡괭이를 소환합니다.',
+};
+const sectionTitleKo: Record<string, string> = { 'normal-spells': '일반 주문', 'tiered-spells': '단계별 주문' };
+
+const spellcastingSpells = spellcastingSections.flatMap((s) => s.spells);
+const iconCount = spellcastingSpells.filter((spell) => spell.icon).length;
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '홈', item: `${SITE.url}/ko` },
+    { '@type': 'ListItem', position: 2, name: '세계', item: `${SITE.url}/ko/locations` },
+    { '@type': 'ListItem', position: 3, name: '주문', item: `${SITE.url}/ko/spellcasting` },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks 주문 - 마나 비용 & 구매 가격"
+  description="확인된 25개 주문 전체의 마나 비용, 설명, 구매 가격을 담은 Moonlight Peaks 전체 주문 목록."
+  path="/ko/spellcasting"
+  jsonLd={jsonLd}
+  crumbs={[{ label: '세계', href: '/ko/locations' }, { label: '주문' }]}
+  lang="ko"
+>
+  <article class="page spellcasting-page">
+    <div class="wrap">
+      <p class="eyebrow">세계 / 주문</p>
+      <h1>Moonlight Peaks <em>주문</em></h1>
+      <p class="intro">
+        {GAME.title}의 확인된 주문 데이터입니다. 이 페이지는 아이콘 {iconCount}개를 포함한
+        {spellcastingSpells.length}개의 주문과 알려진 경우 마나 비용, 구매 가격을 나열합니다.
+      </p>
+
+      <nav class="spell-jump" aria-label="주문 섹션">
+        {spellcastingSections.map((section) => (
+          <a href={`#${section.slug}`}>{sectionTitleKo[section.slug] ?? section.title} <span>{section.spells.length}</span></a>
+        ))}
+      </nav>
+
+      {spellcastingSections.map((section) => (
+        <section class="spell-section" id={section.slug} aria-labelledby={`${section.slug}-title`}>
+          <h2 id={`${section.slug}-title`}>{sectionTitleKo[section.slug] ?? section.title}</h2>
+          <div class="spell-list">
+            {section.spells.map((spell) => (
+              <article class={`spell-card ${spell.icon ? '' : 'spell-card-no-icon'}`}>
+                <div class="spell-icon" aria-hidden={!spell.icon}>
+                  {spell.icon ? (
+                    <img src={spell.icon} alt={`${spell.name} 주문 아이콘`} width="144" height="144" loading="lazy" />
+                  ) : (
+                    <span>-</span>
+                  )}
+                </div>
+                <div class="spell-body">
+                  <h3>{spell.name}</h3>
+                  <p>{descKo[spell.slug] ?? spell.description}</p>
+                  <dl>
+                    <div>
+                      <dt>마나</dt>
+                      <dd>{spell.manaCost}</dd>
+                    </div>
+                    <div>
+                      <dt>구매 가격</dt>
+                      <dd>{spell.buyPrice}</dd>
+                    </div>
+                  </dl>
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
+      ))}
+
+      <p class="spell-note">
+        원본에서 값이 표시되지 않았거나 자리 표시자만 있었던 경우, 누락된 값은 <code>-</code>로 유지됩니다.
+      </p>
+
+      <div class="callout">
+        관련: <a href="/ko/magic">마법 가이드</a>, <a href="/ko/farming">농사</a>,
+        <a href="/ko/items/tools">도구</a>, <a href="/ko/items/cooking">요리</a>, <a href="/ko/quests">퀘스트</a>.
+      </div>
+    </div>
+  </article>
+
+  <style>
+    .spell-jump { display: flex; flex-wrap: wrap; gap: 8px; margin: 18px 0 24px; }
+    .spell-jump a { border: 1px solid var(--line); border-radius: 999px; color: var(--mist); background: var(--surface); padding: 7px 12px; text-decoration: none; font-family: var(--mono); font-size: 0.76rem; }
+    .spell-jump a:hover { border-color: color-mix(in srgb, #5ecfff 54%, var(--line)); color: #84eaff; }
+    .spell-jump span { color: var(--faint); margin-left: 4px; }
+    .spell-section { margin-top: 24px; }
+    .spell-list { display: grid; grid-template-columns: 1fr; gap: 12px; }
+    @media (min-width: 760px) { .spell-list { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    .spell-card { display: grid; grid-template-columns: 104px minmax(0, 1fr); gap: 14px; align-items: center; min-height: 150px; padding: 14px; border: 1px solid var(--line); border-radius: 8px; background: rgba(32, 18, 58, 0.74); }
+    .spell-icon { width: 104px; height: 104px; display: grid; place-items: center; border-radius: 8px; border: 1px solid rgba(94, 207, 255, 0.16); background: rgba(15, 8, 36, 0.42); }
+    .spell-icon img { width: 96px; height: 96px; object-fit: contain; display: block; filter: drop-shadow(0 0 13px rgba(49, 209, 255, 0.46)); }
+    .spell-icon span { color: var(--faint); font-family: var(--mono); font-size: 1.1rem; }
+    .spell-body { min-width: 0; }
+    .spell-body h3 { margin: 0 0 8px; color: #c8a8ee; font-family: var(--sans); font-size: 1.12rem; font-weight: 800; line-height: 1.2; }
+    .spell-body p { margin: 0 0 10px; color: #eee7f3; font-size: 0.92rem; line-height: 1.45; }
+    .spell-body dl { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; }
+    .spell-body dl div { display: flex; align-items: center; gap: 6px; min-height: 28px; padding: 4px 8px; border: 1px solid var(--line); border-radius: 999px; background: rgba(20, 10, 44, 0.56); }
+    .spell-body dt { margin: 0; color: var(--faint); font-family: var(--mono); font-size: 0.66rem; text-transform: uppercase; }
+    .spell-body dd { margin: 0; color: var(--mist); font-weight: 700; font-size: 0.82rem; }
+    .spell-note { color: var(--faint); font-size: 0.78rem; margin: 16px 0 18px; }
+    .spell-note code { color: var(--mist); }
+    @media (max-width: 520px) {
+      .spell-card { grid-template-columns: 82px minmax(0, 1fr); gap: 10px; min-height: 126px; padding: 12px; }
+      .spell-icon { width: 82px; height: 82px; }
+      .spell-icon img { width: 76px; height: 76px; }
+      .spell-body h3 { font-size: 1rem; }
+    }
+  </style>
+</Base>

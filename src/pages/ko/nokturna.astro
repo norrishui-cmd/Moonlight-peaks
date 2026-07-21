@@ -1,0 +1,239 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE } from '../../consts';
+import { cards } from '../../data/nokturna';
+
+const types = [...new Set(cards.map((c) => c.type).filter(Boolean))] as string[];
+
+const faq = [
+  { q: 'Moonlight Peaks에서 Nokturna는 무엇인가요?', a: 'Nokturna는 마을에서 인기 있는 수집형 카드 게임입니다. 카드를 모으고 Moonlight Peaks 주민들에게 대결을 신청하는데, 이는 우정을 쌓는 방법이기도 합니다.' },
+  { q: 'Nokturna는 어떻게 플레이하나요?', a: '확인됨: 대결은 3판 2선승제로 진행되며, 라운드당 카드 3장을 냅니다. 무승부는 양쪽 모두 승리로 취급됩니다. 카드는 "Persist" 키워드 메커니즘을 사용하며, 덱은 늑대인간, 뱀파이어, 식물, 수생 등의 아키타입이나 혼합 빌드를 기반으로 합니다.' },
+  { q: 'Nokturna 카드는 어디서 얻나요?', a: '확인됨: 주민을 이기면 컬렉션에 카드가 추가됩니다 — 이것이 확인된 주된 출처입니다. 커뮤니티 제보: 이 기능이 활성화되면 무덤에서 보상으로 카드가 나올 수도 있습니다. 모든 카드를 모으면 Steam 업적 "Nokturna Master"를 얻습니다.' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '홈', item: `${SITE.url}/ko` },
+    { '@type': 'ListItem', position: 2, name: 'Nokturna', item: `${SITE.url}/ko/nokturna` },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks Nokturna 가이드: 덱, 카드 & 자주 발생하는 문제"
+  description="Moonlight Peaks Nokturna 카드 게임 가이드: 확인된 규칙, 67장 이상의 카드, 덱 아키타입, 그리고 아직 문서화되지 않은 덱 구성 질문에 대한 솔직한 답변."
+  path="/ko/nokturna"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Nokturna' }]}
+  lang="ko"
+  showExport
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">항목 · 카드</p>
+      <h1>Nokturna — <em>Moonlight Peaks</em> 카드 게임</h1>
+      <p class="intro">
+        Nokturna는 마을에서 인기 있는 카드 게임입니다: 카드를 모으고 주민들과 대결하세요.
+        출시 시점에 확인됨: 예언자 Dragan이 세계관 내에서 발명한 것으로, 67장 이상의 카드와
+        여러 덱 아키타입을 갖춘 3판 2선승제입니다. 이것은 검색 가능한 카드 데이터베이스와
+        승리 가이드입니다. 최근 업데이트: {SITE.updated}.
+      </p>
+
+      <h2>플레이 방법</h2>
+      <p>
+        출시 시점에 확인됨: Nokturna는 3판 2선승제 카드 게임입니다 — 각 라운드마다 두 플레이어가
+        카드 3장을 내고, 그 라운드의 승자를 가리기 위해 점수를 계산합니다(무승부는 양쪽 모두
+        승리로 취급). 3라운드 중 2라운드를 이기면 대결에서 승리합니다. 각 카드는 점수 값을
+        가지며, 일부는 효과나 키워드를 가지고 있습니다 — 예를 들어 "Persist"는 낸 카드를 대결이
+        끝날 때까지 필드에 남게 합니다. 획득한 카드는 메뉴에 남으며, 주민과 Nokturna를
+        플레이하는 것은 대화나 선물과 함께 그 주민의 우정 메뉴에 기록됩니다.
+      </p>
+      <p>
+        전체 카드 풀은 여러 덱 아키타입에 걸쳐 67장 이상으로 확인되었습니다 — 지금까지 확인된
+        것: 늑대인간, 뱀파이어, 식물, 수생 덱, 그리고 혼합 덱.
+      </p>
+
+      <h2>새 카드를 얻는 방법</h2>
+      <p>
+        확인됨: 주민을 이기면 개인 컬렉션에 카드가 추가됩니다.
+        <span class="tag-community">커뮤니티 제보</span> 이 기능이 활성화되면 마을에서 땅을 파다가
+        무덤에서 보상으로 카드가 나올 수도 있습니다 — 대결을 하는 것만이 유일한 출처는
+        아니지만, 지금까지 확인된 주된 출처로 남아 있습니다.
+      </p>
+      <p>
+        확인됨: 모든 Nokturna 카드를 모으면 Steam 업적 <strong>"Nokturna Master"</strong>를
+        얻습니다 — 나머지 목록은 저희 <a href="/ko/achievements">업적 가이드</a>를 참고하세요.
+      </p>
+
+      <h2>새 Nokturna 카드가 나타나지 않는 이유</h2>
+      <p>
+        이는 현재 저희 자료에서 독립적으로 문서화되지 않았습니다. 대결에서 획득한 카드가
+        예상한 곳에 나타나지 않는다면, 가장 가능성 있는 확인된 사실은 이렇습니다: 획득한
+        카드는 여러분 자신의 메뉴에 기록되고, 주민과의 플레이는 그 주민의 우정 메뉴에 별도로
+        기록됩니다 — 카드가 사라졌다고 가정하기보다 두 곳 모두 확인하세요. 그 외에는 카드가
+        나타나지 않는 이유에 대해 확인된 설명이 없으며, 저희는 추측하지 않겠습니다. 그동안
+        직접 컬렉션을 추적하고 싶다면, <a href="/tools/nokturna-tracker">Nokturna 추적기</a>를
+        이용해 브라우저에서 비공개로 카드를 기록할 수 있습니다.
+      </p>
+
+      <h2>새 덱을 만드는 방법</h2>
+      <p>
+        현재 저희 자료에서 아직 문서화되지 않았습니다. Nokturna의 덱 생성 메뉴, 덱 크기, 덱
+        슬롯 제한에 대해 확인되거나 커뮤니티에서 제보된 세부 정보가 없습니다 — 검증할 수 없는
+        덱 빌더를 설명하는 대신, 이 섹션에서는 솔직하게 빈틈을 인정합니다. 게임에서 이를
+        발견했다면, 그 메커니즘은 아마 카드 컬렉션을 확인하는 것과 같은 메뉴에 있을 것입니다.
+      </p>
+
+      <h2>시작 덱을 편집할 수 있나요?</h2>
+      <p>
+        아직 문서화되지 않았습니다. 초기/시작 덱이 편집 가능한지, 아니면 모든 대결이 대신
+        플레이어가 만든 공통 덱을 사용하는지에 대해 확인되거나 커뮤니티에서 제보된 정보가
+        없습니다. 규칙을 지어내기보다 이 부분은 답하지 않은 채로 남겨두는 것을 선호합니다.
+      </p>
+
+      <h2>모은 카드를 추가하는 방법</h2>
+      <p>
+        아직 문서화되지 않았습니다. 확인됨: 대결에서 이기면 개인 컬렉션에 카드가 추가되며
+        메뉴에서 볼 수 있습니다. 그 후 획득한 카드를 활성 덱에 수동으로 추가해야 하는지(전체
+        컬렉션에서 자동으로 가져오는 덱과 달리) 여부는 현재 자료로는 확인할 수 없습니다.
+      </p>
+
+      <h2>자주 발생하는 덱 구성 문제</h2>
+      <ul>
+        <li><strong>대결 승리로 실제 카드가 추가되었는지 불확실함:</strong> 대결 종료 화면만으로
+          추측하지 말고 카드 컬렉션 메뉴를 직접 확인하세요.</li>
+        <li><strong>어떤 아키타입으로 만들어야 할지 불확실함:</strong> 지금까지 확인된 덱
+          아키타입은 늑대인간, 뱀파이어, 식물, 수생, 그리고 혼합 빌드입니다 — Alpha Wolf(늑대인간
+          아키타입 카드)는 효과를 확인할 수 있는 유일한 카드입니다. 다른 늑대인간 카드를
+          강화하는데, 이는 아키타입이 "색을 지키는 것"에 보상을 준다는 것을 시사합니다.</li>
+        <li><strong>덱 구성 메뉴의 무언가가 잠긴 것처럼 보임:</strong> 이것이 스토리 진행,
+          Nokturna를 발명한 예언자(Dragan)와의 우정 수준, 또는 다른 무언가와 관련이 있는지는
+          아직 확인되지 않았습니다 — <a href="/characters/dragan">Dragan의 프로필</a>도
+          참고하세요.</li>
+      </ul>
+
+      <h2>카드 데이터베이스</h2>
+      {cards.length === 0 ? (
+        <div class="nok-empty">
+          <p><strong>확인됨: 여러 덱 아키타입에 걸쳐 67장 이상의 카드가 존재합니다.</strong>
+          개별 카드 이름과 효과는 아직 공개되지 않았으므로 나열하지 않았습니다 — 카드를 지어내지
+          않습니다. 확인되는 대로 모든 Nokturna 카드, 그 효과, 얻는 방법을 담은 완전히 검색
+          가능한 데이터베이스가 될 예정입니다.</p>
+        </div>
+      ) : (
+        <div class="nok-tool">
+          <div class="nok-controls">
+            <input class="nok-search" id="nok-search" type="search" placeholder="이름이나 효과로 카드 검색…" aria-label="Nokturna 카드 검색" />
+            <div class="nok-chips" id="nok-chips">
+              <button class="nok-chip is-active" data-type="all" type="button">전체</button>
+              {types.map((t) => <button class="nok-chip" data-type={t.toLowerCase()} type="button">{t}</button>)}
+            </div>
+          </div>
+          <p class="nok-count" id="nok-count">{cards.length}장</p>
+          <div class="nok-grid" id="nok-grid">
+            {cards.map((c) => (
+              <article class="nok-card" data-name={c.name.toLowerCase()} data-type={(c.type || '').toLowerCase()} data-effect={(c.effect || '').toLowerCase()}>
+                <h3>{c.name}</h3>
+                <div class="nok-meta">
+                  {c.type && <span class="nok-badge">{c.type}</span>}
+                  {c.rarity && <span class="nok-badge">{c.rarity}</span>}
+                  {c.cost && <span class="nok-badge">비용 {c.cost}</span>}
+                  {c.power && <span class="nok-badge">파워 {c.power}</span>}
+                </div>
+                {c.effect && <p class="nok-effect">{c.effect}</p>}
+                {c.howToGet && <p class="nok-get"><strong>얻는 방법:</strong> {c.howToGet}</p>}
+              </article>
+            ))}
+          </div>
+          <p class="nok-noresult" id="nok-noresult" hidden>카드를 찾을 수 없습니다 — 다른 검색어를 시도해 보세요.</p>
+        </div>
+      )}
+
+      <h2>승리 & 최고의 덱</h2>
+      <p>
+        개별 카드 이름과 효과가 더 완전히 문서화되면, 이 섹션은 초보자 친화적인 덱 제안과 더
+        어려운 상대에 대한 대응법을 제공할 예정입니다. 그때까지는 검증할 수 없는 카드에 대한
+        메타를 추측하기보다 솔직하게 남겨두겠습니다.
+      </p>
+
+      <h2>자주 묻는 질문</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        관련: <a href="/ko/beginner-guide">초보자 가이드</a>,
+        <a href="/ko/romance">로맨스 & 가문</a>, <a href="/tools/nokturna-tracker">Nokturna 추적기</a>,
+        <a href="/characters/dragan">Dragan</a>, <a href="/ko/release-date">출시일</a>.
+      </div>
+    </div>
+  </article>
+
+  <style>
+    .tag-community {
+      display: inline-block; font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.02em;
+      color: var(--faint); border: 1px solid var(--line); border-radius: 999px; padding: 2px 8px;
+      margin-right: 6px; vertical-align: middle;
+    }
+    .nok-empty { border: 1px dashed var(--line); border-radius: 12px; background: var(--ink-2); padding: 18px; color: var(--muted); }
+    .nok-controls { display: flex; flex-direction: column; gap: 12px; margin: 8px 0 14px; }
+    .nok-search { width: 100%; padding: 12px 14px; border-radius: 10px; border: 1px solid var(--line); background: var(--surface); color: var(--mist); font-size: 0.95rem; font-family: var(--body); }
+    .nok-search:focus { outline: 2px solid var(--candle); outline-offset: 1px; }
+    .nok-chips { display: flex; gap: 8px; flex-wrap: wrap; }
+    .nok-chip { font-size: 0.84rem; color: var(--muted); background: var(--ink); border: 1px solid var(--line); border-radius: 999px; padding: 6px 13px; cursor: pointer; transition: color .14s, border-color .14s; }
+    .nok-chip:hover { color: var(--mist); }
+    .nok-chip.is-active { color: #20160a; background: var(--candle); border-color: var(--candle); font-weight: 600; }
+    .nok-count { font-family: var(--mono); font-size: 0.74rem; color: var(--faint); letter-spacing: 0.06em; text-transform: uppercase; margin: 0 0 12px; }
+    .nok-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 14px; }
+    .nok-card { border: 1px solid var(--line); border-radius: 12px; background: var(--surface); padding: 16px; }
+    .nok-card h3 { font-family: var(--display); font-weight: 600; font-size: 1.1rem; margin: 0 0 8px; }
+    .nok-meta { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 8px; }
+    .nok-badge { font-family: var(--mono); font-size: 0.68rem; color: var(--candle); border: 1px solid var(--candle-dim); border-radius: 6px; padding: 2px 7px; }
+    .nok-effect { color: #ded3e6; font-size: 0.9rem; margin: 0 0 8px; }
+    .nok-get { color: var(--muted); font-size: 0.82rem; margin: 0; }
+    .nok-noresult { color: var(--faint); font-size: 0.9rem; }
+  </style>
+
+  <script>
+    const search = document.getElementById('nok-search');
+    const grid = document.getElementById('nok-grid');
+    const chips = document.getElementById('nok-chips');
+    const count = document.getElementById('nok-count');
+    const noresult = document.getElementById('nok-noresult');
+    if (search && grid) {
+      const items = Array.from(grid.querySelectorAll('.nok-card'));
+      let activeType = 'all';
+      const apply = () => {
+        const q = (search.value || '').trim().toLowerCase();
+        let shown = 0;
+        items.forEach((el) => {
+          const name = el.getAttribute('data-name') || '';
+          const effect = el.getAttribute('data-effect') || '';
+          const type = el.getAttribute('data-type') || '';
+          const matchText = !q || name.includes(q) || effect.includes(q);
+          const matchType = activeType === 'all' || type === activeType;
+          const show = matchText && matchType;
+          el.style.display = show ? '' : 'none';
+          if (show) shown++;
+        });
+        if (count) count.textContent = shown + '장';
+        if (noresult) noresult.hidden = shown !== 0;
+      };
+      search.addEventListener('input', apply);
+      if (chips) {
+        chips.addEventListener('click', (e) => {
+          const btn = e.target.closest('.nok-chip');
+          if (!btn) return;
+          activeType = btn.getAttribute('data-type') || 'all';
+          chips.querySelectorAll('.nok-chip').forEach((c) => c.classList.toggle('is-active', c === btn));
+          apply();
+        });
+      }
+    }
+  </script>
+</Base>

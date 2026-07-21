@@ -1,0 +1,142 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+import { spellcastingSections } from '../../data/spellcasting';
+
+const descFr: Record<string, string> = {
+  hoisthaven: "Déplace magiquement un bâtiment.",
+  refilliarmus: 'Remplit instantanément votre arrosoir.',
+  'tomorrows-tears': 'Fait pleuvoir la nuit suivante.',
+  'arborascend-i': 'Déplace magiquement 1 arbre.',
+  'arborascend-ii': 'Déplace magiquement 5 arbres.',
+  'arborascend-iii': 'Déplace magiquement 10 arbres.',
+  'aquaflux-i': "Invoque un arrosoir pouvant arroser jusqu'à 16 cases.",
+  'aquaflux-ii': "Invoque un arrosoir pouvant arroser jusqu'à - cases.",
+  'aquaflux-iii': "Invoque un arrosoir pouvant arroser jusqu'à 144 cases.",
+  'ethereal-hands-i': "Invoque des mains aidantes pouvant récolter ensemble jusqu'à 32 cultures.",
+  'ethereal-hands-ii': "Invoque des mains aidantes pouvant récolter ensemble jusqu'à 64 cultures.",
+  'ethereal-hands-iii': "Invoque des mains aidantes pouvant récolter ensemble jusqu'à 128 cultures.",
+  'metamorphosia-i': "Transforme 1 culture en une autre culture aléatoire.",
+  'metamorphosia-ii': 'Transforme une zone de cultures 2x2 en autres cultures aléatoires.',
+  'metamorphosia-iii': 'Transforme une zone de cultures 3x3 en autres cultures aléatoires.',
+  'maturio-i': 'Fait mûrir instantanément les cultures sur une zone 1x1.',
+  'maturio-ii': 'Fait mûrir instantanément les cultures sur une zone 2x2.',
+  'maturio-iii': 'Fait mûrir instantanément les cultures sur une zone 3x3.',
+  'ethereal-shovels-i': "Invoque une pelle pouvant creuser jusqu'à 32 emplacements.",
+  'ethereal-shovels-iii': "Invoque une pelle pouvant creuser jusqu'à 128 emplacements.",
+  'ethereal-axes-i': "Invoque une hache pouvant abattre jusqu'à 16 troncs ou arbres.",
+  'ethereal-axes-ii': "Invoque des haches pouvant abattre jusqu'à - troncs ou arbres.",
+  'ethereal-axes-iii': "Invoque une hache pouvant abattre jusqu'à 48 troncs ou arbres.",
+  'ethereal-pickaxes-i': "Invoque une pioche pouvant briser jusqu'à 16 rochers.",
+  'ethereal-pickaxes-ii': "Invoque une pioche pouvant briser jusqu'à - rochers.",
+  'ethereal-pickaxes-iii': "Invoque des pioches pouvant briser jusqu'à 48 rochers.",
+};
+const sectionTitleFr: Record<string, string> = { 'normal-spells': 'Sorts normaux', 'tiered-spells': 'Sorts à paliers' };
+
+const spellcastingSpells = spellcastingSections.flatMap((s) => s.spells);
+const iconCount = spellcastingSpells.filter((spell) => spell.icon).length;
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Accueil', item: `${SITE.url}/fr` },
+    { '@type': 'ListItem', position: 2, name: 'Monde', item: `${SITE.url}/fr/locations` },
+    { '@type': 'ListItem', position: 3, name: 'Sorts', item: `${SITE.url}/fr/spellcasting` },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks Sorts - Coûts en mana & prix d'achat"
+  description="Catalogue complet des sorts de Moonlight Peaks avec coûts en mana, descriptions et prix d'achat pour les 25 sorts confirmés."
+  path="/fr/spellcasting"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Monde', href: '/fr/locations' }, { label: 'Sorts' }]}
+  lang="fr"
+>
+  <article class="page spellcasting-page">
+    <div class="wrap">
+      <p class="eyebrow">Monde / Sorts</p>
+      <h1>Moonlight Peaks <em>sorts</em></h1>
+      <p class="intro">
+        Données de sorts confirmées pour {GAME.title}. Cette page liste {spellcastingSpells.length}
+        sorts avec {iconCount} icônes, coûts en mana et prix d'achat, quand connus.
+      </p>
+
+      <nav class="spell-jump" aria-label="Sections de sorts">
+        {spellcastingSections.map((section) => (
+          <a href={`#${section.slug}`}>{sectionTitleFr[section.slug] ?? section.title} <span>{section.spells.length}</span></a>
+        ))}
+      </nav>
+
+      {spellcastingSections.map((section) => (
+        <section class="spell-section" id={section.slug} aria-labelledby={`${section.slug}-title`}>
+          <h2 id={`${section.slug}-title`}>{sectionTitleFr[section.slug] ?? section.title}</h2>
+          <div class="spell-list">
+            {section.spells.map((spell) => (
+              <article class={`spell-card ${spell.icon ? '' : 'spell-card-no-icon'}`}>
+                <div class="spell-icon" aria-hidden={!spell.icon}>
+                  {spell.icon ? (
+                    <img src={spell.icon} alt={`Symbole du sort ${spell.name}`} width="144" height="144" loading="lazy" />
+                  ) : (
+                    <span>-</span>
+                  )}
+                </div>
+                <div class="spell-body">
+                  <h3>{spell.name}</h3>
+                  <p>{descFr[spell.slug] ?? spell.description}</p>
+                  <dl>
+                    <div>
+                      <dt>Mana</dt>
+                      <dd>{spell.manaCost}</dd>
+                    </div>
+                    <div>
+                      <dt>Prix d'achat</dt>
+                      <dd>{spell.buyPrice}</dd>
+                    </div>
+                  </dl>
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
+      ))}
+
+      <p class="spell-note">
+        Les valeurs manquantes restent marquées <code>-</code> quand la source montrait un espace réservé ou aucune valeur.
+      </p>
+
+      <div class="callout">
+        Lié : <a href="/fr/magic">guide de magie</a>, <a href="/fr/farming">agriculture</a>,
+        <a href="/fr/items/tools">outils</a>, <a href="/fr/items/cooking">cuisine</a>, <a href="/fr/quests">quêtes</a>.
+      </div>
+    </div>
+  </article>
+
+  <style>
+    .spell-jump { display: flex; flex-wrap: wrap; gap: 8px; margin: 18px 0 24px; }
+    .spell-jump a { border: 1px solid var(--line); border-radius: 999px; color: var(--mist); background: var(--surface); padding: 7px 12px; text-decoration: none; font-family: var(--mono); font-size: 0.76rem; }
+    .spell-jump a:hover { border-color: color-mix(in srgb, #5ecfff 54%, var(--line)); color: #84eaff; }
+    .spell-jump span { color: var(--faint); margin-left: 4px; }
+    .spell-section { margin-top: 24px; }
+    .spell-list { display: grid; grid-template-columns: 1fr; gap: 12px; }
+    @media (min-width: 760px) { .spell-list { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    .spell-card { display: grid; grid-template-columns: 104px minmax(0, 1fr); gap: 14px; align-items: center; min-height: 150px; padding: 14px; border: 1px solid var(--line); border-radius: 8px; background: rgba(32, 18, 58, 0.74); }
+    .spell-icon { width: 104px; height: 104px; display: grid; place-items: center; border-radius: 8px; border: 1px solid rgba(94, 207, 255, 0.16); background: rgba(15, 8, 36, 0.42); }
+    .spell-icon img { width: 96px; height: 96px; object-fit: contain; display: block; filter: drop-shadow(0 0 13px rgba(49, 209, 255, 0.46)); }
+    .spell-icon span { color: var(--faint); font-family: var(--mono); font-size: 1.1rem; }
+    .spell-body { min-width: 0; }
+    .spell-body h3 { margin: 0 0 8px; color: #c8a8ee; font-family: var(--sans); font-size: 1.12rem; font-weight: 800; line-height: 1.2; }
+    .spell-body p { margin: 0 0 10px; color: #eee7f3; font-size: 0.92rem; line-height: 1.45; }
+    .spell-body dl { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; }
+    .spell-body dl div { display: flex; align-items: center; gap: 6px; min-height: 28px; padding: 4px 8px; border: 1px solid var(--line); border-radius: 999px; background: rgba(20, 10, 44, 0.56); }
+    .spell-body dt { margin: 0; color: var(--faint); font-family: var(--mono); font-size: 0.66rem; text-transform: uppercase; }
+    .spell-body dd { margin: 0; color: var(--mist); font-weight: 700; font-size: 0.82rem; }
+    .spell-note { color: var(--faint); font-size: 0.78rem; margin: 16px 0 18px; }
+    .spell-note code { color: var(--mist); }
+    @media (max-width: 520px) {
+      .spell-card { grid-template-columns: 82px minmax(0, 1fr); gap: 10px; min-height: 126px; padding: 12px; }
+      .spell-icon { width: 82px; height: 82px; }
+      .spell-icon img { width: 76px; height: 76px; }
+      .spell-body h3 { font-size: 1rem; }
+    }
+  </style>
+</Base>

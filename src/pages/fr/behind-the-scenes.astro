@@ -1,0 +1,121 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+
+const faq = [
+  { q: 'Qui développe Moonlight Peaks ?', a: "Little Chicken Game Company, un studio néerlandais, développe le jeu. Il est publié par XSEED Games en Amérique et par Marvelous Europe en Europe." },
+  { q: 'Y a-t-il un blog de développement pour Moonlight Peaks ?', a: "Oui. Little Chicken publie des journaux de développement en coulisses sur la page news de la communauté Steam du jeu, où des membres de l'équipe décrivent leur travail sur le jeu." },
+  { q: 'Logan est-il un vrai personnage de Moonlight Peaks ?', a: "Très probablement oui. En plus d'apparaître dans des fichiers ayant fuité avant la sortie, le journal de développement d'une artiste 3D chez Little Chicken décrit la conception d'une pièce sur le thème du loup-garou pour la \"maison de Logan\" — ce qui confirme indépendamment le nom, même si ce n'est pas encore confirmé via une annonce officielle des développeurs." },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Accueil', item: `${SITE.url}/fr` },
+    { '@type': 'ListItem', position: 2, name: 'Dans les coulisses', item: new URL('/fr/behind-the-scenes', SITE.url).href },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks Dans les coulisses — L'équipe de développement"
+  description="Ce que les propres journaux de développement de Little Chicken Game Company révèlent sur la création de Moonlight Peaks — paraphrasé à partir de leurs publications sur la communauté Steam."
+  path="/fr/behind-the-scenes"
+  jsonLd={jsonLd}
+  ogImage="/hero-behind-the-scenes.webp"
+  crumbs={[{ label: 'Dans les coulisses' }]}
+  lang="fr"
+  showExport
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Entrée · Dans les coulisses</p>
+      <h1>Dans les coulisses de <em>{GAME.title}</em></h1>
+      <img class="bts-hero" src="/hero-behind-the-scenes.webp" alt="Dans les coulisses de Moonlight Peaks — art illustratif" width="1200" height="630" fetchpriority="high" />
+      <p class="intro">
+        La plupart des couvertures de Moonlight Peaks se concentrent sur le gameplay. Moins connu :
+        les développeurs eux-mêmes publient des journaux de développement en coulisses sur la
+        <a href="https://steamcommunity.com/app/2209900/allnews/" target="_blank" rel="noopener">page news de la communauté Steam</a>
+        du jeu. Voici ce qu'ils révèlent sur les personnes et le processus derrière le jeu —
+        paraphrasé à partir de leurs publications, pas cité longuement. Mis à jour {SITE.updated}.
+      </p>
+
+      <h2>Little Chicken Game Company</h2>
+      <p>
+        {GAME.title} est développé par Little Chicken Game Company, un studio établi avec un
+        catalogue allant de titres mobiles à des expériences VR, et publié par {GAME.publisher} en
+        Amérique ainsi que par Marvelous Europe en Europe.
+      </p>
+
+      <h2>Le développeur principal</h2>
+      <p>
+        Dans un journal de développement, le développeur principal du jeu — connu sous le nom de
+        "Jor," avec plus d'une décennie d'expérience en programmation dans le studio — décrit la
+        construction de la couche de programmation centrale et des outils internes que l'équipe de
+        conception de contenu utilise pour créer le jeu, passant l'essentiel de son rôle sur la
+        stratégie de développement, la revue de code et le codage pratique. Son parcours dans le
+        développement de jeux a commencé enfant, à esquisser des idées d'objets et de lieux dans
+        des tableurs, avant de chercher en ligne comment faire un jeu vidéo, et de commencer à
+        coder vers l'âge de 12 ans.
+      </p>
+
+      <h2>Une pièce prend vie : la maison de Logan</h2>
+      <p>
+        Dans un autre journal, une artiste 3D de l'équipe nommée Julia guide à travers son
+        processus de construction de l'un des intérieurs douillets du jeu, du concept à
+        l'ameublement final — spécifiquement une pièce sur le thème du loup-garou pour la maison
+        d'un habitant, attribuée à l'artiste concept Wietse Treurniet. Plutôt que de copier
+        exactement le concept original, elle le traite comme une directive, commençant par un
+        blocage 3D grossier axé sur l'échelle et la disposition avant d'affiner les matériaux.
+      </p>
+      <p>
+        Un détail à connaître si vous théorisez sur la ville : cette publication désigne la pièce
+        comme <strong>intérieur de la maison de Logan</strong>. Avec "Logan's House," qui apparaît
+        dans des fichiers de jeu ayant fuité avant la sortie, ce sont deux indices indépendants
+        d'un vrai habitant loup-garou nommé Logan — voir son <a href="/characters/logan">profil de personnage</a>
+        pour plus de rapports.
+      </p>
+
+      <h2>Un défi artistique nocturne</h2>
+      <p>
+        Le même journal note un vrai défi de production, spécifique à un jeu se déroulant la
+        nuit : puisque Moonlight Peaks utilise une lumière violette plus sombre tout du long, les
+        couleurs clairement lisibles dans les outils artistiques ne se traduisent pas toujours de
+        la même façon une fois éclairées dans le moteur — les teintes jaunes et vertes en
+        particulier ont été mentionnées comme difficiles à préserver depuis l'art conceptuel
+        original une fois la lumière nocturne appliquée. Un petit détail, mais qui explique
+        pourquoi la palette réelle du jeu peut sembler plus sombre et bleu-violet que ce que
+        suggère l'art conceptuel précoce.
+      </p>
+
+      <h2>Pourquoi c'est important pour les joueurs</h2>
+      <p>
+        Rien de tout cela ne change votre façon de jouer, mais c'est un rappel que {GAME.title}
+        est construit par une petite équipe visible qui partage publiquement son propre
+        processus — ce qui est d'ailleurs aussi une bonne source de confirmations discrètes
+        (comme Logan) bien avant qu'elles n'apparaissent dans une bande-annonce officielle ou un
+        communiqué de presse.
+      </p>
+
+      <h2>FAQ</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        Source : les propres journaux de développement de Little Chicken Game Company sur
+        <a href="https://steamcommunity.com/app/2209900/allnews/" target="_blank" rel="noopener">Steam Community</a>,
+        paraphrasés ici. Lié : <a href="/characters/logan">Logan</a>, <a href="/fr/characters">personnages</a>,
+        <a href="/fr/about">À propos de ce site</a>.
+      </div>
+    </div>
+  </article>
+
+  <style>
+    .bts-hero { display: block; width: 100%; height: auto; border-radius: var(--radius); border: 1px solid var(--line); margin: 0 0 18px; }
+  </style>
+</Base>

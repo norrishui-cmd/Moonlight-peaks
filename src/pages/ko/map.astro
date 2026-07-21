@@ -1,0 +1,221 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+import { markers, categories, markersConfirmed } from '../../data/map-locations';
+import GuideImage from '../../components/GuideImage.astro';
+
+const colorOf = Object.fromEntries(categories.map((c) => [c.id, c.color]));
+const labelOf = Object.fromEntries(categories.map((c) => [c.id, c.label]));
+
+const faq = [
+  { q: 'Moonlight Peaks에 인터랙티브 지도가 있나요?', a: '네 — 이 팬 제작 지도는 실제로 확인된 장소와 상점 이름(Silverveil Lake, Cave of Echoes, 시청, Webb of Wonders, Howling Hammer)을 보여줍니다. 위치는 공식 지도 이미지에서 측정한 것이 아니라 가이드의 설명적 단서를 바탕으로 한 도식적 근사치이므로, 배치는 정확하다기보다 방향을 안내하는 정도입니다.' },
+  { q: 'Moonlight Peaks에 미니맵이 있나요?', a: '아니요, 확인됨: 미니맵이나 퀘스트 마커 시스템이 없으며, 카메라는 자유롭게 따라오지 않고 고정되어 있습니다. 게임 내 지도가 주된 탐색 도구이며, 들어가면 컷신이 발동되는 건물은 느낌표나 반짝이는 오라로 표시됩니다.' },
+  { q: 'Moonlight Peaks에서 낚시는 어디서 하나요?', a: '확인됨: Silverveil Lake는 낚시를 지원하며 Hosu 인어 가족의 고향입니다. 정확한 물고기 종류와 호수 내 구체적인 낚시 지점은 아직 출처가 확인되지 않았습니다 — 지금까지 확인된 내용은 낚시 가이드를 참고하세요.' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '홈', item: `${SITE.url}/ko` },
+    { '@type': 'ListItem', position: 2, name: '지도', item: new URL('/ko/map', SITE.url).href },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks 지도 — 낚시, 채집 & 상점"
+  description="한국어로 보는 Moonlight Peaks 인터랙티브 마을 지도: 낚시 지점, 채집 구역, 상점, 주민의 집을 필터링하세요. 확인된 장소로 채워져 있습니다."
+  path="/ko/map"
+  jsonLd={jsonLd}
+  crumbs={[{ label: '지도' }]}
+  lang="ko"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">항목 · 지도</p>
+      <h1>Moonlight Peaks <em>인터랙티브 지도</em></h1>
+      <p class="intro">
+        찾고 있는 것에 따라 마을을 필터링한 다음, 마커를 눌러 세부 정보를 확인하세요.
+        업데이트: {SITE.updated}.
+      </p>
+
+      {!markersConfirmed && (
+        <div class="callout wip">
+          <strong>도식적 위치입니다.</strong> 아래 마커 이름(Silverveil Lake, Cave of Echoes,
+          시청 등)은 실제로 확인된 것이지만, 이 지도상의 배치는 공식 지도 이미지에서 측정한
+          것이 아니라 가이드의 설명적 단서를 바탕으로 한 근사치입니다. 실제 게임에서 정확한
+          좌표를 얻는 대로 픽셀 단위 좌표로 전환할 예정입니다.
+        </div>
+      )}
+
+      <GuideImage
+        imageId="world-map-screenshot"
+        contextAlt="Moonlit Pines, Moonlight Peaks 마을, Misty Shores, Silverveil Lake를 보여주는 게임 내 지도 스크린샷"
+        caption="아래 저희 도식 버전 옆에 참고용으로 배치한 실제 게임 내 지도 스크린샷입니다. 표시된 지역은 저희가 확인한 내용과 일치합니다: Moonlit Pines, Moonlight Peaks(마을), Misty Shores, Silverveil Lake."
+      />
+
+      <h2>확인된 지명 구역</h2>
+      <p>
+        아래 마커 위치는 아직 자리 표시자이지만, 다음 구역 이름은 출시 주간 보도로 확인되었습니다:
+        <strong>Misty Shores</strong>("A Bridge Too Far" 퀘스트로 접근 가능한 Ambrosia 가문의
+        영역으로, Death를 만나는 묘지가 있음), <strong>Moonlit Pines</strong>(마녀 서클의
+        본거지), <strong>Pink Grove</strong>(주로 축제 기간에 방문하는 사랑의 악마 Llemi의
+        집), 그리고 <strong>시청</strong>(시장에게 등록하는 곳). 정확한 좌표가 검증되는 대로
+        정밀하게 배치하겠습니다.
+      </p>
+
+      <div class="maplegend" id="maplegend">
+        {categories.map((c) => (
+          <button class="lg" data-cat={c.id} style={`--mk:${c.color}`} type="button" aria-pressed="true">
+            <span class="lg-dot"></span>{c.label}
+          </button>
+        ))}
+      </div>
+
+      <div class="mapwrap">
+        <svg viewBox="0 0 800 500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="양식화된 마을 지도">
+          <rect width="800" height="500" rx="16" fill="#1b1526"/>
+          <path d="M0 170 Q220 120 380 210 T800 240 L800 130 Q500 70 250 110 T0 90 Z" fill="#20283f" opacity="0.5"/>
+          <path d="M120 470 Q260 360 480 380 T760 300" stroke="#3a567a" stroke-width="20" fill="none" opacity="0.7" stroke-linecap="round"/>
+          <ellipse cx="190" cy="330" rx="70" ry="42" fill="#2c4666" opacity="0.85"/>
+          <g fill="#33503e" opacity="0.9">
+            <polygon points="600,360 628,310 656,360"/><polygon points="636,372 664,322 692,372"/>
+            <polygon points="672,360 700,310 728,360"/><polygon points="300,410 324,368 348,410"/>
+            <polygon points="336,420 360,378 384,420"/>
+          </g>
+          <g fill="#3a2f50" opacity="0.9">
+            <rect x="150" y="120" width="60" height="44" rx="3"/><rect x="220" y="130" width="44" height="34" rx="3"/>
+          </g>
+          <g fill="#2f2440" stroke="#4a3a63" stroke-width="2">
+            <rect x="372" y="232" width="40" height="34" rx="3"/><rect x="420" y="240" width="34" height="30" rx="3"/>
+            <rect x="492" y="248" width="40" height="30" rx="3"/>
+          </g>
+          <text x="150" y="108" fill="#7c6e90" font-family="monospace" font-size="15">나의 농장</text>
+          <text x="150" y="392" fill="#7c6e90" font-family="monospace" font-size="15">연못</text>
+          <text x="600" y="300" fill="#7c6e90" font-family="monospace" font-size="15">숲</text>
+          <text x="430" y="226" fill="#7c6e90" font-family="monospace" font-size="15">마을 광장</text>
+        </svg>
+        {markers.map((m) => (
+          <button
+            class={`mk mk-${m.category}`}
+            data-cat={m.category}
+            data-name={m.name}
+            data-note={m.note || ''}
+            data-label={labelOf[m.category]}
+            style={`left:${m.x}%;top:${m.y}%;--mk:${colorOf[m.category]}`}
+            aria-label={m.name}
+            type="button"
+          ></button>
+        ))}
+      </div>
+
+      <div class="mapinfo" id="mapinfo">
+        <p class="mapinfo-empty">마커를 눌러 그곳에 무엇이 있는지 확인하세요.</p>
+      </div>
+
+      <h2>미니맵 없이 탐색하기</h2>
+      <p>
+        여러 자료로 확인됨: Moonlight Peaks에는 <strong>미니맵이나 퀘스트 마커가 없으며</strong>,
+        자유롭게 따라오는 카메라 대신 고정 카메라를 사용합니다 — 일시정지 메뉴를 통해 여는
+        게임 내 지도가 주된 탐색 도구입니다. 이 지도에서 <strong>느낌표 기호</strong>는 들어가면
+        컷신이 발동되는 건물을 표시하고, 건물 주변의 <strong>반짝이는 오라</strong>는 들어가면
+        컷신이 발동될 것임을 의미합니다 — 아직 발동되지 않은 하트 이벤트를 찾고 있다면 둘 다
+        확인해 볼 가치가 있습니다.
+      </p>
+      <p>
+        빠르게 이동하려면: <strong>마녀 서클</strong>은 해금되면 빠른 이동 옵션을 제공하며,
+        <a href="/shapeshifting">박쥐 형태</a>도 빠르게 거리를 이동할 수 있게 해줍니다. 두
+        가지 수집품은 특정 지하 구역과도 연결되어 있습니다 — 뱀스터는 <a href="/locations/crystal-cave">카타콤</a>의
+        구멍으로 옮겨지고, 소울 블롭은 이 기능이 해금되면 마을에서 그물로 잡습니다.
+      </p>
+
+      <GuideImage
+        imageId="moonlit-pines-vampster-map"
+        contextAlt="Moonlit Pines의 번호가 매겨진 14개 뱀스터 위치를 보여주는 커뮤니티 제작 지도"
+        caption="Moonlit Pines 구역을 위한 커뮤니티 제작 뱀스터 위치 지도로, 14개 지점이 기록되어 있습니다. 정확한 번호 매김은 개발자가 확인한 것이 아니라 커뮤니티 제보로 취급하되, 이 지역에서 특별히 뱀스터를 찾고 있다면 유용한 출발점입니다."
+      />
+
+      <h2>아직 확인 중</h2>
+      <ul>
+        <li>물고기, 계절, 시간이 표시된 각 <strong>낚시 지점</strong>.</li>
+        <li><strong>채집 구역</strong>과 그곳에 등장하는 것.</li>
+        <li><strong>상점</strong>과 각각 파는 것.</li>
+        <li>로맨스 및 선물 페이지와 연결된 <strong>주민의 집</strong>.</li>
+      </ul>
+
+      <h2>자주 묻는 질문</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout">
+        관련 페이지: <a href="/nokturna">Nokturna 카드 게임</a>, <a href="/ko/romance">로맨스 & 가문</a>,
+        <a href="/ko/beginner-guide">초보자 가이드</a>.
+      </div>
+    </div>
+  </article>
+
+  <style>
+    .maplegend { display: flex; gap: 8px; flex-wrap: wrap; margin: 6px 0 14px; }
+    .lg { display: inline-flex; align-items: center; gap: 7px; font-size: 0.84rem; color: var(--mist); background: var(--surface); border: 1px solid var(--line); border-radius: 999px; padding: 6px 13px; cursor: pointer; }
+    .lg-dot { width: 11px; height: 11px; border-radius: 50%; background: var(--mk); }
+    .lg[aria-pressed="false"] { opacity: 0.4; text-decoration: line-through; }
+    .mapwrap { position: relative; width: 100%; border: 1px solid var(--line); border-radius: 14px; overflow: hidden; background: #15101d; }
+    .mapwrap svg { display: block; width: 100%; height: auto; }
+    .mk { position: absolute; transform: translate(-50%, -50%); width: 22px; height: 22px; border-radius: 50%; background: var(--mk); border: 2px solid #15101d; box-shadow: 0 0 0 2px var(--mk), 0 2px 6px rgba(0,0,0,0.4); cursor: pointer; padding: 0; transition: transform .12s ease; }
+    .mk:hover, .mk.is-sel { transform: translate(-50%, -50%) scale(1.35); z-index: 3; }
+    .mk.is-sel { box-shadow: 0 0 0 3px #fff, 0 2px 8px rgba(0,0,0,0.5); }
+    .mk.hide { display: none; }
+    @media (max-width: 520px) { .mk { width: 26px; height: 26px; } }
+    .mapinfo { margin-top: 14px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); padding: 14px 16px; min-height: 64px; }
+    .mapinfo-empty { color: var(--faint); margin: 0; }
+    .mapinfo h3 { font-family: var(--display); font-weight: 600; font-size: 1.1rem; margin: 0 0 4px; }
+    .mapinfo .cat { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--candle); }
+    .mapinfo p.note { color: #ded3e6; margin: 6px 0 0; font-size: 0.92rem; }
+  </style>
+
+  <script>
+    const legend = document.getElementById('maplegend');
+    const info = document.getElementById('mapinfo');
+    const off = new Set();
+    const markerEls = Array.from(document.querySelectorAll('.mk'));
+
+    const refresh = () => {
+      markerEls.forEach((m) => {
+        const cat = m.getAttribute('data-cat') || '';
+        m.classList.toggle('hide', off.has(cat));
+      });
+    };
+
+    if (legend) {
+      legend.addEventListener('click', (e) => {
+        const btn = e.target.closest('.lg');
+        if (!btn) return;
+        const cat = btn.getAttribute('data-cat') || '';
+        if (off.has(cat)) { off.delete(cat); btn.setAttribute('aria-pressed', 'true'); }
+        else { off.add(cat); btn.setAttribute('aria-pressed', 'false'); }
+        refresh();
+      });
+    }
+
+    markerEls.forEach((m) => {
+      m.addEventListener('click', () => {
+        markerEls.forEach((x) => x.classList.remove('is-sel'));
+        m.classList.add('is-sel');
+        if (info) {
+          const name = m.getAttribute('data-name') || '';
+          const label = m.getAttribute('data-label') || '';
+          const note = m.getAttribute('data-note') || '';
+          info.innerHTML = '<span class="cat"></span><h3></h3>' + (note ? '<p class="note"></p>' : '');
+          info.querySelector('.cat').textContent = label;
+          info.querySelector('h3').textContent = name;
+          if (note) info.querySelector('p.note').textContent = note;
+        }
+      });
+    });
+  </script>
+</Base>

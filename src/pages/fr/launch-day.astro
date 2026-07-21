@@ -1,0 +1,107 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+
+const rows = [
+  ['Commencez ici', "Vérifiez le calendrier de sortie, l'accès à la démo, le choix de plateforme, la configuration requise et les langues supportées avant l'installation."],
+  ['Première session', "Créez votre vampire, testez les contrôles, vérifiez la lisibilité, apprenez le cycle nocturne, et évitez de vous précipiter sur des routes d'argent ou de cadeaux non confirmées."],
+  ['Données à vérifier', "Cultures, poissons, cadeaux, horaires, prix en boutique, quêtes, sauvegardes, performances, et tout bug de lancement."],
+  ['Politique de mise à jour sûre', "Les valeurs ne sont ajoutées qu'une fois visibles dans le jeu en cours, les notes officielles, les pages boutique ou une couverture neutre fiable."],
+];
+
+const checklist = [
+  { label: 'Date de sortie', href: '/fr/release-date', note: 'Calendrier de sortie, prix, plateformes et statut de la démo.' },
+  { label: 'Guide de la démo', href: '/fr/demo', note: "Ce qu'il faut tester avant l'achat ou le redémarrage." },
+  { label: 'Configuration requise', href: '/fr/system-requirements', note: 'Vérifications PC, Mac et Steam Deck.' },
+  { label: 'Langues', href: '/fr/languages', note: 'Support pour le japonais, le chinois, le coréen, l\'allemand et l\'anglais.' },
+  { label: 'Problèmes connus', href: '/known-issues', note: 'Suivi des bugs de lancement et notes de vérification.' },
+  { label: 'Meilleurs réglages', href: '/fr/best-settings', note: 'Liste de vérification des réglages PC, Steam Deck, Switch et Mac.' },
+  { label: 'Guide du débutant', href: '/fr/beginner-guide', note: 'Priorités pour la première nuit et objectifs précoces sûrs.' },
+  { label: 'Personnages', href: '/fr/characters', note: 'Habitants, statut de romance et vérification au lancement.' },
+];
+
+const faq = [
+  { q: 'Que devrais-je vérifier en premier le jour du lancement de Moonlight Peaks ?', a: "Commencez par le calendrier de sortie, la plateforme, la configuration requise, le support linguistique, les problèmes connus et le guide du débutant, avant de chasser des tableaux détaillés d'objets ou de cadeaux." },
+  { q: 'Les données du jour de lancement seront-elles immédiatement complètes ?', a: "Non. Des valeurs exactes comme les cultures, cadeaux, horaires, prix en boutique, quêtes et notes de performance ne sont ajoutées qu'une fois confirmées par le jeu en cours." },
+  { q: 'Devrais-je encore jouer à la démo après la sortie ?', a: "Oui, si vous n'êtes pas sûr des contrôles, du ton, de la lisibilité ou des performances sur votre appareil. La démo reste utile comme vérification rapide de confort." },
+  { q: 'Où atterriront les bugs et notes de performance ?', a: "Utilisez la page Problèmes connus pour les crashs, problèmes de sauvegarde, problèmes de manette, notes Steam Deck, performances Switch et autres problèmes de la semaine de lancement." },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Accueil', item: `${SITE.url}/fr` },
+    { '@type': 'ListItem', position: 2, name: 'Jour de sortie', item: new URL('/fr/launch-day', SITE.url).href },
+  ] },
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({
+    '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })) },
+];
+---
+<Base
+  title="Moonlight Peaks Guide du jour de sortie - Quoi vérifier en premier"
+  description="Hub jour de sortie de Moonlight Peaks pour le calendrier de sortie, la démo, la configuration requise, les langues, les problèmes connus, les meilleurs réglages, les conseils débutant et des mises à jour de données sûres."
+  path="/fr/launch-day"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Jour de sortie' }]}
+  lang="fr"
+  showExport
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Sortie / Premier jour</p>
+      <h1>Moonlight Peaks Guide du <em>jour de sortie</em></h1>
+      <p class="intro">
+        Le hub du premier jour pour {GAME.title} : quoi vérifier avant l'installation, où
+        atterriront les données vérifiées, et comment éviter les informations de lancement
+        minces ou devinées.
+      </p>
+
+      <div class="callout">
+        <strong>Calendrier de sortie :</strong> {GAME.releaseNote}
+      </div>
+
+      <h2>Aperçu du jour de sortie</h2>
+      <table class="facts">
+        {rows.map((row) => (<tr><th>{row[0]}</th><td>{row[1]}</td></tr>))}
+      </table>
+
+      <h2>Vérifiez ceci en premier</h2>
+      <div class="link-grid">
+        {checklist.map((item) => (
+          <a href={item.href}>
+            <strong>{item.label}</strong>
+            <span>{item.note}</span>
+          </a>
+        ))}
+      </div>
+
+      <h2>Ce qu'il ne faut pas deviner</h2>
+      <p>
+        Évitez de publier des cadeaux adorés exacts, prix d'objets, résultats de quêtes, gains de
+        cultures, lieux de pêche, notes Steam Deck ou chemins de sauvegarde précis, tant qu'ils ne
+        sont pas visibles dans le jeu en cours ou des sources officielles. Le trafic de recherche
+        de lancement est précieux, mais les tableaux devinés sont mauvais pour les joueurs et
+        risqués pour le SEO.
+      </p>
+
+      <h2>FAQ</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </article>
+
+  <style>
+    .link-grid { display: grid; grid-template-columns: 1fr; gap: 10px; margin-top: 10px; }
+    @media (min-width: 680px) { .link-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    .link-grid a { display: flex; flex-direction: column; gap: 3px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); padding: 12px 14px; text-decoration: none; }
+    .link-grid strong { color: var(--mist); font-family: var(--display); }
+    .link-grid span { color: var(--muted); font-size: 0.84rem; }
+    .link-grid a:hover { border-color: color-mix(in srgb, var(--candle) 55%, var(--line)); }
+  </style>
+</Base>

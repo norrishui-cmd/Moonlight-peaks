@@ -1,0 +1,118 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+
+const systems: { name: string; note: string; status: string }[] = [
+  { name: '계절', note: '공식 위키 구조 자체로 확인되고 출시 주간 가이드와 교차 확인됨: 1년은 봄, 여름, 가을, 겨울로 나뉘며 각각 한 달씩 지속됩니다 — 총 4개월 달력입니다. 게임은 봄에 시작합니다. 축제 날짜는 예를 들어 "봄 20일"처럼 표기됩니다.', status: '확인됨' },
+  { name: '날씨', note: '출시 전 유출된 파일에 따르면 날씨 시스템이 존재합니다. 정확히 농사나 활동에 어떻게 영향을 미치는지는 아직 여기서 독립적으로 확인되지 않았습니다.', status: '데이터마이닝' },
+  { name: '축제', note: '확인됨: Loveage 축제와 Moonlight Ball을 포함한 마을 전체의 계절 축하 행사이며, 연중 더 많은 축제가 있을 가능성이 높습니다.', status: '확인됨' },
+];
+
+const festivals: { name: string; when: string; note: string; status: string }[] = [
+  { name: 'Loveage 축제', when: '봄 20-21일 (2일간)', note: '공식 위키로 확인됨: "사랑의 악마" Llemi가 주최합니다. Elvira와 Mina가 가판대를 운영하고(Mina는 여러분이 요리를 기여할 수 있는 공동체 뷔페를 마련함), Luna는 계절 꽃(좋은 선물이기도 함)을 파는 기간 한정 꽃꽂이 가판대를 운영합니다. 동시에 비밀 숭배자 선물 교환이 진행됩니다 — 토요일에 최대 3명의 NPC를 선택하면 다음 일요일에 교환이 이루어집니다.', status: '확인됨' },
+  { name: 'Moonlight Ball', when: '여름 20일', note: '공식 위키의 축제 목록을 통해 존재가 확인되었습니다. 구체적인 활동은 아직 여기서 독립적으로 세부 확인되지 않았습니다.', status: '확인됨 (이름 & 날짜만)' },
+  { name: 'Master Soup (요리 대회)', when: '계절 아직 미확인', note: '여러 출시 주간 프리뷰에서 요리 대회로 제보되었습니다. 아직 공식 위키와 교차 확인되지 않았습니다.', status: '커뮤니티 제보' },
+  { name: '패션쇼', when: '계절 아직 미확인', note: '커뮤니티 제보. 세부 사항은 아직 문서화되지 않았습니다.', status: '커뮤니티 제보' },
+  { name: 'Evernight 축제', when: '가을(정확한 날짜 아직 미확인)', note: '미니게임이 있는 가을 축제로 커뮤니티에서 제보되었습니다.', status: '커뮤니티 제보' },
+  { name: 'Pumpkin Head 할로윈 시즌', when: '계절 아직 미확인', note: '커뮤니티에서 제보되었으며, 마을 모임을 활기차게 만드는 "연극적인 이벤트 진행자"인 확인된 NPC Pumpkin Head와 일치합니다.', status: '커뮤니티 제보' },
+];
+
+const faq = [
+  { q: 'Moonlight Peaks에 계절이 있나요?', a: '네, 확인됨: 1년은 봄, 여름, 가을, 겨울로 나뉘며 각각 한 달씩 지속되고, 축제 및 기타 이벤트 일정에 사용됩니다.' },
+  { q: 'Moonlight Peaks에서 1년은 얼마나 되나요?', a: '확인됨: 4개월 달력 — 계절(봄, 여름, 가을, 겨울)마다 한 달. 게임은 봄에 시작합니다.' },
+  { q: 'Moonlight Peaks에 날씨가 있나요?', a: '출시 전 유출된 파일에 날씨 시스템이 언급되어 있습니다. 정확히 농사나 활동에 어떻게 영향을 미치는지는 아직 여기서 독립적으로 확인되지 않았습니다.' },
+  { q: 'Moonlight Peaks의 Loveage 축제는 무엇인가요?', a: '확인됨: 사랑의 악마 Llemi가 주최하는 이틀간의 봄 축제(봄 20-21일). Elvira와 Mina가 가판대를 운영하고, Luna는 꽃꽂이 가판대를 운영하며, 토요일에 최대 3명의 NPC를 선택하고 다음 일요일에 교환이 이루어지는 비밀 숭배자 선물 교환이 있습니다.' },
+  { q: 'Loveage 외에 다른 축제도 있나요?', a: '네 — Moonlight Ball(여름 20일)은 공식 위키를 통해 이름과 날짜가 확인되었습니다. 여러 출시 주간 프리뷰는 Master Soup 요리 대회, 패션쇼, 가을 Evernight 축제, Pumpkin Head가 주최하는 할로윈 시즌도 언급하지만, 독립적으로 확인될 때까지 커뮤니티 제보로 취급합니다.' },
+  { q: 'Moonlight Peaks의 축제는 좋은가요?', a: '지금까지는 엇갈립니다: 일부 출시 주간 리뷰어는 Loveage의 가판대와 선물 교환을 즐겼지만, 적어도 한 명은 Stardew Valley의 계절 이벤트 같은 장르 비교 대상에 비해 축제의 빈도와 다양성이 부족하다고 느꼈습니다 — 저희는 긍정적인 면만 보여주기보다 이를 솔직하게 전달합니다.' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '홈', item: `${SITE.url}/ko` },
+    { '@type': 'ListItem', position: 2, name: '환경', item: `${SITE.url}/ko/environment` },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks 환경 & 축제 — Loveage, Moonlight Ball & 더 보기"
+  description="Moonlight Peaks 계절과 축제: 확인된 Loveage 축제와 Moonlight Ball, 그리고 Master Soup와 Evernight 같은 커뮤니티 제보 이벤트 — 아직 확인되지 않은 내용과 구분."
+  path="/ko/environment"
+  jsonLd={jsonLd}
+  crumbs={[{ label: '환경' }]}
+  lang="ko"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">허브 · 환경</p>
+      <h1>Moonlight Peaks <em>환경</em> & 축제</h1>
+      <p class="intro">
+        {GAME.title}의 세계가 시간에 따라 어떻게 변하는지 — 계절, 날씨, 마을 축제. 확인된
+        세부 사항은 아직 커뮤니티에서 제보되었거나 확인되지 않은 내용과 명확히 구분됩니다.
+      </p>
+
+      <h2>계절 & 날씨</h2>
+      <div class="envg">
+        {systems.map((s) => (
+          <div class="envcard">
+            <h3>{s.name}</h3>
+            <p>{s.note}</p>
+            <span class="envbadge">{s.status}</span>
+          </div>
+        ))}
+      </div>
+
+      <h2>축제</h2>
+      <table class="facts">
+        <tr><th>축제</th><th>시기</th><th>세부 사항</th></tr>
+        {festivals.map((f) => (
+          <tr>
+            <td>{f.name} <span class="envbadge envbadge-inline">{f.status}</span></td>
+            <td>{f.when}</td>
+            <td>{f.note}</td>
+          </tr>
+        ))}
+      </table>
+
+      <h2>밤이 우선인 반전</h2>
+      <p>
+        어떤 계절이나 날씨든 — 한 가지 규칙은 변하지 않습니다: 여러분은 밤에 생활하고 농사를
+        지으며, 해가 뜨기 전에 관으로 돌아갑니다. 밤낮 주기가 핵심 게임플레이 루프를 어떻게
+        형성하는지는 <a href="/ko/farming">농사</a>를 참고하세요.
+      </p>
+
+      <h2>아직 확인 중</h2>
+      <ul>
+        <li>이름과 날짜를 넘어선 <strong>Moonlight Ball</strong>의 정확한 활동.</li>
+        <li><strong>Master Soup, 패션쇼, Evernight, Pumpkin Head 할로윈 시즌</strong>이 공식적으로 이 이름으로 확인되는지 여부.</li>
+        <li><strong>날씨</strong>가 정확히 농사나 활동에 어떻게 영향을 미치는지.</li>
+      </ul>
+
+      <h2>자주 묻는 질문</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        출시 후 항목이며, 축제와 날씨 세부 정보가 더 확인되는 대로 업데이트됩니다. 관련:
+        <a href="/ko/farming">농사</a>, <a href="/ko/items">아이템</a>,
+        <a href="/ko/locations">장소</a>, <a href="/characters/llemi">Llemi</a>, <a href="/ko/romance">로맨스</a>.
+      </div>
+    </div>
+  </article>
+
+  <style>
+    .envg { display: grid; grid-template-columns: 1fr; gap: 12px; margin: 6px 0 18px; }
+    @media (min-width: 640px) { .envg { grid-template-columns: 1fr 1fr 1fr; } }
+    .envcard { border: 1px solid var(--line); border-radius: 14px; background: var(--surface); padding: 14px; }
+    .envcard h3 { font-family: var(--display); font-weight: 600; font-size: 1rem; margin: 0 0 6px; }
+    .envcard p { color: #ded3e6; font-size: 0.84rem; margin: 0 0 8px; }
+    .envbadge { font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.04em; text-transform: uppercase; color: #9ac6e0; border: 1px solid #2f5a70; border-radius: 5px; padding: 2px 6px; }
+    .envbadge-inline { margin-left: 6px; vertical-align: middle; }
+  </style>
+</Base>

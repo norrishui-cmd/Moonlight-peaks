@@ -1,0 +1,100 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+
+const faq = [
+  { q: 'Combien de Vampsters y a-t-il dans Moonlight Peaks ?', a: "Rapporté par la communauté : 100 Vampsters au total, répartis dans les zones extérieures du jeu, des forêts aux plages." },
+  { q: 'Où ramène-t-on les Vampsters dans Moonlight Peaks ?', a: "Rapporté par la communauté : chez eux, dans une grotte de la Cave of Echoes. Alina, que vous rencontrez là-bas en minant du cuivre, vous demande de l'aide pour tous les rassembler." },
+  { q: 'Peut-on porter plusieurs Vampsters à la fois ?', a: "Non — rapporté par la communauté : vous ne pouvez porter qu'un seul Vampster à la fois. Interagir avec quelqu'un ou déclencher une cinématique vous fait lâcher celui que vous portez." },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Accueil', item: `${SITE.url}/fr` },
+    { '@type': 'ListItem', position: 2, name: 'Vampsters', item: new URL('/fr/vampsters', SITE.url).href },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks Vampsters : tous les emplacements & comment les collecter"
+  description="Guide Vampsters de Moonlight Peaks : ce qu'ils sont, où trouver les 100, comment les porter, et où se trouve leur grotte — faits confirmés séparés des rapports communautaires."
+  path="/fr/vampsters"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Vampsters' }]}
+  lang="fr"
+  showExport
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Entrée · Objets à collectionner</p>
+      <h1>Moonlight Peaks <em>Vampsters</em></h1>
+      <p class="intro">
+        Les Vampsters sont de petites créatures de grotte, éparpillées dans le monde de
+        {GAME.title}, que vous collectez et ramenez à leur grotte. Voici ce qui est confirmé et
+        rapporté par la communauté pour tous les trouver et les collecter.
+      </p>
+
+      <div class="callout">
+        <strong>Réponse rapide :</strong> les Vampsters sont des créatures perdues que vous
+        trouvez à l'extérieur et portez — un par un — jusqu'à leur grotte dans la Cave of Echoes.
+        Total rapporté par la communauté : 100.
+      </div>
+
+      <h2>Comment démarre la quête des Vampsters</h2>
+      <p>
+        Rapporté par la communauté : durant votre première semaine environ, une excursion à la
+        Cave of Echoes pour miner du cuivre fait fuir un Vampster près de l'entrée. À l'intérieur,
+        vous rencontrez <a href="/characters/alina">Alina</a>, qui explique que les Vampsters sont
+        perdus et demande de l'aide pour les ramener tous chez eux.
+      </p>
+
+      <h2>Où les trouver</h2>
+      <p>
+        Rapporté par la communauté : les Vampsters sont largement répartis dans les zones
+        extérieures du jeu, des forêts aux plages. Beaucoup sont plus faciles à repérer une fois
+        que vous avez dégagé arbres et buissons avec votre faux, car certains se cachent dans
+        l'herbe envahie.
+      </p>
+
+      <h2>Comment les porter et les ramener</h2>
+      <ul>
+        <li><strong>Un seul à la fois :</strong> rapporté par la communauté — vous ne pouvez pas empiler plusieurs Vampsters ; vous en portez toujours un seul jusqu'à ce que vous le déposiez.</li>
+        <li><strong>Leur grotte :</strong> rapporté par la communauté — dans la Cave of Echoes, à Misty Shores (débloquée via <a href="/quests/a-bridge-too-far">A Bridge Too Far</a>).</li>
+        <li><strong>Attention aux interruptions :</strong> rapporté par la communauté — parler à un habitant ou déclencher une cinématique vous fait lâcher le Vampster porté, alors dégagez les zones riches en dialogues au préalable.</li>
+      </ul>
+
+      <h2>Faut-il une forme spéciale pour les collecter ?</h2>
+      <p>
+        Les sources divergent légèrement ici, donc nous ne présentons pas cela comme un mécanisme
+        fixe : une source communautaire décrit un accès plus facile à la grotte des Vampsters une
+        fois que vous pouvez vous <a href="/shapeshifting">transformer en Hellkitten</a>, tandis
+        que nos propres notes de quête mentionnaient spécifiquement la forme chauve-souris pour le
+        transport. Les deux pourraient s'appliquer à différents moments de la chaîne de quêtes
+        (par ex. une forme pour porter en extérieur, une autre pour accéder à la grotte) — nous
+        mettrons à jour dès que le mécanisme exact sera vérifié contre le jeu en cours.
+      </p>
+
+      <h2>Problèmes fréquents</h2>
+      <ul>
+        <li><strong>Vampster perdu de vue après une cinématique :</strong> attendu — les cinématiques vous font lâcher le Vampster porté ; il reste là où vous l'avez déposé.</li>
+        <li><strong>Impossible de trouver d'autres Vampsters :</strong> essayez de dégager l'herbe et les buissons envahis avec votre faux dans les zones pas encore entièrement nettoyées.</li>
+      </ul>
+
+      <h2>Questions fréquentes</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        Lié : <a href="/locations/mines">Cave of Echoes</a>, <a href="/fr/achievements">achievements</a>
+        (dont "Back to the Den"), <a href="/characters/alina">Alina</a>, <a href="/fr/shapeshifting">métamorphose</a>.
+      </div>
+    </div>
+  </article>
+</Base>
