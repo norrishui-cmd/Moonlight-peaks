@@ -58,6 +58,8 @@ export const platformPriorityLinks: PriorityLink[] = [
 export const characterPriorityLinks: PriorityLink[] = [
   { label: 'All characters', href: '/characters', note: '35 residents, confirmed vs. reported status.' },
   { label: 'Saga', href: '/characters/saga', note: 'Confirmed werewolf romance, with real gift data.' },
+  { label: 'Elvira', href: '/characters/elvira', note: 'Her treasure hunt quest and confirmed heart-event schedule.' },
+  { label: 'Persephone', href: '/characters/persephone', note: 'Henderson family, tied to the Museum unlock storyline.' },
   { label: 'Orlock', href: '/characters/orlock', note: 'The first resident you meet, Ambrosia family head.' },
   { label: 'Fiona', href: '/characters/fiona', note: 'Webb family coven leader and town florist.' },
   { label: 'Dragan', href: '/characters/dragan', note: 'Khazan family seer and Nokturna\u2019s inventor.' },
@@ -69,14 +71,19 @@ export const characterPriorityLinks: PriorityLink[] = [
 
 export const farmMagicPriorityLinks: PriorityLink[] = [
   { label: 'Farming guide', href: '/farming', note: 'Crops, livestock, and the confirmed buying flow.' },
+  { label: 'Farm helpers (Firefly Sanctuary & Pollinator)', href: '/farm/farm-helpers', note: 'All 16 processing machines, including the Firefly Sanctuary and Pollinator.' },
+  { label: 'Farm animals', href: '/farm/animals', note: 'How to get animals, feeding, and what each one produces.' },
   { label: 'Magic guide', href: '/magic', note: 'Aquaflux, spell list, mana, and the wand-fix quest.' },
-  { label: 'Shapeshifting', href: '/shapeshifting', note: 'Bat and Hellkitten forms, plus the unlock chain.' },
+  { label: 'Spellcasting list', href: '/spellcasting', note: 'Every confirmed spell with mana cost and buy price.' },
+  { label: 'Shapeshifting', href: '/shapeshifting', note: 'Bat and Mermaid/Aqua forms, plus the unlock chain.' },
   { label: 'Fishing guide', href: '/fishing', note: 'The rod-unlock bet with Noel and the bug net.' },
   { label: 'Farming Profit Planner', href: '/tools/farming-profit-planner', note: 'Compare crop profits as prices are verified.' },
 ];
 
 export const databasePriorityLinks: PriorityLink[] = [
   { label: 'Item categories', href: '/items', note: 'Tools, livestock, potions, Soul Blobs, and more.' },
+  { label: 'The Museum', href: '/locations/silverveil-museum', note: 'Donation rooms, the Persephone/Jada/Winston unlock, and how to donate.' },
+  { label: 'Mineables (Gold Ore, Quartz Dust)', href: '/items/mineables', note: 'Where mining materials come from and what they craft into.' },
   { label: 'Locations', href: '/locations', note: 'Town Hall, Misty Shores, the Cave of Echoes, and more.' },
   { label: 'Interactive map', href: '/map', note: 'Confirmed named areas around town.' },
   { label: 'Inventory', href: '/inventory', note: 'The universal house storage system.' },
