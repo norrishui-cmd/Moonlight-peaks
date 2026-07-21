@@ -1,0 +1,110 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+
+const tiers = [
+  { label: 'Bestätigt', desc: 'Direkt gegen das laufende Spiel, offizielle Patch-Notes oder eine direkte Entwickleraussage verifiziert (Steam-Community-Beiträge, offizielles Wiki, Presseset). Dies ist die einzige Stufe, die wir als gesicherte Tatsache behandeln.' },
+  { label: 'Gemeldet', desc: 'In Presse-Vorschauen, Reviewer-Berichten oder Community-Tests (Reddit, Steam-Community-Diskussionen, YouTube-Playthroughs) gesehen, die wir als glaubwürdig einschätzen, aber noch nicht selbst unabhängig gegen das laufende Build reproduziert haben.' },
+  { label: 'Datamining', desc: 'In Spieldateien vor dem Launch gefunden, wo möglich gegen andere Vorab-Quellen abgeglichen. Datamining-Inhalte sind echte Daten, können sich aber vor oder nach dem Launch ändern, daher präsentieren wir sie nicht als bestätigt.' },
+  { label: 'Erwartet / Unbestätigt', desc: 'Eine vernünftige Schlussfolgerung basierend auf den bestehenden Mustern des Spiels (z.B. impliziert ein existierender Ladenname Öffnungszeiten), ausdrücklich als unsere eigene Vermutung statt als belegte Tatsache gekennzeichnet.' },
+];
+
+const stats = [
+  { n: '52+', label: 'FAQ-Antworten mit benannter, verlinkter Quelle' },
+  { n: '70+', label: 'News-Einträge mit benannter, verlinkter Quelle' },
+  { n: '49', label: 'einzeln mit Status gekennzeichnete Charakterprofile' },
+  { n: '4', label: 'Bestätigungsstufen, auf jeder Seite angezeigt, die sie verwendet' },
+];
+
+const faq = [
+  { q: 'Wie verifiziert Moonlight Peaks Wiki & Guide Informationen?', a: `Jede Tatsache auf dieser Seite wird mit einer von vier Bestätigungsstufen gekennzeichnet \u2014 bestätigt, gemeldet, Datamining oder erwartet \u2014 damit Leser auf einen Blick sehen können, wie belastbar eine Aussage ist, statt jedes Detail mit derselben falschen Sicherheit zu präsentieren.` },
+  { q: 'Erfindet diese Seite Geschenktabellen, Statistiken oder Rezepte, die nicht bestätigt sind?', a: 'Nein. Wo Daten noch nicht verfügbar sind, sagen die Seiten das ausdrücklich, statt eine plausibel aussehende Lücke zu füllen. Wir zeigen lieber eine Lücke als eine Vermutung.' },
+  { q: 'Können Journalisten oder andere Seiten die Daten dieser Seite zitieren?', a: `Ja \u2014 dafür ist diese Seite da. Bitte nennt ${SITE.brand} und verlinkt zurück auf die konkrete Seite, die ihr zitiert (nicht nur die Startseite), damit Leser die Quellenlage und Bestätigungsstufe selbst prüfen können.` },
+  { q: 'Wie oft wird diese Seite aktualisiert?', a: 'Kontinuierlich während Early Access und nach dem Launch \u2014 Patch-Notes, neue Community-Berichte und offizielle Bestätigungen werden eingearbeitet, sobald sie erscheinen, wobei bestehende Einträge neu gekennzeichnet (nicht gelöscht) werden, wenn sich ihre Bestätigungsstufe ändert.' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Startseite', item: `${SITE.url}/de` },
+    { '@type': 'ListItem', position: 2, name: 'Methodik & Genauigkeitsstandards', item: `${SITE.url}/de/methodology` },
+  ] },
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+];
+---
+<Base
+  title="Methodik & Genauigkeitsstandards | Moonlight Peaks Wiki & Guide"
+  description="Wie wir Moonlight-Peaks-Informationen verifizieren: unser vierstufiges Bestätigungssystem (bestätigt, gemeldet, Datamining, erwartet), Quellenstandards und wie man diese Seite zitiert."
+  path="/de/methodology"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Methodik & Genauigkeitsstandards' }]}
+  lang="de"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Über uns · Methodik</p>
+      <h1>Methodik & <em>Genauigkeitsstandards</em></h1>
+      <p class="intro">
+        {SITE.brand} basiert auf einer Regel: niemals eine Vermutung mit derselben Sicherheit präsentieren wie eine verifizierte Tatsache. Diese Seite erklärt genau, wie wir Informationen über
+        {GAME.title} kennzeichnen, belegen und aktualisieren, und wie andere Seiten oder Journalisten unsere Arbeit zitieren können.
+      </p>
+
+      <h2>Unsere vier Bestätigungsstufen</h2>
+      <p>Jedes Profil, jede FAQ-Antwort und jeder Guide-Eintrag mit einer Tatsachenbehauptung wird mit einer dieser vier Stufen gekennzeichnet, direkt auf der Seite sichtbar statt in einer Fußnote versteckt:</p>
+      <table class="facts">
+        <tr><th>Stufe</th><th>Was es bedeutet</th></tr>
+        {tiers.map((t) => (<tr><th>{t.label}</th><td>{t.desc}</td></tr>))}
+      </table>
+
+      <h2>In Zahlen</h2>
+      <div class="stat-grid">
+        {stats.map((s) => (
+          <div class="stat-card"><strong>{s.n}</strong><span>{s.label}</span></div>
+        ))}
+      </div>
+
+      <h2>Woher unsere Quellen kommen</h2>
+      <ul>
+        <li><strong>Offizielle Kanäle:</strong> Steam-Patch-Notes, die eigenen Steam-Community-Beiträge des Entwicklers, das offizielle Wiki und Plattform-Store-Listings.</li>
+        <li><strong>Presseberichte:</strong> Reviews und Vorschauen von Outlets, die wir ausdrücklich benennen (IGN, GameRant, TheGamer, Nintendo Everything und andere), statt "manche Reviewer sagen" ohne Zuordnung zu zitieren.</li>
+        <li><strong>Community-Tests:</strong> Reddit, Steam-Community-Diskussionen und YouTube-Playthroughs, als "gemeldet" statt "bestätigt" behandelt, bis wir sie gegenprüfen können.</li>
+        <li><strong>Vorab-Datamining:</strong> Wo möglich gegen andere Vorab-Quellen abgeglichen, und ausdrücklich als Datamining statt bestätigt gekennzeichnet, da sich Dateien vor dem Release ändern können.</li>
+      </ul>
+
+      <h2>Was wir nicht tun</h2>
+      <p>
+        Wir erfinden keine Geschenktabellen, Statistiken, Drop-Raten oder Rezepte, um eine Lücke zu füllen. Wir stufen keine "gemeldete" Aussage zu "bestätigt" hoch, nur damit eine Seite vollständiger aussieht. Wenn sich die Bestätigungsstufe einer Tatsache ändert \u2014 etwa ein Datamining-Name, der später im laufenden Spiel bestätigt wird \u2014 aktualisieren wir die Kennzeichnung, statt die Geschichte stillschweigend umzuschreiben.
+      </p>
+
+      <h2>Diese Seite zitieren</h2>
+      <p>
+        Wenn ihr Journalist, YouTuber oder Mitautor eines anderen Guides seid und unsere Daten referenziert, verlinkt bitte direkt auf die konkrete Seite, die ihr zitiert (ein Charakterprofil, eine FAQ-Antwort oder einen Standort-Guide), statt nur auf die Startseite, damit eure Leser die Quellenlage und Bestätigungsstufe selbst sehen können. Eine kurze Zeile wie "<em>via {SITE.brand}</em>" mit einem Link ist genau das, worum wir bitten \u2014 keine formelle Erlaubnis nötig.
+      </p>
+      <p>
+        Einen Fehler gefunden, oder eine Korrektur mit echter Quelle? Kontaktiert uns unter {SITE.contact}
+        und wir verifizieren und aktualisieren die entsprechende Seite.
+      </p>
+
+      <h2>FAQ</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        Verwandt: <a href="/de/about">Über diese Seite</a>, <a href="/de/faq">FAQ-Hub</a>.
+      </div>
+    </div>
+  </article>
+
+  <style>
+    .stat-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin: 14px 0 22px; }
+    @media (min-width: 640px) { .stat-grid { grid-template-columns: repeat(4, 1fr); } }
+    .stat-card { border: 1px solid var(--line); border-radius: 12px; background: var(--surface); padding: 16px 14px; text-align: center; }
+    .stat-card strong { display: block; font-family: var(--display); font-size: 1.8rem; color: var(--candle); }
+    .stat-card span { color: var(--muted); font-size: 0.82rem; }
+  </style>
+</Base>

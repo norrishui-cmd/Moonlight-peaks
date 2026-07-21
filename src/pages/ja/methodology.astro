@@ -1,0 +1,108 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+
+const tiers = [
+  { label: '確認済み', desc: '実際のゲーム、公式パッチノート、または開発者からの直接の発言(Steamコミュニティ投稿、公式Wiki、プレスキット)で直接検証済み。これは確定した事実として扱う唯一の段階です。' },
+  { label: '報告あり', desc: 'プレスのプレビュー、レビュー記事、またはコミュニティのテスト(Reddit、Steamコミュニティディスカッション、YouTubeのプレイ動画)で見られ、信頼できると判断したものの、まだ実機で独自に再現検証していないもの。' },
+  { label: 'データ解析', desc: '発売前のゲームファイルから見つかったもので、可能な限り他の発売前資料と照合済み。データ解析の内容は実際のデータですが、発売前後で変更される可能性があるため、確認済みとしては提示しません。' },
+  { label: '予想 / 未確認', desc: 'ゲームの既存パターンに基づく妥当な推測(例:店名が存在するなら営業時間があると推測する等)。ソースのある事実ではなく、あくまで私たち自身の推測として明示的にラベル付けしています。' },
+];
+
+const stats = [
+  { n: '52+', label: '出典を明記しリンクしたFAQの回答数' },
+  { n: '70+', label: '出典を明記しリンクしたニュース記事数' },
+  { n: '49', label: '個別にステータスをタグ付けしたキャラクタープロフィール数' },
+  { n: '4', label: '使用するすべてのページで表示される確認段階の数' },
+];
+
+const faq = [
+  { q: 'Moonlight Peaks Wiki & Guideはどうやって情報を検証していますか?', a: `このサイトのすべての事実は、確認済み・報告あり・データ解析・予想という4つの確認段階のいずれかでタグ付けされています。これにより、すべての詳細を同じ確実性で提示するのではなく、読者が主張の確からしさを一目で判断できるようにしています。` },
+  { q: 'このサイトは確認されていない贈り物表、統計、レシピを作り上げていますか?', a: 'いいえ。まだデータが入手できない箇所では、それらしい空欄を埋めるのではなく、ページ上でその旨を明示しています。私たちは推測よりも、情報の空白を見せることを選びます。' },
+  { q: 'ジャーナリストや他のサイトはこのサイトのデータを引用できますか?', a: `はい — そのためにこのページがあります。${SITE.brand}のクレジットを明記し、トップページだけでなく引用する具体的なページへリンクを貼ってください。そうすれば読者は自分で出典と確認段階を確認できます。` },
+  { q: 'このサイトはどのくらいの頻度で更新されていますか?', a: 'アーリーアクセス期間中も発売後も継続的に更新しています — パッチノート、新しいコミュニティ報告、公式の確認情報は判明次第反映され、確認段階が変わった既存のエントリーも削除せずに再タグ付けしています。' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'ホーム', item: `${SITE.url}/ja` },
+    { '@type': 'ListItem', position: 2, name: '検証方針と精度基準', item: `${SITE.url}/ja/methodology` },
+  ] },
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+];
+---
+<Base
+  title="検証方針と精度基準 | Moonlight Peaks Wiki & Guide"
+  description="Moonlight Peaksの情報をどう検証しているか:4段階の確認システム(確認済み・報告あり・データ解析・予想)、出典の基準、このサイトの引用方法について。"
+  path="/ja/methodology"
+  jsonLd={jsonLd}
+  crumbs={[{ label: '検証方針と精度基準' }]}
+  lang="ja"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">サイトについて · 検証方針</p>
+      <h1>検証方針と<em>精度基準</em></h1>
+      <p class="intro">
+        {SITE.brand}は「推測を検証済みの事実と同じ確実性で提示しない」という1つのルールを中心に作られています。このページでは、{GAME.title}についての情報をどのようにタグ付けし、出典を明記し、更新しているか、そして他のサイトやジャーナリストが私たちの成果をどう引用できるかを説明します。
+      </p>
+
+      <h2>4つの確認段階</h2>
+      <p>事実に基づく主張を含むすべてのプロフィール、FAQの回答、ガイド項目には、以下の4段階のいずれかがタグ付けされており、脚注に埋もれさせるのではなくページ上に直接表示しています:</p>
+      <table class="facts">
+        <tr><th>段階</th><th>意味</th></tr>
+        {tiers.map((t) => (<tr><th>{t.label}</th><td>{t.desc}</td></tr>))}
+      </table>
+
+      <h2>数字で見る</h2>
+      <div class="stat-grid">
+        {stats.map((s) => (
+          <div class="stat-card"><strong>{s.n}</strong><span>{s.label}</span></div>
+        ))}
+      </div>
+
+      <h2>出典の入手元</h2>
+      <ul>
+        <li><strong>公式チャンネル:</strong> Steamのパッチノート、開発者自身のSteamコミュニティ投稿、公式Wiki、プラットフォームストアの掲載情報。</li>
+        <li><strong>プレス報道:</strong> 「一部のレビューアーによれば」のような帰属のない引用ではなく、明確に名前を挙げたメディア(IGN、GameRant、TheGamer、Nintendo Everythingなど)のレビューやプレビュー。</li>
+        <li><strong>コミュニティによる検証:</strong> Reddit、Steamコミュニティディスカッション、YouTubeのプレイ動画は、相互検証できるまで「確認済み」ではなく「報告あり」として扱います。</li>
+        <li><strong>発売前のデータ解析:</strong> 可能な限り他の発売前資料と照合しており、発売前にファイルが変更される可能性があるため、確認済みではなくデータ解析として明示的にラベル付けしています。</li>
+      </ul>
+
+      <h2>私たちがしないこと</h2>
+      <p>
+        空白を埋めるために贈り物表、統計、ドロップ率、レシピを作り上げることはしません。ページをより完成度高く見せるためだけに「報告あり」を「確認済み」に格上げすることもしません。ある事実の確認段階が変わったとき — 例えばデータ解析で見つかった名前が後に実際のゲームで確認された場合など — 履歴を黙って書き換えるのではなく、タグを更新します。
+      </p>
+
+      <h2>このサイトを引用する</h2>
+      <p>
+        私たちのデータを参照するジャーナリスト、YouTuber、または他のガイド執筆者の方は、トップページだけでなく、引用している具体的なページ(キャラクタープロフィール、FAQの回答、場所のガイドなど)へ直接リンクしてください。そうすれば読者は出典と確認段階を自分で確認できます。「<em>{SITE.brand}より</em>」といった一行とリンクがあれば十分です — 正式な許可は必要ありません。
+      </p>
+      <p>
+        誤りを見つけましたか、または実際の出典に基づく訂正がありますか?{SITE.contact}までご連絡いただければ、該当ページを検証・更新します。
+      </p>
+
+      <h2>FAQ</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        関連:<a href="/ja/about">このサイトについて</a>、<a href="/ja/faq">FAQハブ</a>。
+      </div>
+    </div>
+  </article>
+
+  <style>
+    .stat-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin: 14px 0 22px; }
+    @media (min-width: 640px) { .stat-grid { grid-template-columns: repeat(4, 1fr); } }
+    .stat-card { border: 1px solid var(--line); border-radius: 12px; background: var(--surface); padding: 16px 14px; text-align: center; }
+    .stat-card strong { display: block; font-family: var(--display); font-size: 1.8rem; color: var(--candle); }
+    .stat-card span { color: var(--muted); font-size: 0.82rem; }
+  </style>
+</Base>

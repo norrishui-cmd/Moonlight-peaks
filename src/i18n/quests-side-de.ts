@@ -99,4 +99,14 @@ export const sideQuestsDe: Record<string, SideQuestTrDe> = {
       { q: 'Gibt es eine manuelle Speicheroption?', a: 'Derzeit nicht \u2014 bestätigt abwesend zum Release. Im Sarg zu schlafen ist die einzige Möglichkeit zu speichern, und es ist ein häufig gewünschtes Feature im offiziellen Steam-Community-Bug-Thread des Spiels.' },
     ],
   },
+  'fallen-tree-arborascend': {
+    title: 'Der umgestürzte Baum ist nicht zu finden (Die geheimnisvolle Bucht)',
+    summary: 'Bestätigt über PC Gamer: Während der Quest "Die geheimnisvolle Bucht" musst du einen umgestürzten Baum beseitigen, damit deine neu entdeckten Meerjungfrauen-Nachbarn wieder in die Stadt zurückkehren können. Der Baum liegt nicht in den Howling Marshes, wie die meisten Spieler annehmen \u2014 er blockiert einen Wasserfall in einem anderen Bereich. Die Lösung ist ein Zauber, kein Werkzeug: Kaufe den Arborascend-Zauber bei Sabrina in Webb of Wonders und wirke ihn dann (kostet 3 Mana) am umgestürzten Baum, um eine Zwischensequenz auszulösen, die ihn entfernt.',
+    reward: 'Öffnet den Weg für die Meerjungfrauenfamilie Hosu zurück in die Stadt; führt zu Samaels Romanze-Bogen',
+    troubleshooting: [
+      { q: 'Wo genau liegt der umgestürzte Baum, der den Wasserfall blockiert?', a: 'Bestätigt über PC Gamer: Er liegt nicht in den Howling Marshes, obwohl das die naheliegende Vermutung wäre. Er blockiert einen Wasserfall in einem anderen Bereich, der mit dem Rückweg der Meerjungfrauenfamilie Hosu in die Stadt verbunden ist \u2014 wenn du die Howling Marshes durchsucht und nichts gefunden hast, bestätigt das, dass du am falschen Ort suchst, nicht dass dir dort eine versteckte Stelle entgeht.' },
+      { q: 'Ich habe kein Werkzeug, das den Baum entfernen kann \u2014 was brauche ich?', a: 'Bestätigt: Es ist überhaupt kein Werkzeug \u2014 du brauchst den Arborascend-Zauber, gekauft bei Sabrina in Webb of Wonders. Das Wirken kostet 3 Mana, stelle also sicher, dass du genug angespart hast (Mana-wiederherstellende Nahrung hilft), bevor du losziehst, da du den Baum nicht manuell zerhacken oder wegschieben kannst.' },
+      { q: 'Ich habe Arborascend gekauft, aber am Baum passiert nichts \u2014 warum?', a: 'Community-berichtet: Das Wirken von Arborascend direkt am umgestürzten Baum löst eine Zwischensequenz aus, die ihn entfernt. Wenn nichts passiert, prüfe noch einmal, ob du wirklich genug Mana für das Wirken hast (3 Mana), statt anzunehmen, der Zauber sei fehlgeschlagen.' },
+    ],
+  },
 };

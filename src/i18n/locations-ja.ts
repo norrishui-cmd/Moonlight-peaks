@@ -174,4 +174,84 @@ export const locationsJa: Record<string, LocationTrJa> = {
       { q: 'Crystal Caveでは何が手に入りますか?', a: '確認済み:薔薇水晶の鉱脈が他の宝石とともに豊富に見つかります。薔薇水晶はEnchanted Mortarで粉末に挽かれ、いくつかのクラフトレシピやクエストで使われます。' },
     ],
   },
+  'howling-marshes': {
+    title: 'Howling Marshes', dek: '町のすぐ北、Moonlit Pinesの東 — 確認された2つの入口、採取可能なSugarboneや花々、そしてLogan家の家がある。',
+    body: [
+      'ローンチ週の複数の情報源で確認:Howling Marshesは町の中心部のすぐ北、Moonlit Pinesの東に位置している。',
+      '入口は2つ確認されている:1つはMoonlit PinesのLunaの種売り場のすぐ東、もう1つは町役場のすぐ東。ストーリークエスト「紋章庭園の緊張」の一環としてここへ向かうよう指示される。',
+      'ここで確認されている採取物にはSugarboneと複数の花が含まれる — 生のまま売るより、調理台や乾燥ラックで加工する価値がある。',
+      'Logan家の家もここにあり、初回訪問時には入れない地下墓地や、まだ到達できない北側エリアもある — どちらもおそらく後のクエストに紐づいている。',
+    ],
+    related: [{ label: 'すべてのランドマーク', href: '/locations/landmarks' }, { label: 'Logan家', href: '/families' }, { label: '町', href: '/locations/town' }],
+    faq: [
+      { q: 'ムーンライト・ピークスでHowling Marshesはどこにありますか?', a: '確認済み:町の中心部のすぐ北、Moonlit Pinesの東。入口は2つあり、1つはMoonlit PinesのLunaの種売り場のすぐ東、もう1つは町役場のすぐ東。' },
+      { q: 'Howling Marshesはどうやって解放しますか?', a: 'ストーリークエスト「紋章庭園の緊張」の一環としてここへ向かうよう指示される — 別途の解放条件はない。' },
+      { q: 'Howling Marshesでは何が採取できますか?', a: '確認されている採取物にはSugarboneと複数の花が含まれる。生のまま売るより、調理台や乾燥ラックで加工した方が価値が高い。' },
+    ],
+  },
+  'twilight-catacombs': {
+    title: 'Twilight Catacombs', dek: '地下墓地、Crystal Cave、Misty Shoresの墓地、Luna Bay、Howling Marshesをつなぐ封鎖された地下トンネル網。博物館への寄付で解放される。',
+    body: [
+      '確認済み:Twilight Catacombsは、単一の完結したダンジョンではなく、マップ各所に散らばる入口と出口を持つ封鎖された地下トンネル網である。扉はCrypt(Viktorが滞在する場所)とMisty Shoresの墓地にあり、解放前にこれらと関わろうとしても「反対側から施錠されている」とだけ表示され、開け方は説明されない。',
+      '確認済み:解放ルートは博物館経由であり、探索して見つける単独の鍵アイテムではない。博物館への寄付進捗が全体で25%に達すると、JadaがDracula Insignia Keyを渡してくれる。その鍵をCryptにいるViktorに見せると「深淵への鍵」クエストが発生し、地下墓地が開く。',
+      '確認済み:一度中に入ると、トンネル網は青い感圧板を通じてゲーム内の複数の地下・地上エリアをつないでいる — 1つはCrystal Caveの崩れた扉に、もう1つはMisty Shoresの墓地にある地下墓地の入口に、もう1つは川沿いを北へ進んだLuna Bayの崩れた扉に、そしてもう1つは東のHowling Marshesにある地下墓地の入口につながっている。',
+      '攻略記事による報告:これらの接続を見つけた後、棺で眠り翌日郵便受けを確認すると、Samaelからの手紙が届く。The Broken LampにいるSamaelを訪ねると、さらに別の入口が解放される。',
+    ],
+    related: [{ label: 'Crystal Cave', href: '/locations/crystal-cave' }, { label: '鉱山', href: '/locations/mines' }, { label: 'Howling Marshes', href: '/locations/howling-marshes' }, { label: '博物館', href: '/locations/silverveil-museum' }, { label: 'Viktor', href: '/characters/viktor-dracula' }, { label: 'Samael', href: '/characters/samael' }],
+    faq: [
+      { q: 'ムーンライト・ピークスでTwilight Catacombsはどうやって解放しますか?', a: '確認済み:博物館への寄付進捗を25%まで進めるとJadaからDracula Insignia Keyがもらえる。それをCryptにいるViktorに見せると「深淵への鍵」クエストが始まり、地下墓地が開く。' },
+      { q: 'ムーンライト・ピークスでTwilight Catacombsの入口はどこですか?', a: '確認されている入口はCrypt(Viktorの居場所)とMisty Shoresの墓地。攻略記事による報告:内部の感圧板は一度中に入るとCrystal Cave、Luna Bay、Howling Marshesともつながっている。' },
+      { q: 'Twilight Catacombsの青い感圧板は何をしますか?', a: '攻略記事による報告:それぞれを踏むと、マップ上の別の場所にある崩れた扉へのショートカット接続が開く — Crystal Cave、Misty Shoresの墓地、Luna Bay、Howling Marshes — これにより地下墓地はこれらのエリア間の移動を短縮するハブとなる。' },
+    ],
+  },
+  'crest-garden': {
+    title: 'Crest Garden', dek: '町役場の隣にある町の庭園。メインストーリーを通じて解放すると、七つの家族すべての紋章が表示される。',
+    body: [
+      '公式Wikiで確認済み:Crest Gardenは町役場の隣に位置し、ストーリーの進行によって解放されると、ムーンライト・ピークスの七つの家族それぞれの紋章が表示される — ゲームの中心的な家族ストーリーラインをどれだけ進めたかを示す視覚的なトラッカーである。',
+      '攻略記事による報告:Logan家の紋章が途中で特に紛失し、探し物クエストの寄り道に送り込まれる — Draganが情報を求めてThe Broken Lampを指し示し、それがHowling Marshesにつながる。そこでYabbisが紋章を食べてしまったことが判明し、返す代わりにCopper Barを要求してくる。',
+      '攻略記事による報告:最後に埋まる2つの紋章は、2つの吸血鬼家族、AmbrosiaとDraculaのものである。OrlockはAmbrosiaの紋章のためにクラフト素材(精錬石、金塊、ガラス)を求め、Draculaの紋章クエストはメインストーリーの感情的な結末として描かれ、コウモリ変身を解放した数日後に手紙によって発生する。',
+    ],
+    related: [{ label: '町役場', href: '/locations/town-hall' }, { label: '家族', href: '/families' }, { label: 'Howling Marshes', href: '/locations/howling-marshes' }, { label: 'Dragan', href: '/characters/dragan' }, { label: 'Yabbis', href: '/characters/yabbis' }, { label: 'Orlock', href: '/characters/orlock' }],
+    faq: [
+      { q: 'ムーンライト・ピークスでCrest Gardenはどこにありますか?', a: '公式Wikiで確認済み:町役場の隣に位置している。' },
+      { q: 'ムーンライト・ピークスでCrest Gardenは何をしますか?', a: '確認済み:町の七つの家族すべての紋章を表示し、各家族のメインストーリーを進めるたびに1つずつ解放されていく。' },
+      { q: 'なぜCrest Gardenで家族の紋章が欠けているのですか?', a: '攻略記事による報告:少なくとも1つの紋章(Loganのもの)は自動的に解放されるのではなく、小さな探し物クエストの寄り道として描かれている — このケースではYabbisがそれを食べてしまい、返す代わりにCopper Barを要求した。' },
+      { q: 'Crest Gardenで最後に解放される紋章はどれですか?', a: '攻略記事による報告:2つの吸血鬼家族の紋章、AmbrosiaとDraculaが最後に埋まり、Draculaの紋章クエストはストーリーの感情的な結末として描かれている。' },
+    ],
+  },
+  'moonlit-slopes': {
+    title: 'Moonlit Slopes', dek: 'Moon Goddessの住まい。初回の招待の後は再び封鎖され、コウモリ形態を解放するまで再訪できないことが確認されている。',
+    body: [
+      '確認済み:Moonlit SlopesはMoon Goddessの住まいであり、Khazan家の予言者たちが同時にトランス状態に陥り月が空から消える「消えた月」というストーリーの解決後に到達できる。短い続編クエスト「空の月」で、彼女が正式に訪問を招待してくれる。',
+      '確認済み:その初回訪問の後、Moonlit Slopesは再び封鎖され、「夜の支配者」クエストを通じてコウモリ形態を解放するまで立ち入れなくなる — つまりMoon Goddessに会った直後に戻れなくても、それはバグではなく想定通りの挙動である。',
+    ],
+    related: [{ label: '変身', href: '/shapeshifting' }, { label: 'Moon Goddess', href: '/characters/moon-goddess' }, { label: 'クエスト', href: '/quests' }],
+    faq: [
+      { q: 'ムーンライト・ピークスでMoon Goddessにはどこで会えますか?', a: '確認済み:Moonlit Slopesで、「消えた月」と短い続編クエスト「空の月」を完了した後、彼女が正式に招待してくれる。' },
+      { q: 'なぜ一度訪れた後Moonlit Slopesに戻れないのですか?', a: '確認済み:初回訪問の後エリアは再び封鎖され、「夜の支配者」クエストを通じてコウモリ形態を解放するまで再開しない — これはバグではなく想定通りである。' },
+    ],
+  },
+  'midnight-market': {
+    title: 'Midnight Market', dek: '町で週末限定に開かれる市場。動物用の帽子やポーション素材など、平日には手に入らない品を販売している。',
+    body: [
+      'コミュニティの報告で確認:Midnight Marketは町で週末限定に開催されるイベントで、土曜と日曜に開かれ、ゲームの通常の平日ショップとは異なる。',
+      '報告:SnekはMidnight Marketで農場動物用の小さな帽子を販売しており、SabrinaもそこでAlchemist\'s Globeなどポーション関連の品を販売している — どちらのキャラクターも通常の平日営業時間中にこれらを販売しているとは確認されていない。',
+    ],
+    related: [{ label: 'Snek', href: '/characters/snek' }, { label: 'Sabrina', href: '/characters/sabrina' }, { label: '農場動物', href: '/farm/animals' }, { label: 'ポーション', href: '/items/potions' }],
+    faq: [
+      { q: 'ムーンライト・ピークスでMidnight Marketはいつ開いていますか?', a: 'コミュニティの報告:土曜と日曜のみで、ゲームの通常の平日営業時間とは異なる。' },
+      { q: 'ムーンライト・ピークスのMidnight Marketでは何が買えますか?', a: '報告:Snekから農場動物用の小さな帽子、Sabrinaからは Alchemist\'s Globeなどポーション関連の品 — どちらも通常の平日に販売されているとは確認されていない。' },
+    ],
+  },
+  'bloom-boutique': {
+    title: 'Bloom Boutique', dek: '公式Wikiのナビゲーション自体で町に存在することが確認されている名前付きの店。詳細はまだ未確認。',
+    body: [
+      '公式Wiki自身のサイトナビゲーションによって存在が確認されており、ゲームの他の名前付き店舗と並んで掲載されている。名前以外については、Bloom Boutiqueが何を販売しているか、誰が経営しているか、営業時間について独自に検証された詳細はまだない — 名前が花を連想させるからといって、テーマを推測することはしない。',
+      '名前や、ゲームに既にある花のアレンジメントや贈り物のシステムを考えると、花やインテリア関連という推測は妥当だが、実際のゲームで情報源が検証するまでは「確認済み」ではなく「予想」として扱う。',
+    ],
+    related: [{ label: '店舗', href: '/locations/shops' }, { label: 'アクティビティ:フラワーアレンジメント', href: '/activities/flower-arranging' }],
+    faq: [
+      { q: 'ムーンライト・ピークスのBloom Boutiqueとは何ですか?', a: '公式Wiki自身のナビゲーションによって、名前付き店舗として存在することが確認されている。何を販売し誰が経営しているかはまだ独自に確認されていない — 名前だけで店の内容を推測することはしない。' },
+    ],
+  },
 };

@@ -174,4 +174,84 @@ export const locationsDe: Record<string, LocationTrDe> = {
       { q: 'Was bekommt man aus der Kristallhöhle?', a: 'Bestätigt: Rosenquarz-Vorkommen erscheinen großzügig zusammen mit anderen Edelsteinen. Rosenquarz wird mit dem verzauberten Mörser zu Pulver gemahlen und in mehreren Crafting-Rezepten und Quests verwendet.' },
     ],
   },
+  'howling-marshes': {
+    title: 'Howling Marshes', dek: 'Direkt nördlich der Stadt und östlich von Moonlit Pines \u2014 zwei bestätigte Eingänge, erntbare Sugarbone und Blumen, sowie das Haus der Familie Logan.',
+    body: [
+      'Bestätigt durch mehrere Quellen der Launch-Woche: Howling Marshes liegt direkt nördlich der Hauptstadt und östlich von Moonlit Pines.',
+      'Zwei Eingänge sind bestätigt: einer direkt östlich von Lunas Saatgutstand in Moonlit Pines, der andere direkt östlich des Rathauses. Du wirst hierher geschickt im Rahmen der Story-Quest "Spannungen im Wappengarten".',
+      'Bestätigte Erntbares hier sind Sugarbone und mehrere Blumen \u2014 es lohnt sich, sie an einer Kochstation oder einem Trockengestell zu verarbeiten, statt sie roh zu verkaufen.',
+      'Das Haus der Familie Logan befindet sich ebenfalls hier, zusammen mit einer Gruft, die beim ersten Besuch nicht zugänglich ist, und einem nördlichen Bereich, der ebenfalls noch nicht erreichbar ist \u2014 beides wahrscheinlich an spätere Quests gebunden.',
+    ],
+    related: [{ label: 'Alle Wahrzeichen', href: '/locations/landmarks' }, { label: 'Familie Logan', href: '/families' }, { label: 'Die Stadt', href: '/locations/town' }],
+    faq: [
+      { q: 'Wo liegen die Howling Marshes in Moonlight Peaks?', a: 'Bestätigt: direkt nördlich der Hauptstadt und östlich von Moonlit Pines. Es gibt zwei Eingänge \u2014 einen direkt östlich von Lunas Saatgutstand in Moonlit Pines, den anderen direkt östlich des Rathauses.' },
+      { q: 'Wie schaltet man Howling Marshes frei?', a: 'Du wirst im Rahmen der Story-Quest "Spannungen im Wappengarten" hierher geschickt \u2014 es ist nicht durch ein separates Freischalten gesperrt.' },
+      { q: 'Was kann man in Howling Marshes ernten?', a: 'Bestätigte Erntbares umfasst Sugarbone und mehrere Blumen. Sie lohnen sich, an einer Kochstation oder einem Trockengestell verarbeitet zu werden, statt roh verkauft zu werden.' },
+    ],
+  },
+  'twilight-catacombs': {
+    title: 'Zwielicht-Katakomben', dek: 'Ein verschlossenes unterirdisches Tunnelnetz, das die Gruft, die Kristallhöhle, den Friedhof von Misty Shores, Luna Bay und Howling Marshes verbindet, freigeschaltet durch Spenden ans Museum.',
+    body: [
+      'Bestätigt: Die Zwielicht-Katakomben sind ein verschlossenes, unterirdisches Tunnelnetz mit über die Karte verstreuten Ein- und Ausgängen, statt eines einzelnen in sich geschlossenen Dungeons. Türen findet man in der Gruft (wo Viktor sich aufhält) und auf dem Friedhof von Misty Shores; die Interaktion vor dem Freischalten zeigt nur, dass sie "von der anderen Seite verschlossen" sind, ohne zu erklären, wie man sie öffnet.',
+      'Bestätigt: Der Freischalt-Weg führt über das Museum, nicht über ein eigenständiges Schlüsselobjekt, das man durch Erkunden findet. Erreiche 25% Gesamtfortschritt bei den Museumsspenden, und Jada gibt dir den Dracula-Siegelschlüssel. Zeige diesen Schlüssel Viktor in der Gruft, um die Quest "Ein Schlüssel zur Tiefe" auszulösen und die Katakomben zu öffnen.',
+      'Bestätigt: Einmal drinnen verbindet das Tunnelnetz mehrere unterirdische und oberirdische Bereiche des Spiels über blaue Druckplatten \u2014 eine führt zu einer eingestürzten Tür in der Kristallhöhle, eine andere zum Katakomben-Eingang auf dem Friedhof von Misty Shores, eine weitere nördlich am Fluss zu einer eingestürzten Tür in Luna Bay, und eine östlich zum Katakomben-Eingang in Howling Marshes.',
+      'Berichtet von einem Walkthrough: Nachdem man diese Verbindungen gefunden hat, bringt das Schlafen im Sarg und das Prüfen des Briefkastens am nächsten Tag einen Brief von Samael. Der Besuch bei ihm in der Zerbrochenen Laterne schaltet einen weiteren Eingang frei.',
+    ],
+    related: [{ label: 'Kristallhöhle', href: '/locations/crystal-cave' }, { label: 'Die Minen', href: '/locations/mines' }, { label: 'Howling Marshes', href: '/locations/howling-marshes' }, { label: 'Museum', href: '/locations/silverveil-museum' }, { label: 'Viktor', href: '/characters/viktor-dracula' }, { label: 'Samael', href: '/characters/samael' }],
+    faq: [
+      { q: 'Wie schaltet man die Zwielicht-Katakomben in Moonlight Peaks frei?', a: 'Bestätigt: Erreiche 25% Fortschritt bei den Museumsspenden, um den Dracula-Siegelschlüssel von Jada zu erhalten, zeige ihn dann Viktor in der Gruft, um die Quest "Ein Schlüssel zur Tiefe" zu starten, die die Katakomben öffnet.' },
+      { q: 'Wo sind die Eingänge zu den Zwielicht-Katakomben in Moonlight Peaks?', a: 'Bestätigte Eingänge sind in der Gruft (Viktors Ort) und dem Friedhof von Misty Shores. Berichtet von einem Walkthrough: interne Druckplatten verbinden auch zur Kristallhöhle, Luna Bay und Howling Marshes, sobald man drinnen ist.' },
+      { q: 'Was machen die blauen Druckplatten in den Zwielicht-Katakomben?', a: 'Berichtet von einem Walkthrough: Das Betreten jeder einzelnen öffnet eine Abkürzungsverbindung zu einer anderen eingestürzten Tür an anderer Stelle der Karte \u2014 Kristallhöhle, der Friedhof von Misty Shores, Luna Bay und Howling Marshes \u2014 und macht die Katakomben zu einem Knotenpunkt, der Reisen zwischen diesen Bereichen verkürzt.' },
+    ],
+  },
+  'crest-garden': {
+    title: 'Wappengarten', dek: 'Ein Stadtgarten neben dem Rathaus, der die Wappen aller sieben Familien zeigt, sobald du sie durch die Hauptstory freischaltest.',
+    body: [
+      'Bestätigt durch das offizielle Wiki: Der Wappengarten liegt neben dem Rathaus und zeigt die Wappen jeder der sieben Familien von Moonlight Peaks, sobald sie durch den Story-Fortschritt freigeschaltet werden \u2014 ein visueller Tracker dafür, wie weit du die zentralen Familien-Storylines des Spiels vorangebracht hast.',
+      'Berichtet von einem Walkthrough: Das Wappen der Familie Logan geht speziell im Verlauf verloren, was dich auf einen Beschaffungs-Quest-Umweg schickt \u2014 Dragan verweist dich zur Zerbrochenen Laterne für Informationen, was zu den Howling Marshes führt, wo sich herausstellt, dass Yabbis das Wappen gegessen hat und einen Kupferbarren im Austausch dafür will.',
+      'Berichtet von einem Walkthrough: Die letzten beiden Wappen, die sich füllen, gehören den beiden Vampirfamilien, Ambrosia und Dracula. Orlock bittet um Crafting-Materialien (raffinierter Stein, Goldbarren und Glas) für das Ambrosia-Wappen, während die Dracula-Wappen-Quest als der emotionale Abschluss der Hauptstory beschrieben wird, ausgelöst durch einen Brief einige Tage nach dem Freischalten der Fledermaus-Verwandlung.',
+    ],
+    related: [{ label: 'Rathaus', href: '/locations/town-hall' }, { label: 'Familien', href: '/families' }, { label: 'Howling Marshes', href: '/locations/howling-marshes' }, { label: 'Dragan', href: '/characters/dragan' }, { label: 'Yabbis', href: '/characters/yabbis' }, { label: 'Orlock', href: '/characters/orlock' }],
+    faq: [
+      { q: 'Wo ist der Wappengarten in Moonlight Peaks?', a: 'Bestätigt durch das offizielle Wiki: Er liegt neben dem Rathaus.' },
+      { q: 'Was macht der Wappengarten in Moonlight Peaks?', a: 'Bestätigt: Er zeigt die Wappen aller sieben Familien der Stadt, die eines nach dem anderen freigeschaltet werden, während du die Hauptstory jeder Familie vorantreibst.' },
+      { q: 'Warum fehlt ein Familienwappen im Wappengarten?', a: 'Berichtet von einem Walkthrough: Mindestens ein Wappen (Logans) ist als kleiner Beschaffungs-Quest-Umweg geschrieben, statt automatisch freizuschalten \u2014 in diesem Fall hatte Yabbis es gegessen und wollte einen Kupferbarren zum Zurücktauschen.' },
+      { q: 'Welche Wappen schalten sich zuletzt im Wappengarten frei?', a: 'Berichtet von einem Walkthrough: Die beiden Vampirfamilien-Wappen, Ambrosia und Dracula, füllen sich zuletzt, wobei die Dracula-Wappen-Quest als emotionaler Abschluss der Story beschrieben wird.' },
+    ],
+  },
+  'moonlit-slopes': {
+    title: 'Mondlichthänge', dek: 'Das Zuhause der Mondgöttin, bestätigt, dass es nach deiner ersten Einladung wieder verschlossen bleibt, bis die Fledermaus-Form freigeschaltet ist.',
+    body: [
+      'Bestätigt: Die Mondlichthänge sind das Zuhause der Mondgöttin, erreichbar nach Abschluss des Story-Bogens "Ein vermisster Mond", bei dem die Seher der Familie Khazan gleichzeitig in Trance fallen und der Mond vom Himmel verschwindet. Eine kurze Folgequest, "Der Mond am Himmel", lässt sie dich formell zu einem Besuch einladen.',
+      'Bestätigt: Nach diesem ersten Besuch verschließen sich die Mondlichthänge wieder und bleiben unzugänglich, bis du die Fledermaus-Form durch die Quest "Meister der Nacht" freischaltest \u2014 wenn du also direkt nach dem Treffen mit der Mondgöttin nicht wieder hineinkommst, ist das zu erwarten und kein Fehler.',
+    ],
+    related: [{ label: 'Gestaltwandlung', href: '/shapeshifting' }, { label: 'Mondgöttin', href: '/characters/moon-goddess' }, { label: 'Quests', href: '/quests' }],
+    faq: [
+      { q: 'Wo trifft man die Mondgöttin in Moonlight Peaks?', a: 'Bestätigt: An den Mondlichthängen, nach Abschluss von "Ein vermisster Mond" und der kurzen Folgequest "Der Mond am Himmel", bei der sie dich formell einlädt.' },
+      { q: 'Warum kann ich nicht zu den Mondlichthängen zurück, nachdem ich sie einmal besucht habe?', a: 'Bestätigt: Der Bereich verschließt sich nach deinem ersten Besuch wieder und öffnet sich erst wieder, wenn du die Fledermaus-Form über die Quest "Meister der Nacht" freischaltest \u2014 das ist zu erwarten, kein Fehler.' },
+    ],
+  },
+  'midnight-market': {
+    title: 'Mitternachtsmarkt', dek: 'Ein nur am Wochenende stattfindender Markt in der Stadt, der Tierhüte, Zutaten für Tränke und andere Artikel verkauft, die unter der Woche nicht erhältlich sind.',
+    body: [
+      'Bestätigt durch Community-Berichte: Der Mitternachtsmarkt ist ein Wochenend-Event in der Stadt, das samstags und sonntags stattfindet, getrennt von den regulären Wochentagsläden des Spiels.',
+      'Berichtet: Snek verkauft winzige Hüte für deine Farmtiere auf dem Mitternachtsmarkt, und Sabrina verkauft dort auch die Alchemistenkugel und andere trankbezogene Artikel \u2014 Artikel, die nicht bestätigt sind, während der regulären Wochentagsöffnungszeiten bei einem der beiden Charaktere erhältlich zu sein.',
+    ],
+    related: [{ label: 'Snek', href: '/characters/snek' }, { label: 'Sabrina', href: '/characters/sabrina' }, { label: 'Farmtiere', href: '/farm/animals' }, { label: 'Tränke', href: '/items/potions' }],
+    faq: [
+      { q: 'Wann hat der Mitternachtsmarkt in Moonlight Peaks geöffnet?', a: 'Berichtet von der Community: Nur samstags und sonntags, getrennt von den regulären Wochentags-Öffnungszeiten des Spiels.' },
+      { q: 'Was kann man auf dem Mitternachtsmarkt in Moonlight Peaks kaufen?', a: 'Berichtet: Winzige Hüte für Farmtiere von Snek, sowie die Alchemistenkugel und andere trankbezogene Artikel von Sabrina \u2014 Artikel, die nicht bestätigt sind, unter der Woche verkauft zu werden.' },
+    ],
+  },
+  'bloom-boutique': {
+    title: 'Bloom Boutique', dek: 'Ein benannter Laden, der laut offizieller Wiki-Navigation bestätigt in der Stadt existiert, mit noch unbestätigten Details.',
+    body: [
+      'Bestätigt zu existieren durch die eigene Seitennavigation des offiziellen Wikis, gelistet neben den anderen benannten Läden des Spiels. Über den Namen hinaus haben wir noch keine unabhängig verifizierten Details darüber, was Bloom Boutique verkauft, wer ihn betreibt, oder die Öffnungszeiten \u2014 wir raten nicht auf ein Thema, nur weil der Name Blumen suggeriert.',
+      'Angesichts des Namens und der bereits vorhandenen Blumengesteck- und Geschenksysteme des Spiels wäre ein Blumen- oder Deko-Fokus eine vernünftige Vermutung, aber wir kennzeichnen dies als erwartet statt bestätigt, bis eine Quelle es gegen das echte Spiel verifiziert.',
+    ],
+    related: [{ label: 'Läden', href: '/locations/shops' }, { label: 'Aktivitäten: Blumengestecke', href: '/activities/flower-arranging' }],
+    faq: [
+      { q: 'Was ist Bloom Boutique in Moonlight Peaks?', a: 'Bestätigt zu existieren als benannter Laden laut eigener Navigation des offiziellen Wikis. Was er verkauft und wer ihn betreibt, ist hier noch nicht unabhängig bestätigt \u2014 wir raten nicht auf Ladeninhalte nur aufgrund des Namens.' },
+    ],
+  },
 };

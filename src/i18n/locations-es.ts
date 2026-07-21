@@ -174,4 +174,84 @@ export const locationsEs: Record<string, LocationTrEs> = {
       { q: '¿Qué se obtiene de la Crystal Cave?', a: 'Confirmado: aparecen abundantes nodos de Cuarzo Rosa junto con otras gemas. El Cuarzo Rosa se muele en polvo con el Mortero Encantado y se usa en varias recetas de creación y misiones.' },
     ],
   },
+  'howling-marshes': {
+    title: 'Howling Marshes', dek: 'Justo al norte del pueblo y al este de Moonlit Pines — dos entradas confirmadas, Sugarbone y flores cosechables, y la casa de la familia Logan.',
+    body: [
+      'Confirmado por múltiples fuentes de la semana de lanzamiento: Howling Marshes está justo al norte del pueblo principal y al este de Moonlit Pines.',
+      'Se confirman dos entradas: una justo al este del puesto de semillas de Luna en Moonlit Pines, la otra justo al este del ayuntamiento. Te dirigen aquí como parte de la misión de historia "Tensión en el Crest Garden".',
+      'Los objetos cosechables confirmados aquí incluyen Sugarbone y varias flores — vale la pena procesarlos en una Estación de Cocina o Rejilla de Secado en vez de venderlos crudos.',
+      'La casa de la familia Logan también está aquí, junto con una cripta inaccesible en tu primera visita, y una zona norte que tampoco es accesible aún — ambas probablemente ligadas a misiones posteriores.',
+    ],
+    related: [{ label: 'Todos los puntos de referencia', href: '/locations/landmarks' }, { label: 'Familia Logan', href: '/families' }, { label: 'El pueblo', href: '/locations/town' }],
+    faq: [
+      { q: '¿Dónde están las Howling Marshes en Moonlight Peaks?', a: 'Confirmado: justo al norte del pueblo principal y al este de Moonlit Pines. Hay dos entradas — una justo al este del puesto de semillas de Luna en Moonlit Pines, la otra justo al este del ayuntamiento.' },
+      { q: '¿Cómo se desbloquean las Howling Marshes?', a: 'Te dirigen aquí como parte de la misión de historia "Tensión en el Crest Garden" — no está bloqueada detrás de un desbloqueo separado.' },
+      { q: '¿Qué se puede cosechar en las Howling Marshes?', a: 'Los objetos cosechables confirmados incluyen Sugarbone y varias flores. Vale la pena procesarlos en una Estación de Cocina o Rejilla de Secado para obtener el mejor valor en vez de venderlos crudos.' },
+    ],
+  },
+  'twilight-catacombs': {
+    title: 'Twilight Catacombs', dek: 'Una red de túneles subterráneos bloqueada que conecta la Cripta, la Crystal Cave, el cementerio de Misty Shores, Luna Bay y las Howling Marshes, desbloqueada donando al Museo.',
+    body: [
+      'Confirmado: las Twilight Catacombs son una red de túneles subterráneos bloqueada con entradas y salidas repartidas por el mapa, en vez de una mazmorra única y autocontenida. Hay puertas en la Cripta (donde está Viktor) y en el cementerio de Misty Shores, y al interactuar con ellas antes de desbloquearlas solo dicen que están "cerradas desde el otro lado" sin explicar cómo abrirlas.',
+      'Confirmado: el camino de desbloqueo pasa por el Museo, no es un objeto llave independiente que encuentras explorando. Alcanza el 25% de finalización general de donaciones del Museo, y Jada te da la Dracula Insignia Key. Muestra esa llave a Viktor en la Cripta para activar la misión "A Key to the Deep" y abrir las catacumbas.',
+      'Confirmado: una vez dentro, la red de túneles conecta varias zonas subterráneas y exteriores del juego mediante placas de presión azules — una conecta con una puerta derrumbada en la Crystal Cave, otra con la entrada de las catacumbas en el cementerio de Misty Shores, otra al norte a lo largo del río con una puerta derrumbada en Luna Bay, y otra al este con la entrada de las catacumbas en las Howling Marshes.',
+      'Reportado por un walkthrough: tras encontrar estas conexiones, dormir en tu ataúd y revisar tu buzón al día siguiente trae una carta de Samael. Visitarlo en The Broken Lamp te desbloquea una entrada adicional.',
+    ],
+    related: [{ label: 'Crystal Cave', href: '/locations/crystal-cave' }, { label: 'Las minas', href: '/locations/mines' }, { label: 'Howling Marshes', href: '/locations/howling-marshes' }, { label: 'Museo', href: '/locations/silverveil-museum' }, { label: 'Viktor', href: '/characters/viktor-dracula' }, { label: 'Samael', href: '/characters/samael' }],
+    faq: [
+      { q: '¿Cómo se desbloquean las Twilight Catacombs en Moonlight Peaks?', a: 'Confirmado: alcanza el 25% de finalización de donaciones del Museo para recibir la Dracula Insignia Key de Jada, luego muéstrasela a Viktor en la Cripta para iniciar la misión "A Key to the Deep", que abre las catacumbas.' },
+      { q: '¿Dónde están las entradas de las Twilight Catacombs en Moonlight Peaks?', a: 'Las entradas confirmadas están en la Cripta (ubicación de Viktor) y el cementerio de Misty Shores. Reportado por un walkthrough: las placas de presión internas también conectan con la Crystal Cave, Luna Bay y las Howling Marshes una vez dentro.' },
+      { q: '¿Qué hacen las placas de presión azules en las Twilight Catacombs?', a: 'Reportado por un walkthrough: pisar cada una abre una conexión de atajo a una puerta derrumbada diferente en otra parte del mapa — Crystal Cave, el cementerio de Misty Shores, Luna Bay y las Howling Marshes — convirtiendo las catacumbas en un centro que acorta los viajes entre esas zonas.' },
+    ],
+  },
+  'crest-garden': {
+    title: 'Crest Garden', dek: 'Un jardín del pueblo junto al ayuntamiento que muestra los escudos de las siete familias conforme los desbloqueas a través de la historia principal.',
+    body: [
+      'Confirmado por el wiki oficial: el Crest Garden está ubicado junto al ayuntamiento y muestra los escudos de cada una de las siete familias de Moonlight Peaks conforme se desbloquean con el progreso de la historia — un rastreador visual de cuánto has avanzado en las tramas familiares centrales del juego.',
+      'Reportado por un walkthrough: el escudo de la familia Logan específicamente desaparece a mitad de camino, enviándote a un desvío de misión de recuperación — Dragan te señala The Broken Lamp para obtener información, lo cual lleva a las Howling Marshes, donde resulta que Yabbis se comió el escudo y quiere una Barra de Cobre a cambio.',
+      'Reportado por un walkthrough: los últimos dos escudos en completarse pertenecen a las dos familias vampiro, Ambrosia y Dracula. Orlock pide materiales de creación (piedra refinada, barras de oro y vidrio) para el escudo Ambrosia, mientras que la misión del escudo Dracula se describe como la conclusión emocional de la historia principal, activada por una carta unos días después de desbloquear la transformación en murciélago.',
+    ],
+    related: [{ label: 'Ayuntamiento', href: '/locations/town-hall' }, { label: 'Familias', href: '/families' }, { label: 'Howling Marshes', href: '/locations/howling-marshes' }, { label: 'Dragan', href: '/characters/dragan' }, { label: 'Yabbis', href: '/characters/yabbis' }, { label: 'Orlock', href: '/characters/orlock' }],
+    faq: [
+      { q: '¿Dónde está el Crest Garden en Moonlight Peaks?', a: 'Confirmado por el wiki oficial: está ubicado junto al ayuntamiento.' },
+      { q: '¿Qué hace el Crest Garden en Moonlight Peaks?', a: 'Confirmado: muestra los escudos de las siete familias del pueblo, desbloqueándose uno por uno conforme avanzas la historia principal de cada familia.' },
+      { q: '¿Por qué falta un escudo familiar en el Crest Garden?', a: 'Reportado por un walkthrough: al menos un escudo (el de Logan) está escrito como un pequeño desvío de misión de recuperación en vez de desbloquearse automáticamente — en ese caso, Yabbis se lo había comido y quería una Barra de Cobre para devolverlo.' },
+      { q: '¿Qué escudos se desbloquean al final en el Crest Garden?', a: 'Reportado por un walkthrough: los dos escudos de familias vampiro, Ambrosia y Dracula, son los últimos en completarse, y la misión del escudo Dracula se describe como la conclusión emocional de la historia.' },
+    ],
+  },
+  'moonlit-slopes': {
+    title: 'Moonlit Slopes', dek: 'El hogar de la Diosa de la Luna, confirmado que se bloquea de nuevo tras tu primera invitación hasta desbloquear la forma de murciélago.',
+    body: [
+      'Confirmado: Moonlit Slopes es el hogar de la Diosa de la Luna, alcanzado tras resolver el arco de historia "A Missing Moon", donde los videntes de la familia Khazan caen en trance simultáneo y la luna desaparece del cielo. Una breve misión de seguimiento, "The Moon in the Sky", hace que te invite formalmente a visitarla.',
+      'Confirmado: tras esa primera visita, Moonlit Slopes se bloquea de nuevo y permanece inaccesible hasta que desbloqueas la forma de murciélago mediante la misión "Master of the Night" — así que si no puedes volver a entrar justo después de conocer a la Diosa de la Luna, eso es esperado y no un error.',
+    ],
+    related: [{ label: 'Transformación', href: '/shapeshifting' }, { label: 'Diosa de la Luna', href: '/characters/moon-goddess' }, { label: 'Misiones', href: '/quests' }],
+    faq: [
+      { q: '¿Dónde se conoce a la Diosa de la Luna en Moonlight Peaks?', a: 'Confirmado: en Moonlit Slopes, tras completar "A Missing Moon" y la breve misión de seguimiento "The Moon in the Sky", donde te invita formalmente.' },
+      { q: '¿Por qué no puedo volver a Moonlit Slopes tras visitarlo una vez?', a: 'Confirmado: la zona se bloquea de nuevo tras tu primera visita y solo se reabre una vez que desbloqueas la forma de murciélago mediante la misión "Master of the Night" — esto es esperado, no un error.' },
+    ],
+  },
+  'midnight-market': {
+    title: 'Midnight Market', dek: 'Un mercado exclusivo de fin de semana en el pueblo que vende sombreros para animales, ingredientes de pociones y otros objetos no disponibles entre semana.',
+    body: [
+      'Confirmado por reportes de la comunidad: el Midnight Market es un evento exclusivo de fin de semana en el pueblo, que ocurre sábados y domingos, distinto de las tiendas regulares de días laborables del juego.',
+      'Reportado: Snek vende sombreros diminutos para tus animales de granja en el Midnight Market, y Sabrina también vende ahí el Alchemist\'s Globe y otros artículos relacionados con pociones — objetos no confirmados como disponibles con ninguno de los dos personajes durante el horario regular de días laborables.',
+    ],
+    related: [{ label: 'Snek', href: '/characters/snek' }, { label: 'Sabrina', href: '/characters/sabrina' }, { label: 'Animales de granja', href: '/farm/animals' }, { label: 'Pociones', href: '/items/potions' }],
+    faq: [
+      { q: '¿Cuándo está abierto el Midnight Market en Moonlight Peaks?', a: 'Reportado por la comunidad: solo sábados y domingos, distinto del horario regular de tiendas de días laborables del juego.' },
+      { q: '¿Qué se puede comprar en el Midnight Market en Moonlight Peaks?', a: 'Reportado: sombreros diminutos para animales de granja de Snek, y el Alchemist\'s Globe y otros artículos relacionados con pociones de Sabrina — objetos no confirmados como vendidos en días laborables regulares.' },
+    ],
+  },
+  'bloom-boutique': {
+    title: 'Bloom Boutique', dek: 'Una tienda con nombre confirmada como existente en el pueblo mediante la propia navegación del wiki oficial, con detalles aún sin confirmar.',
+    body: [
+      'Confirmado que existe mediante la propia navegación del sitio del wiki oficial, listada junto a las otras tiendas con nombre del juego. Más allá del nombre, aún no tenemos detalles verificados de forma independiente sobre qué vende Bloom Boutique, quién la dirige, o su horario — no adivinamos un tema solo porque el nombre sugiera flores.',
+      'Dado el nombre y los sistemas existentes de arreglos florales y regalos del juego, un enfoque floral o de decoración sería una suposición razonable, pero etiquetamos esto como esperado en vez de confirmado hasta que una fuente lo verifique contra el juego real.',
+    ],
+    related: [{ label: 'Tiendas', href: '/locations/shops' }, { label: 'Actividades: arreglos florales', href: '/activities/flower-arranging' }],
+    faq: [
+      { q: '¿Qué es Bloom Boutique en Moonlight Peaks?', a: 'Confirmado que existe como tienda con nombre mediante la propia navegación del wiki oficial. Qué vende y quién la dirige aún no está confirmado de forma independiente aquí — no adivinamos el contenido de la tienda solo por el nombre.' },
+    ],
+  },
 };
