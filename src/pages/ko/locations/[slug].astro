@@ -1,0 +1,23 @@
+---
+import TopicPage from '../../../components/TopicPage.astro';
+import { locationsSection, locations } from '../../../data/locations';
+import { locationsKo } from '../../../i18n/locations-ko';
+
+export function getStaticPaths() {
+  return locations.filter((it) => locationsKo[it.slug]).map((it, i, arr) => {
+    const tr = locationsKo[it.slug];
+    const merged = { ...it, ...tr };
+    return {
+      params: { slug: it.slug },
+      props: {
+        item: merged,
+        prev: { ...arr[(i - 1 + arr.length) % arr.length], ...locationsKo[arr[(i - 1 + arr.length) % arr.length].slug] },
+        next: { ...arr[(i + 1) % arr.length], ...locationsKo[arr[(i + 1) % arr.length].slug] },
+      },
+    };
+  });
+}
+const { item, prev, next } = Astro.props;
+const koSection = { ...locationsSection, base: '/ko/locations', label: '장소', eyebrow: '장소' };
+---
+<TopicPage section={koSection} item={item} prev={prev} next={next} lang="ko" basePath="/ko/locations" />

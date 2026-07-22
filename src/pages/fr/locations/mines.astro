@@ -1,0 +1,83 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { SITE } from '../../../consts';
+
+const faq = [
+  { q: "Comment débloquer la Cave of Echoes dans Moonlight Peaks ?", a: "Confirmé : la Cave of Echoes se trouve au sud-ouest de Misty Shores. Elle est initialement verrouillée et s'ouvre une fois que vous avez terminé la quête \"A Bridge Too Far\"." },
+  { q: 'Où trouve-t-on le minerai de cuivre dans Moonlight Peaks ?', a: "Rapporté par la communauté : dans la Cave of Echoes, après avoir terminé \"A Bridge Too Far\". Le minerai de cuivre ressemble à de la pierre normale tachetée de cuivre et se mine avec la pioche." },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Accueil', item: `${SITE.url}/fr` },
+    { '@type': 'ListItem', position: 2, name: 'Lieux', item: `${SITE.url}/fr/locations` },
+    { '@type': 'ListItem', position: 3, name: 'Cave of Echoes', item: `${SITE.url}/fr/locations/mines` },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks Cave of Echoes — Déblocage & minerai (Français)"
+  description="Moonlight Peaks Cave of Echoes en français : comment la débloquer, où trouver le minerai de cuivre, et les problèmes fréquents de progression dans les mines."
+  path="/fr/locations/mines"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Lieux', href: '/fr/locations' }, { label: 'Cave of Echoes' }]}
+  lang="fr"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Entrée / Mines</p>
+      <h1>Moonlight Peaks <em>Cave of Echoes</em></h1>
+
+      <div class="callout">
+        <strong>Réponse rapide :</strong> la Cave of Echoes se débloque une fois que vous avez
+        terminé la quête "A Bridge Too Far". Vous y trouverez ensuite du minerai de cuivre avec
+        la pioche.
+      </div>
+
+      <h2>Déblocage</h2>
+      <p>
+        Confirmé : la Cave of Echoes se trouve au sud-ouest de la zone Misty Shores et est
+        verrouillée au départ. Elle s'ouvre avec le reste de la zone Misty Shores une fois que
+        vous terminez la quête "A Bridge Too Far".
+      </p>
+
+      <h2>Pourquoi la grotte est encore verrouillée</h2>
+      <p>
+        Si vous ne pouvez pas encore l'atteindre, c'est presque toujours la quête — pas un objet
+        manquant — qui en est la véritable raison. Rapporté par la communauté : la zone est
+        bloquée par une querelle entre Orlock et Fiona à propos d'un pont soi-disant maudit.
+      </p>
+
+      <h2>Minerai de cuivre</h2>
+      <p>
+        <span class="tag-community">Rapporté par la communauté</span> Le minerai de cuivre
+        ressemble à de la pierre normale tachetée de cuivre et se mine avec la pioche. Les plus
+        gros gisements peuvent donner jusqu'à 6 minerais au lieu d'1.
+      </p>
+
+      <h2>Questions fréquentes</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        Aller plus loin : <a href="/fr/locations">lieux</a>,
+        <a href="/fr/quests/story/a-bridge-too-far">guide A Bridge Too Far</a>,
+        <a href="/locations/mines">guide complet (en anglais)</a>.
+      </div>
+    </div>
+  </article>
+  <style>
+    .tag-community {
+      display: inline-block; font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.02em;
+      color: var(--faint); border: 1px solid var(--line); border-radius: 999px; padding: 2px 8px;
+      margin-right: 6px; vertical-align: middle;
+    }
+  </style>
+</Base>

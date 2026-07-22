@@ -1,0 +1,80 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { SITE } from '../../../consts';
+
+const faq = [
+  { q: 'Moonlight Peaks에서 Cave of Echoes는 어떻게 해금하나요?', a: '확인됨: Cave of Echoes는 Misty Shores 남서쪽에 있습니다. 처음에는 잠겨 있으며 "A Bridge Too Far" 퀘스트를 완료하면 열립니다.' },
+  { q: 'Moonlight Peaks에서 구리 광석은 어디서 찾나요?', a: '커뮤니티 제보: "A Bridge Too Far"를 완료한 후 Cave of Echoes에서요. 구리 광석은 구리 얼룩이 있는 평범한 돌처럼 보이며 곡괭이로 캡니다.' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '홈', item: `${SITE.url}/ko` },
+    { '@type': 'ListItem', position: 2, name: '장소', item: `${SITE.url}/ko/locations` },
+    { '@type': 'ListItem', position: 3, name: 'Cave of Echoes', item: `${SITE.url}/ko/locations/mines` },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks Cave of Echoes — 해금 & 광석 (한국어)"
+  description="한국어로 보는 Moonlight Peaks Cave of Echoes: 해금 방법, 구리 광석을 찾는 곳, 흔한 광산 진행 문제."
+  path="/ko/locations/mines"
+  jsonLd={jsonLd}
+  crumbs={[{ label: '장소', href: '/ko/locations' }, { label: 'Cave of Echoes' }]}
+  lang="ko"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">항목 / 광산</p>
+      <h1>Moonlight Peaks <em>Cave of Echoes</em></h1>
+
+      <div class="callout">
+        <strong>빠른 답변:</strong> Cave of Echoes는 "A Bridge Too Far" 퀘스트를 완료하면
+        해금됩니다. 그 후 곡괭이로 구리 광석을 찾을 수 있습니다.
+      </div>
+
+      <h2>해금</h2>
+      <p>
+        확인됨: Cave of Echoes는 Misty Shores 구역 남서쪽에 있으며 처음에는 잠겨 있습니다.
+        "A Bridge Too Far" 퀘스트를 완료하면 나머지 Misty Shores 구역과 함께 열립니다.
+      </p>
+
+      <h2>동굴이 아직 잠긴 이유</h2>
+      <p>
+        아직 접근할 수 없다면, 빠진 아이템이 아니라 거의 항상 퀘스트가 진짜 이유입니다.
+        커뮤니티 제보: 이 구역은 저주받았다고 하는 다리를 둘러싼 Orlock과 Fiona 사이의
+        불화로 막혀 있습니다.
+      </p>
+
+      <h2>구리 광석</h2>
+      <p>
+        <span class="tag-community">커뮤니티 제보</span> 구리 광석은 구리 얼룩이 있는 평범한
+        돌처럼 보이며 곡괭이로 캡니다. 더 큰 광맥은 1개 대신 최대 6개의 광석을 줄 수 있습니다.
+      </p>
+
+      <h2>자주 묻는 질문</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        더 알아보기: <a href="/ko/locations">장소</a>,
+        <a href="/ko/quests/story/a-bridge-too-far">A Bridge Too Far 가이드</a>,
+        <a href="/locations/mines">전체 가이드(영어)</a>.
+      </div>
+    </div>
+  </article>
+  <style>
+    .tag-community {
+      display: inline-block; font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.02em;
+      color: var(--faint); border: 1px solid var(--line); border-radius: 999px; padding: 2px 8px;
+      margin-right: 6px; vertical-align: middle;
+    }
+  </style>
+</Base>

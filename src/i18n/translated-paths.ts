@@ -143,5 +143,6 @@ export function isPathTranslated(locale: Locale, barePath: string): boolean {
   // Farm sub-pages (crops, house, barn, greenhouse, animals, farm-helpers) and crop detail pages
   // are fully translated for es.
   if ((locale === 'es' || locale === 'zh' || locale === 'zh-hant' || locale === 'fr' || locale === 'ko') && /^\/farm\/(crops|house|barn|greenhouse|animals|farm-helpers)(\/[a-z0-9-]+)?$/.test(barePath)) return true;
+  if ((locale === 'fr' || locale === 'ko') && /^\/(activities|items|locations|platforms|families)\/[a-z0-9-]+$/.test(barePath)) return true;
   return false;
 }
