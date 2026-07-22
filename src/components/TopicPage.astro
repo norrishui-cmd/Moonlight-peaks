@@ -5,7 +5,7 @@ import { isPathTranslated } from '../i18n/translated-paths';
 import { relatedLabelsDe, relatedLabelsJa } from '../i18n/related-labels';
 import type { TopicSection, TopicItem } from '../data/topic';
 
-interface Props { section: TopicSection; item: TopicItem; prev: TopicItem; next: TopicItem; lang?: 'en' | 'ja' | 'de' | 'es'; basePath?: string; }
+interface Props { section: TopicSection; item: TopicItem; prev: TopicItem; next: TopicItem; lang?: 'en' | 'ja' | 'de' | 'es' | 'fr' | 'ko'; basePath?: string; }
 const { section, item, prev, next, lang = 'en', basePath } = Astro.props;
 const base = basePath ?? section.base;
 // Related links in the underlying data are always bare English paths and labels (shared across
@@ -63,6 +63,28 @@ const ui = {
     },
     statusNote: 'Mantenemos los hechos confirmados por el desarrollador separados de los detalles reportados o esperados, y nunca inventamos datos — esta página se actualiza conforme se verifica información real posterior al lanzamiento.',
   },
+  fr: {
+    whatWeKnow: 'Ce que nous savons', status: 'Statut :', related: 'Lié :', faq: 'FAQ',
+    prev: 'Précédent :', next: 'Suivant :', all: (l: string) => `Tout : ${l.toLowerCase()}`,
+    statusLabels: {
+      confirmed: 'Confirmé par les développeurs',
+      expected: 'Attendu - pas encore confirmé',
+      datamined: 'Datamining - fichiers de jeu antérieurs à la sortie, recoupés avec des références préalables ; à vérifier à la sortie',
+      reported: 'Rapporté - à vérifier à la sortie',
+    },
+    statusNote: "Nous séparons toujours les faits confirmés par les développeurs des détails rapportés ou attendus, et n'inventons jamais de données — cette page est mise à jour à mesure que de vraies informations post-sortie sont vérifiées.",
+  },
+  ko: {
+    whatWeKnow: '확인된 내용', status: '상태:', related: '관련:', faq: 'FAQ',
+    prev: '이전:', next: '다음:', all: (l: string) => `전체 ${l}`,
+    statusLabels: {
+      confirmed: '개발자 확인됨',
+      expected: '예상됨 - 아직 미확인',
+      datamined: '데이터마이닝 - 출시 전 게임 파일에서, 사전 자료와 교차 확인됨; 출시 시 검증 예정',
+      reported: '제보됨 - 출시 시 검증 예정',
+    },
+    statusNote: '개발자가 확인한 사실과 제보되거나 예상되는 세부 사항을 항상 구분하며, 데이터를 지어내지 않습니다 — 실제 출시 후 정보가 확인되는 대로 이 페이지를 업데이트합니다.',
+  },
 }[lang];
 
 const url = new URL(`${base}/${item.slug}`, SITE.url).href;
@@ -70,7 +92,7 @@ const statusLabel = ui.statusLabels[item.status as keyof typeof ui.statusLabels]
 
 const ld: object[] = [
   { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
-    { '@type': 'ListItem', position: 1, name: lang === 'ja' ? 'ホーム' : lang === 'de' ? 'Startseite' : 'Home', item: lang === 'en' ? SITE.url : `${SITE.url}/${lang}` },
+    { '@type': 'ListItem', position: 1, name: lang === 'ja' ? 'ホーム' : lang === 'de' ? 'Startseite' : lang === 'fr' ? 'Accueil' : lang === 'ko' ? '홈' : lang === 'es' ? 'Inicio' : 'Home', item: lang === 'en' ? SITE.url : `${SITE.url}/${lang}` },
     { '@type': 'ListItem', position: 2, name: section.label, item: new URL(base, SITE.url).href },
     { '@type': 'ListItem', position: 3, name: item.title, item: url },
   ] },

@@ -1,0 +1,120 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { SITE } from '../../../consts';
+import { itemCategories, getItemFramework } from '../../../data/items';
+import { itemsKo } from '../../../i18n/items-ko';
+import type { ItemCategory } from '../../../data/items';
+
+export function getStaticPaths() {
+  return itemCategories.filter((item) => itemsKo[item.slug]).map((item, index, arr) => ({
+    params: { slug: item.slug },
+    props: { item, prev: arr[(index - 1 + arr.length) % arr.length], next: arr[(index + 1) % arr.length] },
+  }));
+}
+
+const { item } = Astro.props as { item: ItemCategory };
+const tr = itemsKo[item.slug];
+const url = new URL(`/ko/items/${item.slug}`, SITE.url).href;
+const framework = getItemFramework(item.slug);
+const hasRealData = item.slug === 'foraging' || item.slug === 'cooking';
+const parseImageCell = (cell: string) => {
+  const [src, alt = ''] = cell.slice('image:'.length).split('|');
+  return { src, alt };
+};
+
+const statusLabelKo: Record<string, string> = {
+  confirmed: '확인됨', datamined: '데이터마이닝', expected: '예상됨',
+};
+
+const faq = [
+  { q: `Moonlight Peaks에서 ${tr.name}는 무엇인가요?`, a: `${tr.name}는 Moonlight Peaks의 아이템 카테고리입니다. ${tr.summary}` },
+  { q: `${tr.name}에 대한 정보가 확인되었나요?`, a: item.status === 'confirmed'
+      ? `${tr.name} 시스템은 확인되었지만, 개별 아이템 이름과 효과는 실제 게임에서 계속 검증 중입니다.`
+      : `${tr.name} 카테고리는 아직 실제 게임에서 독립적으로 확인되지 않았습니다. 저희는 추측하지 않으며 확인되는 대로 이 페이지를 업데이트하겠습니다.` },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '홈', item: `${SITE.url}/ko` },
+    { '@type': 'ListItem', position: 2, name: '아이템', item: `${SITE.url}/ko/items` },
+    { '@type': 'ListItem', position: 3, name: tr.name, item: url },
+  ] },
+];
+---
+<Base
+  title={`${tr.name} | Moonlight Peaks 아이템 가이드`}
+  description={tr.dek}
+  path={`/ko/items/${item.slug}`}
+  jsonLd={jsonLd}
+  crumbs={[{ label: '아이템', href: '/ko/items' }, { label: tr.name }]}
+  lang="ko"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">아이템 · {statusLabelKo[item.status] ?? item.status}</p>
+      <h1><em>{tr.name}</em></h1>
+      <p class="intro">{tr.dek}</p>
+
+      <h2>세부 사항</h2>
+      <p>{tr.summary}</p>
+
+      <h2>예시</h2>
+      <ul>{tr.examples.map((e) => (<li>{e}</li>))}</ul>
+
+      {hasRealData && (
+        <>
+          <h2>전체 데이터 표</h2>
+          <div class="ko-item-table-wrap">
+            <table class="ko-item-table">
+              <thead>
+                <tr>{framework.columns.map((col) => <th>{col}</th>)}</tr>
+              </thead>
+              <tbody>
+                {framework.rows.map((row) => (
+                  <tr>
+                    {row.map((cell) => {
+                      const image = cell.startsWith('image:') ? parseImageCell(cell) : null;
+                      return (
+                        <td>
+                          {image ? (
+                            <img class="ko-item-table-icon" src={image.src} alt={image.alt} loading="lazy" decoding="async" />
+                          ) : cell}
+                        </td>
+                      );
+                    })}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <p class="ko-source-note">{framework.sourceNote}</p>
+        </>
+      )}
+
+      <h2>자주 묻는 질문</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        관련: <a href="/ko/items">모든 아이템</a>, <a href={`/items/${item.slug}`}>영어 전체 버전</a>.
+      </div>
+    </div>
+  </article>
+
+  <style>
+    .ko-item-table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 14px; background: var(--surface); margin: 12px 0; }
+    .ko-item-table { width: 100%; min-width: 700px; border-collapse: collapse; font-size: 0.84rem; }
+    .ko-item-table th, .ko-item-table td { border-bottom: 1px solid var(--line); padding: 10px 12px; text-align: left; vertical-align: top; }
+    .ko-item-table th { color: var(--candle); font-family: var(--mono); font-size: 0.66rem; letter-spacing: 0.05em; text-transform: uppercase; background: rgba(21, 16, 29, 0.58); white-space: nowrap; }
+    .ko-item-table-icon { display: block; width: 68px; height: 68px; object-fit: contain; }
+    .ko-item-table tr:last-child td { border-bottom: 0; }
+    .ko-source-note { border-left: 3px solid var(--candle-dim); color: #ded3e6; padding-left: 12px; font-size: 0.88rem; }
+  </style>
+</Base>

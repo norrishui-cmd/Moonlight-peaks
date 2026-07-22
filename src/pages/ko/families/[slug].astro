@@ -1,0 +1,23 @@
+---
+import TopicPage from '../../../components/TopicPage.astro';
+import { familiesSection, families } from '../../../data/families';
+import { familiesKo } from '../../../i18n/families-ko';
+
+export function getStaticPaths() {
+  return families.filter((it) => familiesKo[it.slug]).map((it, i, arr) => {
+    const tr = familiesKo[it.slug];
+    const merged = { ...it, ...tr };
+    return {
+      params: { slug: it.slug },
+      props: {
+        item: merged,
+        prev: { ...arr[(i - 1 + arr.length) % arr.length], ...familiesKo[arr[(i - 1 + arr.length) % arr.length].slug] },
+        next: { ...arr[(i + 1) % arr.length], ...familiesKo[arr[(i + 1) % arr.length].slug] },
+      },
+    };
+  });
+}
+const { item, prev, next } = Astro.props;
+const koSection = { ...familiesSection, base: '/ko/families', label: '가문', eyebrow: '세계관' };
+---
+<TopicPage section={koSection} item={item} prev={prev} next={next} lang="ko" basePath="/ko/families" />

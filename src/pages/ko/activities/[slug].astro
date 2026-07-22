@@ -1,0 +1,24 @@
+---
+import TopicPage from '../../../components/TopicPage.astro';
+import { activitiesSection, activities } from '../../../data/activities';
+import { activitiesKo } from '../../../i18n/activities-ko';
+
+export function getStaticPaths() {
+  const translated = activities.filter((it) => activitiesKo[it.slug]);
+  return translated.map((it, i) => {
+    const tr = activitiesKo[it.slug];
+    const merged = { ...it, ...tr };
+    return {
+      params: { slug: it.slug },
+      props: {
+        item: merged,
+        prev: { ...translated[(i - 1 + translated.length) % translated.length], ...activitiesKo[translated[(i - 1 + translated.length) % translated.length].slug] },
+        next: { ...translated[(i + 1) % translated.length], ...activitiesKo[translated[(i + 1) % translated.length].slug] },
+      },
+    };
+  });
+}
+const { item, prev, next } = Astro.props;
+const koSection = { ...activitiesSection, base: '/ko/activities', label: '활동', eyebrow: '게임플레이' };
+---
+<TopicPage section={koSection} item={item} prev={prev} next={next} lang="ko" basePath="/ko/activities" />
