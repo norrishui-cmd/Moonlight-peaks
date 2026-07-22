@@ -308,9 +308,14 @@ export const charTranslations: Record<'es' | 'ja' | 'zh' | 'zh-hant' | 'de' | 'f
     },
     'skull-girl': {
       name: 'Skull Girl', familyLabel: 'Unbekannt', typeLabel: 'Sonstige',
-      desc: 'Name über die offizielle Wiki-Navigation bestätigt; Rolle noch nicht dokumentiert.',
-      knownInfo: ['Im offiziellen Wiki gelistet; noch keine weiteren Details bestätigt.'],
-      romanceYes: '', romanceNo: '', romanceTbc: 'Noch nicht bestätigt.',
+      desc: 'Bestätigt als vollständig ausgearbeiteter NPC mit eigenem Zeitplan, Geschenken und Beziehungs-Events — zusammen mit Llemi, Pumpkin Head und anderen familienlosen Charakteren im offiziellen Wiki gelistet. Ihre Persönlichkeit und Hintergrundgeschichte sind noch nicht bequellt, aber sie ist weit mehr als nur ein Name.',
+      knownInfo: [
+        'Bestätigt über die Charakter-Navigation des offiziellen Wikis: zusammen mit Llemi, Pumpkin Head, Albertus, Chester, Grim, Hoodini, Larry, Mr. Deyes, Rachel und Yabbis als Charakter ohne Familie gelistet.',
+        'Bestätigt über eine eigene Drittanbieter-Charakterdatenbank (Geburtstag, Geschenkreaktionslisten, Beziehungs-Events und ein täglicher Zeitplan sind alle dokumentiert): sie ist eine echte, systemisch erfasste Bewohnerin, kein bloßer Hintergrund-Cameo.',
+        'Noch nicht bequellt: ihre Persönlichkeit, Hintergrundgeschichte oder genaue Rolle in der Story — wir aktualisieren dies, sobald eine verlässliche Quelle sie beschreibt, statt aus dem Namen zu raten.',
+        'Ob sie romançable ist, ist derzeit nicht verifiziert — anders als bei Llemi, die das offizielle Wiki explizit als "datebar" markiert, ist bei Skull Girl bisher keine solche Markierung aufgetaucht.',
+      ],
+      romanceYes: '', romanceNo: '', romanceTbc: 'Noch nicht bestätigt, ob Skull Girl eine Romanze-Option ist.',
     },
     balthasar: {
       name: 'Balthasar', familyLabel: 'Ohne Familie', typeLabel: 'Geist',
@@ -389,21 +394,23 @@ export const charTranslations: Record<'es' | 'ja' | 'zh' | 'zh-hant' | 'de' | 'f
     },
     'moon-goddess': {
       name: 'Mondgöttin', familyLabel: 'Unbekannt', typeLabel: 'Sonstige',
-      desc: 'Eine gottheitsartige Figur, deren Existenz über die offizielle Wiki-Navigation bestätigt ist; Rolle noch nicht dokumentiert.',
+      desc: 'Bestätigt über das offizielle Wiki: eine Gottheit, die bei Vollmond aus ihrem Mondgesteinspalast herabsteigt, um Moonlight Peaks mit ihrer Anwesenheit zu segnen — esoterisch in der Ausdrucksweise, aber genießt es wirklich, unter Sterblichen zu wandeln.',
       knownInfo: [
-        'Im offiziellen Wiki gelistet; wahrscheinlich mit der Nacht-/Mond-Mythologie des Spiels verbunden.',
-        'Community-berichtet (japanischsprachige Berichterstattung): zusammen mit Brook als reiner Freundschafts-NPC eingestuft, keine Romanze-Option.',
+        'Bestätigt über das offizielle Wiki: erscheint speziell bei Vollmond und wird beschrieben, als liebe sie es, unter gewöhnlichen Stadtbewohnern zu wandeln, trotz ihrer ansonsten kosmischen, esoterischen Ausdrucksweise.',
+        'Bestätigt als Geschwister (kosmischer Zwilling) des Sonnengottes.',
+        'Community-berichtet (japanischsprachige Berichterstattung): zusammen mit Brook als reiner Freundschafts-NPC eingestuft, keine Romanze-Option — konsistent mit ihrem Status hier.',
       ],
-      romanceYes: '', romanceNo: 'Community-berichtet als reiner Freundschafts-NPC.', romanceTbc: '',
+      romanceYes: '', romanceNo: 'Die Mondgöttin ist keine Romanze-Option.', romanceTbc: '',
     },
     'sun-god': {
       name: 'Sonnengott', familyLabel: 'Unbekannt', typeLabel: 'Sonstige',
-      desc: 'Eine gottheitsartige Figur, deren Existenz über die offizielle Wiki-Navigation bestätigt ist; Rolle noch nicht dokumentiert.',
+      desc: 'Bestätigt über das offizielle Wiki: der kosmische Zwillingsbruder der Mondgöttin, eine seltene Erscheinung, die sich nur am Höhepunkt des Sommers zeigt — hochmütig und selbstwichtig, mit wenigen Freunden in der Stadt und einer Aura, die "Nachtwesen" auf Abstand hält.',
       knownInfo: [
-        'Im offiziellen Wiki gelistet; wahrscheinlich das Gegenstück der Mondgöttin in der Mythologie des Spiels.',
-        'Community-berichtet (japanischsprachige Berichterstattung): zusammen mit Brook als reiner Freundschafts-NPC eingestuft, keine Romanze-Option.',
+        'Bestätigt über das offizielle Wiki: erscheint nur am Höhepunkt des Sommers, beschrieben als ausstrahlend hochmütig und selbstwichtig, was nächtliche Bewohner fernhält.',
+        'Bestätigt, wenige Freunde in der Stadt zu haben — eine Tatsache, deren sich die Figur selbst scharf bewusst sein soll.',
+        'Community-berichtet (japanischsprachige Berichterstattung): zusammen mit Brook als reiner Freundschafts-NPC eingestuft, keine Romanze-Option — konsistent mit seinem Status hier.',
       ],
-      romanceYes: '', romanceNo: 'Community-berichtet als reiner Freundschafts-NPC.', romanceTbc: '',
+      romanceYes: '', romanceNo: 'Der Sonnengott ist keine Romanze-Option.', romanceTbc: '',
     },
     yasmin: {
       name: 'Yasmin', familyLabel: 'Unbekannt', typeLabel: 'Sonstige',
@@ -412,14 +419,17 @@ export const charTranslations: Record<'es' | 'ja' | 'zh' | 'zh-hant' | 'de' | 'f
       romanceYes: '', romanceNo: '', romanceTbc: 'Noch nicht bestätigt.',
     },
     'count-dracula': {
-      name: 'Graf Dracula', familyLabel: 'Vampir', typeLabel: 'Vampir',
-      desc: 'Dein Vater und die Legende der Stadt. Aus seinem Schatten herauszutreten ist der Ausgangspunkt der Geschichte — keine Romanze-Option, sondern eine zentrale Erzählfigur.',
+      name: 'Count Dracula (Vlad Dracula)', familyLabel: 'Vampir (Dracula)', typeLabel: 'Vampir',
+      desc: 'Dein Vater, vollständiger Name Vlad Dracula, und die Stadtlegende, aus deren Schatten du heraustreten willst. Zentral für die Story — keine Romanze-Option.',
       knownInfo: [
-        'Dein Vater — der Umzug nach Moonlight Peaks wird als Schritt aus seinem langen Schatten dargestellt.',
-        'Keine Romanze-Option, sondern eine zentrale Erzählfigur.',
-        'Die Spielfigur beweist im Laufe der Geschichte, dass ein sanfteres, ruhigeres unsterbliches Leben möglich ist — etwas, das er bezweifelt.',
+        'Er ist dein Vater; die Story zeigt deinen Umzug nach Moonlight Peaks als Schritt aus seinem langen Schatten heraus.',
+        'Bestätigter vollständiger Name: Vlad Dracula. (Korrektur: ein früherer Eintrag behandelte "Vlad" als eigenen Ambrosia-Charakter — mehrere Quellen bestätigen, dass dies Count Draculas eigener Vorname ist, keine separate Person. Dieser Eintrag wurde zurückgezogen.)',
+        'Bestätigt: Deine Mutter ist Laveau, eine Hexe, die den Webb-Zirkel anführte, bevor sie ihn verließ, um mit Vlad Dracula ein Leben zu beginnen — dein Charakter hat also ein gemischtes Vampir-/Hexen-Erbe.',
+        'Eine zentrale Story-Figur statt einer Romanze-Option.',
+        'Die Prämisse lässt dich beweisen, dass ein sanfteres, freundlicheres Untotenleben möglich ist — etwas, dem er skeptisch gegenübersteht.',
+        'Bestätigt zum Release: Vampire und Werwölfe in der Stadt kommen selten gut miteinander aus und tauschen kleine Streitereien aus; eine frühe Quest lässt dich ein Artefakt finden, um die beiden Familienoberhäupter zu versöhnen.',
       ],
-      romanceYes: '', romanceNo: 'Graf Dracula ist keine Romanze-Option.', romanceTbc: '',
+      romanceYes: '', romanceNo: 'Count Dracula ist eine zentrale Story-Figur, keine Romanze-Option.', romanceTbc: '',
     },
     kai: {
       name: 'Kai', familyLabel: 'Unbekannt', typeLabel: 'Sonstige',
@@ -436,14 +446,17 @@ export const charTranslations: Record<'es' | 'ja' | 'zh' | 'zh-hant' | 'de' | 'f
   },
   es: {
     'count-dracula': {
-      name: 'Conde Drácula', familyLabel: 'Vampiro', typeLabel: 'Vampiro',
-      desc: 'Tu padre y la leyenda del pueblo, cuya sombra buscas dejar atrás. Central para la historia — no es una opción de romance.',
+      name: 'Conde Drácula (Vlad Drácula)', familyLabel: 'Vampiro (Drácula)', typeLabel: 'Vampiro',
+      desc: 'Tu padre, cuyo nombre completo es Vlad Drácula, y la leyenda del pueblo cuya sombra buscas dejar atrás. Central para la historia — no es una opción de romance.',
       knownInfo: [
         'Es tu padre; la historia enmarca tu mudanza a Moonlight Peaks como un paso para salir de su larga sombra.',
+        'Nombre completo confirmado: Vlad Drácula. (Corrección: una entrada anterior trataba a "Vlad" como un personaje separado de la familia Ambrosia — múltiples fuentes confirman que este es el propio nombre de pila del Conde Drácula, no un residente distinto. Esa entrada ha sido retirada.)',
+        'Confirmado: tu madre es Laveau, una bruja que lideró el aquelarre Webb antes de dejarlo para empezar una vida con Vlad Drácula — por lo que tu personaje tiene una herencia mixta de vampiro y bruja.',
         'Una figura central de la historia, no una opción de romance.',
         'La premisa te lleva a demostrar que una vida no-muerta más amable y gentil es posible — algo de lo que él es escéptico.',
+        'Confirmado en el lanzamiento: los vampiros y los hombres lobo del pueblo rara vez se llevan bien, intercambiando pequeñas disputas; una misión temprana te pide encontrar un artefacto para ayudar a reconciliar a los dos líderes familiares.',
       ],
-      romanceYes: '', romanceNo: 'Conde Drácula no es una opción de romance.', romanceTbc: '',
+      romanceYes: '', romanceNo: 'El Conde Drácula es una figura central de la historia, no una opción de romance.', romanceTbc: '',
     },
     saga: {
       name: 'Saga', familyLabel: 'Hombre lobo', typeLabel: 'Hombre lobo',
@@ -735,9 +748,14 @@ export const charTranslations: Record<'es' | 'ja' | 'zh' | 'zh-hant' | 'de' | 'f
     },
     'skull-girl': {
       name: 'Skull Girl', familyLabel: 'Desconocida', typeLabel: 'Otro',
-      desc: 'Nombre confirmado que existe a través de la navegación de la wiki oficial; rol aún no documentado.',
-      knownInfo: ['Listada en la wiki oficial; sin más detalles confirmados todavía.'],
-      romanceYes: '', romanceNo: '', romanceTbc: 'Todavía no confirmado.',
+      desc: 'Confirmada como un NPC totalmente desarrollado con su propio horario, regalos y eventos de relación — agrupada con Llemi, Pumpkin Head y otros personajes sin familia en la wiki oficial. Su personalidad e historia todavía no tienen fuente, pero es mucho más que un simple nombre en una lista.',
+      knownInfo: [
+        'Confirmado a través de la navegación de personajes de la wiki oficial: agrupada junto a Llemi, Pumpkin Head, Albertus, Chester, Grim, Hoodini, Larry, Mr. Deyes, Rachel y Yabbis como un personaje sin familia.',
+        'Confirmado a través de una base de datos de personajes de terceros dedicada (cumpleaños, listas de reacciones a regalos, eventos de relación y un horario diario, todo documentado): es una residente real y rastreada sistemáticamente, no solo un cameo de fondo.',
+        'Aún sin fuente: su personalidad, historia de fondo o rol exacto en la trama — actualizaremos esto en cuanto una fuente confiable la describa, en lugar de adivinar a partir del nombre.',
+        'Si se puede conquistar actualmente no está verificado — a diferencia de Llemi, a quien la wiki oficial etiqueta explícitamente como "conquistable", no ha aparecido tal etiqueta todavía para Skull Girl.',
+      ],
+      romanceYes: '', romanceNo: '', romanceTbc: 'Todavía no confirmado si Skull Girl es una opción de romance.',
     },
     balthasar: {
       name: 'Balthasar', familyLabel: 'Sin familia', typeLabel: 'Fantasma',
@@ -816,21 +834,23 @@ export const charTranslations: Record<'es' | 'ja' | 'zh' | 'zh-hant' | 'de' | 'f
     },
     'moon-goddess': {
       name: 'Diosa Luna', familyLabel: 'Desconocida', typeLabel: 'Otro',
-      desc: 'Una figura tipo deidad confirmada que existe a través de la navegación de la wiki oficial; rol aún no documentado.',
+      desc: 'Confirmado a través de la wiki oficial: una deidad que desciende de su palacio de piedra lunar durante la luna llena para bendecir a Moonlight Peaks con su presencia — esotérica al hablar, pero disfruta genuinamente caminar entre los mortales.',
       knownInfo: [
-        'Listada en la wiki oficial; probablemente vinculada a la mitología nocturna/lunar del juego.',
-        'Reportado por la comunidad (cobertura en japonés): agrupada con Brook como NPC solo de amistad, no una opción de romance.',
+        'Confirmado a través de la wiki oficial: aparece específicamente cuando la luna está llena, y se describe que le encanta caminar entre la gente común del pueblo, a pesar de su manera de hablar por lo demás cósmica y esotérica.',
+        'Confirmado que es hermana (gemela cósmica) del Dios Sol.',
+        'Reportado por la comunidad (cobertura en japonés): agrupada con Brook como NPC solo de amistad, no una opción de romance — consistente con su estado aquí.',
       ],
-      romanceYes: '', romanceNo: 'Reportada por la comunidad como NPC solo de amistad.', romanceTbc: '',
+      romanceYes: '', romanceNo: 'La Diosa Luna no es una opción de romance.', romanceTbc: '',
     },
     'sun-god': {
       name: 'Dios Sol', familyLabel: 'Desconocida', typeLabel: 'Otro',
-      desc: 'Una figura tipo deidad confirmada que existe a través de la navegación de la wiki oficial; rol aún no documentado.',
+      desc: 'Confirmado a través de la wiki oficial: el hermano gemelo cósmico de la Diosa Luna, una aparición rara que solo se muestra en el cénit del verano — altivo y engreído, con pocos amigos en el pueblo y un aura que mantiene a los "habitantes de la noche" a distancia.',
       knownInfo: [
-        'Listado en la wiki oficial; probablemente la contraparte de la Diosa Luna en la mitología del juego.',
-        'Reportado por la comunidad (cobertura en japonés): agrupado con Brook como NPC solo de amistad, no una opción de romance.',
+        'Confirmado a través de la wiki oficial: solo aparece en el cénit del verano, descrito como irradiando un comportamiento altivo y engreído que aleja a los residentes nocturnos.',
+        'Confirmado que tiene pocos amigos en el pueblo, un hecho del que se describe que el propio personaje es agudamente consciente.',
+        'Reportado por la comunidad (cobertura en japonés): agrupado con Brook como NPC solo de amistad, no una opción de romance — consistente con su estado aquí.',
       ],
-      romanceYes: '', romanceNo: 'Reportado por la comunidad como NPC solo de amistad.', romanceTbc: '',
+      romanceYes: '', romanceNo: 'El Dios Sol no es una opción de romance.', romanceTbc: '',
     },
     yasmin: {
       name: 'Yasmin', familyLabel: 'Desconocida', typeLabel: 'Otro',
