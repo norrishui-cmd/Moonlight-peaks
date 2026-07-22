@@ -1,0 +1,153 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { SITE } from '../../../consts';
+import { storyQuests } from '../../../data/quests-story';
+import { sideQuests } from '../../../data/quests-side';
+import { storyQuestsZhHant, storyChaptersZhHant } from '../../../i18n/quests-story-zh-hant';
+import { sideQuestsZhHant } from '../../../i18n/quests-side-zh-hant';
+
+const blockingBugs = sideQuests.filter((q) =>
+  ['npc-stuck-cant-interact', 'form-wheel-softlock', 'ui-softlock-after-shop', 'lost-save-data'].includes(q.slug)
+).filter((q) => sideQuestsZhHant[q.slug]);
+
+const keyQuestSlugs = ['fallen-tree-arborascend', 'elviras-treasure-hunt', 'the-net-and-death', 'the-magic-of-crops', 'vampster-collection-quest'];
+const keyQuests = sideQuests.filter((q) => keyQuestSlugs.includes(q.slug)).filter((q) => sideQuestsZhHant[q.slug]);
+
+const firstWeekChapter = storyChaptersZhHant[0];
+const firstWeekQuests = storyQuests.filter((q) => q.chapter === 1).filter((q) => storyQuestsZhHant[q.slug]);
+
+const faq = [
+  { q: 'Moonlight Peaks 裏那棵倒下的樹在哪?', a: 'PC Gamer 確認:並不在 Howling Marshes 裏,雖然這是最容易想到的猜測。它擋住了另一個區域的瀑布,與人魚家族 Hosu 回鎮的路線有關,是"神祕海灣"任務的一部分。要用 Arborascend 法術(向 Sabrina 購買)清除,而不是用工具。' },
+  { q: '回聲洞穴怎麼解鎖?', a: '已確認:先完成"A Bridge Too Far"。回聲洞穴在 Misty Shores 區域裏,這個任務完成前一直是鎖着的。' },
+  { q: '怎麼和 Samael 談戀愛?', a: '交叉覈對的首發週報道確認:他的戀愛線和劇情進度綁定,要到達 Luna Bay 並遇見人魚家族 Hosu 纔行。之前的"神祕通道"和"神祕海灣"任務包括清理倒下的樹、和 Ludo 一起修橋,以及爲他的婚禮做準備——結果人魚 Kim 在婚禮上突然出現打斷。之後有一週時間無法約會,直到 Orlock 重新開放他的線路。完整細節見角色資料頁。' },
+  { q: 'Moonlight Peaks 裏送給所有人都合適的禮物是什麼?', a: '據報道,紫色鬱金香普遍受歡迎,洋蔥種子普遍不受歡迎——但大多數居民都有各自的偏好,目前還在收集整理中。已確認按角色分類的禮物,用戀愛禮物查找器;想記錄自己測試的結果,用禮物追蹤器。' },
+  { q: 'Moonlight Peaks 裏每種魚分別在哪釣?', a: '包含地點、稀有度、季節和售價的完整 22 種魚類數據庫,在"收藏:魚類"頁面——每種魚都有自己的詳情頁。' },
+  { q: '任務完全沒有進展該怎麼辦?', a: '綜合多篇攻略的通用排查方法:檢查任務日誌、告示板/打工板、地圖(看有沒有感嘆號或閃爍光環標記),以及和任務相關的特定居民是不是在你還沒查過的地方。很多生活模擬遊戲(包括本作)會把某些觸發條件綁定在"進入特定區域"上,所以最近重新去一趟相關地點往往有幫助。最常見的真正原因不是缺了某個道具——而是遊戲已經引入、但你還沒用過的某個系統(新形態、法術、工具或 NPC)。' },
+  { q: '暮光墓穴(Twilight Catacombs)怎麼解鎖?', a: '已確認:Viktor 墓穴附近那扇鎖着的地窖門,不是靠任務或購買打開的——博物館收藏進度達到 25% 後 Jada 會給你鑰匙。捕捉生物、捐贈更高品質的產出纔是真正的路徑,而不是劇情觸發。' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '首頁', item: `${SITE.url}/zh-hant` },
+    { '@type': 'ListItem', position: 2, name: '任務', item: new URL('/zh-hant/quests', SITE.url).href },
+    { '@type': 'ListItem', position: 3, name: '首發周合集', item: new URL('/zh-hant/quests/launch-week', SITE.url).href },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks 首發周指南 — 核心任務、卡關 & 修復"
+  description="Moonlight Peaks 第一週需要的一切:劇情順序、玩家真正會卡住的任務(倒下的樹、回聲洞穴、Elvira 尋寶、Samael 戀愛線)、已知的卡關 bug,以及魚類/禮物數據到底在哪。"
+  path="/zh-hant/quests/launch-week"
+  jsonLd={jsonLd}
+  crumbs={[{ label: '任務', href: '/zh-hant/quests' }, { label: 'Launch Week' }]}
+  lang="zh-hant"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">任務 · 首發周合集</p>
+      <h1>首發周<em>合集</em></h1>
+      <p class="intro">
+        第一週最常遇到的任務和問題的單一入口——不是重複完整的劇情/支線攻略,而是直接指向玩家
+        真正會卡住的地方的捷徑。更新於 {SITE.updated}。
+      </p>
+
+      <h2>1. 第一週劇情走向 — 第 {firstWeekChapter.number} 章</h2>
+      <p>{firstWeekChapter.dek}</p>
+      <ol class="lw-list">
+        {firstWeekQuests.map((q) => (
+          <li><a href={`/zh-hant/quests/story/${q.slug}`}>{storyQuestsZhHant[q.slug].title}</a> <span class="lw-giver">— {q.giver}</span></li>
+        ))}
+      </ol>
+      <p class="lw-note">完整順序和後續所有章節:<a href="/zh-hant/quests/story">主線劇情指南</a>。</p>
+
+      <h2>2. 按名字搜索最多的核心任務</h2>
+      <p>這些是排查內容最完整的具體卡關點頁面。</p>
+      <div class="lw-grid">
+        {keyQuests.map((q) => (
+          <a class="lw-card" href={`/zh-hant/quests/side/${q.slug}`}>
+            <span class="lw-tag">{q.status === 'confirmed' ? '已確認' : '據報道'}</span>
+            <strong>{sideQuestsZhHant[q.slug].title}</strong>
+            <span>{sideQuestsZhHant[q.slug].troubleshooting?.[0]?.q}</span>
+          </a>
+        ))}
+        <a class="lw-card" href="/locations/mines">
+          <span class="lw-tag">已確認</span>
+          <strong>回聲洞穴 / 礦場</strong>
+          <span>怎麼解鎖、銅和鐵在哪、以及爲什麼可能還鎖着。</span>
+        </a>
+        <a class="lw-card" href="/locations/crystal-cave">
+          <span class="lw-tag">已確認</span>
+          <strong>暮光墓穴</strong>
+          <span>Viktor 墓穴附近鎖着的地窖門需要 Jada 的鑰匙,不是任務——博物館完成度需達 25%。</span>
+        </a>
+        <a class="lw-card" href="/characters/samael">
+          <span class="lw-tag">已確認</span>
+          <strong>Samael 的戀愛線</strong>
+          <span>完整的前置任務鏈、婚禮上的意外轉折,以及好感度等級限制。</span>
+        </a>
+      </div>
+
+      <h2>3. 已知的卡關 bug</h2>
+      <p>這些不是任務觸發條件的問題——是真實報告過的 bug。在假設自己漏了某一步之前,先看看這裏。</p>
+      <div class="lw-grid">
+        {blockingBugs.map((q) => (
+          <a class="lw-card lw-card-bug" href={`/zh-hant/quests/side/${q.slug}`}>
+            <span class="lw-tag lw-tag-bug">{q.status === 'confirmed' ? '已確認的 bug' : '據報道的 bug'}</span>
+            <strong>{sideQuestsZhHant[q.slug].title}</strong>
+            <span>{sideQuestsZhHant[q.slug].troubleshooting?.[0]?.q}</span>
+          </a>
+        ))}
+      </div>
+      <p class="lw-note">完整列表:<a href="/known-issues">已知問題</a>。</p>
+
+      <h2>4. 參考數據到底在哪</h2>
+      <p>與其把這些內容重複做成文字頁面,不如直接用互動工具:</p>
+      <div class="lw-grid">
+        <a class="lw-card" href="/zh-hant/tools/romance-gift-finder"><span class="lw-tag">工具</span><strong>戀愛禮物查找器</strong><span>已確認的摯愛/喜歡/討厭禮物,可按角色篩選。</span></a>
+        <a class="lw-card" href="/zh-hant/tools/gift-tracker"><span class="lw-tag">工具</span><strong>禮物追蹤器</strong><span>爲還沒有確認數據的角色記錄你自己的測試結果。</span></a>
+        <a class="lw-card" href="/zh-hant/collections/fish"><span class="lw-tag">數據</span><strong>魚類收藏</strong><span>22 個魚種,每個都有自己的地點/稀有度/季節/價格頁面。</span></a>
+        <a class="lw-card" href="/map"><span class="lw-tag">數據</span><strong>地圖</strong><span>小鎮佈局、任務標記、以及已確認的地點名稱。</span></a>
+      </div>
+
+      <h2>常見問題</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        相關鏈接:<a href="/zh-hant/quests">任務總覽</a>、<a href="/zh-hant/quests/story">主線劇情</a>、
+        <a href="/zh-hant/quests/side">支線任務</a>、<a href="/zh-hant/beginner-guide">新手指南</a>、
+        <a href="/known-issues">已知問題</a>。
+      </div>
+    </div>
+  </article>
+
+  <style>
+    .lw-list { display: grid; gap: 6px; margin: 10px 0 6px; padding-left: 20px; }
+    .lw-giver { color: var(--faint); font-family: var(--mono); font-size: 0.78rem; }
+    .lw-note { font-size: 0.86rem; color: var(--muted); margin: 6px 0 22px; }
+    .lw-grid { display: grid; grid-template-columns: 1fr; gap: 10px; margin: 12px 0 22px; }
+    @media (min-width: 720px) { .lw-grid { grid-template-columns: 1fr 1fr; } }
+    .lw-card {
+      display: flex; flex-direction: column; gap: 6px; border: 1px solid var(--line); border-radius: 14px;
+      background: var(--surface); padding: 14px 16px; text-decoration: none; color: inherit;
+      transition: border-color .15s ease, transform .15s ease;
+    }
+    .lw-card:hover { border-color: color-mix(in srgb, var(--candle) 50%, var(--line)); transform: translateY(-1px); }
+    .lw-card strong { font-family: var(--display); font-size: 1.02rem; color: var(--mist); }
+    .lw-card span { color: #ded3e6; font-size: 0.86rem; }
+    .lw-tag {
+      align-self: flex-start; font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.04em;
+      text-transform: uppercase; color: var(--candle); border: 1px solid var(--candle-dim); border-radius: 999px;
+      padding: 2px 9px;
+    }
+    .lw-card-bug { border-color: color-mix(in srgb, #c85a5a 40%, var(--line)); }
+    .lw-tag-bug { color: #e08a8a; border-color: #c85a5a66; }
+  </style>
+</Base>

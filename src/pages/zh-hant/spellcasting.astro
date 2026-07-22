@@ -1,0 +1,139 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+import { spellcastingSections } from '../../data/spellcasting';
+
+const descZh: Record<string, string> = {
+  hoisthaven: '用魔法移動一座建築物。',
+  refilliarmus: '瞬間把水壺重新裝滿。',
+  'tomorrows-tears': '讓第二天晚上下雨。',
+  'aquaflux-i': '召喚一個水壺,最多可以給 16 格地澆水。',
+  'aquaflux-ii': '召喚一個水壺,最多可以給 - 格地澆水。',
+  'aquaflux-iii': '召喚一個水壺,最多可以給 144 格地澆水。',
+  'ethereal-hands-i': '召喚幫手之手,合計最多可以收割 32 株作物。',
+  'ethereal-hands-ii': '召喚幫手之手,合計最多可以收割 64 株作物。',
+  'ethereal-hands-iii': '召喚幫手之手,合計最多可以收割 128 株作物。',
+  'metamorphosia-i': '把 1 株作物變成另一種隨機作物。',
+  'metamorphosia-ii': '把 2x2 區域的作物變成其他隨機作物。',
+  'metamorphosia-iii': '把 3x3 區域的作物變成其他隨機作物。',
+  'maturio-i': '讓 1x1 區域內的作物瞬間成熟。',
+  'maturio-ii': '讓 2x2 區域內的作物瞬間成熟。',
+  'maturio-iii': '讓 3x3 區域內的作物瞬間成熟。',
+  'ethereal-shovels-i': '召喚一把鏟子,最多可以挖 32 個坑。',
+  'ethereal-shovels-iii': '召喚一把鏟子,最多可以挖 128 個坑。',
+  'ethereal-axes-i': '召喚一把斧頭,最多可以砍 16 根木頭或樹。',
+  'ethereal-axes-ii': '召喚斧頭,最多可以砍 - 根木頭或樹。',
+  'ethereal-axes-iii': '召喚一把斧頭,最多可以砍 48 根木頭或樹。',
+  'ethereal-pickaxes-i': '召喚一把鎬子,最多可以敲碎 16 塊岩石。',
+  'ethereal-pickaxes-ii': '召喚鎬子,最多可以敲碎 - 塊岩石。',
+  'ethereal-pickaxes-iii': '召喚一把鎬子,最多可以敲碎 48 塊岩石。',
+};
+const sectionTitleZh: Record<string, string> = { 'normal-spells': '普通法術', 'tiered-spells': '分級法術' };
+
+const spellcastingSpells = spellcastingSections.flatMap((s) => s.spells);
+const iconCount = spellcastingSpells.filter((spell) => spell.icon).length;
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '首頁', item: `${SITE.url}/zh-hant` },
+    { '@type': 'ListItem', position: 2, name: '世界', item: `${SITE.url}/zh-hant/locations` },
+    { '@type': 'ListItem', position: 3, name: '法術', item: `${SITE.url}/zh-hant/spellcasting` },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks 法術大全 - 魔力消耗 & 購買價格"
+  description="包含全部 25 個已確認法術的完整目錄,附魔力消耗、說明和購買價格。"
+  path="/zh-hant/spellcasting"
+  jsonLd={jsonLd}
+  crumbs={[{ label: '世界', href: '/zh-hant/locations' }, { label: '法術' }]}
+  lang="zh-hant"
+>
+  <article class="page spellcasting-page">
+    <div class="wrap">
+      <p class="eyebrow">世界 / 法術</p>
+      <h1>Moonlight Peaks <em>法術</em></h1>
+      <p class="intro">
+        {GAME.title} 已確認的法術數據。本頁列出 {spellcastingSpells.length} 個法術,包含
+        {iconCount} 個圖標,以及已知的魔力消耗和購買價格。
+      </p>
+
+      <nav class="spell-jump" aria-label="法術分類">
+        {spellcastingSections.map((section) => (
+          <a href={`#${section.slug}`}>{sectionTitleZh[section.slug] ?? section.title} <span>{section.spells.length}</span></a>
+        ))}
+      </nav>
+
+      {spellcastingSections.map((section) => (
+        <section class="spell-section" id={section.slug} aria-labelledby={`${section.slug}-title`}>
+          <h2 id={`${section.slug}-title`}>{sectionTitleZh[section.slug] ?? section.title}</h2>
+          <div class="spell-list">
+            {section.spells.map((spell) => (
+              <article class={`spell-card ${spell.icon ? '' : 'spell-card-no-icon'}`}>
+                <div class="spell-icon" aria-hidden={!spell.icon}>
+                  {spell.icon ? (
+                    <img src={spell.icon} alt={`${spell.name} 法術圖標`} width="144" height="144" loading="lazy" />
+                  ) : (
+                    <span>-</span>
+                  )}
+                </div>
+                <div class="spell-body">
+                  <h3>{spell.name}</h3>
+                  <p>{descZh[spell.slug] ?? spell.description}</p>
+                  <dl>
+                    <div>
+                      <dt>魔力</dt>
+                      <dd>{spell.manaCost}</dd>
+                    </div>
+                    <div>
+                      <dt>購買價格</dt>
+                      <dd>{spell.buyPrice}</dd>
+                    </div>
+                  </dl>
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
+      ))}
+
+      <p class="spell-note">
+        原始資料未顯示數值或只有佔位符時,缺失的數值保留爲 <code>-</code>。
+      </p>
+
+      <div class="callout">
+        相關鏈接:<a href="/zh-hant/magic">魔法指南</a>、<a href="/zh-hant/farming">農場經營</a>、
+        <a href="/zh-hant/items/tools">工具</a>、<a href="/zh-hant/items/cooking">烹飪</a>、<a href="/zh-hant/quests">任務</a>。
+      </div>
+    </div>
+  </article>
+
+  <style>
+    .spell-jump { display: flex; flex-wrap: wrap; gap: 8px; margin: 18px 0 24px; }
+    .spell-jump a { border: 1px solid var(--line); border-radius: 999px; color: var(--mist); background: var(--surface); padding: 7px 12px; text-decoration: none; font-family: var(--mono); font-size: 0.76rem; }
+    .spell-jump a:hover { border-color: color-mix(in srgb, #5ecfff 54%, var(--line)); color: #84eaff; }
+    .spell-jump span { color: var(--faint); margin-left: 4px; }
+    .spell-section { margin-top: 24px; }
+    .spell-list { display: grid; grid-template-columns: 1fr; gap: 12px; }
+    @media (min-width: 760px) { .spell-list { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    .spell-card { display: grid; grid-template-columns: 104px minmax(0, 1fr); gap: 14px; align-items: center; min-height: 150px; padding: 14px; border: 1px solid var(--line); border-radius: 8px; background: rgba(32, 18, 58, 0.74); }
+    .spell-icon { width: 104px; height: 104px; display: grid; place-items: center; border-radius: 8px; border: 1px solid rgba(94, 207, 255, 0.16); background: rgba(15, 8, 36, 0.42); }
+    .spell-icon img { width: 96px; height: 96px; object-fit: contain; display: block; filter: drop-shadow(0 0 13px rgba(49, 209, 255, 0.46)); }
+    .spell-icon span { color: var(--faint); font-family: var(--mono); font-size: 1.1rem; }
+    .spell-body { min-width: 0; }
+    .spell-body h3 { margin: 0 0 8px; color: #c8a8ee; font-family: var(--sans); font-size: 1.12rem; font-weight: 800; line-height: 1.2; }
+    .spell-body p { margin: 0 0 10px; color: #eee7f3; font-size: 0.92rem; line-height: 1.45; }
+    .spell-body dl { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; }
+    .spell-body dl div { display: flex; align-items: center; gap: 6px; min-height: 28px; padding: 4px 8px; border: 1px solid var(--line); border-radius: 999px; background: rgba(20, 10, 44, 0.56); }
+    .spell-body dt { margin: 0; color: var(--faint); font-family: var(--mono); font-size: 0.66rem; text-transform: uppercase; }
+    .spell-body dd { margin: 0; color: var(--mist); font-weight: 700; font-size: 0.82rem; }
+    .spell-note { color: var(--faint); font-size: 0.78rem; margin: 16px 0 18px; }
+    .spell-note code { color: var(--mist); }
+    @media (max-width: 520px) {
+      .spell-card { grid-template-columns: 82px minmax(0, 1fr); gap: 10px; min-height: 126px; padding: 12px; }
+      .spell-icon { width: 82px; height: 82px; }
+      .spell-icon img { width: 76px; height: 76px; }
+      .spell-body h3 { font-size: 1rem; }
+    }
+  </style>
+</Base>

@@ -1,0 +1,224 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE } from '../../consts';
+import { cards } from '../../data/nokturna';
+
+const types = [...new Set(cards.map((c) => c.type).filter(Boolean))] as string[];
+
+const faq = [
+  { q: 'Moonlight Peaks 裏 Nokturna 是什麼?', a: 'Nokturna 是小鎮上流行的集換式卡牌遊戲。你收集卡牌,和 Moonlight Peaks 的居民對戰,這也是培養友誼的一種方式。' },
+  { q: 'Nokturna 怎麼玩?', a: '已確認:對戰採用三局兩勝制,每局出 3 張牌;平局雙方都算獲勝。卡牌使用"持續"關鍵詞機制,牌組圍繞狼人、吸血鬼、植物、水生等流派或混合構築展開。' },
+  { q: 'Nokturna 卡牌在哪獲得?', a: '已確認:打贏一名居民會給你的收藏添加一張卡牌——這是已確認的主要途徑。據社區報告:這個功能啓用後,挖墓地也可能作爲獎勵掉出卡牌。收集齊所有卡牌可獲得 Steam 成就"Nokturna 大師"。' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '首頁', item: `${SITE.url}/zh-hant` },
+    { '@type': 'ListItem', position: 2, name: 'Nokturna', item: `${SITE.url}/zh-hant/nokturna` },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks Nokturna 指南:牌組、卡牌 & 常見問題"
+  description="Moonlight Peaks 卡牌遊戲 Nokturna 指南:已確認的規則、67 張以上的卡牌、牌組流派,以及尚未有資料記錄的組牌問題的誠實解答。"
+  path="/zh-hant/nokturna"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Nokturna' }]}
+  lang="zh-hant"
+  showExport
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">條目 · 卡牌</p>
+      <h1>Nokturna — <em>Moonlight Peaks</em> 卡牌遊戲</h1>
+      <p class="intro">
+        Nokturna 是小鎮上流行的卡牌遊戲:收集卡牌,和居民們對戰。已確認於發售時:採用三局
+        兩勝制,擁有 67 張以上的卡牌和多種牌組流派,由預言家 Dragan 在世界觀內發明。這是你的
+        可搜索卡牌數據庫和取勝指南。最近更新:{SITE.updated}。
+
+      </p>
+
+      <h2>玩法</h2>
+      <p>
+        已確認於發售時:Nokturna 是三局兩勝制的卡牌遊戲——每局雙方各出三張牌,計算分數決出該局
+        勝者(平局雙方都算獲勝)。三局中先贏兩局即贏得整場對戰。每張牌都有分數值,部分帶有效果
+        或關鍵詞——比如"持續"會讓打出的牌在整場對戰結束前一直留在場上。贏得的卡牌會留在你的
+        菜單中,和某位居民玩 Nokturna 也會和對話、送禮一起記錄在他們的友誼菜單裏。
+      </p>
+      <p>
+        完整卡池已確認超過 67 張,分屬多種牌組流派——目前已確認:狼人、吸血鬼、植物、水生
+        牌組,以及混合牌組。
+      </p>
+
+      <h2>如何獲得新卡牌</h2>
+      <p>
+        已確認:打贏一名居民會給你的個人收藏添加一張卡牌。
+        <span class="tag-community">社區報告</span> 這個功能啓用後,在鎮上挖墳也可能作爲獎勵
+        掉出卡牌——所以打對戰並不是唯一途徑,但目前仍是已確認的主要來源。
+      </p>
+      <p>
+        已確認:收集齊所有 Nokturna 卡牌會獲得 Steam 成就<strong>"Nokturna 大師"</strong>——
+        完整列表見我們的<a href="/zh-hant/achievements">成就指南</a>。
+      </p>
+
+      <h2>爲什麼新的 Nokturna 卡牌沒有出現</h2>
+      <p>
+        這一點在我們目前的資料裏還沒有獨立記錄。如果你在對戰中贏得的卡牌沒有出現在你預期的
+        地方,最可能的已確認原因是:贏得的卡牌記錄在你自己的菜單裏,而和居民對戰的記錄則單獨
+        存在他們各自的友誼菜單裏——所以請兩邊都檢查一下,而不是假設卡牌丟失了。除此之外,我們
+        沒有關於卡牌不出現的已確認解釋,也不會去猜測。與此同時,如果你想追蹤自己的收藏進度,
+        可以用<a href="/tools/nokturna-tracker">Nokturna 追蹤器</a>在瀏覽器裏私密記錄卡牌。
+      </p>
+
+      <h2>如何組建新牌組</h2>
+      <p>
+        這一點在我們目前的資料裏還沒有記錄。關於 Nokturna 的組牌菜單、牌組大小或卡槽限制,
+        我們沒有已確認或社區報告的細節——與其描述一個我們無法驗證的組牌器,這個部分我們選擇
+        誠實地承認這個空白。如果你在遊戲裏找到了這個功能,這個機制很可能就在你查看卡牌收藏的
+        同一個菜單裏。
+      </p>
+
+      <h2>可以修改初始牌組嗎?</h2>
+      <p>
+        這一點還沒有記錄。關於初始/起始牌組是否可修改,或者所有對戰是否都使用玩家自建的公共
+        牌組,我們沒有已確認或社區報告的信息。與其編造一條規則,我們更願意把這個問題留白。
+      </p>
+
+      <h2>如何把收集到的卡牌加進去</h2>
+      <p>
+        這一點還沒有記錄。已確認:贏得對戰會給你的個人收藏添加一張卡牌,可以在菜單裏看到。
+        之後你是否需要手動把贏得的卡牌加入使用中的牌組(相對於從整個收藏中自動抽取的牌組),
+        目前的資料無法確認。
+      </p>
+
+      <h2>常見的組牌問題</h2>
+      <ul>
+        <li><strong>不確定對戰勝利是否真的增加了卡牌:</strong>直接查看卡牌收藏菜單,而不是僅憑對戰結束畫面猜測。</li>
+        <li><strong>不確定該組哪個流派:</strong>目前已確認的牌組流派是狼人、吸血鬼、植物、水生,以及混合構築——Alpha Wolf(狼人流派的一張卡)是目前唯一能確認效果的卡牌,它會強化其他狼人卡,這暗示流派獎勵"堅持同一色"的打法。</li>
+        <li><strong>組牌菜單裏有東西看起來被鎖住了:</strong>這是否和劇情進度、與發明 Nokturna 的預言家(Dragan)的友誼等級或其他因素有關,目前還未確認——也可以參考<a href="/characters/dragan">Dragan 的資料頁</a>。</li>
+      </ul>
+
+      <h2>卡牌數據庫</h2>
+      {cards.length === 0 ? (
+        <div class="nok-empty">
+          <p><strong>已確認:橫跨多種牌組流派共有 67 張以上的卡牌。</strong>目前個別卡牌的
+          名字和效果還沒有公開,所以我們沒有列出任何一張——我們不會編造卡牌。等能夠覈實的
+          時候,這裏會變成一個包含每張 Nokturna 卡牌、其效果和獲取方式的完整可搜索數據庫。</p>
+        </div>
+      ) : (
+        <div class="nok-tool">
+          <div class="nok-controls">
+            <input class="nok-search" id="nok-search" type="search" placeholder="按名稱或效果搜索卡牌…" aria-label="搜索 Nokturna 卡牌" />
+            <div class="nok-chips" id="nok-chips">
+              <button class="nok-chip is-active" data-type="all" type="button">全部</button>
+              {types.map((t) => <button class="nok-chip" data-type={t.toLowerCase()} type="button">{t}</button>)}
+            </div>
+          </div>
+          <p class="nok-count" id="nok-count">{cards.length} 張卡牌</p>
+          <div class="nok-grid" id="nok-grid">
+            {cards.map((c) => (
+              <article class="nok-card" data-name={c.name.toLowerCase()} data-type={(c.type || '').toLowerCase()} data-effect={(c.effect || '').toLowerCase()}>
+                <h3>{c.name}</h3>
+                <div class="nok-meta">
+                  {c.type && <span class="nok-badge">{c.type}</span>}
+                  {c.rarity && <span class="nok-badge">{c.rarity}</span>}
+                  {c.cost && <span class="nok-badge">費用 {c.cost}</span>}
+                  {c.power && <span class="nok-badge">力量 {c.power}</span>}
+                </div>
+                {c.effect && <p class="nok-effect">{c.effect}</p>}
+                {c.howToGet && <p class="nok-get"><strong>獲取方式:</strong> {c.howToGet}</p>}
+              </article>
+            ))}
+          </div>
+          <p class="nok-noresult" id="nok-noresult" hidden>沒有找到卡牌——換個搜索詞試試。</p>
+        </div>
+      )}
+
+      <h2>取勝 & 最佳牌組</h2>
+      <p>
+        等到個別卡牌名稱和效果被更完整地記錄下來,這部分會提供新手友好的組牌建議,以及應對
+        更難對手的方法。在此之前,我們寧願誠實留白,也不會爲無法驗證的卡牌猜測一套元數據。
+      </p>
+
+      <h2>常見問題</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        相關鏈接:<a href="/zh-hant/beginner-guide">新手指南</a>、
+        <a href="/zh-hant/romance">戀愛與家族</a>、<a href="/tools/nokturna-tracker">Nokturna 追蹤器</a>、
+        <a href="/characters/dragan">Dragan</a>、<a href="/zh-hant/release-date">發售日期</a>。
+      </div>
+    </div>
+  </article>
+
+  <style>
+    .tag-community {
+      display: inline-block; font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.02em;
+      color: var(--faint); border: 1px solid var(--line); border-radius: 999px; padding: 2px 8px;
+      margin-right: 6px; vertical-align: middle;
+    }
+    .nok-empty { border: 1px dashed var(--line); border-radius: 12px; background: var(--ink-2); padding: 18px; color: var(--muted); }
+    .nok-controls { display: flex; flex-direction: column; gap: 12px; margin: 8px 0 14px; }
+    .nok-search { width: 100%; padding: 12px 14px; border-radius: 10px; border: 1px solid var(--line); background: var(--surface); color: var(--mist); font-size: 0.95rem; font-family: var(--body); }
+    .nok-search:focus { outline: 2px solid var(--candle); outline-offset: 1px; }
+    .nok-chips { display: flex; gap: 8px; flex-wrap: wrap; }
+    .nok-chip { font-size: 0.84rem; color: var(--muted); background: var(--ink); border: 1px solid var(--line); border-radius: 999px; padding: 6px 13px; cursor: pointer; transition: color .14s, border-color .14s; }
+    .nok-chip:hover { color: var(--mist); }
+    .nok-chip.is-active { color: #20160a; background: var(--candle); border-color: var(--candle); font-weight: 600; }
+    .nok-count { font-family: var(--mono); font-size: 0.74rem; color: var(--faint); letter-spacing: 0.06em; text-transform: uppercase; margin: 0 0 12px; }
+    .nok-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 14px; }
+    .nok-card { border: 1px solid var(--line); border-radius: 12px; background: var(--surface); padding: 16px; }
+    .nok-card h3 { font-family: var(--display); font-weight: 600; font-size: 1.1rem; margin: 0 0 8px; }
+    .nok-meta { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 8px; }
+    .nok-badge { font-family: var(--mono); font-size: 0.68rem; color: var(--candle); border: 1px solid var(--candle-dim); border-radius: 6px; padding: 2px 7px; }
+    .nok-effect { color: #ded3e6; font-size: 0.9rem; margin: 0 0 8px; }
+    .nok-get { color: var(--muted); font-size: 0.82rem; margin: 0; }
+    .nok-noresult { color: var(--faint); font-size: 0.9rem; }
+  </style>
+
+  <script>
+    const search = document.getElementById('nok-search');
+    const grid = document.getElementById('nok-grid');
+    const chips = document.getElementById('nok-chips');
+    const count = document.getElementById('nok-count');
+    const noresult = document.getElementById('nok-noresult');
+    if (search && grid) {
+      const items = Array.from(grid.querySelectorAll('.nok-card'));
+      let activeType = 'all';
+      const apply = () => {
+        const q = (search.value || '').trim().toLowerCase();
+        let shown = 0;
+        items.forEach((el) => {
+          const name = el.getAttribute('data-name') || '';
+          const effect = el.getAttribute('data-effect') || '';
+          const type = el.getAttribute('data-type') || '';
+          const matchText = !q || name.includes(q) || effect.includes(q);
+          const matchType = activeType === 'all' || type === activeType;
+          const show = matchText && matchType;
+          el.style.display = show ? '' : 'none';
+          if (show) shown++;
+        });
+        if (count) count.textContent = shown + ' 張卡牌';
+        if (noresult) noresult.hidden = shown !== 0;
+      };
+      search.addEventListener('input', apply);
+      if (chips) {
+        chips.addEventListener('click', (e) => {
+          const btn = e.target.closest('.nok-chip');
+          if (!btn) return;
+          activeType = btn.getAttribute('data-type') || 'all';
+          chips.querySelectorAll('.nok-chip').forEach((c) => c.classList.toggle('is-active', c === btn));
+          apply();
+        });
+      }
+    }
+  </script>
+</Base>

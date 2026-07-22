@@ -1,0 +1,77 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { SITE, GAME } from '../../../consts';
+import { storyQuests } from '../../../data/quests-story';
+import { sideQuests } from '../../../data/quests-side';
+
+const jsonLd = {
+  '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '首頁', item: `${SITE.url}/zh-hant` },
+    { '@type': 'ListItem', position: 2, name: '任務指南', item: `${SITE.url}/zh-hant/quests` },
+  ],
+};
+---
+<Base
+  title="Moonlight Peaks 任務指南 — 主線劇情與支線任務"
+  description="完整的 Moonlight Peaks 任務指南:按章節整理的主線劇情、每一個已確認的支線任務,以及卡關時的解決方法——全部來自交叉驗證的首發周攻略。"
+  path="/zh-hant/quests"
+  jsonLd={jsonLd}
+  crumbs={[{ label: '任務指南' }]}
+  lang="zh-hant"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">樞紐 · 任務</p>
+      <h1>{GAME.title} <em>任務指南</em></h1>
+      <p class="intro">
+        無論你想按順序追主線劇情,還是卡在某個特定任務上——這裏都是正確的地方。這裏的所有內容
+        都交叉覈對了多個獨立的首發周資料來源,而不是照搬單一攻略——兩個以上來源一致時標記爲
+        <strong>已確認</strong>,目前只有一個來源記錄時標記爲<strong>據報道</strong>。這裏的
+        任何內容都不是爲了填補空白而編造的。
+      </p>
+
+      <div class="q-split">
+        <a class="q-card" href="/zh-hant/quests/story">
+          <span class="q-tag">主線劇情</span>
+          <h2>按章節追主線劇情</h2>
+          <p>共 {storyQuests.length} 個主線任務,分爲 5 個章節,從抵達小鎮一直到婚禮支線。選擇對應你進度的章節,直接接着看。</p>
+          <strong>瀏覽各章節 →</strong>
+        </a>
+        <a class="q-card" href="/zh-hant/quests/side">
+          <span class="q-tag">支線任務</span>
+          <h2>NPC 任務與子系統</h2>
+          <p>共 {sideQuests.length} 個已確認的支線任務和持續性系統——釣魚比賽、房屋擴建、打工告示板,以及小鎮的兩套生物收集子系統。</p>
+          <strong>瀏覽支線任務 →</strong>
+        </a>
+      </div>
+
+      <h2>卡在某個具體地方了?</h2>
+      <p>
+        如果你卡在某個特定的劇情節點上:<a href="/quests/story/a-bridge-too-far">A Bridge Too Far</a>
+        是搜索量最高的早期任務(目前僅有英文版)——裏面有 Orlock/Fiona 橋樑事件的完整攻略。
+        關於任務的一般性問題,可以查看<a href="/faq">FAQ</a>,裏面有專門的任務分類。
+      </p>
+
+      <div class="callout wip">
+        相關鏈接:<a href="/zh-hant/beginner-guide">新手指南</a>、<a href="/zh-hant/characters">角色</a>、
+        <a href="/map">地圖</a>、<a href="/known-issues">已知問題</a>。
+      </div>
+    </div>
+  </article>
+
+  <style>
+    .q-split { display: grid; grid-template-columns: 1fr; gap: 14px; margin: 24px 0 30px; }
+    @media (min-width: 720px) { .q-split { grid-template-columns: 1fr 1fr; } }
+    .q-card {
+      display: flex; flex-direction: column; gap: 8px;
+      border: 1px solid var(--line); border-radius: 16px; background: var(--surface);
+      padding: 20px; text-decoration: none; color: inherit;
+      transition: border-color .15s ease, transform .15s ease;
+    }
+    .q-card:hover { border-color: color-mix(in srgb, var(--candle) 54%, var(--line)); transform: translateY(-2px); }
+    .q-tag { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--candle); }
+    .q-card h2 { margin: 4px 0 6px; font-size: 1.2rem; }
+    .q-card p { margin: 0 0 8px; color: #ded3e6; font-size: 0.9rem; }
+    .q-card strong { font-family: var(--mono); font-size: 0.82rem; color: var(--candle); }
+  </style>
+</Base>

@@ -1,0 +1,77 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { SITE } from '../../../consts';
+
+const faq = [
+  { q: 'Moonlight Peaks 中 A Bridge Too Far 怎么开始?', a: '已确认:这个任务紧接在"Orlock 的酿酒计划"之后——向 Orlock 道歉,替他还清 Samael 的 350 金债务,然后回去汇报。' },
+  { q: 'A Bridge Too Far 解锁了什么?', a: '已确认:Ambrosia 庄园以及整个 Misty Shores 区域,包括回声洞穴(铜矿石)。' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '首页', item: `${SITE.url}/zh` },
+    { '@type': 'ListItem', position: 2, name: '任务', item: `${SITE.url}/zh/quests/a-bridge-too-far` },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks:A Bridge Too Far 任务攻略(简体中文)"
+  description="Moonlight Peaks A Bridge Too Far 中文攻略:如何开始这个任务、Orlock 与 Fiona 的纠纷,以及它解锁了什么(Misty Shores、回声洞穴)。"
+  path="/zh/quests/a-bridge-too-far"
+  jsonLd={jsonLd}
+  crumbs={[{ label: '任务' }, { label: 'A Bridge Too Far' }]}
+  lang="zh"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">任务攻略</p>
+      <h1>Moonlight Peaks:<em>A Bridge Too Far</em></h1>
+
+      <div class="callout">
+        <strong>快速回答:</strong>A Bridge Too Far 在完成"Orlock 的酿酒计划"后解锁。找小镇上懂
+        魔法的人聊聊,然后回到 Ambrosia 庄园旁边的桥上。完成后会开放 Misty Shores 和回声洞穴。
+      </div>
+
+      <h2>如何开始这个任务</h2>
+      <p>
+        已确认:这个任务紧接在<strong>Orlock 的酿酒计划</strong>之后,你需要在那个任务里为
+        Orlock 酿造血酒。向 Orlock 道歉、并在破灯酒馆替他还清 350 金债务之后,下次进城时任务
+        会自动触发。
+      </p>
+
+      <h2>桥为什么被封了</h2>
+      <p>
+        <span class="tag-community">社区报告</span> Orlock 认为是 Fiona 诅咒了这座桥。实际上
+        根本没有真正的诅咒——两人只是吵了一架,Orlock 说话不太客气。
+      </p>
+
+      <h2>这个任务解锁了什么</h2>
+      <p>
+        已确认:完成后会开放 Ambrosia 庄园以及整个 Misty Shores 区域,包括回声洞穴。
+      </p>
+
+      <h2>常见问题</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        延伸阅读:<a href="/locations/mines">回声洞穴</a>、
+        <a href="/quests/a-bridge-too-far">完整攻略(英文)</a>。
+      </div>
+    </div>
+  </article>
+  <style>
+    .tag-community {
+      display: inline-block; font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.02em;
+      color: var(--faint); border: 1px solid var(--line); border-radius: 999px; padding: 2px 8px;
+      margin-right: 6px; vertical-align: middle;
+    }
+  </style>
+</Base>

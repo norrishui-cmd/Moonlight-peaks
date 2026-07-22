@@ -1,0 +1,153 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { SITE } from '../../../consts';
+import { storyQuests } from '../../../data/quests-story';
+import { sideQuests } from '../../../data/quests-side';
+import { storyQuestsZh, storyChaptersZh } from '../../../i18n/quests-story-zh';
+import { sideQuestsZh } from '../../../i18n/quests-side-zh';
+
+const blockingBugs = sideQuests.filter((q) =>
+  ['npc-stuck-cant-interact', 'form-wheel-softlock', 'ui-softlock-after-shop', 'lost-save-data'].includes(q.slug)
+).filter((q) => sideQuestsZh[q.slug]);
+
+const keyQuestSlugs = ['fallen-tree-arborascend', 'elviras-treasure-hunt', 'the-net-and-death', 'the-magic-of-crops', 'vampster-collection-quest'];
+const keyQuests = sideQuests.filter((q) => keyQuestSlugs.includes(q.slug)).filter((q) => sideQuestsZh[q.slug]);
+
+const firstWeekChapter = storyChaptersZh[0];
+const firstWeekQuests = storyQuests.filter((q) => q.chapter === 1).filter((q) => storyQuestsZh[q.slug]);
+
+const faq = [
+  { q: 'Moonlight Peaks 里那棵倒下的树在哪?', a: 'PC Gamer 确认:并不在 Howling Marshes 里,虽然这是最容易想到的猜测。它挡住了另一个区域的瀑布,与人鱼家族 Hosu 回镇的路线有关,是"神秘海湾"任务的一部分。要用 Arborascend 法术(向 Sabrina 购买)清除,而不是用工具。' },
+  { q: '回声洞穴怎么解锁?', a: '已确认:先完成"A Bridge Too Far"。回声洞穴在 Misty Shores 区域里,这个任务完成前一直是锁着的。' },
+  { q: '怎么和 Samael 谈恋爱?', a: '交叉核对的首发周报道确认:他的恋爱线和剧情进度绑定,要到达 Luna Bay 并遇见人鱼家族 Hosu 才行。之前的"神秘通道"和"神秘海湾"任务包括清理倒下的树、和 Ludo 一起修桥,以及为他的婚礼做准备——结果人鱼 Kim 在婚礼上突然出现打断。之后有一周时间无法约会,直到 Orlock 重新开放他的线路。完整细节见角色资料页。' },
+  { q: 'Moonlight Peaks 里送给所有人都合适的礼物是什么?', a: '据报道,紫色郁金香普遍受欢迎,洋葱种子普遍不受欢迎——但大多数居民都有各自的偏好,目前还在收集整理中。已确认按角色分类的礼物,用恋爱礼物查找器;想记录自己测试的结果,用礼物追踪器。' },
+  { q: 'Moonlight Peaks 里每种鱼分别在哪钓?', a: '包含地点、稀有度、季节和售价的完整 22 种鱼类数据库,在"收藏:鱼类"页面——每种鱼都有自己的详情页。' },
+  { q: '任务完全没有进展该怎么办?', a: '综合多篇攻略的通用排查方法:检查任务日志、告示板/打工板、地图(看有没有感叹号或闪烁光环标记),以及和任务相关的特定居民是不是在你还没查过的地方。很多生活模拟游戏(包括本作)会把某些触发条件绑定在"进入特定区域"上,所以最近重新去一趟相关地点往往有帮助。最常见的真正原因不是缺了某个道具——而是游戏已经引入、但你还没用过的某个系统(新形态、法术、工具或 NPC)。' },
+  { q: '暮光墓穴(Twilight Catacombs)怎么解锁?', a: '已确认:Viktor 墓穴附近那扇锁着的地窖门,不是靠任务或购买打开的——博物馆收藏进度达到 25% 后 Jada 会给你钥匙。捕捉生物、捐赠更高品质的产出才是真正的路径,而不是剧情触发。' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '首页', item: `${SITE.url}/zh` },
+    { '@type': 'ListItem', position: 2, name: '任务', item: new URL('/zh/quests', SITE.url).href },
+    { '@type': 'ListItem', position: 3, name: '首发周合集', item: new URL('/zh/quests/launch-week', SITE.url).href },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks 首发周指南 — 核心任务、卡关 & 修复"
+  description="Moonlight Peaks 第一周需要的一切:剧情顺序、玩家真正会卡住的任务(倒下的树、回声洞穴、Elvira 寻宝、Samael 恋爱线)、已知的卡关 bug,以及鱼类/礼物数据到底在哪。"
+  path="/zh/quests/launch-week"
+  jsonLd={jsonLd}
+  crumbs={[{ label: '任务', href: '/zh/quests' }, { label: 'Launch Week' }]}
+  lang="zh"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">任务 · 首发周合集</p>
+      <h1>首发周<em>合集</em></h1>
+      <p class="intro">
+        第一周最常遇到的任务和问题的单一入口——不是重复完整的剧情/支线攻略,而是直接指向玩家
+        真正会卡住的地方的捷径。更新于 {SITE.updated}。
+      </p>
+
+      <h2>1. 第一周剧情走向 — 第 {firstWeekChapter.number} 章</h2>
+      <p>{firstWeekChapter.dek}</p>
+      <ol class="lw-list">
+        {firstWeekQuests.map((q) => (
+          <li><a href={`/zh/quests/story/${q.slug}`}>{storyQuestsZh[q.slug].title}</a> <span class="lw-giver">— {q.giver}</span></li>
+        ))}
+      </ol>
+      <p class="lw-note">完整顺序和后续所有章节:<a href="/zh/quests/story">主线剧情指南</a>。</p>
+
+      <h2>2. 按名字搜索最多的核心任务</h2>
+      <p>这些是排查内容最完整的具体卡关点页面。</p>
+      <div class="lw-grid">
+        {keyQuests.map((q) => (
+          <a class="lw-card" href={`/zh/quests/side/${q.slug}`}>
+            <span class="lw-tag">{q.status === 'confirmed' ? '已确认' : '据报道'}</span>
+            <strong>{sideQuestsZh[q.slug].title}</strong>
+            <span>{sideQuestsZh[q.slug].troubleshooting?.[0]?.q}</span>
+          </a>
+        ))}
+        <a class="lw-card" href="/locations/mines">
+          <span class="lw-tag">已确认</span>
+          <strong>回声洞穴 / 矿场</strong>
+          <span>怎么解锁、铜和铁在哪、以及为什么可能还锁着。</span>
+        </a>
+        <a class="lw-card" href="/locations/crystal-cave">
+          <span class="lw-tag">已确认</span>
+          <strong>暮光墓穴</strong>
+          <span>Viktor 墓穴附近锁着的地窖门需要 Jada 的钥匙,不是任务——博物馆完成度需达 25%。</span>
+        </a>
+        <a class="lw-card" href="/characters/samael">
+          <span class="lw-tag">已确认</span>
+          <strong>Samael 的恋爱线</strong>
+          <span>完整的前置任务链、婚礼上的意外转折,以及好感度等级限制。</span>
+        </a>
+      </div>
+
+      <h2>3. 已知的卡关 bug</h2>
+      <p>这些不是任务触发条件的问题——是真实报告过的 bug。在假设自己漏了某一步之前,先看看这里。</p>
+      <div class="lw-grid">
+        {blockingBugs.map((q) => (
+          <a class="lw-card lw-card-bug" href={`/zh/quests/side/${q.slug}`}>
+            <span class="lw-tag lw-tag-bug">{q.status === 'confirmed' ? '已确认的 bug' : '据报道的 bug'}</span>
+            <strong>{sideQuestsZh[q.slug].title}</strong>
+            <span>{sideQuestsZh[q.slug].troubleshooting?.[0]?.q}</span>
+          </a>
+        ))}
+      </div>
+      <p class="lw-note">完整列表:<a href="/known-issues">已知问题</a>。</p>
+
+      <h2>4. 参考数据到底在哪</h2>
+      <p>与其把这些内容重复做成文字页面,不如直接用互动工具:</p>
+      <div class="lw-grid">
+        <a class="lw-card" href="/zh/tools/romance-gift-finder"><span class="lw-tag">工具</span><strong>恋爱礼物查找器</strong><span>已确认的挚爱/喜欢/讨厌礼物,可按角色筛选。</span></a>
+        <a class="lw-card" href="/zh/tools/gift-tracker"><span class="lw-tag">工具</span><strong>礼物追踪器</strong><span>为还没有确认数据的角色记录你自己的测试结果。</span></a>
+        <a class="lw-card" href="/zh/collections/fish"><span class="lw-tag">数据</span><strong>鱼类收藏</strong><span>22 个鱼种,每个都有自己的地点/稀有度/季节/价格页面。</span></a>
+        <a class="lw-card" href="/map"><span class="lw-tag">数据</span><strong>地图</strong><span>小镇布局、任务标记、以及已确认的地点名称。</span></a>
+      </div>
+
+      <h2>常见问题</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        相关链接:<a href="/zh/quests">任务总览</a>、<a href="/zh/quests/story">主线剧情</a>、
+        <a href="/zh/quests/side">支线任务</a>、<a href="/zh/beginner-guide">新手指南</a>、
+        <a href="/known-issues">已知问题</a>。
+      </div>
+    </div>
+  </article>
+
+  <style>
+    .lw-list { display: grid; gap: 6px; margin: 10px 0 6px; padding-left: 20px; }
+    .lw-giver { color: var(--faint); font-family: var(--mono); font-size: 0.78rem; }
+    .lw-note { font-size: 0.86rem; color: var(--muted); margin: 6px 0 22px; }
+    .lw-grid { display: grid; grid-template-columns: 1fr; gap: 10px; margin: 12px 0 22px; }
+    @media (min-width: 720px) { .lw-grid { grid-template-columns: 1fr 1fr; } }
+    .lw-card {
+      display: flex; flex-direction: column; gap: 6px; border: 1px solid var(--line); border-radius: 14px;
+      background: var(--surface); padding: 14px 16px; text-decoration: none; color: inherit;
+      transition: border-color .15s ease, transform .15s ease;
+    }
+    .lw-card:hover { border-color: color-mix(in srgb, var(--candle) 50%, var(--line)); transform: translateY(-1px); }
+    .lw-card strong { font-family: var(--display); font-size: 1.02rem; color: var(--mist); }
+    .lw-card span { color: #ded3e6; font-size: 0.86rem; }
+    .lw-tag {
+      align-self: flex-start; font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.04em;
+      text-transform: uppercase; color: var(--candle); border: 1px solid var(--candle-dim); border-radius: 999px;
+      padding: 2px 9px;
+    }
+    .lw-card-bug { border-color: color-mix(in srgb, #c85a5a 40%, var(--line)); }
+    .lw-tag-bug { color: #e08a8a; border-color: #c85a5a66; }
+  </style>
+</Base>

@@ -1,0 +1,102 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+
+const faq = [
+  { q: 'Moonlight Peaks 像 Stardew Valley 嗎?', a: '整體氛圍上是的——兩者都是溫馨的農場生活模擬遊戲,你會種地、照料作物、交朋友、和村民談戀愛。Moonlight Peaks 加入了超自然的反轉:你扮演一個吸血鬼,在夜裏種地,還能使用魔法。' },
+  { q: 'Moonlight Peaks 像 Stardew Valley 一樣支持多人聯機嗎?', a: '不支持。Stardew Valley 有多人聯機模式,而 Moonlight Peaks 是純單人遊戲。' },
+  { q: 'Moonlight Peaks 和 Stardew Valley 哪個更便宜?', a: 'Stardew Valley 更便宜(約 14.99 美元,經常打折)。Moonlight Peaks 起價 34.99 美元(Switch 2 上爲 39.99 美元)。' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '首頁', item: `${SITE.url}/zh-hant` },
+    { '@type': 'ListItem', position: 2, name: 'vs Stardew Valley', item: new URL('/zh-hant/moonlight-peaks-vs-stardew-valley', SITE.url).href },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks vs Stardew Valley — 溫馨模擬遊戲對比"
+  description="Moonlight Peaks vs Stardew Valley:兩款溫馨農場模擬遊戲的共同點、吸血鬼生活模擬遊戲的獨特之處、多人聯機、價格,以及該選哪一個。"
+  path="/zh-hant/moonlight-peaks-vs-stardew-valley"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'vs Stardew Valley' }]}
+  lang="zh-hant"
+  showExport
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">條目 · 對比</p>
+      <h1><em>Moonlight Peaks</em> vs Stardew Valley</h1>
+      <p class="intro">
+        Moonlight Peaks 經常被拿來和 Stardew Valley 比較——下面是這兩款溫馨農場模擬遊戲實際
+        有什麼區別,幫你判斷哪個更適合自己。更新於 {SITE.updated}。
+      </p>
+
+      <h2>快速對比</h2>
+      <table class="facts">
+        <tr><th>前提設定</th><td>Moonlight Peaks 是背景設在超自然小鎮的吸血鬼生活模擬遊戲;Stardew Valley 是鄉村農場重建模擬遊戲。</td></tr>
+        <tr><th>畫面風格</th><td>Moonlight Peaks 使用現代 3D 畫面;Stardew Valley 使用 2D 像素畫風。</td></tr>
+        <tr><th>戰鬥</th><td>Moonlight Peaks 沒有戰鬥;Stardew Valley 在礦洞及相關區域有戰鬥內容。</td></tr>
+        <tr><th>多人聯機</th><td>Moonlight Peaks 是純單人遊戲;Stardew Valley 支持聯機合作。</td></tr>
+        <tr><th>戀愛方式</th><td>Moonlight Peaks 圍繞超自然家族和不限性別的約會;Stardew Valley 有早已確立多年的村民陣容。</td></tr>
+        <tr><th>最佳選擇</th><td>想要新鮮的哥特式溫馨感,選 Moonlight Peaks;想要經過多年內容驗證的經典之作,選 Stardew Valley。</td></tr>
+      </table>
+
+      <h2>共同點</h2>
+      <p>
+        兩者都是建立在同樣的放鬆循環之上的悠閒農場模擬遊戲:種植和照料作物、釣魚和採集、裝飾
+        房屋,並慢慢和村民交朋友——和他們談戀愛或結婚。如果你喜歡 Stardew 的節奏,Moonlight
+        Peaks 說的是同一種語言。
+      </p>
+
+      <h2>Moonlight Peaks 的獨特之處</h2>
+      <ul>
+        <li><strong>你是一名吸血鬼。</strong>你是德古拉伯爵的孩子,在一個滿是狼人、女巫和人魚的超自然小鎮裏重建家族農場。</li>
+        <li><strong>你在夜裏種地。</strong>農活都在月光下完成——日出前記得趕回棺材。</li>
+        <li><strong>不只是工具,還有魔法。</strong>學習法術(包括澆水小遊戲和省力法術),釀造像"另我藥水"這樣的藥劑。</li>
+        <li><strong>變身能力。</strong>變成蝙蝠穿越小鎮,到達隱藏區域。</li>
+        <li><strong>一切都帶着魔法色彩。</strong>種植會發光的血葡萄和"邪惡黃瓜"之類的作物,飼養德古拉羊之類的魔法家畜。</li>
+        <li><strong>Nokturna。</strong>遊戲內置的集換式卡牌遊戲,有自己的一套卡牌可以收集。</li>
+        <li><strong>沒有戰鬥。</strong>連礦洞都沒有戰鬥——從頭到尾都很溫馨。</li>
+        <li><strong>現代 3D 畫面。</strong>第三人稱 3D 畫面,而不是 Stardew 的 2D 像素畫風。</li>
+      </ul>
+
+      <h2>多人聯機</h2>
+      <p>
+        這是一個關鍵區別。Stardew Valley 提供聯機合作,可以和朋友一起種地。Moonlight Peaks 是
+        <strong>純單人遊戲</strong>——沒有公佈任何聯機或在線模式。
+      </p>
+
+      <h2>價格與平臺</h2>
+      <p>
+        Stardew Valley(2016 年,獨立開發者 ConcernedApe 製作)約 14.99 美元,經常打折,幾乎
+        所有平臺都能玩到。Moonlight Peaks 在 Steam(PC/Mac)、Steam Deck、Switch、Switch 2 和
+        Android 上{GAME.releaseLabel}<strong>起價 34.99 美元</strong>(Switch 2 上爲 39.99 美元)。
+      </p>
+
+      <h2>該玩哪一個?</h2>
+      <p>
+        不需要非此即彼。如果你想要經過驗證、價格實惠、適合聯機、內容近乎無窮的經典之作,
+        Stardew Valley 很難被超越。如果你想要有魔法、夜間農耕、超自然陣容的新鮮哥特式戀愛向
+        體驗,Moonlight Peaks 就是爲你準備的。很多溫馨遊戲愛好者會樂意兩個都玩。
+      </p>
+
+      <h2>常見問題</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout">
+        延伸閱讀:<a href="/zh-hant/beginner-guide">新手指南</a>、<a href="/zh-hant/platforms">平臺與價格</a>、
+        <a href="/zh-hant/release-date">發售日期</a>。
+      </div>
+    </div>
+  </article>
+</Base>

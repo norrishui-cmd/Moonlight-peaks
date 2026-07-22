@@ -101,11 +101,15 @@ export const translatedPathsByLocale: Record<Locale, Set<string>> = {
   zh: new Set([...sharedEsJaZhPaths, '/characters/customize', '/privacy', '/shipping', '/inventory', '/fishing', '/friendship', '/house', '/mini-games', '/reviews', '/achievements', '/best-settings', '/system-requirements', '/vampsters', '/behind-the-scenes', '/environment', '/known-issues', '/launch-day',
     '/tools/fish-finder', '/tools/item-tracker', '/tools/gift-tracker', '/tools/families-explorer',
     '/tools/farming-profit-planner', '/tools/nokturna-tracker', '/tools/platform-picker',
-    '/tools/romance-gift-finder', '/tools/romance-match-quiz', '/tools/romance-planner', '/tools/submit-data']),
+    '/tools/romance-gift-finder', '/tools/romance-match-quiz', '/tools/romance-planner', '/tools/submit-data',
+    '/map', '/methodology', '/moonlight-peaks-vs-stardew-valley', '/nokturna', '/spellcasting',
+    '/quests', '/quests/a-bridge-too-far', '/quests/launch-week']),
   'zh-hant': new Set([...sharedEsJaZhPaths, '/characters/customize', '/privacy', '/shipping', '/inventory', '/fishing', '/friendship', '/house', '/mini-games', '/reviews', '/achievements', '/best-settings', '/system-requirements', '/vampsters', '/behind-the-scenes', '/environment', '/known-issues', '/launch-day',
     '/tools/fish-finder', '/tools/item-tracker', '/tools/gift-tracker', '/tools/families-explorer',
     '/tools/farming-profit-planner', '/tools/nokturna-tracker', '/tools/platform-picker',
-    '/tools/romance-gift-finder', '/tools/romance-match-quiz', '/tools/romance-planner', '/tools/submit-data']), // mirrors the same pages as zh, converted via OpenCC
+    '/tools/romance-gift-finder', '/tools/romance-match-quiz', '/tools/romance-planner', '/tools/submit-data',
+    '/map', '/methodology', '/moonlight-peaks-vs-stardew-valley', '/nokturna', '/spellcasting',
+    '/quests', '/quests/a-bridge-too-far', '/quests/launch-week']), // mirrors the same pages as zh, converted via OpenCC
   de: new Set([...dePaths, '/characters/customize']),
   fr: new Set(frPaths),
   ko: new Set(koPaths),

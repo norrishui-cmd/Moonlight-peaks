@@ -1,0 +1,77 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { SITE, GAME } from '../../../consts';
+import { storyQuests } from '../../../data/quests-story';
+import { sideQuests } from '../../../data/quests-side';
+
+const jsonLd = {
+  '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '首页', item: `${SITE.url}/zh` },
+    { '@type': 'ListItem', position: 2, name: '任务指南', item: `${SITE.url}/zh/quests` },
+  ],
+};
+---
+<Base
+  title="Moonlight Peaks 任务指南 — 主线剧情与支线任务"
+  description="完整的 Moonlight Peaks 任务指南:按章节整理的主线剧情、每一个已确认的支线任务,以及卡关时的解决方法——全部来自交叉验证的首发周攻略。"
+  path="/zh/quests"
+  jsonLd={jsonLd}
+  crumbs={[{ label: '任务指南' }]}
+  lang="zh"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">枢纽 · 任务</p>
+      <h1>{GAME.title} <em>任务指南</em></h1>
+      <p class="intro">
+        无论你想按顺序追主线剧情,还是卡在某个特定任务上——这里都是正确的地方。这里的所有内容
+        都交叉核对了多个独立的首发周资料来源,而不是照搬单一攻略——两个以上来源一致时标记为
+        <strong>已确认</strong>,目前只有一个来源记录时标记为<strong>据报道</strong>。这里的
+        任何内容都不是为了填补空白而编造的。
+      </p>
+
+      <div class="q-split">
+        <a class="q-card" href="/zh/quests/story">
+          <span class="q-tag">主线剧情</span>
+          <h2>按章节追主线剧情</h2>
+          <p>共 {storyQuests.length} 个主线任务,分为 5 个章节,从抵达小镇一直到婚礼支线。选择对应你进度的章节,直接接着看。</p>
+          <strong>浏览各章节 →</strong>
+        </a>
+        <a class="q-card" href="/zh/quests/side">
+          <span class="q-tag">支线任务</span>
+          <h2>NPC 任务与子系统</h2>
+          <p>共 {sideQuests.length} 个已确认的支线任务和持续性系统——钓鱼比赛、房屋扩建、打工告示板,以及小镇的两套生物收集子系统。</p>
+          <strong>浏览支线任务 →</strong>
+        </a>
+      </div>
+
+      <h2>卡在某个具体地方了?</h2>
+      <p>
+        如果你卡在某个特定的剧情节点上:<a href="/quests/story/a-bridge-too-far">A Bridge Too Far</a>
+        是搜索量最高的早期任务(目前仅有英文版)——里面有 Orlock/Fiona 桥梁事件的完整攻略。
+        关于任务的一般性问题,可以查看<a href="/faq">FAQ</a>,里面有专门的任务分类。
+      </p>
+
+      <div class="callout wip">
+        相关链接:<a href="/zh/beginner-guide">新手指南</a>、<a href="/zh/characters">角色</a>、
+        <a href="/map">地图</a>、<a href="/known-issues">已知问题</a>。
+      </div>
+    </div>
+  </article>
+
+  <style>
+    .q-split { display: grid; grid-template-columns: 1fr; gap: 14px; margin: 24px 0 30px; }
+    @media (min-width: 720px) { .q-split { grid-template-columns: 1fr 1fr; } }
+    .q-card {
+      display: flex; flex-direction: column; gap: 8px;
+      border: 1px solid var(--line); border-radius: 16px; background: var(--surface);
+      padding: 20px; text-decoration: none; color: inherit;
+      transition: border-color .15s ease, transform .15s ease;
+    }
+    .q-card:hover { border-color: color-mix(in srgb, var(--candle) 54%, var(--line)); transform: translateY(-2px); }
+    .q-tag { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--candle); }
+    .q-card h2 { margin: 4px 0 6px; font-size: 1.2rem; }
+    .q-card p { margin: 0 0 8px; color: #ded3e6; font-size: 0.9rem; }
+    .q-card strong { font-family: var(--mono); font-size: 0.82rem; color: var(--candle); }
+  </style>
+</Base>

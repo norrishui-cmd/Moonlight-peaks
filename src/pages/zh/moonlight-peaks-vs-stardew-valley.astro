@@ -1,0 +1,102 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+
+const faq = [
+  { q: 'Moonlight Peaks 像 Stardew Valley 吗?', a: '整体氛围上是的——两者都是温馨的农场生活模拟游戏,你会种地、照料作物、交朋友、和村民谈恋爱。Moonlight Peaks 加入了超自然的反转:你扮演一个吸血鬼,在夜里种地,还能使用魔法。' },
+  { q: 'Moonlight Peaks 像 Stardew Valley 一样支持多人联机吗?', a: '不支持。Stardew Valley 有多人联机模式,而 Moonlight Peaks 是纯单人游戏。' },
+  { q: 'Moonlight Peaks 和 Stardew Valley 哪个更便宜?', a: 'Stardew Valley 更便宜(约 14.99 美元,经常打折)。Moonlight Peaks 起价 34.99 美元(Switch 2 上为 39.99 美元)。' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '首页', item: `${SITE.url}/zh` },
+    { '@type': 'ListItem', position: 2, name: 'vs Stardew Valley', item: new URL('/zh/moonlight-peaks-vs-stardew-valley', SITE.url).href },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks vs Stardew Valley — 温馨模拟游戏对比"
+  description="Moonlight Peaks vs Stardew Valley:两款温馨农场模拟游戏的共同点、吸血鬼生活模拟游戏的独特之处、多人联机、价格,以及该选哪一个。"
+  path="/zh/moonlight-peaks-vs-stardew-valley"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'vs Stardew Valley' }]}
+  lang="zh"
+  showExport
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">条目 · 对比</p>
+      <h1><em>Moonlight Peaks</em> vs Stardew Valley</h1>
+      <p class="intro">
+        Moonlight Peaks 经常被拿来和 Stardew Valley 比较——下面是这两款温馨农场模拟游戏实际
+        有什么区别,帮你判断哪个更适合自己。更新于 {SITE.updated}。
+      </p>
+
+      <h2>快速对比</h2>
+      <table class="facts">
+        <tr><th>前提设定</th><td>Moonlight Peaks 是背景设在超自然小镇的吸血鬼生活模拟游戏;Stardew Valley 是乡村农场重建模拟游戏。</td></tr>
+        <tr><th>画面风格</th><td>Moonlight Peaks 使用现代 3D 画面;Stardew Valley 使用 2D 像素画风。</td></tr>
+        <tr><th>战斗</th><td>Moonlight Peaks 没有战斗;Stardew Valley 在矿洞及相关区域有战斗内容。</td></tr>
+        <tr><th>多人联机</th><td>Moonlight Peaks 是纯单人游戏;Stardew Valley 支持联机合作。</td></tr>
+        <tr><th>恋爱方式</th><td>Moonlight Peaks 围绕超自然家族和不限性别的约会;Stardew Valley 有早已确立多年的村民阵容。</td></tr>
+        <tr><th>最佳选择</th><td>想要新鲜的哥特式温馨感,选 Moonlight Peaks;想要经过多年内容验证的经典之作,选 Stardew Valley。</td></tr>
+      </table>
+
+      <h2>共同点</h2>
+      <p>
+        两者都是建立在同样的放松循环之上的悠闲农场模拟游戏:种植和照料作物、钓鱼和采集、装饰
+        房屋,并慢慢和村民交朋友——和他们谈恋爱或结婚。如果你喜欢 Stardew 的节奏,Moonlight
+        Peaks 说的是同一种语言。
+      </p>
+
+      <h2>Moonlight Peaks 的独特之处</h2>
+      <ul>
+        <li><strong>你是一名吸血鬼。</strong>你是德古拉伯爵的孩子,在一个满是狼人、女巫和人鱼的超自然小镇里重建家族农场。</li>
+        <li><strong>你在夜里种地。</strong>农活都在月光下完成——日出前记得赶回棺材。</li>
+        <li><strong>不只是工具,还有魔法。</strong>学习法术(包括浇水小游戏和省力法术),酿造像"另我药水"这样的药剂。</li>
+        <li><strong>变身能力。</strong>变成蝙蝠穿越小镇,到达隐藏区域。</li>
+        <li><strong>一切都带着魔法色彩。</strong>种植会发光的血葡萄和"邪恶黄瓜"之类的作物,饲养德古拉羊之类的魔法家畜。</li>
+        <li><strong>Nokturna。</strong>游戏内置的集换式卡牌游戏,有自己的一套卡牌可以收集。</li>
+        <li><strong>没有战斗。</strong>连矿洞都没有战斗——从头到尾都很温馨。</li>
+        <li><strong>现代 3D 画面。</strong>第三人称 3D 画面,而不是 Stardew 的 2D 像素画风。</li>
+      </ul>
+
+      <h2>多人联机</h2>
+      <p>
+        这是一个关键区别。Stardew Valley 提供联机合作,可以和朋友一起种地。Moonlight Peaks 是
+        <strong>纯单人游戏</strong>——没有公布任何联机或在线模式。
+      </p>
+
+      <h2>价格与平台</h2>
+      <p>
+        Stardew Valley(2016 年,独立开发者 ConcernedApe 制作)约 14.99 美元,经常打折,几乎
+        所有平台都能玩到。Moonlight Peaks 在 Steam(PC/Mac)、Steam Deck、Switch、Switch 2 和
+        Android 上{GAME.releaseLabel}<strong>起价 34.99 美元</strong>(Switch 2 上为 39.99 美元)。
+      </p>
+
+      <h2>该玩哪一个?</h2>
+      <p>
+        不需要非此即彼。如果你想要经过验证、价格实惠、适合联机、内容近乎无穷的经典之作,
+        Stardew Valley 很难被超越。如果你想要有魔法、夜间农耕、超自然阵容的新鲜哥特式恋爱向
+        体验,Moonlight Peaks 就是为你准备的。很多温馨游戏爱好者会乐意两个都玩。
+      </p>
+
+      <h2>常见问题</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout">
+        延伸阅读:<a href="/zh/beginner-guide">新手指南</a>、<a href="/zh/platforms">平台与价格</a>、
+        <a href="/zh/release-date">发售日期</a>。
+      </div>
+    </div>
+  </article>
+</Base>

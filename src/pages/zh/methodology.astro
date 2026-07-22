@@ -1,0 +1,116 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, GAME } from '../../consts';
+
+const tiers = [
+  { label: '已确认', desc: '直接对照实际游戏、官方补丁说明或开发者直接声明验证过(Steam 社区帖子、官方 wiki、媒体资料包)。这是我们唯一当作既定事实处理的级别。' },
+  { label: '据报道', desc: '在媒体试玩报道、评测者报告或我们认为可信的社区测试(Reddit、Steam 社区讨论、YouTube 实况)中出现,但我们还没有在当前版本里亲自独立复现过。' },
+  { label: '数据挖掘', desc: '在发售前的游戏文件中发现,尽可能与其他发售前资料交叉核对。数据挖掘内容是真实数据,但可能在发售前后发生变化,所以我们不会当作已确认呈现。' },
+  { label: '预期 / 未确认', desc: '基于游戏现有规律做出的合理推测(比如已有的商店名称暗示营业时间),明确标注为我们自己的推测,而不是有证据支持的事实。' },
+];
+
+const stats = [
+  { n: '52+', label: '带署名并附链接来源的 FAQ 回答' },
+  { n: '70+', label: '带署名并附链接来源的新闻条目' },
+  { n: '49', label: '单独标注状态的角色资料' },
+  { n: '4', label: '每个使用它们的页面上都会显示的确认等级' },
+];
+
+const faq = [
+  { q: 'Moonlight Peaks Wiki & Guide 如何核实信息?', a: '本站上的每一条事实都标注了四个确认等级之一——已确认、据报道、数据挖掘或预期——这样读者一眼就能看出某个说法的可信程度,而不是把每个细节都用同样的确定性呈现。' },
+  { q: '本站会编造未经确认的礼物表、数值或配方吗?', a: '不会。数据尚不可用的地方,页面会明确说明,而不是用看似合理的内容填补空白。我们宁愿展示空白,也不猜测。' },
+  { q: '记者或其他网站可以引用本站的数据吗?', a: `可以——这正是本站存在的意义。请注明 ${SITE.brand} 并链接回你引用的具体页面(而不只是首页),这样读者可以自己核实来源和确认等级。` },
+  { q: '本站多久更新一次?', a: '在抢先体验期间和发售后都持续更新——补丁说明、新的社区报告和官方确认一出现就会被收录进来,已有条目会重新标注(而不是删除),以反映确认等级的变化。' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '首页', item: `${SITE.url}/zh` },
+    { '@type': 'ListItem', position: 2, name: '方法论与准确性标准', item: `${SITE.url}/zh/methodology` },
+  ] },
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+];
+---
+<Base
+  title="方法论与准确性标准 | Moonlight Peaks Wiki & Guide"
+  description="我们如何核实 Moonlight Peaks 的信息:四级确认体系(已确认、据报道、数据挖掘、预期)、来源标准,以及如何引用本站。"
+  path="/zh/methodology"
+  jsonLd={jsonLd}
+  crumbs={[{ label: '方法论与准确性标准' }]}
+  lang="zh"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">关于 · 方法论</p>
+      <h1>方法论与<em>准确性标准</em></h1>
+      <p class="intro">
+        {SITE.brand} 建立在一条规则之上:绝不把推测用和已核实事实一样的确定性呈现出来。这个页面
+        准确说明我们如何标注、注明来源并更新关于 {GAME.title} 的信息,以及其他网站或记者可以
+        如何引用我们的工作。
+      </p>
+
+      <h2>我们的四级确认体系</h2>
+      <p>每个包含事实性说法的角色资料、FAQ 回答和攻略条目都会标注下列四个等级之一,直接显示在页面上,而不是藏在脚注里:</p>
+      <table class="facts">
+        <tr><th>等级</th><th>含义</th></tr>
+        {tiers.map((t) => (<tr><th>{t.label}</th><td>{t.desc}</td></tr>))}
+      </table>
+
+      <h2>数字一览</h2>
+      <div class="stat-grid">
+        {stats.map((s) => (
+          <div class="stat-card"><strong>{s.n}</strong><span>{s.label}</span></div>
+        ))}
+      </div>
+
+      <h2>我们的资料来源</h2>
+      <ul>
+        <li><strong>官方渠道:</strong>Steam 补丁说明、开发者自己在 Steam 社区发布的帖子、官方 wiki,以及各平台的商店页面。</li>
+        <li><strong>媒体报道:</strong>我们明确署名的媒体(IGN、GameRant、TheGamer、Nintendo Everything 等)的评测和试玩报道,而不是不具名地引用"有评测者说"。</li>
+        <li><strong>社区测试:</strong>Reddit、Steam 社区讨论和 YouTube 实况,在我们能验证之前都归为"据报道"而非"已确认"。</li>
+        <li><strong>发售前数据挖掘:</strong>尽可能与其他发售前资料交叉核对,并明确标注为数据挖掘而非已确认,因为文件在正式发售前可能会变化。</li>
+      </ul>
+
+      <h2>我们不会做的事</h2>
+      <p>
+        我们不会为了填补空白而编造礼物表、数值、掉落率或配方。我们不会把"据报道"的内容升级为
+        "已确认",只是为了让页面看起来更完整。当某个事实的确认等级发生变化时——比如某个数据挖掘
+        得到的名字后来在正式游戏中被确认——我们会更新标注,而不是悄悄改写历史。
+      </p>
+
+      <h2>引用本站</h2>
+      <p>
+        如果你是记者、YouTuber,或其他攻略的共同作者,并且引用了我们的数据,请直接链接到你引用
+        的具体页面(角色资料、FAQ 回答或地点攻略),而不只是首页,这样你的读者可以自己查看来源
+        和确认等级。类似"<em>经由 {SITE.brand}</em>"这样一句话加上链接正是我们所希望的——不需要
+        正式许可。
+      </p>
+      <p>
+        发现了错误,或者有真实来源的更正信息?请通过 {SITE.contact} 联系我们,我们会核实并更新
+        相关页面。
+      </p>
+
+      <h2>常见问题</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        相关链接:<a href="/zh/about">关于本站</a>、<a href="/zh/faq">FAQ 枢纽</a>。
+      </div>
+    </div>
+  </article>
+
+  <style>
+    .stat-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin: 14px 0 22px; }
+    @media (min-width: 640px) { .stat-grid { grid-template-columns: repeat(4, 1fr); } }
+    .stat-card { border: 1px solid var(--line); border-radius: 12px; background: var(--surface); padding: 16px 14px; text-align: center; }
+    .stat-card strong { display: block; font-family: var(--display); font-size: 1.8rem; color: var(--candle); }
+    .stat-card span { color: var(--muted); font-size: 0.82rem; }
+  </style>
+</Base>
