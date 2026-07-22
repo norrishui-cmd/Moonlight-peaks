@@ -1,0 +1,38 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { SITE } from '../../../consts';
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: [{
+    '@type': 'Question', name: 'Moonlight Peaks는 멀티플레이어인가요?',
+    acceptedAnswer: { '@type': 'Answer', text: '아니요 — Moonlight Peaks는 순수 싱글플레이어 경험입니다. 멀티플레이어나 협동 모드는 발표되지 않았으며, Steam에서도 싱글플레이어로 등록되어 있습니다.' },
+  }] },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '홈', item: `${SITE.url}/ko` },
+    { '@type': 'ListItem', position: 2, name: 'FAQ', item: `${SITE.url}/ko/faq` },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks는 멀티플레이어인가요?"
+  description="아니요 — Moonlight Peaks는 순수 싱글플레이어 경험입니다. 멀티플레이어나 협동 모드는 발표되지 않았습니다."
+  path="/ko/faq/is-moonlight-peaks-multiplayer"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'FAQ', href: '/ko/faq' }, { label: '멀티플레이어?' }]}
+  lang="ko"
+>
+  <article class="page">
+    <div class="wrap">
+      <h1>Moonlight Peaks는 <em>멀티플레이어</em>인가요?</h1>
+      <p class="intro">
+        아니요 — 확인됨: Moonlight Peaks는 순수 싱글플레이어 경험입니다. 멀티플레이어나
+        협동 모드는 발표되지 않았으며, Steam 스토어 페이지에도 싱글플레이어로 등록되어
+        있습니다.
+      </p>
+      <div class="callout wip">
+        관련 페이지: <a href="/ko/faq">모든 자주 묻는 질문</a>,
+        <a href="/faq/is-moonlight-peaks-multiplayer">영어 전체 버전</a>.
+      </div>
+    </div>
+  </article>
+</Base>

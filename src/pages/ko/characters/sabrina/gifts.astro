@@ -1,0 +1,46 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import { SITE } from '../../../../consts';
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: [{
+    '@type': 'Question', name: 'Sabrina가 가장 좋아하는 선물은 무엇인가요?',
+    acceptedAnswer: { '@type': 'Answer', text: 'Sabrina는 보라색 튤립과 보라색 플루메리아를 좋아합니다.' },
+  }] },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '홈', item: `${SITE.url}/ko` },
+    { '@type': 'ListItem', position: 2, name: '캐릭터', item: `${SITE.url}/ko/characters` },
+    { '@type': 'ListItem', position: 3, name: 'Sabrina', item: `${SITE.url}/ko/characters/sabrina` },
+  ] },
+];
+---
+<Base
+  title="Sabrina가 좋아하는 선물 | Moonlight Peaks 캐릭터 가이드"
+  description="Moonlight Peaks에서 Sabrina의 확인된 선물 선호도 — 최고로 좋아하는 것, 좋아하는 것, 피해야 할 것."
+  path="/ko/characters/sabrina/gifts"
+  jsonLd={jsonLd}
+  crumbs={[{ label: '캐릭터', href: '/ko/characters' }, { label: 'Sabrina', href: '/ko/characters/sabrina' }, { label: '선물' }]}
+  lang="ko"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">캐릭터 · 선물</p>
+      <h1>Sabrina가 좋아하는 <em>선물</em></h1>
+      <p class="intro">출시 주간 테스트를 바탕으로 확인된 Sabrina의 선물 데이터입니다.</p>
+
+      <h2>최고로 좋아함</h2>
+      <p>Sabrina가 최고로 좋아하는 것으로 확인됨: 보라색 튤립과 보라색 플루메리아.</p>
+
+      <h2>좋아함</h2>
+      <p>최고 선호 선물 외에도 Sabrina는 다음을 좋아합니다: Blood Grape와 Blood Grape 주스.</p>
+
+      <h2>싫어함</h2>
+      <p>Sabrina에게 피해야 할 것: 양파 씨앗과 분홍색 소라 껍데기. 확인됨 — 호감도가 낮아집니다.</p>
+
+      <div class="callout wip">
+        관련 페이지: <a href="/ko/characters/sabrina">Sabrina 프로필</a>,
+        <a href="/ko/characters">모든 캐릭터</a>, <a href="/characters/sabrina/gifts">영어 전체 버전</a>.
+      </div>
+    </div>
+  </article>
+</Base>

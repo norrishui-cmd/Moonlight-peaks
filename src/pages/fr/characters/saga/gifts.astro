@@ -1,0 +1,49 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import { SITE } from '../../../../consts';
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: [{
+    '@type': 'Question', name: 'Quel est le cadeau préféré de Saga ?',
+    acceptedAnswer: { '@type': 'Answer', text: 'Saga adore le Vin Blanc (White Wine) par-dessus tout.' },
+  }] },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Accueil', item: `${SITE.url}/fr` },
+    { '@type': 'ListItem', position: 2, name: 'Personnages', item: `${SITE.url}/fr/characters` },
+    { '@type': 'ListItem', position: 3, name: 'Saga', item: `${SITE.url}/fr/characters/saga` },
+  ] },
+];
+---
+<Base
+  title="Cadeaux préférés de Saga | Guide des personnages Moonlight Peaks"
+  description="Préférences de cadeaux confirmées pour Saga dans Moonlight Peaks — ce qu'elle adore, ce qu'elle aime et ce qu'il faut éviter."
+  path="/fr/characters/saga/gifts"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Personnages', href: '/fr/characters' }, { label: 'Saga', href: '/fr/characters/saga' }, { label: 'Cadeaux' }]}
+  lang="fr"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Personnages · Cadeaux</p>
+      <h1>Cadeaux préférés de <em>Saga</em></h1>
+      <p class="intro">
+        Données de cadeaux confirmées pour Saga, basées sur des tests de la semaine de lancement
+        de médias internationaux (TheGamer, publié le 7 juillet 2026).
+      </p>
+
+      <h2>Elle adore</h2>
+      <p>Confirmé que Saga adore : Vin Blanc (White Wine). Le choix le plus efficace pour approfondir rapidement la relation.</p>
+
+      <h2>Elle aime</h2>
+      <p>Au-delà de son favori, Saga aime aussi : Vin Rouge (Red Wine), Bière, les fleurs individuelles (pas de bouquets), Tulipe Violette, Azalée Rose, Blood Grape, Jus de Fraise et Soupe Gazpacho.</p>
+
+      <h2>Elle n'aime pas</h2>
+      <p>Évitez avec Saga : les bouquets de fleurs (plusieurs fleurs ensemble) et le Lingot de Cuivre. Confirmé que cela réduit l'affection.</p>
+
+      <div class="callout wip">
+        Pages liées : <a href="/fr/characters/saga">profil de Saga</a>,
+        <a href="/fr/characters">tous les personnages</a>, <a href="/characters/saga/gifts">version complète en anglais</a>.
+      </div>
+    </div>
+  </article>
+</Base>

@@ -1,0 +1,49 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import { SITE } from '../../../../consts';
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: [{
+    '@type': 'Question', name: 'Saga가 가장 좋아하는 선물은 무엇인가요?',
+    acceptedAnswer: { '@type': 'Answer', text: 'Saga는 화이트 와인(White Wine)을 무엇보다 좋아합니다.' },
+  }] },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '홈', item: `${SITE.url}/ko` },
+    { '@type': 'ListItem', position: 2, name: '캐릭터', item: `${SITE.url}/ko/characters` },
+    { '@type': 'ListItem', position: 3, name: 'Saga', item: `${SITE.url}/ko/characters/saga` },
+  ] },
+];
+---
+<Base
+  title="Saga가 좋아하는 선물 | Moonlight Peaks 캐릭터 가이드"
+  description="Moonlight Peaks에서 Saga의 확인된 선물 선호도 — 최고로 좋아하는 것, 좋아하는 것, 피해야 할 것."
+  path="/ko/characters/saga/gifts"
+  jsonLd={jsonLd}
+  crumbs={[{ label: '캐릭터', href: '/ko/characters' }, { label: 'Saga', href: '/ko/characters/saga' }, { label: '선물' }]}
+  lang="ko"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">캐릭터 · 선물</p>
+      <h1>Saga가 좋아하는 <em>선물</em></h1>
+      <p class="intro">
+        국제 매체(TheGamer, 2026년 7월 7일 게재)의 출시 주간 테스트를 바탕으로 확인된 Saga의
+        선물 데이터입니다.
+      </p>
+
+      <h2>최고로 좋아함</h2>
+      <p>Saga가 최고로 좋아하는 것으로 확인됨: 화이트 와인(White Wine). 관계를 빠르게 깊어지게 하는 가장 효과적인 선택입니다.</p>
+
+      <h2>좋아함</h2>
+      <p>최고 선호 선물 외에도 Saga는 다음을 좋아합니다: 레드 와인(Red Wine), 맥주, 낱개 꽃(꽃다발 제외), 보라색 튤립, 분홍색 아잘레아, Blood Grape, 딸기 주스, 가스파초 수프.</p>
+
+      <h2>싫어함</h2>
+      <p>Saga에게 피해야 할 것: 꽃다발(여러 꽃을 함께 묶은 것)과 구리 막대. 확인됨 — 호감도가 낮아집니다.</p>
+
+      <div class="callout wip">
+        관련 페이지: <a href="/ko/characters/saga">Saga 프로필</a>,
+        <a href="/ko/characters">모든 캐릭터</a>, <a href="/characters/saga/gifts">영어 전체 버전</a>.
+      </div>
+    </div>
+  </article>
+</Base>

@@ -1,0 +1,48 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import { SITE } from '../../../../consts';
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: [{
+    '@type': 'Question', name: 'Quel est le cadeau préféré de Luna ?',
+    acceptedAnswer: { '@type': 'Answer', text: 'Luna adore la Tulipe Violette, l\'Azalée Violette et la Rose Blanche.' },
+  }] },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Accueil', item: `${SITE.url}/fr` },
+    { '@type': 'ListItem', position: 2, name: 'Personnages', item: `${SITE.url}/fr/characters` },
+    { '@type': 'ListItem', position: 3, name: 'Luna', item: `${SITE.url}/fr/characters/luna` },
+  ] },
+];
+---
+<Base
+  title="Cadeaux préférés de Luna | Guide des personnages Moonlight Peaks"
+  description="Préférences de cadeaux confirmées pour Luna dans Moonlight Peaks — ce qu'elle adore, ce qu'elle aime et ce qu'il faut éviter."
+  path="/fr/characters/luna/gifts"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Personnages', href: '/fr/characters' }, { label: 'Luna', href: '/fr/characters/luna' }, { label: 'Cadeaux' }]}
+  lang="fr"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Personnages · Cadeaux</p>
+      <h1>Cadeaux préférés de <em>Luna</em></h1>
+      <p class="intro">
+        Données de cadeaux confirmées pour Luna, basées sur des tests de la semaine de lancement.
+      </p>
+
+      <h2>Elle adore</h2>
+      <p>Confirmé que Luna adore : Tulipe Violette, Azalée Violette et Rose Blanche.</p>
+
+      <h2>Elle aime</h2>
+      <p>Au-delà de ses favoris, Luna aime aussi : Blood Grape.</p>
+
+      <h2>Elle n'aime pas</h2>
+      <p>Évitez avec Luna : la Boîte de Haricots Rouillée. Confirmé que cela réduit l'affection.</p>
+
+      <div class="callout wip">
+        Pages liées : <a href="/fr/characters/luna">profil de Luna</a>,
+        <a href="/fr/characters">tous les personnages</a>, <a href="/characters/luna/gifts">version complète en anglais</a>.
+      </div>
+    </div>
+  </article>
+</Base>

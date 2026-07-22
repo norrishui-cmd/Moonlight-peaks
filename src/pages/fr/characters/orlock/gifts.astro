@@ -1,0 +1,48 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import { SITE } from '../../../../consts';
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: [{
+    '@type': 'Question', name: 'Quel est le cadeau préféré d\'Orlock ?',
+    acceptedAnswer: { '@type': 'Answer', text: 'Orlock adore le Vin Blanc et le Vin Rouge.' },
+  }] },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Accueil', item: `${SITE.url}/fr` },
+    { '@type': 'ListItem', position: 2, name: 'Personnages', item: `${SITE.url}/fr/characters` },
+    { '@type': 'ListItem', position: 3, name: 'Orlock', item: `${SITE.url}/fr/characters/orlock` },
+  ] },
+];
+---
+<Base
+  title="Cadeaux préférés d'Orlock | Guide des personnages Moonlight Peaks"
+  description="Préférences de cadeaux confirmées pour Orlock dans Moonlight Peaks — ce qu'il adore, ce qu'il aime et ce qu'il faut éviter."
+  path="/fr/characters/orlock/gifts"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Personnages', href: '/fr/characters' }, { label: 'Orlock', href: '/fr/characters/orlock' }, { label: 'Cadeaux' }]}
+  lang="fr"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Personnages · Cadeaux</p>
+      <h1>Cadeaux préférés d'<em>Orlock</em></h1>
+      <p class="intro">
+        Données de cadeaux confirmées pour Orlock, basées sur des tests de la semaine de lancement.
+      </p>
+
+      <h2>Il adore</h2>
+      <p>Confirmé qu'Orlock adore : Vin Blanc (White Wine) et Vin Rouge (Red Wine).</p>
+
+      <h2>Il aime</h2>
+      <p>Au-delà de ses favoris, Orlock aime aussi : Tulipe Violette et Azalée Rose.</p>
+
+      <h2>Il n'aime pas</h2>
+      <p>Évitez avec Orlock : le Bois (Wood) et les Graines d'Oignon. Confirmé que cela réduit l'affection.</p>
+
+      <div class="callout wip">
+        Pages liées : <a href="/fr/characters/orlock">profil d'Orlock</a>,
+        <a href="/fr/characters">tous les personnages</a>, <a href="/characters/orlock/gifts">version complète en anglais</a>.
+      </div>
+    </div>
+  </article>
+</Base>

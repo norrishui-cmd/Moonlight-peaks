@@ -1,0 +1,48 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import { SITE } from '../../../../consts';
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: [{
+    '@type': 'Question', name: 'Quel est le cadeau préféré de Noel ?',
+    acceptedAnswer: { '@type': 'Answer', text: "Noel adore l'Œuf Doré (Golden Egg) par-dessus tout." },
+  }] },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Accueil', item: `${SITE.url}/fr` },
+    { '@type': 'ListItem', position: 2, name: 'Personnages', item: `${SITE.url}/fr/characters` },
+    { '@type': 'ListItem', position: 3, name: 'Noel', item: `${SITE.url}/fr/characters/noel` },
+  ] },
+];
+---
+<Base
+  title="Cadeaux préférés de Noel | Guide des personnages Moonlight Peaks"
+  description="Préférences de cadeaux confirmées pour Noel dans Moonlight Peaks — ce qu'il adore, ce qu'il aime et ce qu'il faut éviter."
+  path="/fr/characters/noel/gifts"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Personnages', href: '/fr/characters' }, { label: 'Noel', href: '/fr/characters/noel' }, { label: 'Cadeaux' }]}
+  lang="fr"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Personnages · Cadeaux</p>
+      <h1>Cadeaux préférés de <em>Noel</em></h1>
+      <p class="intro">
+        Données de cadeaux confirmées pour Noel, basées sur des tests de la semaine de lancement.
+      </p>
+
+      <h2>Il adore</h2>
+      <p>Confirmé que Noel adore : Œuf Doré (Golden Egg). Le choix le plus efficace pour approfondir rapidement la relation.</p>
+
+      <h2>Il aime</h2>
+      <p>Au-delà de son favori, Noel aime aussi : Blood Grape, Jus de Blood Grape, Jus de Fraise et Poisson Glibby.</p>
+
+      <h2>Il n'aime pas</h2>
+      <p>Évitez avec Noel : Tulipe Violette et Azalée Rose — des fleurs populaires auprès de la plupart des autres personnages, mais confirmées comme non désirées par lui.</p>
+
+      <div class="callout wip">
+        Pages liées : <a href="/fr/characters/noel">profil de Noel</a>,
+        <a href="/fr/characters">tous les personnages</a>, <a href="/characters/noel/gifts">version complète en anglais</a>.
+      </div>
+    </div>
+  </article>
+</Base>

@@ -1,0 +1,48 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import { SITE } from '../../../../consts';
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: [{
+    '@type': 'Question', name: '¿Qué regalo le gusta más a Sabrina?',
+    acceptedAnswer: { '@type': 'Answer', text: 'A Sabrina le encantan el Tulipán Morado y la Plumeria Morada.' },
+  }] },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Inicio', item: `${SITE.url}/es` },
+    { '@type': 'ListItem', position: 2, name: 'Personajes', item: `${SITE.url}/es/characters` },
+    { '@type': 'ListItem', position: 3, name: 'Sabrina', item: `${SITE.url}/es/characters/sabrina` },
+  ] },
+];
+---
+<Base
+  title="Regalos favoritos de Sabrina | Guía de personajes de Moonlight Peaks"
+  description="Preferencias de regalos confirmadas de Sabrina en Moonlight Peaks — qué le encanta, qué le gusta y qué evitar."
+  path="/es/characters/sabrina/gifts"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Personajes', href: '/es/characters' }, { label: 'Sabrina', href: '/es/characters/sabrina' }, { label: 'Regalos' }]}
+  lang="es"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Personajes · Regalos</p>
+      <h1>Regalos favoritos de <em>Sabrina</em></h1>
+      <p class="intro">
+        Datos de regalos confirmados para Sabrina, basados en pruebas de la semana de lanzamiento.
+      </p>
+
+      <h2>Le encanta</h2>
+      <p>Confirmado que a Sabrina le encantan: Tulipán Morado y Plumeria Morada.</p>
+
+      <h2>Le gusta</h2>
+      <p>Además de sus favoritos, a Sabrina también le gusta: Uva de Sangre y Jugo de Uva de Sangre.</p>
+
+      <h2>No le gusta</h2>
+      <p>Evita con Sabrina: Semillas de Cebolla y Concha de Caracola Rosa. Confirmado que reducen el afecto.</p>
+
+      <div class="callout wip">
+        Páginas relacionadas: <a href="/es/characters/sabrina">perfil de Sabrina</a>,
+        <a href="/es/characters">todos los personajes</a>, <a href="/characters/sabrina/gifts">versión completa en inglés</a>.
+      </div>
+    </div>
+  </article>
+</Base>

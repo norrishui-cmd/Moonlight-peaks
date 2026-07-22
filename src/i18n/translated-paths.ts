@@ -73,7 +73,10 @@ const frPaths = ['/', '/release-date', '/beginner-guide', '/characters', '/roman
   '/collections', '/collections/fish', '/collections/critters', '/collections/vampsters',
   '/collections/soul-blobs', '/collections/albertus-jobs',
   '/farm', '/farm/crops', '/farm/house', '/farm/barn', '/farm/greenhouse', '/farm/animals', '/farm/farm-helpers',
-  '/quests', '/quests/story', '/quests/side', '/quests/a-bridge-too-far', '/quests/launch-week', '/achievements', '/fishing', '/friendship', '/house', '/inventory', '/known-issues', '/privacy', '/shipping', '/system-requirements', '/mini-games', '/moonlight-peaks-vs-stardew-valley', '/methodology', '/vampsters', '/best-settings', '/reviews', '/behind-the-scenes', '/launch-day', '/environment', '/spellcasting', '/map', '/nokturna'];
+  '/quests', '/quests/story', '/quests/side', '/quests/a-bridge-too-far', '/quests/launch-week', '/achievements', '/fishing', '/friendship', '/house', '/inventory', '/known-issues', '/privacy', '/shipping', '/system-requirements', '/mini-games', '/moonlight-peaks-vs-stardew-valley', '/methodology', '/vampsters', '/best-settings', '/reviews', '/behind-the-scenes', '/launch-day', '/environment', '/spellcasting', '/map', '/nokturna',
+  '/characters/customize', '/characters/saga/gifts', '/characters/luna/gifts', '/characters/orlock/gifts',
+  '/characters/sabrina/gifts', '/characters/noel/gifts', '/characters/fiona/gifts',
+  '/faq/is-moonlight-peaks-multiplayer', '/faq/is-moonlight-peaks-on-ps5-or-xbox'];
 
 // Korean is a brand-new locale, starting with the homepage plus a handful of core pages built
 // alongside it — grows independently from here.
@@ -86,7 +89,10 @@ const koPaths = ['/', '/release-date', '/beginner-guide', '/characters', '/roman
   '/collections', '/collections/fish', '/collections/critters', '/collections/vampsters',
   '/collections/soul-blobs', '/collections/albertus-jobs',
   '/farm', '/farm/crops', '/farm/house', '/farm/barn', '/farm/greenhouse', '/farm/animals', '/farm/farm-helpers',
-  '/quests', '/quests/story', '/quests/side', '/quests/a-bridge-too-far', '/quests/launch-week', '/achievements', '/fishing', '/friendship', '/house', '/inventory', '/known-issues', '/privacy', '/shipping', '/system-requirements', '/mini-games', '/moonlight-peaks-vs-stardew-valley', '/methodology', '/vampsters', '/best-settings', '/reviews', '/behind-the-scenes', '/launch-day', '/environment', '/spellcasting', '/map', '/nokturna'];
+  '/quests', '/quests/story', '/quests/side', '/quests/a-bridge-too-far', '/quests/launch-week', '/achievements', '/fishing', '/friendship', '/house', '/inventory', '/known-issues', '/privacy', '/shipping', '/system-requirements', '/mini-games', '/moonlight-peaks-vs-stardew-valley', '/methodology', '/vampsters', '/best-settings', '/reviews', '/behind-the-scenes', '/launch-day', '/environment', '/spellcasting', '/map', '/nokturna',
+  '/characters/saga/gifts', '/characters/luna/gifts', '/characters/orlock/gifts',
+  '/characters/sabrina/gifts', '/characters/noel/gifts', '/characters/fiona/gifts',
+  '/faq/is-moonlight-peaks-multiplayer', '/faq/is-moonlight-peaks-on-ps5-or-xbox'];
 
 export const translatedPathsByLocale: Record<Locale, Set<string>> = {
   en: new Set(), // English is the source; not meaningful to check "is English translated".

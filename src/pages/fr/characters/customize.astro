@@ -1,0 +1,92 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { SITE } from '../../../consts';
+import { characterCustomizeGroups, characterCustomizeItems } from '../../../data/character-customize';
+
+const categoryTitleFr: Record<string, string> = { Hair: 'Cheveux', Face: 'Visage' };
+const groupTitleFr: Record<string, string> = { 'Hair Styles': 'Coiffures', 'Facial Hair': 'Pilosité faciale', 'Hats': 'Chapeaux' };
+
+const categories = [
+  { title: 'Hair', groups: characterCustomizeGroups.filter((group) => group.category === 'Hair') },
+  { title: 'Face', groups: characterCustomizeGroups.filter((group) => group.category === 'Face') },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Accueil', item: `${SITE.url}/fr` },
+    { '@type': 'ListItem', position: 2, name: 'Personnages', item: `${SITE.url}/fr/characters` },
+    { '@type': 'ListItem', position: 3, name: 'Personnalisation', item: `${SITE.url}/fr/characters/customize` },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks Personnalisation du personnage - Cheveux, barbe & chapeaux"
+  description="Catalogue de personnalisation de personnage Moonlight Peaks avec icônes de coiffures, pilosité faciale et chapeaux."
+  path="/fr/characters/customize"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Personnages', href: '/fr/characters' }, { label: 'Personnalisation' }]}
+  lang="fr"
+>
+  <article class="page customize-page">
+    <div class="wrap">
+      <p class="eyebrow">Personnages / Personnalisation</p>
+      <h1>Moonlight Peaks <em>Personnalisation</em></h1>
+      <p class="intro">
+        Options de personnalisation du personnage. Le catalogue actuel compte {characterCustomizeItems.length}
+        icônes de coiffures, pilosité faciale et chapeaux.
+      </p>
+
+      <nav class="customize-jump" aria-label="Groupes de personnalisation">
+        {characterCustomizeGroups.map((group) => (
+          <a href={`#${group.slug}`}>{groupTitleFr[group.title] ?? group.title} <span>{group.items.length}</span></a>
+        ))}
+      </nav>
+
+      {categories.map((category) => (
+        <section class="customize-category" aria-labelledby={`${category.title.toLowerCase()}-customize`}>
+          <h2 id={`${category.title.toLowerCase()}-customize`}>{categoryTitleFr[category.title] ?? category.title}</h2>
+
+          {category.groups.map((group) => (
+            <section class="customize-table" id={group.slug} aria-labelledby={`${group.slug}-title`}>
+              <h3 id={`${group.slug}-title`} class="customize-table-title">{groupTitleFr[group.title] ?? group.title}</h3>
+              <div class="customize-grid" style={`--customize-cols: ${group.columns}`}>
+                {group.items.map((item) => (
+                  <figure class="customize-cell">
+                    <img src={item.icon} alt={`Icône ${item.name}`} width="96" height="96" loading="lazy" />
+                    <figcaption>{item.name}</figcaption>
+                  </figure>
+                ))}
+              </div>
+            </section>
+          ))}
+        </section>
+      ))}
+
+      <p class="customize-note">
+        Les noms sont des espaces réservés numérotés, car la source ne montrait que des icônes et des noms de groupe.
+      </p>
+
+      <div class="callout">
+        Lié : <a href="/fr/characters">personnages</a>, <a href="/fr/character-creator">éditeur de personnage</a>,
+        <a href="/fr/families">familles</a>, <a href="/fr/romance">romance</a>.
+      </div>
+    </div>
+  </article>
+
+  <style>
+    .customize-jump { display: flex; flex-wrap: wrap; gap: 8px; margin: 18px 0 24px; }
+    .customize-jump a { border: 1px solid var(--line); border-radius: 999px; color: var(--mist); background: var(--surface); padding: 7px 12px; text-decoration: none; font-family: var(--mono); font-size: 0.76rem; }
+    .customize-jump a:hover { border-color: color-mix(in srgb, var(--candle) 50%, var(--line)); color: var(--candle); }
+    .customize-jump span { color: var(--faint); margin-left: 4px; }
+    .customize-category { margin-top: 24px; }
+    .customize-table { border: 1px solid var(--line); margin: 12px 0 24px; overflow: hidden; background: rgba(32, 18, 58, 0.72); }
+    .customize-table-title { margin: 0; padding: 8px 12px; text-align: center; font-family: var(--sans); font-size: 1rem; font-weight: 800; color: #dfcdfa; background: #542199; border-bottom: 1px solid var(--line); }
+    .customize-grid { display: grid; grid-template-columns: repeat(var(--customize-cols), minmax(76px, 1fr)); }
+    .customize-cell { min-width: 0; min-height: 126px; margin: 0; padding: 10px 8px 9px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 7px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .customize-cell img { width: 78px; height: 78px; object-fit: contain; display: block; filter: drop-shadow(0 8px 10px rgba(5, 2, 14, 0.32)); }
+    .customize-cell figcaption { width: 100%; color: #ded3e6; font-family: var(--mono); font-size: 0.64rem; line-height: 1.25; text-align: center; overflow-wrap: anywhere; }
+    .customize-note { color: var(--faint); font-size: 0.78rem; margin: 10px 0 18px; }
+    .customize-note code { color: var(--mist); }
+    @media (max-width: 960px) { .customize-grid { grid-template-columns: repeat(auto-fit, minmax(86px, 1fr)); } }
+  </style>
+</Base>

@@ -1,0 +1,38 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { SITE } from '../../../consts';
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: [{
+    '@type': 'Question', name: '¿Moonlight Peaks es multijugador?',
+    acceptedAnswer: { '@type': 'Answer', text: 'No — Moonlight Peaks es exclusivamente para un jugador. No se ha anunciado modo multijugador ni cooperativo; en Steam está listado como un solo jugador.' },
+  }] },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Inicio', item: `${SITE.url}/es` },
+    { '@type': 'ListItem', position: 2, name: 'FAQ', item: `${SITE.url}/es/faq` },
+  ] },
+];
+---
+<Base
+  title="¿Moonlight Peaks es multijugador?"
+  description="No — Moonlight Peaks es exclusivamente para un jugador. No se ha anunciado modo multijugador ni cooperativo."
+  path="/es/faq/is-moonlight-peaks-multiplayer"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'FAQ', href: '/es/faq' }, { label: '¿Es multijugador?' }]}
+  lang="es"
+>
+  <article class="page">
+    <div class="wrap">
+      <h1>¿Moonlight Peaks es <em>multijugador</em>?</h1>
+      <p class="intro">
+        No — confirmado: Moonlight Peaks es una experiencia exclusivamente para un jugador. No se
+        ha anunciado ningún modo multijugador o cooperativo, y en su ficha de Steam aparece
+        listado como un solo jugador.
+      </p>
+      <div class="callout wip">
+        Páginas relacionadas: <a href="/es/faq">todas las preguntas frecuentes</a>,
+        <a href="/faq/is-moonlight-peaks-multiplayer">versión completa en inglés</a>.
+      </div>
+    </div>
+  </article>
+</Base>
