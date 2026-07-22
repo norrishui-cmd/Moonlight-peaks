@@ -136,7 +136,7 @@ export function isPathTranslated(locale: Locale, barePath: string): boolean {
   if ((locale === 'ja' || locale === 'de' || locale === 'es') && /^\/(locations|activities)\/[a-z0-9-]+$/.test(barePath)) return true;
   if (locale === 'es' && /^\/items\/[a-z0-9-]+$/.test(barePath)) return true;
   if (locale === 'es' && /^\/demo\/[a-z0-9-]+$/.test(barePath)) return true;
-  if (locale === 'es' && /^\/faq\/[a-z0-9-]+$/.test(barePath)) return true;
+  if ((locale === 'es' || locale === 'ko' || locale === 'fr') && /^\/faq\/[a-z0-9-]+$/.test(barePath)) return true;
   if (locale === 'es' && (barePath === '/collections/fish' || barePath === '/collections/critters')) return true;
   // Quest story/side detail pages are fully translated for es (all 20 story + 12 side quests).
   if ((locale === 'es' || locale === 'zh' || locale === 'zh-hant' || locale === 'fr' || locale === 'ko') && /^\/quests\/(story|side)(\/[a-z0-9-]+)?$/.test(barePath)) return true;

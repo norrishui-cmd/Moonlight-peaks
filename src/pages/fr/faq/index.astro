@@ -1,0 +1,86 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { SITE, GAME } from '../../../consts';
+import { faqs } from '../../../data/faq';
+import { faqFr } from '../../../i18n/faq-fr';
+
+const catLabelFr: Record<string, string> = {
+  platforms: 'Plateformes, prix & démo', romance: 'Romance & mariage', characters: 'Personnages',
+  world: 'Monde & gameplay', farming: 'Agriculture & économie', general: 'Général',
+};
+const cats = ['platforms', 'romance', 'characters', 'world', 'farming', 'general'] as const;
+const translated = faqs.filter((f) => faqFr[f.slug]);
+const plain = (slug: string) => {
+  const tr = faqFr[slug];
+  return [tr.a, ...(tr.more || [])].join(' ');
+};
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Accueil', item: `${SITE.url}/fr` },
+    { '@type': 'ListItem', position: 2, name: 'Questions fréquentes', item: `${SITE.url}/fr/faq` },
+  ] },
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: translated.map((f) => ({
+    '@type': 'Question', name: faqFr[f.slug].q, acceptedAnswer: { '@type': 'Answer', text: plain(f.slug) },
+  })) },
+];
+---
+<Base
+  title="Moonlight Peaks FAQ — Sortie, romance, démo & plus"
+  description="Réponses aux questions les plus fréquentes sur Moonlight Peaks : date de sortie, prix, plateformes, multijoueur, combat, mariage, options de romance, la démo et le gameplay."
+  path="/fr/faq"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Questions fréquentes' }]}
+  lang="fr"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">Hub · FAQ</p>
+      <h1>{GAME.title} <em>FAQ</em></h1>
+      <p class="intro">
+        Des réponses rapides et sourcées aux questions que les joueurs posent le plus souvent sur
+        {GAME.title} depuis sa sortie le 7 juillet 2026. Chaque question a sa propre page. Nous ne
+        répondons qu'à ce qui est confirmé ou rapporté, et marquons tout ce qui reste inconnu
+        plutôt que de deviner. Dernière mise à jour : {SITE.updated}.
+      </p>
+
+      <h2>Comment utiliser cette FAQ</h2>
+      <p>
+        Utilisez cette page quand vous avez besoin d'une réponse directe, puis ouvrez le guide lié
+        pour plus de détails. Les questions sur les plateformes et la démo mènent généralement aux
+        pages de sortie, tandis que les questions sur la romance et les personnages mènent aux
+        pages de cadeaux, horaires, événements de cœur et familles.
+      </p>
+
+      {cats.map((cat) => {
+        const items = translated.filter((f) => f.cat === cat);
+        if (items.length === 0) return null;
+        return (
+          <section class="grp">
+            <div class="grp-head"><h2>{catLabelFr[cat]}</h2><span class="note">{items.length} questions</span></div>
+            <ul class="q-list">
+              {items.map((f) => (
+                <li><a href={`/fr/faq/${f.slug}`}>{faqFr[f.slug].q}</a></li>
+              ))}
+            </ul>
+          </section>
+        );
+      })}
+
+      <div class="callout wip">
+        Actuellement, {translated.length} entrées FAQ sont traduites en français. La version
+        anglaise propose les {faqs.length} entrées — <a href="/faq">page FAQ anglaise</a>.
+      </div>
+    </div>
+  </article>
+
+  <style>
+    .grp { margin: 28px 0; }
+    .grp-head { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; border-bottom: 1px solid var(--line); padding-bottom: 6px; margin-bottom: 10px; }
+    .grp-head h2 { margin: 0; }
+    .note { font-family: var(--mono); font-size: 0.72rem; color: var(--faint); white-space: nowrap; }
+    .q-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 6px; }
+    .q-list a { display: block; padding: 8px 0; color: var(--mist); text-decoration: none; border-bottom: 1px dashed var(--line); }
+    .q-list a:hover { color: var(--candle); }
+  </style>
+</Base>

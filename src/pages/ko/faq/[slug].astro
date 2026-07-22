@@ -1,0 +1,75 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { SITE, GAME } from '../../../consts';
+import { faqs, faqCatLabels } from '../../../data/faq';
+import { faqKo } from '../../../i18n/faq-ko';
+
+export function getStaticPaths() {
+  const translated = faqs.filter((f) => faqKo[f.slug]);
+  return translated.map((f, i) => ({
+    params: { slug: f.slug },
+    props: { f, tr: faqKo[f.slug], prev: translated[(i - 1 + translated.length) % translated.length], next: translated[(i + 1) % translated.length] },
+  }));
+}
+
+const { f, tr, prev, next } = Astro.props as {
+  f: (typeof faqs)[number]; tr: { q: string; a: string; more?: string[] };
+  prev: (typeof faqs)[number]; next: (typeof faqs)[number];
+};
+const url = new URL(`/ko/faq/${f.slug}`, SITE.url).href;
+const plain = [tr.a, ...(tr.more || [])].join(' ');
+
+const catLabelKo: Record<string, string> = {
+  platforms: '플랫폼, 가격 & 데모', romance: '로맨스 & 결혼', characters: '캐릭터',
+  world: '세계 & 게임플레이', farming: '농사 & 경제', general: '일반',
+};
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '홈', item: `${SITE.url}/ko` },
+    { '@type': 'ListItem', position: 2, name: '자주 묻는 질문', item: `${SITE.url}/ko/faq` },
+    { '@type': 'ListItem', position: 3, name: tr.q, item: url },
+  ] },
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: [{
+    '@type': 'Question', name: tr.q, acceptedAnswer: { '@type': 'Answer', text: plain },
+  }] },
+];
+---
+<Base
+  title={`${tr.q} · Moonlight Peaks`}
+  description={plain.length > 155 ? plain.slice(0, 152) + '…' : plain}
+  path={`/ko/faq/${f.slug}`}
+  jsonLd={jsonLd}
+  crumbs={[{ label: '자주 묻는 질문', href: '/ko/faq' }, { label: tr.q }]}
+  lang="ko"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">FAQ · {catLabelKo[f.cat] ?? faqCatLabels[f.cat]}</p>
+      <h1>{tr.q}</h1>
+      <p class="intro">{tr.a}</p>
+      {tr.more && tr.more.map((m) => (<p>{m}</p>))}
+
+      {f.related && f.related.length > 0 && (
+        <div class="callout">
+          <strong>관련:</strong>{' '}
+          {f.related.map((r, i) => (<>{i > 0 ? ' · ' : ''}<a href={r.href}>{r.label}</a></>))}
+        </div>
+      )}
+
+      <p class="cnote">{GAME.title}에 대해 확인되거나 제보된 내용만 답변하며, 아직 알려지지 않은 것은 표시하고 계속 업데이트합니다.</p>
+
+      <nav class="prevnext" aria-label="FAQ 탐색">
+        <a href={`/ko/faq/${prev.slug}`}>← 이전</a>
+        <a href="/ko/faq">모든 FAQ</a>
+        <a href={`/ko/faq/${next.slug}`}>다음 →</a>
+      </nav>
+    </div>
+  </article>
+
+  <style>
+    .cnote { font-size: 0.74rem; color: var(--faint); margin: 14px 0 0; }
+    .prevnext { display: flex; justify-content: space-between; gap: 10px; margin: 18px 0 0; font-family: var(--mono); font-size: 0.8rem; }
+    .prevnext a { color: var(--candle); }
+  </style>
+</Base>
