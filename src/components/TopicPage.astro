@@ -5,7 +5,7 @@ import { isPathTranslated } from '../i18n/translated-paths';
 import { relatedLabelsDe, relatedLabelsJa } from '../i18n/related-labels';
 import type { TopicSection, TopicItem } from '../data/topic';
 
-interface Props { section: TopicSection; item: TopicItem; prev: TopicItem; next: TopicItem; lang?: 'en' | 'ja' | 'de' | 'es' | 'fr' | 'ko'; basePath?: string; }
+interface Props { section: TopicSection; item: TopicItem; prev: TopicItem; next: TopicItem; lang?: 'en' | 'ja' | 'de' | 'es' | 'fr' | 'ko' | 'zh' | 'zh-hant'; basePath?: string; }
 const { section, item, prev, next, lang = 'en', basePath } = Astro.props;
 const base = basePath ?? section.base;
 // Related links in the underlying data are always bare English paths and labels (shared across
@@ -85,6 +85,28 @@ const ui = {
     },
     statusNote: '개발자가 확인한 사실과 제보되거나 예상되는 세부 사항을 항상 구분하며, 데이터를 지어내지 않습니다 — 실제 출시 후 정보가 확인되는 대로 이 페이지를 업데이트합니다.',
   },
+  zh: {
+    whatWeKnow: '目前已知的信息', status: '状态:', related: '相关:', faq: '常见问题',
+    prev: '上一个:', next: '下一个:', all: (l: string) => `全部${l}`,
+    statusLabels: {
+      confirmed: '开发者已确认',
+      expected: '预期 - 尚未确认',
+      datamined: '数据挖掘 - 来自发售前的游戏文件,已与发售前资料交叉核对;发售后待验证',
+      reported: '据报道 - 发售后待验证',
+    },
+    statusNote: '我们始终把开发者确认的事实与据报道或预期的细节区分开,绝不编造数据——这个页面会随着真实的发售后信息得到验证而持续更新。',
+  },
+  'zh-hant': {
+    whatWeKnow: '目前已知的資訊', status: '狀態:', related: '相關:', faq: '常見問題',
+    prev: '上一個:', next: '下一個:', all: (l: string) => `全部${l}`,
+    statusLabels: {
+      confirmed: '開發者已確認',
+      expected: '預期 - 尚未確認',
+      datamined: '資料探勘 - 來自發售前的遊戲檔案,已與發售前資料交叉核對;發售後待驗證',
+      reported: '據報導 - 發售後待驗證',
+    },
+    statusNote: '我們始終把開發者確認的事實與據報導或預期的細節區分開,絕不編造資料——這個頁面會隨著真實的發售後資訊得到驗證而持續更新。',
+  },
 }[lang];
 
 const url = new URL(`${base}/${item.slug}`, SITE.url).href;
@@ -92,7 +114,7 @@ const statusLabel = ui.statusLabels[item.status as keyof typeof ui.statusLabels]
 
 const ld: object[] = [
   { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
-    { '@type': 'ListItem', position: 1, name: lang === 'ja' ? 'ホーム' : lang === 'de' ? 'Startseite' : lang === 'fr' ? 'Accueil' : lang === 'ko' ? '홈' : lang === 'es' ? 'Inicio' : 'Home', item: lang === 'en' ? SITE.url : `${SITE.url}/${lang}` },
+    { '@type': 'ListItem', position: 1, name: lang === 'ja' ? 'ホーム' : lang === 'de' ? 'Startseite' : lang === 'fr' ? 'Accueil' : lang === 'ko' ? '홈' : lang === 'es' ? 'Inicio' : lang === 'zh' ? '首页' : lang === 'zh-hant' ? '首頁' : 'Home', item: lang === 'en' ? SITE.url : `${SITE.url}/${lang}` },
     { '@type': 'ListItem', position: 2, name: section.label, item: new URL(base, SITE.url).href },
     { '@type': 'ListItem', position: 3, name: item.title, item: url },
   ] },

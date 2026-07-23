@@ -1,0 +1,78 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { SITE } from '../../../consts';
+
+const faq = [
+  { q: 'Moonlight Peaks 裏回聲洞穴怎麼解鎖?', a: '已確認:回聲洞穴位於 Misty Shores 西南方。它一開始是鎖着的,完成"A Bridge Too Far"任務後纔會打開。' },
+  { q: 'Moonlight Peaks 裏在哪能找到銅礦石?', a: '社區報告:完成"A Bridge Too Far"後,在回聲洞穴裏。銅礦石看起來像帶銅色斑點的普通石頭,用鎬子採集。' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '首頁', item: `${SITE.url}/zh-hant` },
+    { '@type': 'ListItem', position: 2, name: '地點', item: `${SITE.url}/zh-hant/locations/mines` },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks 回聲洞穴 — 解鎖 & 礦石(繁體中文)"
+  description="Moonlight Peaks 回聲洞穴中文攻略:怎麼解鎖、銅礦石在哪找,以及常見的礦場進度卡關問題。"
+  path="/zh-hant/locations/mines"
+  jsonLd={jsonLd}
+  crumbs={[{ label: '地點', href: '/zh-hant/locations' }, { label: '回聲洞穴' }]}
+  lang="zh-hant"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">條目 / 礦場</p>
+      <h1>Moonlight Peaks <em>回聲洞穴</em></h1>
+
+      <div class="callout">
+        <strong>快速回答:</strong>回聲洞穴在完成"A Bridge Too Far"任務後解鎖。之後你就可以用
+        鎬子在裏面找到銅礦石了。
+      </div>
+
+      <h2>解鎖</h2>
+      <p>
+        已確認:回聲洞穴位於 Misty Shores 區域西南方,一開始是鎖着的。完成"A Bridge Too Far"
+        任務後,它會和整個 Misty Shores 區域一起打開。
+      </p>
+
+      <h2>洞穴爲什麼還鎖着</h2>
+      <p>
+        如果你還進不去,幾乎總是任務問題——而不是缺了某個物品——纔是真正的原因。社區報告:
+        這個區域被 Orlock 和 Fiona 之間關於一座"被詛咒"的橋的糾紛鎖住了。
+      </p>
+
+      <h2>銅礦石</h2>
+      <p>
+        <span class="tag-community">社區報告</span> 銅礦石看起來像帶銅色斑點的普通石頭,用鎬子
+        採集。較大的礦脈可能一次給 6 份礦石,而不是 1 份。
+      </p>
+
+      <h2>常見問題</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        延伸閱讀:<a href="/zh-hant/locations">地點</a>、
+        <a href="/zh-hant/quests/story/a-bridge-too-far">A Bridge Too Far 攻略</a>、
+        <a href="/locations/mines">完整攻略(英文)</a>。
+      </div>
+    </div>
+  </article>
+  <style>
+    .tag-community {
+      display: inline-block; font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.02em;
+      color: var(--faint); border: 1px solid var(--line); border-radius: 999px; padding: 2px 8px;
+      margin-right: 6px; vertical-align: middle;
+    }
+  </style>
+</Base>

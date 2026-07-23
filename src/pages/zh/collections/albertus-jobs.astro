@@ -1,0 +1,72 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { SITE } from '../../../consts';
+
+const faq = [
+  { q: 'Moonlight Peaks 里 Albertus 打工板是什么?', a: '已确认:一块由猫头鹰 Albertus 管理的告示板,玩家可以在上面查看可接的委托——完成这些短小的任务能获得金币、偶尔还有物品,以及和委托人的好感度。' },
+  { q: 'Moonlight Peaks 里打工板在哪找?', a: '已确认:在市政厅,由 Albertus 管理。这是新居民最早会接触到的系统之一。' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '首页', item: `${SITE.url}/zh` },
+    { '@type': 'ListItem', position: 2, name: '收藏', item: `${SITE.url}/zh/collections` },
+    { '@type': 'ListItem', position: 3, name: '打工板', item: `${SITE.url}/zh/collections/albertus-jobs` },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks Albertus 打工板 — 玩法详解"
+  description="已确认:Albertus 打工板是 Moonlight Peaks 的告示板,完成短小委托能获得金币、物品和与委托人的好感度。"
+  path="/zh/collections/albertus-jobs"
+  jsonLd={jsonLd}
+  crumbs={[{ label: '收藏', href: '/zh/collections' }, { label: '打工板' }]}
+  lang="zh"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">收藏 · 打工板</p>
+      <h1>Albertus <em>打工板</em></h1>
+      <p class="intro">
+        已确认:Albertus 打工板是小镇的告示板,由猫头鹰
+        <a href="/characters/albertus">Albertus</a> 在市政厅管理——这是新居民最早会接触到的
+        系统之一。
+      </p>
+
+      <h2>打工怎么运作</h2>
+      <p>
+        已确认:打工是贴在告示板上的短小委托。完成一份委托能获得金币,有时还有物品,外加与
+        委托人的好感度提升——这对早期赚钱和被动积累好感度都很有用。
+      </p>
+
+      <h2>在哪找</h2>
+      <p>
+        已确认:告示板位于市政厅内,就在镇长 Brook 的登记柜台旁边——这是新居民在小镇上最早
+        会接触到的东西之一。
+      </p>
+
+      <h2>仍在确认中</h2>
+      <ul>
+        <li>具体的委托池以及多久刷新一次。</li>
+        <li>难度或奖励是否会随时间提升。</li>
+        <li>哪些居民的委托可能出现的完整列表。</li>
+      </ul>
+
+      <h2>常见问题</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        相关页面:<a href="/zh/collections">收藏枢纽</a>、<a href="/characters/albertus">Albertus</a>、
+        <a href="/locations/town-hall">市政厅</a>、<a href="/zh/characters/brook">Brook</a>。
+      </div>
+    </div>
+  </article>
+</Base>

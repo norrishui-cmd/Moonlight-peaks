@@ -1,0 +1,23 @@
+---
+import TopicPage from '../../../components/TopicPage.astro';
+import { locationsSection, locations } from '../../../data/locations';
+import { locationsZh } from '../../../i18n/locations-zh';
+
+export function getStaticPaths() {
+  return locations.filter((it) => locationsZh[it.slug]).map((it, i, arr) => {
+    const tr = locationsZh[it.slug];
+    const merged = { ...it, ...tr };
+    return {
+      params: { slug: it.slug },
+      props: {
+        item: merged,
+        prev: { ...arr[(i - 1 + arr.length) % arr.length], ...locationsZh[arr[(i - 1 + arr.length) % arr.length].slug] },
+        next: { ...arr[(i + 1) % arr.length], ...locationsZh[arr[(i + 1) % arr.length].slug] },
+      },
+    };
+  });
+}
+const { item, prev, next } = Astro.props;
+const zhSection = { ...locationsSection, base: '/zh/locations', label: '地点', eyebrow: '地点' };
+---
+<TopicPage section={zhSection} item={item} prev={prev} next={next} lang="zh" basePath="/zh/locations" />

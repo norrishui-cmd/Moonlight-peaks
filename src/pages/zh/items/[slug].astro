@@ -1,0 +1,120 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { SITE } from '../../../consts';
+import { itemCategories, getItemFramework } from '../../../data/items';
+import { itemsZh } from '../../../i18n/items-zh';
+import type { ItemCategory } from '../../../data/items';
+
+export function getStaticPaths() {
+  return itemCategories.filter((item) => itemsZh[item.slug]).map((item, index, arr) => ({
+    params: { slug: item.slug },
+    props: { item, prev: arr[(index - 1 + arr.length) % arr.length], next: arr[(index + 1) % arr.length] },
+  }));
+}
+
+const { item } = Astro.props as { item: ItemCategory };
+const tr = itemsZh[item.slug];
+const url = new URL(`/zh/items/${item.slug}`, SITE.url).href;
+const framework = getItemFramework(item.slug);
+const hasRealData = item.slug === 'foraging' || item.slug === 'cooking';
+const parseImageCell = (cell: string) => {
+  const [src, alt = ''] = cell.slice('image:'.length).split('|');
+  return { src, alt };
+};
+
+const statusLabelZh: Record<string, string> = {
+  confirmed: '已确认', datamined: '数据挖掘', expected: '预期',
+};
+
+const faq = [
+  { q: `Moonlight Peaks 中的${tr.name}是什么?`, a: `${tr.name}是 Moonlight Peaks 里的一个物品分类。${tr.summary}` },
+  { q: `关于${tr.name}的信息已经确认了吗?`, a: item.status === 'confirmed'
+      ? `${tr.name}的系统已经确认,但具体物品名称和效果仍在实际游戏中持续验证。`
+      : `${tr.name}这个分类目前还没有在实际游戏中独立确认。我们不会靠猜测填补,一旦有内容确认就会更新此页面。` },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '首页', item: `${SITE.url}/zh` },
+    { '@type': 'ListItem', position: 2, name: '物品', item: `${SITE.url}/zh/items` },
+    { '@type': 'ListItem', position: 3, name: tr.name, item: url },
+  ] },
+];
+---
+<Base
+  title={`${tr.name} | Moonlight Peaks 物品指南`}
+  description={tr.dek}
+  path={`/zh/items/${item.slug}`}
+  jsonLd={jsonLd}
+  crumbs={[{ label: '物品', href: '/zh/items' }, { label: tr.name }]}
+  lang="zh"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">物品 · {statusLabelZh[item.status] ?? item.status}</p>
+      <h1><em>{tr.name}</em></h1>
+      <p class="intro">{tr.dek}</p>
+
+      <h2>详情</h2>
+      <p>{tr.summary}</p>
+
+      <h2>示例</h2>
+      <ul>{tr.examples.map((e) => (<li>{e}</li>))}</ul>
+
+      {hasRealData && (
+        <>
+          <h2>完整数据表</h2>
+          <div class="zh-item-table-wrap">
+            <table class="zh-item-table">
+              <thead>
+                <tr>{framework.columns.map((col) => <th>{col}</th>)}</tr>
+              </thead>
+              <tbody>
+                {framework.rows.map((row) => (
+                  <tr>
+                    {row.map((cell) => {
+                      const image = cell.startsWith('image:') ? parseImageCell(cell) : null;
+                      return (
+                        <td>
+                          {image ? (
+                            <img class="zh-item-table-icon" src={image.src} alt={image.alt} loading="lazy" decoding="async" />
+                          ) : cell}
+                        </td>
+                      );
+                    })}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <p class="zh-source-note">{framework.sourceNote}</p>
+        </>
+      )}
+
+      <h2>常见问题</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        相关:<a href="/zh/items">所有物品</a>、<a href={`/items/${item.slug}`}>完整英文版</a>。
+      </div>
+    </div>
+  </article>
+
+  <style>
+    .zh-item-table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 14px; background: var(--surface); margin: 12px 0; }
+    .zh-item-table { width: 100%; min-width: 700px; border-collapse: collapse; font-size: 0.84rem; }
+    .zh-item-table th, .zh-item-table td { border-bottom: 1px solid var(--line); padding: 10px 12px; text-align: left; vertical-align: top; }
+    .zh-item-table th { color: var(--candle); font-family: var(--mono); font-size: 0.66rem; letter-spacing: 0.05em; text-transform: uppercase; background: rgba(21, 16, 29, 0.58); white-space: nowrap; }
+    .zh-item-table-icon { display: block; width: 68px; height: 68px; object-fit: contain; }
+    .zh-item-table tr:last-child td { border-bottom: 0; }
+    .zh-source-note { border-left: 3px solid var(--candle-dim); color: #ded3e6; padding-left: 12px; font-size: 0.88rem; }
+  </style>
+</Base>

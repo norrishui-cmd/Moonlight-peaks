@@ -1,0 +1,78 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { SITE } from '../../../consts';
+
+const faq = [
+  { q: 'Moonlight Peaks 里回声洞穴怎么解锁?', a: '已确认:回声洞穴位于 Misty Shores 西南方。它一开始是锁着的,完成"A Bridge Too Far"任务后才会打开。' },
+  { q: 'Moonlight Peaks 里在哪能找到铜矿石?', a: '社区报告:完成"A Bridge Too Far"后,在回声洞穴里。铜矿石看起来像带铜色斑点的普通石头,用镐子采集。' },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '首页', item: `${SITE.url}/zh` },
+    { '@type': 'ListItem', position: 2, name: '地点', item: `${SITE.url}/zh/locations/mines` },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks 回声洞穴 — 解锁 & 矿石(简体中文)"
+  description="Moonlight Peaks 回声洞穴中文攻略:怎么解锁、铜矿石在哪找,以及常见的矿场进度卡关问题。"
+  path="/zh/locations/mines"
+  jsonLd={jsonLd}
+  crumbs={[{ label: '地点', href: '/zh/locations' }, { label: '回声洞穴' }]}
+  lang="zh"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">条目 / 矿场</p>
+      <h1>Moonlight Peaks <em>回声洞穴</em></h1>
+
+      <div class="callout">
+        <strong>快速回答:</strong>回声洞穴在完成"A Bridge Too Far"任务后解锁。之后你就可以用
+        镐子在里面找到铜矿石了。
+      </div>
+
+      <h2>解锁</h2>
+      <p>
+        已确认:回声洞穴位于 Misty Shores 区域西南方,一开始是锁着的。完成"A Bridge Too Far"
+        任务后,它会和整个 Misty Shores 区域一起打开。
+      </p>
+
+      <h2>洞穴为什么还锁着</h2>
+      <p>
+        如果你还进不去,几乎总是任务问题——而不是缺了某个物品——才是真正的原因。社区报告:
+        这个区域被 Orlock 和 Fiona 之间关于一座"被诅咒"的桥的纠纷锁住了。
+      </p>
+
+      <h2>铜矿石</h2>
+      <p>
+        <span class="tag-community">社区报告</span> 铜矿石看起来像带铜色斑点的普通石头,用镐子
+        采集。较大的矿脉可能一次给 6 份矿石,而不是 1 份。
+      </p>
+
+      <h2>常见问题</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="callout wip">
+        延伸阅读:<a href="/zh/locations">地点</a>、
+        <a href="/zh/quests/story/a-bridge-too-far">A Bridge Too Far 攻略</a>、
+        <a href="/locations/mines">完整攻略(英文)</a>。
+      </div>
+    </div>
+  </article>
+  <style>
+    .tag-community {
+      display: inline-block; font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.02em;
+      color: var(--faint); border: 1px solid var(--line); border-radius: 999px; padding: 2px 8px;
+      margin-right: 6px; vertical-align: middle;
+    }
+  </style>
+</Base>

@@ -1,0 +1,23 @@
+---
+import TopicPage from '../../../components/TopicPage.astro';
+import { familiesSection, families } from '../../../data/families';
+import { familiesZh } from '../../../i18n/families-zh';
+
+export function getStaticPaths() {
+  return families.filter((it) => familiesZh[it.slug]).map((it, i, arr) => {
+    const tr = familiesZh[it.slug];
+    const merged = { ...it, ...tr };
+    return {
+      params: { slug: it.slug },
+      props: {
+        item: merged,
+        prev: { ...arr[(i - 1 + arr.length) % arr.length], ...familiesZh[arr[(i - 1 + arr.length) % arr.length].slug] },
+        next: { ...arr[(i + 1) % arr.length], ...familiesZh[arr[(i + 1) % arr.length].slug] },
+      },
+    };
+  });
+}
+const { item, prev, next } = Astro.props;
+const zhSection = { ...familiesSection, base: '/zh/families', label: '家族', eyebrow: '世界观' };
+---
+<TopicPage section={zhSection} item={item} prev={prev} next={next} lang="zh" basePath="/zh/families" />

@@ -1,0 +1,46 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import { SITE } from '../../../../consts';
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: [{
+    '@type': 'Question', name: 'Fiona 最喜欢什么礼物?',
+    acceptedAnswer: { '@type': 'Answer', text: 'Fiona 最爱的是草莓(Strawberries)。' },
+  }] },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '首页', item: `${SITE.url}/zh` },
+    { '@type': 'ListItem', position: 2, name: '角色', item: `${SITE.url}/zh/characters` },
+    { '@type': 'ListItem', position: 3, name: 'Fiona', item: `${SITE.url}/zh/characters/fiona` },
+  ] },
+];
+---
+<Base
+  title="Fiona 喜欢的礼物 | Moonlight Peaks 角色指南"
+  description="Moonlight Peaks 中 Fiona 已确认的礼物偏好——最爱、喜欢和要避开的礼物。"
+  path="/zh/characters/fiona/gifts"
+  jsonLd={jsonLd}
+  crumbs={[{ label: '角色', href: '/zh/characters' }, { label: 'Fiona', href: '/zh/characters/fiona' }, { label: '礼物' }]}
+  lang="zh"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">角色 · 礼物</p>
+      <h1>Fiona 喜欢的<em>礼物</em></h1>
+      <p class="intro">基于首发周测试确认的 Fiona 礼物数据。</p>
+
+      <h2>最爱</h2>
+      <p>已确认 Fiona 最爱:草莓(Strawberries)。</p>
+
+      <h2>喜欢</h2>
+      <p>除了最爱的礼物之外,Fiona 也喜欢:紫色郁金香、紫色杜鹃花、紫色薰衣草、鸡蛋和月光果汁。</p>
+
+      <h2>不喜欢</h2>
+      <p>要避开的:洋葱种子。已确认会降低好感度。</p>
+
+      <div class="callout wip">
+        相关页面:<a href="/zh/characters/fiona">Fiona 资料</a>,
+        <a href="/zh/characters">所有角色</a>,<a href="/characters/fiona/gifts">完整英文版</a>。
+      </div>
+    </div>
+  </article>
+</Base>

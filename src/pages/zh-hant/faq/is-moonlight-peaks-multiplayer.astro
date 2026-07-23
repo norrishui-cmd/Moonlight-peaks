@@ -1,0 +1,37 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { SITE } from '../../../consts';
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: [{
+    '@type': 'Question', name: 'Moonlight Peaks 是多人遊戲嗎?',
+    acceptedAnswer: { '@type': 'Answer', text: '不是——Moonlight Peaks 是純單人遊戲。沒有公佈任何多人或聯機合作模式;Steam 上標註爲單人遊戲。' },
+  }] },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '首頁', item: `${SITE.url}/zh-hant` },
+    { '@type': 'ListItem', position: 2, name: '常見問題', item: `${SITE.url}/zh-hant/faq` },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks 是多人遊戲嗎?"
+  description="不是——Moonlight Peaks 是純單人遊戲。沒有公佈任何多人或聯機合作模式。"
+  path="/zh-hant/faq/is-moonlight-peaks-multiplayer"
+  jsonLd={jsonLd}
+  crumbs={[{ label: '常見問題', href: '/zh-hant/faq' }, { label: '是多人遊戲嗎?' }]}
+  lang="zh-hant"
+>
+  <article class="page">
+    <div class="wrap">
+      <h1>Moonlight Peaks 是<em>多人遊戲</em>嗎?</h1>
+      <p class="intro">
+        不是——已確認:Moonlight Peaks 是純單人體驗。沒有公佈任何多人或聯機合作模式,Steam
+        商店頁面上也標註爲單人遊戲。
+      </p>
+      <div class="callout wip">
+        相關頁面:<a href="/zh-hant/faq">所有常見問題</a>,
+        <a href="/faq/is-moonlight-peaks-multiplayer">完整英文版</a>。
+      </div>
+    </div>
+  </article>
+</Base>

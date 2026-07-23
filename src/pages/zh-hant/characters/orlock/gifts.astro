@@ -1,0 +1,46 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import { SITE } from '../../../../consts';
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: [{
+    '@type': 'Question', name: 'Orlock 最喜歡什麼禮物?',
+    acceptedAnswer: { '@type': 'Answer', text: 'Orlock 最愛白葡萄酒和紅葡萄酒。' },
+  }] },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '首頁', item: `${SITE.url}/zh-hant` },
+    { '@type': 'ListItem', position: 2, name: '角色', item: `${SITE.url}/zh-hant/characters` },
+    { '@type': 'ListItem', position: 3, name: 'Orlock', item: `${SITE.url}/zh-hant/characters/orlock` },
+  ] },
+];
+---
+<Base
+  title="Orlock 喜歡的禮物 | Moonlight Peaks 角色指南"
+  description="Moonlight Peaks 中 Orlock 已確認的禮物偏好——最愛、喜歡和要避開的禮物。"
+  path="/zh-hant/characters/orlock/gifts"
+  jsonLd={jsonLd}
+  crumbs={[{ label: '角色', href: '/zh-hant/characters' }, { label: 'Orlock', href: '/zh-hant/characters/orlock' }, { label: '禮物' }]}
+  lang="zh-hant"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">角色 · 禮物</p>
+      <h1>Orlock 喜歡的<em>禮物</em></h1>
+      <p class="intro">基於首發周測試確認的 Orlock 禮物數據。</p>
+
+      <h2>最愛</h2>
+      <p>已確認 Orlock 最愛:白葡萄酒(White Wine)和紅葡萄酒(Red Wine)。</p>
+
+      <h2>喜歡</h2>
+      <p>除了最愛的禮物之外,Orlock 也喜歡:紫色鬱金香和粉色杜鵑花。</p>
+
+      <h2>不喜歡</h2>
+      <p>要避開的:木材(Wood)和洋蔥種子。已確認會降低好感度。</p>
+
+      <div class="callout wip">
+        相關頁面:<a href="/zh-hant/characters/orlock">Orlock 資料</a>,
+        <a href="/zh-hant/characters">所有角色</a>,<a href="/characters/orlock/gifts">完整英文版</a>。
+      </div>
+    </div>
+  </article>
+</Base>

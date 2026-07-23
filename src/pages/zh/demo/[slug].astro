@@ -1,0 +1,24 @@
+---
+import TopicPage from '../../../components/TopicPage.astro';
+import { demoSection, demo } from '../../../data/demo';
+import { demoZh } from '../../../i18n/demo-zh';
+
+export function getStaticPaths() {
+  const translated = demo.filter((it) => demoZh[it.slug]);
+  return translated.map((it, i) => {
+    const tr = demoZh[it.slug];
+    const merged = { ...it, ...tr };
+    return {
+      params: { slug: it.slug },
+      props: {
+        item: merged,
+        prev: { ...translated[(i - 1 + translated.length) % translated.length], ...demoZh[translated[(i - 1 + translated.length) % translated.length].slug] },
+        next: { ...translated[(i + 1) % translated.length], ...demoZh[translated[(i + 1) % translated.length].slug] },
+      },
+    };
+  });
+}
+const { item, prev, next } = Astro.props;
+const zhSection = { ...demoSection, base: '/zh/demo', label: '试玩版', eyebrow: '试玩版' };
+---
+<TopicPage section={zhSection} item={item} prev={prev} next={next} lang="zh" basePath="/zh/demo" />

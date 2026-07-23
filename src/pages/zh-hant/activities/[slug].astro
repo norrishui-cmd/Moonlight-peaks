@@ -1,0 +1,24 @@
+---
+import TopicPage from '../../../components/TopicPage.astro';
+import { activitiesSection, activities } from '../../../data/activities';
+import { activitiesZhHant } from '../../../i18n/activities-zh-hant';
+
+export function getStaticPaths() {
+  const translated = activities.filter((it) => activitiesZhHant[it.slug]);
+  return translated.map((it, i) => {
+    const tr = activitiesZhHant[it.slug];
+    const merged = { ...it, ...tr };
+    return {
+      params: { slug: it.slug },
+      props: {
+        item: merged,
+        prev: { ...translated[(i - 1 + translated.length) % translated.length], ...activitiesZhHant[translated[(i - 1 + translated.length) % translated.length].slug] },
+        next: { ...translated[(i + 1) % translated.length], ...activitiesZhHant[translated[(i + 1) % translated.length].slug] },
+      },
+    };
+  });
+}
+const { item, prev, next } = Astro.props;
+const zhSection = { ...activitiesSection, base: '/zh-hant/activities', label: '活動', eyebrow: '玩法' };
+---
+<TopicPage section={zhSection} item={item} prev={prev} next={next} lang="zh-hant" basePath="/zh-hant/activities" />

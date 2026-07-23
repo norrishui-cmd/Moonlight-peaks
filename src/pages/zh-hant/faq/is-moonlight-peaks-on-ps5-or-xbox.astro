@@ -1,0 +1,38 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { SITE } from '../../../consts';
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: [{
+    '@type': 'Question', name: 'Moonlight Peaks 有 PS5 或 Xbox 版本嗎?',
+    acceptedAnswer: { '@type': 'Answer', text: '沒有——沒有公佈任何 PlayStation 或 Xbox 版本。已確認的平臺是 Steam、Steam Deck、Nintendo Switch、Nintendo Switch 2 和 Android。' },
+  }] },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '首頁', item: `${SITE.url}/zh-hant` },
+    { '@type': 'ListItem', position: 2, name: '常見問題', item: `${SITE.url}/zh-hant/faq` },
+  ] },
+];
+---
+<Base
+  title="Moonlight Peaks 有 PS5 或 Xbox 版本嗎?"
+  description="沒有——Moonlight Peaks 沒有 PS5 或 Xbox 版本。已確認平臺:Steam、Steam Deck、Switch、Switch 2、Android。"
+  path="/zh-hant/faq/is-moonlight-peaks-on-ps5-or-xbox"
+  jsonLd={jsonLd}
+  crumbs={[{ label: '常見問題', href: '/zh-hant/faq' }, { label: 'PS5/Xbox' }]}
+  lang="zh-hant"
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="eyebrow">常見問題</p>
+      <h1>Moonlight Peaks 有 <em>PS5 或 Xbox</em> 版本嗎?</h1>
+      <p class="intro">
+        簡單說:沒有。沒有公佈任何 PlayStation 或 Xbox 版本。已確認的平臺是 Steam、Steam Deck、
+        Nintendo Switch、Nintendo Switch 2 和 Android。
+      </p>
+      <p>如果之後公佈了 PS5 或 Xbox 版本,我們會更新這個頁面。</p>
+      <div class="callout wip">
+        延伸閱讀:<a href="/zh-hant/platforms">平臺</a>、<a href="/zh-hant/release-date">發售日期</a>。
+      </div>
+    </div>
+  </article>
+</Base>
