@@ -1,50 +1,35 @@
 ---
 import Base from '../../../layouts/Base.astro';
 import { SITE, GAME } from '../../../consts';
-import News from '../../../components/News.astro';
-import { characters, type CharType } from '../../../data/characters';
+import { characters, typeIcons } from '../../../data/characters';
 import { charTranslations } from '../../../i18n/characters-data';
+import News from '../../../components/News.astro';
 
-const translatedSlugs = new Set(['count-dracula', 'saga', 'luna', 'orlock', 'brook', 'the-warlock', 'mina', 'sabrina', 'noel', 'fiona']);
-const deTranslations = charTranslations.de;
-
-// German labels for character type/family — not claimed as official localization, just natural
-// German for this guide.
-const typeLabelsDe: Record<CharType, string> = {
-  vampire: 'Vampir', werewolf: 'Werwolf', witch: 'Hexe', mermaid: 'Meerjungfrau',
-  seer: 'Seherin', ghost: 'Geist', human: 'Mensch', other: 'Sonstiges',
-};
-const familyLabelDe = (family: string): string => {
-  if (family.includes('Vampire')) return 'Vampirfamilie (Ambrosia)';
-  if (family.includes('Werewolf')) return 'Werwolffamilie (Logan)';
-  if (family.includes('Witch')) return 'Hexenfamilie (Webb)';
-  if (family.includes('Mermaid')) return 'Meerjungfrauenfamilie (Hosu)';
-  if (family.includes('Seer')) return 'Seherfamilie (Khazan)';
-  if (family.includes('Human')) return 'Menschenfamilie (Henderson)';
-  return 'Keiner Familie zugehörig';
-};
-
+const tr = charTranslations.de;
 const isMainCast = (c: (typeof characters)[number]) => c.romanceable === true || c.id === 'count-dracula';
-const mainCast = characters.filter(isMainCast);
-const npcs = characters.filter((c) => !isMainCast(c));
+const mainCast = characters.filter((c) => tr[c.id] && isMainCast(c));
+const npcs = characters.filter((c) => tr[c.id] && !isMainCast(c));
 
-function cardHref(id: string): string {
-  return translatedSlugs.has(id) ? `/de/characters/${id}` : `/characters/${id}`;
-}
-function displayName(c: (typeof characters)[number]): string {
-  return translatedSlugs.has(c.id) ? deTranslations[c.id].name : c.name;
-}
+const typeFilterLabels: Record<string, string> = {
+  vampire: 'Vampire', werewolf: 'Werwölfe', witch: 'Hexen', mermaid: 'Meerjungfrauen',
+  seer: 'Seher', human: 'Menschen', ghost: 'Geister', other: 'Sonstige',
+};
+const types = [...new Set(characters.filter((c) => tr[c.id]).map((c) => c.type))];
 
-const jsonLd = {
-  '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+const statusLabelDe: Record<string, string> = {
+  confirmed: 'bestätigt', reported: 'gemeldet', datamined: 'Datamining', unconfirmed: 'unbestätigt',
+};
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
     { '@type': 'ListItem', position: 1, name: 'Startseite', item: `${SITE.url}/de` },
     { '@type': 'ListItem', position: 2, name: 'Charaktere', item: `${SITE.url}/de/characters` },
-  ],
-};
+  ] },
+];
 ---
 <Base
-  title="Moonlight Peaks Charaktere (Alle Bewohner) - Gothic-Leben als Vampir"
-  description="Alle bestätigten Bewohner von Moonlight Peaks auf Deutsch: 23 Romanze-Optionen und weitere NPCs. Übersetzte Profile verlinken auf Deutsch, der Rest auf die ausführliche englische Version."
+  title="Moonlight Peaks Charaktere — Bewohner & Romanze"
+  description="Alle Moonlight Peaks Charaktere auf Deutsch, nach Familie: bestätigt vs. gemeldet, Romanze-Status, Geschenke und Beziehungen."
   path="/de/characters"
   jsonLd={jsonLd}
   crumbs={[{ label: 'Charaktere' }]}
@@ -52,66 +37,161 @@ const jsonLd = {
 >
   <article class="page">
     <div class="wrap">
-      <p class="eyebrow">Einstieg / Charaktere</p>
-      <h1>{GAME.title} <em>Charaktere</em> (alle Bewohner)</h1>
+      <p class="eyebrow">Eintrag · Bewohner</p>
+      <h1>Charaktere in <em>Moonlight Peaks</em></h1>
       <p class="intro">
-        Alle bestätigten Bewohner, aufgeteilt in Romanze-Optionen und weitere NPCs. Zehn Charaktere
-        haben ein vollständig übersetztes deutsches Profil; der Rest verlinkt auf die ausführlichste
-        verfügbare Version — die englische Profilseite.
+        Die Bewohner von {GAME.title} — ihre Familie, ihr Typ, und ob man sie daten kann.
+        Aufgeteilt in <strong>Hauptbesetzung</strong> (alle romanzefähigen Bewohner, plus Graf Dracula)
+        und <strong>NPCs & andere Bewohner</strong> (Bürgermeisterin, Ladenbesitzer, Geister und
+        Event-Gastgeber). Jeder ist markiert als <strong>bestätigt</strong>, <strong>gemeldet</strong>,
+        <strong>Datamining</strong> (Name aus Vorab-Dateien verifiziert, Rolle unbestätigt) oder
+        <strong>unbestätigt</strong> (nur Artwork gezeigt, Name noch nicht belegt). Aktualisiert {SITE.updated}.
       </p>
 
-      <h2>Romanze-Optionen & Hauptbesetzung ({mainCast.length})</h2>
-      <div class="cx-grid">
-        {mainCast.map((c) => (
-          <a class="cx-card" href={cardHref(c.id)}>
-            <span class="cx-thumb">
-              {c.img ? <img src={c.img} alt="" loading="lazy" width="72" height="72" /> : <span class="cx-letter" style={`background: linear-gradient(135deg, ${c.c1}, ${c.c2})`}>{displayName(c).charAt(0)}</span>}
-            </span>
-            <span>
-              <strong>{displayName(c)}</strong>
-              <em>{familyLabelDe(c.family)} · {typeLabelsDe[c.type]}</em>
-            </span>
-          </a>
-        ))}
+      <div class="cfilters" id="cfilters">
+        <button class="cchip is-active" data-type="all" type="button">Alle</button>
+        {types.map((t) => <button class="cchip" data-type={t} type="button">{typeFilterLabels[t] ?? t}</button>)}
       </div>
 
-      <h2>Weitere NPCs ({npcs.length})</h2>
-      <div class="cx-grid">
-        {npcs.map((c) => (
-          <a class="cx-card" href={cardHref(c.id)}>
-            <span class="cx-thumb">
-              {c.img ? <img src={c.img} alt="" loading="lazy" width="72" height="72" /> : <span class="cx-letter" style={`background: linear-gradient(135deg, ${c.c1}, ${c.c2})`}>{displayName(c).charAt(0)}</span>}
-            </span>
-            <span>
-              <strong>{displayName(c)}</strong>
-              <em>{familyLabelDe(c.family)} · {typeLabelsDe[c.type]}</em>
-            </span>
-          </a>
-        ))}
+      <h2>Hauptbesetzung ({mainCast.length})</h2>
+      <p class="cnote" style="margin: 0 0 12px;">Alle romanzefähigen Bewohner, plus Graf Dracula als zentrale Vaterfigur der Geschichte.</p>
+      <div class="cgrid" id="cgrid-main">
+        {mainCast.map((c) => {
+          const t = tr[c.id];
+          return (
+            <a class="ccard link" data-type={c.type} href={`/de/characters/${c.id}`}>
+              <div class="cavatar">
+                {c.img ? (
+                  <img src={c.img} alt={`${t.name} — Moonlight Peaks`} width="72" height="72" loading="lazy" />
+                ) : (
+                  <svg viewBox="0 0 72 72" width="72" height="72" aria-hidden="true">
+                    <defs><linearGradient id={`g-de-${c.id}`} x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color={c.c1} /><stop offset="1" stop-color={c.c2} /></linearGradient></defs>
+                    <rect width="72" height="72" fill={`url(#g-de-${c.id})`} />
+                    {typeIcons[c.type] ? (
+                      <g transform="translate(11,11) scale(0.5)" fill="rgba(255,255,255,0.92)" stroke="rgba(255,255,255,0.92)" set:html={typeIcons[c.type]} />
+                    ) : (
+                      <text x="36" y="46" text-anchor="middle" font-family="Fraunces, serif" font-size="30" fill="rgba(255,255,255,0.9)">{t.name.charAt(0)}</text>
+                    )}
+                  </svg>
+                )}
+              </div>
+              <div class="cbody">
+                <h2 class="cname">
+                  {t.name}
+                  <span class={`cbadge ${c.status === 'confirmed' ? 'is-conf' : c.status === 'reported' ? 'is-rep' : c.status === 'datamined' ? 'is-dm' : 'is-unc'}`}>{statusLabelDe[c.status] ?? c.status}</span>
+                </h2>
+                <div class="ctags">
+                  <span class="ctag fam">{t.familyLabel}</span>
+                  {c.romanceable === true && <span class="ctag heart">♥ Romanzefähig</span>}
+                  {c.romanceable === false && <span class="ctag">Nicht romanzefähig</span>}
+                  {c.romanceable === null && <span class="ctag">Romanze: TBC</span>}
+                </div>
+                <p class="cdesc">{t.desc}</p>
+                <span class="cmore">Profil ansehen →</span>
+              </div>
+            </a>
+          );
+        })}
+      </div>
+
+      <h2>NPCs & andere Bewohner ({npcs.length})</h2>
+      <p class="cnote" style="margin: 0 0 12px;">Bürgermeisterin, Ladenbesitzer, Geister, Event-Gastgeber und Namen, die noch verifiziert werden — keine Romanze-Optionen (oder bisher unbestätigt).</p>
+      <div class="cgrid" id="cgrid-npc">
+        {npcs.map((c) => {
+          const t = tr[c.id];
+          return (
+            <a class="ccard link" data-type={c.type} href={`/de/characters/${c.id}`}>
+              <div class="cavatar">
+                {c.img ? (
+                  <img src={c.img} alt={`${t.name} — Moonlight Peaks`} width="72" height="72" loading="lazy" />
+                ) : (
+                  <svg viewBox="0 0 72 72" width="72" height="72" aria-hidden="true">
+                    <defs><linearGradient id={`g-de-${c.id}`} x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color={c.c1} /><stop offset="1" stop-color={c.c2} /></linearGradient></defs>
+                    <rect width="72" height="72" fill={`url(#g-de-${c.id})`} />
+                    {typeIcons[c.type] ? (
+                      <g transform="translate(11,11) scale(0.5)" fill="rgba(255,255,255,0.92)" stroke="rgba(255,255,255,0.92)" set:html={typeIcons[c.type]} />
+                    ) : (
+                      <text x="36" y="46" text-anchor="middle" font-family="Fraunces, serif" font-size="30" fill="rgba(255,255,255,0.9)">{t.name.charAt(0)}</text>
+                    )}
+                  </svg>
+                )}
+              </div>
+              <div class="cbody">
+                <h2 class="cname">
+                  {t.name}
+                  <span class={`cbadge ${c.status === 'confirmed' ? 'is-conf' : c.status === 'reported' ? 'is-rep' : c.status === 'datamined' ? 'is-dm' : 'is-unc'}`}>{statusLabelDe[c.status] ?? c.status}</span>
+                </h2>
+                <div class="ctags">
+                  <span class="ctag fam">{t.familyLabel}</span>
+                  {c.romanceable === true && <span class="ctag heart">♥ Romanzefähig</span>}
+                  {c.romanceable === false && <span class="ctag">Nicht romanzefähig</span>}
+                  {c.romanceable === null && <span class="ctag">Romanze: TBC</span>}
+                </div>
+                <p class="cdesc">{t.desc}</p>
+                <span class="cmore">Profil ansehen →</span>
+              </div>
+            </a>
+          );
+        })}
+      </div>
+
+      <p class="cnote">
+        Charaktereigenschaften auf den Profilen sind illustrativ (Persönlichkeitsstil, keine
+        Kampfwerte) — Moonlight Peaks ist ein gemütlicher Life-Sim ohne Kämpfe.
+      </p>
+
+      <div class="callout">
+        Verwandt: <a href="/de/families">die sieben Familien</a>, <a href="/de/locations">Orte</a>,
+        <a href="/de/activities">Aktivitäten</a>, <a href="/de/romance">Romanze</a>, <a href="/de/beginner-guide">Einsteigerguide</a>.
+        Vollständige englische Version: <a href="/characters">Characters (EN)</a>.
       </div>
 
       <h2>Neueste Charakter-Updates</h2>
       <News category="characters" limit={5} />
-
-      <div class="callout wip">
-        Aktuell sind 10 Profile ins Deutsche übersetzt (Graf Dracula, Saga, Luna, Orlock, Brook,
-        der Hexenmeister, Mina, Sabrina, Noel, Fiona). Alle anderen Charaktere führen zur
-        <a href="/characters">englischen Charakterseite</a>, wo die bestätigten Informationen am
-        ausführlichsten sind.
-      </div>
     </div>
   </article>
 
   <style>
-    .cx-grid { display: grid; grid-template-columns: 1fr; gap: 10px; margin: 8px 0 24px; }
-    @media (min-width: 640px) { .cx-grid { grid-template-columns: 1fr 1fr; } }
-    .cx-card { display: flex; align-items: center; gap: 12px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); padding: 12px; transition: border-color .15s ease; }
-    .cx-card:hover { border-color: color-mix(in srgb, var(--candle) 50%, var(--line)); }
-    .cx-thumb { flex: 0 0 auto; width: 72px; height: 72px; border-radius: 10px; overflow: hidden; display: flex; align-items: center; justify-content: center; }
-    .cx-thumb img { width: 100%; height: 100%; object-fit: cover; }
-    .cx-letter { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-family: var(--display); font-weight: 700; font-size: 1.6rem; color: rgba(255,255,255,0.9); }
-    .cx-card span:not(.cx-thumb) { display: flex; flex-direction: column; }
-    .cx-card strong { font-family: var(--display); font-weight: 600; font-size: 0.96rem; color: var(--mist); }
-    .cx-card em { font-style: normal; font-size: 0.78rem; color: var(--faint); margin-top: 2px; }
+    .cfilters { display: flex; gap: 8px; flex-wrap: wrap; margin: 6px 0 16px; }
+    .cchip { font-size: 0.84rem; color: var(--muted); background: var(--surface); border: 1px solid var(--line); border-radius: 999px; padding: 6px 13px; cursor: pointer; transition: color .14s, border-color .14s; }
+    .cchip:hover { color: var(--mist); }
+    .cchip.is-active { color: #20160a; background: var(--candle); border-color: var(--candle); font-weight: 600; }
+    .cgrid { display: grid; grid-template-columns: 1fr; gap: 14px; }
+    @media (min-width: 640px) { .cgrid { grid-template-columns: 1fr 1fr; } }
+    .ccard { display: flex; gap: 14px; border: 1px solid var(--line); border-radius: 14px; background: var(--surface); padding: 16px; color: inherit; text-decoration: none; transition: border-color .15s ease, transform .15s ease; }
+    .ccard:hover { border-color: color-mix(in srgb, var(--candle) 50%, var(--line)); transform: translateY(-2px); }
+    .ccard.hide { display: none; }
+    .cavatar { flex: 0 0 auto; width: 72px; height: 72px; border-radius: 14px; overflow: hidden; border: 1px solid var(--line); }
+    .cavatar img, .cavatar svg { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .cbody { min-width: 0; flex: 1; }
+    .cname { font-family: var(--display); font-weight: 600; font-size: 1.18rem; margin: 0; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+    .cbadge { font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.04em; text-transform: uppercase; border-radius: 5px; padding: 2px 6px; }
+    .cbadge.is-conf { color: #9be6b4; border: 1px solid #2f6a45; }
+    .cbadge.is-rep { color: var(--faint); border: 1px solid var(--line); }
+    .cbadge.is-dm { color: #9ac6e0; border: 1px solid #2f5a70; }
+    .cbadge.is-unc { color: #7c6e90; border: 1px dashed var(--line); }
+    .ctags { display: flex; gap: 6px; flex-wrap: wrap; margin: 8px 0; }
+    .ctag { font-family: var(--mono); font-size: 0.66rem; color: var(--candle); border: 1px solid var(--candle-dim); border-radius: 6px; padding: 2px 7px; }
+    .ctag.fam { color: #cbb4f0; border-color: #5a4a7a; }
+    .ctag.heart { color: var(--wine); border-color: #7a2f45; }
+    .cdesc { color: #ded3e6; font-size: 0.9rem; margin: 6px 0 8px; }
+    .cmore { font-family: var(--mono); font-size: 0.72rem; color: var(--candle); }
+    .cnote { font-size: 0.74rem; color: var(--faint); margin: 16px 0 0; }
   </style>
+
+  <script>
+    const filters = document.getElementById('cfilters');
+    const cards = Array.from(document.querySelectorAll('.ccard'));
+    if (filters) {
+      filters.addEventListener('click', (e) => {
+        const btn = (e.target as HTMLElement).closest('.cchip');
+        if (!btn) return;
+        const f = btn.getAttribute('data-type') || 'all';
+        filters.querySelectorAll('.cchip').forEach((c) => c.classList.toggle('is-active', c === btn));
+        cards.forEach((card) => {
+          card.classList.toggle('hide', f !== 'all' && card.getAttribute('data-type') !== f);
+        });
+      });
+    }
+  </script>
 </Base>

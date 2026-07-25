@@ -1,29 +1,35 @@
 ---
 import Base from '../../../layouts/Base.astro';
 import { SITE, GAME } from '../../../consts';
-import { characters } from '../../../data/characters';
+import { characters, typeIcons } from '../../../data/characters';
 import { charTranslations } from '../../../i18n/characters-data';
+import News from '../../../components/News.astro';
 
-const translatedSlugs = ['count-dracula', 'saga', 'luna', 'orlock', 'brook', 'the-warlock'] as const;
-const translations = charTranslations.es;
-const list = translatedSlugs.map((slug) => ({
-  slug,
-  base: characters.find((c) => c.id === slug)!,
-  tr: translations[slug],
-}));
+const tr = charTranslations.es;
+const isMainCast = (c: (typeof characters)[number]) => c.romanceable === true || c.id === 'count-dracula';
+const mainCast = characters.filter((c) => tr[c.id] && isMainCast(c));
+const npcs = characters.filter((c) => tr[c.id] && !isMainCast(c));
 
-const jsonLd = {
-  '@context': 'https://schema.org',
-  '@type': 'BreadcrumbList',
-  itemListElement: [
+const typeFilterLabels: Record<string, string> = {
+  vampire: 'Vampiros', werewolf: 'Hombres lobo', witch: 'Brujas', mermaid: 'Sirenas',
+  seer: 'Videntes', human: 'Humanos', ghost: 'Fantasmas', other: 'Otros',
+};
+const types = [...new Set(characters.filter((c) => tr[c.id]).map((c) => c.type))];
+
+const statusLabelEs: Record<string, string> = {
+  confirmed: 'confirmado', reported: 'reportado', datamined: 'data mining', unconfirmed: 'sin confirmar',
+};
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
     { '@type': 'ListItem', position: 1, name: 'Inicio', item: `${SITE.url}/es` },
     { '@type': 'ListItem', position: 2, name: 'Personajes', item: `${SITE.url}/es/characters` },
-  ],
-};
+  ] },
+];
 ---
 <Base
-  title="Personajes de Moonlight Peaks - Guia en Espanol"
-  description="Perfiles en espanol de los personajes de Moonlight Peaks: familia, estado de romance y datos confirmados hasta ahora."
+  title="Personajes de Moonlight Peaks — Residentes y romance"
+  description="Todos los personajes de Moonlight Peaks en español, por familia: confirmado vs. reportado, estado de romance, regalos y relaciones."
   path="/es/characters"
   jsonLd={jsonLd}
   crumbs={[{ label: 'Personajes' }]}
@@ -31,44 +37,163 @@ const jsonLd = {
 >
   <article class="page">
     <div class="wrap">
-      <p class="eyebrow">Entrada / Personajes</p>
+      <p class="eyebrow">Entrada · Residentes</p>
       <h1>Personajes de <em>Moonlight Peaks</em></h1>
       <p class="intro">
-        Perfiles en espanol de los residentes mas buscados de {GAME.title}. Esta seccion marca
-        lo confirmado y separa los detalles que aun necesitan verificacion en la version final.
+        Los residentes de {GAME.title} — su familia, tipo, y si se puede tener una relación
+        romántica con ellos. Dividido en <strong>elenco principal</strong> (todos los residentes
+        con opción de romance, más el Conde Drácula) y <strong>NPCs y otros residentes</strong>
+        (la alcaldesa, comerciantes, fantasmas y anfitriones de eventos). Cada uno está marcado
+        como <strong>confirmado</strong>, <strong>reportado</strong>, <strong>data mining</strong>
+        (nombre verificado en archivos previos al lanzamiento, rol sin confirmar) o
+        <strong>sin confirmar</strong> (solo se muestra el arte, el nombre aún no tiene fuente).
+        Actualizado el {SITE.updated}.
       </p>
 
-      <div class="cx-grid">
-        {list.map(({ slug, base, tr }) => (
-          <a class="cx-card" href={`/es/characters/${slug}`}>
-            <span class="cx-thumb">
-              {base.img ? <img src={base.img} alt="" loading="lazy" width="72" height="72" /> : <span class="cx-letter" style={`background: linear-gradient(135deg, ${base.c1}, ${base.c2})`}>{tr.name.charAt(0)}</span>}
-            </span>
-            <span>
-              <strong>{tr.name}</strong>
-              <em>{tr.familyLabel}</em>
-            </span>
-          </a>
-        ))}
+      <div class="cfilters" id="cfilters">
+        <button class="cchip is-active" data-type="all" type="button">Todos</button>
+        {types.map((t) => <button class="cchip" data-type={t} type="button">{typeFilterLabels[t] ?? t}</button>)}
       </div>
 
-      <div class="callout wip">
-        Esta primera fase incluye 6 perfiles traducidos. La lista completa de residentes sigue
-        disponible en <a href="/characters">la pagina principal de personajes</a>.
+      <h2>Elenco principal ({mainCast.length})</h2>
+      <p class="cnote" style="margin: 0 0 12px;">Todos los residentes con opción de romance, más el Conde Drácula como figura paterna central de la historia.</p>
+      <div class="cgrid" id="cgrid-main">
+        {mainCast.map((c) => {
+          const t = tr[c.id];
+          return (
+            <a class="ccard link" data-type={c.type} href={`/es/characters/${c.id}`}>
+              <div class="cavatar">
+                {c.img ? (
+                  <img src={c.img} alt={`${t.name} — Moonlight Peaks`} width="72" height="72" loading="lazy" />
+                ) : (
+                  <svg viewBox="0 0 72 72" width="72" height="72" aria-hidden="true">
+                    <defs><linearGradient id={`g-es-${c.id}`} x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color={c.c1} /><stop offset="1" stop-color={c.c2} /></linearGradient></defs>
+                    <rect width="72" height="72" fill={`url(#g-es-${c.id})`} />
+                    {typeIcons[c.type] ? (
+                      <g transform="translate(11,11) scale(0.5)" fill="rgba(255,255,255,0.92)" stroke="rgba(255,255,255,0.92)" set:html={typeIcons[c.type]} />
+                    ) : (
+                      <text x="36" y="46" text-anchor="middle" font-family="Fraunces, serif" font-size="30" fill="rgba(255,255,255,0.9)">{t.name.charAt(0)}</text>
+                    )}
+                  </svg>
+                )}
+              </div>
+              <div class="cbody">
+                <h2 class="cname">
+                  {t.name}
+                  <span class={`cbadge ${c.status === 'confirmed' ? 'is-conf' : c.status === 'reported' ? 'is-rep' : c.status === 'datamined' ? 'is-dm' : 'is-unc'}`}>{statusLabelEs[c.status] ?? c.status}</span>
+                </h2>
+                <div class="ctags">
+                  <span class="ctag fam">{t.familyLabel}</span>
+                  {c.romanceable === true && <span class="ctag heart">♥ Con opción de romance</span>}
+                  {c.romanceable === false && <span class="ctag">Sin opción de romance</span>}
+                  {c.romanceable === null && <span class="ctag">Romance: por confirmar</span>}
+                </div>
+                <p class="cdesc">{t.desc}</p>
+                <span class="cmore">Ver perfil →</span>
+              </div>
+            </a>
+          );
+        })}
       </div>
+
+      <h2>NPCs y otros residentes ({npcs.length})</h2>
+      <p class="cnote" style="margin: 0 0 12px;">La alcaldesa, comerciantes, fantasmas, anfitriones de eventos y nombres aún en verificación — no son opciones de romance (o todavía no se ha confirmado).</p>
+      <div class="cgrid" id="cgrid-npc">
+        {npcs.map((c) => {
+          const t = tr[c.id];
+          return (
+            <a class="ccard link" data-type={c.type} href={`/es/characters/${c.id}`}>
+              <div class="cavatar">
+                {c.img ? (
+                  <img src={c.img} alt={`${t.name} — Moonlight Peaks`} width="72" height="72" loading="lazy" />
+                ) : (
+                  <svg viewBox="0 0 72 72" width="72" height="72" aria-hidden="true">
+                    <defs><linearGradient id={`g-es-${c.id}`} x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color={c.c1} /><stop offset="1" stop-color={c.c2} /></linearGradient></defs>
+                    <rect width="72" height="72" fill={`url(#g-es-${c.id})`} />
+                    {typeIcons[c.type] ? (
+                      <g transform="translate(11,11) scale(0.5)" fill="rgba(255,255,255,0.92)" stroke="rgba(255,255,255,0.92)" set:html={typeIcons[c.type]} />
+                    ) : (
+                      <text x="36" y="46" text-anchor="middle" font-family="Fraunces, serif" font-size="30" fill="rgba(255,255,255,0.9)">{t.name.charAt(0)}</text>
+                    )}
+                  </svg>
+                )}
+              </div>
+              <div class="cbody">
+                <h2 class="cname">
+                  {t.name}
+                  <span class={`cbadge ${c.status === 'confirmed' ? 'is-conf' : c.status === 'reported' ? 'is-rep' : c.status === 'datamined' ? 'is-dm' : 'is-unc'}`}>{statusLabelEs[c.status] ?? c.status}</span>
+                </h2>
+                <div class="ctags">
+                  <span class="ctag fam">{t.familyLabel}</span>
+                  {c.romanceable === true && <span class="ctag heart">♥ Con opción de romance</span>}
+                  {c.romanceable === false && <span class="ctag">Sin opción de romance</span>}
+                  {c.romanceable === null && <span class="ctag">Romance: por confirmar</span>}
+                </div>
+                <p class="cdesc">{t.desc}</p>
+                <span class="cmore">Ver perfil →</span>
+              </div>
+            </a>
+          );
+        })}
+      </div>
+
+      <p class="cnote">
+        Los rasgos de personalidad en los perfiles son ilustrativos (estilo de personalidad, no
+        estadísticas de combate) — Moonlight Peaks es un simulador de vida relajante sin combate.
+      </p>
+
+      <div class="callout">
+        Relacionado: <a href="/es/families">las siete familias</a>, <a href="/es/locations">lugares</a>,
+        <a href="/es/activities">actividades</a>, <a href="/es/romance">romance</a>, <a href="/es/beginner-guide">guía para principiantes</a>.
+        Versión completa en inglés: <a href="/characters">Characters (EN)</a>.
+      </div>
+
+      <h2>Últimas actualizaciones de personajes</h2>
+      <News category="characters" limit={5} />
     </div>
   </article>
 
   <style>
-    .cx-grid { display: grid; grid-template-columns: 1fr; gap: 10px; margin: 8px 0 24px; }
-    @media (min-width: 640px) { .cx-grid { grid-template-columns: 1fr 1fr; } }
-    .cx-card { display: flex; align-items: center; gap: 12px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); padding: 12px; transition: border-color .15s ease; }
-    .cx-card:hover { border-color: color-mix(in srgb, var(--candle) 50%, var(--line)); }
-    .cx-thumb { flex: 0 0 auto; width: 72px; height: 72px; border-radius: 10px; overflow: hidden; display: flex; align-items: center; justify-content: center; }
-    .cx-thumb img { width: 100%; height: 100%; object-fit: cover; }
-    .cx-letter { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-family: var(--display); font-weight: 700; font-size: 1.6rem; color: rgba(255,255,255,0.9); }
-    .cx-card span:not(.cx-thumb) { display: flex; flex-direction: column; }
-    .cx-card strong { font-family: var(--display); font-weight: 600; font-size: 0.96rem; color: var(--mist); }
-    .cx-card em { font-style: normal; font-size: 0.78rem; color: var(--faint); margin-top: 2px; }
+    .cfilters { display: flex; gap: 8px; flex-wrap: wrap; margin: 6px 0 16px; }
+    .cchip { font-size: 0.84rem; color: var(--muted); background: var(--surface); border: 1px solid var(--line); border-radius: 999px; padding: 6px 13px; cursor: pointer; transition: color .14s, border-color .14s; }
+    .cchip:hover { color: var(--mist); }
+    .cchip.is-active { color: #20160a; background: var(--candle); border-color: var(--candle); font-weight: 600; }
+    .cgrid { display: grid; grid-template-columns: 1fr; gap: 14px; }
+    @media (min-width: 640px) { .cgrid { grid-template-columns: 1fr 1fr; } }
+    .ccard { display: flex; gap: 14px; border: 1px solid var(--line); border-radius: 14px; background: var(--surface); padding: 16px; color: inherit; text-decoration: none; transition: border-color .15s ease, transform .15s ease; }
+    .ccard:hover { border-color: color-mix(in srgb, var(--candle) 50%, var(--line)); transform: translateY(-2px); }
+    .ccard.hide { display: none; }
+    .cavatar { flex: 0 0 auto; width: 72px; height: 72px; border-radius: 14px; overflow: hidden; border: 1px solid var(--line); }
+    .cavatar img, .cavatar svg { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .cbody { min-width: 0; flex: 1; }
+    .cname { font-family: var(--display); font-weight: 600; font-size: 1.18rem; margin: 0; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+    .cbadge { font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.04em; text-transform: uppercase; border-radius: 5px; padding: 2px 6px; }
+    .cbadge.is-conf { color: #9be6b4; border: 1px solid #2f6a45; }
+    .cbadge.is-rep { color: var(--faint); border: 1px solid var(--line); }
+    .cbadge.is-dm { color: #9ac6e0; border: 1px solid #2f5a70; }
+    .cbadge.is-unc { color: #7c6e90; border: 1px dashed var(--line); }
+    .ctags { display: flex; gap: 6px; flex-wrap: wrap; margin: 8px 0; }
+    .ctag { font-family: var(--mono); font-size: 0.66rem; color: var(--candle); border: 1px solid var(--candle-dim); border-radius: 6px; padding: 2px 7px; }
+    .ctag.fam { color: #cbb4f0; border-color: #5a4a7a; }
+    .ctag.heart { color: var(--wine); border-color: #7a2f45; }
+    .cdesc { color: #ded3e6; font-size: 0.9rem; margin: 6px 0 8px; }
+    .cmore { font-family: var(--mono); font-size: 0.72rem; color: var(--candle); }
+    .cnote { font-size: 0.74rem; color: var(--faint); margin: 16px 0 0; }
   </style>
+
+  <script>
+    const filters = document.getElementById('cfilters');
+    const cards = Array.from(document.querySelectorAll('.ccard'));
+    if (filters) {
+      filters.addEventListener('click', (e) => {
+        const btn = (e.target as HTMLElement).closest('.cchip');
+        if (!btn) return;
+        const f = btn.getAttribute('data-type') || 'all';
+        filters.querySelectorAll('.cchip').forEach((c) => c.classList.toggle('is-active', c === btn));
+        cards.forEach((card) => {
+          card.classList.toggle('hide', f !== 'all' && card.getAttribute('data-type') !== f);
+        });
+      });
+    }
+  </script>
 </Base>
