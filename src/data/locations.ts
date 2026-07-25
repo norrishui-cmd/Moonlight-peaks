@@ -41,6 +41,10 @@ export const locations: TopicItem[] = [
       'Seasonal celebrations are part of town life —a theatrical event host has been shown livening up gatherings. The exact layout and which events happen here are confirmed at launch.',
     ],
     related: [{ label: 'Pumpkin Head', href: '/characters/pumpkin-head' }, { label: 'Seasonal events', href: '/activities/seasonal-events' }, { label: 'The town', href: '/locations/town' }],
+    faq: [
+      { q: 'What happens at Town Square in Moonlight Peaks?', a: 'Like most cozy-sim towns, Moonlight Peaks centres on communal spaces where residents cross paths day to day, and seasonal celebrations are part of town life here.' },
+      { q: 'Who hosts events at Town Square?', a: 'A theatrical event host, Pumpkin Head, has been shown livening up gatherings. The exact layout and which events happen here are confirmed at launch.' },
+    ],
   },
   {
     slug: 'your-farm', title: 'Your Farm', tag: 'Homestead', status: 'confirmed', image: '/images/moonlight-peaks/official/farm-06.webp',
@@ -64,6 +68,10 @@ export const locations: TopicItem[] = [
       'Exactly which rooms, furniture sets and customization options are available is confirmed when the full game launches.',
     ],
     related: [{ label: 'Decorating', href: '/activities/decorating' }, { label: 'Character creator', href: '/activities/character-creator' }, { label: 'Your farm', href: '/locations/your-farm' }],
+    faq: [
+      { q: 'Can you customize your cottage in Moonlight Peaks?', a: 'Yes — you live in a gothic cottage that you can make your own, and decorating it (placing and arranging furniture and decor) is one of the core cozy activities.' },
+      { q: 'Are all cottage rooms and furniture confirmed yet?', a: 'Not yet — exactly which rooms, furniture sets, and customization options are available is confirmed once the full game details are fully documented.' },
+    ],
   },
   {
     slug: 'forest', title: 'The Forest', tag: 'Wilds', status: 'reported', image: '/images/moonlight-peaks/official/forest-01-summer.webp',
@@ -73,15 +81,23 @@ export const locations: TopicItem[] = [
       'The exact forageables and any forest landmarks are confirmed once the full game is out.',
     ],
     related: [{ label: 'Foraging', href: '/activities/foraging' }, { label: 'Werewolves', href: '/families/werewolves' }, { label: 'The town', href: '/locations/town' }],
+    faq: [
+      { q: 'Can you forage in the forest in Moonlight Peaks?', a: 'Yes, confirmed: foraging in the woods is one of the game\u2019s confirmed activities, so expect seasonal finds among the trees on the edge of town.' },
+      { q: 'Are forest landmarks confirmed yet?', a: 'Not yet — the exact forageables and any forest landmarks are confirmed once the full game is fully documented.' },
+    ],
   },
   {
     slug: 'lake', title: 'Silverveil Lake', tag: 'Water', status: 'confirmed', image: '/hero-loc-lake.webp',
     dek: 'The town\u2019s confirmed lake, home to fishing and the mermaid family.',
     body: [
       'Confirmed name: Silverveil Lake. Water areas support fishing, one of the demo\u2019s featured activities, and the town\u2019s mermaids (the Hosu family) are tied to the water.',
-      'Named fish and specific fishing spots are not yet sourced — see the fishing guide for what is confirmed so far.',
+      'Confirmed via a fishing location guide: Splotch is a common catch specifically in Silverveil Lake, and Goldy appears in its feeder rivers during Spring or Summer only, disappearing in Fall and Winter.',
     ],
     related: [{ label: 'Fishing', href: '/fishing' }, { label: 'Mermaids', href: '/families/mermaids' }, { label: 'The pier', href: '/locations/pier' }],
+    faq: [
+      { q: 'What fish can you catch in Silverveil Lake?', a: 'Confirmed: Splotch is a common catch specifically in Silverveil Lake, and Goldy appears in its feeder rivers during Spring or Summer only.' },
+      { q: 'Are all Silverveil Lake fishing spots confirmed?', a: 'Not fully — the complete list of named fish and specific casting spots is still being verified; see the fishing guide for what is confirmed so far.' },
+    ],
   },
   {
     slug: 'pier', title: 'The Pier', tag: 'Water', status: 'expected', image: '/images/moonlight-peaks/official/pier-01.webp',
@@ -91,11 +107,18 @@ export const locations: TopicItem[] = [
       'Whether Moonlight Peaks names a specific pier is confirmed at launch —for now, treat this as part of the lakeside fishing area.',
     ],
     related: [{ label: 'Fishing', href: '/activities/fishing' }, { label: 'The lake', href: '/locations/lake' }],
+    faq: [
+      { q: 'Is there a pier for fishing in Moonlight Peaks?', a: 'Fishing waters in cozy sims usually include a pier or dock to cast from, and that\u2019s the expected setup here too.' },
+      { q: 'Is the pier a named, separate location?', a: 'Whether Moonlight Peaks names a specific pier is confirmed at launch — for now, treat this as part of the lakeside fishing area rather than its own distinct location.' },
+    ],
   },
   {
     slug: 'mines', title: 'Cave of Echoes & Mines', tag: 'Underground', status: 'confirmed', image: '/hero-loc-mines.webp',
     dek: 'How to unlock the Cave of Echoes, where to find copper and iron, and the most common progression blockers.',
-    body: [],
+    body: [
+      'Confirmed: the Cave of Echoes sits in the lower-left of Misty Shores, west of Orlock\u2019s mansion, and unlocks once you finish the "A Bridge Too Far" quest. Copper Ore looks like ordinary rock with copper flecks, mined with a Pickaxe, and a Copper Bar is made at the Furnace using 4 Copper Ore plus 1 Charcoal.',
+      'Iron is confirmed as a later-tier resource in the same mine system, unlocked once the story progresses past the initial copper stage — there is no combat anywhere in Moonlight Peaks, including the mines, so underground exploration stays peaceful throughout.',
+    ],
     sections: [
       { title: 'How to unlock Cave of Echoes', body: 'Confirmed: the Cave of Echoes sits in the lower-left of the Misty Shores area, west of Orlock\u2019s mansion. It\u2019s locked at first and opens once you finish the "A Bridge Too Far" quest, which reopens the Ambrosia Estate and the Misty Shores area around it.' },
       { title: 'Why Cave of Echoes is still locked', body: 'If you can\u2019t reach it yet, the quest — not a missing key item or shop purchase — is almost always the actual blocker. Community-reported: the area is locked by an in-story feud between Orlock and Fiona over a supposedly cursed bridge.' },
@@ -142,12 +165,19 @@ export const locations: TopicItem[] = [
   {
     slug: 'landmarks', title: 'Landmarks & Notable Places', tag: 'Wilds', status: 'confirmed', image: '/hero-loc-landmarks.webp',
     dek: 'Named places beyond the core areas — most now confirmed with real context.',
-    body: [],
+    body: [
+      'Confirmed: Misty Shores is the Ambrosia family\u2019s area (Cave of Echoes and the graveyard where you meet Death), Moonlit Pines is where the witches\u2019 coven is based, Pink Grove is the love demon Llemi\u2019s home during festivals, and Luna Bay is where the Hosu mermaid family lives.',
+      'Also confirmed via the game\u2019s official wiki: Moonlit Slopes, the Crypt, Moonlight Tower, and the Khazan family\u2019s Crest Garden are all real locations, with full descriptions still being verified.',
+    ],
     sections: [
       { title: 'Misty Shores, Moonlit Pines, Pink Grove & Luna Bay', body: 'Confirmed: Misty Shores is the Ambrosia family\u2019s area, home to the Cave of Echoes (ore) and the graveyard where you meet Death, unlocked via the "A Bridge Too Far" quest. Moonlit Pines is where the witches\u2019 coven is based. Pink Grove is home to the love demon Llemi, who mostly only appears there during festivals. Luna Bay is where the Hosu mermaid family lives, arriving roughly a year into the story.' },
       { title: 'Moonlit Slopes, the Crypt, Moonlight Tower & Crest Garden', body: 'Also confirmed via the game\u2019s official wiki: Moonlit Slopes, the Crypt, Moonlight Tower, and the Khazan family\u2019s Crest Garden are all real locations. Full descriptions of each are still being verified.' },
     ],
     related: [{ label: 'Death', href: '/characters/death' }, { label: 'Mermaids', href: '/families/mermaids' }, { label: 'Seers', href: '/families/seers' }, { label: 'Howling Marshes', href: '/locations/howling-marshes' }],
+    faq: [
+      { q: 'What is Misty Shores in Moonlight Peaks?', a: 'Confirmed: Misty Shores is the Ambrosia family\u2019s area, home to the Cave of Echoes (ore) and the graveyard where you meet Death, unlocked via the "A Bridge Too Far" quest.' },
+      { q: 'What are Moonlit Slopes and the Crest Garden?', a: 'Confirmed via the game\u2019s official wiki: Moonlit Slopes, the Crypt, Moonlight Tower, and the Khazan family\u2019s Crest Garden are all real locations, though full descriptions of each are still being verified.' },
+    ],
   },
   {
     slug: 'howling-marshes', title: 'Howling Marshes', tag: 'Wilds', status: 'confirmed', image: '/hero-loc-forest.webp',
@@ -213,16 +243,25 @@ export const locations: TopicItem[] = [
     dek: 'A confirmed activity spot for yoga, one of the game\u2019s "dark diversions."',
     body: [
       'Confirmed to exist via the game\u2019s official wiki, tied to yoga — one of the hobby activities alongside fishing, cooking, and Nokturna.',
+      'Confirmed: yoga itself is tied to the "Moonlit Stretching" achievement, awarded for attending your first yoga session — one of several real, non-fabricated activity-linked achievements in the game.',
     ],
     related: [{ label: 'Activities', href: '/activities' }],
+    faq: [
+      { q: 'Is yoga a real activity in Moonlight Peaks?', a: 'Yes, confirmed: yoga is a real activity tied to the "Moonlit Stretching" achievement, awarded for attending your first yoga session, alongside fishing, cooking, and the Nokturna card game as "dark diversions."' },
+      { q: 'Where do you do yoga in Moonlight Peaks?', a: 'The Yoga Shack is confirmed to exist via the game\u2019s official wiki as the location tied to this activity. Exact session mechanics, scheduling, and any instructor NPC are not yet independently confirmed.' },
+    ],
   },
   {
     slug: 'khazan-temple', title: 'Khazan Temple', tag: 'Wilds', status: 'confirmed', image: '/hero-loc-landmarks.webp',
     dek: 'A location tied to the Khazan seer family.',
     body: [
-      'Confirmed to exist via the game\u2019s official wiki. Further detail on what happens here is not yet sourced.',
+      'Confirmed to exist via the game\u2019s official wiki. Confirmed via PC Gamer\u2019s treasure-hunt guide: it is reached by following the path directly east of Town Hall (not the route up toward Howling Marshes), and it sits beside a waterfall.',
     ],
     related: [{ label: 'Seers', href: '/families/seers' }, { label: 'Dragan', href: '/characters/dragan' }],
+    faq: [
+      { q: 'How do you get to Khazan Temple in Moonlight Peaks?', a: 'Confirmed: follow the path directly east of Town Hall, not the route up toward Howling Marshes. The temple sits beside a waterfall.' },
+      { q: 'What family is Khazan Temple tied to?', a: 'Confirmed to exist via the game\u2019s official wiki, tied to the Khazan seer family — further detail on activities inside is not yet sourced.' },
+    ],
   },
   {
     slug: 'crystal-cave', title: 'Crystal Cave & Twilight Catacombs', tag: 'Underground', status: 'confirmed', image: '/hero-loc-mines.webp',
@@ -313,6 +352,7 @@ export const locations: TopicItem[] = [
     related: [{ label: 'Shops', href: '/locations/shops' }, { label: 'Activities: flower arranging', href: '/activities/flower-arranging' }],
     faq: [
       { q: 'What is Bloom Boutique in Moonlight Peaks?', a: 'Confirmed to exist as a named shop via the official wiki\u2019s own navigation. What it sells and who runs it are not yet independently confirmed here \u2014 we don\u2019t guess at shop contents from the name alone.' },
+      { q: 'Is Bloom Boutique likely to be flower-themed?', a: 'That\u2019s a reasonable guess given the name and the game\u2019s existing flower-arranging and gifting systems, but it\u2019s labeled expected rather than confirmed until a source verifies it against the live game.' },
     ],
   },
 ];

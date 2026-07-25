@@ -20,7 +20,10 @@ export const demo: TopicItem[] = [
       'It is a taster of the full experience rather than the whole game; the full version launches July 7, 2026.',
     ],
     related: [{ label: 'Activities', href: '/activities' }, { label: 'Character creator', href: '/activities/character-creator' }, { label: 'Demo vs full game', href: '/demo/demo-vs-full-game' }],
-    faq: [{ q: 'Is the Moonlight Peaks demo free?', a: 'Yes — it is free on Steam and the Nintendo eShop (also on Switch 2).' }],
+    faq: [
+      { q: 'Is the Moonlight Peaks demo free?', a: 'Yes — it is free on Steam and the Nintendo eShop (also on Switch 2).' },
+      { q: 'Does the demo include the character creator?', a: 'Developers confirmed the character creator was not in the earliest demo build but was added in an expanded version ahead of launch, alongside more crafting and mini-games.' },
+    ],
   },
   {
     slug: 'how-to-download-the-demo', title: 'How to download the Moonlight Peaks demo', tag: 'Demo', status: 'confirmed',
@@ -30,7 +33,10 @@ export const demo: TopicItem[] = [
       'The demo is free on both platforms.',
     ],
     related: [{ label: 'Platforms', href: '/platforms' }, { label: 'On Steam Deck', href: '/platforms/steam-deck' }, { label: 'What\u2019s in the demo', href: '/demo/whats-in-the-demo' }],
-    faq: [{ q: 'Is there a Moonlight Peaks demo on Switch?', a: 'Yes — the free demo is on the Nintendo eShop and is playable on both Switch and Switch 2.' }],
+    faq: [
+      { q: 'Is there a Moonlight Peaks demo on Switch?', a: 'Yes — the free demo is on the Nintendo eShop and is playable on both Switch and Switch 2.' },
+      { q: 'Is the demo the same on every platform?', a: 'The core content is the same, but Switch handheld mode adds touchscreen menu navigation and motion/HD Rumble feedback for spellcasting that aren\u2019t available the same way on PC.' },
+    ],
   },
   {
     slug: 'demo-vs-full-game', title: 'Moonlight Peaks demo vs full game', tag: 'Demo', status: 'confirmed',
@@ -40,6 +46,9 @@ export const demo: TopicItem[] = [
       'The full game expands well beyond the demo\u2019s slice, with the complete town, the seven families, farming, magic, romance and marriage. Full details arrive at launch on July 7, 2026.',
     ],
     related: [{ label: 'Does progress carry over?', href: '/faq/does-demo-progress-carry-over' }, { label: 'Romance & families', href: '/romance' }, { label: 'How to download', href: '/demo/how-to-download-the-demo' }],
-    faq: [{ q: 'Does Moonlight Peaks demo progress carry over?', a: 'No — the full game starts fresh.' }],
+    faq: [
+      { q: 'Does Moonlight Peaks demo progress carry over?', a: 'No — the full game starts fresh.' },
+      { q: 'Is the full game much bigger than the demo?', a: 'Yes, confirmed: the demo only covers early character creation and a few cozy activities, while the full game adds all seven families, the complete town, farming, spellcasting, romance, marriage, and the full quest and achievement systems.' },
+    ],
   },
 ];

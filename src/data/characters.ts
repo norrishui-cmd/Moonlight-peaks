@@ -320,8 +320,10 @@ export const characters: Character[] = [
       'Confirmed via the official wiki: once he has enough game time with the player, Death admits he can\u2019t relax with so many Soul Blobs around and asks for help collecting them \u2014 completing this exchange is what grants the Net, the final magic-wheel tool.',
       'Confirmed reward thresholds: collecting 10 Soul Blobs for him earns an Antique Clock, letting you change night length from the default 15 minutes to 25; collecting 50 total earns a second clock that instead shortens nights to 10 minutes.',
     ],
-    // Gift data via Nintendo Everything's character showcase coverage (launch week).
+    // Gift data via Nintendo Everything's character showcase coverage (launch week), liked-tier
+    // gifts cross-checked against Moonlight Peaks Guide's dedicated gift guide (both launch week).
     lovedGifts: ['Trash Bottles', 'Rusty Fish Cans'],
+    likedGifts: ['Eggs', 'Bread', 'Cheese', 'Beer', 'Juice'],
     giftStatus: 'reported',
   },
   { id: 'samael', name: 'Samael', family: 'Vampire (Ambrosia)', type: 'vampire',

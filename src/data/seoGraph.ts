@@ -685,7 +685,10 @@ const platformSeoPages: SeoPage[] = platforms.flatMap((platform) => [
       { title: 'Best things to test', body: 'Use the demo to check controls, readability, character creation, fishing, flower arranging, embroidery, and general comfort on your preferred platform.' },
       { title: 'Before buying', body: 'Compare the demo experience with the release date, price, and platform notes before choosing where to play.' },
     ],
-    faqs: [{ q: `Is there a ${platform.title} demo?`, a: 'Demo availability depends on platform. Check the main demo page and this platform page for the current confirmed status.' }],
+    faqs: [
+      { q: `Is there a ${platform.title} demo?`, a: 'Demo availability depends on platform. Check the main demo page and this platform page for the current confirmed status.' },
+      { q: `Does the ${platform.title} demo include the character creator?`, a: 'The expanded demo released ahead of launch includes character creation and several cozy activities, though the full game adds far more on top of that.' },
+    ],
     related: [{ label: platform.title, href: `/platforms/${platform.slug}` }, { label: 'Demo guide', href: '/demo' }, { label: 'What is in the demo', href: '/demo/whats-in-the-demo' }, { label: 'Platform picker', href: '/tools/platform-picker' }],
     sources: [
       officialSteamSource,

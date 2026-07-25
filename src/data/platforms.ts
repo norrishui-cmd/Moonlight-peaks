@@ -20,7 +20,10 @@ export const platforms: TopicItem[] = [
       'A confirmed launch-week issue: some players hit a crash on Steam Deck startup. The reported fix is switching the compatibility tool to Proton 9.0-4 in the game\u2019s Properties → Compatibility settings. A formal Valve "Steam Deck Verified" rating has not been confirmed here yet.',
     ],
     related: [{ label: 'All platforms', href: '/platforms' }, { label: 'Release date', href: '/release-date' }, { label: 'Known issues', href: '/known-issues' }],
-    faq: [{ q: 'Is Moonlight Peaks Steam Deck Verified?', a: 'A formal Valve "Steam Deck Verified" rating isn\u2019t confirmed here yet. The game is playable on Deck via Steam; if you hit a startup crash, switching to Proton 9.0-4 is the reported fix.' }],
+    faq: [
+      { q: 'Is Moonlight Peaks Steam Deck Verified?', a: 'A formal Valve "Steam Deck Verified" rating isn\u2019t confirmed here yet. The game is playable on Deck via Steam; if you hit a startup crash, switching to Proton 9.0-4 is the reported fix.' },
+      { q: 'Were Steam Deck control issues fixed?', a: 'Confirmed: patch 1.1.41 fixed Steam Deck controls defaulting back to keyboard/mouse instead of the controller, and fixed a Steam-only bug preventing gamepad interaction caused by a hidden cursor hovering over UI elements.' },
+    ],
   },
   {
     slug: 'switch', title: 'Moonlight Peaks on Nintendo Switch', tag: 'Switch', status: 'confirmed',
@@ -31,7 +34,10 @@ export const platforms: TopicItem[] = [
       'Confirmed at launch: full controller support out of the box \u2014 reviewers describe the game as controller-first by design, which suits handheld Switch play well.',
     ],
     related: [{ label: 'All platforms', href: '/platforms' }, { label: 'On Switch 2', href: '/platforms/switch-2' }, { label: 'Release date', href: '/release-date' }],
-    faq: [{ q: 'Is Moonlight Peaks on the original Nintendo Switch?', a: 'Yes — it released on the original Switch on July 7, 2026, and the free demo is on the eShop. A separate, enhanced Switch 2 edition is also available.' }],
+    faq: [
+      { q: 'Is Moonlight Peaks on the original Nintendo Switch?', a: 'Yes — it released on the original Switch on July 7, 2026, and the free demo is on the eShop. A separate, enhanced Switch 2 edition is also available.' },
+      { q: 'Does Switch use motion controls in Moonlight Peaks?', a: 'Yes, confirmed: Joy-Con motion controls and HD Rumble haptic feedback are used for spellcasting and tool interactions, and touchscreen input is supported for menu navigation in handheld mode.' },
+    ],
   },
   {
     slug: 'switch-2', title: 'Moonlight Peaks on Nintendo Switch 2', tag: 'Switch 2', status: 'confirmed',
@@ -42,7 +48,10 @@ export const platforms: TopicItem[] = [
       'Confirmed via launch-week reviews: the Switch 2 edition ran exceptionally well in portable mode, with solid, well-organized controller mapping \u2014 one of the stronger handheld experiences among the confirmed platforms.',
     ],
     related: [{ label: 'All platforms', href: '/platforms' }, { label: 'The demo', href: '/demo' }, { label: 'Release date', href: '/release-date' }],
-    faq: [{ q: 'Is there a Switch 2 version of Moonlight Peaks?', a: 'Yes — a native Nintendo Switch 2 edition is confirmed at $39.99, and the free demo is playable on Switch 2. Reviewers found it ran exceptionally well in portable mode.' }],
+    faq: [
+      { q: 'Is there a Switch 2 version of Moonlight Peaks?', a: 'Yes — a native Nintendo Switch 2 edition is confirmed at $39.99, and the free demo is playable on Switch 2. Reviewers found it ran exceptionally well in portable mode.' },
+      { q: 'Is there a physical Switch 2 edition?', a: 'Yes, confirmed: a physical Nintendo Switch 2 Edition launches August 28, 2026 across Europe at \u20ac49.99 / \u00a344.99, including a collectible sticker sheet and digital soundtrack.' },
+    ],
   },
   {
     slug: 'android', title: 'Moonlight Peaks on Android (Google Play)', tag: 'Android', status: 'confirmed',
