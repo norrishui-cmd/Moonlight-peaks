@@ -862,7 +862,286 @@ export const faqDe: Record<string, FaqTranslationDe> = {
     q: 'Was bewirkt der Zauber "Tomorrow\u2019s Tears"?',
     a: 'Bestätigt über eine dokumentierte Zauberliste: Tomorrow\u2019s Tears kostet 3 Mana und verursacht Regen in der folgenden Spielnacht, was manuelles Bewässern reduzieren kann — magische Pflanzen brauchen aber unabhängig vom Wetter weiterhin Aquaflux.',
   },
+  'can-you-date-any-character-regardless-of-gender': {
+    q: 'Kann man in Moonlight Peaks jeden Charakter unabhängig vom Geschlecht daten?',
+    a: 'Ja, bestätigt: Alle romanzefähigen Charaktere können unabhängig von Identität und Orientierung der Spielfigur gedatet werden. Das Spiel bietet einen inklusiven Charakter-Editor und queere Romanze-Optionen ohne Geschlechtseinschränkungen.',
+  },
+  'does-the-character-creator-have-heterochromia': {
+    q: 'Hat der Charakter-Editor Heterochromie in Moonlight Peaks?',
+    a: 'Ja, von den Entwicklern über offizielles TikTok bestätigt: Der Charakter-Editor umfasst Heterochromie (unterschiedlich gefärbte Augen) unter seinen Optionen, zusammen mit Frisuren, Hauttönen, Make-up, Piercings und Kleidung.',
+  },
+  'does-moonlight-peaks-use-joy-con-motion-controls': {
+    q: 'Nutzt Moonlight Peaks Joy-Con-Bewegungssteuerung?',
+    a: 'Ja, bestätigt: Die Switch-Version nutzt Joy-Con-Bewegungssteuerung und HD-Rumble-haptisches Feedback für Zaubersprüche und Werkzeug-Interaktionen, was Aktivitäten wie Tränkebrauen und Angeln taktiles Feedback verleiht.',
+  },
+  'does-shapeshifting-use-gyro-controls-on-switch': {
+    q: 'Nutzt die Gestaltwandlung auf Switch Gyro-Steuerung?',
+    a: 'Ja, bestätigt: Der Gestaltwandlungs-Mechanismus arbeitet mit der Gyroskop-Steuerung der Switch zusammen und lässt Spieler nach der Verwandlung intuitiv durch die Umgebungen der Stadt bewegen.',
+  },
+  'is-moonlight-peaks-a-3d-or-2d-game': {
+    q: 'Ist Moonlight Peaks ein 3D- oder 2D-Spiel?',
+    a: 'Bestätigt: Die offizielle chinesische Steam-Tag-Liste bestätigt es als Third-Person, 3D und Immersive Sim — kein 2D-Pixel-Art-Titel wie manche Genre-Vertreter.',
+  },
+  'is-there-only-one-vampire-transformation-form': {
+    q: 'Ist die Fledermausform die einzige Vampir-Verwandlung in Moonlight Peaks?',
+    a: 'Nicht unbedingt — bestätigt: Die Fledermausform ist die bestätigte Signatur-Verwandlung, aber die offizielle Website deutet ausdrücklich an, dass weitere Verwandlungen verfügbar sein könnten, ohne sie direkt zu benennen.',
+  },
+  'can-you-have-children-with-your-spouse': {
+    q: 'Kann man mit dem Ehepartner Kinder bekommen in Moonlight Peaks?',
+    a: 'Nein, bestätigt: Es gibt keine Kindererziehungs-Funktion in Moonlight Peaks, mit keinem Plan, sie später hinzuzufügen — eine bewusste Umfangsentscheidung trotz des Heiratssystems.',
+  },
+  'can-you-have-multiple-save-files': {
+    q: 'Kann man mehrere Spielstände in Moonlight Peaks haben?',
+    a: 'Ja, bestätigt: Man kann mehrere Spielstände für verschiedene Charakter-Durchgänge führen, aber es ist nicht möglich, zusätzliche Spielstände zu erstellen, die einen bestehenden Spielstand duplizieren.',
+  },
+  'how-does-moonlight-peaks-perform-on-switch-2': {
+    q: 'Wie läuft Moonlight Peaks auf Nintendo Switch 2?',
+    a: 'Bestätigt durch ein Hands-on-Review: Es lief außergewöhnlich gut auf der tragbaren Konsole, mit einer als solide und gut organisiert beschriebenen Controller-Belegung.',
+  },
+  'what-is-sagas-personality-like': {
+    q: 'Wie ist Sagas Persönlichkeit in Moonlight Peaks?',
+    a: 'Bestätigt: Saga ist oberflächlich schroff, aber tief der Stadt verbunden, kümmert sich um Gemeindeprobleme wie Schlaglöcher und verschwundene Kürbisse, und lässt Romanze wenig Raum, bis sie "sie überrascht".',
+  },
+  'is-orlock-estranged-from-his-children': {
+    q: 'Ist Orlock von seinen Kindern entfremdet in Moonlight Peaks?',
+    a: 'Bestätigt: Orlock wird mit einem Zerwürfnis zu seinen Kindern Mina und Evan geschrieben, sowie einer Frau, die vor langer Zeit ging — eine sensible, kunstliebende Seite soll aber mit Geduld erreichbar sein.',
+  },
+  'how-long-has-samael-run-the-broken-lamp': {
+    q: 'Wie lange betreibt Samael schon The Broken Lamp in Moonlight Peaks?',
+    a: 'Bestätigt: Samael, ein Mitglied der Familie Ambrosia, betreibt The Broken Lamp seit Jahrhunderten, beschrieben als geheimnisvoller Vampir unter einem grüblerischen Äußeren.',
+  },
+  'does-character-behavior-vary-by-creature-type': {
+    q: 'Variiert das Charakterverhalten je nach Kreaturentyp?',
+    a: 'Ja, von den Entwicklern bestätigt: Charaktere können sich je nach Umgebungsumständen, ihrer Vorstellung von Vampiren, oder ihrer Beziehung zur Familie der Spielfigur, einschließlich Graf Dracula, unterschiedlich verhalten.',
+  },
+  'what-gifts-does-jada-like': {
+    q: 'Welche Geschenke mag Jada in Moonlight Peaks?',
+    a: 'Bestätigt: Jada mag Weiße Rosen als Geschenk, passend zu ihrem Interesse am Sammeln von Relikten und der Erforschung des Übernatürlichen — ein Persönlichkeitszug, der auch ihre Museums-Questreihe antreibt.',
+  },
+  'what-is-winstons-personality-like': {
+    q: 'Wie ist Winstons Persönlichkeit in Moonlight Peaks?',
+    a: 'Bestätigt: Winston ist ängstlich mit einer sehr aktiven Vorstellungskraft und vertraut nur sehr langsam — eine der drei bestätigten Romanze-Optionen der Familie Henderson.',
+  },
+  'who-are-kim-and-rei-in-moonlight-peaks': {
+    q: 'Wer sind Kim und Rei in Moonlight Peaks?',
+    a: 'Bestätigt: Kim, die jüngste der Meerjungfrauen-Geschwister von Hosu, ist überschwänglich und aufgeschlossen, während Rei, die älteste, auf ihre jüngeren Geschwister aufpasst — beide sind bestätigte Romanze-Optionen.',
+  },
+  'can-you-navigate-menus-with-the-switch-touchscreen': {
+    q: 'Kann man Menüs mit dem Switch-Touchscreen navigieren?',
+    a: 'Ja, bestätigt: Touchscreen-Eingabe wird für Menü-Navigation unterstützt, was es erlaubt, Gegenstände und Handwerk im Handheld-Modus leichter zu verwalten, zusätzlich zur normalen Tastensteuerung.',
+  },
+  'does-resolution-change-between-docked-and-handheld': {
+    q: 'Ändert sich die Auflösung zwischen Docked- und Handheld-Modus auf Switch?',
+    a: 'Ja, bestätigt: Die Auflösung wechselt nahtlos zwischen Docked- und Handheld-Modus, wobei OLED-Modelle die mondbeschienene Szenerie und magische Effekte mit auffallend lebendiger Klarheit darstellen.',
+  },
+  'can-vampire-abilities-boost-farming-efficiency': {
+    q: 'Können Vampirfähigkeiten die Landwirtschafts-Effizienz steigern?',
+    a: 'Ja, bestätigt: Die Vampirfähigkeiten der Spielfigur können genutzt werden, um die Landwirtschafts-Effizienz zu steigern, ein separates System, das zusätzlich zu gewöhnlichen Werkzeug-Upgrades wirkt, statt sie zu ersetzen.',
+  },
+  'is-exploration-a-core-part-of-moonlight-peaks': {
+    q: 'Ist Erkundung ein Kernbestandteil von Moonlight Peaks, oder nur Landwirtschaft?',
+    a: 'Bestätigt: Die Stadt nach Ressourcen, beim Angeln und nach versteckten Geheimnissen zu erkunden, wird als zentrale Säule der Erfahrung beschrieben, neben Landwirtschaft und Beziehungsaufbau.',
+  },
+  'how-is-spellcasting-marketed-narratively': {
+    q: 'Wie wird das Zaubersystem erzählerisch beworben?',
+    a: 'Bestätigt über offiziellen Marketing-Text: Zauberforschung und Tränkebrauen werden als Wege dargestellt, verborgene Fähigkeiten freizuschalten, die durch das ewige Vampirleben der Spielfigur möglich werden.',
+  },
+  'how-many-families-are-officially-in-the-town': {
+    q: 'Wie viele Familien gibt es offiziell in der Stadt?',
+    a: 'Bestätigt: Die offizielle Website beschreibt sieben übernatürliche Familien plus gewöhnliche menschliche Bewohner und stellt klar, dass die Familie Henderson in diese gleiche Sieben-Familien-Struktur passt, statt eine zusätzliche achte Gruppe zu sein.',
+  },
+  'is-romance-tied-to-family-secret-quests': {
+    q: 'Ist Romanze an Familiengeheimnis-Quests gebunden?',
+    a: 'Bei mindestens einigen Charakteren ja — bestätigt durch Abgleich der offiziellen Darstellung mit Romanze-Guides: Das Fortschreiten in der eigenen Questreihe einer Familie ist an das Freischalten der tieferen Romanze-Inhalte dieser Familie gebunden.',
+  },
+  'is-magical-livestock-separate-from-crop-farming': {
+    q: 'Ist die Haltung magischer Nutztiere getrennt vom Pflanzenanbau?',
+    a: 'Ja, bestätigt: Die Haltung magischer Nutztiere und der magische Pflanzenanbau werden als zwei getrennte Systeme beschrieben, die beide mit den Vampirfähigkeiten der Spielfigur verstärkt werden können.',
+  },
+  'how-many-romanceable-characters-were-planned-originally': {
+    q: 'Wie viele romanzefähige Charaktere waren ursprünglich für Moonlight Peaks geplant?',
+    a: 'Bestätigt über ein früheres Entwickler-Interview: Der Art Director nannte zu diesem Zeitpunkt in der Entwicklung 15 romanzefähige Charaktere, mit der Hoffnung des Teams, dass die Zahl wachsen würde — passend zum späteren Launch-Text, der "über zwei Dutzend" beschreibt.',
+  },
+  'does-item-management-support-touch-input-on-all-platforms': {
+    q: 'Unterstützt die Gegenstandsverwaltung Touch-Eingabe auf allen Plattformen?',
+    a: 'Nein, bestätigt: Touchscreen-Unterstützung für die Verwaltung von Gegenständen und Handwerk ist spezifisch für den Handheld-Modus der Switch-Hardware — PC, Steam Deck und Android verlassen sich stattdessen auf ihre eigenen Standard-Eingabemethoden.',
+  },
+  'is-the-museum-quest-line-tied-to-jadas-personality': {
+    q: 'Ist die Museums-Questreihe an Jadas Persönlichkeit gebunden?',
+    a: 'Ja, bestätigt durch Abgleich von Charakter- und Museums-Guides: Jadas Charakterzug, Relikte zu sammeln und das Übernatürliche zu erforschen, wird im Spiel direkt als ihre Museumseröffnungs-Questreihe umgesetzt.',
+  },
+  'is-gothic-cottage-customization-a-marketed-headline-feature': {
+    q: 'Ist die Anpassung des Cottages im gotischen Stil ein beworbenes Hauptmerkmal?',
+    a: 'Ja, bestätigt über offiziellen chinesischen Steam-Text: Das verlassene, spukhaus-artige Familien-Cottage in einen bevorzugten gotischen Look zu verwandeln, wird als Hauptsäule gelistet, neben Tränkebrauen, Landwirtschaft und Romanze.',
+  },
+  'how-many-total-spells-are-in-the-game': {
+    q: 'Wie viele Zaubersprüche gibt es insgesamt im Spiel?',
+    a: 'Bestätigt über einen Systematik-Guide, der ausschließlich aus in Langform-Gameplay gezeigten Effekten erstellt wurde: 12 Zaubersprüche insgesamt, die alle Landwirtschaft, Sammeln, Pflanzenpflege oder Dekoration unterstützen. Das Spiel hat kein Kampfsystem, daher hat kein bestätigter Zauber eine Schadens- oder Kampfanwendung.',
+  },
+  'how-does-maturio-spell-family-work': {
+    q: 'Wie funktioniert die Maturio-Zauberfamilie?',
+    a: 'Bestätigt über eine quest-spezifische Zauber-Aufschlüsselung: Maturio-Zauber lassen Pflanzen sofort von ihrer ersten Wachstumsstufe bis zur Erntereife reifen, wobei höhere Stufen eine größere Anbaufläche pro Wirkung abdecken. Der Zauber schlägt fehl, wenn Bäume oder Felsen im Weg der Zielfläche stehen.',
+  },
+  'does-moon-phase-affect-crop-growth': {
+    q: 'Beeinflusst die Mondphase das Pflanzenwachstum in Moonlight Peaks?',
+    a: 'Gemeldet von einem Landwirtschafts- und Werkzeug-Guide: Pflanzen während eines Vollmonds soll das Wachstum merklich beschleunigen, was ein gutes Zeitfenster für hochwertige Pflanzen ist, während Neumondnächte für Pflanzen empfohlen werden, die dunklere Bedingungen bevorzugen.',
+  },
+  'how-do-you-unlock-the-herb-garden': {
+    q: 'Wie schaltet man den Kräutergarten in Moonlight Peaks frei?',
+    a: 'Bestätigt über einen Landwirtschafts-Guide: Der Kräutergarten-Bauplan wird durch ein Gespräch mit Luna nach Abschluss von "The Magic of Crops" freigeschaltet, statt direkt an ihrem Samenstand wie gewöhnliche Samen gekauft zu werden.',
+  },
+  'when-do-magical-seeds-appear-at-lunas-stand': {
+    q: 'Wann erscheinen magische Samen an Lunas Samenstand?',
+    a: 'Bestätigt über einen Landwirtschafts-Guide: Magische Samen fehlen an Lunas Stand zu Spielbeginn und werden erst verfügbar, nachdem ihre magiebezogene Questreihe ("The Magic of Crops") abgeschlossen ist.',
+  },
+  'how-much-gold-does-a-bee-house-make': {
+    q: 'Wie viel Gold kann ein einzelnes Bienenhaus einbringen?',
+    a: 'Gemeldet von einem Geld-Tipps-Guide: Ein einzelnes, von Blumen umgebenes Bienenhaus soll etwa 320 Gold Honig pro Zyklus erzeugen, was Bienenhäuser zu einer der besseren passiven Einkommensquellen macht.',
+  },
+  'how-much-does-the-alter-ego-elixir-cost': {
+    q: 'Wie viel kostet das Alter-Ego-Elixier, und was verändert es?',
+    a: 'Bestätigt über mehrere unabhängige Guides: Das Alter-Ego-Elixier kostet 1.300 Gold bei Webb of Wonders (verfügbar während Sabrinas Arbeitszeiten) und öffnet erneut den Charakteranpassungs-Bildschirm, wo man Hautfarbe, Augenfarbe, Haarfarbe und Frisur ändern kann. Kleidung und Accessoires hingegen werden kostenlos an jedem Spiegel gewechselt.',
+  },
+  'what-does-the-character-creator-cover': {
+    q: 'Was umfasst der Charakter-Editor von Moonlight Peaks?',
+    a: 'Bestätigt über die Anpassungs-Aufschlüsselung des offiziellen Wikis: Gesicht und Sommersprossen, Irisform und Augenfarbe, Wimpern, Make-up, Augenbrauen, Haare und Haarfarbe, Outfits (Sets, Oberteile, Unterteile, Schuhe) und Accessoires für Arme und Gesicht — plus die Namensgebung für Charakter, Farm und Hellkitten.',
+  },
+  'can-you-rename-your-character-later': {
+    q: 'Kann man Charakter, Farm oder Hellkitten später umbenennen?',
+    a: 'Nein, bestätigt durch einen Launch-Durchgang: Namen, die im Charakter-Editor für Charakter, Farm und Hellkitten gewählt werden, sind dauerhaft. Alles andere am Aussehen — Haare, Augen, Outfit — kann später über das Alter-Ego-Elixier neu gemacht werden.',
+  },
+  'are-character-creator-options-gender-locked': {
+    q: 'Sind Optionen im Charakter-Editor geschlechtsgebunden in Moonlight Peaks?',
+    a: 'Nein, bestätigt durch Community-Tests und die Editor-Aufschlüsselung des offiziellen Wikis: Optionen wie Gesichtsbehaarung, Frisuren und Outfits sind unabhängig vom Körpertyp verfügbar. Ein Community-Bericht merkt separat an, dass In-Game-Animationen unabhängig vom gewählten Körpertyp feminin kodiert bleiben, was eine Spielerbeobachtung ist, keine offizielle Aussage.',
+  },
+  'how-much-does-copper-pickaxe-upgrade-cost': {
+    q: 'Wie viel kostet das Kupferspitzhacken-Upgrade?',
+    a: 'Bestätigt über einen ausführlichen Bergbau-Guide: 3 Kupferbarren plus 1.000 Gold. Der Guide empfiehlt, so früh wie möglich zu upgraden, da höhere Spitzhacken-Stufen Zugang zu tieferen Bergbaugebieten freischalten.',
+  },
+  'what-tier-pickaxe-breaks-60-durability-deposits-fast': {
+    q: 'Welche Spitzhacken-Stufe eignet sich am besten für intensive Bergbau-Sitzungen?',
+    a: 'Bestätigt über einen ausführlichen Bergbau-Guide: Die Eisenspitzhacke ist die erste Stufe, die Vorkommen mit 60 Haltbarkeit in 8 Schlägen zerschlägt, weshalb sie das empfohlene Upgrade vor einer intensiven Bergbau-Sitzung ist.',
+  },
+  'do-ore-deposits-have-a-diamond-chance': {
+    q: 'Haben Erzvorkommen eine Chance auf einen Diamanten?',
+    a: 'Ja, bestätigt über einen ausführlichen Bergbau-Guide: Erz-, Rosenquarz- und Galaxiekristall-Vorkommen tragen eine 0,5%-Chance auf einen Diamanten zusätzlich zu ihrem Hauptmaterial, plus eine separate 5%-Bonus-Belohnungs-Chance (ein Bergbau-Rezept, oder nach Museumseröffnung eine Rezept-/Artefakt-Aufteilung). Reine Steinvorkommen liefern nur ihr Grundmaterial.',
+  },
+  'how-much-does-the-premium-fishing-rod-cost': {
+    q: 'Wie viel kostet das Premium-Angelruten-Upgrade?',
+    a: 'Bestätigt über einen cross-referenzierten Angel-Guide, der IGN zitiert: 16.000 Gold plus die ursprüngliche Rute und 3 Goldbarren. Das Upgrade schaltet das Fangen von "großen Schatten"-Fischen frei, die die Basis-Rute nicht erreicht.',
+  },
+  'does-the-enchanted-rod-remove-fishing-energy-cost': {
+    q: 'Entfernt die verzauberte Rute die Energiekosten beim Angeln?',
+    a: 'Gemeldet, noch nicht unabhängig bestätigt: Ein Guide beschreibt ein Upgrade auf eine verzauberte Rute, das die normalen Energiekosten beim Angeln vollständig entfernt, aber dieser spezifische Upgrade-Weg braucht noch unabhängige Verifizierung, bevor er als gesichert gilt.',
+  },
+  'should-you-keep-first-of-a-kind-items': {
+    q: 'Sollte man den ersten Fisch, das erste Kleintier oder Artefakt behalten oder verkaufen?',
+    a: 'Behalten, gemeldet von einem Walkthrough zur Inventarstrategie: Behalte ein oder zwei Exemplare jeder neuen Gegenstandsart (Fisch, Kleintiere, Artefakte, 2-Sterne-Pflanzen), da sie später für eine Museumssammlung benötigt werden könnten, und Gegenstände verlieren im Lager keinen Wert.',
+  },
+  'can-crafting-stations-pull-from-house-storage': {
+    q: 'Können Handwerksstationen Materialien direkt aus dem Hauslager ziehen?',
+    a: 'Ja, bestätigt durch einen Walkthrough: Farm-Handwerksstationen können Materialien wie Holz, Stein und Erz direkt aus dem Hauslager ziehen, sodass diese Rohstoffe nicht in der persönlichen Tasche getragen werden müssen — nur Geschenke, Questgegenstände und Museumsspenden müssen physisch im Inventar sein, um sie zu übergeben.',
+  },
+  'was-demo-expanded-before-launch': {
+    q: 'Wurde die kostenlose Demo vor dem Vollversion-Release erweitert?',
+    a: 'Ja, vom Entwickler bestätigt: Little Chicken erweiterte die kostenlose Demo vor dem Release um mehr Charaktererstellungs-Optionen, Handwerk und neue Minispiele, zusammen mit einem neuen Trailer, der bei Wholesome Direct 2026 gezeigt wurde.',
+  },
+  'was-nokturna-soft-lock-fixed': {
+    q: 'Wurde der Nokturna-Soft-Lock-Bug behoben?',
+    a: 'Bestätigt über offizielle Patch-Notes: Patch 1.1.38 (veröffentlicht am 11. Juli 2026) behob einen Soft-Lock im Zusammenhang mit dem Nokturna-Kartenminispiel, zusammen mit Fixes für periodische Mikroruckler.',
+  },
+  'how-do-you-track-gift-preferences-when-guides-disagree': {
+    q: 'Was sollte man tun, wenn sich Geschenke-Guides bei den Vorlieben eines Charakters widersprechen?',
+    a: 'Empfohlen von einem cross-geprüften Geschenke-Guide: Gib dem Bewohner einen Gegenstand und prüfe dann die Reaktion in der Historie der letzten acht Geschenke, statt einer kopierten Community-Liste blind zu vertrauen. Nach jedem Spiel-Patch erneut prüfen, da Uneinigkeit zwischen zwei öffentlichen Guides besonders bei Noel, Evan, Aras, Elvira und Ludo häufig vorkommt.',
+  },
+  'how-do-you-get-gold-ore': {
+    q: 'Wie bekommt man Golderz in Moonlight Peaks?',
+    a: 'Gemeldet von einer Walkthrough-Serie: Golderz findet sich tief in der Cave of Echoes — halte dich weiter nordöstlich, bis man auf Wasser trifft, und überquere es mit Fledermaus- oder Meerjungfrauenform. Ein großer goldener Knoten dort erfordert eine Silberspitzhacke zum Zerschlagen.',
+  },
+  'what-happens-after-the-main-story-ends': {
+    q: 'Was gibt es nach Abschluss der Hauptgeschichte noch zu tun?',
+    a: 'Gemeldet von einer Walkthrough-Serie: Sobald die Familie Dracula in die Stadt zieht und die großen Familien-Handlungsstränge abgeschlossen sind, bleiben als Ziele: Museums- und Journal-Sammlungen abschließen, alle Seelenblobs, Käfer und Fische fangen, Charaktere durch Nebenquests befreunden, die Twilight-Katakomben freischalten, alle Zauber/Rezepte/Tränke lernen, und die Farm weiter dekorieren und erweitern.',
+  },
+  'how-many-achievements-does-the-game-have': {
+    q: 'Wie viele Erfolge hat Moonlight Peaks?',
+    a: 'Gemeldet: Die Liste umfasst über 50 Erfolge, die Story-Fortschritt, Landwirtschaft, Sammelobjekte, Erkundung, Beziehungen, Handwerk, Angeln, Magie und Stadterneuerung abdecken.',
+  },
+  'what-happens-if-youre-caught-outside-at-dawn': {
+    q: 'Was passiert, wenn man bei Sonnenaufgang noch draußen ist?',
+    a: 'Gemeldet: Das Verpassen des Fensters von 18:00 bis 6:00 Uhr bedeutet Sonnenschaden zu nehmen, plus einen Start in die nächste Nacht mit weniger Energie als gewöhnlich. Das Brauen eines Sonnenschutz-Tranks erlaubt es, vorübergehend ohne die Strafe im Tageslicht herumzulaufen.',
+  },
+  'what-are-some-named-achievements-in-moonlight-peaks': {
+    q: 'Was sind einige benannte Erfolge in Moonlight Peaks?',
+    a: 'Gemeldete Beispiele: "New Beginnings" (erste Pflanze setzen), "Purrgatory" und "Wings of the Night" (Hellkitten- und Fledermausform freischalten), "Out of the Mist" (Fluch von Misty Shores heben), "To the Depths" (Katakomben-Eingang öffnen), "Archaeo-Logistics" (Museum eröffnen) und "Happy New Year!" (erstes volles Spieljahr abschließen).',
+  },
+  'is-out-of-this-world-achievement-really-about-going-to-the-moon': {
+    q: 'Gibt es wirklich einen Spätspiel-Handlungspunkt über eine Reise zum Mond?',
+    a: 'Gemeldet: Ja, laut einem Erfolgs-Guide wird "Out of This World" als Spätspiel-Handlungspunkt beschrieben, der eine Reise zum Mond erlaubt — dies als gemeldet behandeln, bis weitere unabhängige Bestätigung des genauen Story-Kontexts vorliegt.',
+  },
+  'what-are-the-best-early-stamina-recipes': {
+    q: 'Was sind die besten frühen Rezepte zur Ausdauer-Wiederherstellung?',
+    a: 'Gemeldet: Pilzeintopf und Gazpacho-Suppe werden als beste frühe Rezepte zur Ausdauer-Wiederherstellung hervorgehoben. Später schaltet der Kauf des Rezeptbuchs "Cooking for Vampires" von Mina bei Coffee and Coffins Rezepte frei, die noch mehr wiederherstellen.',
+  },
+  'is-moonlight-peaks-inclusive-of-queer-content': {
+    q: 'Ist Moonlight Peaks inklusiv bei queeren Beziehungen und Inhalten?',
+    a: 'Gemeldet von einem Reviewer aus der queeren Community: Ja, beschrieben als eines der authentischeren und inklusiveren gemütlichen Landwirtschaftsspiele, die sie gespielt haben, mit der Anmerkung, dass die inklusiven Ergänzungen sich nicht wie eine Einheitslösung anfühlten.',
+  },
+  'why-is-moonlight-peaks-rated-teen': {
+    q: 'Warum ist Moonlight Peaks als PEGI 12 / ESRB Teen eingestuft?',
+    a: 'Bestätigt: Die Einstufung liegt speziell an Erwähnungen von Alkoholkonsum und der Möglichkeit, Bier und Wein herzustellen, sowie leicht anzüglicher Sprache in den romantischen Handlungssträngen — nicht an Gewalt, da das Spiel keine Kämpfe hat.',
+  },
+  'should-you-treat-collectibles-as-early-priorities': {
+    q: 'Sollte man Vampster und Seelenblobs früh sammeln oder für später aufheben?',
+    a: 'Gemeldet: Guides empfehlen, Sammelobjekte wie Vampster, Seelenblobs und versteckte Gegenstände von Anfang an als aktive Priorität zu behandeln, statt sie als Aufräumaufgaben für später liegen zu lassen — zusammen mit einer täglichen Gewohnheit aus Museumsspenden und der Annahme von Albertus\u2019 Jobangeboten.',
+  },
+  'do-transformation-forms-unlock-new-areas': {
+    q: 'Schalten Fledermaus-, Meerjungfrauen- und Hellkitten-Form jeweils neue Gebiete frei?',
+    a: 'Bestätigt: Ja, jede Verwandlungsform öffnet Zugang zu verschiedenen Kartenbereichen, die zuvor unzugänglich waren — Guides empfehlen, nach jedem neuen Formen-Unlock die Karte erneut zu prüfen, um neu erreichbare Stellen zu finden.',
+  },
+  'when-does-luna-bay-become-accessible': {
+    q: 'Wann wird Luna Bay zugänglich in Moonlight Peaks?',
+    a: 'Gemeldet: Luna Bay wird entdeckt, wenn sich durch Story-Fortschritt neue Regionen öffnen, gebunden an einen Erfolg fürs Finden — nicht von Spielbeginn an verfügbar.',
+  },
+  'what-triggers-the-witnessing-revolution-achievement': {
+    q: 'Was löst den Erfolg "Witnessing Revolution" aus?',
+    a: 'Gemeldet: Die Teilnahme am Draculamm-Marsch während der Story löst diesen Erfolg aus — er ist an ein bestimmtes Story-Ereignis gebunden, statt frei auslösbar zu sein.',
+  },
+  'can-you-marry-nearly-any-eligible-npc': {
+    q: 'Kann man fast jeden erwachsenen NPC in Moonlight Peaks daten?',
+    a: 'Gemeldet: Ja, man kann fast jeden geeigneten erwachsenen NPC daten, einschließlich Tod, und der Aufbau dieser Beziehungen schaltet einzigartige Story-Bögen und seltene Baupläne als Belohnungen frei.',
+  },
+  'does-spellcasting-skill-level-up-over-time': {
+    q: 'Steigt die Zauber-Fertigkeit im Laufe der Zeit an?',
+    a: 'Gemeldet: Ja, das Steigern der Zauber-Fertigkeit erfordert nächtliches Üben von Zaubersprüchen — sie wird als Fertigkeit dargestellt, die sich mit regelmäßiger Nutzung verbessert, statt einmal freigeschaltet und dann statisch zu bleiben.',
+  },
+  'how-do-you-fix-your-broken-wand': {
+    q: 'Wie repariert man den zerbrochenen Zauberstab in Moonlight Peaks?',
+    a: 'Bestätigt durch Abgleich von vier unabhängigen Guides: Etwa in Nacht 18 (Sommer) erhält man einen Brief von Luna, die bittet, ihre Farm zu besuchen, wobei sich herausstellt, dass der Zauberstab zerbrochen ist. Gehe zu Webb of Wonders — Sabrinas Laden muss geöffnet sein — wo man auf Noel trifft, der den Stab wieder benutzbar verzaubert. Zurück bei Luna lehrt sie einem Aquaflux I.',
+    more: ['Nach dem Erlernen von Aquaflux I muss man Lunas magische Mondfrucht zwei Tage lang mit dem Zauber bewässern, um die Quest abzuschließen. Der Abschluss gibt Mondfrucht-Samen und erweitert Lunas Laden am nächsten Tag um den Verkauf magischer Samen.'],
+  },
+  'what-is-the-fixed-wand-vs-witchs-wand': {
+    q: 'Was ist der Unterschied zwischen dem reparierten Zauberstab und dem Hexenstab?',
+    a: 'Bestätigt: Der reparierte Zauberstab ist das, was man direkt nach der Reparatur durch Sabrina und Noel erhält — er erlaubt grundlegendes Zaubern. Der Hexenstab ist ein späteres Upgrade, das Aquaflux II freischaltet und die Zauber-Effizienz verbessert.',
+  },
+  'how-is-mana-displayed-on-screen': {
+    q: 'Wie wird Mana auf dem Bildschirm angezeigt?',
+    a: 'Bestätigt: Mana wird als kleine blaue Stern-/Diamant-Symbole unterhalb der Energie-(Ausdauer-)Leiste in der oberen linken Ecke angezeigt.',
+  },
+  'what-blueprints-does-luna-give-you': {
+    q: 'Welche Handwerks-Baupläne gibt Luna im Spielverlauf?',
+    a: 'Bestätigt: Luna liefert die Baupläne für den Kräutergarten (züchtet Kräuterpflanzen), den Kräutertrockner (verwandelt bestimmte Pflanzen in Pulver) und den Verzauberten Mörser (verarbeitet Zutaten), während man in der Story voranschreitet.',
+  },
+  'how-do-you-restore-mana': {
+    q: 'Wie stellt man Mana in Moonlight Peaks wieder her?',
+    a: 'Bestätigt: Schlafen stellt Mana wieder her, und Mana-Essenz (hergestellt über den Mana-Extraktor) kann direkt konsumiert oder Essen hinzugefügt werden, um es ebenfalls wiederherzustellen.',
+  },
+  'where-do-you-get-potion-ingredients': {
+    q: 'Wo bekommt man Tränke-Zutaten in Moonlight Peaks?',
+    a: 'Bestätigt: Die meisten Komponenten stammen aus dem Anbau verzauberter Pflanzen (Samen bei Lunas Laden erhältlich), zusätzlich zum Sammeln ungewöhnlicher Blumen, Kräuter und Pilze beim Erkunden der Welt.',
+  },
 };
+
+
 
 
 
