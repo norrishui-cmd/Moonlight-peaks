@@ -1139,7 +1139,666 @@ export const faqDe: Record<string, FaqTranslationDe> = {
     q: 'Wo bekommt man Tränke-Zutaten in Moonlight Peaks?',
     a: 'Bestätigt: Die meisten Komponenten stammen aus dem Anbau verzauberter Pflanzen (Samen bei Lunas Laden erhältlich), zusätzlich zum Sammeln ungewöhnlicher Blumen, Kräuter und Pilze beim Erkunden der Welt.',
   },
+  'does-magic-require-mana-every-cast': {
+    q: 'Kostet jeder Zauberspruch Mana in Moonlight Peaks?',
+    a: 'Bestätigt: Ja, alle Magie erfordert den Zauberstab und verbraucht Mana. Da der Mana-Pool zu Beginn klein ist, empfehlen Guides, Magie nur bei Bedarf einzusetzen, bis man ihn erweitert hat.',
+  },
+  'does-the-almanac-track-learned-spells': {
+    q: 'Verfolgt das Spiel, welche Zaubersprüche man gelernt hat?',
+    a: 'Bestätigt: Jeder neu gelernte Zauber wird im Almanach registriert, einschließlich einer Wiederholung, wie man ihn ausführt, falls man das Zaubermuster vergisst.',
+  },
+  'is-death-really-a-romance-option-confirmed-again': {
+    q: 'Ist wirklich bestätigt, dass Tod romanzefähig ist?',
+    a: 'Ja, von mehreren unabhängigen Quellen bestätigt: Tod ist eine bestätigte Romanze-Option, nicht mehr nur ein Gerücht vor dem Release.',
+  },
+  'what-forms-can-you-shapeshift-into': {
+    q: 'In welche Formen kann man sich in Moonlight Peaks verwandeln?',
+    a: 'Bestätigt: Fledermausform für schnelles Reisen und Meerjungfrauenform für Unterwassererkundung sind beide bestätigte Verwandlungen, zusammen mit der Hellkitten-Form für Kreaturen-Interaktionen und kostenloses Pflügen — jede wird an unterschiedlichen Punkten der Story freigeschaltet.',
+  },
+  'what-is-the-current-steam-review-count': {
+    q: 'Wie viele Steam-Reviews hat Moonlight Peaks, und wie ist die Bewertung?',
+    a: 'Stand dieser Schreibung, bestätigt über die offizielle Steam-Shop-Seite: 1.086 Nutzer-Reviews, 89% positiv, mit der Bewertung "Sehr positiv". Dies ist eine Momentaufnahme, die sich mit weiteren Reviews ändern wird.',
+  },
+  'what-are-the-best-early-crops-for-profit': {
+    q: 'Was sind die besten frühen Pflanzen für Profit in Moonlight Peaks?',
+    a: 'Gemeldet: Blutraube und Weiße Traube werden als starke Profit-Pflanzen für die ersten zwei Jahreszeiten hervorgehoben — Blutrauben-Samen erhält man zu Beginn direkt von Orlock. Bluttomaten und Zwiebeln sind ebenfalls das ganze Jahr verfügbar und können zu Gazpacho-Suppe verarbeitet werden, einer verlässlichen frühen Energiequelle, die sich gut verkauft.',
+  },
+  'do-npcs-send-recipes-by-mail': {
+    q: 'Schicken NPCs manchmal Rezepte als Geschenk?',
+    a: 'Gemeldet: Ja, Charaktere schicken Spielern gelegentlich ihre Lieblingsrezepte als Geschenk per Post — Froschkuchen von Mina und Erdbeer-Cupcake von Luna werden als Beispiele genannt. Es lohnt sich, besonders nach Romanze-Herz-Ereignissen die Post zu prüfen.',
+  },
+  'is-there-a-seasonal-market-with-limited-recipes': {
+    q: 'Gibt es einen saisonalen Markt mit zeitlich begrenzten Rezepten?',
+    a: 'Gemeldet: Der Evernight-Markt verkauft zeitlich begrenzte Herbst-Rezepte, mit Kürbiskuchen und Kürbiseintopf als Beispiele. Im Kalender vormerken, um kein einmaliges Kochbuch zu verpassen, da diese nur während des Events verfügbar sind.',
+  },
+  'how-do-you-unlock-the-refiner': {
+    q: 'Wie schaltet man die Raffinerie in Moonlight Peaks frei?',
+    a: 'Bestätigt: Repariere das Dach des Bauernhauses für Ridge, was den Raffinerie-Bauplan einbringt. Herstellen mit 20 Holz und 20 Stein. Die Raffinerie produziert veredelte Materialien wie Barren, Holzkohle und Glas, von denen viele spätere Rezepte abhängen.',
+  },
+  'what-is-the-sunscreen-potion-recipe': {
+    q: 'Was ist das Rezept für den Sonnenschutz-Trank?',
+    a: 'Bestätigt: 1 Ei + 1 Faser.',
+  },
+  'how-many-recipes-do-you-start-with': {
+    q: 'Mit wie vielen Kochrezepten startet man in Moonlight Peaks?',
+    a: 'Bestätigt: Das Start-Gehöft hat bereits eine Kochstation und 16 Grundrezepte — genug für Spiegeleier, Brot und einfache Suppen in der ersten Woche. Erweiterbar durch den Kauf von Rezeptbüchern bei Mina, das Ausgraben funkelnder Spiralstellen beim Sammeln, oder das Abschließen bestimmter Story-Quests.',
+  },
+  'does-cooking-quality-affect-gift-reactions': {
+    q: 'Beeinflusst die Kochqualität Geschenk-Reaktionen?',
+    a: 'Gemeldet: Ja, ein perfektes Wenden im Koch-Minispiel ergibt höhere Energie-Wiederherstellung, einen besseren Verkaufspreis und eine stärkere Reaktion, wenn das Gericht verschenkt wird — alles an denselben Qualitätssterne-Mechanismus gebunden.',
+  },
+  'is-there-a-storage-limit-in-moonlight-peaks': {
+    q: 'Gibt es eine Lagergrenze in Moonlight Peaks?',
+    a: 'Gemeldet: Reviewer fanden keine praktische Grenze beim universellen Hauslager, das Handwerks-, Koch-, Tränke- und Verarbeitungsstationen direkt versorgt. Die eine Ausnahme ist der Dekorationsmodus, der keine Möbel aus dem universellen Lager ziehen kann — Gegenstände zuerst in die Tasche legen.',
+  },
+  'can-you-water-crops-while-walking': {
+    q: 'Kann man Pflanzen im Gehen bewässern?',
+    a: 'Bestätigt: Die Gießkanne kann während der Bewegung genutzt werden, und die Sichel ist darauf ausgelegt, mehrere erntereife Pflanzen in einem effizienten Durchgang einzusammeln.',
+  },
+  'how-many-romanceable-characters-really': {
+    q: 'Wie viele romanzefähige Charaktere gibt es also wirklich — 23 oder 24?',
+    a: 'Ungeklärt: Zwei ausführliche Reviews verwenden unterschiedliche Zahlen — eines zählt 23 daten-fähige Charaktere, ein anderes sagt 24. Offizielle Launch-Berichterstattung beschreibt "über zwei Dutzend". Bis eine offizielle Liste dies klärt, wird keine einzelne Zahl als Fakt erzwungen.',
+  },
+  'can-dates-fail-in-moonlight-peaks': {
+    q: 'Kann ein Date in Moonlight Peaks scheitern?',
+    a: 'Bestätigt: Dates beinhalten Minispiele, und es ist möglich, eines zu verpatzen, statt dass jedes Date automatisch gelingt.',
+  },
+  'what-happens-if-you-break-up': {
+    q: 'Was passiert, wenn man sich von einem Partner trennt?',
+    a: 'Gemeldet, mit leicht abweichenden Darstellungen: Eine Quelle sagt, eine Trennung versetzt den Ex-Partner in einen vorübergehenden "Verletzt"-Status, der ein paar Tage nicht mit einem spricht, bevor er auf vier Herzen zurückgesetzt wird, als hätte man nie gedatet. Eine andere beschreibt wiederholtes Ablehnen von Date-Einladungen als Auslöser, wobei der Charakter schließlich vergibt und die Romanze neu starten kann. Beide Darstellungen werden hier genannt, statt eine als endgültig festzulegen.',
+  },
+  'how-far-out-can-you-schedule-a-wedding': {
+    q: 'Wie weit im Voraus kann man eine Hochzeit planen?',
+    a: 'Bestätigt: Das Hochzeitsdatum muss mindestens 2 Tage nach dem Antrag liegen, ohne gemeldete Obergrenze — viele Spieler planen es Berichten zufolge praktisch etwa eine Woche im Voraus. Das Festlegen des Datums schaltet neue Hochzeitskleidung bei Third Eye Threads frei.',
+  },
+  'do-you-become-a-step-parent-if-you-marry-ridge-or-orlock': {
+    q: 'Wird man Stiefelternteil, wenn man Ridge oder Orlock heiratet?',
+    a: 'Bestätigt von mehreren Quellen: Ja, gemeldet — das Heiraten eines älteren Charakters, der bereits Kinder hat, wie Ridge oder Orlock (Vater von Mina und Evan), macht einen zum Stiefelternteil ihrer bestehenden Kinder. Eigene Kinder kann man nicht bekommen, und es gibt keine angekündigten Pläne, diesen Mechanismus hinzuzufügen.',
+  },
+  'what-fish-are-in-silverveil-lake': {
+    q: 'Welche Fische kann man im Silverveil-See fangen?',
+    a: 'Bestätigt über das offizielle Wiki: mindestens vier benannte Arten — Whisper, Twilight, Splotch und Orbis.',
+  },
+  'what-can-you-gather-in-howling-marshes': {
+    q: 'Was kann man in Howling Marshes sammeln oder fangen?',
+    a: 'Bestätigt über das offizielle Wiki: Gelber Glowglammer ist dort sammelbar, und man kann den Brickle-Fisch fangen. Kürbisse erscheinen im Herbst im Wald, und Frosteria erscheint im Winter. Tod wird häufig gesehen, wie er auf einem Baumstumpf nahe der Mitte des Sumpfes sitzt.',
+  },
+  'who-lives-at-ambrosia-mansion': {
+    q: 'Wer wohnt im Ambrosia-Anwesen in Misty Shores?',
+    a: 'Bestätigt über das offizielle Wiki: Orlock, Mina und Evan. Der nahegelegene Friedhof wird oft von Tod, Jarvis und Balthasar Logan besucht, und Yabbis verkauft Waren am Strand südlich des Anwesens.',
+  },
+  'why-are-luna-bays-waters-special': {
+    q: 'Warum gelten Luna Bays Gewässer als besonders?',
+    a: 'Bestätigt über das offizielle Wiki: Den Gewässern werden heilende Eigenschaften durch lange Aussetzung gegenüber dem Mondlicht nachgesagt, mit magischen Strömungen, die seltsame Fische anziehen und den nahen Pink Grove nähren. Es ist auch die Heimat der Meerjungfrauen Tae, Kim und Rei Hosu.',
+  },
+  'how-much-ore-do-large-clusters-give': {
+    q: 'Wie viel Erz geben große Mineralvorkommen im Vergleich zu normalen Knoten?',
+    a: 'Bestätigt: Große Erzvorkommen in der Cave of Echoes können bis zu 6 Kupfererz liefern, verglichen mit 1 bei einem normalen Knoten. Ein Kupferbarren benötigt 4 Kupfererz + 1 Holzkohle am Ofen.',
+  },
+  'are-brook-moon-goddess-sun-god-romanceable': {
+    q: 'Sind Brook, Mondgöttin oder Sonnengott romanzefähig?',
+    a: 'Nein, bestätigt: Alle drei sind ausdrücklich reine Freundschafts-Charaktere, die keine romantischen Partner werden können.',
+  },
+  'do-npc-schedules-change-with-weather-or-season': {
+    q: 'Ändern sich NPC-Zeitpläne mit Wetter oder Jahreszeit?',
+    a: 'Bestätigt über das offizielle Wiki: Ja, NPCs folgen täglichen Routinen, die je nach Wochentag, Jahreszeit, Wetter, einem laufenden Fest oder einer aktiven Quest variieren können — der Zeitplan eines Bewohners ist nicht immer fest.',
+  },
+  'what-is-sagas-relationship-with-her-family': {
+    q: 'Wie ist Sagas Beziehung zu ihrer Familie?',
+    a: 'Gemeldet: Saga möchte in die Fußstapfen ihres Vaters, Bürgermeister Brook, treten, während ihr Geschwister Ludo lieber schläft, statt das Familienhandwerk zu lernen — ein bemerkenswerter Persönlichkeitskontrast zwischen beiden.',
+  },
+  'is-samael-romanceable-or-not': {
+    q: 'Ist Samael romanzefähig oder nicht?',
+    a: 'Andernorts als Romanze-Option mit eigenem Handlungsbogen bestätigt, wobei ein 40-Tage-Eindrucksbericht ihn zu diesem Zeitpunkt als nicht daten-fähig beobachtete, basierend auf einer Begrenzung auf vier Freundschaftsherzen in diesem bestimmten Durchgang — wahrscheinlich eher eine Widerspiegelung des Story-Fortschritts dieses Reviewers als eine feste Grenze.',
+  },
+  'is-there-dialogue-variation-in-noels-fishing-contest': {
+    q: 'Gibt es Dialogvariationen während Noels Angelwettbewerb?',
+    a: 'Gemeldet: Ja, Dialogoptionen während des Wettbewerbs steigern sich passend zu Noels zunehmend hektischer Energie, während er nervöser wird, von einem Reviewer als einer seiner liebsten frühen komischen Momente beschrieben.',
+  },
+  'what-does-patch-1-1-44-fix': {
+    q: 'Was behebt Patch 1.1.44 in Moonlight Peaks?',
+    a: 'Bestätigt über die offiziellen Marvelous-USA-Patch-Notes: 1.1.44 behebt, dass L+R-Tasten nicht funktionierten, behebt, dass das Marshmallow-Date die Röst-Eingabe nicht akzeptierte, und behebt, dass Cloud-Speicherdateien nicht richtig synchronisierten. Es ist weltweit live auf Steam.',
+    more: ['Aktuell bestätigte Versionen: Steam 1.1.44, Nintendo Switch 1.1.3, Nintendo Switch 2 1.1.3, Google Play Games 1.1.3 — Konsole und Mobile holen gegenüber PC noch auf.'],
+  },
+  'how-much-is-the-physical-switch-2-edition-in-europe': {
+    q: 'Wie viel kostet die physische Switch-2-Edition in Europa?',
+    a: 'Bestätigt: 49,99 € / 44,99 £, erscheint am 28. August 2026 in ganz Europa über Marvelous Europe, mit einem exklusiven Sammel-Stickerblatt und einem digitalen Soundtrack.',
+  },
+  'does-steam-version-support-playstation-controllers': {
+    q: 'Unterstützt die Steam-Version PlayStation-(DualShock-)Controller?',
+    a: 'Bestätigt: Die Steam-Version listet DualShock-/PlayStation-Controller-Unterstützung zusammen mit Steam-Erfolgen, Steam-Sammelkarten und Steam-Cloud-Speicherung — passend zum Controller-orientierten Design des Spiels.',
+  },
+  'stuck-in-skull-girl-storyline-what-to-do': {
+    q: 'Ich habe versprochen zu melden, dass ich Skull Girl wiedergesehen habe, aber nichts passiert — ist das ein Bug?',
+    a: 'Von Spielern in Steam-Community-Diskussionen gemeldet, noch nicht vom Entwickler bestätigt: Manche Spieler sagen, die Handlung scheint nach einer zweiten Skull-Girl-Sichtung im Anschluss an die anfängliche Taschen-Fund-Szene nicht weiterzugehen. Dies als ungeklärten Spielerbericht behandeln statt als bestätigte Sackgasse — nach einer entsprechenden Patch-Notiz suchen, oder die eigenen Spielstand-Details dem Support melden, falls es anhält.',
+  },
+  'are-there-still-known-issues-after-1-1-44': {
+    q: 'Gibt es nach Patch 1.1.44 noch bekannte Probleme?',
+    a: 'Ja, von den Entwicklern selbst bestätigt: Zusätzlich zu den in 1.1.44 ausgelieferten Fixes gaben sie an, weiterhin andere bekannte Probleme zu untersuchen und Zeitangaben zu teilen, sobald verfügbar.',
+  },
+  'how-many-items-in-each-museum-collection': {
+    q: 'Wie viele Objekte sind in jeder Museumssammlung?',
+    a: 'Bestätigt: 5 Objekte in der Hexen-Sammlung, 7 in der Werwolf-Sammlung, 7 in der Vampir-Sammlung, 7 in der Seher-Sammlung und 8 in der Meerjungfrauen-Sammlung, plus eine separate Gottheiten-Sammlung und eine Kleintier-Sammlung, die außerhalb der fünf übernatürlichen Familienräume verfolgt werden.',
+  },
+  'does-fur-chair-need-specific-color-for-museum': {
+    q: 'Muss der Pelzsessel eine bestimmte Farbe haben, um fürs Museum zu zählen?',
+    a: 'Ja, bestätigt: Der Pelzsessel muss in der Farbvariante "Braun" hergestellt werden, um für die Werwolf-Sammlung zu qualifizieren. Der Aquatische Schrank benötigt ähnlich die Variante "Blau" für die Meerjungfrauen-Sammlung — falsch gefärbte Duplikate zählen nicht als Spende.',
+  },
+  'what-is-the-deity-collection-in-the-museum': {
+    q: 'Was ist die Gottheiten-Sammlung im Moonlight-Peaks-Museum?',
+    a: 'Bestätigt: Eine sechste Sammlung getrennt von den fünf übernatürlichen Familienräumen, vollständig aus Artefakten bestehend. Jede Zeile verlangt einen Gegenstand normaler Qualität, und Einträge gelten als einmalige Funde, die am besten vor dem Verkauf etwaiger Duplikate gespendet werden.',
+  },
+  'does-museum-donation-quality-vary-by-row': {
+    q: 'Brauchen alle Museumsspenden dieselbe Qualität, oder variiert das?',
+    a: 'Es variiert zeilenweise, bestätigt: Qualitätsanforderungen unterscheiden sich pro einzelner Zeile innerhalb einer Sammlung, statt einheitlich zu gelten — jede Zeile vor dem Spenden prüfen, da ein Gegenstand normaler Qualität eine Zeile nicht erfüllt, die speziell Perfekt-Qualität verlangt.',
+  },
+  'does-farming-collection-need-perfect-quality': {
+    q: 'Braucht die Landwirtschafts-Sammlung im Museum Perfekt-Qualität-Pflanzen?',
+    a: 'Ja, bestätigt: Jede Zeile in der Landwirtschafts-Sammlung verlangt speziell eine Pflanze oder ein anbaubares Objekt in Perfekt-Qualität — beste Ernten aufheben, statt sie zu verkaufen, bevor man die Museums-Anforderungen prüft.',
+  },
+  'what-milestone-rewards-does-the-museum-give': {
+    q: 'Welche Meilenstein-Belohnungen gibt das Museum im Spielverlauf?',
+    a: 'Bestätigt: Bei 10% Gesamtfortschritt gibt Jada eine Meilenstein-Belohnung. Bei 25% Gesamtfortschritt erhält man den Dracula-Insignien-Schlüssel, der die Twilight-Katakomben freischaltet. Die Belohnungs-Zwischensequenz löst aus, wenn man die Ausstellungsräume in den Empfangsbereich verlässt.',
+  },
+  'how-do-you-know-what-still-needs-donating': {
+    q: 'Woher weiß man, welche Gegenstände man noch ans Museum spenden muss?',
+    a: 'Bestätigt: Jeder Inventar-Gegenstand, der Teil einer unvollständigen Museumssammlung ist, zeigt eine kleine Museumssymbol-Überlagerung, speziell um zu helfen, versehentliches Verkaufen oder Verwenden von etwas noch Benötigtem zu vermeiden.',
+  },
+  'what-is-the-starting-tool-set-in-moonlight-peaks': {
+    q: 'Mit welchen Werkzeugen startet man in Moonlight Peaks?',
+    a: 'Bestätigt: Nach den einleitenden Quests von Orlock und Viktor füllt sich das Werkzeugrad mit einer rostigen Spitzhacke, rostiger Sense, rostiger Schaufel, rostiger Gießkanne und einem zerbrochenen Zauberstab — genug, um einen Teil des Grundstücks zu roden und erste Pflanzen zu setzen, wobei jedes anfangs schwach ist (die Spitzhacke zerbricht nur kleine Steine, die Gießkanne leert sich schnell).',
+  },
+  'can-ridge-upgrade-the-magic-wand': {
+    q: 'Kann Ridge den Zauberstab wie andere Werkzeuge aufwerten?',
+    a: 'Nein, bestätigt: Anders als Spitzhacke, Axt, Sense und Gießkanne entwickelt sich der Zauberstab nicht durch Ridges Laden mit Barren und Geld. Er entwickelt sich stattdessen durch Story-Quests, Gespräche mit Hexen und Besuche bei Webb of Wonders.',
+  },
+  'how-do-you-make-the-mana-extractor': {
+    q: 'Wie stellt man den Mana-Extraktor in Moonlight Peaks her?',
+    a: 'Bestätigt durch Abgleich mehrerer Walkthroughs: Baue Rosenquarz in der Kristallhöhle ab (den Felsbrocken mit einer Kupferspitzhacke aufbrechen, rosa Knoten mit einer Eisenaxt abbauen), mahle ihn mit einem Mörser zu Quarzstaub, und verwandle ihn dann an einem Ofen zu Glas. Kombiniere mit 3 Kupferbarren und 3 Eisenbarren für Sabrinas Mana-Extraktor-Quest.',
+  },
+  'how-do-you-make-cheese-in-moonlight-peaks': {
+    q: 'Wie stellt man Käse in Moonlight Peaks her?',
+    a: 'Gemeldet von einer Walkthrough-Serie: Stelle eine Presse aus Eisenbarren her (Eisenerz findet sich in der Cave of Echoes), und lege dann Cowcula-Milch hinein, um sie zu Käse zu verarbeiten. Dies schließt die Quest "Cheese, if You Please" für Viktor ab.',
+  },
+  'how-many-seeds-are-in-moonlight-peaks': {
+    q: 'Wie viele Samen gibt es insgesamt in Moonlight Peaks?',
+    a: 'Gemeldet: 53 Samen insgesamt, wobei Lunas Samenstand-Bestand je nach Jahreszeit rotiert. Beispiele umfassen die ganzjährige Zwiebel und Bluttomate, nur im Frühling/Sommer erhältliche Blutraube, und eine ganzjährige Mondfrucht, die statt einer gewöhnlichen Gießkanne den Aquaflux-Bewässerungszauber erfordert.',
+  },
+  'do-herbs-need-a-special-garden': {
+    q: 'Brauchen Kräuter einen speziellen Garten zum Pflanzen?',
+    a: 'Ja, bestätigt: Kräutersamen können nicht in normaler Erde gepflanzt werden und benötigen einen hergestellten Kräutergarten. Magische Kräuter wie Nachtschatten und Wolfsbann erfordern zusätzlich den Aquaflux-Bewässerungszauber statt einer gewöhnlichen Gießkanne.',
+  },
+  'juice-vs-wine-which-is-better-moonlight-peaks': {
+    q: 'Sollte man aus Blutrauben Saft oder Wein machen?',
+    a: 'Bestätigt: Es hängt von der Priorität ab — Saft ist schneller fertig und hilft, frühe Energie wiederherzustellen, während Wein länger braucht, aber mehr Geld einbringt. Beide werden durch eine frühe Blutrauben-Quest für Orlock eingeführt.',
+  },
+  'what-is-the-alter-ego-elixir-recipe': {
+    q: 'Was ist das Rezept für das Alter-Ego-Elixier?',
+    a: 'Bestätigt: Quarzstaub, Nachtschatten-Pulver und Honig. Dies ist der Trank, der den Erscheinungsbild-Anpassungsbildschirm erneut öffnet, gekauft bei Sabrina bei Webb of Wonders für 1.300 Gold.',
+  },
+  'does-alter-ego-elixir-change-clothes': {
+    q: 'Ändert das Alter-Ego-Elixier auch die Kleidung?',
+    a: 'Nein, bestätigt: Es ändert nur Frisur, Haarfarbe, Hautton, Augenfarbe, Augenbrauenform, Augenbrauenfarbe und Make-up-Stil. Kleidung und Accessoires werden separat und kostenlos über jeden Spiegel geändert.',
+  },
+  'do-you-lose-the-elixir-if-you-cancel': {
+    q: 'Verliert man das Alter-Ego-Elixier, wenn man ohne Änderung abbricht?',
+    a: 'Ja, bestätigt: Das Trinken des Elixiers verbraucht es sofort, selbst wenn man den Anpassungsbildschirm ohne Änderung verlässt. Das gewünschte Aussehen vor dem Öffnen des Menüs entscheiden.',
+  },
+  'can-you-buy-multiple-alter-ego-elixirs': {
+    q: 'Kann man das Alter-Ego-Elixier mehr als einmal kaufen?',
+    a: 'Ja, bestätigt: Es gibt keine Obergrenze, wie oft man es kaufen und trinken kann — jede Nutzung kostet erneut 1.300 Gold, was freies Experimentieren mit dem Aussehen über mehrere Sitzungen erlaubt.',
+  },
+  'does-character-creator-name-your-farm': {
+    q: 'Kann man im Charakter-Editor auch Farm und Haustier benennen?',
+    a: 'Ja, bestätigt: Derselbe Erstellungsablauf, in dem man den Charakter benennt, ist auch der Ort, an dem man dauerhaft die Farm und den Hellkitten-Begleiter benennt — leicht zu übersehen, wenn man sich nur auf das Aussehen konzentriert.',
+  },
+  'is-moonlight-peaks-built-on-one-body-type': {
+    q: 'Verwendet Moonlight Peaks einen einzigen Körpertyp für alle Charaktere?',
+    a: 'Ja, bestätigt über einen offiziellen Entwickler-Blogbeitrag: Das Spiel basiert auf einem geschlechtslosen Körpertyp, sodass jedes Kleidungsset, jede Frisur und jedes Anbauteil so gestaltet ist, dass es mit demselben Basis-Mesh über alle Charaktere hinweg kompatibel ist.',
+  },
+  'what-is-heterochromia-option-in-creator': {
+    q: 'Kann man dem Charakter unterschiedliche Augenfarben (Heterochromie) geben?',
+    a: 'Bestätigt über das offizielle Entwickler-TikTok: Heterochromie (unterschiedlich gefärbte Augen) wurde als eines der inklusiven Charakter-Editor-Features genannt, die die Entwickler einbauen wollten, zusammen mit Frisuren, Hauttönen, Make-up und Piercings.',
+  },
+  'how-does-quest-for-mana-unlock': {
+    q: 'Wie schaltet man "The Quest for Mana" frei?',
+    a: 'Bestätigt: Schließe "The Magic of Crops" ab, warte einen Tag, betrete die Stadt, um "A Mayor\u2019s Burden" auszulösen, und warte dann zwei weitere Tage, bis Sabrina einen Brief schickt. Der Abschluss belohnt mit Mana-Essenz und dem Mana-Extraktor-Bauplan.',
+  },
+  'how-many-townsfolk-must-you-meet-at-the-start': {
+    q: 'Wie viele Stadtbewohner muss man zu Beginn von Moonlight Peaks treffen?',
+    a: 'Bestätigt: Das einleitende Ziel "Die Stadtbewohner kennenlernen" zählt fünf Vampire, vier Hexen, vier Werwölfe und drei Seher. Man muss nicht jede Vorstellung abschließen, bevor man mit der Farmarbeit beginnt, da sich frühe Anfragen überschneiden.',
+  },
+  'how-do-you-win-noels-fishing-challenge': {
+    q: 'Wie gewinnt man Noels Angel-Herausforderung "Outfish the Fisherman"?',
+    a: 'Bestätigt: Fange drei verschiedene Fischarten, nicht drei vom selben Fisch. Die Rückmeldung nach dem Fang schließt die Herausforderung ab, mit einer Belohnung von 250 Münzen.',
+  },
+  'when-does-the-fishing-net-unlock': {
+    q: 'Wann schaltet sich das Angel-/Insektennetz frei?',
+    a: 'Bestätigt: Später als die Angelrute. Bringe die Story voran, bis Fiona die Misty-Shores-Route freimacht und die "Dinner Party"-Handlung im Ambrosia-Anwesen beginnt, dann löse die erste Tod-Szene am Ambrosia-Friedhof aus. Nach dem Schlafen gewährt ein Folge-Ereignis mit Tod/Seelenblob das Netz.',
+  },
+  'how-much-does-the-first-house-expansion-cost': {
+    q: 'Wie viel kostet die erste Hauserweiterung?',
+    a: 'Bestätigt: 8.000 Münzen, 100 Holz und 25 Stein, bei Ridge bestellt. Da Ridge nur einen Bauauftrag gleichzeitig bearbeiten kann, zuerst alle questbezogenen Gebäude fertigstellen, bevor man ihn mit der Hauserweiterung beauftragt.',
+  },
+  'how-do-you-win-a-museum-artifact-from-dragan': {
+    q: 'Wie bekommt man ein Museumsartefakt von Dragan?',
+    a: 'Gemeldet: Ein Sieg in einer Partie Nokturna gegen Dragan ist nötig, um ein Artefakt von ihm fürs Museum zu erhalten, was das Kartenminispiel direkt mit dem Museumsfortschritt verknüpft.',
+  },
+  'what-night-length-options-are-there': {
+    q: 'Welche Nachtlängen-Optionen gibt es in Moonlight Peaks?',
+    a: 'Bestätigt: Eine Standardnacht dauert standardmäßig etwa 15 reale Minuten. Ein Seelenblob-Sammelmeilenstein schaltet alternative Einstellungen für etwa 10-minütige Nächte (schnellere Pflanzen, Bau und Story-Wartezeiten) oder 25-minütige Nächte (mehr Erkundungszeit) frei.',
+  },
+  'how-much-mana-does-sleeping-restore': {
+    q: 'Wie viel Mana stellt Schlafen in Moonlight Peaks wieder her?',
+    a: 'Bestätigt: Schlafen stellt im Launch-Build nur einen Mana-Stern wieder her, weshalb frühe magische Pflanzenfelder klein bleiben sollten, bis Mana-wiederherstellendes Essen und der Mana-Extraktor mehr Optionen eröffnen.',
+  },
+  'what-spell-waters-magical-crops': {
+    q: 'Welchen Zauber nutzt man, um magische Pflanzen zu bewässern?',
+    a: 'Bestätigt: Der Aquaflux-Zauber, keine gewöhnliche Gießkanne. Ein Upgrade auf die Hexenstab-Stufe soll Aquaflux II freischalten, das bis zu 48 Pflanzen in einer Wirkung bewässert (noch nicht unabhängig mit einer zweiten Quelle abgeglichen).',
+  },
+  'what-is-kims-wedding-questline': {
+    q: 'Was passiert in Kims Hochzeits-Questreihe?',
+    a: 'Gemeldet von einer Walkthrough-Serie: Baue Rosenquarz in der Kristallhöhle für Persephone ab, nimm am nächsten Tag an einem Yoga-Minispiel teil, und besuche dann ein Abendessen am Crest Garden, um das Hosu-Familienwappen zu erhalten. Tage später führt ein Brief von Kim zum Hosu-Haus und einer Quest über ihre Hochzeitstorte.',
+  },
+  'where-does-yoga-unlock-in-moonlight-peaks': {
+    q: 'Wo schaltet sich Yoga in Moonlight Peaks frei?',
+    a: 'Gemeldet von einer Walkthrough-Serie: Yoga schaltet sich in Luna Bay frei, etwa im selben Questreihen-Abschnitt, der herstellbare Bienenhäuser zur Honigproduktion einführt.',
+  },
+  'what-are-alinas-aras-dragans-birthdays': {
+    q: 'Was sind die Geburtstage von Alina, Aras und Dragan?',
+    a: 'Bestätigt: Alinas Geburtstag ist Frühling 10 (liebt Schwarze Rosen und Schwarze Tulpen), Aras\u2019 ist Herbst 8 (mag Rote Azaleen), und Dragans ist Frühling 28 (reagiert gut auf Mondkristalle).',
+  },
+  'what-gifts-does-death-like': {
+    q: 'Welche Geschenke mag Tod in Moonlight Peaks?',
+    a: 'Bestätigt: Müllflaschen und rostige Fischdosen, passend zu seinem unkonventionellen Geschmack als Bewohner, der als Urlauber in Moonlight Peaks beschrieben wird.',
+  },
+  'how-is-llemi-introduced-and-what-gifts': {
+    q: 'Wie wird Llemi eingeführt, und welche Geschenke mag er/sie?',
+    a: 'Bestätigt: Llemi (Geburtstag Sommer 8) wird zuerst durch ein ungewöhnliches Ereignis eingeführt, bei dem sich die Spielfigur in einen Baum verlieben kann, und lässt sich mit Diamanten, Blumensträußen und Mondkristallen umwerben.',
+  },
+  'what-are-jada-persephone-winston-like': {
+    q: 'Wie sind Jada, Persephone und Winston als Charaktere?',
+    a: 'Bestätigt: Jada sammelt gerne Relikte und erforscht das Übernatürliche (reagiert gut auf Weiße Rosen); Persephone ist neu angekommen und möchte frei und spirituell leben; Winston, der mit seiner Schwester und Tante ankam, hat spürbare Ängstlichkeit und vertraut nur langsam.',
+  },
+  'which-characters-have-disputed-gift-data': {
+    q: 'Bei welchen Charakteren gibt es widersprüchliche oder unzuverlässige Geschenkdaten?',
+    a: 'Gemeldet von einem Geschenke-Guide, der die eigene Beweisqualität kennzeichnet: Bei Noel, Evan, Aras, Elvira und Ludo gibt es echte Uneinigkeiten zwischen Community-Quellen — bis geklärt, einer aktuellen In-Game-Erfassung mehr vertrauen als jeder kopierten Liste für diese fünf.',
+  },
+  'what-are-easy-strong-gifts-for-luna-ridge-alina': {
+    q: 'Was sind einfache, starke Geschenke für Luna, Ridge und Alina?',
+    a: 'Bestätigt: Jede Blume für Luna, Bier oder eine blaue Blume für Ridge, und Schwarze Rose für Alina.',
+  },
+  'what-thresholds-unlock-hugs-dating-marriage': {
+    q: 'Welche Herz-Schwellen schalten Umarmungen, Dating und Heirat frei?',
+    a: 'Bestätigt über mehrere unabhängige Quellen: 2 Herzen schalten Umarmungen frei, 4 Herzen erlauben den Beginn des Datings (was eine separate romantische Herzreihe hinzufügt), und 8 Herzen schalten eine vollständige Hochzeit frei.',
+  },
+  'which-five-characters-cannot-be-romanced': {
+    q: 'Welche Charaktere sind bestätigt keine Romanze-Optionen?',
+    a: 'Bestätigt: Skull Girl, Kürbiskopf, die Mondgöttin, Viktor und Bürgermeisterin Brook Logan sind ausdrücklich nicht Teil des Romanze-Aufgebots.',
+  },
+  'what-are-flower-bouquet-and-marshmallow-dates': {
+    q: 'Was sind Blumenstrauß-Dates und Marshmallow-Röst-Dates?',
+    a: 'Bestätigt: Bestimmte Date-Aktivitäten, verfügbar sobald ein Paar die Dating-Phase erreicht — Blumenstrauß-Dates beinhalten das gemeinsame Binden eines Straußes, und Marshmallow-Röst-Dates das gemeinsame Rösten von Marshmallows.',
+  },
+  'are-handmade-gifts-better-than-store-bought': {
+    q: 'Sind selbstgemachte Geschenke besser als gekaufte?',
+    a: 'Gemeldet: Geschenke, die durch Blumenbinden oder Stickerei hergestellt werden, kosten mehr Aufwand und Zutaten als ein Kauf im Laden, bieten aber Berichten zufolge mehr Beziehungswert als ähnliche gekaufte Geschenke.',
+  },
+  'what-ui-languages-does-steam-support': {
+    q: 'Welche Oberflächensprachen unterstützt die Steam-Version?',
+    a: 'Bestätigt über das offizielle Steam-Community-Hub: Neben Englisch umfasst die Unterstützung vereinfachtes und traditionelles Chinesisch, Japanisch, Koreanisch, Thailändisch, Indonesisch, Malaiisch und über ein Dutzend europäische Sprachen einschließlich Deutsch, Spanisch, Französisch, Italienisch, Portugiesisch und Russisch.',
+  },
+  'what-is-the-current-steam-review-score': {
+    q: 'Wie ist Moonlight Peaks\u2019 aktuelle Steam-Bewertung?',
+    a: 'Stand dieser Schreibung, bestätigt über die offizielle Steam-Shop-Seite: "Sehr positiv" von 1.046 Nutzer-Reviews, 89% positiv. Diese Momentaufnahme wird sich mit weiteren Reviews im Laufe der Zeit ändern.',
+  },
+  'is-llemi-also-a-romance-option-during-loveage': {
+    q: 'Ist Llemi während des Loveage Festivals auch eine Romanze-Option?',
+    a: 'Ja, bestätigt: Llemi ist ein Romanze-Kandidat, und Guides empfehlen, Llemi während des Loveage Festivals ein geliebtes oder gemochtes Geschenk zu geben, da Llemi das Event und den Geschenkeaustausch darin veranstaltet.',
+  },
+  'what-does-patch-1-1-41-fix': {
+    q: 'Was behebt Patch 1.1.41 in Moonlight Peaks?',
+    a: 'Bestätigt über die offiziellen Steam-Patch-Notes: 1.1.41 ist jetzt live auf PC (Switch/Switch 2 folgen) und macht Hauslagerung von überall auf dem Grundstück zugänglich, mit einer neuen Schnellübertragungs-Option, plus verbesserten Ladezeiten über alle Szenen hinweg.',
+    more: ['Derselbe Patch behebt auch, dass das Netz bei verfehlten Schwüngen Ausdauer verbraucht, mehrere Dialog-Steckenbleib-Bugs (Loveage-Geschenkeaustausch, Algen-Verschenken, Blumenpflücken in Pink Grove), und dass Haus-Upgrades den Inhalt der Lagerkiste oder die Dekorationsqualität löschen.'],
+  },
+  'how-much-is-the-digital-deluxe-edition': {
+    q: 'Wie viel kostet die Moonlight Peaks Digital Deluxe Edition?',
+    a: 'Bestätigt über die offizielle Steam-Ankündigung: 44,97 $, bündelt das Basisspiel mit einem digitalen Artbook und digitalen Soundtrack. Beide Extras sind auch geplant, später separat verkauft zu werden.',
+  },
+  'is-there-a-physical-switch-2-edition': {
+    q: 'Gibt es eine physische Switch-2-Edition von Moonlight Peaks?',
+    a: 'Ja, bestätigt von Marvelous Europe: Eine physische Nintendo-Switch-2-Edition erscheint am 28. August 2026 in ganz Europa, für 49,99 € / 44,99 £, mit einem Sammel-Stickerblatt und digitalem Soundtrack.',
+  },
+  'does-the-net-still-cost-stamina-on-a-miss': {
+    q: 'Kostet das Netz bei einem verfehlten Schwung noch Ausdauer?',
+    a: 'Nicht mehr, seit Patch 1.1.41 — bestätigt über die offiziellen Patch-Notes, verfehlte Netzschwünge verbrauchen keine Ausdauer mehr, was das beim Release gemeldete Verhalten rückgängig macht.',
+  },
+  'how-many-nokturna-cards-in-a-deck': {
+    q: 'Wie viele Karten kommen in ein Nokturna-Deck?',
+    a: 'Bestätigt: Genau 20 Karten pro Deck, mit maximal 2 Kopien jeder einzelnen Karte, und insgesamt 60 gedruckten Punkten oder weniger. Spieler können bis zu 13 eigene Decks gleichzeitig speichern.',
+    more: ['Partien laufen über bis zu 3 Runden mit je 3 Zügen, beginnend mit einer 5-Karten-Hand; die höhere Feldsumme gewinnt jede Runde.'],
+  },
+  'what-does-jadas-museum-quest-require': {
+    q: 'Was verlangt Jadas Museums-Ausstellungs-Quest?',
+    a: 'Bestätigt über einen Launch-Woche-Walkthrough: Jada bittet um jeweils ein Artefakt von vier Familien — Rotwein von Orlock, eine Nokturna-Partie gegen Dragan, eine Nachtschatten von Fiona, und Wolfsbann von Saga (erreicht über ein vorheriges Gespräch mit Brook).',
+    more: ['Alle vier zurückzubringen und am nächsten Tag die Ausstellung zu besuchen platziert das Henderson-Wappen im Crest Garden als direkte Folge.'],
+  },
+  'how-do-you-unlock-potion-making': {
+    q: 'Wie schaltet man Tränkebrauen in Moonlight Peaks frei?',
+    a: 'Bestätigt: Ein von der Mutter geschickter Kessel kommt zerbrochen an; das Aufsuchen der Hexen führt dazu, dass Fiona um zwei Mana-Essenzen bittet, und deren Lieferung bringt einige Tage später den reparierten Kessel plus das Alter-Ego-Elixier-Rezept.',
+  },
+  'what-other-story-quests-exist': {
+    q: 'Welche weiteren Story-Quests gibt es jenseits des frühen Spiels?',
+    a: 'Namentlich bestätigt über einen ausführlichen Quest-Walkthrough: "Elections by Moonlight", "Darkness over Moonlight Peaks", "Master of the Night", "A Key to the Deep" und "Cosmic Preparations". Ihre Freischalt-Bedingungen und Belohnungen sind noch nicht bequellt.',
+  },
+  'how-do-you-unlock-bat-and-mermaid-forms': {
+    q: 'Wie schaltet man Fledermausform und Meerjungfrauenform frei?',
+    a: 'Bestätigt über einen Launch-Woche-Walkthrough: Die Fledermausform ist an das Finden des "vermissten Mondes" und den Erhalt des Khazan-Familienwappens gebunden, während die Meerjungfrauenform durch Hilfe für Kim mit einem besonderen Muschelpulver freigeschaltet wird.',
+  },
+  'do-new-residents-move-in-during-the-game': {
+    q: 'Ziehen im Spielverlauf neue Bewohner zu?',
+    a: 'Ja, bestätigt: Eine Questreihe lässt Ludo um ein Spiegelei bitten, um am eigenen Haus zu arbeiten, gefolgt von einer Einweihungsfeier am nächsten Tag, und die Familie Henderson zieht in ein Haus unterhalb des Sargladens.',
+  },
+  'what-gifts-does-alina-like-in-moonlight-peaks': {
+    q: 'Welche Geschenke mag Alina in Moonlight Peaks?',
+    a: 'Cross-verifiziert über mindestens zwei unabhängige Post-Launch-Guides: Alina liebt Schwarze Rose und Schwarze Tulpe, zusammen mit anderen schwarz-thematischen Blumen und düsteren Kunstdrucken.',
+    more: ['Ihr erstes Herz-Ereignis löst aus, indem man sie nach Erreichen eines Herzens in der Bar besucht, wo man sie dabei erwischt, wie sie zusieht, wie Noel beim Flirten mit ihr scheitert — ihre eigene Retourkutsche zu loben kommt besser an als Noel zu loben.'],
+  },
+  'what-gifts-does-ridge-like': {
+    q: 'Welche Geschenke mag Ridge in Moonlight Peaks?',
+    a: 'Cross-verifiziert: Bier ist derzeit der stärkste bestätigte Geschenke-Hinweis für Ridge, von mindestens zwei unabhängigen Post-Launch-Guides bestätigt.',
+  },
+  'how-does-the-gift-tracking-ui-work': {
+    q: 'Wie erkennt man, ob ein Geschenk gut ankam?',
+    a: 'Bestätigt: Der Beziehungsbildschirm speichert die letzten acht Geschenke an jeden Bewohner, markiert gemochte Gegenstände mit einem Stern und geliebte mit einem Herz — der zuverlässigste Weg, eine Vorliebe selbst zu bestätigen.',
+  },
+  'do-gift-preferences-cluster-by-family': {
+    q: 'Folgen Geschenkvorlieben einem Muster nach Familie?',
+    a: 'Community-gemeldet (Einzelquelle, noch nicht pro Charakter cross-verifiziert): Schwarze Blumen funktionieren gut bei mehreren Werwölfen und Hexen, blaue Blumen passen eher zur Logan-Werwolf-Familie, und mana-thematische Gegenstände sind allgemein eine sichere Wahl für die Hexenfamilie.',
+    more: ['Eine gemeldete Ausnahme: Keiner der Vampirfamilie soll Blutrauben als Geschenk mögen, obwohl es die Startpflanze der Spielfigur ist — sie bevorzugen Berichten zufolge stattdessen den verarbeiteten Wein.'],
+  },
+  'is-there-a-24th-romanceable-character': {
+    q: 'Gibt es einen 24. romanzefähigen Charakter?',
+    a: 'Unbestätigt. Mehrere Post-Launch-Guides benennen unabhängig voneinander dieselben 23 romanzefähigen Charaktere, aber der offizielle Shop-Text bewirbt weiterhin "etwa zwei Dutzend", was die Möglichkeit eines weiteren, noch nicht verlässlich identifizierten Charakters offen lässt.',
+  },
+  'is-the-vampster-in-alinas-house-collectible': {
+    q: 'Ist der Vampster in Alinas Haus einer der 100 sammelbaren?',
+    a: 'Nein, bestätigt: Alina führt die Vampster-Sammelquest ein, aber der Vampster, der in ihrem eigenen Haus lebt, ist speziell ihr Haustier und nicht dafür gedacht, als Sammelobjekt aufgenommen zu werden.',
+  },
+  'what-gifts-does-ludo-like': {
+    q: 'Welche Geschenke mag Ludo in Moonlight Peaks?',
+    a: 'Community-gemeldet (Einzelquelle): Ludo, ein schelmischer Werwolf, soll gekochte Gerichte wie Burger, Burritos und Pizza bevorzugen, zusammen mit schwarzen Blumen.',
+  },
+  'what-gifts-does-samael-like': {
+    q: 'Welche Geschenke mag Samael in Moonlight Peaks?',
+    a: 'Community-gemeldet (Einzelquelle): Samael, der die Bar der Stadt betreibt, soll Weißen oder Roten Wein zusammen mit Gerichten im japanischen Stil wie Onigiri und Violettem Sashimi bevorzugen.',
+  },
+  'why-wont-an-npc-respond-to-my-gifts': {
+    q: 'Warum reagiert ein NPC nicht auf Geschenke?',
+    a: 'Dies war ein bekannter Bug, bei dem bestimmte Bewohner komplett aufhörten, auf Geschenke zu reagieren — bestätigt behoben seit Patch 1.1.41. Falls das vor dem Patch passiert ist, lohnt es sich, es jetzt erneut zu versuchen.',
+  },
+  'why-cant-i-find-aras-heart-event': {
+    q: 'Warum finde ich Aras\u2019 Herz-Ereignis nicht, obwohl ich einen Funkel-Marker sehe?',
+    a: 'Dies war ein bekannter Bug, bei dem Aras\u2019 Herz-Ereignis-Marker am Schneiderladen statt am korrekten Ort erschien — bestätigt behoben in Patch 1.1.41.',
+  },
+  'how-many-save-files-can-you-have-in-moonlight-peaks': {
+    q: 'Wie viele Spielstände kann man in Moonlight Peaks haben, und kann man zu einem früheren Punkt zurück?',
+    a: 'Bestätigt: Man kann mehrere Spielstände für verschiedene Charaktere/Durchgänge behalten, aber man kann keinen bestehenden Spielstand verzweigen, um einen früheren Kontrollpunkt desselben Charakters zu erstellen. Der Fortschritt ist innerhalb eines Spielstands dauerhaft — es gibt keine Möglichkeit, zurückzurollen und später auf derselben Datei andere Entscheidungen zu treffen. Zusammen mit der Tatsache, dass Moonlight Peaks nur beim Schlafen speichert (kein manuelles Speichern), lohnt es sich, große Entscheidungen zu durchdenken, statt anzunehmen, man könne sie rückgängig machen.',
+  },
+  'is-moonlight-peaks-lgbtq-friendly': {
+    q: 'Ist Moonlight Peaks LGBTQ+-freundlich?',
+    a: 'Ja, bestätigt: Das Spiel bietet einen inklusiven Charakter-Editor ohne geschlechtsspezifische Einschränkungen, und Dating ist vollständig geschlechtsneutral — jeder romanzefähige Bewohner kann unabhängig von Identität oder Aussehen der Spielfigur gedatet werden. Reviewer haben die queeren Romanze-Inhalte und die Charakterschreibung besonders als herausragende Stärke gelobt.',
+  },
+  'how-does-aquaflux-mana-limit-work': {
+    q: 'Bewässert Aquaflux Pflanzen kostenlos, oder kostet es trotzdem etwas?',
+    a: 'Bestätigt: Aquaflux ist keine unbegrenzte automatische Bewässerungslösung — er zieht weiterhin aus der Mana-Leiste, demselben Ressourcen-Pool, der für andere Zauber genutzt wird. Eine einzelne Wirkung deckt Berichten zufolge bis zu 16 Pflanzenfelder ab, aber wenn man ein großes magisches Pflanzenfeld plant, ohne genug Mana-Kapazität dafür zu haben, geht einem mittendrin das Mana aus und man muss warten, bis es sich regeneriert (durch Schlaf oder Mana-wiederherstellendes Essen/Tränke), bevor man fertig wird. Als Bewässerungswerkzeug mit echten Grenzen behandeln, nicht als Freifahrtschein, die Mana-Leiste ganz zu ignorieren.',
+  },
+  'is-patch-1-1-41-out-on-switch': {
+    q: 'Ist Patch 1.1.41 schon für Nintendo Switch und Switch 2 verfügbar?',
+    a: 'Noch nicht, Stand dieser Schreibung. Bestätigt über die offiziellen Patch-Notes: 1.1.41 erschien zuerst für Steam, wobei Switch-, Switch-2- und Google-Play-Games-Updates bestätigt später folgen, statt gleichzeitig.',
+    more: ['Stand der neuesten offiziellen Versionsübersicht: Steam liegt bei 1.1.41, während Nintendo Switch, Nintendo Switch 2 und Google Play Games noch bei 1.1.3 liegen — man sollte also nicht annehmen, dass die eigene Plattform einen Fix hat, nur weil die Steam-Patch-Notes ihn erwähnen.'],
+  },
+  'does-1-1-41-fix-crop-growth': {
+    q: 'Behebt Patch 1.1.41 Pflanzen und Bäume, die nicht ausreifen?',
+    a: 'Ja, bestätigt über die offiziellen Patch-Notes: 1.1.41 listet ausdrücklich einen Fix für "manche Pflanzen und Bäume reiften nicht aus" als eine seiner Änderungen.',
+    more: ['Derselbe Patch änderte auch, wie Baumsamen-Tooltips Saisoninformationen anzeigen — sie zeigen jetzt die Saisons, in denen der Baumertrag wächst, statt der Saisons, in denen der Baum selbst wächst, was manche Spieler beim Vergleich mit dem Landwirtschafts-Guide verwirrt hatte.'],
+  },
+  'does-1-1-41-fix-lost-saves': {
+    q: 'Behebt Patch 1.1.41 fehlende oder verlorene Spielstände?',
+    a: 'Teilweise. Bestätigt über offizielle Patch-Notes: 1.1.41 stellt fehlende Spielstände für eine bestimmte bekannte Ursache wieder her, aber dieser Fix gilt ausdrücklich nicht für Spielstände, die durch Schließen des Spiels während des Speicherns beschädigt wurden.',
+    more: ['Falls der Spielstand-Verlust durch Beenden mitten im Speichervorgang entstand, statt durch das Problem, das dieser Patch behebt, als weiterhin ungelöst behandeln und vor größeren Updates Backups des lokalen Speicherordners aufbewahren.'],
+  },
+  'house-storage-from-barn-greenhouse': {
+    q: 'Kann man in Moonlight Peaks von Scheune oder Gewächshaus aus auf Hauslagerung zugreifen?',
+    a: 'Ja, seit Patch 1.1.41. Bestätigt über offizielle Patch-Notes: Hauslagerung ist jetzt vom gesamten Grundstück aus verfügbar, einschließlich Scheunen und Gewächshäusern, nicht nur von innerhalb des Hauses selbst.',
+    more: ['Derselbe Patch fügte eine Schnellübertragungs-Option zum Verschieben von Gegenständen in und aus der Hauslagerung hinzu, was das Materialverschieben zwischen Gebäuden in einer geschäftigen Nacht schneller macht.'],
+  },
+  'does-1-1-41-fix-nokturna-card-reward': {
+    q: 'Behebt Patch 1.1.41, dass man nach einer Partie keine Nokturna-Karte erhält?',
+    a: 'Ja, bestätigt über offizielle Patch-Notes: 1.1.41 behebt ein Problem, bei dem Spieler keine Nokturna-Kartenbelohnung erhielten, wenn sie direkt nach dem Betrachten des Spielfelds am Ende einer Partie das Spiel verließen.',
+  },
+  'does-1-1-41-fix-cloud-save-sync': {
+    q: 'Behebt Patch 1.1.41 Probleme bei der Cloud-Speicher-Synchronisation?',
+    a: 'Ja, bestätigt über die offiziellen Patch-Notes: 1.1.41 behebt ein Problem, bei dem Cloud-Speicherdateien nicht richtig synchronisierten.',
+    more: ['Wer auf mehreren Geräten spielt, sollte weiterhin sicherheitshalber das Spiel vollständig schließen und eine abgeschlossene Synchronisation bestätigen lassen, bevor man das Gerät wechselt, da Patch-Notes, die einen Sync-Bug beheben, keine Spielstände rückwirkend reparieren, die bereits vor dem Update betroffen waren.'],
+  },
+  'embroidery-unlock-timing-patch': {
+    q: 'Hat Patch 1.1.41 geändert, wann Stickerei freischaltet?',
+    a: 'Ja, bestätigt über offizielle Patch-Notes: Stickerei schaltet seit 1.1.41 früher frei, was wiederum NPCs, deren Date-Aktivität Stickerei ist, erlaubt, früher als vor dem Patch zu einem Date eingeladen zu werden.',
+  },
+  'what-are-the-water-bubbles-ripples': {
+    q: 'Was sind die funkelnden Blasen oder Wellen im Wasser in Moonlight Peaks?',
+    a: 'Bestätigt von GameRant: Diese funkelnden Blasen oder Wellen auf Flüssen und Seen sind Meerjungfrauenform-Tauchstellen, keine besonderen Angelstellen — eine Angelschnur hineinzuwerfen gibt keinen Seltenen-Fisch-Bonus.',
+    more: ['Man braucht die Meerjungfrauen-(Wasser-)Form, um mit ihnen zu interagieren, freigeschaltet durch die Questreihe "The Mermaid\u2019s Wish", die nach Erreichen von Luna Bay erscheint. Einmal freigeschaltet, verwandeln, zur Welle schwimmen und interagieren, um nach dem Gegenstand unter der Oberfläche zu tauchen. Bis dahin die Blasen in Ruhe lassen und später wiederkommen.'],
+  },
+  'how-does-the-scarecrow-protection-work': {
+    q: 'Wie viel Fläche schützt eine Vogelscheuche in Moonlight Peaks?',
+    a: 'Gemeldet von einer geprüften Anfänger-Tipps-Zusammenstellung: Eine Vogelscheuche schützt nur einen begrenzten, hervorgehobenen Bereich, der in ihrer Platzierungsvorschau gezeigt wird, nicht die gesamte Farm. Onkel Viktor führt die Notwendigkeit ein, Pflanzen vor Raben zu schützen.',
+    more: ['Keine am Rand eines großen Feldes platzieren und annehmen, die entfernte Seite sei abgedeckt — ein weites Feld in geschützte Blöcke aufteilen, oder eine zweite Vogelscheuche hinzufügen, sobald der Radius der ersten nicht mehr jedes Feld abdeckt.'],
+  },
+  'does-house-storage-have-a-capacity-limit': {
+    q: 'Gibt es eine Kapazitätsgrenze bei der universellen Hauslagerung?',
+    a: 'Gemeldet über mehrere Durchgänge hinweg (sechs-Stunden- und 60-Stunden-Reviews): Es wurde keine praktische Kapazitätsgrenze für die universelle Hauslagerung gefunden, aus der Handwerks-, Koch-, Tränke- und Verarbeitungsstationen alle direkt ziehen können.',
+    more: ['Das ist jedoch getrennt von der persönlichen Tragetasche — Sabrina soll separat ein 10-Slot-Inventar-Upgrade bei Webb of Wonders verkaufen, sodass "unbegrenzte Hauslagerung" und "begrenzte Taschenplätze" zwei verschiedene Systeme zu sein scheinen, kein Widerspruch.'],
+  },
+  'can-you-decorate-from-universal-storage': {
+    q: 'Kann man im Dekorationsmodus Möbel aus der Hauslagerung platzieren?',
+    a: 'Nein, gemeldet von einem geprüften Tipps-Guide: Die universelle Hauslagerung ist im Dekorationsmodus nicht zugänglich. Man muss die geplanten Möbel- und Deko-Stücke vor einer großen Umgestaltung in die Tasche sammeln.',
+  },
+  'do-you-pick-furniture-color-when-crafting': {
+    q: 'Wählt man die Möbelfarbe vor oder nach der Herstellung?',
+    a: 'Vorher, gemeldet von einer Tipps-Zusammenstellung früher Spieler: Beim Herstellen von Möbeln und Deko wählt man die Farbe oder Variante von vornherein, im Moment der Herstellung, statt eine schlichte Version zu machen und sie später neu zu bemalen.',
+    more: ['Manche Gegenstände sollen ihre Farbe von den Blumen erhalten, die man ins Rezept einfüttert, weshalb Sammlern empfohlen wird, Blumen in den gewünschten Farben vor einem thematischen Bauprojekt zu horten.'],
+  },
+  'is-decorating-on-a-grid-in-moonlight-peaks': {
+    q: 'Ist das Dekorieren kachelbasiert oder freie Platzierung?',
+    a: 'Kachelbasiert, gemeldet von einer Tipps-Zusammenstellung früher Spieler: Dekorieren (sowohl innen als auch außen) erfolgt von oben auf einem Kachelraster, und man kann die Platzierung nicht auf halbe Kacheln versetzen oder Objekte in freien Winkeln platzieren.',
+    more: ['Man kann trotzdem die meisten Objekte drehen, kleine Deko-Gegenstände auf kompatiblen Möbeln stapeln, und die Pinselgröße beim Anlegen von Wegen anpassen — und manche Gegenstände sind bewusst vorab gewinkelt gestaltet, damit sich das Layout nicht vollständig rastergebunden anfühlt.'],
+  },
+  'is-cooking-available-from-night-one': {
+    q: 'Ist Kochen von Anfang an verfügbar, anders als Tränkebrauen?',
+    a: 'Ja, gemeldet von einem Rezepte-Guide: Anders als Tränkebrauen am Kessel (das später durch die Story freigeschaltet wird), ist Kochen ab der ersten Nacht über die bereits im Haus vorhandene Kochstation verfügbar.',
+    more: ['Man startet nicht mit Rezeptkenntnissen — sie werden aus in der Stadt gekauften Kochbüchern gelernt oder beim Erkunden entdeckt. Zusätzliche Kochstationen können an einer Werkbank gebaut werden, mit gemeldeten Kosten von 5 Brettern und 5 veredeltem Stein, falls man eine zweite Küche will, etwa nahe der Scheune.'],
+  },
+  'how-does-the-cooking-minigame-work': {
+    q: 'Wie funktioniert das Koch-Minispiel in Moonlight Peaks?',
+    a: 'Gemeldet von einem Rezepte-Guide: Die Bestätigungstaste drücken, wenn ein rotierender Marker die rote Zone auf dem Koch-Ring trifft. Mehr erfolgreiche Treffer während des Vorgangs sollen eine höhere Sternequalität beim fertigen Gericht ergeben.',
+    more: ['Es gibt Berichten zufolge keinen Sammel-Koch-Knopf — jeder Teller erfordert eine eigene Minispiel-Sitzung, also ein Gericht nach dem anderen planen, statt zu erwarten, mehrere gleichzeitig vor Sonnenaufgang einzureihen.'],
+  },
+  'when-is-coffee-and-coffins-open': {
+    q: 'Welche Öffnungszeiten hat Coffee and Coffins?',
+    a: 'Konsistent über zwei unabhängige Quellen gemeldet: Coffee and Coffins, das Café von Mina und Evan, hat von 20 bis 1 Uhr geöffnet, sieben Nächte die Woche.',
+    more: ['Mina verkauft während dieser Zeit Kochbücher hinterm Tresen, weshalb es effizient ist, einen Kochbuch-Kauf mit einem Geschenk und Gespräch beim selben Besuch zu kombinieren.'],
+  },
+  'when-is-minas-birthday': {
+    q: 'Wann ist Minas Geburtstag in Moonlight Peaks?',
+    a: 'Bestätigt von einem eigenen Charakter-Guide: Minas Geburtstag ist Sommer 16. Ihr an genau diesem Tag ein geliebtes Geschenk wie eine rosa Blume zu geben, gibt den größten Beziehungsschub des Jahres.',
+  },
+  'what-happens-after-marrying-mina': {
+    q: 'Was passiert, nachdem man Mina geheiratet hat?',
+    a: 'Bestätigt von einem eigenen Charakter-Guide: Nach der Heirat zieht Mina bei einem ein, betreibt aber weiterhin Coffee and Coffins zusammen mit ihrem Bruder Evan. Sie zu heiraten macht auch Orlock zum Schwiegervater.',
+    more: ['Wie bei anderen Ehen im Spiel gibt es keine Kinder — die Heirat wird als Endpunkt der Beziehung beschrieben, nicht als Stufe, die zu einem Familiensystem führt.'],
+  },
+  'do-birthday-gifts-give-a-bonus': {
+    q: 'Geben Geburtstagsgeschenke einen größeren Beziehungsschub?',
+    a: 'Ja, konsistent über mehrere Geschenke-Guides gemeldet: Ein geliebtes Geschenk genau am Geburtstag eines Bewohners zu geben, bringt einen deutlich größeren Beziehungszuwachs als dasselbe Geschenk an einem gewöhnlichen Tag.',
+    more: ['Community-Rat: Für jeden bevorstehenden Geburtstag mindestens ein geliebtes Geschenk in einer Truhe aufbewahren, statt zu hoffen, am Tag selbst eines zu finden.'],
+  },
+  'how-many-gifts-per-day-per-person': {
+    q: 'Wie viele Geschenke kann man pro Tag an eine Person geben?',
+    a: 'Eines, konsistent über Geschenke-Guides gemeldet: Man kann einem Bewohner pro Spielnacht ein einzelnes Geschenk geben, sodass ein schlecht gewähltes Geschenk eine ganze Tagesgelegenheit kostet, nicht nur den Gegenstand.',
+  },
+  'does-relationship-screen-track-gift-history': {
+    q: 'Zeigt der Beziehungsbildschirm die letzte Geschenkhistorie?',
+    a: 'Ja, über mehrere Geschenke-Guides bestätigt: Der Beziehungsbildschirm merkt sich die letzten acht Geschenke, die man einem Bewohner gegeben hat, und ob er jedes geliebt, gemocht oder nicht gemocht hat.',
+    more: ['Das macht Ausprobieren relativ risikoarm — man kann danach prüfen, was funktioniert hat, statt sich erinnern oder raten zu müssen.'],
+  },
+  'are-there-universally-loved-gifts': {
+    q: 'Gibt es universell geliebte Geschenke, die bei fast jedem funktionieren?',
+    a: 'Gemeldet von einem Community-Geschenke-Guide: Das goldene Ei und Diamanten werden als mindestens zwei Gegenstände genannt, die bei vielen Bewohnern weithin geliebt werden, nützlich als sichere Rückfalloption, wenn die spezifischen Vorlieben eines Charakters noch nicht bekannt sind.',
+  },
+  'how-do-you-learn-npc-preferences-organically': {
+    q: 'Wie lernt man Geschenkvorlieben eines Charakters ohne Guide?',
+    a: 'Durch tägliches Gespräch mit Bewohnern, gemeldet von einem geschenkefokussierten Review: Charaktere geben in gewöhnlichen Gesprächen Hinweise auf Hobbys, Lieblingsessen, Berufe und persönliche Interessen preis, und das Spiel zeichnet Gelerntes dauerhaft in einem Journal auf.',
+  },
+  'how-many-critters-fish-vampsters-total': {
+    q: 'Wie viele Kleintiere, Fische und Vampster gibt es insgesamt zu sammeln?',
+    a: 'Gemeldet aus einem 60-Stunden-Review-Build: 95 Kleintiere, 22 Fische und 100 Vampster, zusätzlich Seelenblobs und weitere Entdeckungen. Kürzere Launch-Woche-Tabellen als Teillisten behandeln, bis ihre Autoren die Vollständigkeit ausdrücklich bestätigen.',
+    more: ['Fische und Kleintiere sollen je nach Gebiet und Jahreszeit variieren, also nicht erwarten, eine der beiden Sammlungen in einem einzigen frühen Durchgang abzuschließen.'],
+  },
+  'when-does-the-museum-unlock': {
+    q: 'Wann schaltet sich das Museum in Moonlight Peaks frei?',
+    a: 'Bestätigt von zwei unabhängigen Quellen: Das Museum ist ein Story- und Beziehungs-Unlock, nicht schon in den ersten Nächten verfügbar. Es öffnet, nachdem Persephone, Jada und Winston in das Haus am Pier ziehen, und Jadas Museums-Questreihe dann über zwei Stufen fortschreitet.',
+    more: ['Ein dokumentierter Durchgang erreichte diesen Punkt etwa zu Beginn des Herbstes in Jahr 1 — das als Beispiel-Zeitpunkt behandeln, nicht als Garantie, da Questreihenfolge und Erkundungstempo dies verschieben können.'],
+  },
+  'does-the-museum-require-perfect-quality-items': {
+    q: 'Braucht das Museum Perfekt-Qualität-Gegenstände für Spenden?',
+    a: 'Für manche Sammlungen ja. Bestätigt von zwei unabhängigen Quellen: Die meisten Museumsspenden brauchen nur einen Gegenstand normaler Qualität, aber die Landwirtschafts-Sammlung verlangt bei manchen Einträgen ausdrücklich Perfekt-Qualität-Pflanzen und Anbaugüter. Mehrere gekochte übernatürliche Spenden sollen ebenfalls Perfekt-Qualität benötigen.',
+    more: ['Das Sammlungs-Schild prüfen, bevor man eine hochwertige Ernte verkauft, da ein verkaufter Perfekt-Qualität-Gegenstand schwer auf Abruf reproduzierbar sein kann.'],
+  },
+  'how-many-museum-collection-rooms': {
+    q: 'Wie viele Sammlungsräume hat das Museum?',
+    a: 'Gemeldet von einer aus dem offiziellen Wiki stammenden Checkliste: Das Museum gruppiert Spenden in mehrere thematische Räume — gemeldet als Hexen-, Vampir-, Seher-, Werwolf-, Meerjungfrauen-, Gottheiten-/Landwirtschafts-, Aquarium- und Kleintier-Sammlungen, wobei die genaue Raumanzahl zwischen frühen Guides leicht variiert und noch als sich einpendelnd behandelt werden sollte.',
+  },
+  'what-does-the-refiner-do': {
+    q: 'Was macht die Raffinerie in Moonlight Peaks?',
+    a: 'Bestätigt von einem Walkthrough-Guide: Die Raffinerie wandelt Rohmaterialien in nutzbare Handwerksressourcen um — Holz in Bretter, Stein in veredelten Stein, und Faser in Futter für Tiere.',
+    more: ['Reviewer merken an, dass sich diese veredelten Bestände schnell aufbrauchen, sobald man ernsthaft baut und herstellt, also einen Kreislauf von Rohmaterialien in die Raffinerie einspeisen, statt erst bei Bedarf herzustellen.'],
+  },
+  'can-you-buy-an-inventory-upgrade': {
+    q: 'Kann man ein Inventar-(Taschen-)Upgrade kaufen?',
+    a: 'Gemeldet von einem Walkthrough-Guide: Sabrina verkauft bei Webb of Wonders ein 10-Slot-Inventar-Upgrade für gemeldete 2.000 Münzen, für Spieler, deren Start-Taschenplätze Besorgungen ständig verkürzen.',
+    more: ['Das ist ein separates System von der universellen Hauslagerung, die laut mehreren Reviewern keine praktische Kapazitätsgrenze hat — das kostenpflichtige Upgrade gilt speziell für die Tasche, die man unterwegs trägt.'],
+  },
+  'what-happens-at-sunrise-if-youre-not-home': {
+    q: 'Was passiert, wenn man bei Sonnenaufgang noch draußen ist?',
+    a: 'Gemeldet aus einem 60-Stunden-Review-Build: Der Sonnenaufgang teleportiert die Spielfigur automatisch nach Hause, ohne beobachtete Geld- oder Ausdauerstrafe. Im Sarg zu schlafen bleibt der normale Weg, eine Nacht zu beenden und zu speichern, aber ein später Ausflug ist nicht automatisch eine Katastrophe.',
+  },
+  'can-you-change-night-length-settings': {
+    q: 'Kann man ändern, wie lange eine Nacht dauert?',
+    a: 'Ja, sobald freigeschaltet. Über mehrere Quellen bestätigt: Die Standardnacht dauert etwa 15 reale Minuten, und spätere Einstellungen erlauben stattdessen etwa 10-minütige oder 25-minütige Nächte, freigeschaltet bei Erreichen von Seelenblob-Sammelmeilensteinen.',
+    more: ['Eine längere Nachteinstellung erleichtert es, das Tempo an Erkundung, Dekorieren oder das Warten auf Quest-Auslöser anzupassen, während eine kürzere Einstellung Spielern entgegenkommt, die schneller durch Tage zyklieren wollen.'],
+  },
+  'do-magical-crops-need-special-watering': {
+    q: 'Brauchen magische Pflanzen etwas anderes als normales Gießen?',
+    a: 'Für manche ja. Gemeldet von einem geprüften Tipps-Guide: Magische Pflanzen müssen generell mit einem Zauber statt der gewöhnlichen Gießkanne bewässert werden, und manche geprüften Beispiele brauchen mehr als das — Pflanzen, die mit einem Käfer oder Fisch gefüttert werden, Pflanzen, die selbst nahegelegene Erde bewässern, und Pflanzen, die umliegende Felder austrocknen.',
+    more: ['Der Rat ist, eine kleine Pflanzung jeder neuen magischen Pflanze zu testen, bevor man ein ganzes Feld dafür festlegt, da sich das Verhalten Berichten zufolge von Pflanze zu Pflanze unterscheidet.'],
+  },
+  'do-ethereal-tool-spells-lock-you-in-place': {
+    q: 'Verhindern die ätherischen Axt- und Spitzhacken-Zauber andere Aktionen während sie aktiv sind?',
+    a: 'Gemeldet in einem geprüften Build: Die ätherischen Axt- und Spitzhacken-Zauber verhinderten andere Aktionen, während die beschworenen Werkzeuge arbeiteten, anders als die ätherische Gießkanne, die diese Einschränkung nicht hatte.',
+    more: ['Da dies in einem bestimmten Review-Build beobachtet wurde, das Verhalten im aktuellen Patch selbst testen, bevor man eine Mana-Routine darauf aufbaut, diese Zauber mit anderen Aktionen zu verketten.'],
+  },
+  'is-nokturna-a-relationship-activity': {
+    q: 'Kann man Nokturna mit Bewohnern als Beziehungsaktivität spielen, nicht nur als Minispiel?',
+    a: 'Ja, gemeldet von einem geprüften Tipps-Guide: Nokturna ist nicht nur ein eigenständiges Kartenspiel — es wird auch unter den verfügbaren Beziehungsaktivitäten mit Bewohnern gelistet, ähnlich einer Date-Aktivität.',
+    more: ['Verschiedene NPCs sollen unterschiedliche Decks verwenden, weshalb es hilft, mehr als eine Deck-Strategie zu haben, wenn man gegen mehrere Bewohner spielen möchte.'],
+  },
+  'how-many-total-characters-are-in-the-game': {
+    q: 'Wie viele Charaktere insgesamt (nicht nur Romanze-Optionen) gibt es?',
+    a: 'Gemeldet von einem Launch-Review: Moonlight Peaks hat 23 daten-fähige Charaktere (verglichen mit etwa 12 in vielen ähnlichen Spielen) und über 30 Charaktere insgesamt, sobald nicht-romanzefähige Bewohner mitgezählt werden.',
+  },
+  'do-new-characters-appear-later-in-the-year': {
+    q: 'Tauchen neue Charaktere später im Jahr auf, statt zu Spielbeginn?',
+    a: 'Ja, bestätigt von einem Launch-Review: Neue Gesichter werden schrittweise im Jahresverlauf eingeführt — zum Beispiel erscheint der Charakter Kürbiskopf erst im Herbst, was dafür sorgt, dass die Stadt weit über die Anfangsstunden hinaus neue Leute einführt.',
+  },
+  'who-is-snek-in-moonlight-peaks': {
+    q: 'Wer ist Snek in Moonlight Peaks?',
+    a: 'Gemeldet von einem Launch-Review: Snek ist ein Ladenbesitzer-Charakter, beschrieben als eine buchstäbliche Schlange, die Ölgemälde verkauft, ein von den Autoren gespieltes Wortspiel mit "snake oil salesman" (Ölschlange/Scharlatan).',
+  },
+  'is-death-a-real-character-you-can-meet': {
+    q: 'Ist Tod ein echter Charakter, den man trifft, nicht nur ein Game-Over-Bildschirm?',
+    a: 'Ja, bestätigt von mehreren Reviews: Tod ist ein echter, benannter Bewohner der Stadt, in einem Review beschrieben, als würde er in Moonlight Peaks "Urlaub machen", komplett mit Hawaiihemd in mindestens einer Review-Beschreibung.',
+    more: ['Das passt dazu, dass Tod andernorts in der Berichterstattung ein eigenes bestätigtes Zuhause hat ("Death\u2019s Cabin"), was bekräftigt, dass er als richtiger Stadtbewohner geschrieben ist, nicht als reines Erzählmittel.'],
+  },
+  'why-does-noel-challenge-you-to-a-fishing-contest': {
+    q: 'Warum fordert Noel einen früh im Spiel zu einem Angelwettbewerb heraus?',
+    a: 'Gemeldet von einem Launch-Review: Noel wird als Hexenlehrling mit Minderwertigkeitskomplex geschrieben, und die Spielfigur zu einem Angelwettbewerb herauszufordern ist einer seiner frühen charakterprägenden Momente, kein Zufallsereignis.',
+  },
+  'are-there-tensions-between-the-four-factions': {
+    q: 'Gibt es Spannungen zwischen verschiedenen übernatürlichen Gruppen?',
+    a: 'Ja, bestätigt von einem Launch-Review: Die Bewohner der Stadt sind grob in Vampire, Werwölfe, Hexen und Seher gruppiert, mit deutlichen Spannungen zwischen manchen dieser Gruppen — ein Reviewer verbrachte auffällig viel Zeit damit, speziell die Beziehungen zwischen Vampiren und Werwölfen zu glätten.',
+  },
+  'is-orlock-drunk-animation-a-real-detail': {
+    q: 'Stolpert Orlock tatsächlich betrunken herum, oder ist das nur eine Beschreibung?',
+    a: 'Ja, bestätigt von einem Launch-Review: Orlock hat eine spezifische stolpernde, taumelnde Animation, wenn er betrunken ist, von mindestens einem Reviewer als eines seiner liebsten kleinen Charakterdetails im Spiel hervorgehoben.',
+  },
+  'are-character-portraits-chibi-style': {
+    q: 'Sind Charakterporträts im Chibi-(super-deformierten-)Kunststil gezeichnet?',
+    a: 'Ja, bestätigt von einem Launch-Review: Charakterporträts werden als "verchibifizierte" Versionen der Charaktere beschrieben, mit sichtbarer Leerlaufanimation und reaktiven Ausdrücken statt statischer Kunst.',
+    more: ['Dies ist getrennt von der bestätigten Option, im Hauptmenü zwischen zwei Porträtstil-Voreinstellungen zu wechseln — ein Cartoon-Stil mit realistischer Schattierung, oder ein niedlicherer, anime-inspirierter Stil.'],
+  },
+  'does-the-town-color-palette-change-by-season': {
+    q: 'Ändert sich die Farbpalette oder Beleuchtung mit den Jahreszeiten?',
+    a: 'Ja, gemeldet von einem Launch-Review: Statt eines hellen, luftigen Frühlings mit Pastellfarben wird das Spiel beschrieben als beginnend mit tiefen, stimmungsvollen Violett- und Blautönen, wobei ein Großteil der Palette gedämpft ist, um sich wie in Dunkelheit gebadet anzufühlen, akzentuiert durch leuchtende Pflanzen und Lichterketten.',
+  },
+  'save-data-and-crash-dump-locations': {
+    q: 'Wo genau werden Spielstände und Absturzdaten auf dem PC gespeichert?',
+    a: 'Bestätigt vom offiziellen Support-Thread: Auf Windows liegen Spielstände unter %USERPROFILE%/AppData/LocalLow/Little Chicken Game Company/Moonlight Peaks/, und auf Mac unter ~/Library/Application Support/Little Chicken Game Company/Moonlight Peaks/. Absturzdaten auf Windows liegen typischerweise unter %LOCALAPPDATA%\\CrashDumps, von "Moonlight Peaks.exe".',
+    more: ['Bei einer Bug-Meldung bitten die Entwickler ausdrücklich darum, diese Dateien der Support-E-Mail beizufügen, statt nur eine Problembeschreibung zu senden.'],
+  },
+  'how-to-report-a-bug-to-the-developers': {
+    q: 'Wie meldet man einen Bug direkt den Entwicklern?',
+    a: 'Bestätigt vom offiziellen Support-Thread: E-Mail an support@xseedgames.com mit Spielstand-Ort, Plattform und (bei Abstürzen) den Absturzdaten-Dateien, oder im angehefteten Bug-Thread der offiziellen Steam-Community-Diskussionen posten.',
+    more: ['Die Entwickler bitten ausdrücklich darum, dass dieser zentrale Bug-Thread auf Gameplay-Probleme fokussiert bleibt, andere Kommentare oder Fragen stattdessen an comments@xseedgames.com zu richten.'],
+  },
+  'does-net-drain-stamina-on-a-miss': {
+    q: 'Verschwendet ein verfehlter Netzschwung Ausdauer?',
+    a: 'Vor Patch 1.1.41 war das so, ist aber jetzt behoben. Bestätigt über offizielle Patch-Notes: 1.1.41 behebt, dass das Netz bei verfehlten Schwüngen Energie verbrauchte, sodass ein Fehlversuch beim Fangen eines Kleintiers unter dem aktuellen Patch keine Ausdauer mehr kostet.',
+  },
+  'does-1-1-41-fix-decorate-mode-item-loss': {
+    q: 'Behebt Patch 1.1.41, dass hochwertige Gegenstände im Dekorationsmodus verschwinden?',
+    a: 'Ja, bestätigt über offizielle Patch-Notes: 1.1.41 behebt ein Problem, bei dem im Dekorationsmodus platzierte hochwertige Gegenstände nicht aus dem Inventar entfernt wurden, was Spielern versehentlich ermöglichte, hochwertigen Bestand zu duplizieren.',
+    more: ['Derselbe Patch behob auch ein verwandtes Handwerksproblem, bei dem Zutaten ohne Qualitätsbewertung im Inventar blieben, wenn sie zur Herstellung höherstufiger Gegenstände verwendet wurden.'],
+  },
+  'does-1-1-41-fix-orlock-bench-interaction': {
+    q: 'Behebt Patch 1.1.41, dass Orlock auf einer Bank schwer ansprechbar ist?',
+    a: 'Ja, bestätigt über offizielle Patch-Notes: 1.1.41 behebt, dass Orlock schwer ansprechbar war, während er auf einer Bank saß, zusammen mit einem Fix dafür, dass die Krönungszeremonie beim Moonlight Ball zu lange brauchte, um zu starten.',
+  },
+  'does-1-1-41-fix-hellkitten-dig-spots': {
+    q: 'Behebt Patch 1.1.41 das Graben nahe der Küste in Hellkitten-Form?',
+    a: 'Ja, bestätigt über offizielle Patch-Notes: 1.1.41 behebt, dass man Grabstellen nahe der Küste nicht ausgraben konnte, während man als Hellkitten verwandelt war.',
+  },
+  'does-1-1-41-fix-cutscene-blocking-bugs': {
+    q: 'Behebt Patch 1.1.41 Zwischensequenzen, die andere Ereignisse blockieren, wie Tods Antike-Uhr-Szene?',
+    a: 'Ja, bestätigt über offizielle Patch-Notes: 1.1.41 behebt, dass die Zwischensequenzen "Crow Introduction", "Dead Crops" und "Keg" verhinderten, dass andere Zwischensequenzen auf dem eigenen Grundstück ausgelöst wurden — einschließlich, als benanntes Beispiel, Tods Übergabe der Antiken Uhr und einiger NPC-Herz-Ereignisse.',
+  },
+  'does-1-1-41-fix-aras-heart-event-marker': {
+    q: 'Behebt Patch 1.1.41, dass Aras\u2019 Herz-Ereignis-Marker am falschen Ort erscheint?',
+    a: 'Ja, bestätigt über offizielle Patch-Notes: 1.1.41 behebt, dass Aras\u2019 Herz-Ereignis-Funkelmarker beim Schneiderladen statt in der Stadt erschien, was Spieler in die Irre geführt hatte, wohin sie gehen sollten.',
+  },
+  'what-is-the-current-version-per-platform': {
+    q: 'Was ist die aktuelle Moonlight-Peaks-Versionsnummer auf jeder Plattform?',
+    a: 'Bestätigt von der offiziellen Versionsübersicht, Stand dieser Schreibung: Steam liegt bei 1.1.41 (weltweit live), während Nintendo Switch, Nintendo Switch 2 und Google Play Games bei 1.1.3 liegen.',
+    more: ['Versionsnummern sind über Plattformen hinweg nicht direkt eins-zu-eins vergleichbar — die plattformspezifischen Patch-Notes prüfen, statt anzunehmen, dass eine höhere Steam-Nummer bedeutet, Steam habe strikt mehr Inhalt oder Fixes als Konsolen-Builds.'],
+  },
 };
+
+
+
+
+
+
 
 
 
