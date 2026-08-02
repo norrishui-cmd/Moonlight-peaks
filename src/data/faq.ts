@@ -35,6 +35,46 @@ export type Faq = {
 
 export const faqs: Faq[] = [
   {
+    slug: 'can-you-100-percent-the-museum-without-romancing-anyone',
+    cat: 'romance',
+    q: 'Can you 100% complete the Museum without romancing anyone in Moonlight Peaks?',
+    a: 'No, confirmed: skipping romance entirely blocks 100% Museum completion, because getting married is the only event that triggers the Love Bug critter, which is required to complete the full critter collection.',
+    sourceLabel: 'GameRant — no-romance guide',
+    sourceUrl: 'https://gamerant.com/moonlight-peaks-no-romance-guide/',
+  },
+  {
+    slug: 'does-dating-or-partnership-trigger-the-love-bug',
+    cat: 'general',
+    q: 'Does dating or partnership trigger the Love Bug critter?',
+    a: 'No, confirmed: only reaching marriage triggers the Love Bug to appear — the earlier dating and partner relationship stages do not unlock it.',
+    sourceLabel: 'GameRant — no-romance guide',
+    sourceUrl: 'https://gamerant.com/moonlight-peaks-no-romance-guide/',
+  },
+  {
+    slug: 'do-you-have-to-romance-someone-to-finish-the-main-story',
+    cat: 'romance',
+    q: 'Do you have to romance someone to finish the main story in Moonlight Peaks?',
+    a: 'No, confirmed: you don\u2019t need to romance anyone to experience everything in the main story — marriage (and by extension the Love Bug and full critter collection) is the only content specifically locked behind the romance system.',
+    sourceLabel: 'GameRant — no-romance guide',
+    sourceUrl: 'https://gamerant.com/moonlight-peaks-no-romance-guide/',
+  },
+  {
+    slug: 'what-were-the-relationship-stages-in-the-original-demo',
+    cat: 'general',
+    q: 'What did the original free demo actually let you do?',
+    a: 'Confirmed: the original free demo covered seven in-game days of farming, gathering, and home-decorating, explicitly without heading into town or meeting any locals — a narrower slice than the later expanded pre-launch demo that added character creation and cozy activities.',
+    sourceLabel: 'TechRadar — original demo coverage',
+    sourceUrl: 'https://www.techradar.com/gaming/consoles-pc/this-farming-sim-adds-vampires-to-the-stardew-valley-mix-and-you-can-try-it-today',
+  },
+  {
+    slug: 'what-is-the-official-story-premise-tagline',
+    cat: 'general',
+    q: 'What is the official story premise tagline for Moonlight Peaks?',
+    a: 'Confirmed via original Steam marketing copy: "In this heartwarming life-sim, you set out to prove to your skeptical father, Count Dracula, that a life of compassion is possible — even for the undead."',
+    sourceLabel: 'TechRadar — original demo coverage',
+    sourceUrl: 'https://www.techradar.com/gaming/consoles-pc/this-farming-sim-adds-vampires-to-the-stardew-valley-mix-and-you-can-try-it-today',
+  },
+  {
     slug: 'how-do-you-get-the-a-new-beginning-quest',
     cat: 'quests',
     q: 'How do you get the "A New Beginning" quest in Moonlight Peaks?',
