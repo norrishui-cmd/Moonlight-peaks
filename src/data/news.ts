@@ -6043,7 +6043,52 @@ export const news: NewsItem[] = [
     sourceLabel: 'Moonlight Peaks Wiki — Jada',
     sourceUrl: 'https://moonlightpeaks.wiki/characters/jada/',
   },
+  {
+    slug: 'fiona-confirmed-able-to-become-a-vampire-unlike-werewolf-spouses',
+    date: '2026-08-03',
+    title: 'Confirmed: Fiona can be turned into a vampire after marriage, since she is human despite being a witch — unlike werewolf spouses such as Saga',
+    body: 'Confirmed via a dedicated character guide: not every spouse can become a vampire — Saga is a confirmed example who cannot, since she\u2019s a werewolf. Fiona, despite being a witch, is confirmed as human and can be turned. To do so, marry her and reach ten hearts, at which point she asks you to change her.',
+    details: [],
+    category: 'romance',
+    topics: ['romance', 'families'],
+    sourceLabel: 'Pocket Tactics Fiona guide',
+    sourceUrl: 'https://www.pockettactics.com/moonlight-peaks/fiona',
+  },
+  {
+    slug: 'fiona-and-dragan-confirmed-as-the-only-shared-disliked-gift-seaweed',
+    date: '2026-08-03',
+    title: 'Confirmed: Seaweed is one of the few gifts confirmed disliked by more than one resident — both Fiona and Dragan',
+    body: 'Confirmed via a dedicated character guide: Seaweed is player-confirmed as disliked by both Fiona and Dragan, making it one of the few specific gift items confirmed to be a shared dislike across more than one resident rather than a single-character quirk.',
+    details: ['Fiona\u2019s top confirmed gift is White Tulips, and she separately dislikes Honey; her birthday is confirmed as Winter 26.'],
+    category: 'characters',
+    topics: ['families', 'romance'],
+    sourceLabel: 'Moonlight Peaks Wiki — Fiona',
+    sourceUrl: 'https://moonlightpeaks.wiki/characters/fiona/',
+  },
+  {
+    slug: 'sabrina-confirmed-to-love-the-entire-purple-flower-range',
+    date: '2026-08-03',
+    title: 'Confirmed: Sabrina loves the entire purple flower range, described as one of the easiest gift palettes to court in town',
+    body: 'Confirmed via a dedicated character guide: Sabrina, the Webb family\u2019s free-thinking shopkeeper at Webb of Wonders, loves the whole purple flower range — described as one of the easiest gift palettes to court in town, in keeping with her purple-clad aesthetic.',
+    details: [],
+    category: 'characters',
+    topics: ['families', 'romance'],
+    sourceLabel: 'Moonlight Peaks Wiki — Sabrina',
+    sourceUrl: 'https://moonlightpeaks.wiki/characters/sabrina/',
+  },
+  {
+    slug: 'webb-family-tree-confirmed-fiona-noels-sister-sabrina-and-luna-cousins',
+    date: '2026-08-03',
+    title: 'Confirmed: Fiona is Noel\u2019s sister, Sabrina\u2019s cousin, and Luna\u2019s more distant cousin, rounding out the Webb witch family tree',
+    body: 'Confirmed via the official Moonlight Peaks Wiki: Fiona is Noel\u2019s sister and Sabrina\u2019s cousin, with Luna confirmed as a more distant cousin — completing the Webb family\u2019s internal relationships alongside Fiona\u2019s role as head of the family and the local witches\u2019 coven.',
+    details: [],
+    category: 'characters',
+    topics: ['families'],
+    sourceLabel: 'Official Moonlight Peaks Wiki — Fiona',
+    sourceUrl: 'https://moonlightpeaks.wiki.gg/wiki/Fiona',
+  },
 ];
+
 
 
 

@@ -35,6 +35,38 @@ export type Faq = {
 
 export const faqs: Faq[] = [
   {
+    slug: 'can-fiona-become-a-vampire-after-marriage',
+    cat: 'romance',
+    q: 'Can Fiona become a vampire after marriage in Moonlight Peaks?',
+    a: 'Yes, confirmed: not every spouse can become a vampire — Saga, a werewolf, is a confirmed example who cannot. Fiona, despite being a witch, is human and can be turned. Marry her and reach ten hearts, and she\u2019ll ask you to change her.',
+    sourceLabel: 'Pocket Tactics Fiona guide',
+    sourceUrl: 'https://www.pockettactics.com/moonlight-peaks/fiona',
+  },
+  {
+    slug: 'which-gift-do-two-different-residents-both-dislike',
+    cat: 'general',
+    q: 'Is there a gift that more than one resident dislikes in Moonlight Peaks?',
+    a: 'Yes, confirmed: Seaweed is player-confirmed as disliked by both Fiona and Dragan, one of the few specific items confirmed as a shared dislike across more than one resident.',
+    sourceLabel: 'Moonlight Peaks Wiki — Fiona',
+    sourceUrl: 'https://moonlightpeaks.wiki/characters/fiona/',
+  },
+  {
+    slug: 'what-gifts-does-sabrina-love',
+    cat: 'characters',
+    q: 'What gifts does Sabrina love in Moonlight Peaks?',
+    a: 'Confirmed: Sabrina loves the entire purple flower range, described as one of the easiest gift palettes to court in town, fitting her purple-clad aesthetic.',
+    sourceLabel: 'Moonlight Peaks Wiki — Sabrina',
+    sourceUrl: 'https://moonlightpeaks.wiki/characters/sabrina/',
+  },
+  {
+    slug: 'how-is-fiona-related-to-noel-sabrina-and-luna',
+    cat: 'characters',
+    q: 'How is Fiona related to Noel, Sabrina, and Luna?',
+    a: 'Confirmed via the official wiki: Fiona is Noel\u2019s sister and Sabrina\u2019s cousin, with Luna confirmed as a more distant cousin — together making up the Webb witch family, which Fiona heads as coven leader.',
+    sourceLabel: 'Official Moonlight Peaks Wiki — Fiona',
+    sourceUrl: 'https://moonlightpeaks.wiki.gg/wiki/Fiona',
+  },
+  {
     slug: 'when-does-samael-become-romanceable',
     cat: 'romance',
     q: 'When does Samael become romanceable in Moonlight Peaks?',
