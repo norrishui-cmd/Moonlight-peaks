@@ -35,6 +35,46 @@ export type Faq = {
 
 export const faqs: Faq[] = [
   {
+    slug: 'what-do-you-need-to-propose-to-ridge',
+    cat: 'quests',
+    q: 'What do you need to propose to Ridge in Moonlight Peaks?',
+    a: 'Confirmed: a specific bench in Town needs to be repaired first. In Autumn before Ridge\u2019s Birthday, Ludo posts a job-board request for 5 Wood in exchange for gold and pancakes, and the bench gets repaired on Ridge\u2019s Birthday itself.',
+    sourceLabel: 'Official Moonlight Peaks Wiki — Ridge Logan',
+    sourceUrl: 'https://moonlightpeaks.wiki.gg/wiki/Ridge_Logan',
+  },
+  {
+    slug: 'where-does-ridge-work-and-who-lives-upstairs',
+    cat: 'characters',
+    q: 'Where does Ridge work, and who lives upstairs?',
+    a: 'Confirmed: Ridge is the town carpenter running the Howling Hammer, and his son Ludo lives on the building\u2019s top floor. Ridge is also who players buy the barn upgrade from, and invites players to Pottery as a date activity.',
+    sourceLabel: 'Moonlight Peaks Wiki — Ridge',
+    sourceUrl: 'https://moonlightpeaks.wiki/characters/ridge/',
+  },
+  {
+    slug: 'who-does-ludo-play-nokturna-with',
+    cat: 'general',
+    q: 'Who does Ludo play Nokturna with in Moonlight Peaks?',
+    a: 'Confirmed: Ludo plays Nokturna together with Evan, Elvira, and later also Winston — specific named in-fiction opponents for the card game.',
+    sourceLabel: 'Official Moonlight Peaks Wiki — Ludo Logan',
+    sourceUrl: 'https://moonlightpeaks.wiki.gg/wiki/Ludo_Logan',
+  },
+  {
+    slug: 'is-brook-the-mayor-a-romance-option',
+    cat: 'romance',
+    q: 'Is Brook, the werewolf mayor, a romance option in Moonlight Peaks?',
+    a: 'No, confirmed: Brook is the patriarch of the Logan werewolf family and mayor of Moonlight Peaks, but he is not a romance option. His children Saga and Ludo, and his brother Ridge, are all romanceable instead.',
+    sourceLabel: 'Moonlight Peaks Wiki & Guide — Brook',
+    sourceUrl: 'https://moonlightpeakswiki.com/characters/brook',
+  },
+  {
+    slug: 'how-does-saga-relate-to-orlock-and-her-father',
+    cat: 'characters',
+    q: 'How does Saga relate to Orlock and her father Brook?',
+    a: 'Confirmed: Saga often helps ease the tension between her father Brook (the werewolf mayor) and Orlock (the Ambrosia vampire family head) whenever the two go into their usual banter, a specific cross-family relationship detail.',
+    sourceLabel: 'Official Moonlight Peaks Wiki — Saga Logan',
+    sourceUrl: 'https://moonlightpeaks.wiki.gg/wiki/Saga_Logan',
+  },
+  {
     slug: 'can-fiona-become-a-vampire-after-marriage',
     cat: 'romance',
     q: 'Can Fiona become a vampire after marriage in Moonlight Peaks?',
